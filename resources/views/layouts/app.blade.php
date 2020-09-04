@@ -36,6 +36,9 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
+    <a href="{{route('index')}}" class="btn btn-dark mr-2"> Index </a>
+    <a href="{{route('io_generator_builder')}}" class="btn btn-success"> GUI Generator </a>
+
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item d-md-down-none">
             <a class="nav-link" href="#">

@@ -3,12 +3,12 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->middleware('verified');
+Route::get('/home', 'HomeController@index')->middleware('verified')->name('home');
 
 // Infyom generator builder
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');

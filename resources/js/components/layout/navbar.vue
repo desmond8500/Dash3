@@ -1,6 +1,6 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" :to="app.link">{{ app.name }}</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+        <router-link class="navbar-brand" :to="app.link">{{ app.name }}</router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,6 +14,9 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <router-link class="dropdown-item" :to="submenu.link" v-for="submenu in menu.submenu" :key="submenu.id">{{ submenu.name }}</router-link>
                     </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home" target="_blank">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -39,7 +42,7 @@ export default {
                         { id: 2, name: 'Projets', link: '/projets' },
                         { id: 3, name: 'Devis', link: '/devis' },
                         { id: 4, name: 'Contacts', link: '/contacts' },
-                        { id: 5, name: 'Documents', link: '/document' },
+                        { id: 5, name: 'Documents', link: '/documents' },
                     ]
                 },
                 {

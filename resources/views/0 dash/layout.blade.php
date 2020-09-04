@@ -10,8 +10,10 @@
 <body>
     <div id="app">
         <navbar-layout></navbar-layout>
+        <div class="container-fluid">
+            <router-view></router-view>
+        </div>
 
-        <router-view></router-view>
     </div>
 
     <script src="{{ asset('js/app.js')}} "></script>

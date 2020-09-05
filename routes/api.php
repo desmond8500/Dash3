@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('projet__clients', 'Projet_ClientAPIController');
+
+Route::resource('projet__projets', 'Projet_ProjetAPIController');

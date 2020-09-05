@@ -22,3 +22,5 @@ Route::post('generator_builder/generate-from-file','\InfyOm\GeneratorBuilder\Con
 
 
 Route::resource('projetClients', 'Projet_ClientController');
+
+Route::resource('projetProjets', 'Projet_ProjetController');

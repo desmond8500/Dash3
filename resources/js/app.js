@@ -1,8 +1,14 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+// Vue Router
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
+// Vue Select
+import vSelect from 'vue-select';
+Vue.component('v-select', vSelect);
+import 'vue-select/dist/vue-select.css';
+
 
 import Index from "./components/pages/index/index.vue";
 import Clients from "./components/pages/clients/clients.vue";
@@ -32,6 +38,7 @@ Vue.component('breadcrumb-layout', require('./components/layout/component/breadc
 // Composannts
 Vue.component('client', require('./components/pages/clients/client.vue').default);
 Vue.component('client-add', require('./components/pages/clients/client-add.vue').default);
+Vue.component('projet-add', require('./components/pages/projets/projet-add.vue').default);
 
 const router = new VueRouter({ routes });
 

@@ -8,7 +8,10 @@
                 <nav aria-label="breadcrumb mt-3  ">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><router-link to="/">Accueil</router-link></li>
-                        <li class="breadcrumb-item" v-for="breadcrumb in page.breadcrumbs" :key="breadcrumb.id"><router-link :to="breadcrumb.link">{{ breadcrumb.name }}</router-link></li>
+                            <li class="breadcrumb-item" v-for="breadcrumb in page.breadcrumbs" :key="breadcrumb.id">
+                                <router-link v-if="breadcrumb.link" :to="breadcrumb.link">{{ breadcrumb.name }}</router-link>
+                                <a v-else >{{ breadcrumb.name }}</a>
+                            </li>
                     </ol>
                 </nav>
             </div>

@@ -27,10 +27,10 @@ export default {
     data() {
         return {
             clients: [],
-             page: {
+            page: {
                 titre: 'Clients',
                 breadcrumbs: [
-                    { id: 1, name: 'Clients', link: '/clients'}
+                    { id: 1, name: 'Clients', link: '/clients'},
                 ]
             }
         }

@@ -1,0 +1,96 @@
+@font-face{
+    font-family: 'Lato';
+    src: url('./lato/Lato-Regular.ttf');
+}
+
+body{
+    margin: 0px;
+    background: #F5F5F5;
+    font-family: 'Lato';
+}
+
+/* Barre de navigation  */
+.dash_nav{
+    display: flex;
+    background: white;
+    align-content: center;
+}
+
+.dash_nav_logo{
+    flex: 1;
+    height: 50px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.dash_nav_menus{
+    flex: 10;
+    display: flex;
+    justify-content: center;
+    /* background: chocolate; */
+    height: 50px;
+}
+.dash_nav_menu{
+    width: 100px;
+    /* background: turquoise; */
+    padding-top: 13px;
+    text-align: center;
+}
+.dash_nav_menu:hover{
+    border-bottom: 3px solid black;
+}
+.dash_nav_profile{
+    flex: 2;
+    /* background: chartreuse; */
+    align-content: flex-end;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.dash_nav_profile img{
+    margin-right: 10px;
+}
+
+/* Barre de titre */
+
+.dash_wrapper{
+    margin: 0 10px;
+}
+
+.dash_page_title{
+    font-size: 15px;
+    padding: 10px 0;
+}
+.dash_breadcrumbs{
+    text-align: right;
+}
+
+/* Cards */
+
+.dash_card{
+    background: white;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+/* Flex */
+
+.row{
+    display: flex;
+}
+.col-1{
+    flex: 1;
+}
+.col-2{
+    flex: 2;
+}
+.col-3{
+    flex: 3;
+}
+.col-4{
+    flex: 4;
+}
+.col-5{
+    flex: 5;
+}

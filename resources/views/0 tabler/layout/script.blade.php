@@ -1,4 +1,4 @@
-<script src="{{ asset('src/library/jquery/jquery.js') }}"></script>
+{{-- <script src="{{ asset('src/library/jquery/jquery.js') }}"></script> --}}
 
 <!-- Libs JS -->
 <script src="{{ asset('template/tabler/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

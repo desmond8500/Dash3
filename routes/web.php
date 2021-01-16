@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Tabler\Admin\Users;
 use App\Http\Livewire\Tabler\Index;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +24,18 @@ Auth::routes();
 Route::middleware(['auth'])->group(
     function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/tabler/index', Index::class)->name('tabler.index');
 
+    //===============================================================================================================================
+    // Tabler
+    //===============================================================================================================================
+
+    Route::get('/tabler/index', Index::class)->name('tabler.index');
+    // Admin
+    Route::get('/tabler/admin/users', Users::class)->name('tabler.admin.users');
+
+    //===============================================================================================================================
+    // Infyom
+    //===============================================================================================================================
 
     Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('generator_builder');
     Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate')->name('io_field_template');

@@ -73,8 +73,14 @@
                     <a class="dropdown-item" target="_blank" href="{{ route('home') }}" >
                         Infyom
                     </a>
+                    <a class="dropdown-item" target="_blank" href="{{ route('tabler.admin.users') }}" >
+                        Utilisateurs
+                    </a>
                     <a class="dropdown-item" target="_blank" href="https://ssh-smi.alwaysdata.net/" >
                         Server
+                    </a>
+                    <a class="dropdown-item" target="_blank" href="https://xd.adobe.com/view/4d2f6747-0350-4d92-a837-ff21c9d2f3ef-187c/" >
+                        dev
                     </a>
                 </div>
             </li>

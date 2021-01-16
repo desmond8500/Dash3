@@ -9,8 +9,7 @@
     <link href="{{ asset('template/tabler/dist/css/tabler-payments.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('template/tabler/dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('template/tabler/dist/css/demo.min.css') }}" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
-    <link rel="stylesheet" href="{{ asset('template/adminlte3/plugins/select2/css/select2.min.css') }}">
+    {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script> --}}
 
     @yield('link')
     <style>

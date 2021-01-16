@@ -6,6 +6,8 @@ Application de gestion de projets
 
 ## Librairies
 
-[Infyom](https://github.com/InfyOmLabs/coreui-generator/tree/8.0)
-[Livewire](https://laravel-livewire.com/docs/2.x/quickstart)
-[Tabler template](https://preview.tabler.io/index.html)
+* [Infyom](https://github.com/InfyOmLabs/coreui-generator/tree/8.0)
+* [Livewire](https://laravel-livewire.com/docs/2.x/quickstart)
+* [Tabler template](https://preview.tabler.io/index.html)
+* [Laravel-Tags](https://spatie.be/docs/laravel-tags/v2/installation-and-setup)
+* [Laravel-permssion](https://spatie.be/docs/laravel-permission/v3/installation-laravel)

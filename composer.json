@@ -19,7 +19,10 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "3.0",
         "laravelcollective/html": "^6.2",
-        "livewire/livewire": "^2.3"
+        "livewire/livewire": "^2.3",
+        "parsedown/laravel": "^1.2",
+        "spatie/laravel-permission": "^3.18",
+        "spatie/laravel-tags": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

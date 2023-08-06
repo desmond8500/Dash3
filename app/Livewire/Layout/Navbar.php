@@ -7,7 +7,8 @@ use Livewire\Component;
 class Navbar extends Component
 {
     public $menu1 = array(
-        array('name' => "menu1", "route" => "", "icon" => ""),
+        array('name' => "Accueil", "route" => "index", "icon" => ""),
+        array('name' => "Clients", "route" => "clients", "icon" => ""),
     );
 
     public function render()

@@ -1,16 +1,14 @@
 <div>
-
-    {{-- @component('components.layout.page-header') --}}
-    @component('components.layout.page-header', ['breadcrumbs' => $breadcrumbs])
+    @component('components.layout.page-header', ['title'=> 'Clients', 'breadcrumbs' => $breadcrumbs])
     <div class="btn-list">
         <button class="btn btn-primary" >Button</button>
-        <button class="btn btn-primary" >Button</button>
+        <button class="btn btn-primary" wire:click='inc' >Button</button>
     </div>
     @endcomponent
 
-   <div class="row">
+   <div class="row row-deck">
     <div class="col">
-        sdfsdf
+        Test = {{ $test }}
     </div>
    </div>
 </div>

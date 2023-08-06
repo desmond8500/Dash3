@@ -1,30 +1,33 @@
 <div>
     @component('components.layout.page-header', ['title'=> 'Clients', 'breadcrumbs' => $breadcrumbs])
-    <div class="btn-list">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSection">
-            <i class="ti ti-plus"></i> sdfsd
+    <div class="d-flex">
+
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Rechercher">
+            <button class="btn btn-primary" wire:click='clientSearch'> <i class="ti ti-search"></i> </button>
+        </div>
+
+        <button type="button" class="btn btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#addSection">
+            <i class="ti ti-plus me-2"></i> Button
         </button>
+
     </div>
     @endcomponent
 
-   <div class="row row-deck">
-    <div class="col">
-        Test = {{ $test }}
+    <div class="row row-deck">
+        @foreach ($clients as $client)
+            {{ $client->name }}
+        @endforeach
     </div>
-   </div>
 
     @component('components.modal.modal_add',[
         'id' => "addSection",
         'title' => "Ajouter une section",
-        // 'include' => "_tabler.erp.avancement_section_form",
-        'method' => "add_section"
+        'method' => "store"
         ])
-
-        <input type="text">
-
+        @include('_form.client_form')
 
        <script> window.addEventListener('close-modal', event => { $("#addSection").modal('hide'); }) </script>
     @endcomponent
-
 
 </div>

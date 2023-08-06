@@ -1,4 +1,4 @@
-<div class="page-header d-print-none">
+<div class="page-header d-print-none mb-2">
     <div class="container-xl">
         <div class="row g-2 align-items-center">
             <div class="col">
@@ -6,7 +6,7 @@
                 <ol class="breadcrumb" aria-label="breadcrumbs">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}">Accueil</a></li>
                     @foreach ($breadcrumbs as $breadcrumb)
-                        <li class="breadcrumb-item"><a href="#">{{ $breadcrumb['name'] }}</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route($breadcrumb['route']) }}">{{ $breadcrumb['name'] }}</a></li>
                     @endforeach
                 </ol>
                 <h2 class="page-title">

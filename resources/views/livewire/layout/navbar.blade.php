@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="{{ route('index') }}">
+            <a href="{{ route('index') }}" wire:navigate>
                 <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </h1>
@@ -163,7 +163,7 @@
                 <ul class="navbar-nav">
                     @foreach ($menus as $menu)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route($menu['route']) }}">
+                            <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <i class="ti ti-{{ $menu['icon'] }}"></i>
                                 </span>

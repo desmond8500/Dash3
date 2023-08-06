@@ -2,25 +2,42 @@
 
 namespace App\Livewire\Erp;
 
+use App\Models\Client;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Clients extends Component
 {
-    public $test = 0;
+    use WithPagination;
+
+    public $search;
+    public $name, $description, $address, $avatar, $status, $type;
 
     public $breadcrumbs = [
-        ["name"=> "name", "route"=> ""],
-        ["name"=> "name", "route"=> ""],
-        ["name"=> "name", "route"=> ""],
+        ["name"=> "Clients", "route"=> "clients"],
     ];
     public function render()
     {
         return view('livewire.erp.clients',[
-            "breadcrumbs" => ["name" => "name", "route" => ""]
+            "breadcrumbs" => $this->breadcrumbs,
+            'clients' => Client::where('name', 'like', '%' . $this->search . '%')->paginate(10)
         ]);
     }
 
-    function inc() : void {
-        $this->test++;
+    function clientSearch() : void {
+        $this->resetPage();
+    }
+
+    function store() : void {
+        $this->dispatch('close-modal');
+    }
+    function edit() : void {
+
+    }
+    function update() : void {
+
+    }
+    function delete() : void {
+
     }
 }

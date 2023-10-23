@@ -30,6 +30,7 @@ class Clients extends Component
 
     function store() : void {
         $this->dispatch('close-modal');
+
     }
     function edit() : void {
 

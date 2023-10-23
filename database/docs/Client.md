@@ -2,5 +2,5 @@
 
 ## Description
 
-* Entreprise 
-* Particulier
+Il s'agit des client de la société **Entreprise** comme **Particuliers**
+

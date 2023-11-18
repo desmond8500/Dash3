@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Layout;
 
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class Navbar extends Component
@@ -17,5 +18,22 @@ class Navbar extends Component
         return view('livewire.layout.navbar', [
             "menus" => $this->menu1
         ]);
+    }
+
+
+    // Register
+    #[Rule('required')]
+    public $prenom;
+    #[Rule('required')]
+    public $nom;
+    #[Rule('required')]
+    public $email;
+    #[Rule('required')]
+    public $password;
+    #[Rule('required')]
+    public $cpassxord;
+
+    function register(){
+        $this->validate();
     }
 }

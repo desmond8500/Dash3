@@ -150,7 +150,7 @@
                 <div class="nav-item ">
                     <div class="btn-list">
                         <a class="btn btn-primary" href="/loginPage" wire:navigate>Connexion</a>
-                        <a class="btn btn-light" href="/registerPage" wire:navigate>Inscription</a>
+                        <a class="btn btn-light" wire:click="dispatch('open-addModal')" >Inscription</a>
                     </div>
                 </div>
             @endauth
@@ -175,5 +175,51 @@
             </div>
         </div>
     </div>
-</header>
 
+
+    <div style="color: black">
+
+
+        @component('components.modal', ["id"=>'addModal', 'method'=>'close'])
+            <form class="row" wire:submit="register">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Prénom</label>
+                    <input type="text" class="form-control" wire:model="prenom" placeholder="Prénom">
+                    @error('prenom') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nom</label>
+                    <input type="text" class="form-control" wire:model="nom" placeholder="Nom">
+                    @error('nom') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" class="form-control" wire:model="email" placeholder="Email">
+                    @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="text" class="form-control" wire:model="password" placeholder="Mot de passe">
+                    @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Confirmation de mot de passe</label>
+                    <input type="text" class="form-control" wire:model="cpassxord" placeholder="Confirmation de mot de passe">
+                    @error('cpassxord') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+
+
+
+
+            <script> window.addEventListener('open-addModal', event => { $('#addModal').modal('show'); }) </script>
+            <script> window.addEventListener('close-addModal', event => { $('#addModal').modal('hide'); }) </script>
+        @endcomponent
+    </div>
+</header>

@@ -7,6 +7,7 @@ use Livewire\Component;
 class TestPage extends Component
 {
     public $number = 0;
+    public $modal = "addModal";
 
     public function render()
     {
@@ -18,7 +19,7 @@ class TestPage extends Component
     }
 
     function close() {
-        $this->dispatch('close-modal');
+        $this->dispatch('close-addModal');
     }
     function close2() {
         $this->dispatch('close-modal');

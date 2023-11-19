@@ -64,12 +64,9 @@
         @livewire('layout.navbar')
 
         <div class="page-wrapper">
-            @yield('page-header')
-            <!-- Page body -->
-            <div class="page-body">
-                <div class="container-xl">
-                    {{ $slot }}
-                </div>
+            <div class="container-xl">
+                {{ $slot }}
+
             </div>
             <footer class="footer footer-transparent d-print-none">
                 <div class="container-xl">

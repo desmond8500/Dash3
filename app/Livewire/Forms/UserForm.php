@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 
@@ -31,15 +32,27 @@ class UserForm extends Form
         );
 
         if (Auth::attempt($credentials)) {
-            $user = User::where('email',$email)->get();
-            // Auth::login($user);
+            return true;
+        }else {
+            return false;
         }
-        return redirect()->intended('/');
     }
 
     function logout(){
         Auth::logout();
         return redirect()->intended('/');
+    }
+
+    function updateAvatar($avatar) {
+        $user = auth()->user();
+
+        $dir = "User/$user->id/avatar";
+        Storage::disk('public')->deleteDirectory($dir);
+        $name = $avatar->getClientOriginalName();
+        $avatar->storeAs("public/$dir", $name);
+
+        $user->avatar = "storage/$dir/$name";
+        $user->save();
     }
 
 }

@@ -36,6 +36,7 @@ class Navbar extends Component
 
     public $email;
     public $password;
+    public $errorMessage;
 
     function login(){
         $this->validate([
@@ -43,10 +44,17 @@ class Navbar extends Component
             'password' => 'required'
         ]);
 
-        $this->user_form->login($this->email, $this->password);
+        $login = $this->user_form->login($this->email, $this->password);
+        if ($login) {
+            $this->reset('email','password', 'errorMessage');
+            $this->dispatch('close-login');
+            return redirect()->intended('/');
+        } else {
+           $this->errorMessage ='Les identifiants sont incorrects';
+        }
 
-        $this->reset('email','password');
-        $this->dispatch('close-login');
+
+
     }
 
     function logout(){

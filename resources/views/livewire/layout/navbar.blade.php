@@ -132,12 +132,7 @@
 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                        @if ($user->avatar)
-                            <img src="" alt="P" class="avatar avatar-sm">
-                        @else
-                            <img src="" alt="A" class="avatar avatar-sm">
-                        @endif
-                        {{-- <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span> --}}
+                        <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm">
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ $user->firstname }} {{ $user->lastname }}</div>
                             <div class="mt-1 small text-secondary">UI Designer</div>
@@ -270,6 +265,9 @@
                         </span>
                     </div>
                     @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-12 text-danger">
+                    {{ $errorMessage }}
                 </div>
 
                 <div class="modal-footer">

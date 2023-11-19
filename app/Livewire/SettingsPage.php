@@ -8,6 +8,10 @@ class SettingsPage extends Component
 {
     public function render()
     {
-        return view('livewire.settings-page');
+        return view('livewire.settings-page',[
+            'user' => auth()->user()
+        ]);
     }
+
+    public $tab = 0;
 }

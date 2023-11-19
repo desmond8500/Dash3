@@ -1,6 +1,10 @@
 <?php
 
 use App\Livewire\Erp\Clients;
+use App\Livewire\Erp\Devis;
+use App\Livewire\Erp\Journaux;
+use App\Livewire\Erp\Projet;
+use App\Livewire\Erp\Projets;
 use App\Livewire\IndexPage;
 use App\Livewire\LoginPage;
 use App\Livewire\ProfilePage;
@@ -23,7 +27,17 @@ Route::middleware(['auth'])->group(function () {
 // ERP
 Route::middleware(['auth'])->group(function () {
     Route::get('/clients', Clients::class)->name('clients');
+    Route::get('/projets/{client_id}', Projets::class)->name('projets');
+    Route::get('/projet/{projet_id}', Projet::class)->name('projet');
+    Route::get('/devis/{devis_id}', Devis::class)->name('devis');
+    Route::get('/journaux/{projet_id}', Journaux::class)->name('journaux');
 });
+
+// Stock
+
+// Medias
+
+// Tasks
 
 // Test
 Route::get('/test', TestPage::class)->name('test');

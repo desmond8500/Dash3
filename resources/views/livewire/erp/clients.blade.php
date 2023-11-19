@@ -15,14 +15,14 @@
             <div class="col-md-3">
                 <div class="card p-2">
                     <div class="row">
-                        <div class="col-auto">
+                        <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}" >
                             <img src="{{ $client->avatar }}" alt="A" class="avatar avatar-md">
-                        </div>
-                        <div class="col-md">
+                        </a>
+                        <a class="col-md cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}">
                             <div class="fw-bold">{{ $client->name }}</div>
                             <div class="text-muted">{{ nl2br($client->description) }}</div>
                             <div class="text-primary">{{ $client->type }}</div>
-                        </div>
+                        </a>
                         <div class="col-auto">
                             <button class="btn  btn-action" wire:click="edit({{ $client }})">
                                 <i class="ti ti-edit"></i>
@@ -153,7 +153,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" wire:click="delete()">
+                <button type="button" class="btn btn-danger" wire:click="delete()" >
                     <i class="ti ti-trash"></i>
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

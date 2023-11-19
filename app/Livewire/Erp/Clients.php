@@ -32,6 +32,10 @@ class Clients extends Component
         return Client::where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
+    function gotoProjets($client_id){
+        return redirect()->route('projets',['client_id'=> $client_id]);
+    }
+
     function store() {
         $this->clientForm->store();
         $this->dispatch('close-addClient');

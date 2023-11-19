@@ -89,7 +89,7 @@
 
             <div class="col-md-12 mb-3">
                 <label class="form-label">Description</label>
-                <textarea class="form-control" wire:model="clientForm.description" placeholder="Name" id="" cols="30" rows="3"></textarea>
+                <textarea class="form-control" wire:model="clientForm.description" placeholder="Description du client" id="" cols="30" rows="3"></textarea>
             </div>
 
             <div class="modal-footer">
@@ -105,17 +105,26 @@
             <div class="col-auto mb-3">
                 @if ($clientForm->avatar)
                     @if(!is_string($clientForm->avatar))
-                        <img src="{{ $clientForm->avatar->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload">
+                        <img src="{{ $clientForm->avatar->temporaryUrl() }}" alt="A1" class="avatar rounded avatar-upload">
                     @else
-                        <img  href="#" src="{{ $clientForm->avatar }}" alt="" class="avatar rounded avatar-upload">
+                        <img  href="#" src="{{ $clientForm->avatar }}" alt="A" class="avatar rounded avatar-upload">
                         <input type="file" id="file" accept="image/*" style="display: none" wire:model="clientForm.avatar">
                         <label for="file"  class="avatar avatar-upload rounded">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none" /> <path d="M12 5l0 14" /> <path d="M5 12l14 0" /> </svg>
                             <span class="avatar-upload-text">Add</span>
                         </label>
                     @endif
-                    {{-- <img src="{{ $clientForm->avatar->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload"> --}}
                 @else
+                    <input type="file" id="file" accept="image/*" style="display: none" wire:model="clientForm.avatar">
+                    <label for="file" class="avatar avatar-upload rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 5l0 14" />
+                            <path d="M5 12l14 0" />
+                        </svg>
+                        <span class="avatar-upload-text">Add</span>
+                    </label>
                 @endif
             </div>
             <div class="col mb-3">
@@ -140,7 +149,7 @@
 
             <div class="col-md-12 mb-3">
                 <label class="form-label">Description</label>
-                <textarea class="form-control" wire:model="clientForm.description" placeholder="Name" id="" cols="30" rows="3"></textarea>
+                <textarea class="form-control" wire:model="clientForm.description" placeholder="Description du client" id="" cols="30" rows="3"></textarea>
             </div>
 
             <div class="modal-footer">

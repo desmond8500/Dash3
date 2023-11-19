@@ -27,6 +27,7 @@ class clientForm extends Form
         if ($this->avatar) {
             $this->storeAvatar($client, $this->avatar);
         }
+        $this->reset();
     }
 
     function storeAvatar($client, $avatar){
@@ -64,6 +65,7 @@ class clientForm extends Form
         }
 
         $client->save();
+        $this->reset();
     }
 
     function delete($id){

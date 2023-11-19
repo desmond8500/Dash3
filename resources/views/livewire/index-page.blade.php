@@ -1,9 +1,7 @@
 <div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
+    @component('components.layouts.page-header', ['title'=> 'Dashboard'])
 
-    @auth
-        Connecté
-    @else
-        Non connecté
-    @endauth
+    @endcomponent
+
+
 </div>

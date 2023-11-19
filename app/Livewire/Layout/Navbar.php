@@ -16,20 +16,21 @@ class Navbar extends Component
     public function render()
     {
         return view('livewire.layout.navbar', [
-            "menus" => $this->menu1
+            "menus" => $this->menu1,
+            'user' => auth()->user(),
         ]);
     }
 
     // Register
-    public UserForm $user;
+    public UserForm $user_form;
     public $formtype = true;
 
     function register(){
         $this->validate();
 
-        $this->user->store();
+        $this->user_form->store();
 
-        $this->user->reset();
+        $this->user_form->reset();
         $this->dispatch('close-register');
     }
 
@@ -42,13 +43,13 @@ class Navbar extends Component
             'password' => 'required'
         ]);
 
-        $this->user->login($this->email, $this->password);
+        $this->user_form->login($this->email, $this->password);
 
         $this->reset('email','password');
         $this->dispatch('close-login');
     }
 
     function logout(){
-        $this->user->logout();
+        $this->user_form->logout();
     }
 }

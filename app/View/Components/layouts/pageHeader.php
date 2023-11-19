@@ -1,18 +1,19 @@
 <?php
 
-namespace App\View\Components\layout;
+namespace App\View\Components\layouts;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class page-header extends Component
+class pageHeader extends Component
 {
-    public $breadcrumbs;
-
-    public function __construct($breadcrumbs = [])
+    /**
+     * Create a new component instance.
+     */
+    public function __construct()
     {
-        // $this->breadcrumbs = [];
+        //
     }
 
     /**
@@ -20,6 +21,6 @@ class page-header extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layout.page-header');
+        return view('components.layouts.page-header');
     }
 }

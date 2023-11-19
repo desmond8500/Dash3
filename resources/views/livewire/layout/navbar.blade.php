@@ -9,6 +9,7 @@
             </a>
         </h1>
 
+        {{-- Right side Buttons --}}
         <div class="navbar-nav flex-row order-md-last">
             @auth
                 <div class="d-none d-md-flex">
@@ -131,18 +132,23 @@
 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                        <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                        @if ($user->avatar)
+                            <img src="" alt="P" class="avatar avatar-sm">
+                        @else
+                            <img src="" alt="A" class="avatar avatar-sm">
+                        @endif
+                        {{-- <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span> --}}
                         <div class="d-none d-xl-block ps-2">
-                            <div>Paweł Kuna</div>
+                            <div>{{ $user->firstname }} {{ $user->lastname }}</div>
                             <div class="mt-1 small text-secondary">UI Designer</div>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                         {{-- <a href="#" class="dropdown-item">Status</a> --}}
-                        <a href="./profile.html" class="dropdown-item">Profile</a>
+                        <a href="{{ route('profile') }}" wire:navigate class="dropdown-item">Profile</a>
                         {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
                         <div class="dropdown-divider"></div>
-                        <a href="./settings.html" class="dropdown-item">Paramètres</a>
+                        <a href="{{ route('settings') }}" class="dropdown-item">Paramètres</a>
                         <a wire:click="logout()" class="dropdown-item">Déconnexion</a>
                     </div>
                 </div>
@@ -156,6 +162,7 @@
             @endauth
         </div>
 
+        {{-- Navbar menu Links --}}
         <div class="collapse navbar-collapse" id="navbar-menu">
             <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                 <ul class="navbar-nav">
@@ -174,11 +181,11 @@
                 </ul>
             </div>
         </div>
+
     </div>
 
-
+    {{-- Modal Forms --}}
     <div style="color: black">
-
 
         @component('components.modal', ["id"=>'register', 'title'=>'Inscription'])
             <form class="row" wire:submit="register">

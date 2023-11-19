@@ -12,10 +12,12 @@
                     {{ $slot }}
 
                 </div>
-                {{-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-primary" wire:click="{{ $method }}">{{ $submit ?? 'Valider' }}</button>
-                </div> --}}
+                @isset ($method)
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-primary" wire:click="{{ $method }}">{{ $submit ?? 'Valider' }}</button>
+                    </div>
+                @endisset
             </div>
         </div>
     </div>

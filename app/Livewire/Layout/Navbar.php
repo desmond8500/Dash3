@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Layout;
 
-use Livewire\Attributes\Rule;
+use App\Livewire\Forms\UserForm;
 use Livewire\Component;
 
 class Navbar extends Component
@@ -20,20 +20,34 @@ class Navbar extends Component
         ]);
     }
 
-
     // Register
-    #[Rule('required')]
-    public $prenom;
-    #[Rule('required')]
-    public $nom;
-    #[Rule('required')]
-    public $email;
-    #[Rule('required')]
-    public $password;
-    #[Rule('required')]
-    public $cpassxord;
+    public UserForm $user;
 
     function register(){
         $this->validate();
+
+        $this->user->store();
+
+        $this->user->reset();
+        $this->dispatch('close-register');
+    }
+
+    public $email;
+    public $password;
+
+    function login(){
+        $this->validate([
+            'email' => 'required|email|exists:App\Models\User,email',
+            'password' => 'required'
+        ]);
+
+        $this->user->login($this->email, $this->password);
+
+        $this->reset('email','password');
+        $this->dispatch('close-login');
+    }
+
+    function logout(){
+        $this->user->logout();
     }
 }

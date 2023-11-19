@@ -7,4 +7,5 @@
 ## Source
 
 * [Laravel 10](https://laravel.com/docs/10.x/installation)
-* [Livewire](https://livewire.laravel.com/docs/quickstart)
+* [Laravel Livewire](https://livewire.laravel.com/docs/quickstart)
+* [Laravel Lang](https://laravel-lang.com/)

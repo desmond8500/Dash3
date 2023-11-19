@@ -161,18 +161,30 @@
         <div class="collapse navbar-collapse" id="navbar-menu">
             <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                 <ul class="navbar-nav">
-                    @foreach ($menus as $menu)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
-                                <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                    <i class="ti ti-{{ $menu['icon'] }}"></i>
-                                </span>
-                                <span class="nav-link-title">
-                                    {{ $menu['name'] }}
-                                </span>
-                            </a>
-                        </li>
-                    @endforeach
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('index') }}" wire:navigate>
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <i class="ti ti-home"></i>
+                            </span>
+                            <span class="nav-link-title">
+                                Accueil
+                            </span>
+                        </a>
+                    </li>
+                    @auth
+                        @foreach ($menus as $menu)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <i class="ti ti-{{ $menu['icon'] }}"></i>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        {{ $menu['name'] }}
+                                    </span>
+                                </a>
+                            </li>
+                        @endforeach
+                    @endauth
                 </ul>
             </div>
         </div>

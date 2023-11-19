@@ -2,7 +2,7 @@
 
 use App\Livewire\Erp\Clients;
 use App\Livewire\IndexPage;
-use App\Livewire\Pages\Index;
+use App\Livewire\LoginPage;
 use App\Livewire\ProfilePage;
 use App\Livewire\SettingsPage;
 use App\Livewire\TestPage;
@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Route;
 
 // Index
 Route::get('/', IndexPage::class)->name('index');
+
+// Auth
+Route::get('/login', LoginPage::class)->name('login');
 
 // Settings
 Route::middleware(['auth'])->group(function () {

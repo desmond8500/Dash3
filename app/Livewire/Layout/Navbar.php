@@ -22,6 +22,7 @@ class Navbar extends Component
 
     // Register
     public UserForm $user;
+    public $formtype = true;
 
     function register(){
         $this->validate();

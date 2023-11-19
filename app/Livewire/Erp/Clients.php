@@ -2,43 +2,56 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\clientForm;
 use App\Models\Client;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class Clients extends Component
 {
     use WithPagination;
+    use WithFileUploads;
+    public clientForm $clientForm;
 
     public $search;
-    public $name, $description, $address, $avatar, $status, $type;
 
-    public $breadcrumbs = [
-        ["name"=> "Clients", "route"=> "clients"],
-    ];
+    public $breadcrumbs = array(
+        array("name" => "Clients", "route" => "clients"),
+    );
     public function render()
     {
         return view('livewire.erp.clients',[
             "breadcrumbs" => $this->breadcrumbs,
-            'clients' => Client::where('name', 'like', '%' . $this->search . '%')->paginate(10)
+            // 'clients' => Client::search($this->search)->paginate(10),
+            'clients' => $this->clientSearch(),
         ]);
     }
 
-    function clientSearch() : void {
-        $this->resetPage();
+    function clientSearch() {
+        return Client::where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
-    function store() : void {
-        $this->dispatch('close-modal');
-
+    function store() {
+        $this->clientForm->store();
+        $this->dispatch('close-addClient');
     }
-    function edit() : void {
 
+    public $selected;
+    function edit($client) {
+        $this->selected = $client;
+        $this->clientForm->set($this->selected);
+        $this->dispatch('open-editClient');
     }
-    function update() : void {
 
+    function update() {
+        $this->clientForm->update($this->selected);
+        $this->dispatch('close-editClient');
+        $this->render();
     }
-    function delete() : void {
-
+    function delete() {
+        $this->clientForm->delete($this->selected['id']);
+        $this->dispatch('close-editClient');
+        $this->render();
     }
 }

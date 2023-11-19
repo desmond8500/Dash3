@@ -7,9 +7,9 @@
                     @isset($breadcrumbs)
                         @foreach ($breadcrumbs as $bread)
                             @if ($loop->last)
-                                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route($bread->route) }}">{{ $bread->name }}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href="{{ route($bread['route']) }}">{{ $bread['name'] }}</a></li>
                             @else
-                                <li class="breadcrumb-item"><a href="{{ route($bread->route) }}">{{ $bread->name }}</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route($bread['route']) }}">{{ $bread['name'] }}</a></li>
                             @endif
                         @endforeach
                     @endisset

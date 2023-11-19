@@ -18,6 +18,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ERP
+Route::middleware(['auth'])->group(function () {
+    Route::get('/clients', Clients::class)->name('clients');
+});
 
 // Test
 Route::get('/test', TestPage::class)->name('test');

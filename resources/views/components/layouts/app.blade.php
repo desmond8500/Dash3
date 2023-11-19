@@ -115,7 +115,6 @@
             </footer>
         </div>
     </div>
-    @livewire('wire-elements-modal')
     <!-- Tabler Core -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

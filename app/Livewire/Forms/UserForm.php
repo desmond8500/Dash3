@@ -22,6 +22,8 @@ class UserForm extends Form
     public $password_confirmation;
 
     function store() {
+        $this->firstname = ucfirst($this->firstname);
+        $this->lastname = ucfirst($this->lastname);
         User::create($this->all());
     }
 

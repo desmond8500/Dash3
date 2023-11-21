@@ -18,13 +18,13 @@
                         <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}" >
                             <img src="{{ $client->avatar }}" alt="A" class="avatar avatar-md">
                         </a>
-                        <a class="col-md cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}">
+                        <a class="col cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}">
                             <div class="fw-bold">{{ $client->name }}</div>
                             <div class="text-muted">{{ nl2br($client->description) }}</div>
                             <div class="text-primary">{{ $client->type }}</div>
                         </a>
                         <div class="col-auto">
-                            <button class="btn  btn-action" wire:click="edit({{ $client }})">
+                            <button class="btn btn-primary btn-icon" wire:click="edit({{ $client->id }})">
                                 <i class="ti ti-edit"></i>
                             </button>
                         </div>
@@ -150,6 +150,10 @@
             <div class="col-md-12 mb-3">
                 <label class="form-label">Description</label>
                 <textarea class="form-control" wire:model="clientForm.description" placeholder="Description du client" id="" cols="30" rows="3"></textarea>
+            </div>
+
+            <div class="col-md-12 mb-3 text-danger">
+                {{ $error_message }}
             </div>
 
             <div class="modal-footer">

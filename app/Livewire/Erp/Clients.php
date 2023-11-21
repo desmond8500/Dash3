@@ -15,6 +15,7 @@ class Clients extends Component
     public clientForm $clientForm;
 
     public $search;
+    public $error_message;
 
     public $breadcrumbs = array(
         array("name" => "Clients", "route" => "clients"),
@@ -29,7 +30,7 @@ class Clients extends Component
     }
 
     function clientSearch() {
-        return Client::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+        return Client::where('name', 'like', '%' . $this->search . '%')->orderBy('name')->paginate(10);
     }
 
     function gotoProjets($client_id){
@@ -42,8 +43,8 @@ class Clients extends Component
     }
 
     public $selected;
-    function edit($client) {
-        $this->selected = $client;
+    function edit($client_id) {
+        $this->selected = Client::find($client_id);;
         $this->clientForm->set($this->selected);
         $this->dispatch('open-editClient');
     }
@@ -54,8 +55,13 @@ class Clients extends Component
         $this->render();
     }
     function delete() {
-        $this->clientForm->delete($this->selected['id']);
-        $this->dispatch('close-editClient');
-        $this->render();
+        $client = Client::find($this->selected->id);
+
+        if ($client->projets->count()) {
+            $this->error_message = 'Ce client a des projets, il faut les supprimer avant';
+        }else{
+            $this->selected->delete();
+            $this->dispatch('close-editClient');
+        }
     }
 }

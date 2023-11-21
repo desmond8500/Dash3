@@ -31,13 +31,15 @@ class clientForm extends Form
     }
 
     function storeAvatar($client, $avatar){
-        $dir = "Erp/Client/$client->id/avatar";
-        Storage::disk('public')->deleteDirectory($dir);
-        $name = $avatar->getClientOriginalName();
-        $avatar->storeAs("public/$dir", $name);
+        if (!is_string($this->avatar)) {
+            $dir = "Erp/Client/$client->id/avatar";
+            Storage::disk('public')->deleteDirectory($dir);
+            $name = $avatar->getClientOriginalName();
+            $avatar->storeAs("public/$dir", $name);
 
-        $client->avatar = "storage/$dir/$name";
-        $client->save();
+            $client->avatar = "storage/$dir/$name";
+            $client->save();
+        }
     }
 
     function set($client){

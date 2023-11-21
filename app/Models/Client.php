@@ -19,8 +19,8 @@ class Client extends Model
         'type'
     ];
 
-    // public function projets(): HasMany
-    // {
-    //     return $this->hasMany(Pro::class, 'foreign_key', 'local_key');
-    // }
+    public function projets(): HasMany
+    {
+        return $this->hasMany(Projet::class);
+    }
 }

@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header mb-3">
     <div class="row align-items-center mw-100">
         <div class="col">
             <div class="mb-1">
@@ -19,7 +19,7 @@
                 <span class="text-truncate">{{ $title ?? 'Title' }}</span>
             </h2>
         </div>
-        <div class="col-auto">
+        <div class="col-md-auto col-xs-12">
             {{ $slot }}
         </div>
     </div>

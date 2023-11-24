@@ -9,21 +9,23 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Projets extends Component
+class ProjetsPage extends Component
 {
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
-    public $search ='';
+    public $search = '';
     public $breadcrumbs;
     public $client_id, $selected;
     public projetForm $projetForm;
 
-    public function mount($client_id) {
+    public function mount($client_id)
+    {
         $this->client_id = $client_id;
         $this->projetForm->client_id = $client_id;
         $client = Client::find($client_id);
+
         $this->breadcrumbs = array(
             array('name' => 'Clients', 'route' => 'clients'),
             array('name' => $client->name, 'route' => 'clients'),
@@ -32,7 +34,7 @@ class Projets extends Component
 
     public function render()
     {
-        return view('livewire.erp.projets',[
+        return view('livewire.erp.projets-page', [
             'projets' => $this->ProjetSearch(),
         ]);
     }
@@ -41,13 +43,13 @@ class Projets extends Component
         return Projet::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
-    function store(){
+    function store() {
         $this->projetForm->store();
         $this->dispatch('close-addProjet');
         $this->reset('projetForm.name', 'projetForm.description');
     }
 
-    function edit($projet_id){
+    function edit($projet_id) {
         $this->selected = Projet::find($projet_id);
 
         $this->projetForm->name = $this->selected->name;
@@ -56,12 +58,12 @@ class Projets extends Component
         $this->dispatch('open-editProjet');
     }
 
-    function update(){
+    function update() {
         $this->projetForm->update($this->selected->id);
         $this->dispatch('close-editProjet');
     }
 
-    function delete(){
+    function delete() {
         $this->selected->delete();
         $this->dispatch('close-editProjet');
     }

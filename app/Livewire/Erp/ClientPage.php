@@ -4,10 +4,10 @@ namespace App\Livewire\Erp;
 
 use Livewire\Component;
 
-class Projet extends Component
+class ClientPage extends Component
 {
     public function render()
     {
-        return view('livewire.erp.projet');
+        return view('livewire.erp.client-page');
     }
 }

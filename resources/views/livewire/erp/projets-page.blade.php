@@ -11,24 +11,24 @@
 
     <div class="row g-2">
         @forelse ($projets as $projet)
-        <div class="col-md-3">
-            <div class="card p-2">
-                <div class="row">
-                    <div class="col-auto">
-                        <img class="avatar avatar-md" src="{{ asset($projet->client->avatar) }}" alt="A">
-                    </div>
-                    <div class="col">
-                        <div class="fw-bold">{{ $projet->name }}</div>
-                        <div class="text-muted">{{ nl2br($projet->description) }}</div>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-primary btn-icon" wire:click="edit('{{ $projet->id }}')">
-                            <i class="ti ti-edit"></i>
-                        </button>
+            <div class="col-md-3">
+                <div class="card p-2">
+                    <div class="row">
+                        <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
+                            <img class="avatar avatar-md" src="{{ asset($projet->client->avatar) }}" alt="A">
+                        </a>
+                        <div class="col">
+                            <div class="fw-bold">{{ $projet->name }}</div>
+                            <div class="text-muted">{{ nl2br($projet->description) }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary btn-icon" wire:click="edit('{{ $projet->id }}')">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         @empty
 
         @endforelse

@@ -12,15 +12,15 @@
     <div class="row g-2">
         @forelse ($projets as $projet)
             <div class="col-md-3">
-                <div class="card p-2">
+                <div class="card p-2 ">
                     <div class="row">
                         <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
                             <img class="avatar avatar-md" src="{{ asset($projet->client->avatar) }}" alt="A">
                         </a>
-                        <div class="col">
+                        <a class="col" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
                             <div class="fw-bold">{{ $projet->name }}</div>
                             <div class="text-muted">{{ nl2br($projet->description) }}</div>
-                        </div>
+                        </a>
                         <div class="col-auto">
                             <button class="btn btn-primary btn-icon" wire:click="edit('{{ $projet->id }}')">
                                 <i class="ti ti-edit"></i>
@@ -30,7 +30,9 @@
                 </div>
             </div>
         @empty
+            @component('components.no-result')
 
+            @endcomponent
         @endforelse
     </div>
 

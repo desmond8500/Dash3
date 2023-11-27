@@ -56,6 +56,9 @@
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
         }
+        .ti{
+            margin-right: 2px;
+        }
     </style>
 </head>
 

@@ -15,16 +15,16 @@ class ProjetPage extends Component
     protected $paginationTheme = 'bootstrap';
     public $search ='';
     public $breadcrumbs;
-    public $projet_id;
+    public $projet, $projet_id;
 
     public function mount($projet_id){
-        $projet = Projet::find($projet_id);
+        $this->projet = Projet::find($projet_id);
         $this->projet_id = $projet_id;
 
         $this->breadcrumbs = array(
             array('name' => 'Clients', 'route' => route('clients')),
-            array('name' => $projet->client->name, 'route' => route('projets',['client_id'=>$projet->client->id])),
-            array('name' => $projet->name, 'route' => route('projet',['projet_id'=>$projet->id])),
+            array('name' => $this->projet->client->name, 'route' => route('projets',['client_id'=>$this->projet->client->id])),
+            array('name' => $this->projet->name, 'route' => route('projet',['projet_id'=>$this->projet->id])),
         );
     }
 

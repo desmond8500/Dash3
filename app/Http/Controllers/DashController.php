@@ -27,7 +27,6 @@ class DashController extends Controller
         Permission::create(['name'=>'erp']);
         Permission::create(['name'=>'stock']);
         Permission::create(['name'=>'erp']);
-        Permission::create(['name'=>'erp']);
         Permission::create(['name'=>'contacts']);
     }
 }

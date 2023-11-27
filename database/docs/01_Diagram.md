@@ -12,18 +12,36 @@ class Client{
     boolean type
 }
 
-class Status{
-    <<enumeration>>
-    Etude
-    Nouveau
-    En_Cours
-    En_Pause
-    Annulé
-    Terminé
+Client <-- Projet
+class Projet{
+    int client_id
+    string name
+    string description
+
 }
 
-Client <-- Type
-Client <-- Status
+Projet <-- Invoice
+class Invoice{
+    int projet_id
+    string client
+    string projet
+    string reference
+    text modalite
+    text description
+    string tva
+    string brs
+    string remise
+    string tva
+
+}
+
+Invoice <-- InvoiceDoc
+class InvoiceDoc{
+    int invoice_id
+    string folder
+    string type
+}
+
 ```
 
 

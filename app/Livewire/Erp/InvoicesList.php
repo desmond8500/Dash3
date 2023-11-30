@@ -14,23 +14,19 @@ class InvoicesList extends Component
 
     public $search ='';
 
-
-    function getInvoices() {
-        return Invoice::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(12);
-    }
-
     public $projet_id;
     function mount($projet_id){
         $this->projet_id = $projet_id;
     }
 
-    public function render()
-    {
+    public function render(){
         return view('livewire.erp.invoices-list',[
             'invoices' => $this->getInvoices(),
         ]);
     }
 
-
+    function getInvoices(){
+        return Invoice::where('projet_id', $this->projet_id)->where('reference', 'like', '%' . $this->search . '%')->paginate(12);
+    }
 
 }

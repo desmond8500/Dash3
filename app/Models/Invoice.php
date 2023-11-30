@@ -10,6 +10,6 @@ class Invoice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'projet_id', 'client', 'projet', 'reference', 'description', 'modalite', 'note', 'statut', 'tax'
+        'projet_id', 'client', 'projet', 'reference', 'description', 'modalite', 'note', 'statut', 'tax', 'remise'
     ];
 }

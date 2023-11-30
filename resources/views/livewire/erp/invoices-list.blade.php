@@ -13,9 +13,9 @@
             </div>
         </div>
         <div class="col-md-auto">
-            <button class="btn btn-primary" wire:click="$dispatch">
+            <a class="btn btn-primary" wire:click="$dispatch('open-addInvoice')">
                 <i class="ti ti-plus"></i>Devis
-            </button>
+            </a>
             <button class="btn btn-primary">
                 <i class="ti ti-plus"></i>Générer Devis
             </button>
@@ -49,13 +49,11 @@
         @endcomponent
     @endforelse
 
-    @component('components.modal', ["id"=>'addInvoice', 'method'=>'close'])
+    @component('components.modal', ["id"=>'addInvoice'])
         <form class="row" wire:submit="register">
+            @include('_form.invoice_form')
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
+
         </form>
         <script> window.addEventListener('open-addInvoice', event => { $('#addInvoice').modal('show'); }) </script>
         <script> window.addEventListener('close-addInvoice', event => { $('#addInvoice').modal('hide'); }) </script>

@@ -15,12 +15,13 @@ class InvoiceAdd extends Component
 
     #[Validate('required')]
     public $reference;
+    #[Validate('required')]
     public $description;
     public $modalite;
     public $note;
-    public $statut;
-    public $tax;
-    public $remise;
+    public $statut = 'Proforma';
+    public $tax = '0';
+    public $remise = '0';
 
     function mount($projet_id){
         $this->projet = Projet::find($projet_id);
@@ -43,6 +44,7 @@ class InvoiceAdd extends Component
     }
 
     function store(){
+        $this->validate();
         Invoice::firstOrCreate([
             'projet_id' => $this->projet->id,
             'client_name' => $this->client_name,
@@ -55,5 +57,8 @@ class InvoiceAdd extends Component
             'tax' => $this->tax,
             'remise' => $this->remise,
         ]);
+
+        $this->dispatch('close-addInvoice');
+        $this->dispatch('invoice-added');
     }
 }

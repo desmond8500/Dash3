@@ -8,8 +8,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <div>Nom du client</div>
-                        <div class="text-primary">#DCA-456-23</div>
+                        <div>{{ $devis->client_name }}</div>
+                        <div class="text-primary">#{{ $devis->reference }}</div>
                     </div>
                     <div class="card-actions btn-list">
                         <div class="dropdown">

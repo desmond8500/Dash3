@@ -20,13 +20,15 @@
                     </a>
                     <a class="col cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}">
                         <div class="fw-bold">{{ $client->name }}</div>
-                        <div class="text-muted">{{ nl2br($client->description) }}</div>
                         <div class="text-primary">{{ $client->type }}</div>
                     </a>
                     <div class="col-auto">
                         <button class="btn btn-primary btn-icon" wire:click="edit({{ $client->id }})">
                             <i class="ti ti-edit"></i>
                         </button>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="text-muted">{{ nl2br($client->description) }}</div>
                     </div>
                 </div>
             </div>
@@ -63,6 +65,10 @@
         </div>
 
         @endforelse
+
+        <div>
+            {{ $clients->links() }}
+        </div>
     </div>
 
     @component('components.modal', ["id"=>'addClient', 'title'=>'Ajouter un client'])

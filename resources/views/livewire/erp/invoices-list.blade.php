@@ -22,18 +22,18 @@
             <div class="card p-2 border-secondary">
                 <div class="row">
                     <div class="col">
-                        <h4 style="text-transform: uppercase">Référence</h4>
+                        <h4 style="text-transform: uppercase">{{ $invoice->reference }}</h4>
                     </div>
                     <div class="col-auto">
                         <div class="status status-primary">
                             <span class="status-dot"></span>
-                            Nouveau
+                            {{ $invoice->statut }}
                         </div>
                     </div>
                     <div class="col-md-12 mb-3">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, vero?
+                        {{ nl2br($invoice->description) }}
                     </div>
-                    <div class="col-md-6"> 12/12/2023 </div>
+                    <div class="col-md-6"> {{ date_format($invoice->created_at, "d-m-Y") }} </div>
                     <div class="col-md-6 text-end">1 800 000 F</div>
                 </div>
             </div>

@@ -16,6 +16,7 @@ class ClientsPage extends Component
 
     public $search;
     public $error_message;
+    protected $paginationTheme = 'bootstrap';
 
     public $breadcrumbs = array(
         array("name" => "Clients", "route" => "clients"),

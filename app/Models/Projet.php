@@ -13,7 +13,7 @@ class Projet extends Model
     protected $fillable = [
         'client_id',
         'name',
-        'description'
+        'description',
     ];
 
     public function client(): BelongsTo

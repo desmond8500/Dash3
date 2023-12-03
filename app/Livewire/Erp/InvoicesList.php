@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Models\Invoice;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -25,6 +26,7 @@ class InvoicesList extends Component
         ]);
     }
 
+    #[On('invoice-added')]
     function getInvoices(){
         return Invoice::where('projet_id', $this->projet_id)->where('reference', 'like', '%' . $this->search . '%')->paginate(12);
     }

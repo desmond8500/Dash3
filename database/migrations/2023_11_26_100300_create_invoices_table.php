@@ -12,8 +12,8 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('projet_id')->constrained();
-            $table->string('client');
-            $table->string('projet');
+            $table->string('client_name')->nullable();
+            $table->string('projet_name')->nullable();
             $table->string('reference');
             $table->text('description');
             $table->string('modalite')->nullable();

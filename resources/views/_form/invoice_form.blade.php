@@ -17,7 +17,6 @@
             <option value="Terminé">Terminé</option>
         </select>
         @error('statut') <span class='text-danger'>{{ $message }}</span> @enderror
-        {{ $statut }}
     </div>
 
     <div class="col-md-8 mb-3">
@@ -36,7 +35,6 @@
         <label class="form-label">Description</label>
         <textarea class="form-control" wire:model="description" placeholder="Description du devis" cols="30" rows="3"></textarea>
         @error('description') <span class="text-danger">{{ $message }}</span> @enderror
-        {{ $description }}
     </div>
 
     <div class="col-md-4 mb-3">

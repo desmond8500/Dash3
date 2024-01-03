@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Form;
 
+use App\Http\Controllers\ErpController;
 use App\Models\Invoice;
 use App\Models\Projet;
 use Livewire\Attributes\Validate;
@@ -29,13 +30,7 @@ class InvoiceAdd extends Component
         $this->projet_name = $this->projet->name;
         $this->client_name = $this->projet->client->name;
 
-        $count = Invoice::count();
-        if ($count) {
-            $this->reference = substr(strtoupper($this->projet->client->name), 0, 3) . "-" . sprintf("%03d", Invoice::latest()->first()->id + 1) . '-' . date('y');
-        } else {
-            $this->reference = substr(strtoupper($this->projet->client->name), 0, 3) . "-" . sprintf("%03d", 1) . '-' . date('y');
-        }
-
+        $this->reference = ErpController::getInvoiceReference($this->projet);
     }
 
     public function render()

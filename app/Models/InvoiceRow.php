@@ -7,21 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Projet extends Model
+class InvoiceRow extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'client_id',
-        'name',
-        'description',
+        'invoice_section_id',
+        'designation',
+        'coef',
+        'reference',
+        'quantite',
+        'prix',
+        'priorite',
     ];
 
-    public function client(): BelongsTo {
-        return $this->belongsTo(Client::class);
-    }
-
-    public function devis(): HasMany {
-        return $this->hasMany(Invoice::class);
+    public function section(): BelongsTo {
+        return $this->belongsTo(InvoiceSection::class);
     }
 }

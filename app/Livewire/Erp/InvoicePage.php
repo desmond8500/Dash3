@@ -3,6 +3,9 @@
 namespace App\Livewire\Erp;
 
 use App\Models\Invoice;
+use App\Models\InvoiceRow;
+use App\Models\InvoiceSection;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -26,6 +29,8 @@ class InvoicePage extends Component
             array('name' => $this->devis->projet->name, 'route' => route('projet', ['projet_id' => $this->devis->projet->id])),
             array('name' => $this->devis->name, 'route' => route('invoice', ['invoice_id' => $this->devis->id])),
         );
+
+        $this->ordre = InvoiceSection::where('invoice_id', $this->devis->id)->count()+1;
     }
 
     function ProjetSearch() {
@@ -34,6 +39,36 @@ class InvoicePage extends Component
 
     public function render()
     {
-        return view('livewire.erp.invoice-page');
+        return view('livewire.erp.invoice-page',[
+            'sections' => $this->getSections()
+        ]);
     }
+
+    #[On('invoice-section-reload') ]
+    function getSections() {
+        return InvoiceSection::where('invoice_id', $this->devis->id)->get();
+    }
+
+    // Row
+    function deleteRow($id){
+        $row = InvoiceRow::find($id);
+        $row->delete();
+    }
+
+    // Section
+    public $section, $ordre;
+
+    function sectionStore(){
+        InvoiceSection::create([
+            'invoice_id' => $this->devis->id,
+            'section'    => $this->section,
+            'ordre'      => $this->ordre,
+        ]);
+        $this->ordre++;
+        $this->dispatch('close-addSection');
+    }
+
+
+
+
 }

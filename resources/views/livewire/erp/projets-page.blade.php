@@ -9,33 +9,19 @@
     </div>
     @endcomponent
 
-    <div class="row g-2">
+    <div class="row row-cards g-2" data-masonry='{"percentPosition": true }'>
         @forelse ($projets as $projet)
             <div class="col-md-3">
-                <div class="card p-2 ">
-                    <div class="row">
-                        <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
-                            <img class="avatar " src="{{ asset($projet->client->avatar) }}" alt="A">
-                        </a>
-                        <a class="col" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
-                            <div class="fw-bold">{{ $projet->name }}</div>
-                        </a>
-                        <div class="col-auto">
-                            <button class="btn btn-primary btn-icon" wire:click="edit('{{ $projet->id }}')">
-                                <i class="ti ti-edit"></i>
-                            </button>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="text-muted">{{ nl2br($projet->description) }}</div>
-                        </div>
-                    </div>
-                </div>
+                @include('_card.projet_card')
             </div>
         @empty
             @component('components.no-result')
 
             @endcomponent
         @endforelse
+        <div class="mt-1">
+            {{ $projets->links() }}
+        </div>
     </div>
 
     @component('components.modal', ["id"=>'addProjet', 'title'=> 'Ajouter un projet'])

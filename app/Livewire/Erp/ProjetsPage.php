@@ -27,8 +27,8 @@ class ProjetsPage extends Component
         $client = Client::find($client_id);
 
         $this->breadcrumbs = array(
-            array('name' => 'Clients', 'route' => 'clients'),
-            array('name' => $client->name, 'route' => 'clients'),
+            array('name' => 'Clients', 'route' => route('clients')),
+            array('name' => $client->name, 'route' => route('projets',['client_id'=>$client->id])),
         );
     }
 
@@ -40,7 +40,7 @@ class ProjetsPage extends Component
     }
 
     function ProjetSearch() {
-        return Projet::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
+        return Projet::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(20);
     }
 
     function store() {

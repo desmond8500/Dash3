@@ -37,9 +37,7 @@
                                 <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
                             </div>
                         </div>
-                        <button class="btn btn-primary" >
-                            <i class="ti ti-plus"></i> Article
-                        </button>
+
                     </div>
                 </div>
 
@@ -56,26 +54,57 @@
                                 <th scope="col" class="text-center">_</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="">
-                                <td scope="row">
-                                    <div>Désignation de l'article</div>
-                                    <div class="text-muted">#DCA-458-23</div>
-                                </td>
-                                <td class="text-center">12</td>
-                                <td class="text-center">1.2</td>
-                                <td class="text-center">{{ number_format('25000', 0,'.', ' ') }}</td>
-                                <td class="text-center">25000</td>
-                                <td class="text-center">5000</td>
-                                <td class="text-center">
-                                    <div>
-                                        <button class="btn btn-action text-success" ><i class="ti ti-edit"></i></button>
 
-                                        <button class="btn btn-action text-danger" ><i class="ti ti-trash"></i></button>
+                        @foreach ($sections as $section)
+                            <tr>
+                                <th scope="col" class="bg-primary-lt" colspan="2">{{ $section->section }}</th>
+                                <th scope="col" class="bg-primary-lt " colspan="6">
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addSection')">
+                                            <i class="ti ti-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-icon mx-1" wire:click="$dispatch('open-addSection')">
+                                            <i class="ti ti-trash"></i>
+                                        </button>
+                                        @livewire('form.invoice-row-add', ['id' => $section->id])
                                     </div>
-                                </td>
+                                </th>
                             </tr>
-                        </tbody>
+
+                            <tbody>
+                                @foreach ($section->rows as $row)
+                                    <tr class="">
+                                        <td scope="row">
+                                            <div>{{ $row->designation }}</div>
+                                            <div class="text-muted">{{ nl2br($row->reference) }}</div>
+                                        </td>
+                                        <td class="text-center">{{ $row->quantite }}</td>
+                                        <td class="text-center">{{ $row->coef }}</td>
+                                        <td class="text-center">{{ number_format($row->prix, 0,'.', ' ') }}</td>
+                                        <td class="text-center">{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</td>
+                                        <td class="text-center">{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', ' ') }}</td>
+                                        <td class="text-center">
+                                            <div>
+                                                <button class="btn btn-action text-success" ><i class="ti ti-edit"></i></button>
+
+                                                <button class="btn btn-action text-danger" wire:click="deleteRow('{{ $row->id }}')"><i class="ti ti-trash"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+
+
+                            @endforeach
+                        <tr>
+                            <th scope="col" class="bg-primary-lt " colspan="8">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-primary" wire:click="$dispatch('open-addSection')">
+                                        <i class="ti ti-plus"></i> Ajouter une section
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
                     </table>
                 </div>
                 <div class="card-footer">
@@ -92,6 +121,21 @@
 
         </div>
         <div class="col-md-4">
+
+            <div class="card mb-1">
+                <div class="card-header">
+                    <div class="card-title">Acompte</div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary btn-icon" >
+                            <i class="ti ti-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                </div>
+                <div class="card-footer"></div>
+            </div>
 
             <div class="card mb-1">
                 <div class="card-header">
@@ -139,4 +183,18 @@
 
         </div>
     </div>
+
+
+    @component('components.modal', ["id"=>'addSection', 'title'=>'Ajouter une section'])
+        <form class="row" wire:submit="sectionStore">
+            @include('_form.invoice_section_form')
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); }) </script>
+        <script> window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); }) </script>
+    @endcomponent
 </div>

@@ -31,7 +31,7 @@ class ClientsPage extends Component
     }
 
     function clientSearch() {
-        return Client::where('name', 'like', '%' . $this->search . '%')->orderBy('name')->paginate(10);
+        return Client::where('name', 'like', '%' . $this->search . '%')->orderBy('name')->paginate(16);
     }
 
     function gotoProjets($client_id)

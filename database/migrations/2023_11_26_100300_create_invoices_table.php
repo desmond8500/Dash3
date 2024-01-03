@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('modalite')->nullable();
             $table->string('note')->nullable();
             $table->string('statut')->default('Nouveau');
-            $table->string('tax')->default('0');
-            $table->string('remise')->default('0');
+            $table->decimal('tax')->default('0');
+            $table->decimal('remise')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });

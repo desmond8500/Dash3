@@ -1,7 +1,9 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Dashboard'])
         @if (!$init)
-            <button class="btn btn-primary" wire:click="initServer()">Initialiser le serveur</button>
+            <button class="btn btn-primary" wire:click="initServer()">
+                Initialiser le serveur
+            </button>
         @endif
 
     @endcomponent
@@ -29,6 +31,15 @@
             </a>
         @endforeach
     </div>
+
+    @auth
+        <div class="btn-list mt-3">
+            @livewire('form.journal-add')
+        </div>
+
+    @endauth
+
+
 
 
 </div>

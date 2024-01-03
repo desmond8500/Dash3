@@ -1,13 +1,11 @@
-<div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="row">
 
-<button class="btn btn-primary" wire:click="$dispatch('open-addModal')">Ouvrir</button>
+            @include('_form.achat_form')
+        </div>
 
-<div>
-    @component('components.modal', ["id"=>'addModal', 'method'=>'close'])
-        <script> window.addEventListener('open-addModal', event => { $('#addModal').modal('show'); }) </script>
-        <script> window.addEventListener('close-addModal', event => { $('#addModal').modal('hide'); }) </script>
-    @endcomponent
-</div>
+    </div>
 
 
 </div>

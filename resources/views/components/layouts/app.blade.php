@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{ $title ?? 'Dash 3' }}</title>
-    <script defer data-api="/stats/api/event" data-domain="preview.tabler.io" src="/stats/js/script.js"></script>
+    {{-- <script defer data-api="/stats/api/event" data-domain="preview.tabler.io" src="/stats/js/script.js"></script> --}}
     <meta name="msapplication-TileColor" content="#0054a6" />
     <meta name="theme-color" content="#0054a6" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -121,6 +121,7 @@
     <!-- Tabler Core -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer></script>
 
 </body>
 

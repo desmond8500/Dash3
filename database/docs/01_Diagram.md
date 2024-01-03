@@ -42,6 +42,32 @@ class InvoiceDoc{
     string type
 }
 
+Achats <-- AchatRow
+class Achats{
+    int provider_id
+    string name
+    text description
+    date date
+}
+class AchatRow{
+    int achat_id
+    string designation
+    string reference
+    int quantite
+    decimal prix
+    decimal tva
+}
+
+class Journal{
+    int client_id
+    int projet_id
+    int devis_id
+    int user_id
+    string title
+    text description
+    date date
+}
+
 ```
 
 

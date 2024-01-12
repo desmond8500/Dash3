@@ -3,7 +3,7 @@
         <div class="card p-2">
             <div class="row">
                 <div class="col-auto">
-                    <img class="avatar avatar-md" src="{{ asset($projet->client->avatar) }}" alt="">
+                    <img class="avatar avatar-md" src="{{ asset($projet->client->avatar) }}" alt="A">
                 </div>
                 <div class="col">
                     <h4>{{ $projet->name }}</h4>

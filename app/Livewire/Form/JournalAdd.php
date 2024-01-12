@@ -21,7 +21,7 @@ class JournalAdd extends Component
     #[Validate('required')]
     public $date;
 
-    function mount(){
+    function mount($projet_id = null, $devis_id=null){
         if (auth()) {
             $this->user_id = auth()->user()->id;
         }

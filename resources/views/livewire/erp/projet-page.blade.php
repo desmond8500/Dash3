@@ -84,6 +84,9 @@
 
                         <div class="tab-pane" id="tabs-journaux">
                             <h2>Journal d'activité</h2>
+
+                            @livewire('form.journal-add')
+
                             <div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at diam, sem nunc amet,
                                 pellentesque id egestas velit sed</div>
                         </div>

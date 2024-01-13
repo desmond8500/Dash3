@@ -57,6 +57,11 @@ class AchatRow{
     decimal prix
     decimal tva
 }
+class Provider{
+    string name
+    string logo
+    string address
+}
 
 class Journal{
     int client_id

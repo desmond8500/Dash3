@@ -11,6 +11,7 @@ class Navbar extends Component
         // array('name' => "Accueil", "route" => "index", "icon" => "home"),
         array('name' => "Clients", "route" => "clients", "icon" => "users"),
         array('name' => "Journaux", "route" => "journaux", "icon" => "file"),
+        array('name' => "Stock", "route" => "stock", "icon" => "file"),
         array('name' => "Test", "route" => "test", "icon" => "users"),
     );
 

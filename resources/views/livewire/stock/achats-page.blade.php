@@ -3,7 +3,7 @@
         @livewire('form.achat-add')
     @endcomponent
 
-    <div class="row">
+    <div class="row row-deck g-2">
         @forelse ($achats as $achat)
             <div class="col-md-3">
                 <div class="card p-2">
@@ -11,7 +11,7 @@
                         <a class="col" href="{{ route('achat', ['achat_id'=> $achat->id]) }}">
                             <div class="card-title">
                                 {{ $achat->name }}
-                                <div class="text-muted" style="font-size: 10px;">
+                                <div class="text-muted" style="font-size: 12px;">
                                     {{ $achat->date }}
                                 </div>
                             </div>

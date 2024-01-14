@@ -64,6 +64,11 @@ class Provider{
     string address
 }
 
+class Brand{
+    string name
+    string logo
+}
+
 class Journal{
     int client_id
     int projet_id

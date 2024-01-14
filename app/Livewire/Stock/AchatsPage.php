@@ -3,6 +3,7 @@
 namespace App\Livewire\Stock;
 
 use App\Models\Achat;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -29,6 +30,12 @@ class AchatsPage extends Component
     public $description;
     #[Validate('required')]
     public $date;
+
+    #[On('close-addAchat')]
+    function ProviderSearch()
+    {
+        return Achat::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+    }
 
     public function render()
     {

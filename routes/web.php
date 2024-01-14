@@ -47,8 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stock/brands', BrandsPage::class)->name('brands');
     Route::get('/stock/articles', ArticlesPage::class)->name('articles');
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
-    Route::get('/stock/achat', AchatPage::class)->name('achat');
     Route::get('/stock/achats', AchatsPage::class)->name('achats');
+    Route::get('/stock/achat/{achat_id}', AchatPage::class)->name('achat');
 });
 
 // Medias

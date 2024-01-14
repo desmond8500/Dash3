@@ -57,6 +57,7 @@ class AchatRow{
     decimal prix
     decimal tva
 }
+
 class Provider{
     string name
     string logo
@@ -71,6 +72,18 @@ class Journal{
     string title
     text description
     date date
+}
+
+class Article{
+    string designation
+    string image
+    string reference
+    text description
+    int quantity
+    int priority_id
+    int brand_id
+    int provider_id
+    float price
 }
 
 ```

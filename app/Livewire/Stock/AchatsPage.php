@@ -3,6 +3,7 @@
 namespace App\Livewire\Stock;
 
 use App\Models\Achat;
+use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -40,19 +41,45 @@ class AchatsPage extends Component
     public function render()
     {
         return view('livewire.stock.achats-page',[
-            'achats' => Achat::all()
+            'achats' => Achat::all(),
+            'providers' => Provider::all()
         ]);
     }
 
-    function store(){
+    public $selected;
+
+    function edit($provider_id){
+        $provider =  Achat::find($provider_id);
+        $this->selected = $provider_id;
+
+        $this->provider_id = $provider->provider_id;
+        $this->name = $provider->name;
+        $this->description = $provider->description;
+        $this->date = $provider->date;
+
+        $this->dispatch('open-editAchat');
+    }
+
+    function update()
+    {
         $this->validate();
 
-        Achat::create([
-            'provider_id'=> $this->provider_id,
-            'name'=> $this->name,
-            'description'=> $this->description,
-            'date'=> $this->date,
-        ]);
-        $this->dispatch('close-addAchat');
+        $provider =  Achat::find($this->selected);
+
+        $provider->provider_id = $this->provider_id;
+        $provider->name = $this->name;
+        $provider->description = $this->description;
+        $provider->date = $this->date;
+        $provider->save();
+
+        $this->dispatch('close-editAchat');
+    }
+
+    // TODO: Voir les dépendnces de suppression
+    function delete()
+    {
+        $article =  Achat::find($this->selected);
+        $article->delete();
+        $this->dispatch('close-editAchat');
     }
 }

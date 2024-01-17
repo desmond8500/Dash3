@@ -24,4 +24,9 @@ class Projet extends Model
     public function devis(): HasMany {
         return $this->hasMany(Invoice::class);
     }
+
+    public function buildings(): HasMany
+    {
+        return $this->hasMany(Building::class);
+    }
 }

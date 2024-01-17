@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('buildings', function (Blueprint $table) {
             $table->id();
+            $table->integer('projet_id');
+            $table->string('name');
+            $table->integer('order')->default(0);
+            $table->text('description')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

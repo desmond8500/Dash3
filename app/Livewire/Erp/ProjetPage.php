@@ -34,6 +34,8 @@ class ProjetPage extends Component
 
     public function render()
     {
-        return view('livewire.erp.projet-page');
+        return view('livewire.erp.projet-page',[
+            'buildings' => json_decode(file_get_contents('json/buildings.json')),
+        ]);
     }
 }

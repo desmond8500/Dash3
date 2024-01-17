@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('provider_id')->nullable();
             $table->float('price')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

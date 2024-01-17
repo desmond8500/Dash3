@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('stages', function (Blueprint $table) {
             $table->id();
+            $table->integer('stage_id');
+            $table->string('name');
+            $table->integer('order')->default(0);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

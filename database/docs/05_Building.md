@@ -27,6 +27,7 @@ classDiagram
 class Building {
     int projet_id
     string name
+    string order
     text description
 }
 
@@ -40,6 +41,7 @@ class Stage {
 class Room {
     int stage_id
     string name
+    string order
     text description
 }
 

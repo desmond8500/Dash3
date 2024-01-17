@@ -55,4 +55,21 @@
         </div>
 
     </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Building management</div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" > <i class="ti ti-plus"></i> Batiment</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <a href="{{ route('buildings', ['projet_id'=>$projet->id]) }}">Consulter</a>
+
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
 </div>

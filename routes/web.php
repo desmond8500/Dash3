@@ -1,10 +1,14 @@
 <?php
 
+use App\Livewire\Erp\BuildingPage;
+use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
 use App\Livewire\Erp\InvoicePage;
 use App\Livewire\Erp\Journaux;
 use App\Livewire\Erp\ProjetPage;
 use App\Livewire\Erp\ProjetsPage;
+use App\Livewire\Erp\RoomPage;
+use App\Livewire\Erp\StagePage;
 use App\Livewire\IndexPage;
 use App\Livewire\LoginPage;
 use App\Livewire\ProfilePage;
@@ -49,6 +53,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
     Route::get('/stock/achats', AchatsPage::class)->name('achats');
     Route::get('/stock/achat/{achat_id}', AchatPage::class)->name('achat');
+});
+
+// Building management
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/buildings/{projet_id}', BuildingsPage::class)->name('buildings');
+    Route::get('/building/{building_id}', BuildingPage::class)->name('building');
+    Route::get('/stage/{stage_id}', StagePage::class)->name('stage');
+    Route::get('/room/{room_id}', RoomPage::class)->name('room');
 });
 
 // Medias

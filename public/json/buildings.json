@@ -1,0 +1,48 @@
+[
+    {
+        "id": 1,
+        "name": "Batiment 1",
+        "stages": [
+            {
+                "id": 1,
+                "name": "RDC",
+                "rooms": [
+                    {
+                        "id": 1,
+                        "name": "Room 1"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "name": "Etage 1",
+                "rooms": [
+                    {
+                        "id": 1,
+                        "name": "Room 1"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Room 2"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Batiment 2",
+        "stages": [
+            {
+                "id": 1,
+                "name": "RDC",
+                "rooms": [
+                    {
+                        "id": 1,
+                        "name": "Room 1"
+                    }
+                ]
+            }
+        ]
+    }
+]

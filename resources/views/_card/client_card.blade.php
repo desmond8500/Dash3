@@ -4,7 +4,7 @@
             <img src="{{ $client->avatar }}" alt="A" class="avatar avatar-md">
         </a>
         <a class="col cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}">
-            <div class="fw-bold">{{ $client->name }} {{ $client->id }}</div>
+            <div class="fw-bold">{{ $client->name }}</div>
             <div class="text-primary">{{ $client->type }}</div>
             <div>{{ $client->projets->count() }}</div>
         </a>

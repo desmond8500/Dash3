@@ -64,4 +64,5 @@ class BuildingsPage extends Component
         // $this->selected_room = Room::find($room_id);
 
     }
+
 }

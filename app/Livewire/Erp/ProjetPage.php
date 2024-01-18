@@ -36,6 +36,7 @@ class ProjetPage extends Component
     {
         return view('livewire.erp.projet-page',[
             'buildings' => json_decode(file_get_contents('json/buildings.json')),
+            'projet_id' => $this->projet_id,
         ]);
     }
 }

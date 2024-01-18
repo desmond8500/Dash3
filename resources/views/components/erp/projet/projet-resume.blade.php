@@ -60,7 +60,7 @@
             <div class="card-header">
                 <div class="card-title"><h2>Building management</h2></div>
                 <div class="card-actions">
-                    <button class="btn btn-primary" > <i class="ti ti-plus"></i> Batiment</button>
+                    @livewire('form.building-add', ['projet_id' => $projet->id])
                 </div>
             </div>
             <div class="card-body">

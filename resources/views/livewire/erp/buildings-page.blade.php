@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <div class="card-title">Batiments</div>
                     <div class="card-actions">
-                        <button class="btn btn-primary"><i class="ti ti-plus"></i> Batiment</button>
+                        @livewire('form.building-add', ['projet_id' => $projet_id])
                     </div>
                 </div>
                 <div class="card-body">

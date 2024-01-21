@@ -29,6 +29,7 @@ class UserAccount extends Component
     public $avatar;
     function updateAvatar(){
         $this->userForm->updateAvatar($this->avatar);
+        $this->reset('avatar');
     }
 
     public $firstname, $lastname;

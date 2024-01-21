@@ -15,11 +15,13 @@ Task <-- TaskPhoto
 Task <-- TaskDocument
 
 class Task{
+    int client_id
+    int projet_id
     int devis_id
     int level_id
     int stage_id
     int room_id
-    string objet
+    string name
     text description
     int status_id
     int priority_id
@@ -42,12 +44,12 @@ class TaskDocument{
     task()
 }
 
-class Status{
+class TaskStatus{
     int level
     string name
 }
 
-class Priority{
+class TaskPriority{
     int level
     string name
 }

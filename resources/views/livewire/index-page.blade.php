@@ -16,7 +16,7 @@
 
     @auth
         <div class="row g-2">
-            <div class="col">
+            <div class="col-md-8">
                 <div class="row">
                     @foreach ($resumes as $resume)
                         <a class="col-md-3" href="{{ $resume->route }}">
@@ -43,7 +43,7 @@
 
             </div>
             <div class="col-auto">
-
+                @livewire('erp.tasklist')
 
             </div>
 

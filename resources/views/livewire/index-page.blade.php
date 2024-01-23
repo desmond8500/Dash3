@@ -42,7 +42,7 @@
                 </div>
 
             </div>
-            <div class="col-auto">
+            <div class="col-md-4">
                 @livewire('erp.tasklist')
 
             </div>

@@ -15,6 +15,8 @@ class Projet extends Model
         'client_id',
         'name',
         'description',
+        'start_date',
+        'end_date',
     ];
 
     public function client(): BelongsTo {
@@ -28,5 +30,9 @@ class Projet extends Model
     public function buildings(): HasMany
     {
         return $this->hasMany(Building::class);
+    }
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
     }
 }

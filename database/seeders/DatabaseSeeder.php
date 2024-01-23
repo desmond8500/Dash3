@@ -7,9 +7,11 @@ namespace Database\Seeders;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Projet;
+use App\Models\Task;
 use App\Models\TaskPriority;
 use App\Models\TaskStatus;
 use App\Models\User;
+use Database\Factories\TaskFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +25,8 @@ class DatabaseSeeder extends Seeder
         Client::factory()
         ->count(50)
         ->has(Projet::factory()->count(30))
+        ->has(Task::factory()->count(9))
+
         ->create();
 
         // Tasks

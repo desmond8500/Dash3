@@ -16,11 +16,12 @@ return new class extends Migration
             $table->integer('client_id')->nullable();
             $table->integer('projet_id')->nullable();
             $table->integer('devis_id')->nullable();
-            $table->integer('level_id')->nullable();
+            $table->integer('building_id')->nullable();
             $table->integer('stage_id')->nullable();
             $table->integer('room_id')->nullable();
-            $table->integer('name');
-            $table->integer('description');
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->date('expiration_date')->nullable();
             $table->integer('priority_id');
             $table->integer('statut_id');
             $table->timestamps();

@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->count(1)->create();
         Client::factory()
-        ->count(50)
-        ->has(Projet::factory()->count(30))
-        ->has(Task::factory()->count(9))
+        ->count(15)
+        ->has(Projet::factory()->count(15))
+        ->has(Task::factory()->count(15))
 
         ->create();
 

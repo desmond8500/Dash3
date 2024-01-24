@@ -16,6 +16,15 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if ($task->expiration_date)
+                        <div class="d-flex justify-content-between">
+                            <div class="fw-bold">Date d'expiration</div>
+                            <div>
+                                {{ $task->client->expiration_date }}
+                            </div>
+                        </div>
+                    @endif
+
                     {{ nl2br($task->description) }}
                 </div>
                 <!-- Some borders are removed -->
@@ -40,7 +49,9 @@
                 <div class="card-header">
                     <div class="card-title">Détails de la tache</div>
                     <div class="card-actions">
-
+                        <button class="btn btn-primary disabled" >
+                            <i class="ti ti-plus"></i> Sous tache
+                        </button>
                     </div>
                 </div>
                 <div class="card-body">

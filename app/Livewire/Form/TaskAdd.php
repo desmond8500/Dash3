@@ -27,19 +27,19 @@ class TaskAdd extends Component
         if ($client_id) {
             $this->form->client_id = $client_id;
         }
-        if ($client_id) {
+        if ($projet_id) {
             $this->form->projet_id = $projet_id;
         }
-        if ($client_id) {
+        if ($devis_id) {
             $this->form->devis_id = $devis_id;
         }
-        if ($client_id) {
+        if ($building_id) {
             $this->form->building_id = $building_id;
         }
-        if ($client_id) {
+        if ($stage_id) {
             $this->form->stage_id = $stage_id;
         }
-        if ($client_id) {
+        if ($room_id) {
             $this->form->room_id = $room_id;
         }
     }

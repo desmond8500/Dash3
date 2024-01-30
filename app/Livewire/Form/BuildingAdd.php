@@ -7,10 +7,10 @@ use Livewire\Component;
 
 class BuildingAdd extends Component
 {
-    public BuildingForm $building_form;
+    public BuildingForm $form;
 
     function mount($projet_id){
-        $this->building_form->projet_id = $projet_id;
+        $this->form->projet_id = $projet_id;
     }
 
 
@@ -20,7 +20,8 @@ class BuildingAdd extends Component
     }
 
     function store(){
-        $this->building_form->store();
-        $this->dispatch('close-buildingAdd');
+        $this->form->store();
+        $this->dispatch('close-addBuilding');
+        $this->dispatch('get-buildings');
     }
 }

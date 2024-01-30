@@ -1,4 +1,11 @@
 <div class="row">
+    <div class="col-md-12">
+        <div>
+            Projet :{{ $form->projet_id }}
+        </div>
+    </div>
+
+
    <div class="col-md-12 mb-3">
        <label class="form-label">Nom de la tache</label>
        <input type="text" class="form-control" wire:model="form.name" placeholder="Nom">

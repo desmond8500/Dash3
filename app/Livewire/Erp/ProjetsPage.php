@@ -54,6 +54,8 @@ class ProjetsPage extends Component
 
         $this->projetForm->name = $this->selected->name;
         $this->projetForm->description = $this->selected->description;
+        $this->projetForm->start_date = $this->selected->start_date;
+        $this->projetForm->end_date = $this->selected->end_date;
 
         $this->dispatch('open-editProjet');
     }

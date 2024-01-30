@@ -9,7 +9,7 @@
     </div>
     @endcomponent
 
-    <div class="row row-cards g-2" data-masonry='{"percentPosition": true }'>
+    <div class="row row-deck g-2" >
         @forelse ($projets as $projet)
             <div class="col-md-3">
                 @include('_card.projet_card')

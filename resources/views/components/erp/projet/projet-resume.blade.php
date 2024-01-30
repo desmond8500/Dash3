@@ -78,7 +78,7 @@
                                     </div>
                                     <div>
                                         @foreach ($building->stages as $stage)
-                                            <a href="{{ route('stage', ['stage_id'=>$stage_id]) }}" class="d-flex justify-content-between">
+                                            <a href="{{ route('stage', ['stage_id'=>$stage->id]) }}" class="d-flex justify-content-between">
                                                 <div>{{ $stage->name  }}</div> <div> 12</div>
                                             </a>
                                         @endforeach

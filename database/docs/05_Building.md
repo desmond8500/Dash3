@@ -31,6 +31,29 @@ class Building {
     text description
 }
 
+class Building_System {
+    int building_id
+    string name
+    string order
+    text description
+}
+
+class Building_item {
+    int building_id
+    int stage_id
+    int room_id
+    int article_id
+    int system_id
+    string name
+    text description
+
+    string tirage
+    string pose
+    string connexion
+    string test
+    string ok
+}
+
 class Stage {
     int building_id
     string name

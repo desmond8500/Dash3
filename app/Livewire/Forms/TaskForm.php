@@ -40,10 +40,12 @@ class TaskForm extends Form
     }
 
     function store(){
+        $this->validate();
         Task::create( $this->all() );
     }
 
     function update(){
+        $this->validate();
         $this->task->update($this->all());
         return $this->task;
     }

@@ -41,23 +41,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Taches</div>
-                    <div class="card-actions">
-                        @livewire('form.task-add', ['stage_id' => $stage->id], key($stage->id))
-                    </div>
-                </div>
-                <div class="card-body">
-                    @foreach ($tasks as $task)
-                        @livewire('task.task-card', ['task' => $task], key($task->id))
-                    @endforeach
-
-                </div>
-                <div class="card-footer">
-
-                </div>
-            </div>
+            @livewire('erp.tasklist', ['stage_id' => $stage->id], key($stage->id))
         </div>
     </div>
 </div>

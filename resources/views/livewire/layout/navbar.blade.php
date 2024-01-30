@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="{{ route('index') }}" wire:navigate>
+            <a href="{{ route('index') }}" >
                 {{ env('APP_NAME', 'Tabler') }}
             </a>
         </h1>

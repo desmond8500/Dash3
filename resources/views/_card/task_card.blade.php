@@ -1,8 +1,6 @@
 <div class="card p-2">
     <div class="row">
-        {{-- <div class="col-auto">
-            <img src="" alt="A" class="avatar avatar-md">
-        </div> --}}
+
         <div  class="col">
             <div class="text-primary" style="font-size: 12px;">
                 @if ($task->client_id)
@@ -40,10 +38,29 @@
                 <div class="text-muted">{{ nl2br($task->description) }}</div>
             </a>
         </div>
-        <div class="col-auto">
-            <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $task->id }}')">
-                <i class="ti ti-edit"></i>
-            </button>
+        <div class="col-auto text-end">
+            <div class="mb-1">
+                <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $task->id }}')">
+                    <i class="ti ti-edit"></i>
+                </button>
+
+            </div>
+
+            <div class="badge badge-pill mb-1
+                    @if($task->priority_id ==1) bg-primary  @endif
+                    @if($task->priority_id ==2) bg-warning  @endif
+                    @if($task->priority_id ==3) bg-danger  @endif
+                "> {{ $task->priority->name }}
+            </div>
+
+            <div>
+                <span class="badge badge-pill mb-1
+                    @if($task->statut_id ==1) bg-primary  @endif
+                    @if($task->statut_id ==2) bg-warning  @endif
+                    @if($task->statut_id ==3) bg-secondary @endif
+                    @if($task->statut_id ==4) bg-success  @endif
+                ">{{ $task->statut->name }}</span>
+            </div>
         </div>
     </div>
 </div>

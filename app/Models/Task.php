@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Task extends Model
 {
@@ -23,6 +24,15 @@ class Task extends Model
         'statut_id',
         'expiration_date',
     ];
+
+    public function priority(): HasOne
+    {
+        return $this->hasOne(TaskPriority::class, 'id', 'priority_id');
+    }
+    public function statut(): HasOne
+    {
+        return $this->hasOne(TaskStatus::class, 'id', 'statut_id');
+    }
 
     public function client(): BelongsTo{
         return $this->belongsTo(Client::class);

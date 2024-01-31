@@ -19,7 +19,7 @@ class TaskFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'description' => $this->faker->realText($maxNbChars = 100),
-            'priority_id' => $this->faker->randomDigit(1,3),
+            'priority_id' => $this->faker->numberBetween(1,3),
             'statut_id' => 1,
         ];
     }

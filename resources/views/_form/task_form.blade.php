@@ -14,7 +14,7 @@
 
    <div class="col-md-4 mb-3">
        <label class="form-label">Status</label>
-       <select class="form-control" wire:model="form.status_id">
+       <select class="form-control" wire:model="form.statut_id">
            @foreach ($statuses as $status)
         <option value="{{ $status->level }}">{{ $status->name }}</option>
         @endforeach

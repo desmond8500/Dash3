@@ -9,6 +9,7 @@
         @auth
             <div class="btn-list mt-3">
                 @livewire('form.journal-add')
+                @livewire('form.task-add')
             </div>
         @endauth
 

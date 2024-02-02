@@ -1,12 +1,13 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Projets', 'breadcrumbs'=>$breadcrumbs])
-    <div class="d-flex">
-        <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher"
-            wire:keydown.enter='ProjetSearch'>
-        <button class="btn btn-primary ms-1" wire:click="$dispatch('open-addProjet')">
-            <i class="ti ti-plus"></i> Projet
-        </button>
-    </div>
+        <div class="d-flex" style="gap:5px">
+            <input type="text" class="form-control mr-1" wire:model.live="search" placeholder="Rechercher" wire:keydown.enter='ProjetSearch'>
+            <button class="btn btn-primary ms-1" wire:click="$dispatch('open-addProjet')">
+                <i class="ti ti-plus"></i> Projet
+            </button>
+            @livewire('form.task-add', ['client_id' => $client_id])
+        </div>
+
     @endcomponent
 
     <div class="row row-deck g-2" >

@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="card-title">Liste des taches</div>
             <div class="card-actions">
-                @livewire('form.task-add', )
+                {{-- @livewire('form.task-add', [$id->]) --}}
             </div>
         </div>
         <div class="p-2">

@@ -56,5 +56,6 @@ class TaskAdd extends Component
     function store(){
         $this->form->store();
         $this->dispatch('close-addTask');
+        $this->dispatch('get-tasks');
     }
 }

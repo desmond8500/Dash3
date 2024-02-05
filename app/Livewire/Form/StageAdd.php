@@ -27,6 +27,6 @@ class StageAdd extends Component
         $this->form->store();
         $this->form->order++;
         $this->dispatch('close-addStage');
-        $this->dispatch('get-stage');
+        $this->dispatch('get-stages');
     }
 }

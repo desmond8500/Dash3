@@ -1,10 +1,10 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Projet: '.$projet->name, 'breadcrumbs'=>$breadcrumbs])
-        {{-- @if ()
-
-        @endif --}}
+        <div class="btn-list">
+            @livewire('form.task-add', ['projet_id' => $projet_id])
+            @livewire('form.journal-add', ['projet_id' => $projet_id])
+        </div>
     @endcomponent
-
 
     <div class="row g-2">
         <div class="col-md-12">
@@ -64,6 +64,7 @@
 
                         <div class="tab-pane" id="tabs-task">
                             <h2>Liste des Taches</h2>
+
                             <div>
                                 @livewire('erp.tasklist', ['projet_id' => $projet_id])
                             </div>

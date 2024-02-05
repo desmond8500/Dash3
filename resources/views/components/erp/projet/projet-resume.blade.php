@@ -92,8 +92,6 @@
                     @endforeach
                 </div>
 
-                <a href="{{ route('buildings', ['projet_id'=>$projet->id]) }}">Consulter</a>
-
             </div>
         </div>
     </div>

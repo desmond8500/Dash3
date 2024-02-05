@@ -20,10 +20,15 @@ class BuildingPage extends Component
     public $breadcrumbs;
 
     public $building;
+    public $selected_stage;
     public BuildingForm $building_form;
 
     function mount($building_id)
     {
+        if (!$building_id) {
+            $this->redirect('/', navigate:true);
+        }
+
         $building = Building::find($building_id);
         $this->building = Building::find($building_id);
 
@@ -46,5 +51,9 @@ class BuildingPage extends Component
     #[On('get-stages')]
     function get_stages() {
         return Stage::where('building_id', $this->building->id)->get();
+    }
+
+    function set_stage($stage_id){
+        $this->selected_stage = Stage::find($stage_id);
     }
 }

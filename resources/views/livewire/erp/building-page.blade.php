@@ -80,8 +80,8 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     window.addEventListener('close-modal', event => {
         $("#exampleModal").modal('hide');
     })
-</script>
+</script> --}}

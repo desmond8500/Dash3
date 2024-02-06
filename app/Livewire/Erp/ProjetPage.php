@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Models\Building;
 use App\Models\Projet;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -35,7 +36,8 @@ class ProjetPage extends Component
     public function render()
     {
         return view('livewire.erp.projet-page',[
-            'buildings' => json_decode(file_get_contents('json/buildings.json')),
+            'buildings' => Building::where('projet_id', $this->projet_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10),
+            // 'buildings' => json_decode(file_get_contents('json/buildings.json')),
             'projet_id' => $this->projet_id,
         ]);
     }

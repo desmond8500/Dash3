@@ -58,7 +58,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <div class="card-title"><h2>Building management</h2></div>
+                <div class="card-title"><h2>Building management</h2> {{ $buildings->count() }}</div>
                 <div class="card-actions">
                     @livewire('form.building-add', ['projet_id' => $projet->id])
                 </div>

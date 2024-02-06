@@ -13,9 +13,7 @@ class BuildingAdd extends Component
         $this->building_form->projet_id = $projet_id;
     }
 
-
-    public function render()
-    {
+    public function render(){
         return view('livewire.form.building-add');
     }
 

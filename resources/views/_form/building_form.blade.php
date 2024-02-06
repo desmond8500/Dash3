@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-3 mb-3">
             <label class="form-label">Odre</label>
-            <input type="text" class="form-control" wire:model="order" placeholder="Odre">
+            <input type="text" class="form-control" wire:model="order" placeholder="Ordre">
             @error('order') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
 

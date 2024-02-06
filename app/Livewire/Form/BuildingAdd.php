@@ -3,6 +3,7 @@
 namespace App\Livewire\Form;
 
 use App\Livewire\Forms\BuildingForm;
+use App\Models\Building;
 use Livewire\Component;
 
 class BuildingAdd extends Component
@@ -11,6 +12,9 @@ class BuildingAdd extends Component
 
     function mount($projet_id){
         $this->building_form->projet_id = $projet_id;
+        $buildings = Building::where('projet_id', $projet_id)->get();
+        $this->building_form->order = $buildings->count()+1;
+
     }
 
     public function render(){
@@ -19,6 +23,7 @@ class BuildingAdd extends Component
 
     function store(){
         $this->building_form->store();
-        $this->dispatch('close-buildingAdd');
+        $this->dispatch('close-addBuilding');
+        $this->dispatch('get-buildings');
     }
 }

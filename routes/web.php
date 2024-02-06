@@ -20,6 +20,8 @@ use App\Livewire\Stock\ArticlesPage;
 use App\Livewire\Stock\BrandsPage;
 use App\Livewire\Stock\ProvidersPage;
 use App\Livewire\Stock\StockPage;
+use App\Livewire\Task\TaskPage;
+use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +69,10 @@ Route::middleware(['auth'])->group(function () {
 // Medias
 
 // Tasks
+Route::middleware(['auth'])->group(function () {
+    Route::get('/tasks', TasksPage::class)->name('tasks');
+    Route::get('/task/{task_id}', TaskPage::class)->name('task');
+});
 
 // Journal
 Route::middleware(['auth'])->group(function () {

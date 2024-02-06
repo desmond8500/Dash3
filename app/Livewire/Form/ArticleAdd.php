@@ -24,8 +24,7 @@ class ArticleAdd extends Component
     #[Validate('numeric')]
     public $price = 0;
 
-    public function render()
-    {
+    public function render(){
         return view('livewire.form.article-add');
     }
 

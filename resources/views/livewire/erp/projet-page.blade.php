@@ -1,24 +1,9 @@
 <div>
-    @component('components.layouts.page-header', ['title'=>'Projet', 'breadcrumbs'=>$breadcrumbs])
-
-    @endcomponent
-
-    <button class="btn btn-primary" wire:click="$dispatch('open-addModal')">Button</button>
-
-    @component('components.modal', ["id"=>'addModal', 'method'=>'close'])
-        <form class="row" wire:submit="register">
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
-        </form>
-        <script>
-            window.addEventListener('open-addModal', event => { $('#addModal').modal('show'); })
-        </script>
-        <script>
-            window.addEventListener('close-addModal', event => { $('#addModal').modal('hide'); })
-        </script>
+    @component('components.layouts.page-header', ['title'=>'Projet: '.$projet->name, 'breadcrumbs'=>$breadcrumbs])
+        <div class="btn-list">
+            @livewire('form.task-add', ['projet_id' => $projet_id])
+            @livewire('form.journal-add', ['projet_id' => $projet_id])
+        </div>
     @endcomponent
 
     <div class="row g-2">
@@ -79,8 +64,10 @@
 
                         <div class="tab-pane" id="tabs-task">
                             <h2>Liste des Taches</h2>
-                            <div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at diam, sem nunc amet,
-                                pellentesque id egestas velit sed</div>
+
+                            <div>
+                                @livewire('erp.tasklist', ['projet_id' => $projet_id])
+                            </div>
                         </div>
 
                         <div class="tab-pane" id="tabs-journaux">
@@ -88,8 +75,9 @@
 
                             @livewire('form.journal-add')
 
-                            <div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at diam, sem nunc amet,
-                                pellentesque id egestas velit sed</div>
+                            <div>
+
+                            </div>
                         </div>
 
                         <div class="tab-pane" id="tabs-dossier">

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

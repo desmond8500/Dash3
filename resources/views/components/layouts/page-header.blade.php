@@ -1,5 +1,5 @@
 <div class="page-header mb-3">
-    <div class="row align-items-center mw-100">
+    <div class="row ">
         <div class="col">
             <div class="mb-1">
                 <ol class="breadcrumb" aria-label="breadcrumbs">

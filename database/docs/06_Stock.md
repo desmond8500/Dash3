@@ -18,7 +18,15 @@ class Article{
     +int priority
     +float price
     +string image
+    int min
+    int max
 }
+
+class Article_link{
+    
+}
+
+
 Article <-- Provider
 Article <-- Brand
 Article <-- Doc

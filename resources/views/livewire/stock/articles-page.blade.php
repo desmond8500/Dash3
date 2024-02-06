@@ -7,7 +7,7 @@
         {{-- @livewire('form.article-add') --}}
     @endcomponent
 
-    <div class="row">
+    <div class="row g-2">
         @foreach ($articles as $article)
             <div class="col-md-3">
                 <div class="card p-2">

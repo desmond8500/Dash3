@@ -9,6 +9,7 @@
         @auth
             <div class="btn-list mt-3">
                 @livewire('form.journal-add')
+                @livewire('form.task-add')
             </div>
         @endauth
 
@@ -16,23 +17,21 @@
 
     @auth
         <div class="row g-2">
-            <div class="col">
+            <div class="col-md-8">
                 <div class="row">
                     @foreach ($resumes as $resume)
                         <a class="col-md-3" href="{{ $resume->route }}">
-                            <div class="card card-sm">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-auto">
-                                            <span class="bg-green text-white avatar">
-                                                <i class="ti ti-user"></i>
-                                            </span>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="font-weight-medium"> {{ $resume->name }} </h4>
-                                            <div class="text-secondary">
-                                                {{ $resume->all }}
-                                            </div>
+                            <div class="card p-2">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="bg-green text-white avatar">
+                                            <i class="ti ti-user"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="font-weight-medium"> {{ $resume->name }} </h4>
+                                        <div class="text-secondary">
+                                            {{ $resume->all }}
                                         </div>
                                     </div>
                                 </div>
@@ -42,8 +41,8 @@
                 </div>
 
             </div>
-            <div class="col-auto">
-
+            <div class="col-md-4">
+                @livewire('erp.tasklist')
 
             </div>
 

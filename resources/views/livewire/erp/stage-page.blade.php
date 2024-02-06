@@ -26,21 +26,6 @@
                 </div>
             </div>
 
-            <div class="card mb-2">
-                <div class="card-header">
-                    <div class="card-title">Articles</div>
-                    <div class="card-actions">
-
-                    </div>
-                </div>
-                <div class="card-body">
-
-                </div>
-                <div class="card-footer">
-
-                </div>
-            </div>
-
             <div class="">
                 @livewire('erp.tasklist', ['stage_id' => $stage->id], key($stage->id))
             </div>
@@ -53,7 +38,9 @@
                         <div class="card p-2">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-title">{{ $room->name }}</div>
+                                    <div class="card-title">
+                                        <a href="{{ route('room', ['room_id' => $room->id]) }}">{{ $room->name }}</a>
+                                    </div>
                                     <div class="text-muted">{{ nl2br($room->description) }}</div>
                                 </div>
                                 <div class="col-auto">
@@ -67,7 +54,6 @@
                 @endforeach
             </div>
         </div>
-
 
     </div>
 </div>

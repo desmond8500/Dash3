@@ -22,8 +22,7 @@ class StagePage extends Component
     public $stage;
     public StageForm $form;
 
-    function mount($stage_id)
-    {
+    function mount($stage_id){
         $stage = Stage::find($stage_id);
         $this->stage = Stage::find($stage_id);
 

@@ -9,13 +9,13 @@ use Livewire\Component;
 
 class StageAdd extends Component
 {
-    public StageForm $form;
+    public StageForm $stage_form;
     public $count;
 
     function mount($building_id) {
-        $this->form->building_id = $building_id;
+        $this->stage_form->building_id = $building_id;
         $stages = Stage::where('building_id', $building_id)->get();
-        $this->form->order = $stages->count() + 1;
+        $this->stage_form->order = $stages->count() + 1;
     }
 
     public function render() {
@@ -24,8 +24,8 @@ class StageAdd extends Component
 
 
     function store() {
-        $this->form->store();
-        $this->form->order++;
+        $this->stage_form->store();
+        $this->stage_form->order++;
         $this->dispatch('close-addStage');
         $this->dispatch('get-stages');
     }

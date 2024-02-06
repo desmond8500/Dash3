@@ -3,9 +3,9 @@
         @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
     @endcomponent
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
+    <div class="row g-2">
+        <div class="col-md-3">
+            <div class="card mb-2">
                 <div class="card-header">
                     <div class="card-title">{{ $building->name }}</div>
                     <div class="card-actions">
@@ -15,73 +15,64 @@
                 <div class="card-body">
                     {{ nl2br($building->description) }}
                 </div>
-                <div class="card-body">
-                    <div class="row g-2">
-                        @foreach ($stages as $stage)
-                            <div class="card p-2">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <img src="" alt="{{ $stage->order }}" class="avatar avatar-md">
-                                    </div>
-                                    <a href="" wire:click="set_stage('{{ $stage->id }}')" class="col">
-                                        <div class="fw-bol">{{ $stage->name }}</div>
-                                        <div class="text-muted">{{ nl2br($stage->description) }}</div>
-                                    </a>
-                                    <div class="col-auto">
-                                      {{ $stage->rooms->count() }}
-                                      @if ($stage->rooms->count() < 2)
-                                          Local
-                                      @else
-                                        Locaux
-                                      @endif
-
-                                      <div>
-                                        <a href="{{ route('stage',['stage_id'=>$stage->id]) }}">Détails</a>
-                                      </div>
-                                      <div>
-                                        <a class="text-success" href="">Editer</a>
-                                      </div>
-
-
-                                  </div>
-                                </div>
-                            </div>
-
-                        @endforeach
-                    </div>
-
-                </div>
             </div>
+
+            @foreach ($stages as $stage)
+                <div class="mb-2">
+                    @include('_card.stage_card')
+                </div>
+            @endforeach
         </div>
-        <div class="col-md-8">
+
+        <div class="col-md-9">
             @if ($selected_stage)
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <h3 class="card-title"> {{ $selected_stage->name }} </h3>
+                        <div class="card-actions">
+                            <button class="btn btn-primary btn-icon" wire:click="edit('{{ $selected_stage->id }}')">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row g-2">
                     @foreach ($selected_stage->rooms as $room)
-
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">{{ $room->name }}</div>
-                                <div class="card-actions">
-                                    {{-- @livewire('form.room_add', ['user' => $user], key($user->id)) --}}
+                        <div class="col-md-4">
+                            <div class="card p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card-title">
+                                            <a href="{{ route('room', ['room_id' => $room->id]) }}">{{ $room->name }}</a>
+                                        </div>
+                                        <div class="text-muted">{{ nl2br($room->description) }}</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-outline-primary btn-icon">
+                                            <i class="ti ti-edit"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-
-                            </div>
-                            <div class="card-footer">
-
-                            </div>
                         </div>
-
                     @endforeach
                 </div>
             @endif
         </div>
     </div>
-</div>
 
-{{-- <script>
-    window.addEventListener('close-modal', event => {
-        $("#exampleModal").modal('hide');
-    })
-</script> --}}
+
+
+    @component('components.modal', ["id"=>'editStage', 'title' => 'Editer un niveau'])
+        <form class="row" wire:submit="update">
+            @include('_form.stage_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editStage', event => { $('#editStage').modal('show'); }) </script>
+        <script> window.addEventListener('close-editStage', event => { $('#editStage').modal('hide'); }) </script>
+    @endcomponent
+</div>

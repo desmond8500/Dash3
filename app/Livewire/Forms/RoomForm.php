@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Room;
+use App\Models\Stage;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -21,5 +22,13 @@ class RoomForm extends Form
         $this->validate();
 
         Room::create($this->all());
+    }
+
+    function set($stage_id){
+        $stage = Stage::find($stage_id);
+
+        $this->name = $stage->name;
+        $this->order = $stage->order;
+        $this->description = $stage->description;
     }
 }

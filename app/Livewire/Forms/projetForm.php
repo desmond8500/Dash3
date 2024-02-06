@@ -34,10 +34,6 @@ class projetForm extends Form
         Projet::create($this->all());
     }
 
-    function edit() {
-
-    }
-
     function update($id) {
         $projet = Projet::find($id);
         $projet->name = $this->name;

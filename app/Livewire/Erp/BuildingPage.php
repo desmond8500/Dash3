@@ -62,11 +62,11 @@ class BuildingPage extends Component
         $this->selected_stage = Stage::find($stage_id);
     }
 
-    function edit($stage_id){
+    function edit_stage($stage_id){
         $this->stage_form->set($stage_id) ;
         $this->dispatch('open-editStage');
     }
-    function update(){
+    function update_stage(){
         $this->stage_form->update() ;
         $this->dispatch('close-editStage');
     }

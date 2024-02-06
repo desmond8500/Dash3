@@ -8,12 +8,12 @@ use Livewire\Component;
 
 class BuildingAdd extends Component
 {
-    public BuildingForm $form;
+    public BuildingForm $building_form;
 
     function mount($projet_id){
-        $this->form->projet_id = $projet_id;
+        $this->building_form->projet_id = $projet_id;
         $buildings = Building::where('projet_id', $projet_id)->get();
-        $this->form->order = $buildings->count()+1;
+        $this->building_form->order = $buildings->count()+1;
 
     }
 
@@ -24,7 +24,7 @@ class BuildingAdd extends Component
     }
 
     function store(){
-        $this->form->store();
+        $this->building_form->store();
         $this->dispatch('close-addBuilding');
         $this->dispatch('get-buildings');
     }

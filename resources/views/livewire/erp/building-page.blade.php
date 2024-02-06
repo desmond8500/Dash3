@@ -1,6 +1,7 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Gestion de batiment', 'breadcrumbs'=>$breadcrumbs])
         @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
+
     @endcomponent
 
     <div class="row g-2">
@@ -9,7 +10,7 @@
                 <div class="card-header">
                     <div class="card-title">{{ $building->name }}</div>
                     <div class="card-actions">
-
+                        <button class="btn btn-primary btn-icon" wire:click="dispatch('open-editBuilding')"><i class="ti ti-edit"></i></button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -17,7 +18,7 @@
                 </div>
             </div>
 
-            @foreach ($stages as $stage)
+            @foreach ($stages->sortBy('order') as $stage)
                 <div class="mb-2">
                     @include('_card.stage_card')
                 </div>
@@ -30,9 +31,11 @@
                     <div class="card-header">
                         <h3 class="card-title"> {{ $selected_stage->name }} </h3>
                         <div class="card-actions">
-                            <button class="btn btn-primary btn-icon" wire:click="edit('{{ $selected_stage->id }}')">
-                                <i class="ti ti-edit"></i>
-                            </button>
+                            <div class="btn-list">
+                                <button class="btn btn-primary btn-icon" wire:click="edit_stage('{{ $selected_stage->id }}')">
+                                    <i class="ti ti-edit"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,8 +67,20 @@
 
 
 
+    @component('components.modal', ["id"=>'editBuilding', 'title' => 'Editer un batiment'])
+        <form class="row" wire:submit="update_building">
+            @include('_form.building_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editBuilding', event => { $('#editBuilding').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBuilding', event => { $('#editBuilding').modal('hide'); }) </script>
+    @endcomponent
+
     @component('components.modal', ["id"=>'editStage', 'title' => 'Editer un niveau'])
-        <form class="row" wire:submit="update">
+        <form class="row" wire:submit="update_stage">
             @include('_form.stage_form')
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

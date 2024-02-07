@@ -5,7 +5,7 @@
         @else --}}
 
         <img src="{{ $clientForm->avatar }}" alt="" class="avatar rounded avatar-upload">
-        @endif
+        {{-- @endif --}}
 
     @else
         <input type="file" id="file" accept="image/*" style="display: none" wire:model="clientForm.avatar">

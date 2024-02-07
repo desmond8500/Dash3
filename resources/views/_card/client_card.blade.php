@@ -5,7 +5,7 @@
         </a>
         <a class="col cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}">
             <div class="fw-bold">{{ $client->name }}</div>
-            <div class="text-primary">{{ $client->type }}</div>
+            <div class="text-primary border border primary px-2 rounded">{{ $client->type }}</div>
             <div>{{ $client->projets->count() }}</div>
         </a>
         <div class="col-auto">

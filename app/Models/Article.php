@@ -15,6 +15,7 @@ class Article extends Model
     'reference',
     'description',
     'quantity',
+    'quantity_min',
     'priority_id',
     'brand_id',
     'provider_id',

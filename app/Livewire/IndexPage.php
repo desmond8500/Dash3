@@ -43,7 +43,10 @@ class IndexPage extends Component
     function store(){
 
     }
+    function delete(){
 
+    }
 
+    public $select;
 
 }

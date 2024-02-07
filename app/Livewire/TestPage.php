@@ -7,6 +7,7 @@ use Livewire\Component;
 class TestPage extends Component
 {
     public $number = 0;
+    public $select;
     public $modal = "addModal";
 
     public function render()
@@ -27,6 +28,13 @@ class TestPage extends Component
 
     function incf(){
         $this->number++;
+    }
+    function alert_modal(){
+        $this->dispatch('swal:modal',[
+            'type' => 'success',
+            'message' => 'User Created Successfully!',
+            'text' => 'It will list on the users table soon.'
+        ]);
     }
 
 

@@ -12,6 +12,7 @@
             </div>
 
         </form>
+
         <script> window.addEventListener('open-addStage', event => { $('#addStage').modal('show'); }) </script>
         <script> window.addEventListener('close-addStage', event => { $('#addStage').modal('hide'); }) </script>
     @endcomponent

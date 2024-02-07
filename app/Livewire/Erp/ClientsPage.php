@@ -17,6 +17,7 @@ class ClientsPage extends Component
     public $search;
     public $error_message;
     protected $paginationTheme = 'bootstrap';
+    public $edit_avatar = false;
 
     public $breadcrumbs = array(
         array("name" => "Clients", "route" => "clients"),
@@ -49,7 +50,7 @@ class ClientsPage extends Component
     function edit($client_id)
     {
         $this->selected = Client::find($client_id);;
-        $this->clientForm->set($this->selected);
+        $this->clientForm->set($client_id);
         $this->dispatch('open-editClient');
     }
 

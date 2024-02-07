@@ -9,6 +9,8 @@ use Livewire\Form;
 
 class clientForm extends Form
 {
+    public Client $client;
+
     #[Rule('required')]
     public $name;
     public $description;
@@ -27,7 +29,7 @@ class clientForm extends Form
         if ($this->avatar) {
             $this->storeAvatar($client, $this->avatar);
         }
-        $this->reset();
+        // $this->reset();
     }
 
     function storeAvatar($client, $avatar){
@@ -42,15 +44,15 @@ class clientForm extends Form
         }
     }
 
-    function set($client){
-        $client = (object) $client;
+    function set($client_id){
+        $this->client = Client::find($client_id);
 
-        $this->name = $client->name;
-        $this->description = $client->description;
-        $this->type = $client->type;
-        $this->status = $client->status;
-        $this->avatar = $client->avatar;
-        $this->address = $client->address;
+        $this->name = $this->client->name;
+        $this->description = $this->client->description;
+        $this->type = $this->client->type;
+        $this->status = $this->client->status;
+        $this->avatar = $this->client->avatar;
+        $this->address = $this->client->address;
     }
 
     function update($selected) {
@@ -67,7 +69,7 @@ class clientForm extends Form
         }
 
         $client->save();
-        $this->reset();
+        // $this->reset();
     }
 
     function delete($id){

@@ -56,19 +56,19 @@ class Tasklist extends Component
 
     function getTasks() {
         if ($this->client_id) {
-            return Task::where('client_id',$this->client_id)->where('status','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
+            return Task::where('client_id',$this->client_id)->where('status_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
         }
         if ($this->projet_id) {
-            return Task::where('projet_id',$this->projet_id)->where('status','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
+            return Task::where('projet_id',$this->projet_id)->where('status_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
         }
         if ($this->building_id) {
-            return Task::where('building_id',$this->building_id)->where('status','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
+            return Task::where('building_id',$this->building_id)->where('status_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
         }
         if ($this->stage_id) {
-            return Task::where('stage_id',$this->stage_id)->where('status','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
+            return Task::where('stage_id',$this->stage_id)->where('status_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
         }
         if ($this->room_id) {
-            return Task::where('room_id',$this->room_id)->where('status','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
+            return Task::where('room_id',$this->room_id)->where('status_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
         }
 
         return Task::where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);

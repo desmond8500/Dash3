@@ -22,12 +22,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->count(1)->create();
-        // Client::factory()
-        // ->count(15)
-        // ->has(Projet::factory()->count(15))
-        // ->has(Task::factory()->count(15))
+        if (env('APP_ENV')=='local') {
+            Client::factory()
+            ->count(15)
+            ->has(Projet::factory()->count(15))
+            ->has(Task::factory()->count(15))
 
-        // ->create();
+            ->create();
+        }
 
         // Tasks
         TaskStatus::create([ 'name' => "Nouveau", 'level' => 1 ]);

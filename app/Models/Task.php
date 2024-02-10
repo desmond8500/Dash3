@@ -23,6 +23,7 @@ class Task extends Model
         'priority_id',
         'statut_id',
         'expiration_date',
+        'favoris',
     ];
 
     public function priority(): HasOne

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('expiration_date')->nullable();
             $table->integer('priority_id');
             $table->integer('statut_id');
+            $table->boolean('favoris')->default(false);
             $table->timestamps();
         });
     }

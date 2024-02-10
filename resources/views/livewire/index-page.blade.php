@@ -25,7 +25,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-auto">
                                         <span class="bg-green text-white avatar">
-                                            <i class="ti ti-user"></i>
+                                            <i class="ti ti-{{ $resume->icon }}"></i>
                                         </span>
                                     </div>
                                     <div class="col">

@@ -30,8 +30,8 @@ class IndexPage extends Component
 
     function getResume(){
         return (Object) array(
-            (Object) array( 'name'=> 'Clients', 'all'=> Client::count(), 'route'=> route('clients')),
-            (Object) array( 'name'=> 'Stock', 'all'=> 0, 'route'=> route('stock')),
+            (Object) array( 'name'=> 'Clients', 'all'=> Client::count(), 'icon'=> 'users', 'route'=> route('clients')),
+            (Object) array( 'name'=> 'Stock',   'all'=> 0,               'icon'=> 'packages', 'route'=> route('stock')),
         );
     }
 

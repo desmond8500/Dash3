@@ -18,7 +18,7 @@ class UserForm extends Form
     public $email;
     #[Rule('required')]
     public $password;
-    #[Rule('required|same:user.password')]
+    #[Rule('required|same:password')]
     public $password_confirmation;
 
     function store() {

@@ -3,10 +3,10 @@
         <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}">
             <img src="{{ $client->avatar }}" alt="A" class="avatar avatar-md">
         </a>
-        <a class="col cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}">
+        <a class="col cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id]) }}" style="text-decoration: none">
             <div class="fw-bold">{{ $client->name }}</div>
-            <div class="text-primary border border primary px-2 rounded">{{ $client->type }}</div>
-            <div>{{ $client->projets->count() }}</div>
+            <div class="text-muted ">{{ $client->type }}</div>
+            <div>Projets: {{ $client->projets->count() }}</div>
         </a>
         <div class="col-auto">
             <button class="btn btn-primary btn-icon" wire:click="edit({{ $client->id }})">
@@ -14,7 +14,7 @@
             </button>
         </div>
         <div class="col-md-12">
-            <div class="text-muted">{{ nl2br($client->description) }}</div>
+            <div class="text-muted mt-1">{{ nl2br($client->description) }}</div>
         </div>
     </div>
 </div>

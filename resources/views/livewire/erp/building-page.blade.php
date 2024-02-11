@@ -68,8 +68,6 @@
         </div>
     </div>
 
-
-
     @component('components.modal', ["id"=>'editBuilding', 'title' => 'Editer un batiment'])
         <form class="row" wire:submit="update_building">
             @include('_form.building_form')

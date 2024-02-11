@@ -35,6 +35,9 @@
                                 <button class="btn btn-primary btn-icon" wire:click="edit_stage('{{ $selected_stage->id }}')">
                                     <i class="ti ti-edit"></i>
                                 </button>
+                                <button class="btn btn-danger btn-icon" wire:click="delete_stage('{{ $selected_stage->id }}')">
+                                    <i class="ti ti-trash"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

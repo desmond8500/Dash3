@@ -10,6 +10,12 @@ class TestPage extends Component
     public $select;
     public $modal = "addModal";
 
+    public $check_ss = 0, $lv_ss = 0;
+    public $check_rdc = 0, $lv_rdc = 0;
+    public $check_mezz = 0, $lv_mezz = 0;
+    public $check_etage = 0, $lv_etage = 0;
+    public $check_roof = 0, $lv_roof = 0;
+
     public function render()
     {
         return view('livewire.test-page');

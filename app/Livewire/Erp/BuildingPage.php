@@ -43,7 +43,6 @@ class BuildingPage extends Component
             array('name' => $building->projet->name, 'route' => route('projet', ['projet_id' => $building->projet->id])),
             array('name' => $building->name, 'route' => route('building', ['building_id' => $building->id])),
         );
-
     }
 
     public function render()
@@ -69,5 +68,11 @@ class BuildingPage extends Component
     function update_stage(){
         $this->stage_form->update() ;
         $this->dispatch('close-editStage');
+    }
+    function delete_stage($id){
+        $stage = Stage::find($id);
+        $stage->delete();
+        $this->reset('selected_stage');
+        $this->dispatch('get-stages');
     }
 }

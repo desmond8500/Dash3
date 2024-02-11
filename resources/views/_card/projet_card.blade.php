@@ -3,9 +3,9 @@
         <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
             <img class="avatar " src="{{ asset($projet->client->avatar) }}" alt="A">
         </a>
-        <a class="col" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
+        <a class="col" href="{{ route('projet',['projet_id'=> $projet->id]) }}" style="text-decoration: none">
             <div class="fw-bold">{{ $projet->name }}</div>
-            <div>{{ $projet->devis->count() }}</div>
+            <div> Devis: {{ $projet->devis->count() }}</div>
         </a>
         <div class="col-auto">
             <button class="btn btn-primary btn-icon" wire:click="edit('{{ $projet->id }}')">
@@ -13,7 +13,7 @@
             </button>
         </div>
         <div class="col-md-12">
-            <div class="text-muted">{{ nl2br($projet->description) }}</div>
+            <div class="text-muted mt-1">{{ nl2br($projet->description) }}</div>
         </div>
     </div>
 </div>

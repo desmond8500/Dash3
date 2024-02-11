@@ -9,6 +9,7 @@ use Livewire\Form;
 class BuildingForm extends Form
 {
     public ?Building $building;
+
     #[Validate('required')]
     public $projet_id;
     #[Validate('required')]

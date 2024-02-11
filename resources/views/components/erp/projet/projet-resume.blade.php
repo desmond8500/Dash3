@@ -1,6 +1,6 @@
 <div class="row g-2">
-    <div class="col-md-12">
-        <div class="card p-2">
+    <div class="col-md-4">
+        <div class="card p-2 mb-2">
             <div class="row">
                 <div class="col-auto">
                     <img class="avatar avatar-md" src="{{ asset($projet->client->avatar) }}" alt="A">
@@ -16,9 +16,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-8">
-        <div class="card p-2">
+
+        <div class="card p-2 mb-2">
             <div class="row">
                 <div class="col">
                     <h2>Devis</h2>
@@ -34,9 +33,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card p-2">
+
+        <div class="card p-2 mb-2">
             <div class="row">
                 <div class="col">
                     <h2>Taches </h2>
@@ -49,11 +47,11 @@
                     @livewire('form.task-add', ['projet_id' => $projet->id])
                 </div>
             </div>
-
         </div>
 
     </div>
-    <div class="col-md-12">
+    <div class="col-md-8">
+
         <div class="card">
             <div class="card-header">
                 <div class="card-title"><h2>Building management</h2> </div>
@@ -61,8 +59,9 @@
                     @livewire('form.building-add', ['projet_id' => $projet->id])
                 </div>
             </div>
-            <div class="card-body">
-                <div class="row g-2">
+            <div class="p-2">
+                <div class="row row-deck g-2">
+
                     @foreach ($buildings as $building)
                         <div class="col-md-4">
                             <div class="card">
@@ -72,20 +71,18 @@
                                         {{-- @livewire('form.stage-add', ['building_id' => $building->id, key($building->id)]) --}}
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="text-muted">
-                                        {{ nl2br($building->description) }}
-                                    </div>
-                                    <div>
-                                        @foreach ($building->stages as $stage)
-                                            <a href="{{ route('stage', ['stage_id'=>$stage->id]) }}" class="d-flex justify-content-between">
-                                                <div>{{ $stage->name  }}</div> <div> {{ $stage->rooms->count() }}</div>
-                                            </a>
-                                        @endforeach
-                                    </div>
+                                <div class="p-2">
+                                    <span class="text-muted"> {{ nl2br($building->description) }} </span>
 
                                 </div>
-
+                                <div class="p-2">
+                                    <li class="d-flex justify-content-between  btn btn-primary p-2 rounded mb-1">
+                                        <span class="fw-bold">Niveaux: </span> <span class="badge bg-white text-primary">{{ $building->stages->count() }}</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between  btn btn-primary p-2 rounded mb-1">
+                                        <span class="fw-bold">Taches: </span> <span class="badge bg-white text-primary">{{ $building->tasks->count() }}</span>
+                                    </li>
+                                </div>
 
                             </div>
                         </div>

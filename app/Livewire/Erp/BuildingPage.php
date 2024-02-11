@@ -34,14 +34,13 @@ class BuildingPage extends Component
             $this->redirect('/', navigate:true);
         }
 
-        $building = Building::find($building_id);
         $this->building = Building::find($building_id);
 
         $this->breadcrumbs = array(
             array('name' => 'Clients', 'route' => route('clients')),
-            array('name' => $building->projet->client->name, 'route' => route('projets', ['client_id' => $building->projet->client->id])),
-            array('name' => $building->projet->name, 'route' => route('projet', ['projet_id' => $building->projet->id])),
-            array('name' => $building->name, 'route' => route('building', ['building_id' => $building->id])),
+            array('name' => $this->building->projet->client->name, 'route' => route('projets', ['client_id' => $this->building->projet->client->id])),
+            array('name' => $this->building->projet->name, 'route' => route('projet', ['projet_id' => $this->building->projet->id])),
+            array('name' => $this->building->name, 'route' => route('building', ['building_id' => $this->building->id])),
         );
     }
 
@@ -52,6 +51,18 @@ class BuildingPage extends Component
         ]);
     }
 
+    // Building
+    function editBuilding(){
+        $this->building_form->set($this->building->id);
+        $this->dispatch('open-editBuilding');
+    }
+    function update_building(){
+        $this->building_form->update($this->building->id);
+        $this->building = Building::find($this->building->id);
+        $this->dispatch('close-editBuilding');
+    }
+
+    // Stages
     #[On('get-stages')]
     function get_stages() {
         return Stage::where('building_id', $this->building->id)->get();

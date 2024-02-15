@@ -16,8 +16,8 @@
        <label class="form-label">Status</label>
        <select class="form-control" wire:model="form.statut_id">
            @foreach ($statuses as $status)
-        <option value="{{ $status->level }}">{{ $status->name }}</option>
-        @endforeach
+                <option value="{{ $status->level }}">{{ $status->name }}</option>
+            @endforeach
        </select>
        @error('form.status_id') <span class='text-danger'>{{ $message }}</span> @enderror
    </div>

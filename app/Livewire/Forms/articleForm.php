@@ -7,25 +7,34 @@ use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class articleForm extends Form
+class ArticleForm extends Form
 {
     public Article $article;
 
-    #[Rule('required')]
+    #[Validate('required')]
     public $designation;
     public $image;
     public $reference;
     public $description;
-    public $quantity;
-    public $quantity_min;
-    public $priority_id;
-    public $brand_id;
-    public $provider_id;
-    public $price;
+    #[Validate('numeric')]
+    public $quantity = 0;
+    #[Validate('numeric')]
+    public $quantity_min = 0;
+    #[Validate('numeric')]
+    public $priority_id = 0;
+    #[Validate('numeric')]
+    public $brand_id = 0;
+    #[Validate('numeric')]
+    public $provider_id = 0;
+    #[Validate('numeric')]
+    public $price = 0;
 
 
     function store(){
-        $this->article->create($this->all());
+        $this->validate();
+        $article = $this->article->create($this->all());
+
+
     }
 
     function set($model_id){

@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Erp;
 
+use App\Exports\ClientsExport;
 use App\Livewire\Forms\clientForm;
 use App\Models\Client;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClientsPage extends Component
 {
@@ -70,5 +72,9 @@ class ClientsPage extends Component
             $this->selected->delete();
             $this->dispatch('close-editClient');
         }
+    }
+    function download_xls()
+    {
+        return Excel::download(new ClientsExport, 'clients.xlsx');
     }
 }

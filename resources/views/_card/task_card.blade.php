@@ -33,9 +33,9 @@
                     <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('room', ['room_id'=>$task->room->id]) }}" title="Local">{{ $task->room->name }}/</a>
                 @endif
             </div>
-            <a href="{{ route('task', ['task_id'=> $task->id]) }}">
+            <a href="{{ route('task', ['task_id'=> $task->id]) }}" class="pl-2">
                 <div class="fw-bold">{{ $task->name }}</div>
-                <div class="text-muted">{{ nl2br($task->description) }}</div>
+                <div class="text-muted">{!! nl2br($task->description) !!}</div>
             </a>
         </div>
         <div class="col-auto text-end">

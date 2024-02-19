@@ -1,22 +1,45 @@
 <div class="row">
-    <div class="col-md-12 mb-3">
-        <label class="form-label">Désignation</label>
-        <input type="text" class="form-control" wire:model="article_form.designation" placeholder="Désignation">
-        @error('article_form.designation') <span class='text-danger'>{{ $message }}</span> @enderror
+    <div class="col-md-12">
+        <div wire:loading>
+            <div class="d-flex justify-content-between">
+                <div>Chargement <span class="animated-dots"></div>
+            </div>
+        </div>
     </div>
+    <div class="col-12 mb-3">
+        {{-- @if ($article_form->image)
+            @foreach ($article_form->image as $image)
+                <img src="{{ $image }}" class="avatar rounded" alt="A">
+            @endforeach
+        @endif --}}
+        <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
+        <label for="file" href="#" class="avatar avatar-upload rounded">
+            <i class="ti ti-plus"></i>
+            <span class="avatar-upload-text">Add</span>
+        </label>
+    </div>
+    <div class="col-md-8 mb-3">
+        <div class="mb-3">
+            <label class="form-label">Désignation</label>
+            <input type="text" class="form-control" wire:model="article_form.designation" placeholder="Désignation">
+            @error('article_form.designation') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
+    {{-- </div>
 
-    <div class="col-md-12 mb-3">
+    <div class="col-md-12 mb-3"> --}}
         <label class="form-label">Référence</label>
         <textarea class="form-control" wire:model="article_form.reference" placeholder="Référence" cols="30" rows="1"></textarea>
         @error('article_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
     <div class="col-md-4 mb-3">
-        <label class="form-label">Quantité</label>
-        <input type="text" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
-        @error('article_form.quantity') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
-    <div class="col-md-4 mb-3">
+        <div class="mb-3">
+            <label class="form-label">Quantité</label>
+            <input type="text" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
+            @error('article_form.quantity') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
+    {{-- </div>
+    <div class="col-md-4 mb-3"> --}}
         <label class="form-label">Quantité Minimale</label>
         <input type="text" class="form-control" wire:model="article_form.quantity_min" placeholder="Quantite">
         @error('article_form.quantity_min') <span class='text-danger'>{{ $message }}</span> @enderror
@@ -31,12 +54,19 @@
     <div class="col-md-4 mb-3">
         <label class="form-label">Priorite</label>
         <select class="form-control" wire:model="article_form.priority_id">
-            <option value=""></option>
+            <option value="0">Centrale 1</option>
+            <option value="1">Centrale 2</option>
+            <option value="2">Organe 1</option>
+            <option value="3">Organe 2</option>
+            <option value="4">Organe 3</option>
+            <option value="5">Cable</option>
+            <option value="6">Accessoires</option>
+            <option value="7">Forfait</option>
         </select>
         @error('article_form.priority_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-6 mb-3">
+    <div class="col-md-4 mb-3">
         <label class="form-label">Marque</label>
         <select class="form-control" wire:model="article_form.brand_id">
             <option value=""></option>

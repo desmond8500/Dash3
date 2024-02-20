@@ -14,6 +14,7 @@ class ArticleForm extends Form
     #[Validate('required')]
     public $designation;
     public $image;
+    #[Validate('required')]
     public $reference;
     public $description;
     #[Validate('numeric')]
@@ -32,16 +33,26 @@ class ArticleForm extends Form
 
     function store(){
         $this->validate();
-        $article = $this->article->create($this->all());
-
-
+        $article = Article::create($this->all());
     }
 
     function set($model_id){
         $this->article = Article::find($model_id);
+
+        $this->designation  = $this->article->designation;
+        $this->image        = $this->article->image;
+        $this->reference    = $this->article->reference;
+        $this->description  = $this->article->description;
+        $this->quantity     = $this->article->quantity;
+        $this->quantity_min = $this->article->quantity_min;
+        $this->priority_id  = $this->article->priority_id;
+        $this->brand_id     = $this->article->brand_id;
+        $this->provider_id  = $this->article->provider_id;
+        $this->price        = $this->article->price;
     }
 
     function update(){
+        $this->validate();
         $this->article->update($this->all());
     }
 

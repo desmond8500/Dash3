@@ -2,9 +2,9 @@
     <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInvoice">
         <i class="ti ti-plus"></i>Devis
     </a>
-    <a class="btn btn-primary" wire:click="$dispatch('open-MintInvoice')">
+    {{-- <a class="btn btn-primary" wire:click="$dispatch('open-initInvoice')">
         <i class="ti ti-plus"></i>Générer Devis
-    </a>
+    </a> --}}
 
     @component('components.modal', ["id"=>'addInvoice', 'title'=>'Ajouter un devis'])
         <form class="row" wire:submit="store">
@@ -19,16 +19,16 @@
         </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'MintInvoice', 'title'=>'Ajouter un devis'])
+    @component('components.modal', ["id"=>'initInvoice', 'title'=>'Ajouter un devis'])
         <form class="row" wire:submit="store">
             {{-- @include('_form.invoice_form') --}}
         </form>
 
         <script>
-            window.addEventListener('open-MintInvoice', event => { $('#MintInvoice').modal('show'); })
+            window.addEventListener('open-initInvoice', event => { $('#initInvoice').modal('show'); })
         </script>
         <script>
-            window.addEventListener('close-MintInvoice', event => { $('#MintInvoice').modal('hide'); })
+            window.addEventListener('close-initInvoice', event => { $('#initInvoice').modal('hide'); })
         </script>
     @endcomponent
 

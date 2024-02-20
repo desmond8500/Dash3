@@ -3,6 +3,7 @@
 namespace App\Livewire\Stock;
 
 use App\Http\Controllers\AchatController;
+use App\Livewire\Forms\ArticleForm;
 use App\Models\Article;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -18,6 +19,7 @@ class ArticlesPage extends Component
     protected $paginationTheme = 'bootstrap';
     public $search ='';
     public $breadcrumbs;
+    public ArticleForm $article_form;
 
     public function mount(){
         $this->breadcrumbs = array(
@@ -57,35 +59,13 @@ class ArticlesPage extends Component
     public $selected;
 
     function edit($article_id){
-        $article =  Article::find($article_id);
-        $this->selected = $article_id;
-
-        $this->designation = $article->designation;
-        $this->reference = $article->reference;
-        $this->description = $article->description;
-        $this->quantity = $article->quantity;
-        $this->priority_id = $article->priority_id;
-        $this->brand_id = $article->brand_id;
-        $this->provider_id = $article->provider_id;
-        $this->price = $article->price;
+        $this->article_form->set($article_id);
 
         $this->dispatch('open-editArticle');
     }
 
     function update(){
-        $this->validate();
-
-        $article =  Article::find($this->selected);
-
-        $article->designation = $this->designation;
-        $article->reference = $this->reference;
-        $article->description = $this->description;
-        $article->quantity = $this->quantity;
-        $article->priority_id = $this->priority_id;
-        $article->brand_id = $this->brand_id;
-        $article->provider_id = $this->provider_id;
-        $article->price = $this->price;
-        $article->save();
+        $this->article_form->update();
 
         $this->dispatch('close-editArticle');
     }

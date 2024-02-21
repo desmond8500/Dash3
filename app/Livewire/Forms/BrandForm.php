@@ -17,7 +17,7 @@ class BrandForm extends Form
 
     function store(){
         $this->validate();
-        $this->brand->create($this->all());
+        ArticleBrand::create($this->all());
     }
 
     function set($brand_id){

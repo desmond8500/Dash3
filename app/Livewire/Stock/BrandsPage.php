@@ -35,6 +35,7 @@ class BrandsPage extends Component
     {
         return view('livewire.stock.brands-page',[
             'articles' => $this->brandSearch(),
+            'brands' => $this->brandSearch(),
         ]);
     }
 }

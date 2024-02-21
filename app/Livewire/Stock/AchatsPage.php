@@ -22,6 +22,7 @@ class AchatsPage extends Component
     public function mount(){
         $this->breadcrumbs = array(
             array('name' => 'Stock', 'route' => route('stock')),
+            array('name' => 'Achats', 'route' => route('achats')),
         );
     }
 

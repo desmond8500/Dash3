@@ -25,7 +25,7 @@ class BrandsPage extends Component
         );
     }
 
-    #[On('close-addArticleBrand')]
+    #[On('get-brands')]
     function brandSearch()
     {
         return ArticleBrand::where('name', 'like', '%' . $this->search . '%')->paginate(10);

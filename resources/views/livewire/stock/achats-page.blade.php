@@ -26,8 +26,8 @@
                 <tr>
                     <td>{{ $key+1 }}</td>
                     <td>
-                        <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a>
-                        <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{{ $achat->description }}</a>
+                        <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a> <br>
+                        <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{!! nl2br($achat->description) !!}</a>
                     </td>
                     <td>{{ $achat->date }}</td>
                     <td>{{ $achat->tva() }} F</td>

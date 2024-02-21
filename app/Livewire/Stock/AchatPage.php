@@ -4,9 +4,11 @@ namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\AchatRowForm;
 use App\Models\Achat;
+use App\Models\AchatFacture;
 use App\Models\AchatRow;
 use App\Models\Article;
 use App\Models\Provider;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -116,6 +118,28 @@ class AchatPage extends Component
 
     function row_delete($id){
         $this->a_row->delete($id);
+    }
+
+    public $facture;
+    function addFacture(){
+        if ($this->facture) {
+        $dir = "erp/stock/achats/".$this->achat->id."/factures";
+            $name = $this->facture->getClientOriginalName();
+            $this->facture->storeAS("public/$dir", $name);
+        }
+
+        AchatFacture::create([
+            'achat_id' => $this->achat->id,
+            'folder' => "storage/$dir/$name",
+        ]);
+        $this->dispatch('close-addAchatFacture');
+    }
+    function delete_facture($id){
+        $facture = AchatFacture::find($id);
+
+        $file = public_path($facture->folder);
+        unlink($file);
+        $facture->delete();
     }
 
 }

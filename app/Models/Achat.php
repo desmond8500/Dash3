@@ -21,6 +21,11 @@ class Achat extends Model
     {
         return $this->hasMany(AchatRow::class);
     }
+    public function factures(): HasMany
+    {
+        return $this->hasMany(AchatFacture::class);
+    }
+
     public function total()
     {
         $total = 0;

@@ -32,7 +32,19 @@
                     </tr>
                 </table>
                 <div class="card-footer">
-                    <button class="btn btn-primary" >Ajouter une facture</button>
+
+                    @foreach ($achat->factures as $facture)
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ asset($facture->folder) }}" target="_blank">
+                                <i class="ti ti-file-pdf"></i>
+                                {{ basename($facture->folder) }}
+                            </a>
+                            <button class="btn btn-danger btn-action" wire:click="delete_facture('{{ $facture->id }}')">
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </div>
+                    @endforeach
+                    <button class="btn btn-primary mt-3" wire:click="$dispatch('open-addAchatFacture')">Ajouter une facture</button>
                 </div>
             </div>
 
@@ -200,5 +212,26 @@
         </form>
         <script> window.addEventListener('open-editAchatRow', event => { $('#editAchatRow').modal('show'); }) </script>
         <script> window.addEventListener('close-editAchatRow', event => { $('#editAchatRow').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'addAchatFacture', 'title'=>"Editer l'achat"])
+        <form class="row" wire:submit="addFacture">
+            <div class="col-md-12 mb-3">
+                <label class="form-label">Facture</label>
+                <input type="file" class="form-control" wire:model="facture">
+                @error('facture') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script>
+            window.addEventListener('open-addAchatFacture', event => { $('#addAchatFacture').modal('show'); })
+        </script>
+        <script>
+            window.addEventListener('close-addAchatFacture', event => { $('#addAchatFacture').modal('hide'); })
+        </script>
     @endcomponent
 </div>

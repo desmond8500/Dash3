@@ -1,6 +1,10 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Achats', 'breadcrumbs'=>$breadcrumbs])
-        @livewire('form.achat-add')
+        <div class="btn-list">
+            @livewire('form.achat-add')
+            @livewire('form.provider-add')
+            @livewire('form.brand-add')
+        </div>
     @endcomponent
 
     <div class="row row-deck g-2">

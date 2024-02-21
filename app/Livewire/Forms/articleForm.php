@@ -53,7 +53,7 @@ class ArticleForm extends Form
 
     function update(){
         $this->validate();
-        $this->article->update($this->all());
+        $this->article->update();
     }
 
     function delete(){

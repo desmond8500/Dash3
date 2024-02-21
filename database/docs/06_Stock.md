@@ -86,10 +86,17 @@ class Achat{
     +text description
     +date date
 }
-class AchatArticle{
+
+class AchatRow{
     +int achat_id
+    +string designation
+    +string reference
     +int article_id
-    +int quantity
-    +date date
+    +int quantite
+    +decimal tva
+    +decimal prix
+}
+class AchatFacture{
+    +string name
 }
 ```

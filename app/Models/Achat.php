@@ -21,4 +21,33 @@ class Achat extends Model
     {
         return $this->hasMany(AchatRow::class);
     }
+    public function total()
+    {
+        $total = 0;
+        foreach ($this->rows as $key => $row) {
+            $total+= $row->prix*$row->quantite;
+        }
+
+        return $total;
+    }
+
+    public function tva()
+    {
+        $total = 0;
+        foreach ($this->rows as $key => $row) {
+            $total+= $row->prix*$row->tva*$row->quantite;
+        }
+
+        return $total;
+    }
+
+    public function ttc()
+    {
+        $total = 0;
+        foreach ($this->rows as $key => $row) {
+            $total+= ($row->prix + $row->prix*$row->tva)*$row->quantite;
+        }
+
+        return $total;
+    }
 }

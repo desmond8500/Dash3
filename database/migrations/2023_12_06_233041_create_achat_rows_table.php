@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('designation');
             $table->string('reference')->nullable();
             $table->integer('quantite')->default(0);
-            $table->decimal('prix');
+            $table->decimal('prix')->nullable();
             $table->decimal('tva')->nullable();
             $table->timestamps();
             $table->softDeletes();

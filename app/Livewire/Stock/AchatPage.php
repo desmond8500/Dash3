@@ -2,9 +2,12 @@
 
 namespace App\Livewire\Stock;
 
+use App\Livewire\Forms\AchatRowForm;
 use App\Models\Achat;
+use App\Models\AchatRow;
 use App\Models\Article;
 use App\Models\Provider;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -77,6 +80,42 @@ class AchatPage extends Component
         $this->achat = $achat;
 
         $this->dispatch('close-editAchat');
+    }
+
+    public $row_quantity = 1;
+    public $row_tva = false;
+
+    function row_store($id){
+        $article = Article::find($id);
+
+        AchatRow::create([
+            'achat_id' => $this->achat->id,
+            'designation' => $article->designation,
+            'reference' => $article->reference,
+            'quantite' => $this->row_quantity,
+            'prix' => $article->price,
+            'tva' => $this->row_tva ? 0.18 : 0,
+        ]);
+        $this->dispatch('close-addAchatArticle');
+
+    }
+
+    public AchatRowForm $a_row;
+
+    function row_edit($id){
+        $this->a_row->set($id);
+        $this->dispatch('open-editAchatRow');
+    }
+
+    function row_update()
+    {
+        $this->a_row->update();
+
+        $this->dispatch('close-editAchatRow');
+    }
+
+    function row_delete($id){
+        $this->a_row->delete($id);
     }
 
 }

@@ -8,8 +8,6 @@ use App\Models\AchatFacture;
 use App\Models\AchatRow;
 use App\Models\Article;
 use App\Models\Provider;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;

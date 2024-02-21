@@ -7,7 +7,60 @@
         </div>
     @endcomponent
 
-    <div class="row row-deck g-2">
+
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Date</th>
+                    <th>TVA</th>
+                    <th>Total</th>
+                    <th>Facture</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($achats as $key => $achat)
+                <tr>
+                    <td>{{ $key+1 }}</td>
+                    <td>
+                        <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a>
+                        <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{{ $achat->description }}</a>
+                    </td>
+                    <td>{{ $achat->date }}</td>
+                    <td>{{ $achat->tva() }} F</td>
+                    <td>
+                        <div>{{ $achat->total() }} F HT</div>
+                        <div class="text-danger">{{ $achat->ttc() }} F TTC</div>
+                    </td>
+                    <td>
+                        @foreach ($achat->factures as $facture)
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ asset($facture->folder) }}" target="_blank">
+                                    <i class="ti ti-file-pdf"></i>
+                                    {{ basename($facture->folder) }}
+                                </a>
+                                <button class="btn btn-danger btn-action" wire:click="delete_facture('{{ $facture->id }}')">
+                                    <i class="ti ti-trash"></i>
+                                </button>
+                            </div>
+                        @endforeach
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
+                            <i class="ti ti-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    {{-- <div class="row row-deck g-2">
         @forelse ($achats as $achat)
             <div class="col-md-3">
                 <div class="card p-2">
@@ -34,7 +87,7 @@
             <div>Pas d'articles</div>
 
         @endforelse
-    </div>
+    </div> --}}
 
     @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat"])
         <form class="row" wire:submit="update">

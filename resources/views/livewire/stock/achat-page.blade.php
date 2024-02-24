@@ -1,6 +1,7 @@
 <div>
     @component('components.layouts.page-header', ['title'=>"Achat: $achat->name", 'breadcrumbs'=>$breadcrumbs])
         {{-- @livewire('form.achat-add') --}}
+        <a class="btn btn-primary" target="_blank" href="{{ route('achat_pdf',['achat_id'=>$achat->id]) }}">PDF</a>
     @endcomponent
 
     <div class="row g-2">
@@ -31,20 +32,31 @@
                         <td class="text-end text-danger"> {{ $achat->ttc() }} CFA </td>
                     </tr>
                 </table>
-                <div class="card-footer">
 
+            </div>
+
+            <div class="card mt-2">
+                <div class="card-header">
+                    <div class="card-title">Factures</div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary mt-3" wire:click="$dispatch('open-addAchatFacture')"><i class="ti ti-plus"></i> Facture</button>
+                    </div>
+                </div>
+                <div class="card-body">
                     @foreach ($achat->factures as $facture)
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between mb-1">
                             <a href="{{ asset($facture->folder) }}" target="_blank">
                                 <i class="ti ti-file-pdf"></i>
                                 {{ basename($facture->folder) }}
                             </a>
-                            <button class="btn btn-danger btn-action" wire:click="delete_facture('{{ $facture->id }}')">
+                            <button class="btn btn-ghost-danger btn-icon" wire:click="delete_facture('{{ $facture->id }}')">
                                 <i class="ti ti-trash"></i>
                             </button>
                         </div>
                     @endforeach
-                    <button class="btn btn-primary mt-3" wire:click="$dispatch('open-addAchatFacture')">Ajouter une facture</button>
+                </div>
+                <div class="card-footer">
+
                 </div>
             </div>
 
@@ -60,13 +72,13 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <td>#</td>
+                            <td width="10px">#</td>
                             <td>Désignation</td>
-                            <td>Quantité</td>
-                            <td>Prix HT/TTC</td>
-                            <td>TVA</td>
-                            <td>Total</td>
-                            <td>Action</td>
+                            <td class="text-center">Quantité</td>
+                            <td class="text-center">Prix HT/TTC</td>
+                            <td class="text-center">TVA</td>
+                            <td class="text-center">Total</td>
+                            <td class="text-end">Action</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,22 +93,22 @@
                                     <div>{{ $row->designation }}</div>
                                     <div class="text-muted">{{ $row->reference }}</div>
                                 </td>
-                                <td>{{ $row->quantite }}</td>
-                                <td>
-                                    <div>{{ $row->prix }} <span style="font-size: 10px">HT</span> </div>
-                                    <div class="text-danger">{{ $row->prix + $row->prix * $row->tva}} <span style="font-size: 10px">TTC</span></div>
+                                <td class="text-center">{{ $row->quantite }}</td>
+                                <td class="text-center">
+                                    <div>{{ number_format($row->prix, 0, 2) }} <span style="font-size: 10px">HT</span> </div>
+                                    <div class="text-danger">{{ number_format($row->prix + $row->prix * $row->tva, 0, 2)}} <span style="font-size: 10px">TTC</span></div>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @if ($row->tva)
                                         <div class="text-light">_</div>
                                         <div>{{ $row->tva*100 }}%</div>
                                     @endif
                                 </td>
-                                <td>
-                                    <div>{{ $row->prix *$row->quantite }}</div>
-                                    <div>{{ ($row->prix + $row->prix * $row->tva)*$row->quantite }}</div>
+                                <td class="text-center">
+                                    <div>{{ number_format($row->prix *$row->quantite, 0, 2) }}</div>
+                                    <div>{{ number_format(($row->prix + $row->prix * $row->tva)*$row->quantite, 0, 2) }}</div>
                                 </td>
-                                <td>
+                                <td class="text-end">
                                     <button class="btn btn-primary btn-icon" wire:click="row_edit('{{ $row->id }}')">
                                         <i class="ti ti-edit"></i>
                                     </button>
@@ -112,13 +124,6 @@
                         @endforeach
                     </tbody>
                 </table>
-
-                <div class="card-body">
-
-                </div>
-                <div class="card-footer">
-
-                </div>
             </div>
 
             @component('components.modal', ["id"=>'addAchatArticle', 'title'=> "Ajouter un article à l'achat", 'class'=>'modal-xl'])

@@ -8,6 +8,7 @@ use App\Models\AchatFacture;
 use App\Models\AchatRow;
 use App\Models\Article;
 use App\Models\Provider;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -119,6 +120,7 @@ class AchatPage extends Component
     }
 
     public $facture;
+
     function addFacture(){
         if ($this->facture) {
         $dir = "erp/stock/achats/".$this->achat->id."/factures";
@@ -132,12 +134,26 @@ class AchatPage extends Component
         ]);
         $this->dispatch('close-addAchatFacture');
     }
+
     function delete_facture($id){
         $facture = AchatFacture::find($id);
 
         $file = public_path($facture->folder);
         unlink($file);
         $facture->delete();
+    }
+
+    function pdf(){
+        // 'achat' => $this->achat
+        $data = ['sdfs'];
+        $data = mb_convert_encoding($data, 'UTF-8', 'UTF-8');
+
+        // $pdf = Pdf::loadView('_pdf.achat', $data);
+        $pdf = Pdf::loadView('welcome', $data);
+        return $pdf->stream();
+        // return $pdf->download('_pdf.achat');
+
+        // Pdf::view('pdf.invoice')->save('/some/directory/invoice.pdf');
     }
 
 }

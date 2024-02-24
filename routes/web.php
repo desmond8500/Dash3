@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PDFController;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
@@ -43,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projets/{client_id}', ProjetsPage::class)->name('projets');
     Route::get('/projet/{projet_id}', ProjetPage::class)->name('projet');
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
+
     // Route::get('/journaux/{projet_id}', Journaux::class)->name('journaux');
 });
 
@@ -55,6 +57,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
     Route::get('/stock/achats', AchatsPage::class)->name('achats');
     Route::get('/stock/achat/{achat_id}', AchatPage::class)->name('achat');
+    Route::get('/stock/achat_pdf/{achat_id}', function ($achat_id) {
+        return PDFController::achat_pdf($achat_id);
+    })->name('achat_pdf');
 });
 
 // Building management

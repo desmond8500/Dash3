@@ -1,0 +1,92 @@
+/* Text Align */
+.text-left {
+    text-align: left;
+}
+
+.text-start {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-end {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* Text Decoration */
+.text-bold {
+    font-weight: bold;
+}
+
+.fw-bold {
+    font-weight: bold;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Thin', sans-serif;
+    font-family: 'Roboto Light', sans-serif;
+    font-family: 'Roboto Medium', sans-serif;
+    font-family: 'Roboto Black', sans-serif;
+
+}
+
+.text-primary {
+    color: #0092ca;
+}
+
+.text-danger {
+    color: #dc2f2f;
+}
+
+.text-white {
+    color: white;
+}
+
+.text-light {
+    color: #eeeeee;
+}
+
+.bg-primary {
+    background: #0092ca;
+}
+
+.bg-danger {
+    background: #dc2f2f;
+}
+
+.bg-light {
+    background: #eeeeee;
+}
+
+.bg-white {
+    background: white;
+}

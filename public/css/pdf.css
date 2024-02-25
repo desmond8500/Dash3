@@ -1,0 +1,27 @@
+.doc_title{
+    font-size: 30px;
+    font-weight: bold;
+    color: green;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
+    background: green;
+    color: white;
+}
+
+.border_white{
+    border: 1px solid white;
+}
+
+.thead{
+    background: green;
+    color: white;
+    font-weight: bold;
+    font-family: merriwheather;
+}
+
+
+
+

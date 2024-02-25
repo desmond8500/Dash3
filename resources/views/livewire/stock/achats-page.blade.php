@@ -14,47 +14,46 @@
                 <tr>
                     <th>#</th>
                     <th>Nom</th>
-                    <th>Date</th>
-                    <th>TVA</th>
-                    <th>Total</th>
-                    <th>Facture</th>
-                    <th>Actions</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">TVA</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Facture</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($achats as $key => $achat)
-                <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td>
-                        <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a> <br>
-                        <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{!! nl2br($achat->description) !!}</a>
-                    </td>
-                    <td>{{ $achat->date }}</td>
-                    <td>{{ $achat->tva() }} F</td>
-                    <td>
-                        <div>{{ $achat->total() }} F HT</div>
-                        <div class="text-danger">{{ $achat->ttc() }} F TTC</div>
-                    </td>
-                    <td>
-                        @foreach ($achat->factures as $facture)
-                            <div class="d-flex justify-content-between">
-                                <a href="{{ asset($facture->folder) }}" target="_blank">
-                                    <i class="ti ti-file-pdf"></i>
-                                    {{ basename($facture->folder) }}
-                                </a>
-                                <button class="btn btn-danger btn-action" wire:click="delete_facture('{{ $facture->id }}')">
-                                    <i class="ti ti-trash"></i>
-                                </button>
-                            </div>
-                        @endforeach
-                    </td>
-                    <td>
-                        <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
-                            <i class="ti ti-edit"></i>
-                        </button>
-                    </td>
-                </tr>
-
+                    <tr>
+                        <td>{{ $key+1 }}</td>
+                        <td>
+                            <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a> <br>
+                            <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{!! nl2br($achat->description) !!}</a>
+                        </td>
+                        <td class="text-center">{{ $achat->date }}</td>
+                        <td class="text-center">{{ number_format($achat->tva(), 0, 2) }} F</td>
+                        <td class="text-end">
+                            <div>{{ number_format($achat->total(), 0, 2) }} F HT<span class="text-white">C</span> </div>
+                            <div class="text-danger">{{ number_format($achat->ttc(), 0, 2) }} F TTC</div>
+                        </td>
+                        <td>
+                            @foreach ($achat->factures as $facture)
+                                <div class="d-flex justify-content-between mb-1">
+                                    <a href="{{ asset($facture->folder) }}" target="_blank">
+                                        <i class="ti ti-file-pdf"></i>
+                                        {{ basename($facture->folder) }}
+                                    </a>
+                                    <button class="btn btn-danger btn-sm" wire:click="delete_facture('{{ $facture->id }}')">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </div>
+                            @endforeach
+                        </td>
+                        <td class="text-end">
+                            <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

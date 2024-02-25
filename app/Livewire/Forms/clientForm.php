@@ -34,7 +34,7 @@ class clientForm extends Form
 
     function storeAvatar($client, $avatar){
         if (!is_string($this->avatar)) {
-            $dir = "Erp/Client/$client->id/avatar";
+            $dir = "erp/clients/$client->id/avatar";
             Storage::disk('public')->deleteDirectory($dir);
             $name = $avatar->getClientOriginalName();
             $avatar->storeAs("public/$dir", $name);

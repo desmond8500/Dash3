@@ -123,7 +123,7 @@ class AchatPage extends Component
 
     function addFacture(){
         if ($this->facture) {
-        $dir = "erp/stock/achats/".$this->achat->id."/factures";
+        $dir = "stock/achats/".$this->achat->id."/factures";
             $name = $this->facture->getClientOriginalName();
             $this->facture->storeAS("public/$dir", $name);
         }

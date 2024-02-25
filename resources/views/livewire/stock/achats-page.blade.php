@@ -1,6 +1,7 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Achats', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
+            @livewire('form.article-add')
             @livewire('form.achat-add')
             @livewire('form.provider-add')
             @livewire('form.brand-add')

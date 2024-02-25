@@ -48,7 +48,7 @@ class UserForm extends Form
     function updateAvatar($avatar) {
         $user = auth()->user();
 
-        $dir = "User/$user->id/avatar";
+        $dir = "user/$user->id/avatar";
         Storage::disk('public')->deleteDirectory($dir);
         $name = $avatar->getClientOriginalName();
         $avatar->storeAs("public/$dir", $name);

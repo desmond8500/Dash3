@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Article;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -33,7 +34,30 @@ class ArticleForm extends Form
 
     function store(){
         $this->validate();
-        $article = Article::create($this->all());
+        $article = Article::create($this->only(
+            'designation',
+            'reference',
+            'description',
+            'quantity',
+            'quantity_min',
+            'priority_id',
+            'brand_id',
+            'provider_id',
+            'price',
+        ));
+
+        if ($this->image) {
+            $images = $this->image;
+            $dir = "stock/articles/$article->id/images";
+            foreach ($images as $key => $image) {
+                $name = $image->getClientOriginalName();
+                $image->storeAS("public/$dir", $name);
+            }
+
+            $article->image = "$dir/$name";
+            // $article->image = "stockage/$dir/$name";
+            $article->save();
+        }
     }
 
     function set($model_id){

@@ -20,7 +20,7 @@
         <form class="row" wire:submit="update">
             @include('_form.article_form')
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary me-auto" wire:click='delete'>
+                <button type="button" class="btn btn-danger me-auto" wire:click='delete'>
                     <i class="ti ti-trash"></i>
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

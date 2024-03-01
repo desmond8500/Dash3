@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Stock;
 
-use App\Models\ArticleBrand;
+use App\Models\Brand;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -28,7 +28,7 @@ class BrandsPage extends Component
     #[On('get-brands')]
     function brandSearch()
     {
-        return ArticleBrand::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+        return Brand::where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
     public function render()

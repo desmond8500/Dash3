@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -31,6 +32,17 @@ class Article extends Model
     public function brand(): HasOne
     {
         return $this->hasOne(Brand::class, 'id', 'brand_id');
+    }
+
+    public function images()
+    {
+        $dir = "stock/articles/$this->id/images";
+        // $dir = "public/stock/articles";
+
+        // return $dir;
+        return Storage::disk('public')->allFiles($dir);
+        // return Storage::directories($dir);
+        // return Storage::disk('public')->files($dir);
     }
 
     public function priority()

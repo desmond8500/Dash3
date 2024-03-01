@@ -7,11 +7,13 @@
         </div>
     </div>
     <div class="col-12 mb-3">
-        {{-- @if ($article_form->image)
-            @foreach ($article_form->image as $image)
-                <img src="{{ $image }}" class="avatar rounded" alt="A">
+        @if ($article_form->image && is_string($article_form->image))
+            @foreach (glob(dirname($article_form->image)."/*") as $item)
+                <img src="{{ asset($item) }}" class="avatar avatar-md rounded" alt="A">
             @endforeach
-        @endif --}}
+        @endif
+
+
         <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
         <label for="file" href="#" class="avatar avatar-upload rounded">
             <i class="ti ti-plus"></i>
@@ -70,7 +72,7 @@
     <div class="col-md-4 mb-3">
         <label class="form-label">Fournisseur</label>
         <select class="form-control" wire:model="article_form.provider_id">
-            <option value="" disabled>Sélectionner</option>
+            <option value="0" disabled>Sélectionner</option>
             @foreach ($providers as $provider)
                 <option value="{{ $provider->id }}">{{ $provider->name }}</option>
             @endforeach
@@ -81,6 +83,7 @@
     <div class="col-md-4 mb-3">
         <label class="form-label">Marque</label>
         <select class="form-control" wire:model="article_form.brand_id">
+            <option value="0" disabled>Sélectionner</option>
             @foreach ($brands as $brand)
             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
             @endforeach

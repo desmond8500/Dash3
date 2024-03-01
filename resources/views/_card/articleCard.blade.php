@@ -1,5 +1,5 @@
 <div class="card p-2">
-    <div class="row">
+    <div class="row g-2">
         <div class="col-auto">
             <img src="{{ asset("storage/$article->image") }}" alt="A" class="avatar avatar-xl">
         </div>
@@ -9,9 +9,19 @@
                     <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $article->id }}')">
-                        <i class="ti ti-edit"></i>
+                    <button class="btn btn-outline-primary btn-icon"
+                        id="triggerId"
+                        data-bs-toggle="dropdown"
+                        >
+                        <i class="ti ti-dots-vertical"></i>
                     </button>
+
+                    <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId" >
+                        <a class="dropdown-item" wire:click="edit('{{ $article->id }}')">Editer</a>
+                        <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')">Dupliquer</a>
+                        {{-- <div class="dropdown-divider"></div> --}}
+                        {{-- <a class="dropdown-item" href="#" disabled>Action</a> --}}
+                    </div>
                 </div>
             </div>
 
@@ -24,12 +34,12 @@
             </div>
             <div class="text-muted" >
                 @if ($article->provider)
-                    {{ $article->provider->name }}
+                    <span class="badge bg-blue-lt">{{ $article->provider->name }}</span>
                 @else
                     _
                 @endif
             </div>
-            <div class="text-muted">{!! nl2br($article->description) !!}</div>
+            {{-- <div class="text-muted">{!! nl2br($article->description) !!}</div> --}}
 
             <div class="row mt-1">
                 <div class="col-md-6">

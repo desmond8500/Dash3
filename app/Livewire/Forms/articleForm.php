@@ -31,7 +31,6 @@ class ArticleForm extends Form
     #[Validate('numeric')]
     public $price = 0;
 
-
     function store(){
         $this->validate();
         $article = Article::create($this->only(
@@ -102,7 +101,6 @@ class ArticleForm extends Form
             // $article->image = "stockage/$dir/$name";
             $this->article->save();
         }
-
         return $article;
     }
 

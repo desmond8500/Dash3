@@ -2,13 +2,11 @@
 
 namespace App\Livewire\Stock;
 
-use App\Http\Controllers\AchatController;
 use App\Livewire\Forms\ArticleForm;
 use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Provider;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -44,7 +42,6 @@ class ArticlesPage extends Component
         ]);
     }
 
-
     public $selected;
 
     function edit($article_id){
@@ -65,6 +62,19 @@ class ArticlesPage extends Component
         $article = Article::find($this->selected);
         $article->delete();
         $this->dispatch('get-articles');
+    }
+
+    function dupliquer($article_id){
+        $article = Article::find($article_id);
+
+        $new = $article->replicate();
+        $new->save();
+    }
+
+    public $files;
+
+    public store_files(){
+
     }
 
 }

@@ -2,20 +2,27 @@
     @component('components.layouts.page-header', ['title'=> 'Article', 'breadcrumbs'=> $breadcrumbs])
         <div class="btn-list">
             @livewire('form.provider-add')
+            @livewire('form.brand-add')
         </div>
 
     @endcomponent
 
-    <div class="row">
+    <div class="row g-2">
 
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body-sm">
-                    <img src="{{ asset("storage/$article->image") }}" class="ratio ratio-1x1"   alt="">
+                    <img src="{{ asset("storage/$article->image") }}" class="ratio ratio-1x1 rounded"   alt="">
                 </div>
-                <div class="card-body">
-                    <img src="{{ asset("storage/$article->image") }}" class="avatar avatar-md border-dark" alt="">
-
+                <div class="card-footer">
+                    @foreach ($article->images() as $image)
+                        <img src="{{ asset("storage/$image") }}" class="avatar avatar-md border-dark" alt="">
+                    @endforeach
+                    <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
+                    <label for="file" href="#" class="avatar avatar-upload rounded">
+                        <i class="ti ti-plus"></i>
+                        <span class="avatar-upload-text">Ajouter</span>
+                    </label>
                 </div>
             </div>
         </div>
@@ -111,7 +118,7 @@
         <form class="row" wire:submit="update">
             @include('_form.article_form')
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary me-auto" wire:click='delete'>
+                <button type="button" class="btn btn-danger me-auto" wire:click='delete'>
                     <i class="ti ti-trash"></i>
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

@@ -3,8 +3,8 @@
 namespace App\Livewire\Form;
 
 use App\Livewire\Forms\ArticleForm;
-use App\Models\Article;
-use Livewire\Attributes\Validate;
+use App\Models\Brand;
+use App\Models\Provider;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -16,6 +16,8 @@ class ArticleAdd extends Component
 
     public function render(){
         return view('livewire.form.article-add',[
+            'providers' => Provider::all(),
+            'brands' => Brand::all(),
         ]);
     }
 
@@ -23,7 +25,7 @@ class ArticleAdd extends Component
         $this->validate();
         $this->article_form->store();
 
-
         $this->dispatch('close-addArticle');
+        $this->dispatch('get-articles');
     }
 }

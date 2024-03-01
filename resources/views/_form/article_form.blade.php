@@ -33,22 +33,23 @@
     </div>
 
     <div class="col-md-4 mb-3">
-        <div class="mb-3">
-            <label class="form-label">Quantité</label>
-            <input type="text" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
-            @error('article_form.quantity') <span class='text-danger'>{{ $message }}</span> @enderror
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Qte</label>
+                <input type="text" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
+                @error('article_form.quantity') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Qte Min</label>
+                <input type="text" class="form-control" wire:model="article_form.quantity_min" placeholder="Quantite">
+                @error('article_form.quantity_min') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+            <div class="col-md-12">
+                <label class="form-label">Prix</label>
+                <input type="text" class="form-control" wire:model="article_form.price" placeholder="Prix">
+                @error('article_form.price') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
         </div>
-    {{-- </div>
-    <div class="col-md-4 mb-3"> --}}
-        <label class="form-label">Quantité Minimale</label>
-        <input type="text" class="form-control" wire:model="article_form.quantity_min" placeholder="Quantite">
-        @error('article_form.quantity_min') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Prix</label>
-        <input type="text" class="form-control" wire:model="article_form.price" placeholder="Prix">
-        @error('article_form.price') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
     <div class="col-md-4 mb-3">
@@ -67,9 +68,22 @@
     </div>
 
     <div class="col-md-4 mb-3">
+        <label class="form-label">Fournisseur</label>
+        <select class="form-control" wire:model="article_form.provider_id">
+            <option value="" disabled>Sélectionner</option>
+            @foreach ($providers as $provider)
+                <option value="{{ $provider->id }}">{{ $provider->name }}</option>
+            @endforeach
+        </select>
+        @error('article_form.brand_id') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
+    <div class="col-md-4 mb-3">
         <label class="form-label">Marque</label>
         <select class="form-control" wire:model="article_form.brand_id">
-            <option value=""></option>
+            @foreach ($brands as $brand)
+            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+            @endforeach
         </select>
         @error('article_form.brand_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>

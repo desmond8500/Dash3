@@ -5,6 +5,8 @@ namespace App\Livewire\Stock;
 use App\Http\Controllers\AchatController;
 use App\Livewire\Forms\ArticleForm;
 use App\Models\Article;
+use App\Models\Brand;
+use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -28,7 +30,7 @@ class ArticlesPage extends Component
         );
     }
 
-    #[On('close-addArticle')]
+    #[On('get-articles')]
     function articleSearch() {
         return Article::where('designation', 'like', '%' . $this->search . '%')->orWhere('reference', 'like', '%' . $this->search . '%')->paginate(10);
     }
@@ -37,29 +39,17 @@ class ArticlesPage extends Component
     {
         return view('livewire.stock.articles-page',[
             'articles' => $this->articleSearch(),
+            'providers' => Provider::all(),
+            'brands' => Brand::all(),
         ]);
     }
 
-    #[Validate('required')]
-    public $designation;
-    public $image;
-    public $reference;
-    public $description;
-    #[Validate('numeric')]
-    public $quantity = 0;
-    #[Validate('numeric')]
-    public $priority_id = 0;
-    #[Validate('numeric')]
-    public $brand_id = 0;
-    #[Validate('numeric')]
-    public $provider_id = 0;
-    #[Validate('numeric')]
-    public $price = 0;
 
     public $selected;
 
     function edit($article_id){
         $this->article_form->set($article_id);
+        $this->selected = $article_id;
 
         $this->dispatch('open-editArticle');
     }
@@ -72,8 +62,9 @@ class ArticlesPage extends Component
 
     // TODO: Voir les dépendnces de suppression
     function delete(){
-        AchatController::delete($this->selected);
-        $this->dispatch('close-editArticle');
+        $article = Article::find($this->selected);
+        $article->delete();
+        $this->dispatch('get-articles');
     }
 
 }

@@ -50,4 +50,10 @@ class ArticlePage extends Component
 
         $this->dispatch('close-editArticle');
     }
+
+    public $files;
+
+    function store_files()
+    {
+    }
 }

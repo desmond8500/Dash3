@@ -18,11 +18,14 @@
                     @foreach ($article->images() as $image)
                         <img src="{{ asset("storage/$image") }}" class="avatar avatar-md border-dark" alt="">
                     @endforeach
-                    <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
+                    <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="files">
                     <label for="file" href="#" class="avatar avatar-upload rounded">
                         <i class="ti ti-plus"></i>
                         <span class="avatar-upload-text">Ajouter</span>
                     </label>
+                    @if ($files)
+                        <button class="btn btn-primary" wire:click="store_files">Ajouter</button>
+                    @endif
                 </div>
             </div>
         </div>

@@ -71,10 +71,4 @@ class ArticlesPage extends Component
         $new->save();
     }
 
-    public $files;
-
-    public store_files(){
-
-    }
-
 }

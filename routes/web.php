@@ -11,6 +11,7 @@ use App\Livewire\Erp\ProjetsPage;
 use App\Livewire\Erp\RoomPage;
 use App\Livewire\Erp\StagePage;
 use App\Livewire\IndexPage;
+use App\Livewire\JournalPage;
 use App\Livewire\LoginPage;
 use App\Livewire\ProfilePage;
 use App\Livewire\SettingsPage;
@@ -45,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projet/{projet_id}', ProjetPage::class)->name('projet');
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
 
-    // Route::get('/journaux/{projet_id}', Journaux::class)->name('journaux');
+    Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
 });
 
 // Stock

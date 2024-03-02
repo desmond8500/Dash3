@@ -34,7 +34,7 @@
 
     <div class="d-flex justify-content-between p-2">
         <div> <i class="ti ti-box"></i> Projets <b>{{ $client->projets->count() }}</b></div>
-        <div> <i class="ti ti-box"></i> Taches <b>06</b></div>
+        <div> <i class="ti ti-box"></i> Taches <b>{{ $client->tasks->count() }}</b></div>
     </div>
 
 </div>

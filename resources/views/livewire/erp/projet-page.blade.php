@@ -71,9 +71,19 @@
                         </div>
 
                         <div class="tab-pane" id="tabs-journaux">
-                            <h2>Journal d'activité</h2>
+                            <div class="d-flex justify-content-between">
+                                <h2>Journal d'activité</h2>
+                                @livewire('form.journal-add')
+                            </div>
 
-                            @livewire('form.journal-add')
+                            <div class="row g-2s">
+                                @foreach ($journaux as $journal)
+                                    <div class="col-md-4">
+                                        @include('_card.journal_card')
+                                    </div>
+                                @endforeach
+                            </div>
+
 
                             <div>
 

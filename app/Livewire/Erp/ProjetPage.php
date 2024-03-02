@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Models\Building;
+use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
 use Livewire\Attributes\On;
@@ -17,6 +18,7 @@ class ProjetPage extends Component
 
     protected $paginationTheme = 'bootstrap';
     public $search ='';
+    public $journal_search ='';
     public $breadcrumbs;
     public $projet, $projet_id;
     public $tab = 0;
@@ -42,6 +44,7 @@ class ProjetPage extends Component
             'buildings' => $this->get_buildings(),
             'projet_id' => $this->projet_id,
             'tasks' => $this->get_tasks(),
+            'journaux' => $this->get_news(),
         ]);
     }
 
@@ -53,4 +56,11 @@ class ProjetPage extends Component
     function get_tasks() {
         return Task::where('projet_id', $this->projet_id)->get();
     }
+
+    #[On('get-news')]
+    function get_news() {
+        return Journal::where('projet_id', $this->projet_id)->get();
+    }
+
+
 }

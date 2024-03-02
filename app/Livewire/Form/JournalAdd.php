@@ -46,6 +46,7 @@ class JournalAdd extends Component
             'date' => $this->date,
         ]);
         $this->dispatch('close-addJournal');
+        $this->dispatch('get-news');
     }
 
 }

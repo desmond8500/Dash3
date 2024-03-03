@@ -18,6 +18,12 @@
                     <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('building', ['building_id'=>$task->building->id]) }}" title="Batiment">{{ $task->building->name }}</a>
                 @endif
 
+                @if ($task->devis_id)
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->devis->projet->client->id]) }}" title="Client">{{ $task->devis->projet->client->name }}</a> /
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projet',['projet_id'=>$task->devis->projet->id]) }}" title="Projet">{{ $task->devis->projet->name }}</a> /
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('invoice', ['invoice_id'=>$task->devis->id]) }}" title="Devis">{{ $task->devis->reference }}</a>
+                @endif
+
                 @if ($task->stage_id)
                     <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->stage->building->projet->client->id]) }}" title="Client">{{ $task->stage->building->projet->client->name }}</a> /
                     <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projet',['projet_id'=>$task->stage->building->projet->id]) }}" title="Projet">{{ $task->stage->building->projet->name }}</a> /

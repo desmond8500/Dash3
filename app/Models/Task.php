@@ -50,4 +50,8 @@ class Task extends Model
     public function room(): BelongsTo{
         return $this->belongsTo(Room::class);
     }
+
+    public function devis(): BelongsTo{
+        return $this->belongsTo(Invoice::class, 'devis_id');
+    }
 }

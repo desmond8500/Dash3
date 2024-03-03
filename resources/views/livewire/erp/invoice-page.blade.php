@@ -1,5 +1,6 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Devis', 'breadcrumbs'=>$breadcrumbs])
+        @livewire('form.task-add', ['devis_id' => $devis->id])
     @endcomponent
 
     <div class="row g-2">

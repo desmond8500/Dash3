@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoice_acomptes', function (Blueprint $table) {
+        Schema::create('invoice_spents', function (Blueprint $table) {
             $table->id();
             $table->integer('invoice_id')->constrained();
             $table->string('name');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoice_acomptes');
+        Schema::dropIfExists('invoice_spents');
     }
 };

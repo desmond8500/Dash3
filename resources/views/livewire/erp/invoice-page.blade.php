@@ -2,7 +2,7 @@
     @component('components.layouts.page-header', ['title'=>'Devis', 'breadcrumbs'=>$breadcrumbs])
     @endcomponent
 
-    <div class="row">
+    <div class="row g-2">
         <div class="col-md-8">
 
             <div class="card">

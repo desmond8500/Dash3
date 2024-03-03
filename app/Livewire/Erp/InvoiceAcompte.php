@@ -20,7 +20,6 @@ class InvoiceAcompte extends Component
 
     function getSearch() {
         return $this->invoice->acomptes;
-        // return ModelsInvoiceAcompte::where('invoice_id', $this->invoice_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
     public function render()
@@ -30,25 +29,25 @@ class InvoiceAcompte extends Component
         ]);
     }
 
-public $invoice;
-public InvoiceAcompteForm $acompte_form;
+    public $invoice;
+    public InvoiceAcompteForm $acompte_form;
 
-function store(){
-    $this->acompte_form->store($this->invoice->id);
-    $this->dispatch('close-add-invoiceAcompte');
-}
+    function store(){
+        $this->acompte_form->store($this->invoice->id);
+        $this->dispatch('close-add-invoiceAcompte');
+    }
 
-function edit($id){
-    $this->acompte_form->set($id);
-    $this->dispatch('open-edit-invoiceAcompte');
-}
+    function edit($id){
+        $this->acompte_form->set($id);
+        $this->dispatch('open-edit-invoiceAcompte');
+    }
 
-function update(){
-    $this->acompte_form->update();
-    $this->dispatch('close-edit-invoiceAcompte');
-}
+    function update(){
+        $this->acompte_form->update();
+        $this->dispatch('close-edit-invoiceAcompte');
+    }
 
-function delete($id){
-    $this->acompte_form->delete($id);
-}
+    function delete($id){
+        $this->acompte_form->delete($id);
+    }
 }

@@ -44,9 +44,9 @@ class Invoice extends Model
         return $this->hasMany(InvoiceAcompte::class);
     }
 
-    public function spent(): HasMany
+    public function spents(): HasMany
     {
-        return $this->hasMany(InvoiceAcompte::class);
+        return $this->hasMany(InvoiceSpent::class);
     }
 
 }

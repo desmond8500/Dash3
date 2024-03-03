@@ -124,50 +124,9 @@
 
             @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id], key($devis->id))
 
-            {{-- <div class="card mb-1">
-                <div class="card-header">
-                    <div class="card-title">Acompte</div>
-                    <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" >
-                            <i class="ti ti-plus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
+            @livewire('erp.invoice-spent', ['invoice_id' => $devis->id], key($devis->id))
 
-                </div>
-                <div class="card-footer"></div>
-            </div> --}}
 
-            <div class="card mb-1">
-                <div class="card-header">
-                    <div class="card-title">Acompte</div>
-                    <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" >
-                            <i class="ti ti-plus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-
-                </div>
-                <div class="card-footer"></div>
-            </div>
-
-            <div class="card mb-1">
-                <div class="card-header">
-                    <div class="card-title">Dépenses</div>
-                    <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" >
-                            <i class="ti ti-plus"></i>
-                        </button>
-                    </div>
-                </div>
-               <div class="card-body">
-
-                </div>
-                <div class="card-footer"></div>
-            </div>
             <div class="card mb-1">
                 <div class="card-header">
                     <div class="card-title">Documents</div>

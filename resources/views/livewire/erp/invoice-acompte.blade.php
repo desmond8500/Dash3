@@ -2,17 +2,13 @@
 
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Acompte</div>
+            <div class="card-title">Acompte: {{ number_format($acomptes->sum('montant'), 0, 2) }} F CFA</div>
             <div class="card-actions">
                 <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-add-invoiceAcompte')">
                     <i class="ti ti-plus"></i>
                 </button>
             </div>
         </div>
-        <div class="card-body">
-
-        </div>
-
         <table class="table">
             <thead>
                 <tr>
@@ -20,7 +16,7 @@
                     <th>Nom</th>
                     <th style="text-align:center; width: 10px;">Montant</th>
                     <th style="text-align:center; width: 30px;">Date</th>
-                    <th style="text-align:center; width: 10px;">#</th>
+                    <th style="text-align:center; width: 10px;">_</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,14 +56,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        <div class="card-footer">
-            <div class="d-flex justify-content-between">
-                <div class="fw-bold">TOTAL:</div>
-                <div>{{ number_format($acompte->sum('montant'), 0, 2) }} F CFA</div>
-
-            </div>
-        </div>
     </div>
 
     @component('components.modal', ["id"=>'add-invoiceAcompte', 'title' => 'Ajouter un acompte'])

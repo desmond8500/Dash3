@@ -11,12 +11,13 @@
                         <div>{{ $devis->client_name }}</div>
                         <div class="text-primary">#{{ $devis->reference }}</div>
                     </div>
-                    <div class="card-actions btn-list">
+                    <div class="card-actions">
+                        <div class="badge mb-1">{{ $devis->statut }}</div>
                         <div class="dropdown">
                             <a href="#" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Actions</a>
                             <div class="dropdown-menu">
                                 <span class="dropdown-header">Devis</span>
-                                <a class="dropdown-item text-success" href="#"> <i class="ti ti-edit"></i> Modifier </a>
+                                <a class="dropdown-item text-success" href="#" wire:click="edit({{ $devis->id }})"> <i class="ti ti-edit"></i> Modifier </a>
                                 <a class="dropdown-item text-danger" href="#"> <i class="ti ti-trash"></i> Supprimer </a>
 
                                 <div class="dropdown-divider"></div>
@@ -157,5 +158,14 @@
         </form>
         <script> window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); }) </script>
         <script> window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editInvoice', 'title'=>'Editer un devis'])
+    <form class="row" wire:submit="update_invoice">
+        @include('_form.invoice_form')
+    </form>
+
+    <script> window.addEventListener('open-editInvoice', event => { $('#editInvoice').modal('show'); }) </script>
+    <script> window.addEventListener('close-editInvoice', event => { $('#editInvoice').modal('hide'); }) </script>
     @endcomponent
 </div>

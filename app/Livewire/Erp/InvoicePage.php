@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\InvoiceForm;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
@@ -68,7 +69,19 @@ class InvoicePage extends Component
         $this->dispatch('close-addSection');
     }
 
+    public InvoiceForm $invoice_form;
 
+    function edit($id){
+        $this->invoice_form->set($id);
+        $this->dispatch('open-editInvoice');
+    }
+
+    function update_invoice()
+    {
+        $this->invoice_form->update();
+        $this->devis = Invoice::find($this->devis->id);
+        $this->dispatch('close-editInvoice');
+    }
 
 
 }

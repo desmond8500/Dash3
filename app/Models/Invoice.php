@@ -34,4 +34,19 @@ class Invoice extends Model
         return $this->hasMany(InvoiceSection::class);
     }
 
+    public function acomptes(): HasMany
+    {
+        return $this->hasMany(InvoiceAcompte::class);
+    }
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(InvoiceAcompte::class);
+    }
+
+    public function spent(): HasMany
+    {
+        return $this->hasMany(InvoiceAcompte::class);
+    }
+
 }

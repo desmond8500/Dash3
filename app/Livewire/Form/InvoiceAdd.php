@@ -54,6 +54,6 @@ class InvoiceAdd extends Component
         ]);
 
         $this->dispatch('close-addInvoice');
-        // $this->dispatch('invoice-added');
+        $this->dispatch('get-invoices');
     }
 }

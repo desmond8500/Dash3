@@ -122,7 +122,9 @@
         </div>
         <div class="col-md-4">
 
-            <div class="card mb-1">
+            @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id], key($devis->id))
+
+            {{-- <div class="card mb-1">
                 <div class="card-header">
                     <div class="card-title">Acompte</div>
                     <div class="card-actions">
@@ -135,7 +137,7 @@
 
                 </div>
                 <div class="card-footer"></div>
-            </div>
+            </div> --}}
 
             <div class="card mb-1">
                 <div class="card-header">

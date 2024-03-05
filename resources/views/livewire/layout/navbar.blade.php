@@ -144,7 +144,7 @@
                         {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('settings') }}" class="dropdown-item">Paramètres</a>
-                        <a wire:click="logout()" class="dropdown-item">Déconnexion</a>
+                        <a wire:click="logout()" class="dropdown-item text-danger">Déconnexion</a>
                     </div>
                 </div>
             @else

@@ -14,6 +14,7 @@ use App\Livewire\Erp\StagePage;
 use App\Livewire\IndexPage;
 use App\Livewire\JournalPage;
 use App\Livewire\LoginPage;
+use App\Livewire\Modules\ContactsPage;
 use App\Livewire\ProfilePage;
 use App\Livewire\SettingsPage;
 use App\Livewire\Stock\AchatPage;
@@ -48,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
 
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
+
+    Route::get('/contacts', ContactsPage::class)->name('contacts');
 });
 
 // Stock

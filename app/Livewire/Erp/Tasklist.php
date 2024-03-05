@@ -49,29 +49,51 @@ class Tasklist extends Component
     {
         return view('livewire.erp.tasklist',[
             'tasks' => $this->getTasks(),
+            'activeCount' => Task::activeCount(),
+            'inactiveCount' => Task::inactiveCount(),
             'statuses' => TaskStatus::all(),
             'priorities' => TaskPriority::all(),
         ]);
     }
 
+    public $active;
     function getTasks() {
-        if ($this->client_id) {
-            return Task::where('client_id',$this->client_id)->where('statut_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
-        }
-        if ($this->projet_id) {
-            return Task::where('projet_id',$this->projet_id)->where('statut_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
-        }
-        if ($this->building_id) {
-            return Task::where('building_id',$this->building_id)->where('statut_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
-        }
-        if ($this->stage_id) {
-            return Task::where('stage_id',$this->stage_id)->where('statut_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
-        }
-        if ($this->room_id) {
-            return Task::where('room_id',$this->room_id)->where('statut_id','!=',4)->where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
+        if ($this->active) {
+            if ($this->client_id) {
+                return Task::where('client_id', $this->client_id)->finished($this->search)->paginate(10);
+            }
+            if ($this->projet_id) {
+                return Task::where('projet_id', $this->projet_id)->finished($this->search)->paginate(10);
+            }
+            if ($this->building_id) {
+                return Task::where('building_id', $this->building_id)->finished($this->search)->paginate(10);
+            }
+            if ($this->stage_id) {
+                return Task::where('stage_id', $this->stage_id)->finished($this->search)->paginate(10);
+            }
+            if ($this->room_id) {
+                return Task::where('room_id', $this->room_id)->finished($this->search)->paginate(10);
+            }
+            return Task::finished($this->search)->paginate(10);
+        } else {
+            if ($this->client_id) {
+                return Task::where('client_id',$this->client_id)->active($this->search)->paginate(10);
+            }
+            if ($this->projet_id) {
+                return Task::where('projet_id',$this->projet_id)->active($this->search)->paginate(10);
+            }
+            if ($this->building_id) {
+                return Task::where('building_id',$this->building_id)->active($this->search)->paginate(10);
+            }
+            if ($this->stage_id) {
+                return Task::where('stage_id',$this->stage_id)->active($this->search)->paginate(10);
+            }
+            if ($this->room_id) {
+                return Task::where('room_id',$this->room_id)->active($this->search)->paginate(10);
+            }
+            return Task::active($this->search)->paginate(10);
         }
 
-        return Task::where('name', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
     }
 
     public TaskForm $form;
@@ -79,13 +101,11 @@ class Tasklist extends Component
     #[On('task-edit')]
     function edit($task_id){
         $this->form->set($task_id);
-
         $this->dispatch('open-editTaskModal');
     }
 
     function update(){
         $this->form->update();
         $this->dispatch('close-editTaskModal');
-
     }
 }

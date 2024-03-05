@@ -1,9 +1,21 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Liste des taches</div>
+            <div class="card-title">Liste des taches
+                @if ($active)
+                    terminés
+                @else
+                    en cours
+                @endif
+            </div>
             <div class="card-actions">
-                {{-- @livewire('form.task-add', [$id->]) --}}
+                <button class="btn btn-primary" wire:click="$toggle('active')">
+                    @if ($active)
+                        En cours {{ $activeCount }}
+                    @else
+                        Terminés {{ $inactiveCount }}
+                    @endif
+                </button>
             </div>
         </div>
         <div class="p-2">

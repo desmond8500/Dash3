@@ -49,7 +49,6 @@
                 <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $task->id }}')">
                     <i class="ti ti-edit"></i>
                 </button>
-
             </div>
 
             <div class="badge badge-pill mb-1

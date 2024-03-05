@@ -29,12 +29,8 @@ class ClientsPage extends Component
     {
         return view('livewire.erp.clients-page', [
             "breadcrumbs" => $this->breadcrumbs,
-            'clients' => $this->clientSearch(),
+            'clients' => Client::search($this->search),
         ]);
-    }
-
-    function clientSearch() {
-        return Client::where('name', 'like', '%' . $this->search . '%')->orderBy('name')->paginate(16);
     }
 
     function gotoProjets($client_id)

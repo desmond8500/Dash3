@@ -1,6 +1,9 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Devis', 'breadcrumbs'=>$breadcrumbs])
-        @livewire('form.task-add', ['devis_id' => $devis->id])
+        <div class="btn-list">
+            @livewire('form.task-add', ['devis_id' => $devis->id])
+            @livewire('form.article-add')
+        </div>
     @endcomponent
 
     <div class="row g-2">
@@ -53,7 +56,7 @@
                                 <th scope="col" class="text-center">Prix</th>
                                 <th scope="col" class="text-center">Total</th>
                                 <th scope="col" class="text-center">Marge</th>
-                                <th scope="col" class="text-center">_</th>
+                                <th scope="col" style="width: 100px" class="text-center">_</th>
                             </tr>
                         </thead>
 
@@ -85,11 +88,10 @@
                                         <td class="text-center">{{ number_format($row->prix, 0,'.', ' ') }}</td>
                                         <td class="text-center">{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</td>
                                         <td class="text-center">{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', ' ') }}</td>
-                                        <td class="text-center">
+                                        <td class="text-center " >
                                             <div>
-                                                <button class="btn btn-action text-success" ><i class="ti ti-edit"></i></button>
-
-                                                <button class="btn btn-action text-danger" wire:click="deleteRow('{{ $row->id }}')"><i class="ti ti-trash"></i></button>
+                                                <button class="btn  btn-icon btn-outline-success" wire:click="editRow('{{ $row->id }}')" ><i class="ti ti-edit"></i></button>
+                                                <button class="btn btn-icon btn-outline-danger" wire:click="deleteRow('{{ $row->id }}')"><i class="ti ti-trash"></i></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -133,7 +135,7 @@
                 <div class="card-header">
                     <div class="card-title">Documents</div>
                     <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" >
+                        <button class="btn btn-primary btn-icon" disabled>
                             <i class="ti ti-plus"></i>
                         </button>
                     </div>

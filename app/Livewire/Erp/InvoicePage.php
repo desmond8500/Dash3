@@ -51,6 +51,17 @@ class InvoicePage extends Component
     }
 
     // Row
+    function EditRow($id){
+        $row = InvoiceRow::find($id);
+        $row->delete();
+    }
+
+    function updateRow($id){
+        $row = InvoiceRow::find($id);
+        $row->delete();
+    }
+
+
     function deleteRow($id){
         $row = InvoiceRow::find($id);
         $row->delete();

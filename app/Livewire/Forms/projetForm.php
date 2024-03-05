@@ -9,7 +9,7 @@ use Livewire\Form;
 
 class projetForm extends Form
 {
-    public ?projetForm $projetForm;
+    public Projet $projet;
 
     #[Rule('required')]
     public $name;
@@ -20,13 +20,14 @@ class projetForm extends Form
     public $end_date;
 
 
-    function set(projetForm $projet){
-        $this->projetForm = $projet;
-        $this->client_id = $projet->client_id;
-        $this->name = $projet->name;
-        $this->description = $projet->description;
-        $this->start_date = $projet->start_date;
-        $this->end_date = $projet->end_date;
+    function set($projet_id){
+        $this->projet = Projet::find($projet_id);
+
+        $this->client_id = $this->projet->client_id;
+        $this->name = $this->projet->name;
+        $this->description = $this->projet->description;
+        $this->start_date = $this->projet->start_date;
+        $this->end_date = $this->projet->end_date;
     }
 
     function store(){
@@ -35,12 +36,7 @@ class projetForm extends Form
     }
 
     function update($id) {
-        $projet = Projet::find($id);
-        $projet->name = $this->name;
-        $projet->description = $this->description;
-        $projet->start_date = $this->start_date;
-        $projet->end_date = $this->end_date;
-        $projet->save();
+        $this->projet->update($this->all());
     }
 
     function delete() {

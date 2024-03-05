@@ -35,12 +35,8 @@ class ProjetsPage extends Component
     public function render()
     {
         return view('livewire.erp.projets-page', [
-            'projets' => $this->ProjetSearch(),
+            'projets' => Projet::search($this->search())->paginate(20),
         ]);
-    }
-
-    function ProjetSearch() {
-        return Projet::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(20);
     }
 
     function store() {
@@ -52,11 +48,7 @@ class ProjetsPage extends Component
     function edit($projet_id) {
         $this->selected = Projet::find($projet_id);
 
-        $this->projetForm->name = $this->selected->name;
-        $this->projetForm->description = $this->selected->description;
-        $this->projetForm->start_date = $this->selected->start_date;
-        $this->projetForm->end_date = $this->selected->end_date;
-
+        $this->projetForm->set($projet_id);
         $this->dispatch('open-editProjet');
     }
 

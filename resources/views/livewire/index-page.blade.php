@@ -20,7 +20,7 @@
             <div class="col-md-8">
                 <div class="row">
                     @foreach ($resumes as $resume)
-                        <a class="col-md-3" href="{{ $resume->route }}">
+                        <a class="col-md-3 mb-1" href="{{ $resume->route }}">
                             <div class="card p-2">
                                 <div class="row align-items-center">
                                     <div class="col-auto">

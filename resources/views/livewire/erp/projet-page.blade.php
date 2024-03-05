@@ -71,12 +71,12 @@
                         </div>
 
                         <div class="tab-pane" id="tabs-journaux">
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mb-1">
                                 <h2>Journal d'activité</h2>
                                 @livewire('form.journal-add')
                             </div>
 
-                            <div class="row g-2s">
+                            <div class="row g-2">
                                 @foreach ($journaux as $journal)
                                     <div class="col-md-4">
                                         @include('_card.journal_card')

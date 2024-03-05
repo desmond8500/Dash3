@@ -17,7 +17,7 @@
                                     <div class="text-muted" style="font-size: 12px">{{ $journal->date }}</div>
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary btn-icon" wire:click="edit('{{ $journal->id }}')">
+                                    <button class="btn btn-primary btn-icon" wire:click="edit('{{ $journal->id }}')" disabled>
                                         <i class="ti ti-edit"></i>
                                     </button>
                                 </div>

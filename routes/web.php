@@ -4,6 +4,7 @@ use App\Http\Controllers\PDFController;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
+use App\Livewire\Erp\FinancesPage;
 use App\Livewire\Erp\InvoicePage;
 use App\Livewire\Erp\Journaux;
 use App\Livewire\Erp\ProjetPage;
@@ -84,6 +85,9 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/journaux', Journaux::class)->name('journaux');
 });
+
+// Finances
+Route::get('/finances', FinancesPage::class)->name('finances');
 
 // Test
 Route::get('/test', TestPage::class)->name('test');

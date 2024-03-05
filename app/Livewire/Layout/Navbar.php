@@ -8,10 +8,10 @@ use Livewire\Component;
 class Navbar extends Component
 {
     public $menu1 = array(
-        // array('name' => "Accueil", "route" => "index", "icon" => "home"),
         array('name' => "Clients", "route" => "clients", "icon" => "users"),
         array('name' => "Journaux", "route" => "journaux", "icon" => "article"),
         array('name' => "Stock", "route" => "stock", "icon" => "packages"),
+        array('name' => "Finances", "route" => "finances", "icon" => "coins"),
         array('name' => "Test", "route" => "test", "icon" => "hammer"),
     );
 

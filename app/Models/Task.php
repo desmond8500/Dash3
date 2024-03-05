@@ -33,6 +33,7 @@ class Task extends Model
     {
         return $query->where('statut_id', '!=' , 4)->search($search)->orderBy('priotity_id');
     }
+
     public function scopeFinished($query, $search)
     {
         return $query->where('statut_id', 4)->search($search)->orderBy('priotity_id');
@@ -42,6 +43,7 @@ class Task extends Model
     {
         return $query->where('statut_id', '!=', 4)->orderBy('priotity_id')->count();
     }
+
     public function scopeInactiveCount($query)
     {
         return $query->where('statut_id', 4)->orderBy('priotity_id')->count();
@@ -51,6 +53,7 @@ class Task extends Model
     {
         return $this->hasOne(TaskPriority::class, 'id', 'priority_id');
     }
+
     public function statut(): HasOne
     {
         return $this->hasOne(TaskStatus::class, 'id', 'statut_id');
@@ -59,15 +62,19 @@ class Task extends Model
     public function client(): BelongsTo{
         return $this->belongsTo(Client::class);
     }
+
     public function projet(): BelongsTo{
         return $this->belongsTo(Projet::class);
     }
+
     public function buiding(): BelongsTo{
         return $this->belongsTo(Building::class);
     }
+
     public function stage(): BelongsTo{
         return $this->belongsTo(Stage::class);
     }
+
     public function room(): BelongsTo{
         return $this->belongsTo(Room::class);
     }

@@ -7,5 +7,5 @@ use Livewire\Form;
 
 class ContactPhoneForm extends Form
 {
-    //
+
 }

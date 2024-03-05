@@ -43,13 +43,16 @@ Route::middleware(['auth'])->group(function () {
 
 // ERP
 Route::middleware(['auth'])->group(function () {
+    // Clients
     Route::get('/clients', ClientsPage::class)->name('clients');
+    // Projets
     Route::get('/projets/{client_id}', ProjetsPage::class)->name('projets');
     Route::get('/projet/{projet_id}', ProjetPage::class)->name('projet');
+    // Devis
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
-
+    // Journaux
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
-
+    // Contacts
     Route::get('/contacts', ContactsPage::class)->name('contacts');
 });
 
@@ -77,6 +80,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Medias
+Route::middleware(['auth'])->group(function () {
+    // Images
+    // Route::get('/images', Image::class)->name('images');
+    // Route::get('/image/{image_id}', TasksPage::class)->name('image');
+    // Mangas
+    // Route::get('/mangas', TasksPage::class)->name('mangas');
+    // Route::get('/manga/{manga_id}', TasksPage::class)->name('manga');
+    // Videos
+    // Route::get('/videos', TasksPage::class)->name('videos');
+    // Route::get('/video/{video_id}', TasksPage::class)->name('video');
+});
 
 // Tasks
 Route::middleware(['auth'])->group(function () {

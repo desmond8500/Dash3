@@ -207,15 +207,25 @@
             <script> window.addEventListener('close-register', event => { $('#register').modal('hide'); }) </script>
         @endcomponent
 
-        @component('components.modal', ["id"=>'login', 'title'=>'Connexion'])
+        @component('components.modal', ["id"=>'login', 'title'=>'Connexion', 'class'=>'modal-sm'])
+
+            <div class="bg-blue mx-auto" style="
+                border-radius: 25px;
+                width: 50px;
+                height: 50px;
+                color: white;
+            ">
+                <i class="ti ti-user" style=" display: block; padding: 10px; font-size: 30px; "> </i>
+            </div>
+
             <form class="row" wire:submit="login">
 
-                <div class="col-md-8 mb-3">
+                <div class="col-md-10 offset-1 mb-3">
                     <label class="form-label">Email</label>
                     <input type="text" class="form-control" wire:model="email" placeholder="Email">
                     @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
-                <div class="col-md-8 mb-3">
+                <div class="col-md-10 offset-1 mb-3">
                     <label class="form-label">Mot de passe</label>
                     <div class="input-group input-group-flat">
                         <input type="{{ $formtype ? 'password' : "text" }}" class="form-control" wire:model="password" placeholder="Mot de passe">
@@ -235,9 +245,11 @@
                     {{ $errorMessage }}
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <button type="submit" class="btn btn-primary">Valider</button>
+                <div class="modal-foote">
+                    <div class="d-flex justify-content-evenly">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
                 </div>
             </form>
 

@@ -31,22 +31,22 @@ class Task extends Model
 
     public function scopeActive($query, $search)
     {
-        return $query->where('statut_id', '!=' , 4)->search($search)->orderBy('priotity_id');
+        return $query->where('statut_id', '!=' , 4)->search($search)->orderBy('priority_id');
     }
 
     public function scopeFinished($query, $search)
     {
-        return $query->where('statut_id', 4)->search($search)->orderBy('priotity_id');
+        return $query->where('statut_id', 4)->search($search)->orderBy('priority_id');
     }
 
     public function scopeActiveCount($query)
     {
-        return $query->where('statut_id', '!=', 4)->orderBy('priotity_id')->count();
+        return $query->where('statut_id', '!=', 4)->orderBy('priority_id')->count();
     }
 
     public function scopeInactiveCount($query)
     {
-        return $query->where('statut_id', 4)->orderBy('priotity_id')->count();
+        return $query->where('statut_id', 4)->orderBy('priority_id')->count();
     }
 
     public function priority(): HasOne

@@ -19,7 +19,7 @@ class TaskAdd extends Component
     public $name;
     public $description;
     public $priority_id;
-    public $statut_id;
+    public $statut_id=1;
     public TaskForm $form;
 
     function mount($client_id=null,$projet_id=null,$devis_id=null, $building_id=null,$stage_id=null, $room_id = null,){

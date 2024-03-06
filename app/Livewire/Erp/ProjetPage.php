@@ -56,6 +56,7 @@ class ProjetPage extends Component
         return Building::where('projet_id', $this->projet_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
+    #[On('get-tasks')]
     function get_tasks() {
         return Task::where('projet_id', $this->projet_id)->get();
     }

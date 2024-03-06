@@ -35,7 +35,7 @@ class ProjetsPage extends Component
     public function render()
     {
         return view('livewire.erp.projets-page', [
-            'projets' => Projet::search($this->search())->paginate(20),
+            'projets' => Projet::search($this->search)->paginate(20),
         ]);
     }
 

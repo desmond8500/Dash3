@@ -7,6 +7,7 @@ use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -37,6 +38,8 @@ class ProjetPage extends Component
     function ProjetSearch() {
         return Projet::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
+
+    // #[Session]
 
     public function render()
     {

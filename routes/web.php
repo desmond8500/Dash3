@@ -68,6 +68,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stock/achat_pdf/{achat_id}', function ($achat_id) {
         return PDFController::achat_pdf($achat_id);
     })->name('achat_pdf');
+    Route::get('/stock/commande_pdf', function () {
+        return PDFController::commande_pdf();
+    })->name('commande_pdf');
 });
 
 // Building management

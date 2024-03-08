@@ -18,7 +18,7 @@ class clientForm extends Form
     public $avatar;
     public $status = 1;
     public $type = 'Entreprise';
-    public $favorite;
+    public $favorite = 0;
 
     function store()
     {

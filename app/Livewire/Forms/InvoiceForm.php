@@ -22,7 +22,7 @@ class InvoiceForm extends Form
     public $statut;
     public $tax;
     public $remise;
-    public $favorite;
+    public $favorite = 0;
 
     function store(){
         Invoice::create($this->all());

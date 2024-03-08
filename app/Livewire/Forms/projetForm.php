@@ -18,7 +18,7 @@ class projetForm extends Form
     public $description;
     public $start_date;
     public $end_date;
-    public $favorite;
+    public $favorite = 0;
 
 
     function set($projet_id){

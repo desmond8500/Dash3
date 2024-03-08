@@ -18,6 +18,7 @@ class clientForm extends Form
     public $avatar;
     public $status = 1;
     public $type = 'Entreprise';
+    public $favorite;
 
     function store()
     {
@@ -53,6 +54,7 @@ class clientForm extends Form
         $this->status = $this->client->status;
         $this->avatar = $this->client->avatar;
         $this->address = $this->client->address;
+        $this->favorite = $this->client->favorite;
     }
 
     function update($selected) {

@@ -22,6 +22,7 @@ class InvoiceForm extends Form
     public $statut;
     public $tax;
     public $remise;
+    public $favorite;
 
     function store(){
         Invoice::create($this->all());
@@ -40,6 +41,7 @@ class InvoiceForm extends Form
         $this->statut = $this->invoice->statut;
         $this->tax = $this->invoice->tax;
         $this->remise = $this->invoice->remise;
+        $this->favorite = $this->invoice->favorite;
     }
 
     function update(){

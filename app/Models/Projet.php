@@ -19,6 +19,7 @@ class Projet extends Model
         'description',
         'start_date',
         'end_date',
+        'favorite',
     ];
 
     public function client(): BelongsTo {

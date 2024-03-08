@@ -18,6 +18,7 @@ class projetForm extends Form
     public $description;
     public $start_date;
     public $end_date;
+    public $favorite;
 
 
     function set($projet_id){
@@ -28,6 +29,7 @@ class projetForm extends Form
         $this->description = $this->projet->description;
         $this->start_date = $this->projet->start_date;
         $this->end_date = $this->projet->end_date;
+        $this->favorite = $this->projet->favorite;
     }
 
     function store(){

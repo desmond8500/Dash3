@@ -18,7 +18,8 @@ class Client extends Model
         'address',
         'avatar',
         'status',
-        'type'
+        'type',
+        'favorite',
     ];
 
     public function projets(): HasMany

@@ -23,7 +23,8 @@ class Invoice extends Model
         'note',
         'statut',
         'tax',
-        'remise'
+        'remise',
+        'favorite',
     ];
 
     public function projet(): BelongsTo

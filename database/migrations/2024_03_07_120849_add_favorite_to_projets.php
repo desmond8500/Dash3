@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('projet', function (Blueprint $table) {
+        Schema::table('projets', function (Blueprint $table) {
             $table->boolean('favorite')->default(false);
         });
     }

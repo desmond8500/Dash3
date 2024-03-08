@@ -4,7 +4,9 @@ namespace App\Livewire;
 
 use App\Http\Controllers\DashController;
 use App\Models\Client;
+use App\Models\Invoice;
 use App\Models\Journal;
+use App\Models\Projet;
 use App\Models\User;
 use Livewire\Component;
 
@@ -15,7 +17,9 @@ class IndexPage extends Component
         return view('livewire.index-page',[
             'init' => User::count(),
             'resumes' => $this->getResume(),
-
+            'clients' => Client::favorite(),
+            'projets' => Projet::favorite(),
+            'invoices' => Invoice::favorite(),
         ]);
     }
     // Init

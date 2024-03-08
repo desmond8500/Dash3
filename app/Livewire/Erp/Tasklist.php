@@ -61,38 +61,38 @@ class Tasklist extends Component
     function getTasks() {
         if ($this->active) {
             if ($this->client_id) {
-                return Task::where('client_id', $this->client_id)->finished($this->search)->paginate(10);
+                return Task::where('client_id', $this->client_id)->finished($this->search)->paginate(4);
             }
             if ($this->projet_id) {
-                return Task::where('projet_id', $this->projet_id)->finished($this->search)->paginate(10);
+                return Task::where('projet_id', $this->projet_id)->finished($this->search)->paginate(4);
             }
             if ($this->building_id) {
-                return Task::where('building_id', $this->building_id)->finished($this->search)->paginate(10);
+                return Task::where('building_id', $this->building_id)->finished($this->search)->paginate(4);
             }
             if ($this->stage_id) {
-                return Task::where('stage_id', $this->stage_id)->finished($this->search)->paginate(10);
+                return Task::where('stage_id', $this->stage_id)->finished($this->search)->paginate(4);
             }
             if ($this->room_id) {
-                return Task::where('room_id', $this->room_id)->finished($this->search)->paginate(10);
+                return Task::where('room_id', $this->room_id)->finished($this->search)->paginate(4);
             }
-            return Task::finished($this->search)->paginate(10);
+            return Task::finished($this->search)->paginate(4);
         } else {
             if ($this->client_id) {
-                return Task::where('client_id',$this->client_id)->active($this->search)->paginate(10);
+                return Task::where('client_id',$this->client_id)->active($this->search)->paginate(4);
             }
             if ($this->projet_id) {
-                return Task::where('projet_id',$this->projet_id)->active($this->search)->paginate(10);
+                return Task::where('projet_id',$this->projet_id)->active($this->search)->paginate(4);
             }
             if ($this->building_id) {
-                return Task::where('building_id',$this->building_id)->active($this->search)->paginate(10);
+                return Task::where('building_id',$this->building_id)->active($this->search)->paginate(4);
             }
             if ($this->stage_id) {
-                return Task::where('stage_id',$this->stage_id)->active($this->search)->paginate(10);
+                return Task::where('stage_id',$this->stage_id)->active($this->search)->paginate(4);
             }
             if ($this->room_id) {
-                return Task::where('room_id',$this->room_id)->active($this->search)->paginate(10);
+                return Task::where('room_id',$this->room_id)->active($this->search)->paginate(4);
             }
-            return Task::active($this->search)->paginate(10);
+            return Task::active($this->search)->paginate(4);
         }
 
     }

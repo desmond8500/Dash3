@@ -69,8 +69,20 @@ class ClientsPage extends Component
             $this->dispatch('close-editClient');
         }
     }
+
     function download_xls()
     {
         return Excel::download(new ClientsExport, 'clients.xlsx');
+    }
+
+    function toggleFavorite()
+    {
+        $client = Client::find($this->selected->id);
+        if ($client->favorite) {
+            $client->favorite = 0;
+        } else {
+            $client->favorite = 1;
+        }
+        $client->save();
     }
 }

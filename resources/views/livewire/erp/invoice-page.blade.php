@@ -3,6 +3,20 @@
         <div class="btn-list">
             @livewire('form.task-add', ['devis_id' => $devis->id])
             @livewire('form.article-add')
+
+            <div class="col-auto md-3">
+                @if ($devis->favorite)
+                    <button class="btn btn-secondary btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()"
+                        title="Supprimmer aux favoris">
+                        <i class="ti ti-heart"></i>
+                    </button>
+                @else
+                    <button class="btn btn-success btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()"
+                        title="Ajouter aux favoris">
+                        <i class="ti ti-heart"></i>
+                    </button>
+                @endif
+            </div>
         </div>
     @endcomponent
 

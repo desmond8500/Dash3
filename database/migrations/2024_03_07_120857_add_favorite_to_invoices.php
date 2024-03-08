@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('invoice', function (Blueprint $table) {
+        Schema::table('invoices', function (Blueprint $table) {
             $table->boolean('favorite')->default(false);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

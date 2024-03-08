@@ -17,4 +17,9 @@ trait searchTrait {
     {
         return $query->where('designation', 'like', '%' . $search . '%')->orWhere('reference', 'like', '%' . $search . '%');
     }
+
+    public function scopeFavorite($query)
+    {
+        return $query->where('favorite', 1)->get();
+    }
 }

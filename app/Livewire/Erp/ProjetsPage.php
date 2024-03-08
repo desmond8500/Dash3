@@ -61,4 +61,15 @@ class ProjetsPage extends Component
         $this->selected->delete();
         $this->dispatch('close-editProjet');
     }
+
+    function toggleFavorite()
+    {
+        $projet = Projet::find($this->selected->id);
+        if ($projet->favorite) {
+            $projet->favorite = 0;
+        } else {
+            $projet->favorite = 1;
+        }
+        $projet->save();
+    }
 }

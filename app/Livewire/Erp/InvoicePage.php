@@ -94,5 +94,13 @@ class InvoicePage extends Component
         $this->dispatch('close-editInvoice');
     }
 
-
+    function toggleFavorite()
+    {
+        if ($this->devis->favorite) {
+            $this->devis->favorite = 0;
+        } else {
+            $this->devis->favorite = 1;
+        }
+        $this->devis->save();
+    }
 }

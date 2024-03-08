@@ -25,6 +25,18 @@
     <input type="text" class="form-control" wire:model='clientForm.name' />
     @error('clientForm.name') <span class="text-danger">{{ $message }}</span> @enderror
 </div>
+<div class="col-auto md-3">
+    <label class="form-label text-white">Favoris</label>
+    @if ($clientForm->favorite)
+        <button class="btn btn-secondary btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()" title="Supprimmer aux favoris">
+            <i class="ti ti-heart"></i>
+        </button>
+    @else
+        <button class="btn btn-success btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()" title="Ajouter aux favoris">
+            <i class="ti ti-heart"></i>
+        </button>
+    @endif
+</div>
 <div class="w-100"></div>
 
 <div class="col-md-4 mb-3">

@@ -5,6 +5,7 @@ namespace App\Livewire\Stock;
 use App\Livewire\Forms\ArticleForm;
 use App\Models\Article;
 use App\Models\Brand;
+use App\Models\Commande;
 use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -29,14 +30,10 @@ class ArticlesPage extends Component
     }
 
     #[On('get-articles')]
-    function articleSearch() {
-        return Article::where('designation', 'like', '%' . $this->search . '%')->orWhere('reference', 'like', '%' . $this->search . '%')->paginate(10);
-    }
-
     public function render()
     {
         return view('livewire.stock.articles-page',[
-            'articles' => $this->articleSearch(),
+            'articles' => Article::articleSearch($this->search)->paginate(15),
             'providers' => Provider::all(),
             'brands' => Brand::all(),
         ]);
@@ -69,6 +66,13 @@ class ArticlesPage extends Component
 
         $new = $article->replicate();
         $new->save();
+    }
+
+    function buy($article_id){
+        Commande::create([
+            'article_id' => $article_id,
+            'quantity' => 1,
+        ]);
     }
 
 }

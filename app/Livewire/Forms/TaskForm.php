@@ -21,7 +21,7 @@ class TaskForm extends Form
     public $name;
     public $description;
     public $priority_id=2;
-    public $statut_id=2;
+    public $statut_id=1;
 
     function set($task_id){
         $this->task = Task::find($task_id);

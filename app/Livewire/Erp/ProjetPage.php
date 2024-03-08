@@ -7,6 +7,7 @@ use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -38,6 +39,8 @@ class ProjetPage extends Component
         return Projet::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
+    // #[Session]
+
     public function render()
     {
         return view('livewire.erp.projet-page',[
@@ -53,6 +56,7 @@ class ProjetPage extends Component
         return Building::where('projet_id', $this->projet_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
+    #[On('get-tasks')]
     function get_tasks() {
         return Task::where('projet_id', $this->projet_id)->get();
     }

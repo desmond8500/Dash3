@@ -19,6 +19,7 @@
                     <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId" >
                         <a class="dropdown-item" wire:click="edit('{{ $article->id }}')">Editer</a>
                         <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')">Dupliquer</a>
+                        <a class="dropdown-item" wire:click="buy('{{ $article->id }}')">Commander</a>
                         {{-- <div class="dropdown-divider"></div> --}}
                         {{-- <a class="dropdown-item" href="#" disabled>Action</a> --}}
                     </div>

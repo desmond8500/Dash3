@@ -57,6 +57,7 @@ class Tasklist extends Component
     }
 
     public $active;
+    #[On('get-tasks')]
     function getTasks() {
         if ($this->active) {
             if ($this->client_id) {

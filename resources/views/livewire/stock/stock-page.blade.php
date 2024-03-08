@@ -23,18 +23,12 @@
                 </div>
             </a>
         @endforeach
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Articles à acheter</div>
-                    <div class="card-actions">
 
-                    </div>
-                </div>
-                <div class="card-body">
+        <div class="col-md-6">
 
-                </div>
-            </div>
+        </div>
+        <div class="col-md-6">
+            @livewire('stock.commandes')
         </div>
     </div>
 

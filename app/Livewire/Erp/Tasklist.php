@@ -109,4 +109,9 @@ class Tasklist extends Component
         $this->form->update();
         $this->dispatch('close-editTaskModal');
     }
+
+    function toggleFavorite()
+    {
+        $this->form->favoris();
+    }
 }

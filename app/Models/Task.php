@@ -25,6 +25,8 @@ class Task extends Model
         'priority_id',
         'statut_id',
         'expiration_date',
+        'start_date',
+        'end_date',
         'favoris',
     ];
 

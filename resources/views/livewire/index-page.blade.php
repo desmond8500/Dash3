@@ -83,7 +83,7 @@
 
                 <div class="row g-2">
                     @foreach ($invoices as $invoice)
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <a class="card p-2" href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}">
                                 <div class="row">
                                     <div class="col-auto">
@@ -100,6 +100,8 @@
                         </div>
                     @endforeach
                 </div>
+
+                <div class="card card-body mt-2">Planning de la semaine</div>
 
 
             </div>

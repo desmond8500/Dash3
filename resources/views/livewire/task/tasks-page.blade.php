@@ -1,3 +1,7 @@
 <div>
-    {{-- In work, do what you enjoy. --}}
+    @component('components.layouts.page-header', ['title'=> 'Taches', 'breadcrumbs' => $breadcrumbs])
+        {{-- @livewire('erp.task-add') --}}
+    @endcomponent
+
+    @livewire('erp.tasklist')
 </div>

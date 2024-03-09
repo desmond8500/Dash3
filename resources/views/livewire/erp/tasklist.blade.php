@@ -25,12 +25,14 @@
                     <i class="ti ti-search"></i>
                 </span>
             </div>
-            @foreach ($tasks as $task)
-                <div class="mb-2">
-                    @include('_card.task_card')
-                    {{-- @livewire('task.task-card', ['task' => $task], key($task->id)) --}}
-                </div>
-            @endforeach
+            <div class="row row-deck g-2">
+                @foreach ($tasks as $task)
+                    <div class="{{ $class ?? 'col-md-12' }}">
+                        @include('_card.task_card')
+                        {{-- @livewire('task.task-card', ['task' => $task], key($task->id)) --}}
+                    </div>
+                @endforeach
+            </div>
         </div>
         <div class="card-footer">
             {{ $tasks->links() }}

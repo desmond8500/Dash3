@@ -101,7 +101,9 @@
                     @endforeach
                 </div>
 
-                <div class="card card-body mt-2">Planning de la semaine</div>
+                <div class="mt-2">
+                    @livewire('erp.planning')
+                </div>
 
 
             </div>

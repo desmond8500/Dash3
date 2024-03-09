@@ -26,11 +26,7 @@
                         <li>Devis en cours</li>
                     </ul>
                 </div>
-                <div class="col-auto">
-                    <button class="btn btn-primary btn-icon">
-                        <i class="ti ti-edit"></i>
-                    </button>
-                </div>
+
             </div>
         </div>
 

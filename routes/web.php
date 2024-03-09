@@ -54,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
     // Contacts
     Route::get('/contacts', ContactsPage::class)->name('contacts');
+    // Taches
+    Route::get('/tasks', TasksPage::class)->name('tasks');
 });
 
 // Stock

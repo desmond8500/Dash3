@@ -64,12 +64,6 @@ class ProjetsPage extends Component
 
     function toggleFavorite()
     {
-        $projet = Projet::find($this->selected->id);
-        if ($projet->favorite) {
-            $projet->favorite = 0;
-        } else {
-            $projet->favorite = 1;
-        }
-        $projet->save();
+        $this->projetForm->favorite();
     }
 }

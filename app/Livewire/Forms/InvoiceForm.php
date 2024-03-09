@@ -51,4 +51,14 @@ class InvoiceForm extends Form
     function delete(){
         $this->invoice->delete();
     }
+
+    function favorite()
+    {
+        if ($this->favorite) {
+            $this->favorite = 0;
+        } else {
+            $this->favorite = 1;
+        }
+        $this->invoice->update($this->only('favorite'));
+    }
 }

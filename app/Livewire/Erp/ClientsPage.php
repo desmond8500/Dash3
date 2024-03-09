@@ -45,6 +45,7 @@ class ClientsPage extends Component
     }
 
     public $selected;
+
     function edit($client_id)
     {
         $this->selected = Client::find($client_id);;
@@ -77,12 +78,6 @@ class ClientsPage extends Component
 
     function toggleFavorite()
     {
-        $client = Client::find($this->selected->id);
-        if ($client->favorite) {
-            $client->favorite = 0;
-        } else {
-            $client->favorite = 1;
-        }
-        $client->save();
+        $this->clientForm->favorite();
     }
 }

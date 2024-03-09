@@ -44,4 +44,14 @@ class projetForm extends Form
     function delete() {
 
     }
+
+    function favorite()
+    {
+        if ($this->favorite) {
+            $this->favorite = 0;
+        } else {
+            $this->favorite = 1;
+        }
+        $this->projet->update($this->only('favorite'));
+    }
 }

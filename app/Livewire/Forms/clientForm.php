@@ -78,4 +78,13 @@ class clientForm extends Form
         $client = Client::find($id);
         $client->delete();
     }
+
+    function favorite(){
+        if ($this->favorite) {
+            $this->favorite = 0;
+        } else {
+            $this->favorite = 1;
+        }
+        $this->client->update($this->only('favorite'));
+    }
 }

@@ -25,6 +25,7 @@ class Tasklist extends Component
     public $building_id;
     public $stage_id;
     public $room_id;
+    public $task;
 
     public function mount($client_id=null, $projet_id = null, $building_id = null, $stage_id = null, $room_id = null){
 
@@ -103,6 +104,12 @@ class Tasklist extends Component
     function edit($task_id){
         $this->form->set($task_id);
         $this->dispatch('open-editTaskModal');
+    }
+
+    function show($task_id){
+        $this->form->set($task_id);
+        $this->task = Task::find($task_id);
+        $this->dispatch('open-taskDetail');
     }
 
     function update(){

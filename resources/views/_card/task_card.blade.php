@@ -46,6 +46,9 @@
         </div>
         <div class="col-auto text-end">
             <div class="mb-1">
+                <button class="btn btn-outline-primary btn-icon" wire:click="show('{{ $task->id }}')">
+                    <i class="ti ti-eye"></i>
+                </button>
                 <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $task->id }}')">
                     <i class="ti ti-edit"></i>
                 </button>

@@ -26,6 +26,10 @@
             @include('_card.client_card')
 
         </div>
+        <div class="col-md-4">
+            @include('_form.task_detail')
+
+        </div>
     </div>
 
 </div>

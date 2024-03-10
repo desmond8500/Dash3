@@ -52,6 +52,12 @@
         <script> window.addEventListener('close-editTaskModal', event => { $('#editTaskModal').modal('hide'); }) </script>
     @endcomponent
 
+    @component('components.modal.link-modal', ["id"=>'taskDetail', 'title' => 'Editer une tache'])
+        @include('_form.task_detail')
+        <script> window.addEventListener('open-taskDetail', event => { $('#taskDetail').modal('show'); }) </script>
+        <script> window.addEventListener('close-taskDetail', event => { $('#taskDetail').modal('hide'); }) </script>
+    @endcomponent
+
 
 
 

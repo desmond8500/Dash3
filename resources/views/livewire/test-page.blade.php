@@ -1,5 +1,5 @@
-<div>
-    <style>
+<div class="row">
+    {{-- <style>
         .tb_container{
             display: flex;
             flex-wrap: wrap;
@@ -28,7 +28,7 @@
 
         </div>
         <div class="col-md-4">
-            {{-- @include('_form.task_detail') --}}
+            @include('_form.task_detail')
 
         </div>
         <div class="col-md-4 mt-3">
@@ -67,7 +67,15 @@
         </div>
     </div>
 
-    <button class="btn btn-primary" wire:click='store'>store</button>
+    <button class="btn btn-primary" wire:click='store'>store</button> --}}
+    @php
+        $list = (object) array(
+            (object) array('name'=> 'test', 'link'=>'test')
+        );
+    @endphp
 
+    <div class="col-4 mt-3">
+        <x-dropdown :list="$list"></x-dropdown>
 
+    </div>
 </div>

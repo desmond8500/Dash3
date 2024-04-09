@@ -39,4 +39,21 @@ class RoomPage extends Component
     {
         return view('livewire.erp.room-page');
     }
+
+    // Room
+    public RoomForm $room_form;
+
+    function edit($id){
+        $this->room_form->set($id);
+        $this->dispatch('open-editRoom');
+    }
+
+    function update(){
+        $this->room_form->update();
+        $this->dispatch('close-editRoom');
+    }
+
+    function delete(){
+        $this->room_form->delete();
+    }
 }

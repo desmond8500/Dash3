@@ -3,13 +3,27 @@
 
     @endcomponent
 
-    <div class="row">
+    <div class="row g-2">
         <div class="col-md-7">
             <div class="card mb-2">
                 <div class="card-header">
-                    <div class="card-title">Articles</div>
+                    <div class="card-title">{{ $room->name }}</div>
                     <div class="card-actions">
+                        <button class="btn btn-primary btn-icon" wire:click="edit('{{ $room->id }}')">
+                            <i class="ti ti-edit"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
+
+            <div class="card mb-2">
+                <div class="card-header">
+                    <div class="card-title">Equipements</div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" disabled>
+                            <i class="ti ti-plus"></i> Equipment
+                        </button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -25,4 +39,16 @@
             @livewire('erp.tasklist', ['room' => $room->id], key($room->id))
         </div>
     </div>
+
+    @component('components.modal', ["id"=>'editRoom', 'title' => 'Editer un local'])
+        <form class="row" wire:submit="update">
+            @include('_form.room_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editRoom', event => { $('#editRoom').modal('show'); }) </script>
+        <script> window.addEventListener('close-editRoom', event => { $('#editRoom').modal('hide'); }) </script>
+    @endcomponent
 </div>

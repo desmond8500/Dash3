@@ -1,8 +1,8 @@
 <div>
     @component('components.layouts.page-header', ['title'=> $stage->building->name.": ".$stage->name , 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
-            @livewire('form.room-add', ['stage_id' => $stage->id], key($stage->id))
-            @livewire('form.task-add', ['stage_id' => $stage->id], key($stage->id))
+            @livewire('form.room-add', ['stage_id' => $stage->id])
+            @livewire('form.task-add', ['stage_id' => $stage->id])
         </div>
     @endcomponent
     <div class="row g-2">
@@ -14,8 +14,8 @@
                         <div class="fw-bold">Niveau : {{ $stage->name }}</div>
                     </div>
                     <div class="card-actions">
-                        <button class="btn btn-primary" >
-                            <i class="ti t-edit"></i>
+                        <button class="btn btn-primary btn-icon" wire:click="edit_stage('{{ $stage->id }}')">
+                            <i class="ti ti-edit"></i>
                         </button>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
 
         <div class="col-md-7">
             <div class="row g-2">
-                @foreach ($stage->rooms as $room)
+                @foreach ($rooms as $room)
                     <div class="col-md-4">
                         <div class="card p-2">
                             <div class="row">
@@ -58,4 +58,20 @@
         </div>
 
     </div>
+
+    @component('components.modal', ["id"=>'editStage', 'title' => 'Editer un niveau'])
+        <form class="row" wire:submit="update_stage">
+            @include('_form.stage_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script>
+            window.addEventListener('open-editStage', event => { $('#editStage').modal('show'); })
+        </script>
+        <script>
+            window.addEventListener('close-editStage', event => { $('#editStage').modal('hide'); })
+        </script>
+    @endcomponent
 </div>

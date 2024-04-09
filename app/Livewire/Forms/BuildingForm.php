@@ -31,7 +31,10 @@ class BuildingForm extends Form
     function store(){
         $this->validate();
 
-        Building::create($this->all());
+        $building = Building::create($this->all());
+        $building->name = ucfirst($building->name);
+        $building->description = ucfirst($building->description);
+        $building->save();
     }
 
     function update()
@@ -39,6 +42,9 @@ class BuildingForm extends Form
         $this->validate();
 
         $this->building->update($this->all());
+        $this->building->name = ucfirst($this->building->name);
+        $this->building->description = ucfirst($this->building->description);
+        $this->building->save();
     }
 
     function delete()

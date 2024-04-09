@@ -10,6 +10,7 @@ class RoomAdd extends Component
 {
     public RoomForm $form;
     public $count;
+    public $tab = false;
 
     function mount($stage_id)
     {
@@ -23,11 +24,13 @@ class RoomAdd extends Component
         return view('livewire.form.room-add');
     }
 
+    function select(){
+        $this->tab = ($this->tab) ? false : true ;
+    }
+
     function store(){
         $this->form->store();
         $this->dispatch('close-addRoom');
-
-        // $this->dispatch('get-rooms');
-        // $this->dispatch('get-rooms');
+        $this->dispatch('get-rooms');
     }
 }

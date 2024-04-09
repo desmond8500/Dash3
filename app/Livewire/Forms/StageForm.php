@@ -18,13 +18,6 @@ class StageForm extends Form
     public $order;
     public $description;
 
-    function store()
-    {
-        $this->validate();
-
-        Stage::create($this->all());
-    }
-
     function set($stage_id){
         $this->stage = Stage::find($stage_id);
 
@@ -34,10 +27,20 @@ class StageForm extends Form
         $this->description = $this->stage->description;
     }
 
+    function store()
+    {
+        $this->validate();
+        $stage = Stage::create($this->all());
+        $stage->name = ucfirst($stage->name);
+        $stage->save();
+    }
+
     function update(){
         $this->validate();
-
         $this->stage->update($this->all());
+
+        $this->stage->name = ucfirst($this->stage->name);
+        $this->stage->save();
     }
 
     function delete(){

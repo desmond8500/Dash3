@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\StageForm;
+use App\Models\Room;
 use App\Models\Stage;
 use App\Models\Task;
 use Livewire\Attributes\On;
@@ -20,7 +21,7 @@ class StagePage extends Component
     public $breadcrumbs;
 
     public $stage;
-    public StageForm $form;
+    public StageForm $stage_form;
 
     function mount($stage_id){
         $stage = Stage::find($stage_id);
@@ -35,16 +36,44 @@ class StagePage extends Component
         );
     }
 
+    #[On('get-rooms')]
     public function render()
     {
         return view('livewire.erp.stage-page',[
             'tasks' => $this->getTasks(),
+            'rooms' => $this->getRooms(),
         ]);
     }
 
+    // Rooms
+    function getRooms(){
+        return Room::where('stage_id', $this->stage->id)->get();
+    }
+
+    // Task
     #[On('get-tasks')]
     function getTasks(){
         return Task::where('stage_id', $this->stage->id)->get();
+    }
+
+    // Stages
+    function edit_stage($stage_id)
+    {
+        $this->stage_form->set($stage_id);
+        $this->dispatch('open-editStage');
+    }
+    function update_stage()
+    {
+        $this->stage_form->update();
+        $this->stage = Stage::find($this->stage->id);
+        $this->dispatch('get-stages');
+    }
+    function delete_stage($id)
+    {
+        $stage = Stage::find($id);
+        $stage->delete();
+        $this->reset('selected_stage');
+        $this->dispatch('get-stages');
     }
 
 

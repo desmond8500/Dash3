@@ -23,15 +23,20 @@ class RoomForm extends Form
     {
         $this->validate();
 
-        Room::create($this->all());
+        $room = Room::create($this->all());
+
+        $room->name = ucfirst($room->name);
+        $room->description = ucfirst($room->description);
+        $room->save();
     }
 
-    function set($stage_id){
-        $stage = Stage::find($stage_id);
+    function set($room_id){
+        $this->room = Room::find($room_id);
 
-        $this->name = $stage->name;
-        $this->order = $stage->order;
-        $this->description = $stage->description;
+        $this->stage_id = $this->room->stage_id;
+        $this->name = $this->room->name;
+        $this->order = $this->room->order;
+        $this->description = $this->room->description;
     }
 
     function update()
@@ -39,6 +44,10 @@ class RoomForm extends Form
         $this->validate();
 
         $this->room->update($this->all());
+
+        $this->room->name = ucfirst($this->room->name);
+        $this->room->description = ucfirst($this->room->description);
+        $this->room->save();
     }
 
     function delete()

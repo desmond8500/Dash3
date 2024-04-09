@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\BuildingForm;
 use App\Models\Building;
 use App\Models\Journal;
 use App\Models\Projet;
@@ -64,6 +65,20 @@ class ProjetPage extends Component
     #[On('get-news')]
     function get_news() {
         return Journal::where('projet_id', $this->projet_id)->get();
+    }
+
+    // Building management
+    public BuildingForm $building_form;
+
+    function edit_building($id)
+    {
+        $this->building_form->set($id);
+        $this->dispatch('open-editBuilding');
+    }
+    function store_building()
+    {
+        $this->building_form->update();
+        $this->dispatch('close-editBuilding');
     }
 
 

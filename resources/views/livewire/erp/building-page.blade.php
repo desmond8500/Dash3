@@ -1,7 +1,9 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Gestion de batiment', 'breadcrumbs'=>$breadcrumbs])
-        @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
-
+        <div class="btn-list">
+            @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
+            <a href="{{ route('avancements',['building_id'=>$building->id]) }}" class="btn btn-primary" >Avancements</a>
+        </div>
     @endcomponent
 
     <div class="row g-2">
@@ -44,6 +46,7 @@
                 </div>
 
                 <div class="row g-2">
+
                     @foreach ($selected_stage->rooms as $room)
                         <div class="col-md-4">
                             <div class="card p-2">

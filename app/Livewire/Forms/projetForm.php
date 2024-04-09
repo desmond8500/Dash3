@@ -34,11 +34,17 @@ class projetForm extends Form
 
     function store(){
         $this->validate();
-        Projet::create($this->all());
+        $projet = Projet::create($this->all());
+        $projet->name = ucfirst($projet->name);
+        $projet->description = ucfirst($projet->description);
+        $projet->save();
     }
 
     function update($id) {
         $this->projet->update($this->all());
+        $this->projet->name = ucfirst($this->projet->name);
+        $this->projet->description = ucfirst($this->projet->description);
+        $this->projet->save();
     }
 
     function delete() {

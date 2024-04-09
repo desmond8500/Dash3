@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Achat;
+use App\Models\Building;
 use App\Models\Commande;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -31,6 +32,18 @@ class PDFController extends Controller
             'carbon' => $carbon,
         ];
         $pdf = Pdf::loadView('_pdf.commande', $data);
+        return $pdf->stream();
+    }
+    public static function avancement_pdf($building_id){
+        $carbon = new Carbon();
+        $building = Building::find($building_id);
+
+        $data = [
+            'title' => 'Avancements',
+            // 'avancements' => $building->avancements,
+            'carbon' => $carbon,
+        ];
+        $pdf = Pdf::loadView('_pdf.avancements', $data);
         return $pdf->stream();
     }
 }

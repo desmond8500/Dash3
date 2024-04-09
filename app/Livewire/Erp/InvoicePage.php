@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\InvoiceForm;
+use App\Livewire\Forms\InvoiceSectionForm;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
@@ -45,9 +46,25 @@ class InvoicePage extends Component
         ]);
     }
 
+    // Section
+    public InvoiceSectionForm $section_form;
+    public $section_info;
+
     #[On('invoice-section-reload') ]
     function getSections() {
         return InvoiceSection::where('invoice_id', $this->devis->id)->get();
+    }
+
+    function edit_section($section_id){
+        $this->section_form->set($section_id);
+    }
+
+    function update_section(){
+        $this->section_form->update();
+    }
+    function delete_section($id)
+    {
+        $this->section_info = $this->section_form->delete($id);
     }
 
     // Row

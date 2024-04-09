@@ -11,10 +11,12 @@
             <div class="card mb-2">
                 <div class="card-header">
                     <div class="card-title">
-                        <div class="fw-bold">Local</div>
+                        <div class="fw-bold">Niveau : {{ $stage->name }}</div>
                     </div>
                     <div class="card-actions">
-                        <div>{{ $stage->name }}</div>
+                        <button class="btn btn-primary" >
+                            <i class="ti t-edit"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="card-body">

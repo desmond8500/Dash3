@@ -3,6 +3,9 @@
         <div class="btn-list">
             @livewire('form.task-add', ['devis_id' => $devis->id])
             @livewire('form.article-add')
+            <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addSection')">
+                <i class="ti ti-plus"></i> Section
+            </button>
 
             <div class="col-auto md-3">
                 @if ($devis->favorite)
@@ -76,16 +79,20 @@
 
                         @foreach ($sections as $section)
                             <tr>
-                                <th scope="col" class="bg-primary-lt" colspan="2">{{ $section->section }}</th>
+                                <th scope="col" class="bg-primary-lt" colspan="2">
+                                    {{ $section->section }}
+
+                                    @if ($section_info)
+                                        <span class="danger">{{ $section_info }}</span>
+                                    @endif
+                                </th>
                                 <th scope="col" class="bg-primary-lt " colspan="6">
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addSection')">
-                                            <i class="ti ti-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-icon mx-1" wire:click="$dispatch('open-addSection')">
+
+                                        <button class="btn btn-danger btn-icon mx-1" wire:click="delete_section('{{ $section->id }}')">
                                             <i class="ti ti-trash"></i>
                                         </button>
-                                        @livewire('form.invoice-row-add', ['id' => $section->id])
+
                                     </div>
                                 </th>
                             </tr>
@@ -128,9 +135,7 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-auto">
-                            <button class="btn btn-primary" >
-                                <i class="ti ti-plus"></i> Article
-                            </button>
+                            @livewire('form.invoice-row-add', ['id' => $section->id])
                         </div>
                         <div class="col"></div>
                     </div>

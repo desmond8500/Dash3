@@ -24,11 +24,21 @@ Cette structure permettra de faire le suivi des travaux.
 ```mermaid
 classDiagram
 
+Projet <-- Building
+ Building <--  Building_System
+ Building <--  Stage
+ Stage <--  Room
+ Room <--  Building_item
+ Article <--  Building_item
+ Building_System <--  Building_item
+
 class Building {
     int projet_id
     string name
     string order
     text description
+
+    generer_quantitatif()
 }
 
 class Building_System {
@@ -39,8 +49,6 @@ class Building_System {
 }
 
 class Building_item {
-    int building_id
-    int stage_id
     int room_id
     int article_id
     int system_id
@@ -68,7 +76,18 @@ class Room {
     text description
 }
 
+class Quantitatif {
+    int building_id
+    string name
+    text description
+}
 
+class QuantitatifRow {
+    int quanitatif_id
+    int article_id
+    string name
+    text description
+}
 
 
 ```

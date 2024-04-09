@@ -21,9 +21,15 @@ class Building extends Model
     {
         return $this->hasMany(Stage::class);
     }
+
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function avancements(): HasMany
+    {
+        return $this->hasMany(Avancement::class);
     }
 
     public function projet(): BelongsTo

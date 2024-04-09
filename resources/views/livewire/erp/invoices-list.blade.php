@@ -18,7 +18,7 @@
     </div>
 
     @forelse ($invoices as $invoice)
-        <a href="{{ route('invoice',['invoice_id'=>1]) }}" class="col-md-3 text-dark">
+        <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="col-md-3 text-dark">
             <div class="card p-2 border-secondary">
                 <div class="row">
                     <div class="col">

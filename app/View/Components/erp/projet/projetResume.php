@@ -17,7 +17,7 @@ class projetResume extends Component
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Get the view / contents that represent the component.T
      */
     public function render(): View|Closure|string
     {

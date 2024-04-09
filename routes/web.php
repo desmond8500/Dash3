@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PDFController;
+use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
@@ -56,6 +57,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/contacts', ContactsPage::class)->name('contacts');
     // Taches
     Route::get('/tasks', TasksPage::class)->name('tasks');
+    // Avancements
+    Route::get('/avancements/{building_id}', AvancementsPage::class)->name('avancements');
+    Route::get('/avancements_pdf/{avancement_id}', function ($avancement_id) {
+        return PDFController::avancement_pdf($avancement_id);
+    })->name('avancements_pdf');
 });
 
 // Stock

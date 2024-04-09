@@ -64,7 +64,9 @@
                                 <div class="card-header">
                                     <h3 class="card-title"><a href="{{ route('building', ['building_id'=> $building->id]) }}">{{ $building->name }}</a> </h3>
                                     <div class="card-actions">
-                                        {{-- @livewire('form.stage-add', ['building_id' => $building->id, key($building->id)]) --}}
+                                        <button class="btn btn-primary btn-icon" wire:click="edit_building('{{ $building->id }}')">
+                                            <i class="ti ti-edit"></i>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="p-2">
@@ -88,4 +90,17 @@
             </div>
         </div>
     </div>
+
+    @component('components.modal', ["id"=>'editBuilding', 'title' => 'Titre'])
+        <form class="row" wire:submit="store_building">
+            @include('_form.building_form')
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editBuilding', event => { $('#editBuilding').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBuilding', event => { $('#editBuilding').modal('hide'); }) </script>
+    @endcomponent
 </div>

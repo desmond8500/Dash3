@@ -21,13 +21,5 @@ class InvoiceSection extends Model
         return $this->hasMany(InvoiceRow::class, 'invoice_section_id', 'id');
     }
 
-    /**
-     * Get all of the comments for the InvoiceSection
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class, 'foreign_key', 'local_key');
-    }
+
 }

@@ -82,7 +82,8 @@ class InvoicePage extends Component
     }
     function delete_section($id)
     {
-        $this->section_info = $this->section_form->delete($id);
+        $this->message= $this->section_form->delete($id);
+        $this->dispatch('open-infoModal');
     }
 
     // Row
@@ -125,5 +126,15 @@ class InvoicePage extends Component
             $this->devis->favorite = 1;
         }
         $this->devis->save();
+    }
+
+    public $message;
+    function info($message){
+        $this->message = $message;
+        $this->dispatch('open-infoModal');
+    }
+
+    function close(){
+        $this->dispatch('close-infoModal');
     }
 }

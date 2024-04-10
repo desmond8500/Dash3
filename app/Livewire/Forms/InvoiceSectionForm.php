@@ -36,7 +36,7 @@ class InvoiceSectionForm extends Form
 
     function delete($id){
         $section = InvoiceSection::find($id);
-        if ($section->rows) {
+        if ($section->rows->count()) {
             return 'La section a des champs, elle ne peut etre supprimée';
         }else{
             $section->delete();

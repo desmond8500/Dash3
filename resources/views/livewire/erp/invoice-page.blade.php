@@ -79,23 +79,15 @@
 
                         @foreach ($sections as $section)
                             <tr>
-                                <th scope="col" class="bg-primary-lt" colspan="2">
-                                    {{ $section->section }}
-
-                                    @if ($section_info)
-                                        <span class="danger">{{ $section_info }}</span>
-                                    @endif
-                                </th>
+                                <th scope="col" class="bg-primary-lt" colspan="2"> {{ $section->section }} </th>
                                 <th scope="col" class="bg-primary-lt " colspan="6">
                                     <div class="d-flex justify-content-end">
-
                                         <button class="btn btn-primary btn-icon mx-1" wire:click="edit_section('{{ $section->id }}')">
                                             <i class="ti ti-edit"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-icon mx-1" wire:click="delete_section('{{ $section->id }}')">
+                                        <button class="btn btn-danger btn-icon mx-1" wire:click="delete_section('{{ $section->id }}')" wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
                                             <i class="ti ti-trash"></i>
                                         </button>
-
                                     </div>
                                 </th>
                             </tr>
@@ -207,5 +199,13 @@
 
     <script> window.addEventListener('open-editInvoice', event => { $('#editInvoice').modal('show'); }) </script>
     <script> window.addEventListener('close-editInvoice', event => { $('#editInvoice').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal.info-modal', ["id"=>'infoModal', 'title'=> 'Titre', 'type'=>'success', 'action'=> 'close'])
+
+        {!! nl2br($message ?? 'Description') !!}
+
+        <script> window.addEventListener('open-infoModal', event => { $('#infoModal').modal('show'); }) </script>
+        <script> window.addEventListener('close-infoModal', event => { $('#infoModal').modal('hide'); }) </script>
     @endcomponent
 </div>

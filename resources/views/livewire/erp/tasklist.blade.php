@@ -58,7 +58,4 @@
         <script> window.addEventListener('close-taskDetail', event => { $('#taskDetail').modal('hide'); }) </script>
     @endcomponent
 
-
-
-
 </div>

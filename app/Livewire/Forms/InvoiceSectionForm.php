@@ -17,6 +17,7 @@ class InvoiceSectionForm extends Form
     public $ordre;
 
     function store(){
+        $this->validate();
         InvoiceSection::create($this->all());
     }
 
@@ -26,10 +27,10 @@ class InvoiceSectionForm extends Form
         $this->invoice_id = $this->invoice_section->invoice_id;
         $this->section = $this->invoice_section->section;
         $this->ordre = $this->invoice_section->ordre;
-
     }
 
     function update(){
+        $this->validate();
         $this->invoice_section->update($this->all());
     }
 

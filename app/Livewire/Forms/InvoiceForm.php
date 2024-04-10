@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Http\Controllers\ErpController;
 use App\Models\Invoice;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
@@ -15,16 +16,20 @@ class InvoiceForm extends Form
     public $projet_id;
     public $client_name;
     public $projet_name;
+    #[Validate('required')]
     public $reference;
+    #[Validate('required')]
     public $description;
     public $modalite;
     public $note;
+    #[Validate('required')]
     public $statut;
     public $tax;
     public $remise;
     public $favorite = 0;
 
     function store(){
+        // $this->validate();
         Invoice::create($this->all());
     }
 

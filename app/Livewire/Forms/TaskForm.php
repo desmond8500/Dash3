@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Room;
 use App\Models\Task;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -46,7 +47,20 @@ class TaskForm extends Form
 
     function store(){
         $this->validate();
+        // if(!$this->stage_id){
+        //     if ($this->room_id) {
+        //         $room = Room::find($this->room_id);
+        //         $this->stage_id = $room->stage_id;
+        //     }
+        // }
+        // if(!$this->building_id){
+        //     if ($this->room_id) {
+        //         $room = Room::find($this->room_id);
+        //         $this->stage_id = $room->stage_id;
+        //     }
+        // }
         Task::create( $this->all() );
+
     }
 
     function update(){

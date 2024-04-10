@@ -3,7 +3,7 @@
         <div class="btn-list">
             @livewire('form.task-add', ['devis_id' => $devis->id])
             @livewire('form.article-add')
-            <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addSection')">
+            <button class="btn btn-primary" wire:click="$dispatch('open-addSection')">
                 <i class="ti ti-plus"></i> Section
             </button>
 
@@ -89,6 +89,9 @@
                                 <th scope="col" class="bg-primary-lt " colspan="6">
                                     <div class="d-flex justify-content-end">
 
+                                        <button class="btn btn-primary btn-icon mx-1" wire:click="edit_section('{{ $section->id }}')">
+                                            <i class="ti ti-edit"></i>
+                                        </button>
                                         <button class="btn btn-danger btn-icon mx-1" wire:click="delete_section('{{ $section->id }}')">
                                             <i class="ti ti-trash"></i>
                                         </button>
@@ -124,7 +127,8 @@
                         <tr>
                             <th scope="col" class="bg-primary-lt " colspan="8">
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn btn-primary" wire:click="$dispatch('open-addSection')">
+                                    <button class="btn btn-primary" wire:click="addSection()">
+                                    {{-- <button class="btn btn-primary" wire:click="$dispatch('open-addSection')"> --}}
                                         <i class="ti ti-plus"></i> Ajouter une section
                                     </button>
                                 </div>
@@ -135,7 +139,9 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-auto">
-                            @livewire('form.invoice-row-add', ['id' => $section->id])
+                            @isset($section_id)
+                                @livewire('form.invoice-row-add', ['id' => $section->id])
+                            @endisset
                         </div>
                         <div class="col"></div>
                     </div>
@@ -145,9 +151,9 @@
         </div>
         <div class="col-md-4">
 
-            @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id], key($devis->id))
+            @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
 
-            @livewire('erp.invoice-spent', ['invoice_id' => $devis->id], key($devis->id))
+            @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
 
 
             <div class="card mb-1">
@@ -180,6 +186,18 @@
         </form>
         <script> window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); }) </script>
         <script> window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); }) </script>
+    @endcomponent
+    @component('components.modal', ["id"=>'editSection', 'title'=>'Editer une section'])
+        <form class="row" wire:submit="update_section">
+            @include('_form.invoice_section_form')
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editSection', event => { $('#editSection').modal('show'); }) </script>
+        <script> window.addEventListener('close-editSection', event => { $('#editSection').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editInvoice', 'title'=>'Editer un devis'])

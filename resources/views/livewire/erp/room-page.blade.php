@@ -1,6 +1,6 @@
 <div>
     @component('components.layouts.page-header', ['title'=> $room->stage->building->name." : ".$room->stage->name." / ".$room->name , 'breadcrumbs'=>$breadcrumbs])
-
+        @livewire('form.task-add', ['room_id' => $room->id])
     @endcomponent
 
     <div class="row g-2">
@@ -36,7 +36,7 @@
 
         </div>
         <div class="col-md-5">
-            @livewire('erp.tasklist', ['room' => $room->id], key($room->id))
+            @livewire('erp.tasklist', ['room' => $room->id])
         </div>
     </div>
 

@@ -7,7 +7,7 @@
 
     <div class="col-md-4 mb-3">
         <label class="form-label">Statut</label>
-        <select wire:model.linvoice_form.ive="statut" class="form-control">
+        <select wire:model="invoice_form.statut" class="form-control">
             <option value="Proforma">Proforma</option>
             <option value="Nouveau">Nouveau</option>
             <option value="En Cours">En Cours</option>

@@ -30,6 +30,8 @@ class Task extends Model
         'favoris',
     ];
 
+    protected $with = ['room'];
+
 
     public function scopeActive($query, $search)
     {

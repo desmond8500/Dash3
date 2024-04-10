@@ -8,15 +8,15 @@ use Livewire\Component;
 
 class RoomAdd extends Component
 {
-    public RoomForm $form;
+    public RoomForm $room_form;
     public $count;
     public $tab = false;
 
     function mount($stage_id)
     {
-        $this->form->stage_id = $stage_id;
+        $this->room_form->stage_id = $stage_id;
         $stages = Room::where('stage_id', $stage_id)->get();
-        $this->form->order = $stages->count() + 1;
+        $this->room_form->order = $stages->count() + 1;
     }
 
     public function render()
@@ -29,7 +29,7 @@ class RoomAdd extends Component
     }
 
     function store(){
-        $this->form->store();
+        $this->room_form->store();
         $this->dispatch('close-addRoom');
         $this->dispatch('get-rooms');
     }

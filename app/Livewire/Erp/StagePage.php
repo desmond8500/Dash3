@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\RoomForm;
 use App\Livewire\Forms\StageForm;
 use App\Models\Room;
 use App\Models\Stage;
@@ -74,6 +75,26 @@ class StagePage extends Component
         $stage->delete();
         $this->reset('selected_stage');
         $this->dispatch('get-stages');
+    }
+
+    // Room
+    public RoomForm $room_form;
+
+    function edit($id)
+    {
+        $this->room_form->set($id);
+        $this->dispatch('open-editRoom');
+    }
+
+    function update()
+    {
+        $this->room_form->update();
+        $this->dispatch('close-editRoom');
+    }
+
+    function delete()
+    {
+        $this->room_form->delete();
     }
 
 

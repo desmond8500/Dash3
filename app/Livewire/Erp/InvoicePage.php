@@ -47,6 +47,9 @@ class InvoicePage extends Component
     }
 
     // Section
+    // Section
+    public $section, $ordre;
+
     public InvoiceSectionForm $section_form;
     public $section_info;
 
@@ -55,12 +58,27 @@ class InvoicePage extends Component
         return InvoiceSection::where('invoice_id', $this->devis->id)->get();
     }
 
+    function addSection(){
+        $this->dispatch('open-addSection');
+        $this->section_form->ordre = InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1;
+    }
+
+    function sectionStore()
+    {
+        $this->section_form->invoice_id = $this->devis->id;
+        $this->section_form->store();
+        $this->ordre++;
+        $this->dispatch('close-addSection');
+    }
+
     function edit_section($section_id){
         $this->section_form->set($section_id);
+        $this->dispatch('open-editSection');
     }
 
     function update_section(){
         $this->section_form->update();
+        $this->dispatch('close-editSection');
     }
     function delete_section($id)
     {
@@ -84,18 +102,6 @@ class InvoicePage extends Component
         $row->delete();
     }
 
-    // Section
-    public $section, $ordre;
-
-    function sectionStore(){
-        InvoiceSection::create([
-            'invoice_id' => $this->devis->id,
-            'section'    => $this->section,
-            'ordre'      => $this->ordre,
-        ]);
-        $this->ordre++;
-        $this->dispatch('close-addSection');
-    }
 
     public InvoiceForm $invoice_form;
 

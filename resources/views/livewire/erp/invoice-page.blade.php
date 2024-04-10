@@ -82,6 +82,9 @@
                                 <th scope="col" class="bg-primary-lt" colspan="2"> {{ $section->section }} </th>
                                 <th scope="col" class="bg-primary-lt " colspan="6">
                                     <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary mx-1" wire:click="addRow('{{ $section->id }}')">
+                                            <i class="ti ti-plus"></i> Article
+                                        </button>
                                         <button class="btn btn-primary btn-icon mx-1" wire:click="edit_section('{{ $section->id }}')">
                                             <i class="ti ti-edit"></i>
                                         </button>
@@ -166,9 +169,58 @@
         </div>
     </div>
 
+    {{-- Invoice --}}
+    @component('components.modal', ["id"=>'editInvoice', 'title'=>'Editer un devis'])
+        <form class="row" wire:submit="update_invoice">
+            @include('_form.invoice_form')
+        </form>
 
+        <script>
+            window.addEventListener('open-editInvoice', event => { $('#editInvoice').modal('show'); })
+        </script>
+        <script>
+            window.addEventListener('close-editInvoice', event => { $('#editInvoice').modal('hide'); })
+        </script>
+    @endcomponent
+
+    {{-- Section --}}
     @component('components.modal', ["id"=>'addSection', 'title'=>'Ajouter une section'])
-        <form class="row" wire:submit="sectionStore">
+        @slot('actions')
+            @if ($section_tab)
+                <button class="btn btn-primary" wire:click="$toggle('section_tab')"> Formulaire </button>
+            @else
+                <button class="btn btn-primary" wire:click="$toggle('section_tab')"> Générer </button>
+            @endif
+        @endslot
+
+        @if ($section_tab)
+            <div> <b>Systèmes :</b> {{ $systemes->count() }} </div>
+
+            @foreach ($systemes as $systeme)
+                <button class="btn btn-primary" wire:click="sectionGenerate({{ $systeme->name }})">{{ $systeme->name }}</button>
+            @endforeach
+
+        @else
+            <form class="row" wire:submit="sectionStore">
+                @include('_form.invoice_section_form')
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+            <script>
+                window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); })
+            </script>
+            <script>
+                window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); })
+            </script>
+
+        @endif
+
+
+
+        {{-- <form class="row" wire:submit="sectionStore">
             @include('_form.invoice_section_form')
 
             <div class="modal-footer">
@@ -177,8 +229,9 @@
             </div>
         </form>
         <script> window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); }) </script>
-        <script> window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); }) </script>
+        <script> window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); }) </script> --}}
     @endcomponent
+
     @component('components.modal', ["id"=>'editSection', 'title'=>'Editer une section'])
         <form class="row" wire:submit="update_section">
             @include('_form.invoice_section_form')
@@ -192,15 +245,22 @@
         <script> window.addEventListener('close-editSection', event => { $('#editSection').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editInvoice', 'title'=>'Editer un devis'])
-    <form class="row" wire:submit="update_invoice">
-        @include('_form.invoice_form')
-    </form>
+    {{-- Rows --}}
+    @component('components.modal', ["id"=>'addRow', 'title'=>'Ajouter un article'])
+        <form class="row" wire:submit="update_section">
+            @include('_form.invoice_section_form')
 
-    <script> window.addEventListener('open-editInvoice', event => { $('#editInvoice').modal('show'); }) </script>
-    <script> window.addEventListener('close-editInvoice', event => { $('#editInvoice').modal('hide'); }) </script>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-addRow', event => { $('#addRow').modal('show'); }) </script>
+        <script> window.addEventListener('close-addRow', event => { $('#addRow').modal('hide'); }) </script>
     @endcomponent
 
+
+    {{-- Informations --}}
     @component('components.modal.info-modal', ["id"=>'infoModal', 'title'=> 'Titre', 'type'=>'success', 'action'=> 'close'])
 
         {!! nl2br($message ?? 'Description') !!}

@@ -13,6 +13,7 @@ class Navbar extends Component
         array('name' => "Stock", "route" => "stock", "icon" => "packages"),
         array('name' => "Finances", "route" => "finances", "icon" => "coins"),
         array('name' => "Test", "route" => "test", "icon" => "hammer"),
+        array('name' => "Systemes", "route" => "systemes", "icon" => "hammer"),
     );
 
     public function render()

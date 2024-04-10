@@ -12,6 +12,7 @@ use App\Livewire\Erp\ProjetPage;
 use App\Livewire\Erp\ProjetsPage;
 use App\Livewire\Erp\RoomPage;
 use App\Livewire\Erp\StagePage;
+use App\Livewire\Erp\SystemesPage;
 use App\Livewire\IndexPage;
 use App\Livewire\JournalPage;
 use App\Livewire\LoginPage;
@@ -119,3 +120,6 @@ Route::get('/finances', FinancesPage::class)->name('finances');
 
 // Test
 Route::get('/test', TestPage::class)->name('test');
+
+// Test
+Route::get('/systemes', SystemesPage::class)->name('systemes');

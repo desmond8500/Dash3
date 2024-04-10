@@ -7,6 +7,7 @@ use App\Livewire\Forms\InvoiceSectionForm;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
+use App\Models\Systeme;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -42,13 +43,13 @@ class InvoicePage extends Component
     public function render()
     {
         return view('livewire.erp.invoice-page',[
-            'sections' => $this->getSections()
+            'sections' => $this->getSections(),
+            'systemes' => Systeme::all(),
         ]);
     }
 
     // Section
-    // Section
-    public $section, $ordre;
+    public $section, $ordre, $section_tab = false;
 
     public InvoiceSectionForm $section_form;
     public $section_info;
@@ -71,6 +72,15 @@ class InvoicePage extends Component
         $this->dispatch('close-addSection');
     }
 
+    function sectionGenerate($name)
+    {
+        $this->section_form->invoice_id = $this->devis->id;
+        $this->section_form->section = $name;
+        $this->section_form->store();
+        $this->ordre++;
+        $this->dispatch('close-addSection');
+    }
+
     function edit_section($section_id){
         $this->section_form->set($section_id);
         $this->dispatch('open-editSection');
@@ -87,6 +97,10 @@ class InvoicePage extends Component
     }
 
     // Row
+    function addRow($id){
+        $row = InvoiceRow::find($id);
+        $row->delete();
+    }
     function EditRow($id){
         $row = InvoiceRow::find($id);
         $row->delete();

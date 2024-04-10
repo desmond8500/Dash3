@@ -74,10 +74,12 @@ class InvoicePage extends Component
 
     function sectionGenerate($name)
     {
-        $this->section_form->invoice_id = $this->devis->id;
-        $this->section_form->section = $name;
-        $this->section_form->store();
-        $this->ordre++;
+        InvoiceSection::create([
+            'invoice_id' => $this->devis->id,
+            'section' => $name,
+            'ordre' => $this->section_form->ordre,
+        ]);
+
         $this->dispatch('close-addSection');
     }
 

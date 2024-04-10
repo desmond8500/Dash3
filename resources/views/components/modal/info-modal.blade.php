@@ -27,11 +27,13 @@
                                 Fermer
                             </a>
                         </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-{{ $type ?? 'success' }} w-100" wire:click="{{ $action }}">
-                                {{ $button ?? 'Valider' }}
-                            </a>
-                        </div>
+                        @isset($action)
+                            <div class="col">
+                                <a href="#" class="btn btn-{{ $type ?? 'success' }} w-100" wire:click="{{ $action }}">
+                                    {{ $button ?? 'Valider' }}
+                                </a>
+                            </div>
+                        @endisset
                     </div>
                 </div>
             </div>

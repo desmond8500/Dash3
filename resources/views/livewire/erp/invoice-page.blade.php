@@ -197,7 +197,7 @@
             <div> <b>Systèmes :</b> {{ $systemes->count() }} </div>
 
             @foreach ($systemes as $systeme)
-                <button class="btn btn-primary" wire:click="sectionGenerate({{ $systeme->name }})">{{ $systeme->name }}</button>
+                <button class="btn btn-primary mb-1" wire:click="sectionGenerate('{{ $systeme->name }}')">{{ $systeme->name }}</button>
             @endforeach
 
         @else
@@ -261,7 +261,7 @@
 
 
     {{-- Informations --}}
-    @component('components.modal.info-modal', ["id"=>'infoModal', 'title'=> 'Titre', 'type'=>'success', 'action'=> 'close'])
+    @component('components.modal.info-modal', ["id"=>'infoModal', 'title'=> 'Information', 'type'=>'success'])
 
         {!! nl2br($message ?? 'Description') !!}
 

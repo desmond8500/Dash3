@@ -20,6 +20,19 @@ class InvoiceSection extends Model
     {
         return $this->hasMany(InvoiceRow::class, 'invoice_section_id', 'id');
     }
+    public function total()
+    {
+        $total = 1;
+        foreach ($this->rows() as  $row) {
+            $total = 3;
+            // $total += $row->quantite*$row->coef*$row->prix;
+            // $total++;
+        }
+
+
+
+        return $total;
+    }
 
 
 }

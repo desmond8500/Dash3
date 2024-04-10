@@ -76,10 +76,16 @@
                                 <th scope="col" style="width: 100px" class="text-center">_</th>
                             </tr>
                         </thead>
-
-                        @foreach ($sections as $section)
+                        @php
+                        $total = 0;
+                        $total_marge = 0;
+                        @endphp
+                        @foreach ($sections as $key => $section)
                             <tr>
-                                <th scope="col" class="bg-primary-lt" colspan="2"> {{ $section->section }} </th>
+                                <th scope="col" class="bg-primary-lt" colspan="2">
+                                    <div>{{ $section->section }}</div>
+                                    <div class="text-danger">{{ $section->total() }}</div>
+                                </th>
                                 <th scope="col" class="bg-primary-lt " colspan="6">
                                     <div class="d-flex justify-content-end">
                                         <button class="btn btn-primary mx-1" wire:click="addRow('{{ $section->id }}')">
@@ -96,7 +102,15 @@
                             </tr>
 
                             <tbody>
+                                @php
+                                    $subtotal = 0;
+                                @endphp
                                 @foreach ($section->rows as $row)
+                                    @php
+                                        $total += $row->quantite*$row->prix;
+                                        $total_marge += $row->quantite*$row->coef*$row->prix;
+                                        $subtotal = $row->quantite*$row->coef*$row->prix;
+                                    @endphp
                                     <tr class="">
                                         <td scope="row">
                                             <div>{{ $row->designation }}</div>
@@ -115,6 +129,10 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                <tr class="fw-bold">
+                                    <td colspan="2">Sous Total</td>
+                                    <td colspan="5" class="text-end"> {{ number_format($subtotal, 0,'.', ' ') }}  F</td>
+                                </tr>
                             </tbody>
 
                             @endforeach
@@ -131,12 +149,13 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-auto">
-                            @isset($section_id)
-                                @livewire('form.invoice-row-add', ['id' => $section->id])
-                            @endisset
+                        <div class="col">
+
                         </div>
-                        <div class="col"></div>
+                        <div class="col-auto">
+                            <div class="fw-bold">TOTAL: {{ number_format($total, 0,'.', ' ') }} F</div>
+                            <div class="fw-bold">TOTAL GENERAL: {{ number_format($total_marge, 0,'.', ' ') }} F</div>
+                        </div>
                     </div>
                 </div>
             </div>

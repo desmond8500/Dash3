@@ -3,10 +3,14 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\InvoiceForm;
+use App\Livewire\Forms\InvoiceRowForm;
 use App\Livewire\Forms\InvoiceSectionForm;
+use App\Models\Article;
+use App\Models\Brand;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
+use App\Models\Provider;
 use App\Models\Systeme;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -45,6 +49,9 @@ class InvoicePage extends Component
         return view('livewire.erp.invoice-page',[
             'sections' => $this->getSections(),
             'systemes' => Systeme::all(),
+            'providers' => Provider::all(),
+            'brands' => Brand::all(),
+            'articles' => Article::paginate(6),
         ]);
     }
 
@@ -99,27 +106,55 @@ class InvoicePage extends Component
     }
 
     // Row
-    function addRow($id){
-        $row = InvoiceRow::find($id);
-        $row->delete();
-    }
-    function EditRow($id){
-        $row = InvoiceRow::find($id);
-        $row->delete();
+    public $row_tab = 1, $row_class = '';
+    public InvoiceRowForm $row_form;
+    function toggle_row($tab){
+        $this->row_tab = $tab;
+        if ($this->row_tab == 1) {
+            $this->row_class = '';
+        } elseif ($this->row_tab == 2) {
+            $this->row_class = 'modal-xl';
+        } else {
+            $this->row_class = 'modal-md';
+        }
+
     }
 
-    function updateRow($id){
-        $row = InvoiceRow::find($id);
-        $row->delete();
+    function addRow($section_id){
+        $this->row_form->invoice_section_id = $section_id;
+        $this->dispatch('open-addRow');
+    }
+    function storeRow(){
+        $this->row_form->store();
+        $this->dispatch('close-addRow');
+    }
+    function designation($designation){
+        $this->row_form->designation = $designation;
+    }
+    function prix($prix){
+        $this->row_form->prix = $prix;
     }
 
+    function generateRow(){
+        $this->row_form->store();
+        $this->dispatch('close-addRow');
+    }
+    function editRow($row_id){
+        $this->row_form->set($row_id);
+        $this->dispatch('open-editRow');
+    }
+
+    function updateRow(){
+        $this->row_form->update();
+        $this->dispatch('close-editRow');
+    }
 
     function deleteRow($id){
         $row = InvoiceRow::find($id);
         $row->delete();
     }
 
-
+    // Invoice
     public InvoiceForm $invoice_form;
 
     function edit($id){
@@ -144,6 +179,7 @@ class InvoicePage extends Component
         $this->devis->save();
     }
 
+    // Message
     public $message;
     function info($message){
         $this->message = $message;

@@ -117,13 +117,11 @@
                                 @endforeach
                             </tbody>
 
-
                             @endforeach
                         <tr>
                             <th scope="col" class="bg-primary-lt " colspan="8">
                                 <div class="d-flex justify-content-end">
                                     <button class="btn btn-primary" wire:click="addSection()">
-                                    {{-- <button class="btn btn-primary" wire:click="$dispatch('open-addSection')"> --}}
                                         <i class="ti ti-plus"></i> Ajouter une section
                                     </button>
                                 </div>
@@ -217,19 +215,6 @@
             </script>
 
         @endif
-
-
-
-        {{-- <form class="row" wire:submit="sectionStore">
-            @include('_form.invoice_section_form')
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
-        </form>
-        <script> window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); }) </script>
-        <script> window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); }) </script> --}}
     @endcomponent
 
     @component('components.modal', ["id"=>'editSection', 'title'=>'Editer une section'])
@@ -246,19 +231,129 @@
     @endcomponent
 
     {{-- Rows --}}
-    @component('components.modal', ["id"=>'addRow', 'title'=>'Ajouter un article'])
-        <form class="row" wire:submit="update_section">
-            @include('_form.invoice_section_form')
+    @component('components.modal', ["id"=>'addRow', 'title'=>'Ajouter un article', 'class'=> $row_class])
+        @slot('actions')
+            <button class="btn btn-primary" wire:click="toggle_row(1)">Formulaire</button>
+            <button class="btn btn-primary" wire:click="toggle_row(2)">Générer</button>
+            <button class="btn btn-primary" wire:click="toggle_row(3)">Forfaits</button>
+        @endslot
 
+        @if ($row_tab==2)
+            <div class="row g-2">
+                @foreach ($articles as $article)
+                    <div class="col-md-4">
+                        @include('_card.articleCard')
+                    </div>
+                @endforeach
+                <div class="col-md-12">
+                    {{ $articles->links() }}
+                </div>
+            </div>
+        @elseif($row_tab==1)
+            <form class="row" wire:submit="storeRow">
+                @include('_form.invoice_row_form')
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+            <script> window.addEventListener('open-addRow', event => { $('#addRow').modal('show'); }) </script>
+            <script> window.addEventListener('close-addRow', event => { $('#addRow').modal('hide'); }) </script>
+        @elseif($row_tab==3)
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <div class="card card-body card-active">
+                        <div class="d-flex justify-content-between">
+                            <div>{{ $row_form->designation }}</div>
+                            <div>{{ $row_form->prix }}</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label>Tarif</label>
+                            <input type="text" class="form-control" wire:model.live="row_form.prix" placeholder="Prix">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label>Coéficient</label>
+                            <input type="text" class="form-control" wire:model="row_form.coef" placeholder="Coef">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label>Quantité</label>
+                            <input type="text" class="form-control" wire:model="row_form.quantite" placeholder="Quantite">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-5">
+                    <div class="btn-group mb-1 w-100" role="group" aria-label="Button group with nested dropdown">
+                        <button type="button" class="btn btn-primary" wire:click="designation('Main d\'oeuvre')">Main d'oeuvre</button>
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" wire:click="prix(30000)">30 000 CFA</a></li>
+                                <li><a class="dropdown-item" wire:click="prix(50000)">50 000 CFA</a></li>
+                                <li><a class="dropdown-item" wire:click="prix(100000)">100 000 CFA</a></li>
+                                <li><a class="dropdown-item" wire:click="prix(200000)">200 000 CFA</a></li>
+                                <li><a class="dropdown-item" wire:click="prix(300000)">300 000 CFA</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="btn-group mb-1 w-100" role="group" aria-label="Button group with nested dropdown">
+                        <button type="button" class="btn btn-primary" wire:click="designation('Accessoires')">Accessoires</button>
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class="dropdown-item" wire:click="prix(20000)">20 000 CFA</a></li>
+                                <li><a class="dropdown-item" wire:click="prix(50000)">50 000 CFA</a></li>
+                                <li><a class="dropdown-item" wire:click="prix(100000)">100 000 CFA</a></li>
+                                <li><a class="dropdown-item" wire:click="prix(150000)">150 000 CFA</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class=" mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article" cols="30"
+                        rows="4" data-bs-toggle="autosize"></textarea>
+                </div>
+
+                <div class="col-md-12" style="display: flex; justify-items-between">
+                    <div class="modal-footer">
+                        <div class="w-100">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-secondary" wire:click="$dispatch('close-editRow')">Fermer</button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-primary" wire:click="generateRow()">Valider</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        @endif
+    @endcomponent
+    @component('components.modal', ["id"=>'editRow', 'title'=>'Editer un article', 'class'=> $row_class])
+        <form class="row" wire:submit="updateRow">
+            @include('_form.invoice_row_form')
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addRow', event => { $('#addRow').modal('show'); }) </script>
-        <script> window.addEventListener('close-addRow', event => { $('#addRow').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editRow', event => { $('#editRow').modal('show'); }) </script>
+        <script> window.addEventListener('close-editRow', event => { $('#editRow').modal('hide'); }) </script>
     @endcomponent
-
 
     {{-- Informations --}}
     @component('components.modal.info-modal', ["id"=>'infoModal', 'title'=> 'Information', 'type'=>'success'])

@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('invoice_rows', function (Blueprint $table) {
             $table->id();
             $table->integer('invoice_section_id')->constrained();
+            $table->integer('article_id')->constrained()->nullable();
             $table->string('designation');
             $table->decimal('coef')->default(1);
             $table->text('reference')->default('_');
             $table->integer('quantite')->default(1);
             $table->decimal('prix')->default(1);
-            $table->integer('priorite')->default(1);
+            $table->integer('priorite_id')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

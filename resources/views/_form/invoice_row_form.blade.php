@@ -1,44 +1,54 @@
 <div class="row">
     <div class="col-md-8 mb-3">
-        <label class="form-label">Désignation</label>
-        <input type="text" class="form-control" wire:model="designation" placeholder="Désignation de l'article">
-        @error('designation') <span class='text-danger'>{{ $message }}</span> @enderror
+        <div class="mb-3">
+            <label class="form-label">Désignation</label>
+            <input type="text" class="form-control" wire:model="row_form.designation" placeholder="Désignation de l'article">
+            @error('row_form.designation') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
+
+        <div class=" mb-3">
+            <label class="form-label">Référence</label>
+            <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article" cols="30"
+                rows="4" data-bs-toggle="autosize"></textarea>
+            @error('row_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
     </div>
     <div class="col-md-4 mb-3">
         <label class="form-label">Quantité</label>
-        <input type="text" class="form-control" wire:model="quantite" placeholder="Quantité">
-        @error('quantite') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
+        <input type="text" class="form-control" wire:model="row_form.quantite" placeholder="Quantité">
+        @error('row_form.quantite') <span class='text-danger'>{{ $message }}</span> @enderror
+    {{-- </div>
 
-    <div class="col-md-4 mb-3">
+    <div class="col-md-4 mb-3"> --}}
         <label class="form-label">Prix</label>
-        <input type="text" class="form-control" wire:model="prix" placeholder="Prix de l'article">
-        @error('prix') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
-    <div class="col-md-4 mb-3">
+        <input type="text" class="form-control" wire:model="row_form.prix" placeholder="Prix de l'article">
+        @error('row_form.prix') <span class='text-danger'>{{ $message }}</span> @enderror
+    {{-- </div>
+    <div class="col-md-4 mb-3"> --}}
         <label class="form-label">Coeficient</label>
-        <input type="text" class="form-control" wire:model="coef" placeholder="Coféficient de marge">
-        @error('coef') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Priorité</label>
-        <select wire:model="priorite" class="form-select">
-            @foreach ($priorites as $key => $priorite)
-            <option value="{{ $key+1 }}">{{ $priorite }}</option>
-            @endforeach
+        <input type="text" class="form-control" wire:model="row_form.coef" placeholder="Coféficient de marge">
+        @error('row_form.coef') <span class='text-danger'>{{ $message }}</span> @enderror
+    {{-- </div>
+    <div class="col-md-4 mb-3"> --}}
+        <label class="form-label">Priorite</label>
+        <select class="form-control" wire:model="row_form.priority_id">
+            <option value="0">Centrale 1</option>
+            <option value="1">Centrale 2</option>
+            <option value="2">Organe 1</option>
+            <option value="3">Organe 2</option>
+            <option value="4">Organe 3</option>
+            <option value="5">Cable</option>
+            <option value="6">Accessoires</option>
+            <option value="7">Forfait</option>
         </select>
-        @error('priorite') <span class='text-danger'>{{ $message }}</span> @enderror
+        @error('row_form.priority_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-12 mb-3">
+    {{-- <div class="col-md-12 mb-3">
         <label class="form-label">Référence</label>
-        <textarea class="form-control" wire:model="reference" placeholder="Référence de l'article" cols="30" rows="4"></textarea>
-        @error('reference') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
+        <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article" cols="30" rows="4"></textarea>
+        @error('row_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div> --}}
 
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        <button type="submit" class="btn btn-primary">Valider</button>
-    </div>
 </div>
 

@@ -118,7 +118,7 @@
 
         <div class="btn-list">
             <a class="btn btn-primary" wire:click="dispatch('open-login')">Connexion</a>
-            <a class="btn btn-light" wire:click="dispatch('open-register')">Inscription</a>
+            <a class="btn btn-secondary" wire:click="dispatch('open-register')">Inscription</a>
         </div>
 
     @endauth

@@ -115,16 +115,14 @@
         </div>
 
     @else
-
         <div class="btn-list">
             <a class="btn btn-primary" wire:click="dispatch('open-login')">Connexion</a>
             <a class="btn btn-secondary" wire:click="dispatch('open-register')">Inscription</a>
         </div>
-
     @endauth
 
-
-
-
+    <div>
+        <a href="/log-viewer">Logs</a>
+    </div>
 
 </div>

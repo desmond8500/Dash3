@@ -6,6 +6,7 @@ use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Client extends Model
 {
@@ -27,8 +28,10 @@ class Client extends Model
     {
         return $this->hasMany(Projet::class);
     }
-    public function tasks(): HasMany
+    public function tasks(): HasManyThrough
     {
-        return $this->hasMany(Task::class);
+        return $this->hasManyThrough(Task::class, Projet::class);
     }
+
+
 }

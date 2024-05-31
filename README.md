@@ -13,3 +13,4 @@
 * [Laravel Markdown](https://spatie.be/docs/laravel-markdown/v1/installation-setup)
 * [Laravel Parsedown](https://github.com/parsedown/laravel)
 * [Laravel Excel](https://docs.laravel-excel.com/3.1/getting-started/installation.html)
+* [Laravel logViewer](https://log-viewer.opcodes.io/)

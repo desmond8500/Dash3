@@ -121,8 +121,9 @@
         </div>
     @endauth
 
-    <div>
-        <a href="/log-viewer">Logs</a>
-    </div>
+    <ul>
+        <li><a href="/log-viewer" target="_blank">Logs Viewer page</a></li>
+        <li><a href="/migrator" target="_blank">Migrator page</a></li>
+    </ul>
 
 </div>

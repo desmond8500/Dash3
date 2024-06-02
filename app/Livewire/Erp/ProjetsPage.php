@@ -53,7 +53,7 @@ class ProjetsPage extends Component
     }
 
     function update() {
-        $this->projetForm->update($this->selected->id);
+        $this->projetForm->update();
         $this->dispatch('close-editProjet');
     }
 

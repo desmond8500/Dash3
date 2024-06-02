@@ -40,7 +40,7 @@ class projetForm extends Form
         $projet->save();
     }
 
-    function update($id) {
+    function update() {
         $this->projet->update($this->all());
         $this->projet->name = ucfirst($this->projet->name);
         $this->projet->description = ucfirst($this->projet->description);

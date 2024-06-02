@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\BuildingForm;
+use App\Livewire\Forms\projetForm;
 use App\Models\Building;
 use App\Models\Journal;
 use App\Models\Projet;
@@ -41,6 +42,7 @@ class ProjetPage extends Component
     }
 
     // #[Session]
+
 
     public function render()
     {
@@ -81,5 +83,18 @@ class ProjetPage extends Component
         $this->dispatch('close-editBuilding');
     }
 
+    // Projets
+    public projetForm $projetForm;
+    function edit()
+    {
+        $this->projetForm->set($this->projet->id);
+        $this->dispatch('open-editProjet');
+    }
 
+    function update()
+    {
+        $this->projetForm->update();
+        $this->projet = Projet::find($this->projet->id);
+        $this->dispatch('close-editProjet');
+    }
 }

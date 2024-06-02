@@ -10,9 +10,19 @@
                     <p>{{ nl2br($projet->description) }}</p>
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-primary btn-icon">
-                        <i class="ti ti-edit"></i>
-                    </button>
+                    <div class="dropdown open">
+                        <button class="btn btn-action border dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <i class="ti ti-dots-vertical"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                            <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')">Editer</button>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                        <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')">Editer</button>
+                    </div>
                 </div>
             </div>
         </div>

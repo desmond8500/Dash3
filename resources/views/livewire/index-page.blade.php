@@ -108,9 +108,11 @@
                     @endforeach
                 </div>
 
-                <div class="mt-2">
-                    @livewire('erp.planning')
-                </div>
+                @env('local')
+                    <div class="mt-2">
+                        @livewire('erp.planning')
+                    </div>
+                @endenv
 
 
             </div>

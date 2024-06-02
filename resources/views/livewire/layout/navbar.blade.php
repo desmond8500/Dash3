@@ -173,16 +173,32 @@
                     </li>
                     @auth
                         @foreach ($menus as $menu)
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
-                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                        <i class="ti ti-{{ $menu['icon'] }}"></i>
-                                    </span>
-                                    <span class="nav-link-title">
-                                        {{ $menu['name'] }}
-                                    </span>
-                                </a>
-                            </li>
+                            @if ($menu['name'] == 'Test')
+                                @env('local')
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                <i class="ti ti-{{ $menu['icon'] }}"></i>
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ $menu['name'] }}
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endenv
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <i class="ti ti-{{ $menu['icon'] }}"></i>
+                                        </span>
+                                        <span class="nav-link-title">
+                                            {{ $menu['name'] }}
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
+
                         @endforeach
                     @endauth
                 </ul>

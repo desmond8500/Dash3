@@ -121,9 +121,12 @@
         </div>
     @endauth
 
-    <ul>
-        <li><a href="/log-viewer" target="_blank">Logs Viewer page</a></li>
-        <li><a href="/migrator" target="_blank">Migrator page</a></li>
-    </ul>
+    @env('local')
+        <ul>
+            <li><a href="/log-viewer" target="_blank">Logs Viewer page</a></li>
+            <li><a href="/migrator" target="_blank">Migrator page</a></li>
+        </ul>
+    @endenv
+
 
 </div>

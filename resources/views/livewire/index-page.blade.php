@@ -13,6 +13,13 @@
             </div>
         @endauth
 
+        @env('local')
+            @component('components.off-canvas',['button'=>'Todos'])
+
+            @endcomponent
+        @endenv
+
+
     @endcomponent
 
     @auth
@@ -127,6 +134,8 @@
             <li><a href="/migrator" target="_blank">Migrator page</a></li>
         </ul>
     @endenv
+
+
 
 
 </div>

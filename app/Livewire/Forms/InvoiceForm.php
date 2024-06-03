@@ -29,7 +29,7 @@ class InvoiceForm extends Form
     public $favorite = 0;
 
     function store(){
-        // $this->validate();
+        $this->validate();
         Invoice::create($this->all());
     }
 

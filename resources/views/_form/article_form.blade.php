@@ -7,7 +7,9 @@
         </div>
     </div>
     <div class="col-12 mb-3">
-        @if ($article_form->image && is_string($article_form->image))
+
+        @if ($article_form->image)
+        {{-- @if ($article_form->image && is_string($article_form->image)) --}}
             @foreach (glob(dirname($article_form->image)."/*") as $item)
                 <img src="{{ asset($item) }}" class="avatar avatar-md rounded" alt="A">
             @endforeach

@@ -1,8 +1,7 @@
 <div class="card">
     <div class="card-header">
-        <div class="card-title">Planning de la semaine {{ $carbon->startOfWeek()->format('m-Y') }}</div>
+        <div class="card-title">Planning de la semaine </div>
         <div class="card-actions">
-
         </div>
     </div>
 

@@ -7,16 +7,18 @@
         @endif
 
         @auth
-            <div class="btn-list mt-3">
+            <div class="btn-list mb-1">
                 @livewire('form.journal-add')
                 @livewire('form.task-add')
             </div>
         @endauth
 
         @env('local')
-            @component('components.off-canvas',['button'=>'Todos'])
+            <div>
+                @component('components.off-canvas',['button'=>'Todos'])
 
-            @endcomponent
+                @endcomponent
+            </div>
         @endenv
 
 

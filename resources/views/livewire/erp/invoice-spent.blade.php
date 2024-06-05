@@ -2,7 +2,7 @@
 
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Dépenses: {{ number_format($spents->sum('montant'), 0, 2) }} F CFA</div>
+            <div class="card-title">Dépenses: {{ number_format($spents->sum('montant'), 0,'.', ' ') }} F CFA</div>
             <div class="card-actions">
                 <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-add-invoiceSpent')">
                     <i class="ti ti-plus"></i>
@@ -27,7 +27,7 @@
                         <div>{{ $spent->name }}</div>
                         <div class="text-muted">{{ nl2br($spent->description) }}</div>
                     </td>
-                    <td class="text-end">{{ number_format($spent->montant, 0, 2) }} F</td>
+                    <td class="text-end">{{ number_format($spent->montant, 0,'.', ' ') }} F</td>
                     <td class="text-end">
                         <div>{{ $spent->date }}</div>
 

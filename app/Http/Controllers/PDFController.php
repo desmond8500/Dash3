@@ -22,6 +22,7 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.achat', $data);
         return $pdf->stream();
     }
+
     public static function commande_pdf(){
         $carbon = new Carbon();
 
@@ -34,6 +35,7 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.commande', $data);
         return $pdf->stream();
     }
+
     public static function avancement_pdf($building_id){
         $carbon = new Carbon();
         $building = Building::find($building_id);
@@ -41,6 +43,18 @@ class PDFController extends Controller
         $data = [
             'title' => 'Avancements',
             // 'avancements' => $building->avancements,
+            'carbon' => $carbon,
+        ];
+        $pdf = Pdf::loadView('_pdf.avancements', $data);
+        return $pdf->stream();
+    }
+
+    public static function tasks_pdf($tasks){
+        $carbon = new Carbon();
+
+        $data = [
+            'title' => 'Avancements',
+            'tasks' => $tasks,
             'carbon' => $carbon,
         ];
         $pdf = Pdf::loadView('_pdf.avancements', $data);

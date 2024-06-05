@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Http\Controllers\TaskController;
 use App\Livewire\Forms\TaskForm;
 use App\Models\Task;
 use App\Models\TaskPriority;
@@ -60,42 +61,7 @@ class Tasklist extends Component
     public $active;
     #[On('get-tasks')]
     function getTasks() {
-        if ($this->active) {
-            if ($this->client_id) {
-                return Task::orderBy('priority_id', 'desc')->where('client_id', $this->client_id)->finished($this->search)->paginate(4);
-            }
-            if ($this->projet_id) {
-                return Task::orderBy('priority_id', 'desc')->where('projet_id', $this->projet_id)->finished($this->search)->paginate(4);
-            }
-            if ($this->building_id) {
-                return Task::orderBy('priority_id', 'desc')->where('building_id', $this->building_id)->finished($this->search)->paginate(4);
-            }
-            if ($this->stage_id) {
-                return Task::orderBy('priority_id', 'desc')->where('stage_id', $this->stage_id)->finished($this->search)->paginate(4);
-            }
-            if ($this->room_id) {
-                return Task::orderBy('priority_id', 'desc')->where('room_id', $this->room_id)->finished($this->search)->orderBy('priority_id', 'desc')->paginate(4);
-            }
-            return Task::finished($this->search)->paginate(4);
-        } else {
-            if ($this->client_id) {
-                return Task::orderBy('priority_id', 'desc')->where('client_id',$this->client_id)->active($this->search)->paginate(4);
-            }
-            if ($this->projet_id) {
-                return Task::orderBy('priority_id', 'desc')->where('projet_id',$this->projet_id)->active($this->search)->paginate(4);
-            }
-            if ($this->building_id) {
-                return Task::orderBy('priority_id', 'desc')->where('building_id',$this->building_id)->active($this->search)->paginate(4);
-            }
-            if ($this->stage_id) {
-                return Task::orderBy('priority_id', 'desc')->where('stage_id',$this->stage_id)->active($this->search)->paginate(4);
-            }
-            if ($this->room_id) {
-                return Task::orderBy('priority_id', 'desc')->where('room_id',$this->room_id)->active($this->search)->paginate(4);
-            }
-            return Task::orderBy('priority_id', 'desc')->active($this->search)->paginate(4);
-        }
-
+       return TaskController::getTask($this->active, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->search);
     }
 
     public TaskForm $form;
@@ -120,5 +86,9 @@ class Tasklist extends Component
     function toggleFavorite()
     {
         $this->form->favoris();
+    }
+
+    function tasklist_pdf(){
+        return redirect()->route('tasks_pdf',['tasks'=> 12]);
     }
 }

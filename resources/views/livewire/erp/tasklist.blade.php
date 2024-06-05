@@ -9,13 +9,21 @@
                 @endif
             </div>
             <div class="card-actions">
-                <button class="btn btn-primary" wire:click="$toggle('active')">
-                    @if ($active)
-                        En cours {{ $activeCount }}
-                    @else
-                        Terminés {{ $inactiveCount }}
-                    @endif
-                </button>
+                <div class="btn-list">
+
+                    {{-- <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['tasks'=>$tasks]) }}"> --}}
+                    <button class="btn btn-primary btn-icon" wire:click='tasklist_pdf()'>
+                        <i class="ti ti-file-type-pdf"></i>
+                    </button>
+                    <button class="btn btn-primary" wire:click="$toggle('active')">
+                        @if ($active)
+                            En cours {{ $activeCount }}
+                        @else
+                            Terminés {{ $inactiveCount }}
+                        @endif
+                    </button>
+
+                </div>
             </div>
         </div>
         <div class="p-2">

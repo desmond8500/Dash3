@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/contacts', ContactsPage::class)->name('contacts');
     // Taches
     Route::get('/tasks', TasksPage::class)->name('tasks');
+    Route::get('/tasks_pdf', [PDFController::class, 'tasks_pdf'] )->name('tasks_pdf');
     // Avancements
     Route::get('/avancements/{building_id}', AvancementsPage::class)->name('avancements');
     Route::get('/avancements_pdf/{avancement_id}', function ($avancement_id) {

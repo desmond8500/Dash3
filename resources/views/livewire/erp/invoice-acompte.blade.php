@@ -2,7 +2,7 @@
 
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Acompte: {{ number_format($acomptes->sum('montant'), 0, 2) }} F CFA</div>
+            <div class="card-title">Acompte: {{ number_format($acomptes->sum('montant'), 0,'.', ' ') }} F CFA</div>
             <div class="card-actions">
                 <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-add-invoiceAcompte')">
                     <i class="ti ti-plus"></i>
@@ -27,7 +27,7 @@
                             <div>{{ $acompte->name }}</div>
                             <div class="text-muted">{{ nl2br($acompte->description) }}</div>
                         </td>
-                        <td class="text-end">{{ number_format($acompte->montant, 0, 2) }} F</td>
+                        <td class="text-end">{{ number_format($acompte->montant, 0,'.', ' ') }} F</td>
                         <td class="text-end">
                             <div>{{ $acompte->date }}</div>
                             <div>

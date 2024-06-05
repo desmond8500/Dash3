@@ -21,17 +21,11 @@
         @error('invoice_form.statut') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-8 mb-3">
+    {{-- <div class="col-md-8 mb-3">
         <label class="form-label">Nom du projet</label>
         <input type="text" class="form-control" wire:model="invoice_form.projet_name" placeholder="Nom du projet">
         @error('invoice_form.projet_name') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Reference</label>
-        <input type="text" class="form-control" wire:model="invoice_form.reference" disabled>
-        @error('invoice_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
+    </div> --}}
 
     <div class="col-md-8 mb-3">
         <label class="form-label">Description</label>
@@ -40,6 +34,12 @@
     </div>
 
     <div class="col-md-4 mb-3">
+        <label class="form-label">Reference</label>
+        <input type="text" class="form-control" wire:model="invoice_form.reference" disabled>
+        @error('invoice_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
+    {{-- </div>
+
+    <div class="col-md-4 mb-3"> --}}
         <label class="form-label">Taxes</label>
         <select wire:model="invoice_form.tax" class="form-control">
             <option value="0">Pas de TVA</option>

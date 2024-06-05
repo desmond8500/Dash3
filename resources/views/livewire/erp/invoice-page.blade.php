@@ -31,6 +31,9 @@
                     <div class="card-title">
                         <div>{{ $devis->client_name }}</div>
                         <div class="text-primary">#{{ $devis->reference }}</div>
+                        <div class="" style="font-size: 13px; font-weight:normal;">
+                            <div>{!! nl2br($devis->description) !!}</div>
+                        </div>
                     </div>
                     <div class="card-actions">
                         <div class="badge mb-1">{{ $devis->statut }}</div>
@@ -48,10 +51,14 @@
                                 <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
                                 <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
 
+                                <div class="dropdown-divider"></div>
+
                                 <span class="dropdown-header">Facture</span>
                                 <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
                                 <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Facture d'acompte </a>
                                 <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
+
+                                <div class="dropdown-divider"></div>
 
                                 <span class="dropdown-header">Exporter</span>
                                 <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
@@ -77,14 +84,20 @@
                             </tr>
                         </thead>
                         @php
-                        $total = 0;
-                        $total_marge = 0;
+                            $total = 0;
+                            $total_marge = 0;
                         @endphp
                         @foreach ($sections as $key => $section)
+                            @php
+                                $subtotal = 0;
+                            @endphp
                             <tr>
                                 <th scope="col" class="bg-primary-lt" colspan="2">
                                     <div>{{ $section->section }}</div>
-                                    <div class="text-danger">{{ $section->total() }}</div>
+                                    <div>Sous Total: {{ $section->total() }}</div>
+                                    {{-- @foreach ($section->total as $item)
+                                        @dump($item)
+                                    @endforeach --}}
                                 </th>
                                 <th scope="col" class="bg-primary-lt " colspan="6">
                                     <div class="d-flex justify-content-end">
@@ -102,14 +115,12 @@
                             </tr>
 
                             <tbody>
-                                @php
-                                    $subtotal = 0;
-                                @endphp
+
                                 @foreach ($section->rows as $row)
                                     @php
                                         $total += $row->quantite*$row->prix;
                                         $total_marge += $row->quantite*$row->coef*$row->prix;
-                                        $subtotal = $row->quantite*$row->coef*$row->prix;
+                                        $subtotal += $row->quantite*$row->coef*$row->prix;
                                     @endphp
                                     <tr class="">
                                         <td scope="row">
@@ -118,9 +129,18 @@
                                         </td>
                                         <td class="text-center">{{ $row->quantite }}</td>
                                         <td class="text-center">{{ $row->coef }}</td>
-                                        <td class="text-center">{{ number_format($row->prix, 0,'.', ' ') }}</td>
-                                        <td class="text-center">{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</td>
-                                        <td class="text-center">{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', ' ') }}</td>
+                                        <td class="text-center">
+                                            <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
+                                            <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div>{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
+                                            <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div></div>
+                                            <div>{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', ' ') }}</div>
+                                        </td>
                                         <td class="text-center " >
                                             <div>
                                                 <button class="btn  btn-icon btn-outline-success" wire:click="editRow('{{ $row->id }}')" ><i class="ti ti-edit"></i></button>
@@ -153,8 +173,18 @@
 
                         </div>
                         <div class="col-auto">
-                            <div class="fw-bold">TOTAL: {{ number_format($total, 0,'.', ' ') }} F</div>
-                            <div class="fw-bold">TOTAL GENERAL: {{ number_format($total_marge, 0,'.', ' ') }} F</div>
+                            <div class="d-flex justify-content-between">
+                                <div class="fw-bold me-3">TOTAL HT:</div>
+                                <div>{{ number_format($total, 0,'.', ' ') }} F</div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="fw-bold me-3">MARGE:</div>
+                                <div>{{ number_format($total_marge - $total, 0,'.', ' ') }} F</div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="fw-bold me-3">TOTAL TTC:</div>
+                                <div>{{ number_format($total_marge, 0,'.', ' ') }} F</div>
+                            </div>
                         </div>
                     </div>
                 </div>

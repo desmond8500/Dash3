@@ -24,12 +24,8 @@ class InvoiceSection extends Model
     {
         $total = 1;
         foreach ($this->rows() as  $row) {
-            $total = 3;
-            // $total += $row->quantite*$row->coef*$row->prix;
-            // $total++;
+            $total += $row->quantite * $row->coef * $row->prix;
         }
-
-
 
         return $total;
     }

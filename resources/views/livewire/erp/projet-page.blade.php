@@ -74,6 +74,12 @@
                             <div class="d-flex justify-content-between mb-1">
                                 <h2>Journal d'activité</h2>
                                 @livewire('form.journal-add')
+                                @component("components.off-canvas", ['button'=>'Todo'])
+                                    <ul>
+                                        <li>Editer une entrée de journal</li>
+                                        <li>Consulter et remplir un journal</li>
+                                    </ul>
+                                @endcomponent
                             </div>
 
                             <div class="row g-2">

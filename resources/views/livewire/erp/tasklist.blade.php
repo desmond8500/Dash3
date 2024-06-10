@@ -1,20 +1,20 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Liste des taches
+            <a class="card-title" href="{{ route('tasks') }}">Liste des taches
                 @if ($active)
                     terminés
                 @else
                     en cours
                 @endif
-            </div>
+            </a>
             <div class="card-actions">
                 <div class="btn-list">
 
-                    {{-- <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['tasks'=>$tasks]) }}"> --}}
-                    <button class="btn btn-primary btn-icon" wire:click='tasklist_pdf()'>
+                    <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>0, 'type'=>'client_id', 'search'=>$search]) }}" target="_blank">
                         <i class="ti ti-file-type-pdf"></i>
-                    </button>
+                    </a>
+
                     <button class="btn btn-primary" wire:click="$toggle('active')">
                         @if ($active)
                             En cours {{ $activeCount }}

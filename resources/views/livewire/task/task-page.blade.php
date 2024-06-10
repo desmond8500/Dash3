@@ -128,45 +128,51 @@
                     <div>{{ nl2br($task->description) }}</div>
                 </div>
 
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h3>Fichiers joints</h3>
-                        <button class="btn btn-primary" disabled>
-                            <i class="ti ti-plus"></i> Fichier
-                        </button>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 border rounded p-1">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <img src="" class="avatar " alt="PDF">
-                                </div>
-                                <div class="col">
-                                    <div>Fichier.pdf</div>
-                                    <div class="text-muted">
-                                        Télécharger
+                @env('local')
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h3>Fichiers joints</h3>
+                            <button class="btn btn-primary" disabled>
+                                <i class="ti ti-plus"></i> Fichier
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 border rounded p-1">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <img src="" class="avatar " alt="PDF">
+                                    </div>
+                                    <div class="col">
+                                        <div>Fichier.pdf</div>
+                                        <div class="text-muted">
+                                            Télécharger
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-auto">
+                                <button class="btn btn-lg btn-icon">
+                                    <i class="ti ti-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <button class="btn btn-lg btn-icon">
-                                <i class="ti ti-plus"></i>
+
+
+                    </div>
+
+                @endenv
+
+                @env('local')
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h3>Sous Taches</h3>
+                            <button class="btn btn-primary" disabled>
+                                <i class="ti ti-plus"></i> Tache
                             </button>
                         </div>
                     </div>
 
-
-                </div>
-
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h3>Sous Taches</h3>
-                        <button class="btn btn-primary" disabled>
-                            <i class="ti ti-plus"></i> Tache
-                        </button>
-                    </div>
-                </div>
+                @endenv
             </div>
         </div>
     </div>

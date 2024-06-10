@@ -45,29 +45,25 @@ class TaskForm extends Form
         $this->start_date = $this->task->start_date;
     }
 
+    function fix()  {
+        $this->name = ucfirst($this->name);
+    }
+
+
     function store(){
+        $this->fix();
         $this->validate();
-        // if(!$this->stage_id){
-        //     if ($this->room_id) {
-        //         $room = Room::find($this->room_id);
-        //         $this->stage_id = $room->stage_id;
-        //     }
-        // }
-        // if(!$this->building_id){
-        //     if ($this->room_id) {
-        //         $room = Room::find($this->room_id);
-        //         $this->stage_id = $room->stage_id;
-        //     }
-        // }
         Task::create( $this->all() );
 
     }
 
     function update(){
+        $this->fix();
         $this->validate();
         $this->task->update($this->all());
         return $this->task;
     }
+
     function favoris(){
         if ($this->favoris) {
             $this->favoris = 0;
@@ -77,6 +73,5 @@ class TaskForm extends Form
         $this->task->update($this->only('favoris'));
         return $this->task;
     }
-
 
 }

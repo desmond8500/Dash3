@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/pdf.css">
     <link rel="stylesheet" href="css/text.css">
-    <title>Commandes</title>
+    <link rel="stylesheet" href="css/tasks.css">
+    <title>Liste des taches</title>
 
 </head>
 <body>
@@ -22,7 +23,7 @@
         <tr>
             <td width="150px" class="border_white">
                 <div class="logo">
-                    <div>logo</div>
+                    <div>Logo</div>
 
                 </div>
             </td>
@@ -37,16 +38,33 @@
     <table class="table">
         <thead class="thead">
             <tr>
-                <th>#</th>
-                <th>Durée</th>
-                <th>Début</th>
-                <th>Fin</th>
-                <th>Avancement</th>
-                <th>Commentaires</th>
-                <th>Actions</th>
+                <th width='10px'>#</th>
+                <th>Projet</th>
+                <th>Description</th>
+                <th>Infos</th>
+                <th>Statut</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($tasks as $key => $task)
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td>
+                        <div class="task_projet_name"> {{ $task->projet->name }} </div>
+                    </td>
+                    <td>
+                        <div class="task_name">{{ $task->name }}</div>
+                        <div class="task_description">{{ $task->description }}</div>
+                    </td>
+                    <td>
+                        <div class="task_statut">{{ $task->statut->name }}</div>
+                        <div class="task_priority">{{ $task->priority->name }}</div>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            @endforeach
 
         </tbody>
     </table>

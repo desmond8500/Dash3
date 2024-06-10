@@ -49,15 +49,18 @@ class PDFController extends Controller
         return $pdf->stream();
     }
 
-    public static function tasks_pdf($tasks){
+    public static function tasks_pdf($id, $type, $search, $status){
         $carbon = new Carbon();
 
+        $tasks = TaskController::getTasklist($id, $type, $search, $status);
+
         $data = [
-            'title' => 'Avancements',
+            'title' => 'Liste des taches',
             'tasks' => $tasks,
             'carbon' => $carbon,
         ];
-        $pdf = Pdf::loadView('_pdf.avancements', $data);
+
+        $pdf = Pdf::loadView('_pdf.tasks', $data);
         return $pdf->stream();
     }
 }

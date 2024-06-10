@@ -45,13 +45,18 @@
             </a>
         </div>
         <div class="col-auto text-end">
-            <div class="mb-1">
-                <button class="btn btn-outline-primary btn-icon" wire:click="show('{{ $task->id }}')">
-                    <i class="ti ti-eye"></i>
+            <div class="dropdown open">
+                <button class="btn btn-action dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <i class="ti ti-dots-vertical"></i>
                 </button>
-                <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $task->id }}')">
-                    <i class="ti ti-edit"></i>
-                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <button class="dropdown-item" wire:click="edit('{{ $task->id }}')">
+                        Modifier
+                    </button>
+                    <button class="dropdown-item" wire:click="show('{{ $task->id }}')">
+                        Détails
+                    </button>
+                </div>
             </div>
 
             <div class="badge badge-pill mb-1

@@ -1,0 +1,16 @@
+.task_name{
+    font-weight: bold;
+    font-size: 13px;
+}
+.task_description{
+    font-size: 13px;
+}
+.task_priority{
+    font-size: 13px;
+}
+.task_statut {
+    font-size: 13px;
+}
+.task_projet_name {
+    font-size: 13px;
+}

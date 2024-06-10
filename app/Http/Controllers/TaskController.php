@@ -44,6 +44,44 @@ class TaskController extends Controller
             return Task::orderBy('priority_id', 'desc')->active($search)->paginate(4);
         }
     }
+    static function getTasklist($id, $type='', $search= '', $status = true){
+        return Task::all();
+        if ($status) {
+            if ($type == 'client_id') {
+                return Task::orderBy('priority_id', 'desc')->where('client_id', $id)->finished($search)->paginate(4);
+            }
+            if ($type == 'projet_id') {
+                return Task::orderBy('priority_id', 'desc')->where('projet_id', $id)->finished($search)->paginate(4);
+            }
+            if ($type == 'building_id') {
+                return Task::orderBy('priority_id', 'desc')->where('building_id', $id)->finished($search)->paginate(4);
+            }
+            if ($type == 'stage_id') {
+                return Task::orderBy('priority_id', 'desc')->where('stage_id', $id)->finished($search)->paginate(4);
+            }
+            if ($type == 'room_id') {
+                return Task::orderBy('priority_id', 'desc')->where('room_id', $id)->finished($search)->orderBy('priority_id', 'desc')->paginate(4);
+            }
+            return Task::finished($search)->paginate(4);
+        } else {
+            if ($type == 'client_id') {
+                return Task::orderBy('priority_id', 'desc')->where('client_id', $id)->active($search)->paginate(4);
+            }
+            if ($type == 'projet_id') {
+                return Task::orderBy('priority_id', 'desc')->where('projet_id', $id)->active($search)->paginate(4);
+            }
+            if ($type == 'building_id') {
+                return Task::orderBy('priority_id', 'desc')->where('building_id', $id)->active($search)->paginate(4);
+            }
+            if ($type == 'stage_id') {
+                return Task::orderBy('priority_id', 'desc')->where('stage_id', $id)->active($search)->paginate(4);
+            }
+            if ($type == 'room_id') {
+                return Task::orderBy('priority_id', 'desc')->where('room_id', $id)->active($search)->paginate(4);
+            }
+            return Task::orderBy('priority_id', 'desc')->active($search)->paginate(4);
+        }
+    }
 }
 
 

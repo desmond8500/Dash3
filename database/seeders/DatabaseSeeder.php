@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(1)->create();
+        // User::factory()->count(1)->create();
 
         // Tasks
         TaskStatus::create([ 'name' => "Nouveau", 'level' => 1 ]);

@@ -15,6 +15,7 @@ use App\Livewire\Erp\StagePage;
 use App\Livewire\Erp\SystemesPage;
 use App\Livewire\IndexPage;
 use App\Livewire\JournalPage;
+use App\Livewire\JournauxPage;
 use App\Livewire\LoginPage;
 use App\Livewire\Modules\ContactsPage;
 use App\Livewire\ProfilePage;
@@ -120,7 +121,11 @@ Route::middleware(['auth'])->group(function () {
 
 // Journal
 Route::middleware(['auth'])->group(function () {
-    Route::get('/journaux', Journaux::class)->name('journaux');
+    // Route::get('/journaux', Journaux::class)->name('journaux');
+    Route::get('/journaux', JournauxPage::class)->name('journaux');
+    Route::get('/journaux/journal_pdf/{journal_id}', function ($journal_id) {
+        return PDFController::journal_pdf($journal_id);
+    })->name('journal_pdf');
 });
 
 // Finances

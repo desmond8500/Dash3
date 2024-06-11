@@ -2,52 +2,44 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\JournalForm;
 use App\Models\Journal;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Journaux extends Component
 {
-    #[Validate('required')]
-    public $user_id;
-    public $client_id;
     public $projet_id;
-    public $devis_id;
 
-    #[Validate('required')]
-    public $title;
-    public $description;
-
-    #[Validate('required')]
-    public $date;
+    function mount($projet_id){
+        $this->projet_id = $projet_id;
+    }
 
     public function render()
     {
         return view('livewire.erp.journaux',[
-            'journaux' => Journal::paginate(20),
+            'journaux' => $this->getJournaux(),
         ]);
     }
 
-    public $selected_id;
+    function getJournaux(){
+        return Journal::where('projet_id', $this->projet_id)->paginate(20);
+    }
+
+    public JournalForm $journalForm;
 
     function edit_journal($journal_id){
-        $journal = Journal::find($journal_id);
-        $this->selected_id = $journal->id;
+        $this->journalForm->set($journal_id);
         $this->dispatch('open-editJournal');
-
-        $this->title = $journal->title;
-        $this->description = $journal->description;
-        $this->date = $journal->date;
     }
 
     function update_journal() {
-        $journal = Journal::find($this->selected_id);
+        $this->journalForm->update();
+        $this->dispatch('close-editJournal');
+    }
 
-        $journal->title = $this->title;
-        $journal->description = $this->description;
-        $journal->date = $this->date;
-
-        $journal->save();
+    function delete_journal() {
+        $this->journalForm->delete();
         $this->dispatch('close-editJournal');
     }
 }

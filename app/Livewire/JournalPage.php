@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Livewire\Forms\JournalForm;
 use App\Models\Journal;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class JournalPage extends Component
@@ -15,10 +16,12 @@ class JournalPage extends Component
         $this->journal = Journal::find($journal_id);
 
         $this->breadcrumbs = array(
+            array('name' => 'Journaux', 'route' => route('journaux')),
             array('name' => 'Journal', 'route' => route('journal',['journal_id'=>$this->journal->id])),
         );
     }
 
+    #[On('close-editJournal')]
     public function render()
     {
         return view('livewire.journal-page');

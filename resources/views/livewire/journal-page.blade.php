@@ -1,13 +1,12 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Journal', 'breadcrumbs'=>$breadcrumbs])
-    <div class="btn-list">
-        {{-- @livewire('form.task-add', ['projet_id' => $projet_id])
-        @livewire('form.journal-add', ['projet_id' => $projet_id]) --}}
-    </div>
+        <div class="btn-list">
+            <a class="btn btn-*primary" target="_blank" href="{{ route('journal_pdf',['journal_id'=>$journal->id]) }}">PDF</a>
+        </div>
     @endcomponent
 
     <div class="row g-2">
-        <div class="col-md-4">
+        <div class="col-md-8">
 
             <div class="card">
                 <div class="card-header">
@@ -19,12 +18,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    {!! nl2br($journal->description) !!}
+                    @parsedown($journal->description)
                 </div>
             </div>
 
         </div>
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Rapports</div>
@@ -33,6 +32,16 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @env('local')
+                        <div>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" />
+
+                            <trix-editor></trix-editor>
+
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
+                        </div>
+
+                    @endenv
 
                 </div>
                 <div class="card-footer">

@@ -12,7 +12,8 @@
                     <i class="ti ti-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
-                    <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')">Editer</button>
+                    <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')"> <i class="ti ti-edit me-2"></i> Editer</button>
+                    <button class="dropdown-item disabled" > <i class="ti ti-trash me-2"></i> Supprimer</button>
                 </div>
             </div>
 

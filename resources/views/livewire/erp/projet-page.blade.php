@@ -83,11 +83,7 @@
                             </div>
 
                             <div class="row g-2">
-                                @foreach ($journaux as $journal)
-                                    <div class="col-md-4">
-                                        @include('_card.journal_card')
-                                    </div>
-                                @endforeach
+                                @livewire('erp.journaux', ['projet_id' => $projet_id])
                             </div>
 
 

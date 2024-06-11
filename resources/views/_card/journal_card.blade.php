@@ -1,8 +1,17 @@
 <div class="card p-2">
     <div class="row">
       <div class="col">
-          <a class="fw-bold text-dark" href="{{ route('journal',['journal_id'=>$journal->id]) }}">{{ $journal->title }}</a>
-          <div class="text-primary" style="font-size: 10px;">{{ $journal->date }}</div>
+        <div>
+            @isset($journal->projet)
+                <span style="font-size: 10px;" class="text-purple">{{ $journal->projet->client->name }} / </span>
+                <span style="font-size: 10px;" class="text-purple">{{ $journal->projet->name }}</span>
+            @endisset
+        </div>
+        <a class="fw-bold text-dark" href="{{ route('journal',['journal_id'=>$journal->id]) }}">
+            {{ $journal->title }}
+        </a>
+        <div class="text-primary" style="font-size: 10px;">{{ $journal->date }}</div>
+
       </div>
       <div class="col-auto">
         <div class="dropdown">

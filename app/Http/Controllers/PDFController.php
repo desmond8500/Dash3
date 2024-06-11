@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Achat;
 use App\Models\Building;
 use App\Models\Commande;
+use App\Models\Journal;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -61,6 +62,21 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.tasks', $data);
+        return $pdf->stream();
+    }
+
+    public static function journal_pdf($journal_id){
+        $carbon = new Carbon();
+
+        $journal = Journal::find($journal_id);
+
+        $data = [
+            'title' => 'Rapport de visite',
+            'journal' => $journal,
+            'carbon' => $carbon,
+        ];
+
+        $pdf = Pdf::loadView('_pdf.journal_pdf', $data);
         return $pdf->stream();
     }
 }

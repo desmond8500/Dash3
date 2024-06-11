@@ -71,7 +71,7 @@ class PDFController extends Controller
         $journal = Journal::find($journal_id);
 
         $data = [
-            'title' => 'Rapport de visite',
+            'title' => 'Rapport',
             'journal' => $journal,
             'carbon' => $carbon,
         ];

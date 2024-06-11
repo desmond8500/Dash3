@@ -33,7 +33,8 @@
             <td align="right" class="border_white">
                 <div class="doc_title" style="text-transform: uppercase">{{ $title }}</div>
                 {{-- <div><b>{{ $commande->name }}</b></div> --}}
-                <div><i>{{ str_pad($carbon->day,2, '0', STR_PAD_LEFT) }} - {{ str_pad($carbon->month,2, '0', STR_PAD_LEFT) }} - {{ $carbon->year }}</i></div>
+                {{-- <div><i>{{ str_pad($carbon->day,2, '0', STR_PAD_LEFT) }} - {{ str_pad($carbon->month,2, '0', STR_PAD_LEFT) }} - {{ $carbon->year }}</i></div> --}}
+                <i>{{ $journal->date }}</i>
             </td>
         </tr>
     </table>

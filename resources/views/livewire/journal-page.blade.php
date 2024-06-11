@@ -13,7 +13,7 @@
                 <div class="card-header">
                     <div class="card-title">{{ $journal->title }}</div>
                     <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" disabled>
+                        <button class="btn btn-primary btn-icon" wire:click="edit_journal('{{ $journal->id }}')">
                             <i class="ti ti-edit"></i>
                         </button>
                     </div>
@@ -41,4 +41,17 @@
             </div>
         </div>
     </div>
+
+    @component('components.modal', ["id"=>'editJournal', 'title' => 'Editer un journal'])
+        <form class="row" wire:submit="update_journal">
+            @include('_form.journal_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editJournal', event => { $('#editJournal').modal('show'); }) </script>
+        <script> window.addEventListener('close-editJournal', event => { $('#editJournal').modal('hide'); }) </script>
+    @endcomponent
+
 </div>

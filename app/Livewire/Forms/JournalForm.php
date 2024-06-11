@@ -19,7 +19,7 @@ class JournalForm extends Form
     public $title;
     #[Rule('required')]
     public $date;
-    public $designation;
+    public $description;
 
     function store(){
         Journal::create($this->all());
@@ -34,7 +34,7 @@ class JournalForm extends Form
         $this->devis_id = $this->journal->devis_id;
         $this->title = $this->journal->title;
         $this->date = $this->journal->date;
-        $this->designation = $this->journal->designation;
+        $this->description = $this->journal->description;
     }
 
     function update(){

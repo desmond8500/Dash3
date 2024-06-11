@@ -30,7 +30,7 @@ class Journaux extends Component
 
     public $selected_id;
 
-    function edit($journal_id){
+    function edit_journal($journal_id){
         $journal = Journal::find($journal_id);
         $this->selected_id = $journal->id;
         $this->dispatch('open-editJournal');
@@ -40,7 +40,7 @@ class Journaux extends Component
         $this->date = $journal->date;
     }
 
-    function update() {
+    function update_journal() {
         $journal = Journal::find($this->selected_id);
 
         $journal->title = $this->title;

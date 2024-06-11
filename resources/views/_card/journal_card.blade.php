@@ -5,9 +5,15 @@
           <div class="text-primary" style="font-size: 10px;">{{ $journal->date }}</div>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-primary btn-icon" >
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path> <path d="M13.5 6.5l4 4"></path> </svg>
-        </button>
+        <div class="dropdown">
+            <button class="btn btn-action border dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <i class="ti ti-dots-vertical"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="triggerId">
+                <button class="dropdown-item" wire:click="edit_journal('{{ $journal->id }}')"><i class="ti ti-edit me-2"></i> Editer</button>
+                <button class="dropdown-item disabled "><i class="ti ti-trash me-2"></i>Supprimer</button>
+            </div>
+        </div>
       </div>
       <div class="col-md-12">
         <div class="text-muted">{!! nl2br($journal->description) !!}</div>

@@ -1,29 +1,15 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Journaux'])
-
         @livewire('form.journal-add')
-
     @endcomponent
 
     <div class="row g-2">
         <div class="col-md-8">
             <div class="row g-2">
                 @forelse ($journaux as $journal)
-                    <div class="col-md-5">
-                        <div class="card mt-2 p-2">
-                            <div class="d-flex justify-content-between">
-                                <div class="fw-bold">
-                                    <a href="{{ route('journal',['journal_id'=>$journal->id]) }}">{{ $journal->title }}</a>
-                                    <div class="text-muted" style="font-size: 12px">{{ $journal->date }}</div>
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary btn-icon" wire:click="edit('{{ $journal->id }}')">
-                                        <i class="ti ti-edit"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div>{{ nl2br($journal->description) }}</div>
-                        </div>
+                    <div class="col-md-6">
+                        @component('_card.journal_card',['journal'=>$journal])
+                        @endcomponent
                     </div>
                 @empty
                     <div class="card mt-2">
@@ -39,7 +25,7 @@
 
 
     @component('components.modal', ["id"=>'editJournal', 'title'=> 'Editer un journal'])
-        <form class="row" wire:submit="update">
+        <form class="row" wire:submit="update_journal">
 
             @include('_form.journal_form')
 

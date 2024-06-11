@@ -11,6 +11,7 @@ class JournalForm extends Form
 {
     public Journal $journal;
 
+    #[Rule('required')]
     public $user_id;
     public $client_id;
     public $projet_id;
@@ -22,6 +23,8 @@ class JournalForm extends Form
     public $description;
 
     function store(){
+        $this->user_id = auth()->user()->id;
+        $this->validate();
         Journal::create($this->all());
     }
 

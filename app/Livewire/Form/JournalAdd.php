@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Form;
 
+use App\Livewire\Forms\JournalForm;
 use App\Models\Journal;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -21,7 +22,10 @@ class JournalAdd extends Component
     #[Validate('required')]
     public $date;
 
-    function mount($projet_id = null, $devis_id=null){
+    function mount($client_id=null, $projet_id = null, $devis_id=null){
+        $this->client_id = $client_id;
+        $this->projet_id = $projet_id;
+        $this->devis_id = $devis_id;
         if (auth()) {
             $this->user_id = auth()->user()->id;
         }
@@ -34,17 +38,13 @@ class JournalAdd extends Component
         ]);
     }
 
+    public JournalForm $journalForm;
+
     function store(){
-        $this->validate();
-        Journal::create([
-            'user_id' =>  $this->user_id,
-            'client_id' => $this->client_id,
-            'projet_id' => $this->projet_id,
-            'devis_id' => $this->devis_id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'date' => $this->date,
-        ]);
+        $this->journalForm->client_id= $this->client_id;
+        $this->journalForm->projet_id= $this->projet_id;
+        $this->journalForm->devis_id= $this->devis_id;
+        $this->journalForm->store();
         $this->dispatch('close-addJournal');
         $this->dispatch('get-news');
     }

@@ -58,8 +58,6 @@
 
                         <div class="tab-pane  show" id="tabs-devis">
                             @livewire('erp.invoices-list', ['projet_id' => $projet_id])
-
-
                         </div>
 
                         <div class="tab-pane" id="tabs-task">
@@ -73,7 +71,6 @@
                         <div class="tab-pane" id="tabs-journaux">
                             <div class="d-flex justify-content-between mb-1">
                                 <h2>Journal d'activité</h2>
-                                @livewire('form.journal-add')
                                 @component("components.off-canvas", ['button'=>'Todo'])
                                     <ul>
                                         <li>Editer une entrée de journal</li>

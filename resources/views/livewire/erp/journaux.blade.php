@@ -1,6 +1,6 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Journaux'])
-        @livewire('form.journal-add')
+        @livewire('form.journal-add',['projet_id'=>$projet_id])
     @endcomponent
 
     <div class="row g-2">

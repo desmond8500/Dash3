@@ -21,7 +21,7 @@
 
     <table class="table" style="margin-bottom: 10px;">
         <tr>
-            <td width="80px" class="border">
+            <td width="80px" class="">
                 @if ($logo)
                     <div style="width: 80px; height: 80px;">
                         <img src="{{ $logo }}" alt="" style="width:100%; height:100%;">

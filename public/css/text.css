@@ -62,6 +62,9 @@ body {
 .text-primary {
     color: #0092ca;
 }
+.text-success {
+    color: #219C90;
+}
 
 .text-danger {
     color: #dc2f2f;

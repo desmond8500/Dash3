@@ -71,9 +71,14 @@ class PDFController extends Controller
         $journal = Journal::find($journal_id);
 
         $data = [
-            'title' => 'Rapport',
+            'logo' => env('LOGO', ''),
+            'title' => "Rapport d'intervention",
+            'title_css' => env('COLOR1', 'border: 1px solid white; font-size: 20px;'),
             'journal' => $journal,
             'carbon' => $carbon,
+            'color1' => env('COLOR1', '219C90'),
+            'color2' => env('COLOR2', '219C90'),
+            'color3' => env('COLOR3', '219C90'),
         ];
 
         $pdf = Pdf::loadView('_pdf.journal_pdf', $data);

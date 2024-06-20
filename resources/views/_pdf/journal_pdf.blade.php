@@ -32,7 +32,7 @@
                     </div>
                 @endif
             </td>
-            <td width="300px" class="border_white fw-bold" align="left" style="{{ $title_css }}" style="">
+            <td width="300px" class="border_white fw-bold" align="left" style="{{ $title_css }}" >
                 <div>{{ env('MAIN_NAME') }}</div>
             </td>
             <td align="right" class="border_white">

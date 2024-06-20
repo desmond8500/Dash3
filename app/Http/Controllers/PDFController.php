@@ -73,7 +73,7 @@ class PDFController extends Controller
         $data = [
             'logo' => env('LOGO', ''),
             'title' => "Rapport d'intervention",
-            'title_css' => env('COLOR1', 'border: 1px solid white; font-size: 20px; color: #219C90;'),
+            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px; color: #219C90;'),
             'journal' => $journal,
             'carbon' => $carbon,
             'color1' => env('COLOR1', '219C90'),

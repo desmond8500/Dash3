@@ -21,13 +21,13 @@
 
     <table class="table" style="margin-bottom: 10px;">
         <tr>
-            <td width="80px" class="">
+            <td width="80px" class="border_white">
                 @if ($logo)
-                    <div style="width: 80px; height: 80px;">
-                        <img src="{{ $logo }}" alt="" style="width:100%; height:100%;">
+                    <div style="width: 80px; height: 80px;" >
+                        <img src="{{ $logo }}" alt="logo" style="width:100%; height:100%;">
                     </div>
                 @else
-                    <div class="logo" style="background: #{{ $color1 }}">
+                    <div class="logo"  style="background: #{{ $color1 }}">
                         <div class="text-center" style="padding-top: 30px;">Logo</div>
                     </div>
                 @endif

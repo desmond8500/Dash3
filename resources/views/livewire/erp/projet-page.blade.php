@@ -41,6 +41,11 @@
                                 <i class="ti ti-file-description"></i> Contacts
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#tabs-notes" class="nav-link" data-bs-toggle="tab">
+                                <i class="ti ti-file-description"></i> Notes
+                            </a>
+                        </li>
                         <li class="nav-item ms-auto">
                             <a href="#tabs-reglages" class="nav-link" title="Settings" data-bs-toggle="tab">
                                 <i class="ti ti-settings"></i>
@@ -105,6 +110,9 @@
                             <h2>Contats</h2>
                             <div>Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet, facilisi sit mauris
                                 accumsan nibh habitant senectus</div>
+                        </div>
+                        <div class="tab-pane" id="tabs-notes">
+                            @livewire('erp.projet-notes', ['projet_id' => $projet->id], )
                         </div>
                     </div>
                 </div>

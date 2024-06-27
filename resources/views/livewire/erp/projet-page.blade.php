@@ -85,7 +85,7 @@
                             </div>
 
                             <div class="row g-2">
-                                @livewire('erp.journaux', ['projet_id' => $projet_id])
+                                @livewire('erp.journaux', ['projet_id' => $projet_id],)
                             </div>
 
 

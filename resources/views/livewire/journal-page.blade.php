@@ -5,30 +5,32 @@
         </div>
     @endcomponent
 
-    <style>
-        h1, h2, h3, h4{
-            background: grey;
-            color: white;
-            padding: 5px;
-            border-radius: 5px;
-            font-size: 18px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    @push('css')
+        <style>
+            h1, h2, h3, h4{
+                background: grey;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+                font-size: 18px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
 
-        thead {
-            background-color: #D1D2D4;
-            padding: 3px;
-            padding-right: 10px;
-        }
+            thead {
+                background-color: #D1D2D4;
+                padding: 3px;
+                padding-right: 10px;
+            }
 
-        th {
-            padding: 4px;
-        }
+            th {
+                padding: 4px;
+            }
 
-    </style>
+        </style>
+    @endpush
 
     <div class="row g-2">
         <div class="col-md-8">

@@ -82,6 +82,7 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.journal_pdf', $data);
-        return $pdf->stream();
+        return $pdf->stream($journal->date.' - '.$journal->projet->name.' - ' . $data['title']);
+        // return $pdf->download('sdfsd');
     }
 }

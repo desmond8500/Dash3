@@ -63,6 +63,9 @@
                                     <li class="list-group-item d-flex justify-content-between">
                                         <b>Priorité :</b> {{ $article->priority() }}
                                     </li>
+                                    <li class="list-group-item d-flex justify-content-between {{ $article->quantity <= $article->quantity_min ? 'text-danger' : '' }}">
+                                        <b class="">Quantité :</b> {{ $article->quantity }}
+                                    </li>
                                 </ul>
 
                             </div>

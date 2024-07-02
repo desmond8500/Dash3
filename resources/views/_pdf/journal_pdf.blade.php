@@ -45,6 +45,9 @@
     </table>
 
     <hr>
+    <div>
+        <span class="fw-bold">Projet : </span> <span>{{ $journal->projet->name }}</span>
+    </div>
 
     <div class="journal_title" style="color: #{{ $color1 }}">
         {{ $journal->title }}

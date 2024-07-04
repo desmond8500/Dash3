@@ -3,14 +3,14 @@
       <div class="col">
         <div>
             @isset($journal->projet)
-                <span style="font-size: 10px;" class="text-purple">{{ $journal->projet->client->name }} / </span>
-                <span style="font-size: 10px;" class="text-purple">{{ $journal->projet->name }}</span>
+                <a href="{{ route('projets',['client_id'=> $journal->projet->client->id]) }}" style="font-size: 10px;" class="text-purple">{{ $journal->projet->client->name }} / </a>
+                <a href="{{ route('projet',['projet_id'=> $journal->projet->id]) }}" style="font-size: 10px;" class="text-purple">{{ $journal->projet->name }}</a>
             @endisset
         </div>
         <a class="fw-bold text-dark" href="{{ route('journal',['journal_id'=>$journal->id]) }}">
             {{ $journal->title }}
         </a>
-        <div class="text-primary" style="font-size: 10px;">{{ $journal->date }}</div>
+        <div class="text-primary" style="font-size: 10px;">{{ $journal->formatDate() }}</div>
 
       </div>
       <div class="col-auto">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="col-md-12">
-        <div class="text-muted">{!! nl2br($journal->description) !!}</div>
+        {{-- <div class="text-muted ">{!! nl2br($journal->description) !!}</div> --}}
       </div>
     </div>
 </div>

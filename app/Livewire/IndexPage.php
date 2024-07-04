@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Http\Controllers\DashController;
+use App\Models\Article;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Journal;
@@ -35,7 +36,7 @@ class IndexPage extends Component
     function getResume(){
         return (Object) array(
             (Object) array( 'name'=> 'Clients', 'all'=> Client::count(), 'icon'=> 'users', 'route'=> route('clients')),
-            (Object) array( 'name'=> 'Stock',   'all'=> 0,               'icon'=> 'packages', 'route'=> route('stock')),
+            (Object) array( 'name'=> 'Stock',   'all'=> Article::count(),               'icon'=> 'packages', 'route'=> route('stock')),
         );
     }
 

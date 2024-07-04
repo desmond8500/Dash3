@@ -22,9 +22,14 @@ class JournalForm extends Form
     public $date;
     public $description;
 
+    function fix(){
+        $this->title = ucfirst($this->title);
+    }
+
     function store(){
         $this->user_id = auth()->user()->id;
         $this->validate();
+        $this->fix();
         Journal::create($this->all());
     }
 
@@ -41,6 +46,8 @@ class JournalForm extends Form
     }
 
     function update(){
+        $this->fix();
+        $this->validate();
         $this->journal->update($this->all());
     }
 

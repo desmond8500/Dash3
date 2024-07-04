@@ -9,6 +9,7 @@ class Planning extends Component
 {
     public function render()
     {
+
         return view('livewire.erp.planning',[
             'carbon' => Carbon::now()->locale('fr_FR')->timezone('Africa/Dakar'),
         ]);

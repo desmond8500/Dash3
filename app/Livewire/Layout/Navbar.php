@@ -14,6 +14,12 @@ class Navbar extends Component
         array('name' => "Finances", "route" => "finances", "icon" => "coins"),
         array('name' => "Test", "route" => "test", "icon" => "hammer"),
         array('name' => "Systemes", "route" => "systemes", "icon" => "hammer"),
+        array('name' => "Medias", "icon" => "hammer",
+            'submenu' => [
+                array('name' => "Images", "route" => "systemes", "icon" => "hammer"),
+                array('name' => "Vidéos", "route" => "systemes", "icon" => "hammer"),
+            ]
+        ),
     );
 
     public function render()

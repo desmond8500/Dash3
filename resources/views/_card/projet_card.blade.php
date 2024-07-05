@@ -1,5 +1,5 @@
 <div class="card p-2 ">
-    <div class="row">
+    <div class="row ">
         <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
             <img class="avatar " src="{{ asset($projet->client->avatar) }}" alt="A">
         </a>
@@ -18,11 +18,11 @@
             </div>
 
         </div>
-        <div class="col-md-12">
+        {{-- <div class="col-md-12">
             <div class="text-muted mt-1">{{ nl2br($projet->description) }}</div>
-        </div>
+        </div> --}}
     </div>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between bg-blue-lt mt-2 p-1 rounded">
         <div> Devis: {{ $projet->devis->count() }}</div>
         <div> Taches: {{ $projet->tasks->count() }}</div>
     </div>

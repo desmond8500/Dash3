@@ -1,6 +1,6 @@
 
 <div class="card p-1 bg-light rounded  border-primary">
-    <div class="bg-{{ $client->type == 'Entreprise' ? "primary" : 'success' }} p-2 rounded">
+    <div class="bg-{{ $client->type == 'Entreprise' ? "primary" : 'cyan' }} p-2 rounded">
         <div class="row ">
             <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}">
                 <img src="{{ $client->avatar ?? '' }}" alt="C" class="avatar p-1">

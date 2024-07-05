@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('projet_notes', function (Blueprint $table) {
             $table->id();
-            $table->integer('projet_id')->constrained();
+            $table->integer('projet_id')->constrained()->cascadeOnDelete();
             $table->string("titre");
             $table->text("description");
             $table->timestamps();

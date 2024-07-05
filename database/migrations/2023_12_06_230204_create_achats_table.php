@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('achats', function (Blueprint $table) {
             $table->id();
-            $table->integer('provider_id')->nullable();
+            $table->integer('provider_id')->nullable()->cascadeOnDelete();
             $table->string('name');
             $table->text('description')->nullable();
             $table->date('date')->nullable();

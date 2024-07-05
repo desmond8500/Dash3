@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('projet_id')->constrained();
+            $table->foreignId('projet_id')->constrained()->cascadeOnDelete();
             $table->string('client_name')->nullable();
             $table->string('projet_name')->nullable();
             $table->string('reference');

@@ -171,6 +171,7 @@
                             </span>
                         </a>
                     </li>
+
                     @auth
                         @foreach ($menus as $menu)
                             @if ($menu['name'] == 'Test')
@@ -187,18 +188,38 @@
                                     </li>
                                 @endenv
                             @else
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
-                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <i class="ti ti-{{ $menu['icon'] }}"></i>
-                                        </span>
-                                        <span class="nav-link-title">
-                                            {{ $menu['name'] }}
-                                        </span>
-                                    </a>
-                                </li>
+                                @isset ($menu['submenu'])
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#navbar-third" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                            role="button" aria-expanded="false">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                <i class="ti ti-chevron-down"></i>
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ $menu['name'] }}
+                                            </span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            @foreach ($menu['submenu'] as $submenu)
+                                                <a class="dropdown-item" href="{{ route($submenu['route']) }}" wire:navigate>
+                                                    {{ $submenu['name'] }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                <i class="ti ti-{{ $menu['icon'] }}"></i>
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ $menu['name'] }}
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endisset
                             @endif
-
                         @endforeach
                     @endauth
                 </ul>

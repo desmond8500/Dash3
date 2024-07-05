@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('invoice_spents', function (Blueprint $table) {
             $table->id();
-            $table->integer('invoice_id')->constrained();
+            $table->integer('invoice_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('montant');

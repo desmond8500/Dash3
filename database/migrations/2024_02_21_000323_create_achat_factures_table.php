@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('achat_factures', function (Blueprint $table) {
             $table->id();
-            $table->integer('achat_id')->constrained();
+            $table->integer('achat_id')->constrained()->cascadeOnDelete();
             $table->string('folder');
             $table->timestamps();
         });

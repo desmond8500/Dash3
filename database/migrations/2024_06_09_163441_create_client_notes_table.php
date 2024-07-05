@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('client_notes', function (Blueprint $table) {
             $table->id();
-            $table->integer('client_id')->constrained();
+            $table->integer('client_id')->constrained()->cascadeOnDelete();
             $table->text('description')->nullable();
             $table->integer('note')->nullable();
             $table->timestamps();

@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('invoice_sections', function (Blueprint $table) {
             $table->id();
-            $table->integer('invoice_id')->constrained();
+            $table->integer('invoice_id')->constrained()->cascadeOnDelete();
             $table->string('section');
             $table->integer('ordre')->default(1);
             $table->timestamps();

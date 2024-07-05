@@ -134,8 +134,6 @@
                     </div>
                 </div>
 
-
-
             </div>
             <div class="col-md-4">
                 @livewire('erp.tasklist')
@@ -156,6 +154,6 @@
         @env('local')
             <li><a href="/migrator" target="_blank">Migrator page</a></li>
         @endenv
-        </ul>
+    </ul>
 
 </div>

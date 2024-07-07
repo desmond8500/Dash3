@@ -3,8 +3,8 @@
       <div class="col">
         <div>
             @isset($journal->projet)
-                <a href="{{ route('projets',['client_id'=> $journal->projet->client->id]) }}" style="font-size: 10px;" class="text-purple">{{ $journal->projet->client->name }} / </a>
-                <a href="{{ route('projet',['projet_id'=> $journal->projet->id]) }}" style="font-size: 10px;" class="text-purple">{{ $journal->projet->name }}</a>
+                <a href="{{ route('projets',['client_id'=> $journal->projet->client->id]) }}" style="font-size: 12px;" class="text-purple">{{ $journal->projet->client->name }} / </a>
+                <a href="{{ route('projet',['projet_id'=> $journal->projet->id]) }}" style="font-size: 12px;" class="text-purple">{{ $journal->projet->name }}</a>
             @endisset
         </div>
         <a class="fw-bold text-dark" href="{{ route('journal',['journal_id'=>$journal->id]) }}">

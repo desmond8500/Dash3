@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Livewire\Forms\JournalForm;
 use App\Models\Journal;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\WithPagination;
@@ -16,7 +17,7 @@ class JournauxPage extends Component
     public $search;
     public $breadcrumbs;
 
-
+    #[On('get-news')]
     public function render()
     {
         $this->breadcrumbs = array(

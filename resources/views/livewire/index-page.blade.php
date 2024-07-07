@@ -24,20 +24,26 @@
 
     @auth
         <div class="row g-2">
-            <div class="col-md-8">
+            <div class="col-md-12">
+            {{-- <div class="col-md-8"> --}}
                 <div class="row">
                     @foreach ($resumes as $resume)
                         <a class="col-md-3 mb-1" href="{{ $resume->route }}">
                             <div class="card p-2">
                                 <div class="row align-items-center">
                                     <div class="col-auto">
-                                        <span class="bg-green text-white avatar">
+                                        <span class="bg-blue text-white avatar">
                                             <i class="ti ti-{{ $resume->icon }}"></i>
                                         </span>
                                     </div>
                                     <div class="col">
                                         <h4 class="font-weight-medium"> {{ $resume->name }} </h4>
-                                        <div class="text-secondary">
+                                        {{-- <div class="text-secondary">
+                                            {{ $resume->all }}
+                                        </div> --}}
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="text-primary display-6" >
                                             {{ $resume->all }}
                                         </div>
                                     </div>
@@ -135,10 +141,10 @@
                 </div>
 
             </div>
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 @livewire('erp.tasklist')
 
-            </div>
+            </div> --}}
 
         </div>
 

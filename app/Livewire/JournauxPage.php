@@ -23,7 +23,7 @@ class JournauxPage extends Component
             array('name' => 'Journaux', 'route' => route('journaux')),
         );
         return view('livewire.journaux-page',[
-            'journaux' => Journal::search($this->search)->paginate(20),
+            'journaux' => Journal::search($this->search, 'title')->paginate(20),
         ]);
     }
 

@@ -34,7 +34,7 @@
                         {{ nl2br($invoice->description) }}
                     </div>
                     <div class="col-md-6"> {{ date_format($invoice->created_at, "d-m-Y") }} </div>
-                    <div class="col-md-6 text-end">1 800 000 F</div>
+                    <div class="col-md-6 text-end">{{  $invoice->total() }} F</div>
                 </div>
             </div>
         </a>

@@ -37,6 +37,25 @@ class Invoice extends Model
         return $this->hasMany(InvoiceSection::class);
     }
 
+    public function total()
+    {
+
+        $result = collect($this->sections())->reduce(function ($total, $item) {
+            $total['price'] += $item['price'];
+            $total['discount'] += $item['discount'];
+            return $total;
+        }, ['price' => 0, 'discount' => 0]);
+
+
+        // foreach ($this->sections as $section) {
+        //     foreach ($section->rows as $row) {
+        //         $total += $row->quantite * $row->coef * $row->prix;
+        //     }
+        // }
+
+        return $result;
+    }
+
     public function acomptes(): HasMany
     {
         return $this->hasMany(InvoiceAcompte::class);

@@ -3,6 +3,8 @@
         @livewire('form.journal-add',['projet_id'=>$projet_id])
     @endcomponent
 
+    <div>sqdfs</div>
+
     <div class="row g-2">
         <div class="col-md-8">
             <div class="row g-2">

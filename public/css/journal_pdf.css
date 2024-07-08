@@ -33,5 +33,6 @@ thead {
 }
 
 th {
+    text-transform: capitalize;
     padding: 4px;
 }

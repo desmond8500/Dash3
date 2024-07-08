@@ -66,14 +66,13 @@ class PDFController extends Controller
     }
 
     public static function journal_pdf($journal_id){
-        $carbon = new Carbon();
-
         $journal = Journal::find($journal_id);
+        $carbon = new Carbon($journal->date);
 
         $data = [
             'logo' => env('LOGO', ''),
-            'title' => "Rapport d'intervention",
-            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px; color: #219C90;'),
+            'title' => $journal->type ?? "Rapport d'intervention",
+            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
             'journal' => $journal,
             'carbon' => $carbon,
             'color1' => env('COLOR1', '219C90'),

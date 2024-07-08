@@ -32,14 +32,14 @@
                     </div>
                 @endif
             </td>
-            <td width="300px" class="border_white fw-bold" align="left" style="{{ $title_css }}" >
+            <td width="300px" class="border_white fw-bold" align="left" style="{{ $title_css }}; color: #{{ $color1 }}" >
                 <div>{{ env('MAIN_NAME') }}</div>
             </td>
             <td align="right" class="border_white">
                 <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">{{ $title }}</div>
                 {{-- <div><b>{{ $commande->name }}</b></div> --}}
                 {{-- <div><i>{{ str_pad($carbon->day,2, '0', STR_PAD_LEFT) }} - {{ str_pad($carbon->month,2, '0', STR_PAD_LEFT) }} - {{ $carbon->year }}</i></div> --}}
-                <i>{{ $journal->date }}</i>
+                <i>{{ $journal->formatDate() }}</i>
             </td>
         </tr>
     </table>

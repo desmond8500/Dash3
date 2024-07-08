@@ -42,8 +42,9 @@ class JournauxPage extends Component
         $this->dispatch('close-editJournal');
     }
 
-    function delete_journal()
+    function delete_journal($journal_id)
     {
+        $this->journalForm->set($journal_id);
         $this->journalForm->delete();
         $this->dispatch('close-editJournal');
     }

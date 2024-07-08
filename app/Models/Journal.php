@@ -23,6 +23,7 @@ class Journal extends Model
         'title',
         'date',
         'description',
+        'type',
     ];
 
     public function client(): BelongsTo

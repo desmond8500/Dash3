@@ -21,6 +21,7 @@ class JournalForm extends Form
     #[Rule('required')]
     public $date;
     public $description;
+    public $type;
 
     function fix(){
         $this->title = ucfirst($this->title);
@@ -43,6 +44,7 @@ class JournalForm extends Form
         $this->title = $this->journal->title;
         $this->date = $this->journal->date;
         $this->description = $this->journal->description;
+        $this->type = $this->journal->type;
     }
 
     function update(){

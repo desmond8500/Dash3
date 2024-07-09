@@ -37,7 +37,10 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">{{ $journal->title }}</div>
+                    <div class="card-title">
+                        <div style="font-size: 12px;" class="text-primary">{{ $journal->formatDate() }}</div>
+                        <div>{{ $journal->title }}</div>
+                    </div>
                     <div class="card-actions">
                         <button class="btn btn-primary btn-icon" wire:click="edit_journal('{{ $journal->id }}')">
                             <i class="ti ti-edit"></i>

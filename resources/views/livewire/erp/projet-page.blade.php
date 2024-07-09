@@ -6,11 +6,11 @@
         </div>
     @endcomponent
 
-    <div class="row g-2">
+    <div class="row g-2" wire:ignore>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                    <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" >
                         <li class="nav-item">
                             <a href="#tabs-resume" class="nav-link active" data-bs-toggle="tab">
                                 <i class="ti ti-home"></i> Résumé

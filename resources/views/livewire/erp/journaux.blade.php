@@ -1,10 +1,11 @@
 <div>
-    @component('components.layouts.page-header', ['title'=> 'Journaux'])
-        @livewire('form.journal-add',['projet_id'=>$projet_id])
+    {{-- @component('components.layouts.page-header', ['title'=> 'Journaux'])
     @endcomponent
+     --}}
 
-    <div>sqdfs</div>
-
+    {{-- <div class="d-flex justify-content-end">
+        @livewire('form.journal-add',['projet_id'=>$projet_id])
+    </div> --}}
     <div class="row g-2">
         <div class="col-md-8">
             <div class="row g-2">

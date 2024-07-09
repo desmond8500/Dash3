@@ -4,6 +4,7 @@ namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\JournalForm;
 use App\Models\Journal;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -15,6 +16,7 @@ class Journaux extends Component
         $this->projet_id = $projet_id;
     }
 
+    #[On('get-news')]
     public function render()
     {
         return view('livewire.erp.journaux',[

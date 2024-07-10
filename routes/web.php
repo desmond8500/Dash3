@@ -53,6 +53,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projet/{projet_id}', ProjetPage::class)->name('projet');
     // Devis
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
+    Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) {
+        return PDFController::facture_pdf($invoice_id, $type);
+    })->name('facture_pdf');
     // Journaux
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
     // Contacts

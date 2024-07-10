@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <div>{{ $devis->client_name }}</div>
+                        <div>{{ $devis->client_name ?? $devis->projet->client->name.' - '.$devis->projet->name }}</div>
                         <div class="text-primary">#{{ $devis->reference }}</div>
                         <div class="" style="font-size: 13px; font-weight:normal;">
                             <div>{!! nl2br($devis->description) !!}</div>
@@ -47,16 +47,16 @@
                                 <div class="dropdown-divider"></div>
 
                                 <span class="dropdown-header">Devis</span>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
+                                <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                                <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
+                                <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
 
                                 <div class="dropdown-divider"></div>
 
                                 <span class="dropdown-header">Facture</span>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Facture d'acompte </a>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
+                                <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
+                                <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>"Facture d'acompte"]) }}"> <i class="ti ti-file-type-pdf"></i> Facture d'acompte </a>
+                                <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
 
                                 <div class="dropdown-divider"></div>
 

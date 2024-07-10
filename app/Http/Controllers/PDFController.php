@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Achat;
 use App\Models\Building;
 use App\Models\Commande;
+use App\Models\Invoice;
+use App\Models\InvoiceSection;
 use App\Models\Journal;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -82,6 +84,27 @@ class PDFController extends Controller
 
         $pdf = Pdf::loadView('_pdf.journal_pdf', $data);
         return $pdf->stream($journal->date.' - '.$journal->projet->name.' - ' . $data['title']);
+        // return $pdf->download('sdfsd');
+    }
+    public static function facture_pdf($invoice_id,$type, $acompte = 0){
+        $devis = Invoice::find($invoice_id);
+        $carbon = new Carbon($devis->date);
+
+        $data = [
+            'logo' => env('LOGO', ''),
+            'title' => $type ?? "Facture",
+            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
+            'devis' => $devis,
+            'carbon' => $carbon,
+            'acompte' => $acompte,
+            'sections' => InvoiceSection::where('invoice_id', $devis->id)->get(),
+            'color1' => env('COLOR1', '219C90'),
+            'color2' => env('COLOR2', '219C90'),
+            'color3' => env('COLOR3', '219C90'),
+        ];
+
+        $pdf = Pdf::loadView('_pdf.facture_pdf', $data);
+        return $pdf->stream($devis->date.' - '.$devis->projet->name);
         // return $pdf->download('sdfsd');
     }
 }

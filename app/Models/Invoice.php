@@ -40,11 +40,11 @@ class Invoice extends Model
     public function total()
     {
 
-        $result = collect($this->sections())->reduce(function ($total, $item) {
-            $total['price'] += $item['price'];
-            $total['discount'] += $item['discount'];
-            return $total;
-        }, ['price' => 0, 'discount' => 0]);
+        // $result = collect($this->sections())->reduce(function ($total, $item) {
+        //     $total['price'] += $item['price'];
+        //     $total['discount'] += $item['discount'];
+        //     return $total;
+        // }, ['price' => 0, 'discount' => 0]);
 
 
         // foreach ($this->sections as $section) {
@@ -53,7 +53,8 @@ class Invoice extends Model
         //     }
         // }
 
-        return $result;
+        // return $result;
+        return 0;
     }
 
     public function acomptes(): HasMany

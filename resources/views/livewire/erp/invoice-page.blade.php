@@ -1,9 +1,9 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Devis', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
-            @livewire('form.task-add', ['devis_id' => $devis->id])
-            @livewire('form.article-add')
-            {{-- <button class="btn btn-primary" wire:click="$dispatch('open-addSection')">
+            {{-- @livewire('form.task-add', ['devis_id' => $devis->id]) --}}
+            {{-- @livewire('form.article-add') --}}
+            <button class="btn btn-primary" wire:click="$dispatch('open-addSection')">
                 <i class="ti ti-plus"></i> Section
             </button>
 
@@ -19,19 +19,19 @@
                         <i class="ti ti-heart"></i>
                     </a>
                 @endif
-            </div> --}}
+            </div>
         </div>
     @endcomponent
 
     <div class="row g-2">
         <div class="col-md-8">
-            {{-- @include('_erp.invoice.invoice_table') --}}
+            @include('_erp.invoice.invoice_table')
         </div>
         <div class="col-md-4">
 
-            {{-- @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id]) --}}
+            @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
 
-            {{-- @livewire('erp.invoice-spent', ['invoice_id' => $devis->id]) --}}
+            @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
 
 
             <div class="card mb-1">

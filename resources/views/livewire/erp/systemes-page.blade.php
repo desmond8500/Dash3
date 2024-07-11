@@ -6,17 +6,21 @@
         </div>
     @endcomponent
 
-    @foreach ($systemes as $systeme)
-        <div class="btn-group">
-            <button class="btn" >{{ $systeme->name}}</button>
-            <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $systeme->id }}')">
-                <i class="ti ti-edit"></i>
-            </button>
-            <button class="btn btn-outline-danger btn-icon" wire:click="delete('{{ $systeme->id }}')" wire:confirm='Etes vous sure de vouloir supprimer ce système ?'>
-                <i class="ti ti-trash"></i>
-            </button>
-        </div>
-    @endforeach
+    <div class="row g-2">
+        @foreach ($systemes as $systeme)
+            <div class="col-auto">
+                <div class="btn-group">
+                    <button class="btn" >{{ $systeme->name}}</button>
+                    <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $systeme->id }}')">
+                        <i class="ti ti-edit"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-icon" wire:click="delete('{{ $systeme->id }}')" wire:confirm='Etes vous sure de vouloir supprimer ce système ?'>
+                        <i class="ti ti-trash"></i>
+                    </button>
+                </div>
+            </div>
+        @endforeach
+    </div>
 
     @component('components.modal', ["id"=>'editSysteme', 'title' => 'Editer le système'])
         <form class="row" wire:submit="update">

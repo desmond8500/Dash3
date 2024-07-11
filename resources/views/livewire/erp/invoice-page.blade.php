@@ -55,7 +55,7 @@
 
                                 <span class="dropdown-header">Facture</span>
                                 <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
-                                <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>"Facture d'acompte"]) }}"> <i class="ti ti-file-type-pdf"></i> Facture d'acompte </a>
+                                {{-- <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>"Facture d'acompte"]) }}"> <i class="ti ti-file-type-pdf"></i> Facture d'acompte </a> --}}
                                 <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
 
                                 <div class="dropdown-divider"></div>

@@ -81,6 +81,7 @@ class ProjetPage extends Component
     {
         $this->building_form->update();
         $this->dispatch('close-editBuilding');
+
     }
 
     // Projets

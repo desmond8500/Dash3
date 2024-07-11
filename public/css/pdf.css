@@ -22,6 +22,18 @@
     font-family: merriwheather;
 }
 
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid grey;
+    padding-top: 5px;
+    text-align: center;
+    font-size: 15px;
+}
+
 
 
 

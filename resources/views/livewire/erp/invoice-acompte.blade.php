@@ -48,6 +48,9 @@
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
                                     <a class="dropdown-item text-success" href="#" wire:click="edit('{{ $acompte->id }}')"><i class="ti ti-edit"></i> Editer</a>
                                     <a class="dropdown-item text-danger" href="#" wire:click="delete('{{ $acompte->id }}')"><i class="ti ti-trash"></i> Supprimer</a>
+                                    <a class="dropdown-item" target="_blank" href="{{ route('facture_acompte_pdf',[
+                                        'invoice_id'=>$acompte->invoice_id,
+                                        'type'=>" Facture d'acompte",'acompte_id'=>$acompte->id]) }}"> <i class="ti ti-file-type-pdf"></i> Facture d'acompte </a>
                                 </div>
                             </div>
 

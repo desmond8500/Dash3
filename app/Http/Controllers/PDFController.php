@@ -6,6 +6,7 @@ use App\Models\Achat;
 use App\Models\Building;
 use App\Models\Commande;
 use App\Models\Invoice;
+use App\Models\InvoiceAcompte;
 use App\Models\InvoiceSection;
 use App\Models\Journal;
 use Illuminate\Http\Request;
@@ -86,7 +87,7 @@ class PDFController extends Controller
         return $pdf->stream($journal->date.' - '.$journal->projet->name.' - ' . $data['title']);
         // return $pdf->download('sdfsd');
     }
-    public static function facture_pdf($invoice_id,$type, $acompte = 0){
+    public static function facture_pdf($invoice_id,$type){
         $devis = Invoice::find($invoice_id);
         $carbon = new Carbon($devis->date);
 
@@ -96,7 +97,29 @@ class PDFController extends Controller
             'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
             'devis' => $devis,
             'carbon' => $carbon,
-            'acompte' => $acompte,
+            'acompte' => 0,
+            // 'acompte' => InvoiceAcompte::find($acompte_id),
+            'sections' => InvoiceSection::where('invoice_id', $devis->id)->get(),
+            'color1' => env('COLOR1', '219C90'),
+            'color2' => env('COLOR2', '219C90'),
+            'color3' => env('COLOR3', '219C90'),
+        ];
+
+        $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
+        return $pdf->stream($devis->date.' - '.$devis->projet->name);
+        // return $pdf->download('sdfsd');
+    }
+    public static function facture_acompte_pdf($invoice_id,$type, $acompte_id){
+        $devis = Invoice::find($invoice_id);
+        $carbon = new Carbon($devis->date);
+
+        $data = [
+            'logo' => env('LOGO', ''),
+            'title' => $type ?? "Facture",
+            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
+            'devis' => $devis,
+            'carbon' => $carbon,
+            'acompte' => InvoiceAcompte::find($acompte_id),
             'sections' => InvoiceSection::where('invoice_id', $devis->id)->get(),
             'color1' => env('COLOR1', '219C90'),
             'color2' => env('COLOR2', '219C90'),

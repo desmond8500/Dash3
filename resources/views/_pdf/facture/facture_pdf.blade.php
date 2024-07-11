@@ -139,5 +139,9 @@
         @endif
     </div>
 
+    <div class="footer">
+        @include('_pdf.facture.facture_footer_pdf')
+    </div>
+
 </body>
 </html>

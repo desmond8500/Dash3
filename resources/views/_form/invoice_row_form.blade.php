@@ -42,6 +42,14 @@
             <option value="7">Forfait</option>
         </select>
         @error('row_form.priority_id') <span class='text-danger'>{{ $message }}</span> @enderror
+
+        <label class="form-label">Section</label>
+        <select class="form-control" wire:model="row_form.invoice_section_id">
+            @foreach ($sections as $section)
+                <option value="{{ $section->id }}">{{ $section->section }}</option>
+            @endforeach
+        </select>
+        @error('row_form.invoice_section_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
     {{-- <div class="col-md-12 mb-3">

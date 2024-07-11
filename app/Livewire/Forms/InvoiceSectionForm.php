@@ -16,8 +16,13 @@ class InvoiceSectionForm extends Form
     public $section;
     public $ordre;
 
+    function fix(){
+        $this->section = ucfirst($this->section);
+    }
+
     function store(){
         $this->validate();
+        $this->fix();
         InvoiceSection::create($this->all());
     }
 
@@ -31,6 +36,7 @@ class InvoiceSectionForm extends Form
 
     function update(){
         $this->validate();
+        $this->fix();
         $this->invoice_section->update($this->all());
     }
 

@@ -25,7 +25,7 @@ class InvoicePage extends Component
     protected $paginationTheme = 'bootstrap';
     public $search ='';
     public $breadcrumbs;
-    public $devis, $devis_id;
+    public $devis;
 
     public function mount($invoice_id){
         $this->devis = Invoice::find($invoice_id);

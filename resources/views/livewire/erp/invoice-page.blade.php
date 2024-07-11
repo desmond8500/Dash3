@@ -9,15 +9,15 @@
 
             <div class="col-auto md-3">
                 @if ($devis->favorite)
-                    <button class="btn btn-secondary btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()"
+                    <a class="btn btn-secondary btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()"
                         title="Supprimmer aux favoris">
                         <i class="ti ti-heart"></i>
-                    </button>
+                    </a>
                 @else
-                    <button class="btn btn-success btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()"
+                    <a class="btn btn-success btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()"
                         title="Ajouter aux favoris">
                         <i class="ti ti-heart"></i>
-                    </button>
+                    </a>
                 @endif
             </div>
         </div>

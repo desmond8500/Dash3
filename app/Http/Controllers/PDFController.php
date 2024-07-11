@@ -103,7 +103,7 @@ class PDFController extends Controller
             'color3' => env('COLOR3', '219C90'),
         ];
 
-        $pdf = Pdf::loadView('_pdf.facture_pdf', $data);
+        $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
         return $pdf->stream($devis->date.' - '.$devis->projet->name);
         // return $pdf->download('sdfsd');
     }

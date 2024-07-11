@@ -7,19 +7,18 @@
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/pdf.css">
     <link rel="stylesheet" href="css/text.css">
+    <link rel="stylesheet" href="css/margin.css">
     <link rel="stylesheet" href="css/journal_pdf.css">
     <title>Journal</title>
-
 </head>
 <body>
     @php
         $total = 0;
         $tva = 0;
         $carbon->locale('fr_FR');
-        // $carbon->create($commande->date)->locale('fr_FR');
     @endphp
 
-    <table class="table" style="margin-bottom: 10px;">
+    <table class="table" style="margin-bottom: 5px;">
         <tr>
             <td width="80px" class="border_white">
                 @if ($logo)
@@ -39,16 +38,17 @@
                 <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">{{ $title }}</div>
                 {{-- <div><b>{{ $commande->name }}</b></div> --}}
                 {{-- <div><i>{{ str_pad($carbon->day,2, '0', STR_PAD_LEFT) }} - {{ str_pad($carbon->month,2, '0', STR_PAD_LEFT) }} - {{ $carbon->year }}</i></div> --}}
-                {{-- <i>{{ $journal->formatDate() }}</i> --}}
+                @if ($title !="quantitatif")
+                    <i>#{{ $devis->reference }}</i>
+                @endif
             </td>
         </tr>
     </table>
 
-    <hr>
-    <div>
+    <div class="mt-1">
         <table>
-            <tr>
-                <td>
+            <tr style="border: 1px solid gray" >
+                <td class="border-white">
                     <div>
                         <span class="fw-bold">Client : </span> <span>{{ $devis->projet->client->name }}</span>
                     </div>
@@ -57,7 +57,7 @@
                     </div>
 
                 </td>
-                <td>
+                <td class="border-white">
                     <div class="fw-bold">Description</div>
                     <div>{!! nl2br($devis->description) !!}</div>
                 </td>
@@ -66,16 +66,16 @@
 
     </div>
 
-    <hr>
-
-    <div class="table-responsive">
+    <div class="mt-1">
         <table class="table ">
             <thead>
-                <tr>
-                    <th scope="col">Désignation</th>
+                <tr class="bg-green3 text-white" >
+                    <th scope="col" class="text-start">Désignation</th>
                     <th style="width:80px;" scope="col" class="text-center">Quantité</th>
-                    <th scope="col" class="text-center">Prix</th>
-                    <th scope="col" class="text-center">Total</th>
+                    @if ($title !="quantitatif")
+                        <th style="width: 80px;" scope="col" class="text-center">Prix</th>
+                        <th style="width: 100px;" scope="col" class="text-center">Total</th>
+                    @endif
                 </tr>
             </thead>
             @php
@@ -84,80 +84,60 @@
             @endphp
             @foreach ($sections as $key => $section)
             @php
-            $subtotal = 0;
+                $subtotal = 0;
             @endphp
             <tr>
-                <th scope="col" class="bg-primary-lt" colspan="4">
+                <th scope="col" class="bg-green2" colspan="{{ $title !="quantitatif" ? 4 : 2 }}">
                     <div>{{ $section->section }}</div>
                 </th>
-
             </tr>
 
             <tbody style="font-size: 13px;">
 
                 @foreach ($section->rows as $row)
-                @php
-                    $total += $row->quantite*$row->prix;
-                    $total_marge += $row->quantite*$row->coef*$row->prix;
-                    $subtotal += $row->quantite*$row->coef*$row->prix;
-                @endphp
-                <tr class="">
-                    <td scope="row" >
-                        <div>{{ $row->designation }}</div>
-                        <div class="text-muted">{{ nl2br($row->reference) }}</div>
-                    </td>
-                    <td class="text-center">{{ $row->quantite }}</td>
-                    <td class="text-center">
-                        <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
-                        {{-- <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div> --}}
-                    </td>
-                    <td class="text-center">
-                        <div>{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
-                        {{-- <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div> --}}
-                    </td>
-
-                </tr>
+                    @php
+                        $total += $row->quantite*$row->prix;
+                        $total_marge += $row->quantite*$row->coef*$row->prix;
+                        $subtotal += $row->quantite*$row->coef*$row->prix;
+                    @endphp
+                    <tr class="">
+                        <td scope="row" >
+                            <div class="fw-bold">{{ $row->designation }}</div>
+                            <div class="text-muted" style="font-size: 10px;">{{ nl2br($row->reference) }}</div>
+                        </td>
+                        <td class="text-center">{{ $row->quantite }}</td>
+                        @if ($title !="quantitatif")
+                            <td class="text-center">
+                                <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
+                                {{-- <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div> --}}
+                            </td>
+                            <td class="text-center">
+                                <div>{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
+                                {{-- <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div> --}}
+                            </td>
+                        @endif
+                    </tr>
                 @endforeach
-                <tr class="fw-bold">
-                    <td colspan="3">Sous Total</td>
-                    <td colspan="1" class="text-end"> {{ number_format($subtotal, 0,'.', ' ') }} F</td>
-                </tr>
+                @if ($title!="quantitatif")
+                    <tr class="fw-bold">
+                        <td colspan="3">Sous Total</td>
+                        <td colspan="1" class="text-end"> {{ number_format($subtotal, 0,'.', ' ') }} F</td>
+                    </tr>
+                @endif
             </tbody>
 
             @endforeach
 
         </table>
 
-        <hr>
+        @if ($title!="quantitatif")
+            @include('_pdf.facture.facture_total_pdf')
+        @endif
 
-        <table class="fw-bold">
-            <tr>
-                <td>TOTAL HT:</td>
-                <td class="text-end">{{ number_format($total_marge, 0,'.', ' ') }} F CFA</td>
-            </tr>
-            <tr>
-                <td>TVA</td>
-                <td class="text-end">0 F CFA</td>
-            </tr>
-            <tr>
-                <td>TOTAL TTC:</td>
-                <td class="text-end">{{ number_format($total_marge, 0,'.', ' ') }} F CFA</td>
-            </tr>
-        </table>
-
-        <hr>
-
-        <table>
-            <tr class="fw-bold">
-                <td><div >Montant Acompte à payer: </div></td>
-                <td class="text-end">{{ $acompte }} F CFA</td>
-            </tr>
-        </table>
-
-
-
+        @if ($acompte)
+            @include('_pdf.facture.facture_acompte_pdf')
+        @endif
     </div>
-
 
 </body>
 </html>

@@ -61,9 +61,8 @@
                                 <div class="dropdown-divider"></div>
 
                                 <span class="dropdown-header">Exporter</span>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Quantitatif XLS </a>
-                                <a class="dropdown-item" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
+                                <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
+                                <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Quantitatif XLS </a>
                             </div>
                         </div>
 

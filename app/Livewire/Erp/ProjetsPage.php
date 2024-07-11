@@ -57,7 +57,8 @@ class ProjetsPage extends Component
         $this->dispatch('close-editProjet');
     }
 
-    function delete() {
+    function delete($projet_id) {
+        $this->selected = Projet::find($projet_id);
         $this->selected->delete();
         $this->dispatch('close-editProjet');
     }

@@ -13,7 +13,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
                     <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')"> <i class="ti ti-edit me-2"></i> Editer</button>
-                    <button class="dropdown-item disabled" > <i class="ti ti-trash me-2"></i> Supprimer</button>
+                    <button class="dropdown-item text-danger" wire:click="delete('{{ $projet->id }}')" wire:confirm='Etes vous sur de vouloir supprimer ce projet ?'> <i class="ti ti-trash me-2"></i> Supprimer</button>
                 </div>
             </div>
 

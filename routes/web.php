@@ -1,5 +1,7 @@
 <?php
 
+use App\Exports\InvoiceExport;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PDFController;
 use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
@@ -31,6 +33,7 @@ use App\Livewire\Task\TaskPage;
 use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 // Index
 Route::get('/', IndexPage::class)->name('index');
@@ -59,6 +62,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) {
         return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id);
     })->name('facture_acompte_pdf');
+
+    Route::get('invoice_export/{invoice_id}',  function ($invoice_id){
+        return Excel::download(new InvoiceExport($invoice_id), 'invoices.xlsx');
+    })->name('invoice_export');
+
     // Route::get('/facture/facture_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) {
     //     return PDFController::facture_pdf($invoice_id, $type, $acompte_id);
     // })->name('facture_pdf');

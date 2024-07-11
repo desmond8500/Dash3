@@ -1,6 +1,9 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Devis', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
+            <button class="btn">
+                Importer Devis
+            </button>
             @livewire('form.task-add', ['devis_id' => $devis->id])
             {{-- @livewire('form.article-add') --}}
             <button class="btn btn-primary" wire:click="$dispatch('open-addSection')">

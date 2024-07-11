@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Invoice extends Model
 {
@@ -35,6 +36,11 @@ class Invoice extends Model
     public function sections(): HasMany
     {
         return $this->hasMany(InvoiceSection::class);
+    }
+
+    public function rows(): HasManyThrough
+    {
+        return $this->hasManyThrough(InvoiceRow::class, InvoiceSection::class);
     }
 
     public function total()

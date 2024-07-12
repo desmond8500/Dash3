@@ -108,7 +108,7 @@
                 <tr class="">
                     <td scope="row">
                         <div>{{ $row->designation }}</div>
-                        <div class="text-muted">{{ nl2br($row->reference) }}</div>
+                        <div class="text-muted">{!! nl2br($row->reference) !!}</div>
                     </td>
                     <td class="text-center">{{ $row->quantite }}</td>
                     <td class="text-center">{{ $row->coef }}</td>

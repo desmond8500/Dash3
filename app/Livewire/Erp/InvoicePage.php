@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Imports\InvoiceImport;
 use App\Livewire\Forms\InvoiceForm;
 use App\Livewire\Forms\InvoiceRowForm;
 use App\Livewire\Forms\InvoiceSectionForm;
@@ -16,6 +17,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InvoicePage extends Component
 {
@@ -188,5 +190,11 @@ class InvoicePage extends Component
 
     function close(){
         $this->dispatch('close-infoModal');
+    }
+
+    public $file;
+    function import(){
+        // $sections = InvoiceSection::where('invoice_id', $this->devis->id)->get();
+        Excel::import(new InvoiceImport, $this->file);
     }
 }

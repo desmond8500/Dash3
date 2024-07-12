@@ -1,7 +1,7 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Devis', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
-            <button class="btn">
+            <button class="btn" wire:click="$dispatch('open-importRows')">
                 Importer Devis
             </button>
             @livewire('form.task-add', ['devis_id' => $devis->id])
@@ -241,6 +241,25 @@
         </form>
         <script> window.addEventListener('open-editRow', event => { $('#editRow').modal('show'); }) </script>
         <script> window.addEventListener('close-editRow', event => { $('#editRow').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'importRows', 'title'=>'Importer des articles', 'class'=> $row_class])
+        <form class="row" wire:submit="import">
+            {{-- @include('_form.invoice_row_form') --}}
+
+            <div class="col-md-12 mb-3">
+                <label class="form-label">Fichier</label>
+                <input type="file" class="form-control" wire:model="file" placeholder="Fichier">
+                @error('file') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-importRows', event => { $('#importRows').modal('show'); }) </script>
+        <script> window.addEventListener('close-importRows', event => { $('#importRows').modal('hide'); }) </script>
     @endcomponent
 
     {{-- Informations --}}

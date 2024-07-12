@@ -13,19 +13,15 @@
                 <a href="#" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Actions</a>
                 <div class="dropdown-menu">
                     <span class="dropdown-header">Devis</span>
-                    <a class="dropdown-item text-success" href="#" wire:click="edit({{ $devis->id }})"> <i
-                            class="ti ti-edit"></i> Modifier </a>
+                    <a class="dropdown-item text-success" href="#" wire:click="edit({{ $devis->id }})"> <i class="ti ti-edit"></i> Modifier </a>
                     <a class="dropdown-item text-danger" href="#"> <i class="ti ti-trash"></i> Supprimer </a>
 
                     <div class="dropdown-divider"></div>
 
                     <span class="dropdown-header">Devis</span>
-                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis PDF
-                    </a>
-                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple
-                        PDF </a>
-                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF
-                    </a>
+                    <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'devis']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
+                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
 
                     <div class="dropdown-divider"></div>
 
@@ -36,15 +32,12 @@
                     {{-- <a class="dropdown-item" target="_blank"
                         href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>" Facture d'acompte"]) }}"> <i
                             class="ti ti-file-type-pdf"></i> Facture d'acompte </a> --}}
-                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture
-                        Simple PDF </a>
+                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
 
                     <div class="dropdown-divider"></div>
 
                     <span class="dropdown-header">Exporter</span>
-                    <a class="dropdown-item" target="_blank"
-                        href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i
-                            class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
+                    <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
                     <a class="dropdown-item" target="_blank" href="{{ route('invoice_export',['invoice_id'=>$devis->id]) }}"> <i class="ti ti-file-type-pdf"></i> Exporter Quantitatif XLS </a>
                 </div>
             </div>
@@ -75,7 +68,7 @@
             @endphp
             <tr>
                 <th scope="col" class="bg-primary-lt" colspan="2">
-                    <div>{{ $section->section }}</div>
+                    <div>{{ $section->id }} {{ $section->section }}</div>
                     <div>Sous Total: {{ $section->total() }}</div>
                     {{-- @foreach ($section->total as $item)
                     @dump($item)

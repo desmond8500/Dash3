@@ -3,6 +3,7 @@
 use App\Exports\InvoiceExport;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PDFController;
+use App\Imports\InvoiceImport;
 use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
@@ -66,6 +67,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('invoice_export/{invoice_id}',  function ($invoice_id){
         return Excel::download(new InvoiceExport($invoice_id), 'invoices.xlsx');
     })->name('invoice_export');
+
+    Route::post('invoice_import', 'InvoiceController@import')->name('invoice_import');
 
     // Route::get('/facture/facture_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) {
     //     return PDFController::facture_pdf($invoice_id, $type, $acompte_id);

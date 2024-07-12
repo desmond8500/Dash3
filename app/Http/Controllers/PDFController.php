@@ -106,7 +106,7 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->stream($devis->date.' - '.$devis->projet->name);
+        return $pdf->stream($devis->reference.' - '.$devis->projet->name);
         // return $pdf->download('sdfsd');
     }
     public static function facture_acompte_pdf($invoice_id,$type, $acompte_id){

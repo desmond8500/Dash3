@@ -25,5 +25,8 @@ class InvoiceExport implements FromView
         ]);
     }
 
-
+    public function startCell(): string
+    {
+        return 'A2';
+    }
 }

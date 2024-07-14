@@ -26,7 +26,7 @@
         <div class="row g-2">
             <div class="col-md-12">
             {{-- <div class="col-md-8"> --}}
-                <div class="row">
+                <div class="row g-2">
                     @foreach ($resumes as $resume)
                         <a class="col-md-3 mb-1" href="{{ $resume->route }}">
                             <div class="card p-2">

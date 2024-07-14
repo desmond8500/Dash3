@@ -29,7 +29,7 @@ class ClientsPage extends Component
     {
         return view('livewire.erp.clients-page', [
             "breadcrumbs" => $this->breadcrumbs,
-            'clients' => Client::search($this->search)->paginate(10),
+            'clients' => Client::search($this->search)->paginate(20),
         ]);
     }
 

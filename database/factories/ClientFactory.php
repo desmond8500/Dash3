@@ -18,7 +18,7 @@ class ClientFactory extends Factory
         $type =  $array[array_rand($array, 1)];
 
         return [
-            'name' => $this->faker->company(),
+            'name' => $type == "Entreprise" ? $this->faker->company() : $this->faker->name(),
             'type' => $type,
             'address' => $this->faker->address(),
             'description' => $this->faker->text($maxNbChars = 100),

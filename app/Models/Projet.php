@@ -29,6 +29,9 @@ class Projet extends Model
     public function devis(): HasMany {
         return $this->hasMany(Invoice::class);
     }
+    public function invoices(): HasMany {
+        return $this->hasMany(Invoice::class);
+    }
 
     public function buildings(): HasMany
     {
@@ -38,5 +41,10 @@ class Projet extends Model
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function journals(): HasMany
+    {
+        return $this->hasMany(Journal::class);
     }
 }

@@ -3,11 +3,11 @@
         <div class="card p-2 mb-2">
             <div class="row">
                 <div class="col-auto">
-                    <img class="avatar avatar-md" src="{{ asset($projet->client->avatar) }}" alt="A">
+                    <img class="avatar avatar" src="{{ asset($projet->client->avatar) }}" alt="A">
                 </div>
                 <div class="col">
                     <h4>{{ $projet->name }}</h4>
-                    <p>{{ nl2br($projet->description) }}</p>
+
                 </div>
                 <div class="col-auto">
                     <div class="dropdown open">
@@ -18,11 +18,12 @@
                             <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')">Editer</button>
                         </div>
                     </div>
-
-
                     <div class="dropdown-menu" aria-labelledby="triggerId">
                         <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')">Editer</button>
                     </div>
+                </div>
+                <div class="col-md-12">
+                    <p class="mt-2">{{ nl2br($projet->description) }}</p>
                 </div>
             </div>
         </div>

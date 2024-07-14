@@ -16,14 +16,8 @@ class InvoiceFactory extends Factory
 
     public function definition(): array
     {
-        $projet_id = random_int(1, 30);
-        $projet = Projet::find($projet_id);
-
         return [
-            'projet_id' => $projet->id,
-            'client_name' => $projet->client->name,
-            'projet_name' => $projet->name,
-            'reference' => ErpController::getInvoiceReference($projet),
+            'reference' => "DSR-152-24",
             'description' => $this->faker->text($maxNbChars = 100),
             'modalite' => '',
             'note' => '',

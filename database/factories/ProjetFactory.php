@@ -16,7 +16,7 @@ class ProjetFactory extends Factory
     {
         return [
             'client_id' => rand(1, 50),
-            'name' => $this->faker->name(),
+            'name' => $this->faker->company(),
             'description' => $this->faker->text($maxNbChars = 100),
         ];
     }

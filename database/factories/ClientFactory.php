@@ -16,12 +16,15 @@ class ClientFactory extends Factory
     {
         $array = array("Entreprise", "Particulier");
         $type =  $array[array_rand($array, 1)];
+        $avatar = 'https://picsum.photos/200/300';
 
         return [
             'name' => $type == "Entreprise" ? $this->faker->company() : $this->faker->name(),
             'type' => $type,
             'address' => $this->faker->address(),
             'description' => $this->faker->text($maxNbChars = 100),
+            // 'avatar' => $this->faker->imageUrl(200,200),
+            'avatar' => $avatar,
         ];
     }
 }

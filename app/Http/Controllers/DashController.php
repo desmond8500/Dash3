@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Invoice;
+use App\Models\Journal;
+use App\Models\Projet;
+use App\Models\Task;
 use App\Models\TaskPriority;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -47,10 +51,12 @@ class DashController extends Controller
     }
 
     static function init_clients(){
-        // Client::create('');
-
-        Client::factory(24)->create();
-
+        Client::factory(24)
+            ->has(Projet::factory(5)
+                ->has(Task::factory(3))
+                ->has(Journal::factory(3))
+                ->has(Invoice::factory(3))
+            )->create();
     }
 
     static function init_projets(){

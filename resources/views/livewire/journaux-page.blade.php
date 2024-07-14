@@ -8,7 +8,7 @@
     <div class="row g-2">
         <div class="col-md-12">
             <div class="row row-deck g-2">
-                @forelse ($journaux as $journal)
+                @forelse ($journaux->sortbydesc('date') as $journal)
                     <div class="col-md-4">
                         @component('_card.journal_card',['journal'=>$journal]) @endcomponent
                     </div>

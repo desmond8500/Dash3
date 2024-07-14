@@ -20,7 +20,7 @@ class TaskFactory extends Factory
             'name' => $this->faker->name(),
             'description' => $this->faker->realText($maxNbChars = 100),
             'priority_id' => $this->faker->numberBetween(1,3),
-            'statut_id' => 1,
+            'statut_id' => $this->faker->numberBetween(1, 4),
         ];
     }
 }

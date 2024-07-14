@@ -3,9 +3,10 @@
         @php $date = new Carbon\Carbon($journal->date); @endphp
 
         <div class="col-auto text-primary">
-            <div class="text-center border rounded p-1" >
-                <div class="fw-bold">{{ $date->format('m')}}-{{ $date->format('y')}}</div>
+            <div class="text-center border rounded p-1" style="width: 70px">
+                <div class="fw-bold">{{ $date->shortMonthName}}</div>
                 <div class="display-6">{{ $date->format('d') }}</div>
+                <div class="fw-bold">{{ $date->format('Y')}}</div>
             </div>
         </div>
         <div class="col">

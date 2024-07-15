@@ -179,4 +179,5 @@ class PDFController extends Controller
         return $pdf->stream('pdf');
         // return $pdf->download('sdfsd');
     }
+
 }

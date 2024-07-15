@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/text.css">
-    <link rel="stylesheet" href="css/badge/arp.css">
+    <link rel="stylesheet" href="css/badge/arp2.css">
     <title>PDF Test</title>
 
 </head>
@@ -25,31 +25,33 @@
     </style>
 
     <div>
-        <table >
-            <tr style="padding: 0px;">
-                <td  style="padding: 0px;">
-                    <img src="{{ $flag }}"  width="80px" alt="" class="flag" style="position: absolute;">
-                    {{-- <div style="margin: auto">
-                        <img src="{{ $photo }}" width="100px" alt="" class="photo" >
-                    </div> --}}
+        <table class="table">
+            <tr style="padding: 0px; height: 50px">
+                <td  style="padding: 0px; ">
+                    <img src="{{ $flag }}"  width="80px" alt="" class="flag" >
                 </td>
                 <td  class="logo" style="padding: 0px;">
                     <img src="{{ $logo }}"  width="150px" alt="" class="logo" style="margin-right: 10px">
                 </td>
             </tr>
             <tr>
-                <td>
+                <td rowspan="3" height="130px">
                     <div class="photo">
-                        <img src="{{ $photo }}" width="100px" alt="" style="margin-top: 20px; margin-left:20px;">
+                        <img src="{{ $photo }}" width="100%">
                     </div>
                 </td>
                 <td>
-                    <div style="margin-bottom: 10px; text-transform:uppercase;">
-                        <div>{{ $prenom }}</div>
-                        <div>{{ $nom }}</div>
-                    </div>
+                    <div>{{ $prenom }} {{ $nom }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <div class="fonction">{{ $fonction }}</div>
-                    <div class="direction" >{{ $direction }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <div class="direction">{{ $direction }}</div>
                 </td>
             </tr>
         </table>

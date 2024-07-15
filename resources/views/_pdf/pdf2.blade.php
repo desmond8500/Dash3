@@ -56,11 +56,11 @@
             </table> --}}
 
             <table class="table">
-                <tr style="padding: 0px; height: 50px">
+                <tr style="height: 50px">
                     <td style="padding: 0px; ">
                         <img src="{{ $flag }}" width="80px" alt="" class="flag">
                     </td>
-                    <td class="logo" style="padding: 0px;">
+                    <td class="logo">
                         <img src="{{ $logo }}" width="150px" alt="" class="logo" >
                     </td>
                 </tr>
@@ -68,17 +68,16 @@
                     <td rowspan="3" height="140px" width="130px">
                         <div class="photo">
                             <div class="img">
-
                                 <img src="{{ $card->photo }}" class="avatar">
                             </div>
                         </div>
                     </td>
-                    <td style="vertical-align: bottom;">
+                    <td style="vertical-align: bottom; padding-right: 5px;">
                         <div class="nom">{{ $card->prenom }} {{ $card->nom }}</div>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="padding-right: 5px;">
                         <div class="fonction">{{ $card->fonction }}</div>
                     </td>
                 </tr>

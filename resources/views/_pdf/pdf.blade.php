@@ -39,7 +39,9 @@
             </tr>
             <tr>
                 <td>
-                    <img src="{{ $photo }}" width="100px" alt="" style="margin-top: 20px; margin-left:20px;">
+                    <div class="photo">
+                        <img src="{{ $photo }}" width="100px" alt="" style="margin-top: 20px; margin-left:20px;">
+                    </div>
                 </td>
                 <td>
                     <div style="margin-bottom: 10px; text-transform:uppercase;">

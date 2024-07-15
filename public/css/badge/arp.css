@@ -23,18 +23,22 @@ td {
 }
 
 .photo{
-    z-index: 2;
-    position: relative;
-    top: 20px;
+    width: 100px;
+    /* border: 1px solid black; */
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 15px;
 }
 
 .fonction{
     background: #51c59e;
-    height: 40px;
+    /* height: 40px; */
+    padding: 5px;
     text-align: center;
     font-weight: bold;
     padding: 3px;
     border-radius: 5px;
+    /* width: 100%; */
 }
 
 .direction{
@@ -42,4 +46,13 @@ td {
     font-size: 13px;
     text-align: center;
     margin-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.service{
+    margin-top: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 10px;
 }

@@ -40,7 +40,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <img src="{{ $card->photo }}" width="100px" alt="" style="margin-top: 20px; margin-left:20px;">
+                        <div class="photo">
+                            <img src="{{ $card->photo }}" width="100px" alt="" style="border-radius: 15px;">
+                        </div>
                     </td>
                     <td>
                         <div style="margin-bottom: 10px; text-transform:uppercase;">
@@ -48,6 +50,7 @@
                             <div>{{ $card->nom }}</div>
                         </div>
                         <div class="fonction">{{ $card->fonction }}</div>
+                        <div class="service" >{{ $card->service }}</div>
                         <div class="direction" >{{ $card->direction }}</div>
                     </td>
                 </tr>

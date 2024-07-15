@@ -73,6 +73,12 @@ class BadgeForm extends Form
     function update(){
         // $this->validate();
         $this->badge->update($this->all());
+
+        if ($this->photo) {
+            $this->storeAvatar($this->badge,
+                $this->photo
+            );
+        }
     }
 
     function delete($id){

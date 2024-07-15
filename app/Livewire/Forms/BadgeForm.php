@@ -39,6 +39,8 @@ class BadgeForm extends Form
         if ($this->photo) {
             $this->storeAvatar($badge, $this->photo);
         }
+
+        $this->reset('prenom', 'nom', 'fonction', 'service', 'direction', 'photo');
     }
 
     function storeAvatar($badge, $photo)

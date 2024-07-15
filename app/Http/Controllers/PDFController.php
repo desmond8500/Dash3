@@ -130,4 +130,21 @@ class PDFController extends Controller
         return $pdf->stream($devis->date.' - '.$devis->projet->name);
         // return $pdf->download('sdfsd');
     }
+    public static function pdf_test(){
+        $carbon = new Carbon();
+
+        $data = [
+            'logo' => "img/arp/logo.png",
+            'flag' => "img/arp/flag.png",
+            'photo' => "img/arp/Pr Djibril Fall.jpg",
+            'prenom' => "Khady",
+            'nom' => "Tine",
+            'fonction' => "Analyste SOC Niveau 2  sdfsdfsdfsdfsd sdfsdf",
+            'direction' => "Direction de l'administration et des finances ",
+        ];
+
+        $pdf = Pdf::loadView('_pdf.pdf', $data)->setPaper(array(0,0,246,492), 'landscape');
+        return $pdf->stream('pdf');
+        // return $pdf->download('sdfsd');
+    }
 }

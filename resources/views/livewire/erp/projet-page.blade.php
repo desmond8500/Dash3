@@ -96,8 +96,10 @@
 
                         <div class="tab-pane" id="tabs-dossier">
                             <h2>Dossier</h2>
-                            <div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at diam, sem nunc amet,
-                                pellentesque id egestas velit sed</div>
+                            {{-- <div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at diam, sem nunc amet,
+                                pellentesque id egestas velit sed</div> --}}
+
+                            @livewire('badges', ['projet_id' => $projet_id])
                         </div>
 
                         <div class="tab-pane" id="tabs-reglages">

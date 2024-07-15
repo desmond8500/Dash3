@@ -70,18 +70,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('invoice_import', 'InvoiceController@import')->name('invoice_import');
 
-    // Route::get('/facture/facture_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) {
-    //     return PDFController::facture_pdf($invoice_id, $type, $acompte_id);
-    // })->name('facture_pdf');
     // Journaux
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
     // Contacts
     Route::get('/contacts', ContactsPage::class)->name('contacts');
     // Taches
     Route::get('/tasks', TasksPage::class)->name('tasks');
-    // Route::get('/tasks_pdf/{tasks}',  function ($tasks) {
-    //     return PDFController::tasks_pdf($tasks);
-    // })->name('tasks_pdf');
 
     Route::get('/tasks_pdf/{id}/{type?}/{search?}/{status?}',  function ($id, $type='', $search='', $status=true) {
         return PDFController::tasks_pdf($id, $type, $search, $status);
@@ -153,6 +147,9 @@ Route::get('/finances', FinancesPage::class)->name('finances');
 
 // Test
 Route::get('/test', TestPage::class)->name('test');
+Route::get('pdf_test', function () {
+    return PDFController::pdf_test();
+})->name('pdf_test');
 
 // Test
 Route::get('/systemes', SystemesPage::class)->name('systemes');

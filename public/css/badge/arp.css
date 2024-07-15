@@ -1,0 +1,45 @@
+table,
+th,
+/* td {
+    border: 1px solid black; */
+    border-collapse: collapse;
+}
+
+td {
+    /* padding: 5px; */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.flag{
+
+}
+
+.logo{
+
+}
+
+.photo{
+    z-index: 2;
+    position: relative;
+    top: 20px;
+}
+
+.fonction{
+    background: #51c59e;
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.direction{
+    color: #51c59e;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 5px;
+}

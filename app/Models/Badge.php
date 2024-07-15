@@ -16,6 +16,7 @@ class Badge extends Model
         'nom',
         'fonction',
         'service',
+        'direction',
         'photo',
         'matricule',
         'adresse',

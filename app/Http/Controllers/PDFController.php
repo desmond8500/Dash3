@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Achat;
+use App\Models\Badge;
 use App\Models\Building;
 use App\Models\Commande;
 use App\Models\Invoice;
@@ -144,6 +145,37 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.pdf', $data)->setPaper(array(0,0,246,492), 'landscape');
+        return $pdf->stream('pdf');
+        // return $pdf->download('sdfsd');
+    }
+    public static function arp_card_pdf($card_id){
+        $card = Badge::find($card_id);
+
+        $data = [
+            'logo' => "img/arp/logo.png",
+            'flag' => "img/arp/flag.png",
+            'photo' => $card->photo ?? "img/arp/Pr Djibril Fall.jpg",
+            'prenom' => $card->prenom,
+            'nom' => $card->nom,
+            'fonction' => $card->fonction,
+            'direction' => $card->direction,
+            'service' => $card->service,
+        ];
+
+        $pdf = Pdf::loadView('_pdf.pdf', $data)->setPaper(array(0,0,246,492), 'landscape');
+        return $pdf->stream('pdf');
+        // return $pdf->download('sdfsd');
+    }
+    public static function arp_card_pdfs($projet_id){
+        $cards = Badge::where("projet_id", $projet_id)->get();
+
+        $data = [
+            'logo' => "img/arp/logo.png",
+            'flag' => "img/arp/flag.png",
+            'cards' => $cards
+        ];
+
+        $pdf = Pdf::loadView('_pdf.pdf2', $data)->setPaper(array(0,0,246,492), 'landscape');
         return $pdf->stream('pdf');
         // return $pdf->download('sdfsd');
     }

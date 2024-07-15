@@ -150,6 +150,12 @@ Route::get('/test', TestPage::class)->name('test');
 Route::get('pdf_test', function () {
     return PDFController::pdf_test();
 })->name('pdf_test');
+Route::get('arp_card_pdf/{card_id}', function ($card_id) {
+    return PDFController::arp_card_pdf($card_id);
+})->name('arp_card_pdf');
+Route::get('arp_card_pdf2/{projet_id}', function ($projet_id) {
+    return PDFController::arp_card_pdfs($projet_id);
+})->name('arp_card_pdfs');
 
 // Test
 Route::get('/systemes', SystemesPage::class)->name('systemes');

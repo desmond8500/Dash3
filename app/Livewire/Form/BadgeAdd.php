@@ -4,9 +4,11 @@ namespace App\Livewire\Form;
 
 use App\Livewire\Forms\BadgeForm;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class BadgeAdd extends Component
 {
+    use WithFileUploads;
     public $projet_id;
     public BadgeForm $badge_form;
 

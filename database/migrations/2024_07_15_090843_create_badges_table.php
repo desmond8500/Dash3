@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nom')->nullable();
             $table->string('fonction')->nullable();
             $table->string('service')->nullable();
+            $table->string('direction')->nullable();
             $table->string('photo')->nullable();
             $table->string('matricule')->nullable();
             $table->string('adresse')->nullable();

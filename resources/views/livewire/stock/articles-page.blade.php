@@ -1,9 +1,9 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Articles', 'breadcrumbs'=> $breadcrumbs])
         <div class="btn-list">
-            @livewire('form.article-add')
+            {{-- @livewire('form.article-add')
             @livewire('form.provider-add')
-            @livewire('form.brand-add')
+            @livewire('form.brand-add') --}}
         </div>
     @endcomponent
 
@@ -39,7 +39,7 @@
     </div>
 
 
-    {{-- @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article'])
+    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article'])
         <form class="row" wire:submit="update">
             @include('_form.article_form')
             <div class="modal-footer">
@@ -52,5 +52,5 @@
         </form>
         <script> window.addEventListener('open-editArticle', event => { $('#editArticle').modal('show'); }) </script>
         <script> window.addEventListener('close-editArticle', event => { $('#editArticle').modal('hide'); }) </script>
-    @endcomponent --}}
+    @endcomponent
 </div>

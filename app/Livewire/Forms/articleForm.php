@@ -18,17 +18,17 @@ class ArticleForm extends Form
     #[Validate('required')]
     public $reference;
     public $description;
-    #[Validate('numeric')]
+    // #[Validate('numeric')]
     public $quantity;
-    #[Validate('numeric')]
+    // #[Validate('numeric')]
     public $quantity_min;
-    #[Validate('numeric')]
+    // #[Validate('numeric')]
     public $priority_id;
-    #[Validate('numeric')]
+    // #[Validate('numeric')]
     public $brand_id;
-    #[Validate('numeric')]
+    // #[Validate('numeric')]
     public $provider_id;
-    #[Validate('numeric')]
+    // #[Validate('numeric')]
     public $price;
 
     function store(){

@@ -19,17 +19,17 @@ class ArticleForm extends Form
     public $reference;
     public $description;
     #[Validate('numeric')]
-    public $quantity = 0;
+    public $quantity;
     #[Validate('numeric')]
-    public $quantity_min = 0;
+    public $quantity_min;
     #[Validate('numeric')]
-    public $priority_id = 0;
+    public $priority_id;
     #[Validate('numeric')]
-    public $brand_id = 0;
+    public $brand_id;
     #[Validate('numeric')]
-    public $provider_id = 0;
+    public $provider_id;
     #[Validate('numeric')]
-    public $price = 0;
+    public $price;
 
     function store(){
         $this->validate();

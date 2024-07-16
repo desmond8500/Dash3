@@ -4,7 +4,8 @@
 
         <div class="col-auto text-primary">
             <div class="text-center border rounded p-1" style="width: 70px">
-                <div class="fw-bold">{{ $date->shortMonthName}}</div>
+                <div class="fw-bold text-muted" style="font-size: 10px">{{ ucfirst($date->dayName) }}</div>
+                <div class="fw-bold">{{ ucfirst($date->shortMonthName) }}</div>
                 <div class="display-6">{{ $date->format('d') }}</div>
                 <div class="fw-bold">{{ $date->format('Y')}}</div>
             </div>

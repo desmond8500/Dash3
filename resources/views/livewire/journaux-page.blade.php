@@ -8,7 +8,7 @@
     <div class="row g-2">
         <div class="col-md-12">
             <div class="row row-deck g-2">
-                @forelse ($journaux->sortbydesc('date') as $journal)
+                @forelse ($journaux->sortByDesc('date') as $journal)
                     <div class="col-md-4">
                         @component('_card.journal_card',['journal'=>$journal]) @endcomponent
                     </div>
@@ -19,9 +19,9 @@
                 @endforelse
             </div>
         </div>
-        {{-- <div class="col-md-4">
-
-        </div> --}}
+        <div class="col-md-12">
+            {{ $journaux->links() }}
+        </div>
     </div>
 
     @component('components.modal', ["id"=>'editJournal', 'title'=> 'Editer un journal'])

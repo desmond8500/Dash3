@@ -3,6 +3,7 @@
         <div class="btn-list">
             @livewire('form.badge-add', ['projet_id' => $projet_id])
             <a class="btn btn-primary" href="{{ route('arp_card_pdfs', ['projet_id'=>$projet_id]) }}" target="_blank">PDF</a>
+            <a class="btn btn-primary" wire:click="$dispatch('close-addbadge')" target="_blank">Actualiser</a>
         </div>
     </div>
 
@@ -33,22 +34,41 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="{{ asset($badge->photo) }}" class="img-fluid" alt="">
+                                <img src="{{ asset($badge->photo) }}" class="img-fluid rounded" alt="">
                             </div>
                             <div class="col-md-9">
-                                <div><b>Prénom :</b> {{ $badge->prenom }} </div>
-                                <div><b>Nom :</b> {{ $badge->nom }}</div>
-                                <div><b>Fonction :</b> {{ $badge->fonction }}</div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-bold">Prénom :</div> <div> {{ $badge->prenom }} </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-bold">Nom :</div> <div> {{ $badge->nom }}</div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-bold">Fonction :</div> <div> {{ $badge->fonction }}</div>
+                                </div>
                             </div>
                             <div class="col-md-12">
-                                <div><b>Service :</b> {{ $badge->service }}</div>
-                                <div><b>Direction :</b> {{ $badge->direction }}</div>
-                                <div><b>Matricule :</b> {{ $badge->matricule }}</div>
-                                <div><b>Adresse :</b> {{ $badge->adresse }}</div>
+
                             </div>
                         </div>
                     </div>
+                    <!-- Some borders are removed -->
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="fw-bold">Service :</div> <div> {{ $badge->service }}</div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="fw-bold">Direction :</div> <div> {{ $badge->direction }}</div>
 
+                        </li>
+                        <li class="list-group-item">
+                            <div class="fw-bold">Matricule :</div> <div> {{ $badge->matricule }}</div>
+
+                        </li>
+                        <li class="list-group-item">
+                            <div class="fw-bold">Adresse :</div> <div> {{ $badge->adresse }}</div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 

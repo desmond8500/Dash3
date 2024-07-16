@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-
+{{--
     <div class="col-md-4 mb-3">
         <label class="form-label">Priorite</label>
         <select class="form-control" wire:model="article_form.priority_id">
@@ -98,6 +98,6 @@
         <label class="form-label">Description</label>
         <textarea class="form-control" wire:model="article_form.description" placeholder="Description" cols="30" rows="5"></textarea>
         @error('article_form.description') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
+    </div> --}}
 
 </div>

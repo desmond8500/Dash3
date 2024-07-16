@@ -81,7 +81,7 @@
                 <option value="{{ $provider->id }}">{{ $provider->name }}</option>
             @endforeach
         </select>
-        @error('article_form.brand_id') <span class='text-danger'>{{ $message }}</span> @enderror
+        @error('article_form.provider_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
     <div class="col-md-4 mb-3">

@@ -1,9 +1,9 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Articles', 'breadcrumbs'=> $breadcrumbs])
         <div class="btn-list">
-            {{-- @livewire('form.article-add')
+            @livewire('form.article-add')
             @livewire('form.provider-add')
-            @livewire('form.brand-add') --}}
+            @livewire('form.brand-add')
         </div>
     @endcomponent
 

@@ -65,20 +65,27 @@
                     </td>
                 </tr>
                 <tr style="vertical-align: bottom;">
-                    <td rowspan="3" height="140px" width="130px">
+                    <td rowspan="4" height="{{ $card->prenom ? '140px' : '80px' }}" width="130px">
                         <div class="photo">
                             <div class="img">
                                 <img src="{{ $card->photo }}" class="avatar">
                             </div>
                         </div>
                     </td>
-                    <td style="vertical-align: bottom; padding-right: 5px;">
-                        <div class="nom">{{ $card->prenom }} {{ $card->nom }}</div>
-                    </td>
+                    {{-- @if ($card->prenom || $card->nom) --}}
+                        <td style="vertical-align: bottom; padding-right: 5px;">
+                            <div class="nom">{{ $card->prenom }} {{ $card->nom }}</div>
+                        </td>
+                    {{-- @endif --}}
                 </tr>
                 <tr>
                     <td style="padding-right: 5px;">
                         <div class="fonction">{{ $card->fonction }}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 5px;">
+                        <div class="service">{{ $card->service }}</div>
                     </td>
                 </tr>
                 <tr>

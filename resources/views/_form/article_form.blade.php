@@ -23,19 +23,17 @@
             <span class="avatar-upload-text">Add</span>
         </label>
     </div> --}}
-    <div class="col-md-8 mb-3">
+    {{-- <div class="col-md-8 mb-3">
         <div class="mb-3">
             <label class="form-label required">Désignation</label>
             <input type="text" class="form-control" wire:model="article_form.designation" placeholder="Désignation">
             @error('article_form.designation') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
-    {{-- </div>
 
-    <div class="col-md-12 mb-3"> --}}
         <label class="form-label required">Référence</label>
         <textarea class="form-control" wire:model="article_form.reference" placeholder="Référence" cols="30" rows="1"></textarea>
         @error('article_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
+    </div> --}}
 
     <div class="col-md-4 mb-3">
         <div class="row">

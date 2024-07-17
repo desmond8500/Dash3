@@ -23,7 +23,7 @@
         @endif
         <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
     </div> --}}
-{{--
+
     <div class="col-md-8 mb-3">
         <div class="mb-3">
             <label class="form-label required">Désignation</label>
@@ -97,6 +97,6 @@
         <label class="form-label">Description</label>
         <textarea class="form-control" wire:model="article_form.description" placeholder="Description" cols="30" rows="5"></textarea>
         @error('article_form.description') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div> --}}
+    </div>
 
 </div>

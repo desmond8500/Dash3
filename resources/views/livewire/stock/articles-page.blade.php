@@ -1,7 +1,7 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Articles', 'breadcrumbs'=> $breadcrumbs])
         <div class="btn-list">
-            {{-- @livewire('form.article-add') --}}
+            @livewire('form.article-add')
             @livewire('form.provider-add')
             @livewire('form.brand-add')
         </div>
@@ -26,7 +26,7 @@
         <div class="col-md-10">
             <div class="row row-deck g-2">
                 @foreach ($articles as $article)
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         @include('_card.articleCard')
                     </div>
                 @endforeach

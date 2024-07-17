@@ -27,6 +27,10 @@ class ArticleAdd extends Component
         ]);
     }
 
+    function add(){
+        $this->dispatch('open-addArticle');
+    }
+
     function store(){
         $this->validate();
         $this->article_form->store();

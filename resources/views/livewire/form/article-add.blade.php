@@ -1,5 +1,5 @@
 <div>
-    <button class="btn btn-primary" wire:click="$dispatch('open-addArticle')"><i class="ti ti-plus"></i> Article </button>
+    <a class="btn btn-primary" wire:click="add"><i class="ti ti-plus"></i> Article </a>
 
     @component('components.modal', ["id"=>'addArticle', 'title'=>'Ajouter un article'])
         <form class="row" wire:submit="store">

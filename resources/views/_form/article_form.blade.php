@@ -1,28 +1,27 @@
 <div class="row">
-    <div class="col-md-12">
-        <div wire:loading>
-            <div class="d-flex justify-content-between">
-                <div>Chargement <span class="animated-dots"></div>
-            </div>
+    <div class="col-auto mb-3">
+        <div wire:loading wire:target='article_form.image'>
+            Chargement <div class="spinner-border" role="status"></div>
         </div>
-    </div>
-    <div class="col-12 mb-3">
-
-        @isset($article_form->image)
-            @if ($article_form->image)
-                @foreach (glob(dirname($article_form->image)."/*") as $item)
-                    <img src="{{ asset($item) }}" class="avatar avatar-md rounded" alt="A">
-                @endforeach
+        {{-- @if ($article_form->image)
+            @if(is_string($article_form->image))
+                <img src="{{ $article_form->image }}" alt="" class="avatar rounded avatar-upload">
+            @else
+                <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload">
             @endif
-        @endisset
-
-
+            <label for="file" href="#" class="avatar avatar-upload rounded">
+                <i class="ti ti-edit text-muted"></i>
+                <span class="avatar-upload-text">Modifier</span>
+            </label>
+        @else
+            <label for="file" href="#" class="avatar avatar-upload rounded">
+                <i class="ti ti-plus text-muted"></i>
+                <span class="avatar-upload-text">Ajouter</span>
+            </label>
+        @endif --}}
         <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
-        <label for="file" href="#" class="avatar avatar-upload rounded">
-            <i class="ti ti-plus"></i>
-            <span class="avatar-upload-text">Add</span>
-        </label>
     </div>
+{{--  --}}
     <div class="col-md-8 mb-3">
         <div class="mb-3">
             <label class="form-label required">Désignation</label>

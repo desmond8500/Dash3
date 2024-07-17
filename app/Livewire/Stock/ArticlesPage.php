@@ -55,10 +55,9 @@ class ArticlesPage extends Component
     }
 
     // TODO: Voir les dépendnces de suppression
-    function delete(){
-        $article = Article::find($this->selected);
-        $article->delete();
-        $this->dispatch('get-articles');
+    function delete($article_id){
+        $this->article_form->delete($article_id);
+        // $this->dispatch('get-articles');
     }
 
     function dupliquer($article_id){

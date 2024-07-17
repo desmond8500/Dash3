@@ -1,7 +1,7 @@
 <div class="card p-2">
     <div class="row g-2">
         <div class="col-auto">
-            <img src="{{ asset("storage/$article->image") }}" alt="A" class="avatar avatar-xl">
+            <img src="{{ asset("$article->image") }}" alt="A" class="avatar avatar-xl">
         </div>
         <div class="col">
             <div class="row">
@@ -20,8 +20,8 @@
                         <a class="dropdown-item" wire:click="edit('{{ $article->id }}')">Editer</a>
                         <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')">Dupliquer</a>
                         <a class="dropdown-item" wire:click="buy('{{ $article->id }}')">Commander</a>
-                        {{-- <div class="dropdown-divider"></div> --}}
-                        {{-- <a class="dropdown-item" href="#" disabled>Action</a> --}}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')" > <i class="ti ti-trash"></i> Supprimer</a>
                     </div>
                 </div>
             </div>

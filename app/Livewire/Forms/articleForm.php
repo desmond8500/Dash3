@@ -18,18 +18,18 @@ class ArticleForm extends Form
     #[Validate('required')]
     public $reference;
     public $description;
-    // #[Validate('numeric')]
-    public $quantity;
-    // #[Validate('numeric')]
-    public $quantity_min;
-    // #[Validate('numeric')]
-    public $priority_id;
+    #[Validate('numeric')]
+    public $quantity = 0;
+    #[Validate('numeric')]
+    public $quantity_min = 0;
+    #[Validate('numeric')]
+    public $priority_id = 1;
     // #[Validate('numeric')]
     public $brand_id;
     // #[Validate('numeric')]
     public $provider_id;
-    // #[Validate('numeric')]
-    public $price;
+    #[Validate('numeric')]
+    public $price = 0;
 
     function store(){
         $this->validate();
@@ -53,7 +53,7 @@ class ArticleForm extends Form
                 $image->storeAS("public/$dir", $name);
             }
 
-            $article->image = "$dir/$name";
+            $article->image = "storage/$dir/$name";
             // $article->image = "stockage/$dir/$name";
             $article->save();
         }
@@ -91,7 +91,7 @@ class ArticleForm extends Form
         if ($this->image && is_array($this->image)) {
             $this->article = Article::find($this->article->id);
             $images = $this->image;
-            $dir = "stock/articles/$this->article->id/images";
+            $dir = "stock/articles/".$this->article->id."/images";
             foreach ($images as $key => $image) {
                 $name = $image->getClientOriginalName();
                 $image->storeAS("public/$dir", $name);
@@ -104,7 +104,8 @@ class ArticleForm extends Form
         return $article;
     }
 
-    function delete(){
-        $this->article->delete();
+    function delete($id){
+        $article = Article::find($id);
+        $article->delete();
     }
 }

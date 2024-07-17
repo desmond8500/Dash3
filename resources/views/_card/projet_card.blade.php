@@ -23,7 +23,7 @@
         </div> --}}
     </div>
     <div class="d-flex justify-content-between bg-blue-lt mt-2 p-1 rounded">
-        <div> Devis: {{ $projet->devis->count() }}</div>
-        <div> Taches: {{ $projet->tasks->count() }}</div>
+        <div> <b>Devis:</b> {{ $projet->devis->count() }}</div>
+        <div> <b>Taches:</b> {{ $projet->tasks->count() }}</div>
     </div>
 </div>

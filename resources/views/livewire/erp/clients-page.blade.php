@@ -3,7 +3,7 @@
         <div class="d-flex">
             <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
 
-            <button type="button" class="btn btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#addClient">
+            <button type="button" class="btn btn-primary mx-1" wire:click="add()">
                 <i class="ti ti-plus me-2"></i> Client
             </button>
             <button type="button" class="btn btn-primary btn-icon mx-1" wire:click='download_xls' data-bs-toggle="tooltip" title="Exporter en XLS">
@@ -15,7 +15,7 @@
     <div class="row row-deck g-2">
 
         @forelse ($clients as $client)
-            <div class="col-md-3">
+            <div class="col-md-4">
                 @include('_card.client_card')
             </div>
         @empty

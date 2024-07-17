@@ -20,5 +20,6 @@ class BrandAdd extends Component
         $this->brand_form->store();
         $this->dispatch('close-addBrand');
         $this->dispatch('get-brands');
+        // $this->reset();
     }
 }

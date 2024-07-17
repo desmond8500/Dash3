@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Models\ArticleBrand;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -16,9 +17,19 @@ class BrandForm extends Form
     public $description;
     public $logo;
 
+    function fix(){
+        $this->name = ucfirst($this->name);
+        $this->description = ucfirst($this->description);
+    }
+
     function store(){
         $this->validate();
-        Brand::create($this->all());
+        $this->fix();
+        $brand = Brand::create($this->all());
+
+        if ($this->logo) {
+            $this->storeAvatar($brand, $this->logo);
+        }
     }
 
     function set($brand_id){
@@ -28,14 +39,31 @@ class BrandForm extends Form
         $this->logo = $this->brand->logo;
     }
 
-    function update(){
-        $this->brand->update($this->only(
-            'name',
-            'description'
-        ));
+    function storeAvatar($brand, $logo, $delete = false){
+        if (!is_string($this->logo)) {
+            $dir = "stock/brands/$brand->id/logo";
+            if ($delete) {
+                Storage::disk('public')->deleteDirectory($dir);
+            }
+            $name = $logo->getClientOriginalName();
+            $logo->storeAs("public/$dir", $name);
+
+            $brand->logo = "storage/$dir/$name";
+            $brand->save();
+        }
     }
 
-    function delete(){
+    function update(){
+        $this->fix();
+        $this->brand->update($this->all());
+
+        if ($this->logo) {
+            $this->storeAvatar($this->brand, $this->logo);
+        }
+    }
+
+    function delete($id){
+        $this->set($id);
         $this->brand->delete();
     }
 }

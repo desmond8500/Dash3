@@ -43,16 +43,17 @@ class BadgeForm extends Form
         $this->reset('prenom', 'nom', 'fonction', 'service', 'direction', 'photo');
     }
 
-    function storeAvatar($badge, $photo)
-    {
+    function storeAvatar($client, $photo, $delete = false){
         if (!is_string($this->photo)) {
-            $dir = "erp/clients/".$badge->projet->client->id."/projet/".$badge->projet->id."/badge/". $badge->id."img";
-            Storage::disk('public')->deleteDirectory($dir);
+            $dir = "erp/clients/client->id/photo";
+            if ($delete) {
+                Storage::disk('public')->deleteDirectory($dir);
+            }
             $name = $photo->getClientOriginalName();
             $photo->storeAs("public/$dir", $name);
 
-            $badge->photo = "storage/$dir/$name";
-            $badge->save();
+            $client->photo = "storage/$dir/$name";
+            $client->save();
         }
     }
 
@@ -71,13 +72,11 @@ class BadgeForm extends Form
     }
 
     function update(){
-        // $this->validate();
+        $this->validate();
         $this->badge->update($this->all());
 
         if ($this->photo) {
-            $this->storeAvatar($this->badge,
-                $this->photo
-            );
+            $this->storeAvatar($this->badge, $this->photo );
         }
     }
 

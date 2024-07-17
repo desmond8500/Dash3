@@ -20,6 +20,10 @@ class clientForm extends Form
     public $type = 'Entreprise';
     public $favorite = 0;
 
+    function reset_form(){
+        $this->reset('name','description','address','avatar');
+    }
+
     function store()
     {
         $this->validate();
@@ -30,13 +34,15 @@ class clientForm extends Form
         if ($this->avatar) {
             $this->storeAvatar($client, $this->avatar);
         }
-        // $this->reset();
+        $this->reset_form();
     }
 
-    function storeAvatar($client, $avatar){
+    function storeAvatar($client, $avatar, $delete = false){
         if (!is_string($this->avatar)) {
             $dir = "erp/clients/$client->id/avatar";
-            Storage::disk('public')->deleteDirectory($dir);
+            if ($delete) {
+                Storage::disk('public')->deleteDirectory($dir);
+            }
             $name = $avatar->getClientOriginalName();
             $avatar->storeAs("public/$dir", $name);
 
@@ -71,7 +77,7 @@ class clientForm extends Form
         }
 
         $client->save();
-        // $this->reset();
+        $this->reset_form();
     }
 
     function delete($id){
@@ -79,7 +85,8 @@ class clientForm extends Form
         $client->delete();
     }
 
-    function favorite(){
+    function favorite($id){
+        $this->set($id);
         if ($this->favorite) {
             $this->favorite = 0;
         } else {

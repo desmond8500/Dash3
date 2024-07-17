@@ -29,13 +29,18 @@ class ClientsPage extends Component
     {
         return view('livewire.erp.clients-page', [
             "breadcrumbs" => $this->breadcrumbs,
-            'clients' => Client::search($this->search)->paginate(20),
+            'clients' => Client::search($this->search)->paginate(18),
         ]);
     }
 
     function gotoProjets($client_id)
     {
         return redirect()->route('projets', ['client_id' => $client_id]);
+    }
+
+    function add(){
+        $this->clientForm->reset_form();
+        $this->dispatch('open-addClient');
     }
 
     function store()
@@ -45,6 +50,7 @@ class ClientsPage extends Component
     }
 
     public $selected;
+    public $tempo  = false;
 
     function edit($client_id)
     {
@@ -76,8 +82,8 @@ class ClientsPage extends Component
         return Excel::download(new ClientsExport, 'clients.xlsx');
     }
 
-    function toggleFavorite()
+    function toggleFavorite($id)
     {
-        $this->clientForm->favorite();
+        $this->clientForm->favorite($id);
     }
 }

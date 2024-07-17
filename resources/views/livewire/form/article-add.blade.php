@@ -3,7 +3,7 @@
 
     @component('components.modal', ["id"=>'addArticle', 'title'=>'Ajouter un article'])
         <form class="row" wire:submit="store">
-            @include('_form.article_form',['providers' => $providers])
+            @include('_form.article_form',['providers' => $providers, 'brands'=> $brands])
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>

@@ -1,9 +1,11 @@
 <div class="row">
-    <div class="col-auto mb-3">
+
+    sdf
+    {{-- <div class="col-auto mb-3">
         <div wire:loading wire:target='article_form.image'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
-        {{-- @if ($article_form->image)
+        @if ($article_form->image)
             @if(is_string($article_form->image))
                 <img src="{{ $article_form->image }}" alt="" class="avatar rounded avatar-upload">
             @else
@@ -18,9 +20,9 @@
                 <i class="ti ti-plus text-muted"></i>
                 <span class="avatar-upload-text">Ajouter</span>
             </label>
-        @endif --}}
+        @endif
         <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
-    </div>
+    </div> --}}
 {{--
     <div class="col-md-8 mb-3">
         <div class="mb-3">

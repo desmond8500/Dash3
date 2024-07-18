@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col-12 mb-3">
+    {{-- <div class="col-12 mb-3">
         <div wire:loading wire:target='article_form.image'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
-        {{-- <div class="row g-1">
+        <div class="row g-1">
             @if ($article_form)
                 @if ($article_form->image)
                     @if(is_string($article_form->image))
@@ -27,9 +27,9 @@
                 @endif
 
             @endif
-        </div> --}}
+        </div>
         <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
-    </div>
+    </div> --}}
 
     <div class="col-md-8 mb-3">
         <div class="mb-3">

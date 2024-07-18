@@ -1,28 +1,32 @@
 <div class="row">
-
-    sdf
-    {{-- <div class="col-auto mb-3">
+    <div class="col-12 mb-3">
         <div wire:loading wire:target='article_form.image'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
-        @if ($article_form->image)
-            @if(is_string($article_form->image))
-                <img src="{{ $article_form->image }}" alt="" class="avatar rounded avatar-upload">
+        <div class="row g-1">
+            @if ($article_form->image)
+                @if(is_string($article_form->image))
+                    <img src="{{ asset($article_form->image) }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
+
+                @else
+                    @foreach ($article_form->image as $image)
+                        <img src="{{ $image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
+                    @endforeach
+
+                @endif
+                <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                    <i class="ti ti-edit text-muted"></i>
+                    <span class="avatar-upload-text">Modifier</span>
+                </label>
             @else
-                <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload">
+                <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                    <i class="ti ti-plus text-muted"></i>
+                    <span class="avatar-upload-text">Ajouter</span>
+                </label>
             @endif
-            <label for="file" href="#" class="avatar avatar-upload rounded">
-                <i class="ti ti-edit text-muted"></i>
-                <span class="avatar-upload-text">Modifier</span>
-            </label>
-        @else
-            <label for="file" href="#" class="avatar avatar-upload rounded">
-                <i class="ti ti-plus text-muted"></i>
-                <span class="avatar-upload-text">Ajouter</span>
-            </label>
-        @endif
+        </div>
         <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
-    </div> --}}
+    </div>
 
     <div class="col-md-8 mb-3">
         <div class="mb-3">

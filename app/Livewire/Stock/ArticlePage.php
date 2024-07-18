@@ -6,6 +6,7 @@ use App\Livewire\Forms\ArticleForm;
 use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Provider;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -35,6 +36,7 @@ class ArticlePage extends Component
         // return Projet::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
     }
 
+    #[On('refresh-article')]
     public function render()
     {
         return view('livewire.stock.article-page',[

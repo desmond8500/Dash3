@@ -12,11 +12,11 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body-sm">
-                    <img src="{{ asset("storage/$article->image") }}" class="ratio ratio-1x1 rounded"   alt="">
+                    <img src="{{ asset("$article->image") }}" class="ratio ratio-1x1 rounded p-2"   alt="">
                 </div>
                 <div class="card-footer">
                     @foreach ($article->images() as $image)
-                        <img src="{{ asset("storage/$image") }}" class="avatar avatar-md border-dark" alt="">
+                        <img src="{{ asset("storage/$image") }}" class="avatar avatar-md border-dark mt-1 border" alt="">
                     @endforeach
                     <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="files">
                     <label for="file" href="#" class="avatar avatar-upload rounded">

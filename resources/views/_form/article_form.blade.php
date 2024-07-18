@@ -4,25 +4,28 @@
             Chargement <div class="spinner-border" role="status"></div>
         </div>
         <div class="row g-1">
-            @if ($article_form->image)
-                @if(is_string($article_form->image))
-                    <img src="{{ asset($article_form->image) }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
+            @if ($article_form)
+                @if ($article_form->image)
+                    @if(is_string($article_form->image))
+                        <img src="{{ asset($article_form->image) }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
 
+                    @else
+                        @foreach ($article_form->image as $image)
+                            <img src="{{ $image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
+                        @endforeach
+
+                    @endif
+                    <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                        <i class="ti ti-edit text-muted"></i>
+                        <span class="avatar-upload-text">Modifier</span>
+                    </label>
                 @else
-                    @foreach ($article_form->image as $image)
-                        <img src="{{ $image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
-                    @endforeach
-
+                    <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                        <i class="ti ti-plus text-muted"></i>
+                        <span class="avatar-upload-text">Ajouter</span>
+                    </label>
                 @endif
-                <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
-                    <i class="ti ti-edit text-muted"></i>
-                    <span class="avatar-upload-text">Modifier</span>
-                </label>
-            @else
-                <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
-                    <i class="ti ti-plus text-muted"></i>
-                    <span class="avatar-upload-text">Ajouter</span>
-                </label>
+
             @endif
         </div>
         <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">

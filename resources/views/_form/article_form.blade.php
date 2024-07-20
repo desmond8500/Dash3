@@ -1,5 +1,5 @@
 <div class="row">
-    {{-- <div class="col-12 mb-3">
+    <div class="col-12 mb-3">
         <div wire:loading wire:target='article_form.image'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
@@ -29,7 +29,7 @@
             @endif
         </div>
         <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
-    </div> --}}
+    </div>
 
     <div class="col-md-8 mb-3">
         <div class="mb-3">

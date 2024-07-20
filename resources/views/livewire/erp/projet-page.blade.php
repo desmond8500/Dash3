@@ -42,6 +42,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="#tabs-badge" class="nav-link" data-bs-toggle="tab">
+                                <i class="ti ti-file-description"></i> Badge
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#tabs-notes" class="nav-link" data-bs-toggle="tab">
                                 <i class="ti ti-file-description"></i> Notes
                             </a>
@@ -99,7 +104,7 @@
                             {{-- <div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at diam, sem nunc amet,
                                 pellentesque id egestas velit sed</div> --}}
 
-                            @livewire('badges', ['projet_id' => $projet_id])
+
                         </div>
 
                         <div class="tab-pane" id="tabs-reglages">
@@ -112,6 +117,9 @@
                             <h2>Contats</h2>
                             <div>Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet, facilisi sit mauris
                                 accumsan nibh habitant senectus</div>
+                        </div>
+                        <div class="tab-pane" id="tabs-badge">
+                            @livewire('badges', ['projet_id' => $projet_id])
                         </div>
                         <div class="tab-pane" id="tabs-notes">
                             @livewire('erp.projet-notes', ['projet_id' => $projet->id], )

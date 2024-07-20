@@ -2,6 +2,15 @@
     $total = 0;
 @endphp
 <div>
+    <div class="row g-2">
+        @foreach ($articles as $article)
+            <div class="col-md-6">
+                @include('_card.articleCard')
+            </div>
+        @endforeach
+    </div>
+
+
     <div class="card">
         <div class="card-header">
             <div class="card-title">Articles à acheter</div>

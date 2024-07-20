@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Invoice;
+use App\Models\InvoiceRow;
+use App\Models\InvoiceSection;
 use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
@@ -55,7 +57,9 @@ class DashController extends Controller
             ->has(Projet::factory(5)
                 ->has(Task::factory(3))
                 ->has(Journal::factory(3))
-                ->has(Invoice::factory(3))
+                ->has(Invoice::factory(3)
+                    ->has(InvoiceSection::factory(2)
+                    ->has(InvoiceRow::factory(5))))
             )->create();
     }
 

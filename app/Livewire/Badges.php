@@ -11,6 +11,7 @@ class Badges extends Component
 {
     public $projet_id;
     public BadgeForm $badge_form;
+    public $search;
 
     function mount($projet_id)
     {
@@ -20,8 +21,17 @@ class Badges extends Component
     public function render()
     {
         return view('livewire.badges',[
-            'badges' => Badge::where('projet_id', $this->projet_id)->get(),
+            'badges' => Badge::where('projet_id', $this->projet_id)
+            ->where('prenom', 'LIKE', "%{$this->search}%")
+            ->orWhere('nom', 'LIKE', "%{$this->search}%")
+            ->get(),
         ]);
+    }
+
+    public function resetSearch()
+    {
+        $this->reset('search') ;
+        $this->getArticles();
     }
 
     function edit($id){

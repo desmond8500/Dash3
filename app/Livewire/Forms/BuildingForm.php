@@ -35,6 +35,7 @@ class BuildingForm extends Form
         $building->name = ucfirst($building->name);
         $building->description = ucfirst($building->description);
         $building->save();
+        $this->reset('name','description');
     }
 
     function update()

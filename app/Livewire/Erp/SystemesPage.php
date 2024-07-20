@@ -4,6 +4,8 @@ namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\SystemeForm;
 use App\Models\Systeme;
+use App\Models\TaskStatus;
+use App\View\Components\Status;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -30,7 +32,8 @@ class SystemesPage extends Component
     public function render()
     {
         return view('livewire.erp.systemes-page',[
-            'systemes' => Systeme::all()
+            'systemes' => Systeme::all(),
+            'statuts' => TaskStatus::all(),
         ]);
     }
 

@@ -6,6 +6,13 @@
         </div>
     @endcomponent
 
+    @foreach ($statuts as $status)
+        @component('components.status', ['status'=> $status])
+
+        @endcomponent
+
+    @endforeach
+
     <div class="row g-2">
         @foreach ($systemes as $systeme)
             <div class="col-auto">

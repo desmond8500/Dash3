@@ -20,6 +20,10 @@ class InvoiceSection extends Model
     {
         return $this->hasMany(InvoiceRow::class, 'invoice_section_id', 'id');
     }
+    public function invoiceRow(): HasMany
+    {
+        return $this->hasMany(InvoiceRow::class, 'invoice_section_id', 'id');
+    }
     public function total()
     {
         $total = 1;

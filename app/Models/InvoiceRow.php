@@ -16,7 +16,7 @@ class InvoiceRow extends Model
         'reference',
         'quantite',
         'prix',
-        'priorite',
+        'priorite_id',
     ];
 
     public function section(): BelongsTo {

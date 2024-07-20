@@ -9,7 +9,7 @@
         <div class="col-auto">
             <div class="dropdown open">
                 <button class="btn btn-action border dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                    <i class="ti ti-dots-vertical"></i>
+                    <i class="ti ti-chevron-down"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
                     <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')"> <i class="ti ti-edit me-2"></i> Editer</button>

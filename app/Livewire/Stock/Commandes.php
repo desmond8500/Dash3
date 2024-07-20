@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Stock;
 
+use App\Models\Article;
 use App\Models\Commande;
 use Livewire\Component;
 
@@ -10,7 +11,8 @@ class Commandes extends Component
     public function render()
     {
         return view('livewire.stock.commandes',[
-            'commandes' => Commande::all()
+            'articles' => Article::where('quantity','<','quantity_min')->get(),
+            'commandes' => Commande::all(),
         ]);
     }
 

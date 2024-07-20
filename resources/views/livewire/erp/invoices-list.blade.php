@@ -25,10 +25,9 @@
                         <h4 style="text-transform: uppercase">{{ $invoice->reference }}</h4>
                     </div>
                     <div class="col-auto">
-                        <div class="status status-primary">
-                            <span class="status-dot"></span>
-                            {{ $invoice->statut }}
-                        </div>
+                        @component('components.status',['status'=>$invoice->statut])
+
+                        @endcomponent
                     </div>
                     <div class="col-md-12 mb-3">
                         {{ nl2br($invoice->description) }}

@@ -16,16 +16,12 @@ class InvoiceRowFactory extends Factory
 
     public function definition(): array
     {
-        $invoice_id = rand(1, 50);
-        $invoice = Invoice::find($invoice_id);
-
         return [
-            'invoice_id' => $invoice->id,
             'designation' => $this->faker->word(),
             'coef' => 1,
             'reference' => $this->faker->word(),
             'quantite'=>1,
-            'priorite'=>1,
+            'priorite_id'=>1,
             'prix'=> $this->faker->numberBetween($min = 1000, $max = 9000),
         ];
     }

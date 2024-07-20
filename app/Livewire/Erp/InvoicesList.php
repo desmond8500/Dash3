@@ -28,7 +28,9 @@ class InvoicesList extends Component
 
     #[On('get-invoices')]
     function getInvoices(){
-        return Invoice::where('projet_id', $this->projet_id)->where('reference', 'like', '%' . $this->search . '%')->paginate(12);
+        return Invoice::where('projet_id', $this->projet_id)
+        ->where('reference', 'like', '%' . $this->search . '%')
+        ->paginate(12);
     }
 
 }

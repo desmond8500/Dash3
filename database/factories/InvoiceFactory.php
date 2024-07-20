@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Http\Controllers\ErpController;
 use App\Models\Invoice;
-use App\Models\Projet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

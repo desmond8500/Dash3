@@ -2,14 +2,12 @@
 
 namespace App\Livewire\Erp;
 
-use App\Livewire\Forms\BuildingForm;
 use App\Livewire\Forms\projetForm;
 use App\Models\Building;
 use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -67,21 +65,6 @@ class ProjetPage extends Component
     #[On('get-news')]
     function get_news() {
         return Journal::where('projet_id', $this->projet_id)->get();
-    }
-
-    // Building management
-    public BuildingForm $building_form;
-
-    function edit_building($id)
-    {
-        $this->building_form->set($id);
-        $this->dispatch('open-editBuilding');
-    }
-    function store_building()
-    {
-        $this->building_form->update();
-        $this->dispatch('close-editBuilding');
-
     }
 
     // Projets

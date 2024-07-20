@@ -12,6 +12,7 @@ class Badge extends Model
 
     protected $fillable = [
         'projet_id',
+        'badge_modele_id',
         'prenom',
         'nom',
         'fonction',

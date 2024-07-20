@@ -3,7 +3,6 @@
 
     @endcomponent
 
-
     <div class="page-body">
         <div class="card">
             <div class="row g-0">
@@ -59,21 +58,36 @@
                                             <div class="card-title">Status</div>
                                             <div class="card-actions">
                                                 <div class="badge bg-primary">{{ $taskStatuses->count() }}</div>
+                                                <button class="btn btn-action" wire:click="status_add">
+                                                    <i class="ti ti-plus"></i>
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             @foreach ($taskStatuses as $taskStatus)
                                                 <div class="card p-2 my-1">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div>{{ $taskStatus->name }}</div>
-                                                        <div class="badge ">{{ $taskStatus->level }}</div>
+                                                    <div class="row">
+                                                        <div class="col">{{ $taskStatus->name }}</div>
+                                                        <div class="col-auto">
+                                                            <div class="badge bg-{{ $taskStatus->color }}"> {{ $taskStatus->level }} </div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-sm" wire:click="status_edit('{{ $taskStatus->id }}')"> <i class="ti ti-edit"></i> </button>
+                                                        </div>
                                                     </div>
+
+                                                    {{-- <div class="d-flex justify-content-between">
+                                                        <div>{{ $taskStatus->name }}</div>
+                                                        <button class="btn btn-action"> <i class="ti ti-edit"></i> </button>
+                                                        <button class="btn btn-action"> <i class="ti ti-edit"></i> </button>
+                                                        <div class="badge bg-{{ $taskStatus->color }}" wire:click="status_edit('{{ $taskStatus->id }}')">{{ $taskStatus->level }}</div>
+                                                    </div> --}}
                                                 </div>
                                             @endforeach
                                         </div>
-                                        <div class="card-footer">
+                                        {{-- <div class="card-footer">
 
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -94,9 +108,9 @@
                                                 </div>
                                             @endforeach
                                         </div>
-                                        <div class="card-footer">
+                                        {{-- <div class="card-footer">
 
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -107,5 +121,31 @@
         </div>
 
     </div>
+
+
+    @component('components.modal', ["id"=>'addStatus', 'title' => 'Ajouter un statut'])
+        <form class="row" wire:submit="status_store">
+            @include('_form.task_status_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-addStatus', event => { $('#addStatus').modal('show'); }) </script>
+        <script> window.addEventListener('close-addStatus', event => { $('#addStatus').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editStatus', 'title' => 'Editer un statut'])
+        <form class="row" wire:submit="status_update">
+            @include('_form.task_status_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" wire:click='status_delete'> <i class="ti ti-trash"></i> </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editStatus', event => { $('#editStatus').modal('show'); }) </script>
+        <script> window.addEventListener('close-editStatus', event => { $('#editStatus').modal('hide'); }) </script>
+    @endcomponent
 </div>
 

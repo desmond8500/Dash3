@@ -37,6 +37,10 @@ class Invoice extends Model
     {
         return $this->hasMany(InvoiceSection::class);
     }
+    public function invoiceSection(): HasMany
+    {
+        return $this->hasMany(InvoiceSection::class);
+    }
 
     public function rows(): HasManyThrough
     {

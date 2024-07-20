@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/pdf.css">
     <link rel="stylesheet" href="css/text.css">
     <link rel="stylesheet" href="css/margin.css">
-    <link rel="stylesheet" href="css/journal_pdf.css">
+    <link rel="stylesheet" href="css/facture_pdf.css">
     <title>Journal</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
         $carbon->locale('fr_FR');
     @endphp
 
-    <table class="table" style="margin-bottom: 5px;">
+    <table class="table" style="">
         <tr>
             <td width="80px" class="border_white">
                 @if ($logo)
@@ -36,8 +36,6 @@
             </td>
             <td align="right" class="border_white">
                 <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">{{ $title }}</div>
-                {{-- <div><b>{{ $commande->name }}</b></div> --}}
-                {{-- <div><i>{{ str_pad($carbon->day,2, '0', STR_PAD_LEFT) }} - {{ str_pad($carbon->month,2, '0', STR_PAD_LEFT) }} - {{ $carbon->year }}</i></div> --}}
                 @if ($title !="quantitatif")
                     <i>#{{ $devis->reference }}</i>
                 @endif
@@ -45,10 +43,10 @@
         </tr>
     </table>
 
-    <div class="mt-1">
+    <div class="">
         <table>
             <tr style="border: 1px solid gray" >
-                <td class="border-white">
+                <td class="border-white" width="350px">
                     <div>
                         <span class="fw-bold">Client : </span> <span>{{ $devis->projet->client->name }}</span>
                     </div>
@@ -88,7 +86,7 @@
             @endphp
             <tr>
                 <th scope="col" class="bg-green2" colspan="{{ $title !="quantitatif" ? 4 : 2 }}">
-                    <div>{{ $section->section }}</div>
+                    <div class="facture_section">{{ $section->section }}</div>
                 </th>
             </tr>
 
@@ -119,7 +117,7 @@
                     </tr>
                 @endforeach
                 @if ($title!="quantitatif")
-                    <tr class="fw-bold">
+                    <tr class="sous-total">
                         <td colspan="3">Sous Total</td>
                         <td colspan="1" class="text-end"> {{ number_format($subtotal, 0,'.', ' ') }} F</td>
                     </tr>

@@ -24,6 +24,14 @@
         <input type="date" class="form-control" wire:model='spent_form.date'>
         @error('spent_form.date') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
+    <div class="mb-3">
+        <label class="form-label">Statut</label>
+        <select class="form-control" wire:model="spent_form.status">
+            <option value="prevue">Prévue</option>
+            <option value="achete">achete</option>
+        </select>
+        @error('Name') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
 
 </div>
 

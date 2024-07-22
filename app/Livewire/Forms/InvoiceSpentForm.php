@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\InvoiceSpent;
+use App\Models\Transaction;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -19,12 +20,21 @@ class InvoiceSpentForm extends Form
     public $montant;
     #[Rule('date')]
     public $date;
+    public $status;
 
     function store($id)
     {
         $this->invoice_id = $id;
-        // $this->validate();
-        InvoiceSpent::create($this->all());
+        $this->validate();
+        $spent = InvoiceSpent::create($this->all());
+
+        Transaction::create([
+            'invoice_spent_id' => $spent->id,
+            'objet' => $spent->objet,
+            'type' => "depense",
+            'date' => $spent->date,
+            'montant' =>$spent->montant,
+        ]);
     }
 
     function select($model_id)

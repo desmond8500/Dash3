@@ -39,6 +39,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="triggerId">
                 <button class="dropdown-item" wire:click="edit_journal('{{ $journal->id }}')"><i class="ti ti-edit me-2"></i> Editer</button>
+                <button class="dropdown-item" wire:click="select('{{ $journal->id }}')"><i class="ti ti-eye me-2"></i> Consulter</button>
                 <a class="dropdown-item" target="_blank" href="{{ route('journal_pdf',['journal_id'=>$journal->id]) }}"><i class="ti ti-file-type-pdf me-2"></i> PDF</a>
                 <button class="dropdown-item text-danger" wire:click="delete_journal('{{ $journal->id }}')" wire:confirm='Etes-vous sur de vouloir supprimer ce journal'><i class="ti ti-trash me-2"></i>Supprimer</button>
             </div>

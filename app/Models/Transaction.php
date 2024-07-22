@@ -31,15 +31,15 @@ class Transaction extends Model
         return $this->hasOne(Projet::class);
     }
 
-    public function devis(): HasOne{
+    public function invoice(): HasOne{
         return $this->hasOne(Invoice::class);
     }
 
-    public function acompte(): HasOne{
+    public function invoiceAcompte(): HasOne{
         return $this->hasOne(InvoiceAcompte::class);
     }
 
-    public function depense(): HasOne{
+    public function invoiceSpent(): HasOne{
         return $this->hasOne(InvoiceSpent::class);
     }
 }

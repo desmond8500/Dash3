@@ -40,6 +40,7 @@ class JournauxPage extends Component
     {
         $this->journalForm->update();
         $this->dispatch('close-editJournal');
+        $this->dispatch('get-news');
     }
 
     function delete_journal($journal_id)
@@ -47,5 +48,11 @@ class JournauxPage extends Component
         $this->journalForm->set($journal_id);
         $this->journalForm->delete();
         $this->dispatch('close-editJournal');
+    }
+
+    public $selected;
+
+    function select($journal_id){
+        $this->selected = Journal::find($journal_id);
     }
 }

@@ -111,3 +111,111 @@ body {
 .bg-white {
     background: white;
 }
+
+/* BG Colors */
+.bg-blue {
+    background: #0054a6;
+}
+.bg-azur {
+    background: #4299e1;
+}
+.bg-indigo {
+    background: #4263eb;
+}
+.bg-purple {
+    background: #ae3ec9;
+}
+.bg-pink {
+    background: #d6336c;
+}
+.bg-red {
+    background: #d63939;
+}
+.bg-orange {
+    background: #f76707;
+}
+.bg-yellow {
+    background: #f59f00;
+}
+.bg-lime {
+    background: #74b816;
+}
+.bg-green {
+    background: #2fb344;
+}
+.bg-teal {
+    background: #0ca678;
+}
+.bg-cyan {
+    background: #17a2b8;
+}
+
+/* BG Colors LT */
+.bg-blue-lt {
+    background: #e9f0f9;
+}
+.bg-azur-lt {
+    background: #ecf5fc;
+}
+.bg-indigo-lt {
+    background: #eceffd;
+}
+.bg-purple-lt {
+    background: #f7ecfa;
+}
+.bg-pink-lt {
+    background: #fbebf0;
+}
+.bg-red-lt {
+    background: #fbebeb;
+}
+.bg-orange-lt {
+    background: #fef0e6;
+}
+.bg-yellow-lt {
+    background: #fef5e6;
+}
+.bg-lime-lt {
+    background: #f1f8e8;
+}
+.bg-green-lt {
+    background: #eaf7ec;
+}
+.bg-teal-lt {
+    background: #e7f6f2;
+}
+.bg-cyan-lt {
+    background: #e8f6f8;
+}
+
+/* BG Gary */
+.bg-gray-50 {
+    background: #f8fafc;
+}
+.bg-gray-100 {
+    background: #f1f5f9;
+}
+.bg-gray-200 {
+    background: #e2e8f0;
+}
+.bg-gray-300 {
+    background: #c8d3e1;
+}
+.bg-gray-400 {
+    background: #9ba9be;
+}
+.bg-gray-500 {
+    background: #6c7a91;
+}
+.bg-gray-600 {
+    background: #49566c;
+}
+.bg-gray-700 {
+    background: #313c52;
+}
+.bg-gray-800 {
+    background: #1d273b;
+}
+.bg-gray-900 {
+    background: #0f172a;
+}

@@ -15,7 +15,7 @@ class InvoiceSpent extends Model
         'name',
         'description',
         'montant',
-        'statut',
+        'status',
         'date',
     ];
 
@@ -23,4 +23,6 @@ class InvoiceSpent extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
+
+
 }

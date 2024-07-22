@@ -155,11 +155,15 @@
         </div>
     @endauth
 
-    <ul>
-        <li><a href="/log-viewer" target="_blank">Logs Viewer page</a></li>
+    <div class="mt-5 border border-primary rounded p-2">
+        <div class="fw-bold mb-2 ">
+            Dev tools
+        </div>
+        <a class="btn btn-cyan" href="/log-viewer" target="_blank">Logs Viewer page</a>
         @env('local')
-            <li><a href="/migrator" target="_blank">Migrator page</a></li>
+            <a class="btn btn-purple" href="/migrator" target="_blank">Migrator page</a>
         @endenv
-    </ul>
+    </div>
+
 
 </div>

@@ -56,7 +56,6 @@ body {
     font-family: 'Roboto Light', sans-serif;
     font-family: 'Roboto Medium', sans-serif;
     font-family: 'Roboto Black', sans-serif;
-
 }
 
 .text-primary {
@@ -80,7 +79,56 @@ body {
 .text-muted {
     color: gray;
 }
+/* Text color */
+.text-blue {
+    background: #0054a6;
+}
 
+.text-azur {
+    background: #4299e1;
+}
+
+.text-indigo {
+    background: #4263eb;
+}
+
+.text-purple {
+    background: #ae3ec9;
+}
+
+.text-pink {
+    background: #d6336c;
+}
+
+.text-red {
+    background: #d63939;
+}
+
+.text-orange {
+    background: #f76707;
+}
+
+.text-yellow {
+    background: #f59f00;
+}
+
+.text-lime {
+    background: #74b816;
+}
+
+.text-green {
+    background: #2fb344;
+}
+
+.text-teal {
+    background: #0ca678;
+}
+
+.text-cyan {
+    background: #17a2b8;
+}
+
+/* BG */
 .bg-primary {
     background: #0092ca;
 }

@@ -11,6 +11,7 @@ use App\Models\Projet;
 use App\Models\Task;
 use App\Models\TaskPriority;
 use App\Models\TaskStatus;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -50,6 +51,10 @@ class DashController extends Controller
         TaskPriority::create(['name' => "Basse", 'level' => 1]);
         TaskPriority::create(['name' => "Moyenne", 'level' => 2]);
         TaskPriority::create(['name' => "Haute", 'level' => 3]);
+    }
+
+    static function init_transaction(){
+        Transaction::factory(25);
     }
 
     static function init_clients(){

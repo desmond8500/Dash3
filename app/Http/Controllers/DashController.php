@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\Brand;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
 use App\Models\Journal;
 use App\Models\Projet;
+use App\Models\Provider;
 use App\Models\Task;
 use App\Models\TaskPriority;
 use App\Models\TaskStatus;
@@ -54,7 +57,13 @@ class DashController extends Controller
     }
 
     static function init_transaction(){
-        Transaction::factory(25);
+        Transaction::factory(25)->create();
+    }
+
+    static function init_stock(){
+        Provider::factory(25)->create();
+        Brand::factory(25)->create();
+        Article::factory(25)->create();
     }
 
     static function init_clients(){

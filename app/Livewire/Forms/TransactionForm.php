@@ -33,7 +33,7 @@ class TransactionForm extends Form
 
 
     function store(){
-        // $this->validate();
+        $this->validate();
         Transaction::create($this->all());
     }
 
@@ -46,6 +46,7 @@ class TransactionForm extends Form
         $this->date = $this->transaction->date;
         $this->achat_id = $this->transaction->achat_id;
         $this->projet_id = $this->transaction->projet_id;
+        $this->invoice_id = $this->transaction->invoice_id;
         $this->invoice_acompte_id = $this->transaction->invoice_acompte_id;
         $this->invoice_spent_id = $this->transaction->invoice_spent_id;
     }

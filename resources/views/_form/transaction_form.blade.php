@@ -1,3 +1,26 @@
+<div class="col-auto">
+    <div class="mb-3">
+        <label class="form-label">Achat</label>
+        <input type="text" class="form-control" wire:model="transaction_form.achat_id" placeholder="Identifiant du devis">
+        @error('transaction_form.achat_id') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+</div>
+<div class="col-auto">
+    <div class="mb-3">
+        <label class="form-label">Projet</label>
+        <input type="text" class="form-control" wire:model="transaction_form.projet_id" placeholder="Identifiant du devis">
+        @error('transaction_form.projet_id') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+</div>
+<div class="col-auto">
+    <div class="mb-3">
+        <label class="form-label">Devis</label>
+        <input type="text" class="form-control" wire:model="transaction_form.devis_id" placeholder="Identifiant du devis">
+        @error('transaction_form.devis_id') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+</div>
+
+<div class="w-100"></div>
 
 <div class="col-md-8 mb-3">
     <div class="mb-3">
@@ -9,7 +32,7 @@
     <div class="mb-3">
         <label class="form-label">Description</label>
         <textarea class="form-control" wire:model="transaction_form.description" placeholder="Description" cols="30" rows="5"></textarea>
-        @error('transaction_form.description') <span class='text-danger'>{{ message }}</span> @enderror
+        @error('transaction_form.description') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 </div>
 

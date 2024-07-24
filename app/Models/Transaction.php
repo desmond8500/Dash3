@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\dateTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Transaction extends Model
@@ -29,12 +30,14 @@ class Transaction extends Model
         return $this->hasOne(Achat::class);
     }
 
-    public function projet(): HasOne{
-        return $this->hasOne(Projet::class);
+    public function projet(): BelongsTo{
+        // return $this->hasOne(Projet::class);
+        return $this->belongsTo(Projet::class);
     }
 
-    public function invoice(): HasOne{
-        return $this->hasOne(Invoice::class);
+    public function invoice(): BelongsTo{
+        return $this->belongsTo(Projet::class);
+        // return $this->hasOne(Invoice::class);
     }
 
     public function invoiceAcompte(): HasOne{

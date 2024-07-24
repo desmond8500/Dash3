@@ -10,6 +10,8 @@
                 <i class="ti ti-plus"></i> Section
             </button>
 
+            @livewire('form.transaction-add', ['invoice_id' => $devis->id])
+
             <div class="col-auto md-3">
                 @if ($devis->favorite)
                     <a class="btn btn-secondary btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()"

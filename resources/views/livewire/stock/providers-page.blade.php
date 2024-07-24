@@ -4,6 +4,11 @@
     @endcomponent
 
     <div class="row g-2">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
+            </div>
+        </div>
         @foreach ($providers as $provider)
             <div class="col-md-3">
                 <div class="card p-2">

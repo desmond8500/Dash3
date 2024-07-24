@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         DashController::initUser();
         DashController::initRoles();
         DashController::init_transaction();
+        DashController::init_stock();
 
         // Clients
         DashController::init_clients();

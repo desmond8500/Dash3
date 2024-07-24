@@ -1,15 +1,22 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Marques', 'breadcrumbs'=>$breadcrumbs])
-        @livewire('form.brand-add')
+        <div class="btn-list">
+            @livewire('form.brand-add')
+        </div>
     @endcomponent
 
     <div class="row row-deck g-2">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
+            </div>
+        </div>
         @foreach ($brands as $brand)
             <div class="col-md-4">
                 <div class="card p-2">
                     <div class="row">
                         <div class="col-auto">
-                            <img src="{{ asset($brand->logo) }}" alt="M" class="avatar avatar-md">
+                            <img src="{{ asset($brand->logo) ?? 'https://avatar.iran.liara.run/public' }}" alt="M" class="avatar avatar-md">
                         </div>
                         <div class="col">
                             <div class="card-title">{{ $brand->name }}</div>

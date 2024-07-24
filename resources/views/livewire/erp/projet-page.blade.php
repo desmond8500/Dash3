@@ -3,6 +3,7 @@
         <div class="btn-list">
             @livewire('form.task-add', ['projet_id' => $projet_id])
             @livewire('form.journal-add', ['projet_id' => $projet_id])
+            @livewire('form.transaction-add', ['projet_id' => $projet_id])
         </div>
     @endcomponent
 

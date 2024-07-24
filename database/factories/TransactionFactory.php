@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,18 +10,15 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TransactionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Transaction::class;
+
     public function definition(): array
     {
         return [
-            'objet' => $this->faker->words($this->faker->numberBetween(35)),
-            'type' => $this->faker->randomElements($array = array('credit', 'debit'), $count = 1),
-            'montant' => $this->faker->numberBetween($min = 1000, $max = 9000),
-            'description' => $this->faker->words(5),
+            'objet' => $this->faker->text($this->faker->numberBetween(5,20)),
+            'type' => $this->faker->randomElement(array('credit', 'debit')),
+            'montant' => $this->faker->numberBetween(1000, 9000),
+            'description' => $this->faker->text(20),
             'date' => $this->faker->date(),
         ];
     }

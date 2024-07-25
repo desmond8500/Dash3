@@ -162,6 +162,7 @@
         <a class="btn btn-cyan" href="/log-viewer" target="_blank">Logs Viewer page</a>
         @env('local')
             <a class="btn btn-purple" href="/migrator" target="_blank">Migrator page</a>
+            <button wire:click='send'>Send mail</button>
         @endenv
     </div>
 

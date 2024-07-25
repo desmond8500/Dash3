@@ -13,9 +13,12 @@ class Contact extends Model
     use searchTrait;
 
     protected $fillable = [
+        'client_id',
+        'projet_id',
         'firstname',
         'lastname',
         'fonction',
+        'avatar',
     ];
 
     public function phone(): HasMany

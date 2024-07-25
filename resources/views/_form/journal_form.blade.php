@@ -35,6 +35,7 @@
                 <a href="#" class="btn dropdown-toggle" data-bs-toggle="dropdown">Select</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" wire:click="$set('journalForm.type','Rapport d\'intervention')">Rapport d'intervention</a>
+                    <a class="dropdown-item" wire:click="$set('journalForm.type','Rapport de travaux')">Rapport de travaux</a>
                     <a class="dropdown-item" wire:click="$set('journalForm.type','Rapport de visite')">Rapport de visite</a>
                 </div>
             </div>
@@ -47,6 +48,7 @@
         <textarea class="form-control" wire:model="journalForm.description" data-bs-toggle="autosize" placeholder="Description" cols="30" rows="5"></textarea>
         @error('journalForm.description') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
+
 
 
 </div>

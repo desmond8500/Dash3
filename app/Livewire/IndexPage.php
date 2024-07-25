@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Http\Controllers\DashController;
+use App\Mail\ReportMail;
 use App\Models\Article;
 use App\Models\Client;
 use App\Models\Invoice;
@@ -10,6 +11,7 @@ use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class IndexPage extends Component
@@ -55,5 +57,9 @@ class IndexPage extends Component
     }
 
     public $select;
+
+    function send(){
+        Mail::to('test@test.com')->send(new ReportMail());
+    }
 
 }

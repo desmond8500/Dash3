@@ -102,10 +102,6 @@
 
                         <div class="tab-pane" id="tabs-dossier">
                             <h2>Dossier</h2>
-                            {{-- <div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at diam, sem nunc amet,
-                                pellentesque id egestas velit sed</div> --}}
-
-
                         </div>
 
                         <div class="tab-pane" id="tabs-reglages">
@@ -116,8 +112,7 @@
 
                         <div class="tab-pane" id="tabs-contact">
                             <h2>Contats</h2>
-                            <div>Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet, facilisi sit mauris
-                                accumsan nibh habitant senectus</div>
+                            @livewire('contact-list', ['projet_id' => $projet->id])
                         </div>
                         <div class="tab-pane" id="tabs-badge">
                             @livewire('badges', ['projet_id' => $projet_id])

@@ -11,8 +11,11 @@ class ContactForm extends Form
 {
     public Contact $contact;
 
+    public $projet_id;
+    public $client_id;
     #[Rule('required')]
     public $firstname;
+    #[Rule('required')]
     public $lastname;
     public $fonction;
     public $avatar;

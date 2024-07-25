@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Contact extends Model
@@ -20,6 +21,17 @@ class Contact extends Model
         'fonction',
         'avatar',
     ];
+
+
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function projet(): BelongsTo
+    {
+        return $this->belongsTo(Projet::class);
+    }
 
     public function phone(): HasMany
     {

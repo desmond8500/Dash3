@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Livewire\Forms\ContactForm;
 use App\Models\Contact;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\WithPagination;
@@ -22,10 +23,11 @@ class ContactList extends Component
         $this->projet_id = $projet_id;
     }
 
+    #[On('get-contacts')]
     public function render()
     {
         return view('livewire.contact-list',[
-            'contacts' => Contact::where('projet_id')->search($this->search)->paginate(18),
+            'contacts' => Contact::where('projet_id', $this->projet_id)->search($this->search)->paginate(18),
         ]);
     }
 }

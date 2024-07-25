@@ -9,11 +9,18 @@ class ContactAdd extends Component
 {
     public ContactForm $contact_form;
 
+    public $client_id;
     public $projet_id;
 
-    function mount($projet_id = 0)
+    function mount($projet_id = 0, $client_id = 0)
     {
-        $this->projet_id = $projet_id;
+        if ($projet_id) {
+            $this->contact_form->projet_id = $projet_id;
+        }
+
+        if ($client_id) {
+            $this->contact_form->client_id = $client_id;
+        }
     }
 
     public function render()
@@ -24,5 +31,6 @@ class ContactAdd extends Component
     function store(){
         $this->contact_form->store();
         $this->dispatch('close-addContact');
+        $this->dispatch('get-contacts');
     }
 }

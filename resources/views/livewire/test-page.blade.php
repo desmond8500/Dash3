@@ -1,1 +1,10 @@
-<a target="_blank" href="{{ route('pdf_test') }}" class="btn mt-3">Card PDF</a>
+<div class="row">
+    <div class="col-md-4">
+        {{ $title }}
+    </div>
+    <div class="col-md-8">
+        @livewire('trix',['content' => 'Awesome <strong>Sauce</strong>'])
+
+    </div>
+
+</div>

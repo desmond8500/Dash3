@@ -27,7 +27,10 @@ class ContactList extends Component
     public function render()
     {
         return view('livewire.contact-list',[
-            'contacts' => Contact::where('projet_id', $this->projet_id)->search($this->search)->paginate(18),
+            'contacts' => Contact::where('projet_id', $this->projet_id)
+            ->search($this->search,'firstname')
+            ->search($this->search, 'lastname')
+            ->paginate(18),
         ]);
     }
 }

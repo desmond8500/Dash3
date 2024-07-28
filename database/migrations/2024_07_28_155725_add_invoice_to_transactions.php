@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('transactions', function (Blueprint $table) {
-            Schema::create('transactions', function (Blueprint $table) {
-                $table->renameColumn('devis_id', 'invoice_id');
-            });
-        // });
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->integer('invoice_id')->nullable();
+        });
     }
 
     /**

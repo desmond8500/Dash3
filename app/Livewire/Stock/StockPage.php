@@ -12,6 +12,7 @@ class StockPage extends Component
 {
     public $breadcrumbs;
     public $count;
+    public $sections;
 
     public function mount()
     {
@@ -25,14 +26,15 @@ class StockPage extends Component
             'brands'=> Brand::count(),
             'providers'=> Provider::count(),
         );
+
+        $this->sections = array(
+            array('name' => 'Articles', 'route' => 'articles', 'count' => $this->count['articles']),
+            array('name' => 'Achats', 'route' => 'achats', 'count' => $this->count['achats']),
+            array('name' => 'Marques', 'route' => 'brands', 'count' => $this->count['brands']),
+            array('name' => 'Fournisseurs', 'route' => 'providers', 'count' => $this->count['providers']),
+        );
     }
 
-    public $sections = array(
-         array( 'name'=> 'Articles', 'route'=>'articles'),
-         array( 'name'=> 'Achats', 'route'=>'achats'),
-         array( 'name'=>'Marques', 'route'=>'brands'),
-         array( 'name'=> 'Fournisseurs', 'route'=>'providers'),
-    );
     public function render()
     {
         return view('livewire.stock.stock-page');

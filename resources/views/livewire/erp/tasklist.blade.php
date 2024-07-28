@@ -10,11 +10,28 @@
             </a>
             <div class="card-actions">
                 <div class="btn-list">
+                    @if ($client_id)
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$client_id, 'type'=>'client', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                    @elseif($projet_id)
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$projet_id, 'type'=>'projet', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                    @elseif($building_id)
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$building_id, 'type'=>'building', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                    @elseif($satge_id)
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$satge_id, 'type'=>'satge', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                    @elseif($room_id)
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$room_id, 'type'=>'room', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
 
-                    <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>0, 'type'=>'client_id', 'search'=>$search]) }}" target="_blank">
-                        <i class="ti ti-file-type-pdf"></i>
-                    </a>
-
+                    @endif
                     <button class="btn btn-primary" wire:click="$toggle('active')">
                         @if ($active)
                             En cours {{ $activeCount }}
@@ -22,7 +39,6 @@
                             Terminés {{ $inactiveCount }}
                         @endif
                     </button>
-
                 </div>
             </div>
         </div>
@@ -37,7 +53,6 @@
                 @foreach ($tasks as $task)
                     <div class="{{ $class ?? 'col-md-12' }}">
                         @include('_card.task_card')
-                        {{-- @livewire('task.task-card', ['task' => $task], key($task->id)) --}}
                     </div>
                 @endforeach
             </div>

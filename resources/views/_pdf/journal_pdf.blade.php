@@ -16,7 +16,6 @@
         $total = 0;
         $tva = 0;
         $carbon->locale('fr_FR');
-        // $carbon->create($commande->date)->locale('fr_FR');
     @endphp
 
     <table class="table" style="margin-bottom: 10px;">
@@ -37,8 +36,6 @@
             </td>
             <td align="right" class="border_white">
                 <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">{{ $title }}</div>
-                {{-- <div><b>{{ $commande->name }}</b></div> --}}
-                {{-- <div><i>{{ str_pad($carbon->day,2, '0', STR_PAD_LEFT) }} - {{ str_pad($carbon->month,2, '0', STR_PAD_LEFT) }} - {{ $carbon->year }}</i></div> --}}
                 <i>{{ $journal->formatDate() }}</i>
             </td>
         </tr>

@@ -33,7 +33,7 @@ class ArticlesPage extends Component
     public function render()
     {
         return view('livewire.stock.articles-page',[
-            'articles' => Article::articleSearch($this->search)->paginate(15),
+            'articles' => Article::articleSearch($this->search)->paginate(10),
             'providers' => Provider::all(),
             'brands' => Brand::all(),
         ]);

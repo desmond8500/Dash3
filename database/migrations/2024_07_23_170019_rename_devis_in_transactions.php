@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transactions', function (Blueprint $table) {
+        // Schema::table('transactions', function (Blueprint $table) {
             Schema::table('transactions', function (Blueprint $table) {
                 $table->renameColumn('devis_id', 'invoice_id');
             });
-        });
+        // });
     }
 
     /**

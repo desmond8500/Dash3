@@ -9,7 +9,7 @@
                 <div class="card p-2">
                     <div class="row">
                         <div class="col-auto">
-                            <img src="" alt="" class="avatar avatar-md">
+                            <img src="" alt="{{ $section['count'] }}" class="avatar avatar-md">
                         </div>
                         <div class="col">
                             <div class="fw-bold">{{ $section['name'] }}</div>

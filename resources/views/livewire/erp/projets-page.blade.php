@@ -6,6 +6,7 @@
                 <i class="ti ti-plus"></i> Projet
             </button>
             @livewire('form.task-add', ['client_id' => $client_id])
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
 
     @endcomponent

@@ -1,5 +1,10 @@
 <div class="card-body">
-    <div class="row row-deck">
+    <div class="d-flex justify-content-between">
+        <h2>Status et priorités</h2>
+        <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+    </div>
+    <div class="row row-deck mt-3">
+
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">

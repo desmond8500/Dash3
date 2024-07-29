@@ -4,6 +4,7 @@
             @livewire('form.article-add')
             @livewire('form.provider-add')
             @livewire('form.brand-add')
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
 

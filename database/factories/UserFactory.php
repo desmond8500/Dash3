@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Controllers\DashController;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -18,6 +19,8 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $id = random_int(0, 99);
+        $image = random_int(0, 99);
         return [
             'firstname' => 'admin',
             'lastname' => 'admin',
@@ -25,6 +28,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('passer1234'), // password
             'remember_token' => Str::random(10),
+            'avatar' =>  DashController::store_url_image("https://avatar.iran.liara.run/public/$id", "demo/stock/$image/avatar"),
         ];
     }
 

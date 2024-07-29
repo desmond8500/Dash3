@@ -2,7 +2,7 @@
     @component('components.layouts.page-header', ['title'=>'Marques', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             @livewire('form.brand-add')
-<button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
 

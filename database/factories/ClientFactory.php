@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Controllers\DashController;
 use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,15 +17,16 @@ class ClientFactory extends Factory
     {
         $array = array("Entreprise", "Particulier");
         $type =  $array[array_rand($array, 1)];
-        $avatar = 'https://picsum.photos/200/300';
+        $id = random_int(0, 99);
+        $image = random_int(0, 99);
 
         return [
             'name' => $type == "Entreprise" ? $this->faker->company() : $this->faker->name(),
             'type' => $type,
             'address' => $this->faker->address(),
-            'description' => $this->faker->text($maxNbChars = 100),
+            'description' => $this->faker->text(),
             // 'avatar' => $this->faker->imageUrl(200,200),
-            'avatar' => $avatar,
+            'avatar' =>  DashController::store_url_image("https://avatar.iran.liara.run/public/$id", "demo/stock/$image/avatar"),
         ];
     }
 }

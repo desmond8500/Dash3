@@ -1,8 +1,10 @@
 <div class="p-3">
-    <div class="row g-2">
-        <div class="col-md-12">
-            <button class="btn btn-primary btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i></button>
-        </div>
+    <div class="d-flex justify-content-between">
+        <h2>Permissions et Roles</h2>
+        <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+    </div>
+    <div class="row g-2 mt-3">
+
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">

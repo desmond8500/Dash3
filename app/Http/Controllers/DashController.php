@@ -24,30 +24,36 @@ use Spatie\Permission\Models\Role;
 class DashController extends Controller
 {
     static function init_app(){
-        User::create([
-            'firstname' => 'Admin',
-            'lastname' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('passer1234'),
-        ]);
-
-        $url = "http://www.google.co.in/intl/en_com/images/srpr/logo1w.png";
-        $contents = file_get_contents($url);
-        $name = substr($url, strrpos($url, '/') + 1);
-        Storage::put($name, $contents);
-
+        DashController::initUser();
         DashController::initRoles();
         DashController::init_task_status();
         DashController::init_task_priority();
     }
 
     public static function initUser(){
-        User::create([
+        $user = User::create([
             'firstname' => 'Admin',
             'lastname' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('passer1234'),
         ]);
+
+
+
+        $user->avatar = DashController::store_url_image('https://avatar.iran.liara.run/public', "users/$user/avatar");
+        $user->save();
+    }
+
+    static function store_url_image($url, $dir)
+    {
+        if ($dir) {
+            $dir = "test/avatar";
+        }
+        $contents = file_get_contents($url);
+        $name = substr($url, strrpos($url, '/') + 1);
+        Storage::disk('public')->put("$dir/$name", $contents);
+
+        return "storage/$dir/$name";
     }
 
     public static  function initRoles(){

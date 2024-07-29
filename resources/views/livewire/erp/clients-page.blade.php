@@ -9,6 +9,7 @@
             <button type="button" class="btn btn-primary btn-icon mx-1" wire:click='download_xls' data-bs-toggle="tooltip" title="Exporter en XLS">
                 <i class="ti ti-file-spreadsheet "></i>
             </button>
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
 

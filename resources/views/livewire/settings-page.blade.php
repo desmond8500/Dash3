@@ -16,8 +16,8 @@
                         <h4 class="subheader mt-4">Paramètres Système</h4>
                         <div class="list-group list-group-transparent">
                             <a href="#" wire:click="$set('tab', 2)" class="list-group-item list-group-item-action @if($tab==2)active @endif">Utilisateurs</a>
-                            <a href="#" wire:click="$set('tab', 3)" class="list-group-item list-group-item-action @if($tab==3)active @endif">Taches</a>
-                            <a href="#" wire:click="$set('tab', 4)" class="list-group-item list-group-item-action @if($tab==4)active @endif">Permissions</a>
+                            <a href="#" wire:click="$set('tab', 3)" class="list-group-item list-group-item-action @if($tab==3)active @endif">Status et priorités</a>
+                            <a href="#" wire:click="$set('tab', 4)" class="list-group-item list-group-item-action @if($tab==4)active @endif">Permissions et Roles</a>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,10 @@
                         @livewire('settings.user-account', ['user' => $user], key($user->id))
                     @elseif($tab == 1)
                         <div class="card-body">
-                            Notifications
+                            <div class="d-flex justify-content-between">
+                                <h2>Notifications</h2>
+                                <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+                            </div>
                         </div>
                     @elseif($tab == 2)
                         @livewire('settings.userslist')
@@ -40,7 +43,6 @@
         </div>
 
     </div>
-
 
     @component('components.modal', ["id"=>'addStatus', 'title' => 'Ajouter un statut'])
         <form class="row" wire:submit="status_store">

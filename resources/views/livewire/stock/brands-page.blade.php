@@ -2,6 +2,7 @@
     @component('components.layouts.page-header', ['title'=>'Marques', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             @livewire('form.brand-add')
+<button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
 
@@ -19,7 +20,7 @@
                             <img src="{{ asset($brand->logo) ?? 'https://avatar.iran.liara.run/public' }}" alt="M" class="avatar avatar-md">
                         </div>
                         <div class="col">
-                            <div class="card-title">{{ $brand->name }}</div>
+                            <a class="card-title" href="{{ route('brand',['brand_id'=>$brand->id]) }}">{{ $brand->name }}</a>
                             <div class="text-muted">{!! nl2br($brand->description) !!}</div>
                         </div>
                         <div class="col-auto">

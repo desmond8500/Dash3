@@ -7,13 +7,13 @@
 
     @push('css')
         <style>
-            h1, h2, h3, h4{
+            /* h1, h2, h3, h4{
                 background: grey;
                 color: white;
                 padding: 5px;
                 border-radius: 5px;
                 font-size: 18px;
-            }
+            } */
             table {
                 width: 100%;
                 border-collapse: collapse;

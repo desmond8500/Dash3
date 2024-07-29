@@ -24,12 +24,14 @@ use App\Livewire\Stock\AchatPage;
 use App\Livewire\Stock\AchatsPage;
 use App\Livewire\Stock\ArticlePage;
 use App\Livewire\Stock\ArticlesPage;
+use App\Livewire\Stock\BrandPage;
 use App\Livewire\Stock\BrandsPage;
 use App\Livewire\Stock\ProvidersPage;
 use App\Livewire\Stock\StockPage;
 use App\Livewire\Task\TaskPage;
 use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
+use App\Livewire\UsersPage;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -47,6 +49,9 @@ Route::middleware(['auth'])->group(function () {
 
 // ERP
 Route::middleware(['auth'])->group(function () {
+    // Users
+    // Route::get('/users', UsersPage::class)->name('users');
+
     // Clients
     Route::get('/clients', ClientsPage::class)->name('clients');
     // Projets
@@ -54,16 +59,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projet/{projet_id}', ProjetPage::class)->name('projet');
     // Devis
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
-    Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) {
-        return PDFController::facture_pdf($invoice_id, $type);
-    })->name('facture_pdf');
-    Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) {
-        return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id);
-    })->name('facture_acompte_pdf');
+    Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf($invoice_id, $type); })->name('facture_pdf');
+    Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) { return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id); })->name('facture_acompte_pdf');
 
-    Route::get('invoice_export/{invoice_id}',  function ($invoice_id){
-        return Excel::download(new InvoiceExport($invoice_id), 'invoices.xlsx');
-    })->name('invoice_export');
+    Route::get('invoice_export/{invoice_id}',  function ($invoice_id){ return Excel::download(new InvoiceExport($invoice_id), 'invoices.xlsx'); })->name('invoice_export');
 
     Route::post('invoice_import', 'InvoiceController@import')->name('invoice_import');
 
@@ -74,9 +73,7 @@ Route::middleware(['auth'])->group(function () {
     // Taches
     Route::get('/tasks', TasksPage::class)->name('tasks');
 
-    Route::get('/tasks_pdf/{id}/{type?}/{search?}/{status?}',  function ($id, $type='', $search='', $status=true) {
-        return PDFController::tasks_pdf($id, $type, $search, $status);
-    })->name('tasks_pdf');
+    Route::get('/tasks_pdf/{id}/{type?}/{search?}/{status?}',  function ($id, $type='', $search='', $status=true) { return PDFController::tasks_pdf($id, $type, $search, $status); })->name('tasks_pdf');
 
     // Avancements
     Route::get('/avancements/{building_id}', AvancementsPage::class)->name('avancements');
@@ -90,6 +87,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/stock', StockPage::class)->name('stock');
     Route::get('/stock/providers', ProvidersPage::class)->name('providers');
     Route::get('/stock/brands', BrandsPage::class)->name('brands');
+    Route::get('/stock/brand/{brand_id}', BrandPage::class)->name('brand');
     Route::get('/stock/articles', ArticlesPage::class)->name('articles');
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
     Route::get('/stock/achats', AchatsPage::class)->name('achats');

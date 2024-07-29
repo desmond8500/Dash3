@@ -14,9 +14,6 @@ class SettingsPage extends Component
     {
         return view('livewire.settings-page',[
             'user' => auth()->user(),
-            'users' => User::all(),
-            'taskPriorities' => TaskPriority::all(),
-            'taskStatuses' => TaskStatus::all(),
         ]);
     }
 

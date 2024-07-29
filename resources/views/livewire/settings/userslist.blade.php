@@ -12,7 +12,7 @@
                 <div class="card p-2" wire:click="select_user('{{ $user->id }}')">
                     <div class="row">
                         <div class="col-auto">
-                            <img src="" alt="A" class="avatar">
+                            <img src="{{ $user->avatar }}" alt="A" class="avatar">
                         </div>
                         <div class="col">
                             <div class="fw-bold">{{ $user->firstname }} {{ $user->lastname }}</div>

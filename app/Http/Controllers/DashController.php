@@ -16,15 +16,32 @@ use App\Models\TaskPriority;
 use App\Models\TaskStatus;
 use App\Models\Transaction;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class DashController extends Controller
 {
+    static function init_app(){
+        User::create([
+            'firstname' => 'Admin',
+            'lastname' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('passer1234'),
+        ]);
 
-    public static  function initUser(){
+        $url = "http://www.google.co.in/intl/en_com/images/srpr/logo1w.png";
+        $contents = file_get_contents($url);
+        $name = substr($url, strrpos($url, '/') + 1);
+        Storage::put($name, $contents);
+
+        DashController::initRoles();
+        DashController::init_task_status();
+        DashController::init_task_priority();
+    }
+
+    public static function initUser(){
         User::create([
             'firstname' => 'Admin',
             'lastname' => 'Admin',
@@ -40,6 +57,7 @@ class DashController extends Controller
         Permission::create(['name'=>'erp']);
         Permission::create(['name'=>'stock']);
         Permission::create(['name'=>'contacts']);
+        Permission::create(['name'=>'finances']);
     }
 
     static function init_task_status(){

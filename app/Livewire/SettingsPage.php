@@ -3,9 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\StatusForm;
-use App\Models\TaskPriority;
 use App\Models\TaskStatus;
-use App\Models\User;
 use Livewire\Component;
 
 class SettingsPage extends Component

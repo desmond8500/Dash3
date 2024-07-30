@@ -155,14 +155,15 @@
         </div>
     @endauth
 
-    <div class="mt-5 border border-primary rounded p-2">
+    <div class="mt-5 border border-primary rounded p-2 bg-white">
         <div class="fw-bold mb-2 ">
             Dev tools
         </div>
         <a class="btn btn-cyan" href="/log-viewer" target="_blank">Logs Viewer page</a>
         @env('local')
             <a class="btn btn-purple" href="/migrator" target="_blank">Migrator page</a>
-            <button wire:click='send'>Send mail</button>
+            <button class="btn btn-secondary" wire:click='send'>Send mail</button>
+            <button class="btn btn-danger" wire:click='init'>Initialiser</button>
         @endenv
     </div>
 

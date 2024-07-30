@@ -12,7 +12,7 @@
         <div class="w-100"></div>
         <div class="col-md-5">
             @foreach ($users as $user)
-                <div class="card p-2" wire:click="select_user('{{ $user->id }}')">
+                <div class="card p-2 mb-1" wire:click="select_user('{{ $user->id }}')">
                     <div class="row">
                         <div class="col-auto">
                             <img src="{{ $user->avatar }}" alt="A" class="avatar">
@@ -51,7 +51,7 @@
                             <div class="card card-sm  p-1 mb-1">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>{{ ucfirst($role->name) }}</div>
-                                    @if ($user->hasRole($role->name))
+                                    @if ($selected->hasRole($role->name))
                                         <div class="btn btn-sm rounded btn-danger" wire:click="delete_role('{{ $role->name }}')">Supprimer</div>
                                     @else
                                         <div class="btn btn-sm rounded btn-primary" wire:click="add_role('{{ $role->name }}')">Ajouter</div>
@@ -66,7 +66,7 @@
                             <div class="card card-sm  p-1 mb-1">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>{{ ucfirst($permission->name) }}</div>
-                                    @if ($user->hasPermissionTo($permission->name))
+                                    @if ($selected->hasPermissionTo($permission->name))
                                     <div class="btn btn-sm rounded btn-danger" wire:click="delete_permission('{{ $permission->name }}')">Supprimer</div>
                                     @else
                                     <div class="btn btn-sm rounded btn-primary" wire:click="add_permission('{{ $permission->name }}')">Ajouter</div>

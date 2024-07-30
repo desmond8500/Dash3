@@ -62,4 +62,7 @@ class IndexPage extends Component
         Mail::to('test@test.com')->send(new ReportMail());
     }
 
+    function init(){
+        DashController::init_app();
+    }
 }

@@ -1,7 +1,7 @@
 <div class="card p-2">
     <div class="row g-2">
         <div class="col-auto">
-            <img src="{{ asset("$article->image") }}" alt="A" class="avatar avatar-xl">
+            <img src="{{ asset("$article->image") }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
         </div>
         <div class="col">
             <div class="row">
@@ -25,19 +25,22 @@
                     </div>
                 </div>
             </div>
-
-            <div class="text-muted" >
+            @isset ($img_class)
+                </div>
+                <div class="col-12">
+            @endisset
+            <div class="text-muted">
                 @if ($article->brand)
-                    {{ $article->brand->name }}
+                {{ $article->brand->name }}
                 @else
-                    _
+                _
                 @endif
             </div>
-            <div class="text-muted" >
+            <div class="text-muted">
                 @if ($article->provider)
-                    <span class="badge bg-blue-lt">{{ $article->provider->name }}</span>
+                <span class="badge bg-blue-lt">{{ $article->provider->name }}</span>
                 @else
-                    _
+                _
                 @endif
             </div>
             {{-- <div class="text-muted">{!! nl2br($article->description) !!}</div> --}}
@@ -50,8 +53,6 @@
                     <div class="text-danger text-end" style="font-size: 20px">{{ number_format($article->price, 0, 2) }} F</div>
                 </div>
             </div>
-        </div>
-        <div class="col-auto">
         </div>
     </div>
 </div>

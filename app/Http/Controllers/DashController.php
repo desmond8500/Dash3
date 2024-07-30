@@ -31,17 +31,15 @@ class DashController extends Controller
     }
 
     public static function initUser(){
-        $user = User::create([
+        $admin = User::create([
             'firstname' => 'Admin',
             'lastname' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('passer1234'),
         ]);
 
-
-
-        $user->avatar = DashController::store_url_image('https://avatar.iran.liara.run/public', "users/$user/avatar");
-        $user->save();
+        $admin->assignRole('admin');
+        User::factory(10)->create();
     }
 
     static function store_url_image($url, $dir)
@@ -57,13 +55,20 @@ class DashController extends Controller
     }
 
     public static  function initRoles(){
-        Role::create(['name'=>'admin']);
-        Role::create(['name'=>'user']);
+        $admin_role = Role::create(['name'=>'admin']);
+        $user_role = Role::create(['name'=>'user']);
 
-        Permission::create(['name'=>'erp']);
+        Permission::create(['name'=>'clients']);
         Permission::create(['name'=>'stock']);
+        Permission::create(['name'=>'journaux']);
         Permission::create(['name'=>'contacts']);
         Permission::create(['name'=>'finances']);
+        Permission::create(['name'=>'settings']);
+        Permission::create(['name'=>'medias']);
+        Permission::create(['name'=>'test']);
+
+        $admin_role->givePermissionTo(['clients','stock','journaux','contacts','finances','settings','medias','test']);
+        $user_role->givePermissionTo(['clients','stock']);
     }
 
     static function init_task_status(){

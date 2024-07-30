@@ -5,7 +5,9 @@
     <div class="row g-2">
         @foreach ($articles as $article)
             <div class="col-md-6">
-                @include('_card.articleCard')
+                @include('_card.articleCard',[
+                    'img_class' => ''
+                ])
             </div>
         @endforeach
     </div>

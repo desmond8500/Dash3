@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ERP
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:erp'])->group(function () {
     // Users
     // Route::get('/users', UsersPage::class)->name('users');
 
@@ -83,7 +83,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Stock
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:stock'])->group(function () {
     Route::get('/stock', StockPage::class)->name('stock');
     Route::get('/stock/providers', ProvidersPage::class)->name('providers');
     Route::get('/stock/brands', BrandsPage::class)->name('brands');
@@ -102,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Building management
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/buildings/{projet_id}', BuildingsPage::class)->name('buildings');
     Route::get('/building/{building_id}', BuildingPage::class)->name('building');
     Route::get('/stage/{stage_id}', StagePage::class)->name('stage');
@@ -110,7 +110,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Medias
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','can:medias'])->group(function () {
     // Images
     // Route::get('/images', Image::class)->name('images');
     // Route::get('/image/{image_id}', TasksPage::class)->name('image');
@@ -123,13 +123,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Tasks
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/tasks', TasksPage::class)->name('tasks');
     Route::get('/task/{task_id}', TaskPage::class)->name('task');
 });
 
 // Journal
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:erp'])->group(function () {
     // Route::get('/journaux', Journaux::class)->name('journaux');
     Route::get('/journaux', JournauxPage::class)->name('journaux');
     Route::get('/journaux/journal_pdf/{journal_id}', function ($journal_id) {
@@ -138,7 +138,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Finances
-Route::get('/finances', FinancesPage::class)->name('finances');
+Route::middleware(['auth', 'can:finances'])->group(function () {
+    Route::get('/finances', FinancesPage::class)->name('finances');
+
+});
 
 // Test
 Route::get('/test', TestPage::class)->name('test');

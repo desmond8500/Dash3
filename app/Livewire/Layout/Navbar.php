@@ -8,13 +8,13 @@ use Livewire\Component;
 class Navbar extends Component
 {
     public $menu1 = array(
-        array('name' => "Clients", "route" => "clients", "icon" => "users"),
-        array('name' => "Journaux", "route" => "journaux", "icon" => "article"),
-        array('name' => "Stock", "route" => "stock", "icon" => "packages", ),
-        array('name' => "Finances", "route" => "finances", "icon" => "coins"),
-        array('name' => "Test", "route" => "test", "icon" => "hammer"),
-        array('name' => "Systemes", "route" => "systemes", "icon" => "hammer"),
-        array('name' => "Medias", "icon" => "hammer",
+        array('name' => "Clients", "route" => "clients", "icon" => "users", "can"=>"clients"),
+        array('name' => "Journaux", "route" => "journaux", "icon" => "article", "can"=> "journaux"),
+        array('name' => "Stock", "route" => "stock", "icon" => "packages", "can"=> "stock"),
+        array('name' => "Finances", "route" => "finances", "icon" => "coins", "can"=> "finances"),
+        array('name' => "Test", "route" => "test", "icon" => "hammer", "can"=> "test"),
+        array('name' => "Systemes", "route" => "systemes", "icon" => "hammer", "can"=> "settings"),
+        array('name' => "Medias", "icon" => "hammer", "can"=> "medias",
             'submenu' => [
                 array('name' => "Images", "route" => "systemes", "icon" => "hammer"),
                 array('name' => "Vidéos", "route" => "systemes", "icon" => "hammer"),

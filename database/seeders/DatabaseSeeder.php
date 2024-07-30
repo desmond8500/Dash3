@@ -12,10 +12,10 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        DashController::initRoles();
+        DashController::initUser();
         DashController::init_task_status();
         DashController::init_task_priority();
-        DashController::initUser();
-        DashController::initRoles();
         DashController::init_transaction();
         DashController::init_stock();
 

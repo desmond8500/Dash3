@@ -1,6 +1,6 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Stock', 'breadcrumbs'=>$breadcrumbs])
-
+        <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
     @endcomponent
 
     <div class="row mt-2 g-2">

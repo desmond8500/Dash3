@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Http\Controllers\DashController;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -12,19 +13,16 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = User::class;
+
     public function definition(): array
     {
         $id = random_int(0, 99);
         $image = random_int(0, 99);
         return [
-            'firstname' => 'admin',
-            'lastname' => 'admin',
-            'email' => 'admin@admin.com',
+            'firstname' => $this->faker->firstName,
+            'lastname' => $this->faker->lastName,
+            'email' => $this->faker->email,
             'email_verified_at' => now(),
             'password' => Hash::make('passer1234'), // password
             'remember_token' => Str::random(10),

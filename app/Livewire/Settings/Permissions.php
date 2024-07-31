@@ -15,4 +15,19 @@ class Permissions extends Component
             'roles' => Role::all(),
         ]);
     }
+
+    // Permission
+    function permission_add($name){
+        Permission::create([
+            'name' => $name
+        ]);
+    }
+    function permission_edit($permission_id){
+        $permission = Permission::find($permission_id);
+        $this->dispatch('open-editPermission');
+    }
+    function permission_update(){
+        $permission = Permission::find($permission_id);
+        $this->dispatch('open-editPermission');
+    }
 }

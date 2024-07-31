@@ -24,22 +24,29 @@ use Spatie\Permission\Models\Role;
 class DashController extends Controller
 {
     static function init_app(){
-        DashController::initUser();
+        DashController::init_admin();
         DashController::initRoles();
         DashController::init_task_status();
         DashController::init_task_priority();
     }
 
-    public static function initUser(){
-        $admin = User::create([
-            'firstname' => 'Admin',
-            'lastname' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('passer1234'),
-        ]);
+    public static function init_admin(){
+        $users = User::count();
+        if ($users) {
+            $admin = User::create([
+                'firstname' => 'Admin',
+                'lastname' => 'Admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('passer1234'),
+            ]);
+            $admin->assignRole('admin');
+            $admin->avatar = DashController::store_url_image('https://avatar.iran.liara.run/public', "test/user/$admin->id/avatar");
+            $admin->save();
+        }
 
-        $admin->assignRole('admin');
-        $admin->avatar = DashController::store_url_image('https://avatar.iran.liara.run/public', "test/user/$admin->id/avatar");
+    }
+    public static function initUser(){
+
         User::factory(10)->create();
     }
 

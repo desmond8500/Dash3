@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Stock;
 
+use App\Livewire\Forms\AchatForm;
 use App\Models\Achat;
 use App\Models\Provider;
 use Livewire\Attributes\On;
@@ -48,31 +49,16 @@ class AchatsPage extends Component
     }
 
     public $selected;
+    public AchatForm $achat_form;
 
-    function edit($provider_id){
-        $provider =  Achat::find($provider_id);
-        $this->selected = $provider_id;
-
-        $this->provider_id = $provider->provider_id;
-        $this->name = $provider->name;
-        $this->description = $provider->description;
-        $this->date = $provider->date;
-
+    function edit($achat_id){
+        $this->achat_form->set($achat_id);
         $this->dispatch('open-editAchat');
     }
 
     function update()
     {
-        $this->validate();
-
-        $provider =  Achat::find($this->selected);
-
-        $provider->provider_id = $this->provider_id;
-        $provider->name = $this->name;
-        $provider->description = $this->description;
-        $provider->date = $this->date;
-        $provider->save();
-
+        $this->achat_form->update();
         $this->dispatch('close-editAchat');
     }
 

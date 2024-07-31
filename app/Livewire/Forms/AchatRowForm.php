@@ -20,7 +20,7 @@ class AchatRowForm extends Form
     public $tva;
 
     function store(){
-        $this->row->create($this->all());
+        AchatRow::create($this->all());
 
     }
 

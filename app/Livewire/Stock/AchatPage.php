@@ -26,7 +26,7 @@ class AchatPage extends Component
     public $breadcrumbs;
     public $achat_id;
     public $achat;
-    public AchatForm $achat_form;
+
 
     public $provider_id;
     #[Validate('required')]
@@ -104,6 +104,12 @@ class AchatPage extends Component
 
     public AchatRowForm $a_row;
 
+    function achat_row_add(){
+        $this->a_row->achat_id = $this->achat_id;
+        $this->a_row->store();
+        $this->dispatch('close-addAchatArticle');
+    }
+
     function row_edit($id){
         $this->a_row->set($id);
         $this->dispatch('open-editAchatRow');
@@ -158,7 +164,7 @@ class AchatPage extends Component
     }
 
     // Achat
-
+    public AchatForm $achat_form;
     function achat_edit($achat_id)
     {
         $this->achat_form->set($achat_id);
@@ -171,6 +177,9 @@ class AchatPage extends Component
         $this->achat = Achat::find($this->achat->id);
         $this->dispatch('close-editAchat');
     }
+
+    // Achat Row
+    public $row_toggle = false;
 
 }
 

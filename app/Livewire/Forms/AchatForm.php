@@ -26,6 +26,7 @@ class AchatForm extends Form
     function store(){
         $this->validate();
         Achat::create($this->all());
+        $this->reset('name','date','provider_id', 'description');
     }
 
     function set($model_id){

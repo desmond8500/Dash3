@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Stock;
 
+use App\Livewire\Forms\AchatForm;
 use App\Livewire\Forms\AchatRowForm;
 use App\Models\Achat;
 use App\Models\AchatFacture;
@@ -9,6 +10,7 @@ use App\Models\AchatRow;
 use App\Models\Article;
 use App\Models\Provider;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -24,6 +26,7 @@ class AchatPage extends Component
     public $breadcrumbs;
     public $achat_id;
     public $achat;
+    public AchatForm $achat_form;
 
     public $provider_id;
     #[Validate('required')]
@@ -33,6 +36,7 @@ class AchatPage extends Component
     public $date;
 
     public function mount($achat_id){
+        $this->achat_form->set($achat_id);
         $this->achat = Achat::find($achat_id);
         $this->breadcrumbs = array(
             array('name' => 'Stock', 'route' => route('stock')),
@@ -41,14 +45,11 @@ class AchatPage extends Component
         );
     }
 
-    function AchatSearch() {
-        return Achat::where('name', 'like', '%' . $this->search . '%')->paginate(10);
-    }
-
+    #[On('get-achat')]
     public function render(){
         return view('livewire.stock.achat-page',[
             'achat' => $this->achat,
-            'articles' => Article::all(),
+            'articles' => Article::search($this->search,'designation')->paginate(5),
             'providers' => Provider::all(),
         ]);
     }
@@ -154,6 +155,21 @@ class AchatPage extends Component
         // return $pdf->download('_pdf.achat');
 
         // Pdf::view('pdf.invoice')->save('/some/directory/invoice.pdf');
+    }
+
+    // Achat
+
+    function achat_edit($achat_id)
+    {
+        $this->achat_form->set($achat_id);
+
+        $this->dispatch('open-editAchat');
+    }
+    function achat_update()
+    {
+        $this->achat_form->update();
+        $this->achat = Achat::find($this->achat->id);
+        $this->dispatch('close-editAchat');
     }
 
 }

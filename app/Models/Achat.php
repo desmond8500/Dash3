@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\dateTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Achat extends Model
 {
     use HasFactory;
+    use dateTrait;
 
     protected $fillable = [
         'provider_id',
@@ -16,6 +20,11 @@ class Achat extends Model
         'description',
         'date'
     ];
+
+    public function provider(): BelongsTo
+    {
+        return $this->belongsTo(Provider::class);
+    }
 
     public function rows(): HasMany
     {

@@ -1,7 +1,9 @@
 <div>
     @component('components.layouts.page-header', ['title'=>"Achat: $achat->name", 'breadcrumbs'=>$breadcrumbs])
-        {{-- @livewire('form.achat-add') --}}
-        <a class="btn btn-primary" target="_blank" href="{{ route('achat_pdf',['achat_id'=>$achat->id]) }}">PDF</a>
+        <div class="btn-list">
+            <a class="btn btn-primary" target="_blank" href="{{ route('achat_pdf',['achat_id'=>$achat->id]) }}">PDF</a>
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+        </div>
     @endcomponent
 
     <div class="row g-2">
@@ -10,15 +12,27 @@
                 <div class="card-header">
                     <div class="card-title">{{ $achat->name }}</div>
                     <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path> <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path> <path d="M16 5l3 3"></path> </svg>
+                        <button class="btn btn-primary btn-icon" wire:click="achat_edit('{{ $achat->id }}')">
+                            <i class="ti ti-edit"></i>
                         </button>
                     </div>
                 </div>
                 <div class="card-body">
+                    <h3>Description</h3>
                     {{ nl2br($achat->description) }}
                 </div>
+
                 <table class="table">
+                    @if ($achat->provider)
+                        <tr>
+                            <td> Fournisseur : </td>
+                            <td class="text-end "> {{ $achat->provider->name }} </td>
+                        </tr>
+                    @endif
+                    <tr>
+                        <td> Date : </td>
+                        <td class="text-end fst-italic"> {{ $achat->formatDate() }} </td>
+                    </tr>
                     <tr>
                         <td> TOTAL HT </td>
                         <td class="text-end text-danger"> {{ $achat->total() }} CFA </td>
@@ -127,34 +141,37 @@
             </div>
 
             @component('components.modal', ["id"=>'addAchatArticle', 'title'=> "Ajouter un article à l'achat", 'class'=>'modal-xl'])
-                <div class="row">
-                    @foreach ($articles as $article)
-                        <div class="col-md-4">
-                            <div class="card p-2">
-                                <div class="row">
-                                    <div class="col-auto">
-                                        <img src="" alt="A" class="avatar avatar-md">
-                                    </div>
-                                    <div class="col">
-                                        <div class="card-title">{{ $article->designation }}</div>
-                                        <div class="text-muted">{!! nl2br($article->description) !!}</div>
-                                        <label class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" wire:model='row_tva'>
-                                            <span class="form-check-label">TVA</span>
-                                        </label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div style="width: 83px;" class="mb-1">
-                                            <input type="text" class="form-control" wire:model='row_quantity'>
-                                        </div>
-                                      <button class="btn btn-outline-primary " wire:click="row_store('{{ $article->id }}')">
-                                        {{-- <i class="ti ti-plus"></i> --}} Ajouter
-                                      </button>
-                                  </div>
-                                </div>
-                            </div>
+                <div class="row g-2">
+                    <div class="col-md-12 ">
+                        <div class="input-icon">
+                            <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher">
+                            <span class="input-icon-addon">
+                                <i class="ti ti-search"></i>
+                            </span>
                         </div>
+                    </div>
+                    @foreach ($articles as $article)
+                        <div class="col-md-6">
+                            {{-- @include('_card.articleCard') --}}
+
+                            @component('components.stock.article_card', ['article'=> $article])
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <input type="number" min="0" class="form-control" wire:model="quantity" value="1" placeholder="Quantité">
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary" >
+                                            Ajouter
+                                        </button>
+                                    </div>
+                                </div>
+                            @endcomponent
+                        </div>
+
                     @endforeach
+                    <div class="col-md-12">
+                        {{ $articles->links() }}
+                    </div>
                 </div>
 
                     <div class="modal-footer">
@@ -168,7 +185,7 @@
     </div>
 
     @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat"])
-        <form class="row" wire:submit="update">
+        <form class="row" wire:submit="achat_update">
             @include('_form.achat_form')
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -219,7 +236,7 @@
         <script> window.addEventListener('close-editAchatRow', event => { $('#editAchatRow').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'addAchatFacture', 'title'=>"Editer l'achat"])
+    @component('components.modal', ["id"=>'addAchatFacture', 'title'=>"Ajouter une facture"])
         <form class="row" wire:submit="addFacture">
             <div class="col-md-12 mb-3">
                 <label class="form-label">Facture</label>
@@ -232,11 +249,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script>
-            window.addEventListener('open-addAchatFacture', event => { $('#addAchatFacture').modal('show'); })
-        </script>
-        <script>
-            window.addEventListener('close-addAchatFacture', event => { $('#addAchatFacture').modal('hide'); })
-        </script>
+        <script> window.addEventListener('open-addAchatFacture', event => { $('#addAchatFacture').modal('show'); }) </script>
+        <script> window.addEventListener('close-addAchatFacture', event => { $('#addAchatFacture').modal('hide'); }) </script>
     @endcomponent
 </div>

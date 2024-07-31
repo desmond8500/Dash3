@@ -1,13 +1,13 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Dashboard'])
-        @if (!$init)
-            <button class="btn btn-primary" wire:click="initServer()">
-                Initialiser le serveur
-            </button>
-        @endif
+        <div class="btn-list mb-1">
+            @if (!$init)
+                <button class="btn btn-primary" wire:click="initServer()">
+                    Initialiser le serveur
+                </button>
+            @endif
 
-        @auth
-            <div class="btn-list mb-1">
+            @auth
                 @livewire('form.journal-add')
                 @livewire('form.task-add')
                 @env('local')
@@ -17,8 +17,9 @@
                         @endcomponent
                     </div>
                 @endenv
-            </div>
-        @endauth
+            @endauth
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+        </div>
 
     @endcomponent
 

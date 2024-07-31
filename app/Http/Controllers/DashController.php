@@ -32,7 +32,7 @@ class DashController extends Controller
 
     public static function init_admin(){
         $users = User::count();
-        if ($users) {
+        if (!$users) {
             $admin = User::create([
                 'firstname' => 'Admin',
                 'lastname' => 'Admin',

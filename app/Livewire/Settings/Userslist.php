@@ -16,7 +16,7 @@ class Userslist extends Component
     {
         return view('livewire.settings.userslist',[
             'users' => User::search($this->search, 'firstname')
-                ->search($this->search, 'lasttname')
+                ->search($this->search, 'lastname')
                 ->search($this->search, 'email')
                 ->paginate(5)
                 ,

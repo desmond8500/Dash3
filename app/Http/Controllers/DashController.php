@@ -39,6 +39,7 @@ class DashController extends Controller
         ]);
 
         $admin->assignRole('admin');
+        $admin->avatar = DashController::store_url_image('https://avatar.iran.liara.run/public', "test/user/$admin->id/avatar");
         User::factory(10)->create();
     }
 
@@ -58,6 +59,7 @@ class DashController extends Controller
         $admin_role = Role::create(['name'=>'admin']);
         $user_role = Role::create(['name'=>'user']);
 
+        Permission::create(['name'=>'erp']);
         Permission::create(['name'=>'clients']);
         Permission::create(['name'=>'stock']);
         Permission::create(['name'=>'journaux']);
@@ -67,7 +69,7 @@ class DashController extends Controller
         Permission::create(['name'=>'medias']);
         Permission::create(['name'=>'test']);
 
-        $admin_role->givePermissionTo(['clients','stock','journaux','contacts','finances','settings','medias','test']);
+        $admin_role->givePermissionTo(['erp','clients','stock','journaux','contacts','finances','settings','medias','test']);
         $user_role->givePermissionTo(['clients','stock']);
     }
 

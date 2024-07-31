@@ -15,18 +15,18 @@
                 <div class="card p-2 mb-1" wire:click="select_user('{{ $user->id }}')">
                     <div class="row">
                         <div class="col-auto">
-                            <img src="{{ $user->avatar }}" alt="A" class="avatar">
+                            <img src="{{ $user->avatar }}" alt="A" class="avatar p-1">
                         </div>
                         <div class="col">
                             <div class="fw-bold">{{ $user->firstname }} {{ $user->lastname }}</div>
                             <div class="">{{ $user->email }} </div>
                             {{-- <div class="text-muted">Description</div> --}}
                         </div>
-                        <div class="col-auto">
+                        {{-- <div class="col-auto">
                             <button class="btn btn-outline-primary btn-icon">
                                 <i class="ti ti-edit"></i>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             @endforeach
@@ -37,7 +37,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-auto">
-                                <img src="{{ asset($selected->avatar) }}" alt="U" class="avatar ">
+                                <img src="{{ asset($selected->avatar) }}" alt="U" class="avatar p-1">
                             </div>
                             <div class="col">
                                 <div class="fw-bold">{{ $selected->firstname }} {{ $selected->lastname }}</div>

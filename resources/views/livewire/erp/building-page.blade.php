@@ -68,6 +68,16 @@
                     @endforeach
                 </div>
             @endif
+
+            <div class="row">
+                <div class="col-md-6">
+                    @livewire('erp.building-quantitatif')
+                </div>
+                <div class="col-md-6">
+                    @livewire('erp.building-fiche')
+
+                </div>
+            </div>
         </div>
     </div>
 

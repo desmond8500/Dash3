@@ -22,8 +22,8 @@
                         <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$building_id, 'type'=>'building', 'search'=>$search]) }}" target="_blank">
                             <i class="ti ti-file-type-pdf"></i>
                         </a>
-                    @elseif($satge_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$satge_id, 'type'=>'satge', 'search'=>$search]) }}" target="_blank">
+                    @elseif($stage_id)
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$stage_id, 'type'=>'stage', 'search'=>$search]) }}" target="_blank">
                             <i class="ti ti-file-type-pdf"></i>
                         </a>
                     @elseif($room_id)

@@ -2,6 +2,7 @@
     @component('components.layouts.page-header', ['title'=>'Journaux', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             @livewire('form.journal-add')
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
     <style>

@@ -7,13 +7,13 @@
         @foreach ($sections as $section)
             <a class="col-md-3" href="{{ route($section['route']) }}">
                 <div class="card p-2">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-auto">
-                            <img src="" alt="{{ $section['count'] }}" class="avatar avatar-md">
+                            <img src="" alt="{{ $section['count'] }}" class="avatar">
                         </div>
                         <div class="col">
                             <div class="fw-bold">{{ $section['name'] }}</div>
-                            <div class="text-muted">Description</div>
+                            {{-- <div class="text-muted">Description</div> --}}
                         </div>
                         <div class="col-auto">
 

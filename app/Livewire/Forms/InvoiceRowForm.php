@@ -23,7 +23,7 @@ class InvoiceRowForm extends Form
     public $quantite= 1;
     #[Validate('numeric')]
     public $prix = 0;
-    public $priorite_id;
+    public $priorite_id=1;
 
     function set($row_id)
     {

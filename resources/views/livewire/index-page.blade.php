@@ -161,10 +161,10 @@
             Dev tools
         </div>
         <a class="btn btn-cyan" href="/log-viewer" target="_blank">Logs Viewer page</a>
+        <button class="btn btn-danger" wire:click='init'>Initialiser</button>
         @env('local')
             <a class="btn btn-purple" href="/migrator" target="_blank">Migrator page</a>
             <button class="btn btn-secondary" wire:click='send'>Send mail</button>
-            <button class="btn btn-danger" wire:click='init'>Initialiser</button>
         @endenv
     </div>
 

@@ -101,7 +101,7 @@
                     <tr class="">
                         <td scope="row" >
                             <div class="fw-bold">{{ $row->designation }}</div>
-                            <div class="text-muted" style="font-size: 10px;">{{ nl2br($row->reference) }}</div>
+                            <div class="text-muted" style="font-size: 10px;">{!! nl2br($row->reference) !!}</div>
                         </td>
                         <td class="text-center">{{ $row->quantite }}</td>
                         @if ($title !="quantitatif")

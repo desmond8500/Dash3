@@ -68,24 +68,21 @@
             @endphp
             <tr>
                 <th scope="col" class="bg-primary-lt" colspan="2">
-                    <div>{{ $section->id }} {{ $section->section }}</div>
-                    <div>Sous Total: {{ $section->total() }}</div>
-                    {{-- @foreach ($section->total as $item)
-                    @dump($item)
-                    @endforeach --}}
+                    <div> <span class='text-danger'>{{ $section->id }}</span> {{ $section->section }}</div>
                 </th>
                 <th scope="col" class="bg-primary-lt " colspan="6">
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary mx-1" wire:click="addRow('{{ $section->id }}')">
+                        <button class="btn btn-sm p-1 rounded btn-primary me-1" wire:click="addRow('{{ $section->id }}')">
                             <i class="ti ti-plus"></i> Article
                         </button>
-                        <button class="btn btn-primary btn-icon mx-1" wire:click="edit_section('{{ $section->id }}')">
+                        <button class="btn btn-sm p-1 rounded btn-primary btn-icon me-1" wire:click="edit_section('{{ $section->id }}')">
                             <i class="ti ti-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-icon mx-1" wire:click="delete_section('{{ $section->id }}')"
+                        <button class="btn btn-sm p-1 rounded btn-danger btn-icon me-1" wire:click="delete_section('{{ $section->id }}')"
                             wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
                             <i class="ti ti-trash"></i>
                         </button>
+                        <button class="btn btn-sm p-1 btn-primary rounded" disabled>PDF</button>
                     </div>
                 </th>
             </tr>

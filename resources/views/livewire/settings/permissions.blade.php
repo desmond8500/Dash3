@@ -29,7 +29,7 @@
                 <ul class="list-group">
                     @foreach ($roles as $role)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            {{ ucfirst($role->name) }}
+                            <div wire:click="select_role('{{ $role->id }}')">{{ ucfirst($role->name) }}</div>
                             <button class="btn btn-danger btn-sm rounded" wire:click="role_delete('{{ $role->id }}')">
                                 <i class="ti ti-trash"></i>
                             </button>
@@ -37,6 +37,45 @@
                     @endforeach
                 </ul>
             </div>
+
+            @if ($selected_role)
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Permission Role</div>
+                        <div class="card-actions">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @foreach ($permissions as $permission)
+                            @php
+                                $green = 0;
+                            @endphp
+                            @foreach ($selected_role->getAllPermissions() as $perm)
+                                @php
+                                    if ($perm->name == $permission->name) {
+                                        $green =1;
+                                    }
+                                @endphp
+                            @endforeach
+                            @if ($green)
+                                <button class="border bg-green text-white p-1 mb-1 rounded" wire:click="assign_role('{{ $permission->name }}')">
+                                    {{ $permission->name }}
+                                </button>
+                            @else
+                                <button class="border bg-red text-white p-1 mb-1 rounded" wire:click="revoke_role('{{ $permission->name }}')">
+                                    {{ $permission->name }}
+                                </button>
+                            @endif
+
+                        @endforeach
+
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            @endif
         </div>
 
         <div class="col-md-6">

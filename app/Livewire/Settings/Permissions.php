@@ -42,6 +42,7 @@ class Permissions extends Component
     }
 
     // Role
+    public $selected_role;
     function role_store(){
         $this->role_form->store();
         $this->dispatch('open-addRole');
@@ -56,5 +57,18 @@ class Permissions extends Component
     }
     function role_delete($role_id){
         $this->role_form->delete($role_id);
+    }
+
+    function select_role($role_id){
+        $this->selected_role = Role::find($role_id);
+    }
+
+    function assign_role($role){
+        $this->selected_role->givePermissionTo($role);
+        $this->selected_role = Role::find($this->selected_role->id);
+    }
+    function revoke_role($role){
+        $this->selected_role->revokePermissionTo($role);
+        $this->selected_role = Role::find($this->selected_role->id);
     }
 }

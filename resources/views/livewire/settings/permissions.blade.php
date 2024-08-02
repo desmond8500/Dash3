@@ -59,11 +59,11 @@
                                 @endphp
                             @endforeach
                             @if ($green)
-                                <button class="border bg-green text-white p-1 mb-1 rounded" wire:click="assign_role('{{ $permission->name }}')">
+                                <button class="border bg-green text-white p-1 mb-1 rounded cursor-pointer" wire:click="assign_role('{{ $permission->name }}')">
                                     {{ $permission->name }}
                                 </button>
                             @else
-                                <button class="border bg-red text-white p-1 mb-1 rounded" wire:click="revoke_role('{{ $permission->name }}')">
+                                <button class="border bg-red text-white p-1 mb-1 rounded cursor-pointer" wire:click="revoke_role('{{ $permission->name }}')">
                                     {{ $permission->name }}
                                 </button>
                             @endif

@@ -145,9 +145,10 @@ Route::middleware(['auth', 'can:finances'])->group(function () {
 
 // Test
 Route::get('/test', TestPage::class)->name('test');
-Route::get('pdf_test', function () {
-    return PDFController::pdf_test();
-})->name('pdf_test');
+Route::get('pdf_test', function () { return PDFController::pdf_test(); })->name('pdf_test');
+Route::get('test_pdf', function () { return PDFController::test_pdf(); })->name('test_pdf');
+Route::get('proces_verbal_pdf', function () { return PDFController::proces_verbal_pdf(); })->name('proces_verbal_pdf');
+
 Route::get('arp_card_pdf/{card_id}', function ($card_id) {
     return PDFController::arp_card_pdf($card_id);
 })->name('arp_card_pdf');

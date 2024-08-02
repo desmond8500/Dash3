@@ -102,7 +102,7 @@
                         </div>
 
                         <div class="tab-pane" id="tabs-dossier">
-                            <h2>Dossier</h2>
+                            @livewire('erp.dossier', ['projet_id' => $projet_id])
                         </div>
 
                         <div class="tab-pane" id="tabs-reglages">

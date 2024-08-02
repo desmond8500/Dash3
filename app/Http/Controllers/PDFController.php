@@ -179,5 +179,23 @@ class PDFController extends Controller
         return $pdf->stream('pdf');
         // return $pdf->download('sdfsd');
     }
+    public static function test_pdf(){
+
+        $data = [
+
+        ];
+
+        $pdf = Pdf::loadView('_pdf.test', $data);
+        return $pdf->stream('pdf');
+    }
+    public static function proces_verbal_pdf(){
+
+        $data = [
+
+        ];
+
+        $pdf = Pdf::loadView('_pdf.proces_verbal_pdf', $data);
+        return $pdf->stream('proces_verbal_pdf');
+    }
 
 }

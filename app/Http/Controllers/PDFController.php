@@ -191,11 +191,27 @@ class PDFController extends Controller
     public static function proces_verbal_pdf(){
 
         $data = [
-
+            "societes" => array('Société 1', 'Société 2'),
+            "systemes" => array('Détection incendie', 'Signalisation'),
+            "date" => "20/12/2024",
+            "client" => "CBAO Kermel",
+            "travaux" => "",
+            "articles" => array(
+                (object) array('designation' => 'Article 1', 'quantite'=> 1, 'reference'=> 'ref'),
+                (object) array('designation' => 'Article 2', 'quantite'=> 1, 'reference'=> 'ref'),
+                (object) array('designation' => 'Article 3', 'quantite'=> 1, 'reference'=> 'ref'),
+                (object) array('designation' => 'Article 4', 'quantite'=> 1, 'reference'=> 'ref'),
+                (object) array('designation' => 'Article 5', 'quantite'=> 1, 'reference'=> 'ref'),
+            ),
+            "personnes" => array(
+                (object) array('prenom' => 'Adrien', 'nom'=> 'Monk', 'societe'=> 'police'),
+                (object) array('prenom' => 'Adrien', 'nom'=> 'Monk', 'societe'=> 'police'),
+                (object) array('prenom' => 'Adrien', 'nom'=> 'Monk', 'societe'=> 'police'),
+            ),
         ];
 
-        $pdf = Pdf::loadView('_pdf.proces_verbal_pdf', $data);
-        return $pdf->stream('proces_verbal_pdf');
+        $pdf = Pdf::loadView('_pdf.doe_pdf', $data);
+        return $pdf->stream('doe_pdf');
     }
 
 }

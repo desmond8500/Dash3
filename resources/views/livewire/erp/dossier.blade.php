@@ -8,4 +8,5 @@
 
     <a class="btn btn-primary" target="_blank" href="{{ route('test_pdf') }}">PDF Test</a>
     <a class="btn btn-primary" target="_blank" href="{{ route('proces_verbal_pdf') }}">Process Verbal</a>
+    <a class="btn btn-primary" target="_blank" href="{{ route('doe_pdf') }}">DOE</a>
 </div>

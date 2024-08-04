@@ -54,6 +54,7 @@ class TaskForm extends Form
         $this->fix();
         $this->validate();
         Task::create( $this->all() );
+        $this->reset('name','description','start_date', 'end_date', 'status_id', 'priority_id', 'expiration_date');
 
     }
 

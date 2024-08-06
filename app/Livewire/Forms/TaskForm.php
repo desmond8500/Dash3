@@ -11,6 +11,7 @@ class TaskForm extends Form
 {
     public ?Task $task;
 
+    public $id;
     public $client_id;
     public $projet_id;
     public $devis_id;
@@ -30,6 +31,7 @@ class TaskForm extends Form
     function set($task_id){
         $this->task = Task::find($task_id);
 
+        $this->id = $this->task->id;
         $this->client_id = $this->task->client_id;
         $this->projet_id = $this->task->projet_id;
         $this->devis_id = $this->task->devis_id;

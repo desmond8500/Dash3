@@ -39,6 +39,7 @@
                             Terminés {{ $inactiveCount }}
                         @endif
                     </button>
+                    <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
                 </div>
             </div>
         </div>
@@ -51,8 +52,8 @@
             </div>
             <div class="row row-deck g-2">
                 @foreach ($tasks as $task)
-                    <div class="{{ $class ?? 'col-md-12' }}">
-                        @include('_card.task_card')
+                    <div class="{{ $class ?? 'col-md-12'}}">
+                        @include('_card.task_card',['task' => $task])
                     </div>
                 @endforeach
             </div>
@@ -75,7 +76,7 @@
         <script> window.addEventListener('close-editTaskModal', event => { $('#editTaskModal').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal.link-modal', ["id"=>'taskDetail', 'title' => 'Editer une tache'])
+    @component('components.modal.link-modal', ["id"=>'taskDetail', 'title' => 'Editer une tache', 'task'=>$task])
         @include('_form.task_detail')
         <script> window.addEventListener('open-taskDetail', event => { $('#taskDetail').modal('show'); }) </script>
         <script> window.addEventListener('close-taskDetail', event => { $('#taskDetail').modal('hide'); }) </script>

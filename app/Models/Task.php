@@ -6,6 +6,7 @@ use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Task extends Model
@@ -85,5 +86,9 @@ class Task extends Model
 
     public function devis(): BelongsTo{
         return $this->belongsTo(Invoice::class, 'devis_id');
+    }
+
+    function subtasks(): HasMany{
+        return $this->hasMany(Subtask::class, 'task_id');
     }
 }

@@ -45,19 +45,28 @@
             </a>
         </div>
         <div class="col-auto text-end">
-            <div class="dropdown open">
+            <div class="mb-2">
+                <button class="btn btn-sm btn-icon btn-outline-primary rounded p-1" wire:click="edit('{{ $task->id }}')">
+                    <i class="ti ti-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-icon btn-outline-primary rounded p-1" wire:click="show('{{ $task->id }}')">
+                    <i class="ti ti-eye"></i>
+                </button>
+
+            </div>
+            {{-- <div class="dropdown open">
                 <button class="btn btn-action dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                     <i class="ti ti-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
                     <button class="dropdown-item" wire:click="edit('{{ $task->id }}')">
-                        Modifier
+                        <i class="ti ti-edit"></i> Modifier
                     </button>
                     <button class="dropdown-item" wire:click="show('{{ $task->id }}')">
-                        Détails
+                        <i class="ti ti-eye"></i> Détails
                     </button>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="badge badge-pill mb-1
                     @if($task->priority_id ==1) bg-primary  @endif

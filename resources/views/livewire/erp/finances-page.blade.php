@@ -1,18 +1,30 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Finances', 'breadcrumbs'=>$breadcrumbs])
-        @livewire('form.transaction-add')
-
+        <div class="btn-list">
+            @livewire('form.transaction-add')
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+        </div>
     @endcomponent
 
     <div class="row">
         <div class="col-md-4">
-            @foreach ($transactions->sortByDesc('created_at') as $transaction)
+            <div class="input-icon mb-2">
+                <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher">
+                <span class="input-icon-addon">
+                    <i class="ti ti-search"></i>
+                </span>
+            </div>
+
+            @foreach ($transactions->sortByDesc('date') as $transaction)
                 @include('_card.transaction_card')
             @endforeach
+            <div>
+                {{ $transactions->links() }}
+            </div>
         </div>
 
         <div class="col-md-4">
-            TOTAL: {{ $total }}
+
         </div>
 
         <div class="col-md-4" wire:ignore>

@@ -180,6 +180,20 @@ class AchatPage extends Component
 
     // Achat Row
     public $row_toggle = false;
+    public AchatRowForm $a_form;
+
+    function article_add($article_id){
+        $this->a_form->add_article($article_id, $this->achat_id);
+    }
+
+    // function set_tva(){
+    //     if ($this->a_form->tva) {
+    //         $this->a_form->tva = 0;
+    //     } else {
+    //         $this->a_form->tva = 0.18;
+    //     }
+
+    // }
 
 }
 

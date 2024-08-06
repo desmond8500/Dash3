@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Form;
 
+use App\Livewire\Forms\AchatForm;
 use App\Models\Achat;
 use App\Models\Provider;
 use Livewire\Attributes\Validate;
@@ -14,22 +15,10 @@ class AchatAdd extends Component
             'providers' => Provider::all(),
         ]);
     }
-
-    #[Validate('required')]
-    public $name;
-    public $provider_id;
-    public $description;
-    #[Validate('required')]
-    public $date;
+    public AchatForm $achat_form;
 
     function store(){
-        $this->validate();
-        Achat::firstOrCreate([
-            'name' => $this->name,
-            'provider_id' => $this->provider_id,
-            'date' => $this->date,
-            'description' => $this->description,
-        ]);
+        $this->achat_form->store();
 
         $this->dispatch('close-addAchat');
     }

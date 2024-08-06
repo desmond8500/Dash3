@@ -20,7 +20,7 @@
                     <th width="120px" class="bg-blue-lt text-center">TVA</th>
                     <th width="150px" class="text-end">Total</th>
                     <th class="text-center">Facture</th>
-                    <th width="10px" class="text-end">Actions</th>
+                    <th width="130px" class="text-end">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,9 +48,17 @@
                             @endforeach
                         </td>
                         <td class="text-end">
-                            <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
-                                <i class="ti ti-edit"></i>
-                            </button>
+                            <div class="btn-list">
+                                <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
+                                    <i class="ti ti-edit"></i>
+                                </button>
+                                @if (!$achat->transaction_id)
+                                    <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')">
+                                        <i class="ti ti-coins"></i>
+                                    </button>
+                                @endif
+
+                            </div>
                         </td>
                     </tr>
                 @endforeach

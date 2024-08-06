@@ -18,7 +18,8 @@ class Achat extends Model
         'provider_id',
         'name',
         'description',
-        'date'
+        'date',
+        'transaction_id',
     ];
 
     public function provider(): BelongsTo

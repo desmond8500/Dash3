@@ -29,7 +29,7 @@ class FinancesPage extends Component
     public function render()
     {
         return view('livewire.erp.finances-page',[
-            'transactions' => Transaction::all(),
+            'transactions' => Transaction::search($this->search,'objet')->paginate(6),
             'total' => Transaction::where('type','credit')->sum('montant') - Transaction::where('type', 'debit')->sum('montant')
         ]);
     }

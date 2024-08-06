@@ -159,6 +159,7 @@
                         @else
                             <button class="btn btn-primary" wire:click="$toggle('row_toggle')">Ajouter un champ</button>
                         @endif
+                        <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
                     </div>
                     <div class="w-100"></div>
                     @if ($row_toggle)
@@ -173,16 +174,23 @@
                         @foreach ($articles as $article)
                             <div class="col-md-6">
                                 @component('components.stock.article_card', ['article'=> $article])
-                                    <div class="row mt-1">
+                                    <form class="row mt-1" wire:submit="article_add('{{ $article->id }}')">
                                         <div class="col">
-                                            <input type="number" min="0" class="form-control" wire:model="quantity" value="1" placeholder="Quantité">
+                                            <input type="number" min="0" class="form-control" wire:model="a_form.quantite" value="1">
                                         </div>
+                                        {{-- <div class="col">
+                                            @if ($a_form->tva)
+                                                <button class="btn btn-primary" wire:click="set_tva">TVA</button>
+                                            @else
+                                                <button class="btn btn-danger" wire:click="set_tva">TVA</button>
+                                            @endif
+                                        </div> --}}
                                         <div class="col-auto">
-                                            <button class="btn btn-primary" >
+                                            <button class="btn btn-primary" type="submit">
                                                 Ajouter
                                             </button>
                                         </div>
-                                    </div>
+                                    </form>
                                 @endcomponent
                             </div>
                         @endforeach

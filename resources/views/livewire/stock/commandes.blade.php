@@ -3,6 +3,16 @@
 @endphp
 <div>
     <div class="row g-2">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Articles a commander</div>
+                    <div class="card-actions">
+                        <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         @foreach ($articles as $article)
             <div class="col-md-6">
                 @include('_card.articleCard',[
@@ -13,7 +23,7 @@
     </div>
 
 
-    <div class="card">
+    {{-- <div class="card">
         <div class="card-header">
             <div class="card-title">Articles à acheter</div>
             <div class="card-actions">
@@ -65,5 +75,5 @@
         </form>
         <script> window.addEventListener('open-addModal', event => { $('#addModal').modal('show'); }) </script>
         <script> window.addEventListener('close-addModal', event => { $('#addModal').modal('hide'); }) </script>
-    @endcomponent
+    @endcomponent --}}
 </div>

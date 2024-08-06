@@ -5,6 +5,7 @@ namespace App\Livewire\Stock;
 use App\Livewire\Forms\AchatForm;
 use App\Models\Achat;
 use App\Models\Provider;
+use App\Models\Transaction;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -68,5 +69,10 @@ class AchatsPage extends Component
         $article =  Achat::find($this->selected);
         $article->delete();
         $this->dispatch('close-editAchat');
+    }
+    // Transaction
+
+    function add_transaction($achat_id){
+        $this->achat_form->add_transaction($achat_id);
     }
 }

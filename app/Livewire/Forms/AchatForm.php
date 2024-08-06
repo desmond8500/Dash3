@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Achat;
+use App\Models\Transaction;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -22,9 +23,24 @@ class AchatForm extends Form
         $this->description = ucfirst($this->description);
     }
 
+    function add_transaction($achat_id)
+    {
+        $achat = Achat::find($achat_id);
+        $transaction = Transaction::create([
+            'achat_id' => $achat_id,
+            'objet' => $achat->name,
+            'description' => $achat->description,
+            'montant' => $achat->ttc(),
+            'date' => $achat->date,
+            'type' => 'debit'
+        ]);
+        $achat->transaction_id = $transaction->id;
+        $achat->save();
+    }
+
 
     function store(){
-        $this->validate();
+        // $this->validate();
         Achat::create($this->all());
         $this->reset('name','date','provider_id', 'description');
     }

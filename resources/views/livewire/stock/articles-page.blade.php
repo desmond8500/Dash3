@@ -18,7 +18,9 @@
             <div class="row row-deck g-2">
                 @foreach ($articles as $article)
                     <div class="col-md-6">
-                        @include('_card.articleCard')
+                        @include('_card.articleCard',[
+                            'edit' => true
+                        ])
                     </div>
                 @endforeach
                 <div class="col-md-12">

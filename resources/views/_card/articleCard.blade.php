@@ -10,17 +10,14 @@
                 </div>
                 @isset($edit)
                     <div class="col-auto">
-                        <button class="btn btn-outline-primary btn-icon"
-                            id="triggerId"
-                            data-bs-toggle="dropdown"
-                            >
+                        <button class="btn btn-outline-primary btn-icon" id="triggerId" data-bs-toggle="dropdown" >
                             <i class="ti ti-dots-vertical"></i>
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId" >
-                            <a class="dropdown-item" wire:click="edit('{{ $article->id }}')">Editer</a>
-                            <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')">Dupliquer</a>
-                            <a class="dropdown-item" wire:click="buy('{{ $article->id }}')">Commander</a>
+                            <a class="dropdown-item" wire:click="edit('{{ $article->id }}')"><i class="ti ti-edit"></i> Editer</a>
+                            <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')"><i class="ti ti-copy"></i> Dupliquer</a>
+                            <a class="dropdown-item" wire:click="buy('{{ $article->id }}')"><i class="ti ti-shopping-cart"></i> Commander</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')" > <i class="ti ti-trash"></i> Supprimer</a>
                         </div>
@@ -32,21 +29,34 @@
                 </div>
                 <div class="col-12">
             @endisset
-            <div class="text-muted">
-                @if ($article->brand)
-                {{ $article->brand->name }}
-                @else
-                _
-                @endif
+            <div class="row">
+                <div class="col-8">
+                    <div class="text-muted">
+                        @if ($article->brand)
+                        {{ $article->brand->name }}
+                        @else
+                        _
+                        @endif
+                    </div>
+                    <div class="text-muted">
+                        @if ($article->provider)
+                        <span class="badge bg-blue-lt">{{ $article->provider->name }}</span>
+                        @else
+                        _
+                        @endif
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="d-flex-between">
+                        <div>Qte: </div>
+                        <div>{{ $article->quantity }}</div>
+                    </div>
+                    <div class="d-flex-between">
+                        <div>Qte_min: </div>
+                        <div>{{ $article->quantity_min }}</div>
+                    </div>
+                </div>
             </div>
-            <div class="text-muted">
-                @if ($article->provider)
-                <span class="badge bg-blue-lt">{{ $article->provider->name }}</span>
-                @else
-                _
-                @endif
-            </div>
-            {{-- <div class="text-muted">{!! nl2br($article->description) !!}</div> --}}
 
             <div class="row mt-1">
                 <div class="col-md-6">

@@ -14,15 +14,17 @@
         </tr>
         <tr>
             <td><i class="ti ti-accessible"></i> Statut :</td>
-            <td><div class="status status-primary"><span class="status-dot"></span> {{ $task->statut->name }}</div> </td>
+            <td>
+                {{-- <div class="status status-primary"><span class="status-dot"></span> {{ $form->statut_id }}</div>  --}}
+                @include('components.status',['status'=> $form->statut_id])
+            </td>
         </tr>
         <tr>
             <td><i class="ti ti-accessible"></i> Priorité :</td>
-            <td><div class="status status-primary"><span class="status-dot"></span> {{ $task->priority->name }}</div> </td>
+            <td><div class="status status-primary"><span class="status-dot"></span> {{ $form->priority_id }}</div> </td>
         </tr>
     </table>
 </div>
-
 
 <div class="mb-3">
     <div class="fs-2 fw-bold">Description</div>

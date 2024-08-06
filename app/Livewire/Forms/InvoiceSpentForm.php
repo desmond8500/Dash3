@@ -26,15 +26,22 @@ class InvoiceSpentForm extends Form
     {
         $this->invoice_id = $id;
         $this->validate();
-        $spent = InvoiceSpent::create($this->all());
+        InvoiceSpent::create($this->all());
+    }
 
-        Transaction::create([
-            'invoice_spent_id' => $spent->id,
-            'objet' => $spent->objet,
-            'type' => "depense",
+    function add_transaction($invoice_spent_id)
+    {
+        $spent = InvoiceSpent::find($invoice_spent_id);
+        $transaction = Transaction::create([
+            'invoice_spent_id' => $invoice_spent_id,
+            'objet' => $spent->name,
+            'description' => $spent->description,
+            'montant' => $spent->montant,
             'date' => $spent->date,
-            'montant' =>$spent->montant,
+            'type' => 'debit'
         ]);
+        $spent->transaction_id = $transaction->id;
+        $spent->save();
     }
 
     function select($model_id)

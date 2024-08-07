@@ -3,6 +3,9 @@
         <div class="btn-list">
             @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
             <a href="{{ route('avancements',['building_id'=>$building->id]) }}" class="btn btn-primary" >Avancements</a>
+            <button class="btn btn-primary" wire:click="$refresh">
+                <i class="ti ti-reload"></i>
+            </button>
         </div>
     @endcomponent
 
@@ -71,10 +74,10 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    @livewire('erp.building-quantitatif')
+                    @livewire('erp.building-quantitatif',['building_id'=> $building->id ])
                 </div>
                 <div class="col-md-6">
-                    @livewire('erp.building-fiche')
+                    @livewire('erp.building-fiche',['building_id'=> $building->id ])
 
                 </div>
             </div>

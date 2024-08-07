@@ -29,7 +29,9 @@
                 <div class="card-header">
                     <div class="card-title">Permisions</div>
                     <div class="card-actions">
-
+                        <button class="btn btn-primary" wire:click="">
+                            <i class="ti ti-plus"></i> Permission
+                        </button>
                     </div>
                 </div>
                 <ul class="list-group">
@@ -44,4 +46,28 @@
         </div>
 
     </div>
+    @component('components.modal', ["id"=>'addPermission', 'title' => 'Ajouter un statut'])
+    <form class="row" wire:submit="status_store">
+        @include('_form.task_status_form')
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+    </form>
+    <script> window.addEventListener('open-addPermission', event => { $('#addPermission').modal('show'); }) </script>
+    <script> window.addEventListener('close-addPermission', event => { $('#addPermission').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editPermission', 'title' => 'Editer un statut'])
+    <form class="row" wire:submit="status_update">
+        @include('_form.task_status_form')
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" wire:click='status_delete'> <i class="ti ti-trash"></i> </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+    </form>
+    <script> window.addEventListener('open-editPermission', event => { $('#editPermission').modal('show'); }) </script>
+    <script> window.addEventListener('close-editPermission', event => { $('#editPermission').modal('hide'); }) </script>
+    @endcomponent
 </div>

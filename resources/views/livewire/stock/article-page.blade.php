@@ -3,6 +3,7 @@
         <div class="btn-list">
             @livewire('form.provider-add')
             @livewire('form.brand-add')
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
 
     @endcomponent
@@ -49,28 +50,35 @@
                                     <li class="list-group-item d-flex justify-content-between">
                                         <b>Référence :</b> {{ $article->reference }}
                                     </li>
-                                    @if ($article->brand)
-                                        <li class="list-group-item d-flex justify-content-between">
-                                            <b>Marque :</b> {{ $article->brand->name }}
-                                        </li>
-                                    @endif
-                                    @if ($article->provider)
-                                        <li class="list-group-item d-flex justify-content-between">
-                                            <b>Fournisseur :</b>
-                                            {{ $article->provider->name }}
-                                        </li>
-                                    @endif
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <b>Priorité :</b> {{ $article->priority() }}
-                                    </li>
+
+
                                     <li class="list-group-item d-flex justify-content-between {{ $article->quantity <= $article->quantity_min ? 'text-danger' : '' }}">
                                         <b class="">Quantité :</b> {{ $article->quantity }}
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <b>Prix :</b> {{ number_format($article->price, 0, '.', ' ') }} CFA
                                     </li>
                                 </ul>
 
                             </div>
                             <div class="col-md-6">
+                                <ul class="list-group list-group-flush">
 
+                                    @if ($article->brand)
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <b>Marque :</b> {{ $article->brand->name }}
+                                    </li>
+                                    @endif
+                                    @if ($article->provider)
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <b>Fournisseur :</b>
+                                        {{ $article->provider->name }}
+                                    </li>
+                                    @endif
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <b>Priorité :</b> {{ $article->priority() }}
+                                    </li>
+                                </ul>
                             </div>
 
 

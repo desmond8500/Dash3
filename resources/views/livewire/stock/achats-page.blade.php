@@ -5,6 +5,7 @@
             @livewire('form.achat-add')
             @livewire('form.provider-add')
             @livewire('form.brand-add')
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
 
@@ -13,13 +14,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th width="10px">#</th>
                     <th>Nom</th>
-                    <th class="text-center">Date</th>
-                    <th class="text-center">TVA</th>
-                    <th class="text-center">Total</th>
+                    <th width="10px" class="bg-red-lt text-center">Date</th>
+                    <th width="120px" class="bg-blue-lt text-center">TVA</th>
+                    <th width="150px" class="text-end">Total</th>
                     <th class="text-center">Facture</th>
-                    <th class="text-center">Actions</th>
+                    <th width="130px" class="text-end">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,51 +44,27 @@
                                         <i class="ti ti-file-pdf"></i>
                                         {{ basename($facture->folder) }}
                                     </a>
-                                    <button class="btn btn-danger btn-sm" wire:click="delete_facture('{{ $facture->id }}')">
-                                        <i class="ti ti-trash"></i>
-                                    </button>
                                 </div>
                             @endforeach
                         </td>
                         <td class="text-end">
-                            <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
-                                <i class="ti ti-edit"></i>
-                            </button>
+                            <div class="btn-list">
+                                <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
+                                    <i class="ti ti-edit"></i>
+                                </button>
+                                @if (!$achat->transaction_id)
+                                    <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')">
+                                        <i class="ti ti-coins"></i>
+                                    </button>
+                                @endif
+
+                            </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
-    {{-- <div class="row row-deck g-2">
-        @forelse ($achats as $achat)
-            <div class="col-md-3">
-                <div class="card p-2">
-                    <div class="row" >
-                        <a class="col" href="{{ route('achat', ['achat_id'=> $achat->id]) }}">
-                            <div class="card-title">
-                                {{ $achat->name }}
-                                <div class="text-muted" style="font-size: 12px;">
-                                    {{ $achat->date }}
-                                </div>
-                            </div>
-                            <div class="text-muted">{{ nl2br($achat->description) }}</div>
-                        </a>
-                        <div class="col-auto" wire:click="edit('{{ $achat->id }}')">
-                          <button class="btn btn-outline-primary btn-icon" >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path> <path d="M13.5 6.5l4 4"></path> </svg>
-                          </button>
-                      </div>
-                    </div>
-                </div>
-            </div>
-        @empty
-
-            <div>Pas d'articles</div>
-
-        @endforelse
-    </div> --}}
 
     @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat"])
         <form class="row" wire:submit="update">

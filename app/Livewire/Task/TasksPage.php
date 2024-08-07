@@ -8,7 +8,7 @@ class TasksPage extends Component
 {
 
     public $breadcrumbs = array(
-        array("name" => "Clients", "route" => "clients"),
+        array("name" => "Taches", "route" => "taches"),
     );
 
     public function render()

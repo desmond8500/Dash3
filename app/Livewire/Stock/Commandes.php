@@ -11,7 +11,7 @@ class Commandes extends Component
     public function render()
     {
         return view('livewire.stock.commandes',[
-            'articles' => Article::where('quantity','<','quantity_min')->get(),
+            'articles' => Article::whereRaw('`quantity` < `quantity_min`')->get(),
             'commandes' => Commande::all(),
         ]);
     }

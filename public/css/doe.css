@@ -1,0 +1,16 @@
+.titre1{
+    text-align: center;
+}
+
+thead{
+    background: #d9d9d9;
+}
+
+.logo{
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 15px;
+}

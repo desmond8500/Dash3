@@ -3,7 +3,9 @@
 namespace App\Livewire\Erp;
 
 use App\Http\Controllers\TaskController;
+use App\Livewire\Forms\SubtaskForm;
 use App\Livewire\Forms\TaskForm;
+use App\Models\Subtask;
 use App\Models\Task;
 use App\Models\TaskPriority;
 use App\Models\TaskStatus;
@@ -55,6 +57,7 @@ class Tasklist extends Component
             'inactiveCount' => Task::inactiveCount(),
             'statuses' => TaskStatus::all(),
             'priorities' => TaskPriority::all(),
+            // 'subtasks' => $this->getSubtasks()
         ]);
     }
 
@@ -75,6 +78,7 @@ class Tasklist extends Component
     function show($task_id){
         $this->form->set($task_id);
         $this->task = Task::find($task_id);
+        $this->subtasks = $this->getSubtasks($task_id);
         $this->dispatch('open-taskDetail');
     }
 
@@ -90,5 +94,41 @@ class Tasklist extends Component
 
     function tasklist_pdf(){
         return redirect()->route('tasks_pdf',['tasks'=> 12]);
+    }
+
+    // Subtask
+    public $show_subtask_bool = false;
+    public SubtaskForm $subtask_form;
+    public $subtasks = [];
+
+    function show_subtask_form($value){
+        $this->show_subtask_bool = $value;
+    }
+
+    function subtask_store(){
+        $this->subtask_form->task_id = $this->form->id;
+        $this->subtask_form->order = Subtask::where('task_id', $this->form->id)->count() + 1;
+        $this->subtask_form->store();
+        $this->show_subtask_form(false);
+        $this->dispatch('get-subtasks');
+    }
+
+    function subtask_edit($id){
+        $this->subtask_form->set($id);
+    }
+
+    function subtask_update(){
+        $this->subtask_form->update();
+        $this->dispatch('get-subtasks');
+    }
+
+    function subtask_delete($id){
+        $this->subtask_form->delete($id);
+        $this->dispatch('get-subtasks');
+    }
+
+    #[On('get-subtasks')]
+    function getSubtasks($task_id){
+        return Subtask::where('task_id',$task_id)->get();
     }
 }

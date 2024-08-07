@@ -11,6 +11,6 @@
 
     <div class="status status-{{ $color ?? '' }}">
         <span class="status-dot"></span>
-        {{ $status }}
+        {{ $status ?? '' }}
     </div>
 </div>

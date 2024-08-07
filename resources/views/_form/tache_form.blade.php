@@ -1,4 +1,24 @@
 <div class="row">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-between">
+            @if ($client_id)
+                <div class="text-muted">Client :</div>
+                <div>{{ $client_id }}</div>
+            @endif
+            @if ($projet_id)
+                <div class="text-muted">Projet :</div>
+                <div>{{ $projet_id }}</div>
+            @endif
+            @if ($building_id)
+                <div class="text-muted">Building :</div>
+                <div>{{ $building_id }}</div>
+            @endif
+            @if ($room_id)
+                <div class="text-muted">Room :</div>
+                <div>{{ $room_id }}</div>
+            @endif
+        </div>
+    </div>
     <div class="col-md mb-3">
         <label class="form-label">Nom de la tache</label>
         <input type="text" class="form-control" wire:model="form.name" placeholder="Nom">

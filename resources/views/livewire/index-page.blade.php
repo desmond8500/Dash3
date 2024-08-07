@@ -158,7 +158,7 @@
 
     <div class="mt-5 border border-primary rounded p-2 bg-white">
         <div class="fw-bold mb-2 ">
-            Dev tools
+            Dev tools !!!
         </div>
         <a class="btn btn-cyan" href="/log-viewer" target="_blank">Logs Viewer page</a>
         <button class="btn btn-danger" wire:click='init'>Initialiser</button>

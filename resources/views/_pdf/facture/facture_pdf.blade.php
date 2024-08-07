@@ -65,8 +65,8 @@
     </div>
 
     <div class="mt-1">
-        <table class="table ">
-            <thead>
+        <table class="table " >
+            <thead style="border-radius: 10px;">
                 <tr class="bg-green3 text-white" >
                     <th scope="col" class="text-start">Désignation</th>
                     <th style="width:80px;" scope="col" class="text-center">Quantité</th>
@@ -101,7 +101,7 @@
                     <tr class="">
                         <td scope="row" >
                             <div class="fw-bold">{{ $row->designation }}</div>
-                            <div class="text-muted" style="font-size: 10px;">{{ nl2br($row->reference) }}</div>
+                            <div class="text-muted" style="font-size: 10px;">{!! nl2br($row->reference) !!}</div>
                         </td>
                         <td class="text-center">{{ $row->quantite }}</td>
                         @if ($title !="quantitatif")

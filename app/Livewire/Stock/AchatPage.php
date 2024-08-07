@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Stock;
 
+use App\Livewire\Forms\AchatForm;
 use App\Livewire\Forms\AchatRowForm;
 use App\Models\Achat;
 use App\Models\AchatFacture;
@@ -9,6 +10,7 @@ use App\Models\AchatRow;
 use App\Models\Article;
 use App\Models\Provider;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -25,6 +27,7 @@ class AchatPage extends Component
     public $achat_id;
     public $achat;
 
+
     public $provider_id;
     #[Validate('required')]
     public $name;
@@ -33,6 +36,7 @@ class AchatPage extends Component
     public $date;
 
     public function mount($achat_id){
+        $this->achat_form->set($achat_id);
         $this->achat = Achat::find($achat_id);
         $this->breadcrumbs = array(
             array('name' => 'Stock', 'route' => route('stock')),
@@ -41,14 +45,11 @@ class AchatPage extends Component
         );
     }
 
-    function AchatSearch() {
-        return Achat::where('name', 'like', '%' . $this->search . '%')->paginate(10);
-    }
-
+    #[On('get-achat')]
     public function render(){
         return view('livewire.stock.achat-page',[
             'achat' => $this->achat,
-            'articles' => Article::all(),
+            'articles' => Article::search($this->search,'designation')->paginate(5),
             'providers' => Provider::all(),
         ]);
     }
@@ -103,6 +104,12 @@ class AchatPage extends Component
 
     public AchatRowForm $a_row;
 
+    function achat_row_add(){
+        $this->a_row->achat_id = $this->achat_id;
+        $this->a_row->store();
+        $this->dispatch('close-addAchatArticle');
+    }
+
     function row_edit($id){
         $this->a_row->set($id);
         $this->dispatch('open-editAchatRow');
@@ -155,6 +162,38 @@ class AchatPage extends Component
 
         // Pdf::view('pdf.invoice')->save('/some/directory/invoice.pdf');
     }
+
+    // Achat
+    public AchatForm $achat_form;
+    function achat_edit($achat_id)
+    {
+        $this->achat_form->set($achat_id);
+
+        $this->dispatch('open-editAchat');
+    }
+    function achat_update()
+    {
+        $this->achat_form->update();
+        $this->achat = Achat::find($this->achat->id);
+        $this->dispatch('close-editAchat');
+    }
+
+    // Achat Row
+    public $row_toggle = false;
+    public AchatRowForm $a_form;
+
+    function article_add($article_id){
+        $this->a_form->add_article($article_id, $this->achat_id);
+    }
+
+    // function set_tva(){
+    //     if ($this->a_form->tva) {
+    //         $this->a_form->tva = 0;
+    //     } else {
+    //         $this->a_form->tva = 0.18;
+    //     }
+
+    // }
 
 }
 

@@ -23,19 +23,34 @@ class Status extends Component
      */
     public function render(): View|Closure|string
     {
-        if($this->status=='Nouveau')
+        if($this->status=='Nouveau' || $this->status == 1){
             $color = 'blue';
-        elseif($this->status=='En cours')
+            $status = 'Nouveau';
+        }
+        elseif($this->status=='En cours' || $this->status == 2){
             $color = 'orange';
-        elseif($this->status=='En pause')
+            $status = 'En cours';
+        }
+        elseif($this->status=='En pause' || $this->status == 3){
             $color = 'secondary';
-        elseif($this->status=='Terminé')
+            $status = 'En pause';
+        }
+        elseif($this->status=='Terminé' || $this->status == 4){
             $color = 'green';
-        elseif($this->status=='Cloturé')
+            $status = 'Terminé';
+        }
+        elseif($this->status=='Cloturé' || $this->status == 5){
             $color = 'teal';
-        else
+            $status = 'Cloturé';
+        }
+        else{
             $color = 'blue';
+            $status = 'Nouveau';
+        }
 
-        return view('components.status');
+        return view('components.status',[
+            'color' => $color,
+            // 'status' => $status
+        ]);
     }
 }

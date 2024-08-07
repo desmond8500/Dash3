@@ -19,6 +19,7 @@ class InvoiceAcompte extends Model
         'montant',
         'statut',
         'date',
+        'transaction_id',
     ];
 
     public function invoice(): BelongsTo

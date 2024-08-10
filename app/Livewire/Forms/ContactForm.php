@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Contact;
+use App\Models\Projet;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -29,6 +30,11 @@ class ContactForm extends Form
 
     function store(){
         // $this->validate();
+        if ($this->projet_id) {
+            $this->client_id = Projet::find($this->projet_id)->id;
+        }
+
+
         Contact::create($this->all());
     }
 

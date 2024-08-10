@@ -7,11 +7,15 @@
             </div>
         </div>
         <div class="col-auto">
-            @livewire('form.contact-add', ['projet_id' => $projet_id])
+            @if ($client_id)
+                @livewire('form.contact-add', ['client_id' => $client_id])
+            @else
+                @livewire('form.contact-add', ['projet_id' => $projet_id])
+            @endif
         </div>
         <div class="w-100"></div>
         @foreach ($contacts as $contact)
-            <div class="col-md-4">
+            <div class="{{ $card_class ?? 'col-md-6' }}">
                 <div class="card p-2">
                     <div class="row">
                         <div class="col-auto">

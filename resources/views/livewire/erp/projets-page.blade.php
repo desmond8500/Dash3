@@ -25,6 +25,17 @@
             {{ $projets->links() }}
         </div>
     </div>
+    <hr>
+
+    <div class="row g-2">
+        <div class="col-md-6">
+            @livewire('erp.tasklist', ['client_id' => $client_id])
+        </div>
+        <div class="col-md-6">
+            @livewire('contact-list', ['client_id' => $client_id, 'card_class'=> 'col-md-6'])
+        </div>
+    </div>
+
 
     @component('components.modal', ["id"=>'addProjet', 'title'=> 'Ajouter un projet'])
         <form class="row" wire:submit="store">

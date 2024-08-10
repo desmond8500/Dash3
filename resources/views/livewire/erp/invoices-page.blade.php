@@ -12,7 +12,7 @@
     @endcomponent
 
     <div class="row g-2">
-        @foreach ($invoices as $invoice)
+        @foreach ($invoices->sortByDesc() as $invoice)
             @include('_card.invoice_card')
         @endforeach
     </div>

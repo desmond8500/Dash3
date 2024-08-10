@@ -18,9 +18,9 @@
                             <img src="" alt="A" class="avatar avatar-md">
                         </div>
                         <div class="col">
-                            <div class="card-title">{{ $contact->firstname }}</div>
-                            <div class="card-title">{{ $contact->lastname }}</div>
-                            <div class="card-title">{{ $contact->focntion }}</div>
+                            <div class="fw-bold">{{ $contact->firstname }}</div>
+                            <div class="fw-bold">{{ $contact->lastname }}</div>
+                            <div class="">{{ $contact->focntion }}</div>
                         </div>
                         <div class="col-auto">
                           <button class="btn btn-outline-primary btn-icon" >

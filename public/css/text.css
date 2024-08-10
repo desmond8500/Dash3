@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto/Roboto-Regular.ttf');
+
+}
+
 /* Text Align */
 .text-left {
     text-align: left;

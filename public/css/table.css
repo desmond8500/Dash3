@@ -25,6 +25,54 @@ td {
     /* text-align: center; */
 }
 
+/* Border color */
 .border-white{
     border-color: white;
+}
+.border-blue {
+    border-color: #0054a6;
+}
+
+.border-azur {
+    border-color: #4299e1;
+}
+
+.border-indigo {
+    border-color: #4263eb;
+}
+
+.border-purple {
+    border-color: #ae3ec9;
+}
+
+.border-pink {
+    border-color: #d6336c;
+}
+
+.border-red {
+    border-color: #d63939;
+}
+
+.border-orange {
+    border-color: #f76707;
+}
+
+.border-yellow {
+    border-color: #f59f00;
+}
+
+.border-lime {
+    border-color: #74b816;
+}
+
+.border-green {
+    border-color: #2fb344;
+}
+
+.border-teal {
+    border-color: #0ca678;
+}
+
+.border-cyan {
+    border-color: #17a2b8;
 }

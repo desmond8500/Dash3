@@ -34,6 +34,9 @@ use App\Livewire\TestPage;
 use App\Livewire\UsersPage;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Browsershot\Browsershot;
+use Spatie\LaravelPdf\Facades\Pdf;
+use function Spatie\LaravelPdf\Support\pdf;
 
 // Index
 Route::get('/', IndexPage::class)->name('index');
@@ -144,11 +147,30 @@ Route::middleware(['auth', 'can:finances'])->group(function () {
 });
 
 // Test
+    // PDF
+    Route::get('pdf', function () { return PDFController::pdf(); })->name('pdf');
+
 Route::get('/test', TestPage::class)->name('test');
 Route::get('pdf_test', function () { return PDFController::pdf_test(); })->name('pdf_test');
 Route::get('test_pdf', function () { return PDFController::test_pdf(); })->name('test_pdf');
 Route::get('proces_verbal_pdf', function () { return PDFController::proces_verbal_pdf(); })->name('proces_verbal_pdf');
 Route::get('doe_pdf', function () { return PDFController::proces_verbal_pdf(); })->name('doe_pdf');
+Route::get('esser_pdf', function () {
+    return pdf()
+        ->view('_pdf.fiches.extinction.esser')
+        ->disk('public')
+        ->name('invoice-2023-04-10.pdf')
+        ->download();
+
+
+    // return Pdf::view('_pdf.fiches.extinction.esser');
+    // ->format('a4')
+    // ->name('invoice-2023-04-10.pdf');
+    // ->save('test.pdf');
+ })->name('esser_pdf');
+Route::get('esser_pdf2', function () {
+    return Browsershot::url('https://example.com')->save('example.pdf');
+ })->name('esser_pdf2');
 
 Route::get('arp_card_pdf/{card_id}', function ($card_id) { return PDFController::arp_card_pdf($card_id); })->name('arp_card_pdf');
 Route::get('arp_card_pdf2/{projet_id}', function ($projet_id) { return PDFController::arp_card_pdfs($projet_id); })->name('arp_card_pdfs');

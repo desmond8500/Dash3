@@ -1,8 +1,10 @@
+
 <div>
     @component('components.layouts.page-header', ['title'=>'Gestion de batiment', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
             <a href="{{ route('avancements',['building_id'=>$building->id]) }}" class="btn btn-primary" >Avancements</a>
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
 
@@ -25,6 +27,28 @@
                     @include('_card.stage_card')
                 </div>
             @endforeach
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Quantitatif</div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" >
+                            <i class="ti ti-plus">Quantitatif</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Article</li>
+                        <li>lien</li>
+                        <li>quantite</li>
+                    </ul>
+
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
         </div>
 
         <div class="col-md-9">

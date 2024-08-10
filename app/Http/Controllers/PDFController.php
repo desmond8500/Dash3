@@ -16,6 +16,22 @@ use Carbon\Carbon;
 
 class PDFController extends Controller
 {
+    public static function pdf(){
+        $carbon = new Carbon();
+
+        $data = [
+            'carbon' => $carbon,
+            'logo' => env('LOGO', ''),
+            'title' => $type ?? "Facture",
+            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
+            'color1' => env('COLOR1', '219C90'),
+            'color2' => env('COLOR2', '219C90'),
+            'color3' => env('COLOR3', '219C90'),
+            'date' => $carbon->now()->format('d-m-Y')
+        ];
+        $pdf = Pdf::loadView('_pdf.pdf', $data);
+        return $pdf->stream();
+    }
     public static function achat_pdf($achat_id){
         $carbon = new Carbon();
 

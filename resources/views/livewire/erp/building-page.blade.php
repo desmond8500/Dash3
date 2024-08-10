@@ -95,10 +95,10 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    @livewire('erp.building-quantitatif')
+                    @livewire('erp.building-quantitatif',['building_id'=> $building->id ])
                 </div>
                 <div class="col-md-6">
-                    @livewire('erp.building-fiche')
+                    @livewire('erp.building-fiche',['building_id'=> $building->id ])
 
                 </div>
             </div>

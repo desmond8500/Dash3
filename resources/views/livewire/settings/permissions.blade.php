@@ -118,32 +118,4 @@
         </div>
 
     </div>
-
-
-
-    @component('components.modal', ["id"=>'addPermission', 'title' => 'Ajouter une permission'])
-        <form class="row" wire:submit="permission_store">
-            @include('_form.permission_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
-        </form>
-        <script> window.addEventListener('open-addPermission', event => { $('#addPermission').modal('show'); }) </script>
-        <script> window.addEventListener('close-addPermission', event => { $('#addPermission').modal('hide'); }) </script>
-    @endcomponent
-
-    <button class='btn btn-primary' wire:click="$dispatch('open-editPermission')" ><i class='ti ti-plus'></i> Editer</button>
-
-    @component('components.modal', ["id"=>'editPermission', 'title' => 'Editer une permission'])
-        <form class="row" wire:submit="permission_update">
-            @include('_form.permission_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
-        </form>
-        <script> window.addEventListener('open-editPermission', event => { $('#editPermission').modal('show'); }) </script>
-        <script> window.addEventListener('close-editPermission', event => { $('#editPermission').modal('hide'); }) </script>
-    @endcomponent
 </div>

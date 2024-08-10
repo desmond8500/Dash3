@@ -8,6 +8,7 @@ use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
 use App\Livewire\Erp\FinancesPage;
 use App\Livewire\Erp\InvoicePage;
+use App\Livewire\Erp\InvoicesPage;
 use App\Livewire\Erp\ProjetPage;
 use App\Livewire\Erp\ProjetsPage;
 use App\Livewire\Erp\RoomPage;
@@ -61,6 +62,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/projets/{client_id}', ProjetsPage::class)->name('projets');
     Route::get('/projet/{projet_id}', ProjetPage::class)->name('projet');
     // Devis
+    Route::get('/invoices', InvoicesPage::class)->name('invoices');
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
     Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf($invoice_id, $type); })->name('facture_pdf');
     Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) { return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id); })->name('facture_acompte_pdf');

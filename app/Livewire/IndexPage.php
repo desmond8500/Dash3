@@ -41,6 +41,7 @@ class IndexPage extends Component
             (Object) array( 'name'=> 'Clients', 'all'=> Client::count(), 'icon'=> 'users', 'route'=> route('clients')),
             (Object) array( 'name'=> 'Stock',   'all'=> Article::count(), 'icon'=> 'packages', 'route'=> route('stock')),
             (Object) array( 'name'=> 'Taches',   'all'=> Task::activeCount(), 'icon'=> 'checklist', 'route'=> route('tasks')),
+            (Object) array( 'name'=> 'Devis',   'all'=> Invoice::count(), 'icon'=> 'checklist', 'route'=> route('invoices')),
         );
     }
 

@@ -15,8 +15,11 @@ class InvoiceFactory extends Factory
 
     public function definition(): array
     {
+        $name = $this->faker->lexify('???');
+        $number = $this->faker->numberBetween(1,200);
+
         return [
-            'reference' => "DSR-152-24",
+            'reference' => "$name-$number-24",
             'description' => $this->faker->text($maxNbChars = 100),
             'modalite' => '',
             'note' => '',

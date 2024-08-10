@@ -58,7 +58,7 @@
 
     </div>
     <div class="col-md-8">
-        @livewire('erp.building-list', ['projet_id' => $projet->id])
+        {{-- @livewire('erp.building-list', ['projet_id' => $projet->id]) --}}
     </div>
 
 

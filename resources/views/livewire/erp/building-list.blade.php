@@ -1,15 +1,12 @@
-<div class="card">
-    <div class="card-header">
-        <div class="card-title">
-            <h2>Building management</h2>
-        </div>
-        <div class="card-actions">
-            @livewire('form.building-add', ['projet_id' => $projet_id])
-        </div>
-    </div>
+<div class="">
+
     <div class="p-2">
         <div class="row row-deck g-2">
-
+            <div class="col"><h2>Building management</h2></div>
+            <div class="col-auto">
+                @livewire('form.building-add', ['projet_id' => $projet_id])
+            </div>
+            <div class="w-100"></div>
             @foreach ($buildings as $building)
             <div class="col-md-4">
                 <div class="card">

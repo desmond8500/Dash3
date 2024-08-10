@@ -53,6 +53,11 @@
                                 <i class="ti ti-file-description"></i> Notes
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="#tabs-structure" class="nav-link" data-bs-toggle="tab">
+                                <i class="ti ti-file-description"></i> Structure
+                            </a>
+                        </li>
                         <li class="nav-item ms-auto">
                             <a href="#tabs-reglages" class="nav-link" title="Settings" data-bs-toggle="tab">
                                 <i class="ti ti-settings"></i>
@@ -120,6 +125,12 @@
                         </div>
                         <div class="tab-pane" id="tabs-notes">
                             @livewire('erp.projet-notes', ['projet_id' => $projet->id], )
+                        </div>
+                        <div class="tab-pane" id="tabs-notes">
+                            @livewire('erp.projet-notes', ['projet_id' => $projet->id], )
+                        </div>
+                        <div class="tab-pane" id="tabs-structure">
+                            @livewire('erp.building-list', ['projet_id' => $projet->id])
                         </div>
                     </div>
                 </div>

@@ -16,11 +16,13 @@ class InvoiceRowFactory extends Factory
 
     public function definition(): array
     {
+        $designation = $this->faker->numberBetween($min = 5, $max = 10);
+        $reference = $this->faker->numberBetween($min = 5, $max = 10);
         return [
-            'designation' => $this->faker->word(),
+            'designation' => $this->faker->text($designation),
             'coef' => 1,
-            'reference' => $this->faker->word(),
-            'quantite'=>1,
+            'reference' => $this->faker->text($reference),
+            'quantite'=> $this->faker->numberBetween($min = 1, $max = 30),
             'priorite_id'=>1,
             'prix'=> $this->faker->numberBetween($min = 1000, $max = 9000),
         ];

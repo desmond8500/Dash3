@@ -229,5 +229,18 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.doe_pdf', $data);
         return $pdf->stream('doe_pdf');
     }
+    public static function supra_pdf(){
+
+        $data = [
+            'logo' => env('LOGO', ''),
+            'title' => "BUILDING COMFORT SENEGAL",
+            'phone' => '77 777 77 77',
+            'email' => 'email@email.com',
+            'client' => 'BRT',
+        ];
+
+        $pdf = Pdf::loadView('_pdf.supra_pdf', $data);
+        return $pdf->stream('supra_pdf');
+    }
 
 }

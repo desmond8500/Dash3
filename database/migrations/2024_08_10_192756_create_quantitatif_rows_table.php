@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('quantitatifs', function (Blueprint $table) {
+        Schema::create('quantitatif_rows', function (Blueprint $table) {
             $table->id();
-            $table->integer('building_id')->constrained();
-            $table->integer ('devis_id')->nullable();
-            $table->string('name');
+            $table->integer('quantitatif_id')->constrained();
+            $table->integer('article_id')->nullable();
+            $table->integer('quantite')->default(1);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quantitatifs');
+        Schema::dropIfExists('quantitatif_rows');
     }
 };

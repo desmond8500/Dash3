@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Brand;
+use App\Models\Building;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
@@ -112,10 +113,17 @@ class DashController extends Controller
                 ->has(Invoice::factory(3)
                     ->has(InvoiceSection::factory(2)
                     ->has(InvoiceRow::factory(5))))
+                ->has(Building::factory(1))
             )->create();
     }
 
     static function init_projets(){
 
+    }
+
+    static function get_fiche_types(){
+        return (object) array(
+            (object) array( 'name' => 'Fiche Extinction Rp1r-Supra', 'route'=>'supra_pdf' )
+        );
     }
 }

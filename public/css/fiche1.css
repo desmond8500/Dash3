@@ -1,0 +1,71 @@
+.page_title{
+    text-transform: uppercase;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    background: #0054a6;
+    color: white;
+    border: 1px solid black;
+    font-size: 1.5rem;
+    /* margin-bottom: 5px; */
+}
+.structure_title{
+    color: #0054a6;
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-align: center;
+}
+.title1{
+    background: red;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+.title2{
+    background: orange;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+.title3{
+    background: #5153fe;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+.logo{
+    height: 50px;
+}
+
+.number_a{
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    border: 2px solid red;
+    height: 30px;
+    border-radius: 150px;
+    font-size: 25px;
+    padding: 10px;
+}
+
+.contact{
+    text-align: center;
+    font-size: 1.25rem;
+    color: #5153fe;
+}
+
+.client{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-top: 5px;
+}
+
+table{
+    font-size: 1.2rem;
+}
+

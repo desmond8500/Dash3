@@ -28,8 +28,17 @@ class BuildingPage extends Component
     public RoomForm $room_form;
     public $form;
 
+    public $tabs, $selected_tab=0;
+
     function mount($building_id)
     {
+        $this->tabs = (object) array(
+            (object) array('number'=> 0, 'name' => 'Résumé'),
+            (object) array('number'=> 1, 'name' => 'Niveaux'),
+            (object) array('number'=> 2, 'name' => 'Quantitatif'),
+            (object) array('number'=> 3, 'name' => 'Fiches'),
+        );
+
         if (!$building_id) {
             $this->redirect('/', navigate:true);
         }

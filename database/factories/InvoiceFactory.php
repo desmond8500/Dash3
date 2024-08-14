@@ -17,10 +17,11 @@ class InvoiceFactory extends Factory
     {
         $name = $this->faker->lexify('???');
         $number = $this->faker->numberBetween(1,200);
+        $reference = $this->faker->numberBetween($min = 5, $max = 10);
 
         return [
             'reference' => "$name-$number-24",
-            'description' => $this->faker->text($maxNbChars = 100),
+            'description' => $this->faker->text($reference),
             'modalite' => '',
             'note' => '',
             'statut' => ErpController::getRandomStatus(),

@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('fiches', function (Blueprint $table) {
             $table->id();
+            $table->string('building_id')->constrained();
+            $table->string('titre')->nullable();
+            $table->string('date')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

@@ -2,14 +2,22 @@
 
 namespace App\Livewire\Erp;
 
+use App\Models\Fiche;
 use Livewire\Component;
 use Spatie\LaravelPdf\Facades\Pdf;
 
 class BuildingFiche extends Component
 {
+    public $building_id;
+
+    function mount($building_id){
+        $this->building_id = $building_id;
+    }
     public function render()
     {
-        return view('livewire.erp.building-fiche');
+        return view('livewire.erp.building-fiche',[
+            'fiches' => Fiche::where('building_id', $this->building_id)->get()
+        ]);
     }
 
     function pdf(){

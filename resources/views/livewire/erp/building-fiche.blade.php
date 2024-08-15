@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="card-title">{{ $fiche->titre }}</div>
-                                    <div class="text-muted">Description</div>
+                                    <div class="text-muted">{{ $fiche->user->firstname }} {{ $fiche->user->lastname }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <button class="btn btn-primary btn-icon" wire:click="edit_fiche('{{ $fiche->id }}')">
@@ -26,7 +26,7 @@
                                     <a class="btn btn-outline-primary btn-icon" href="{{ route('fiche_pdf',['fiche_id'=>$fiche->id]) }}" target="_blank" >
                                         <i class="ti ti-eye"></i>
                                     </a>
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -40,6 +40,9 @@
         <form class="row" wire:submit="update_fiche">
             @include('_form.fiche_form')
             <div class="modal-footer">
+                <a type="button" class="btn btn-danger" wire:click='delete_fiche'>
+                    <i class="ti ti-trash"></i>
+                </a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>

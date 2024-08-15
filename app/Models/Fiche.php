@@ -12,6 +12,7 @@ class Fiche extends Model
 
     protected $fillable = [
         'building_id',
+        'user_id',
         'titre',
         'date',
         'phone',
@@ -23,5 +24,9 @@ class Fiche extends Model
     public function building(): BelongsTo
     {
         return $this->belongsTo(Building::class);
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

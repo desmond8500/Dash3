@@ -20,6 +20,7 @@ class FicheForm extends Form
     public $email;
     #[Rule('required')]
     public $type;
+    public $user_id;
 
     function fix(){
         $this->titre = ucfirst($this->titre);
@@ -27,12 +28,8 @@ class FicheForm extends Form
 
 
     function store(){
-        // $this->validate();
-
-        if (!$this->titre) {
-
-        }
-
+        $this->validate();
+        $this->user_id = auth()->user()->id;
         Fiche::create($this->all());
     }
 

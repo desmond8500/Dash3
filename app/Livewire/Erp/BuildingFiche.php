@@ -36,4 +36,8 @@ class BuildingFiche extends Component
             $this->fiche_form->update();
             $this->dispatch('close-editFiche');
     }
+    function delete_fiche(){
+            $this->fiche_form->delete();
+            $this->dispatch('close-editFiche');
+    }
 }

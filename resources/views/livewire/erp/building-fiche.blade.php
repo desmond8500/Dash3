@@ -9,16 +9,16 @@
         <div class="card-body">
             <div class="row">
                 @foreach ($fiches as $fiche)
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card p-2">
                             <div class="row">
-                                <div class="col-auto">
+                                {{-- <div class="col-auto">
                                     <img src="" alt="F" class="avatar avatar-md">
-                                </div>
-                                <div class="col">
+                                </div> --}}
+                                <a class="col" href="{{ route('fiche_zone',['fiche_id'=>$fiche->id]) }}">
                                     <div class="card-title">{{ $fiche->titre }}</div>
                                     <div class="text-muted">{{ $fiche->user->firstname }} {{ $fiche->user->lastname }}</div>
-                                </div>
+                                </a>
                                 <div class="col-auto">
                                     <button class="btn btn-primary btn-icon" wire:click="edit_fiche('{{ $fiche->id }}')">
                                         <i class="ti ti-edit"></i>
@@ -33,7 +33,6 @@
                 @endforeach
             </div>
         </div>
-
     </div>
 
     @component('components.modal', ["id"=>'editFiche', 'title' => 'Editer la fiche'])

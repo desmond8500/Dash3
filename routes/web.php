@@ -6,6 +6,7 @@ use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
+use App\Livewire\Erp\FicheZonePage;
 use App\Livewire\Erp\FinancesPage;
 use App\Livewire\Erp\InvoicePage;
 use App\Livewire\Erp\InvoicesPage;
@@ -112,6 +113,8 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/building/{building_id}', BuildingPage::class)->name('building');
     Route::get('/stage/{stage_id}', StagePage::class)->name('stage');
     Route::get('/room/{room_id}', RoomPage::class)->name('room');
+
+    Route::get('/fiche_zone/{fiche_id}', FicheZonePage::class)->name('fiche_zone');
 });
 
 // Medias
@@ -157,23 +160,6 @@ Route::get('pdf_test', function () { return PDFController::pdf_test(); })->name(
 Route::get('test_pdf', function () { return PDFController::test_pdf(); })->name('test_pdf');
 Route::get('proces_verbal_pdf', function () { return PDFController::proces_verbal_pdf(); })->name('proces_verbal_pdf');
 
-
-Route::get('esser_pdf', function () {
-    return pdf()
-        ->view('_pdf.fiches.extinction.esser')
-        ->disk('public')
-        ->name('invoice-2023-04-10.pdf')
-        ->download();
-
-
-    // return Pdf::view('_pdf.fiches.extinction.esser');
-    // ->format('a4')
-    // ->name('invoice-2023-04-10.pdf');
-    // ->save('test.pdf');
- })->name('esser_pdf');
-Route::get('esser_pdf2', function () {
-    return Browsershot::url('https://example.com')->save('example.pdf');
- })->name('esser_pdf2');
 // Badges PDF
 Route::get('arp_card_pdf/{card_id}', function ($card_id) { return PDFController::arp_card_pdf($card_id); })->name('arp_card_pdf');
 Route::get('arp_card_pdf2/{projet_id}', function ($projet_id) { return PDFController::arp_card_pdfs($projet_id); })->name('arp_card_pdfs');
@@ -181,7 +167,8 @@ Route::get('arp_card_pdf2/{projet_id}', function ($projet_id) { return PDFContro
 Route::get('doe_pdf', function () {
     return PDFController::proces_verbal_pdf();
 })->name('doe_pdf');
-Route::get('supra_pdf/{fiche_id}', function ($fiche_id) {
+
+Route::get('fiche_pdf/{fiche_id}', function ($fiche_id) {
     return PDFController::fiche_pdf($fiche_id);
 })->name('fiche_pdf');
 

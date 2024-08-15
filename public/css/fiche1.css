@@ -36,6 +36,20 @@
     text-align: center;
     font-weight: bold;
 }
+.title4{
+    background: #248835;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+.subtitle4{
+    background: #5ca368;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    /* font-weight: bold; */
+}
 
 .logo{
     height: 50px;

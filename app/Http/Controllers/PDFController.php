@@ -237,10 +237,11 @@ class PDFController extends Controller
         $data = [
             'logo' => env('LOGO', ''),
             'title' => env('MAIN_NAME'),
-            'fiche' => $fiche
+            'fiche' => $fiche,
+            'zones' => $fiche->zones ?? [],
         ];
 
-        $pdf = Pdf::loadView("_pdf.$fiche->type", $data);
+        $pdf = Pdf::loadView("_pdf.fiches.$fiche->type", $data);
         return $pdf->stream('fiche_pdf');
     }
 

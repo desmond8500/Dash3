@@ -8,6 +8,7 @@ use App\Livewire\Forms\StageForm;
 use App\Models\Building;
 use App\Models\Stage;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -28,7 +29,9 @@ class BuildingPage extends Component
     public RoomForm $room_form;
     public $form;
 
-    public $tabs, $selected_tab=0;
+    public $tabs;
+    #[Session]
+    public $selected_tab=0;
 
     function mount($building_id)
     {

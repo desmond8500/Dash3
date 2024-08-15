@@ -6,6 +6,7 @@ use App\Models\Achat;
 use App\Models\Badge;
 use App\Models\Building;
 use App\Models\Commande;
+use App\Models\Fiche;
 use App\Models\Invoice;
 use App\Models\InvoiceAcompte;
 use App\Models\InvoiceSection;
@@ -229,18 +230,18 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.doe_pdf', $data);
         return $pdf->stream('doe_pdf');
     }
-    public static function supra_pdf(){
+
+    public static function fiche_pdf($fiche_id){
+        $fiche = Fiche::find($fiche_id);
 
         $data = [
             'logo' => env('LOGO', ''),
-            'title' => "BUILDING COMFORT SENEGAL",
-            'phone' => '77 777 77 77',
-            'email' => 'email@email.com',
-            'client' => 'BRT',
+            'title' => env('MAIN_NAME'),
+            'fiche' => $fiche
         ];
 
-        $pdf = Pdf::loadView('_pdf.supra_pdf', $data);
-        return $pdf->stream('supra_pdf');
+        $pdf = Pdf::loadView("_pdf.$fiche->type", $data);
+        return $pdf->stream('fiche_pdf');
     }
 
 }

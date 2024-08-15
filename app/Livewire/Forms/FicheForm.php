@@ -16,7 +16,9 @@ class FicheForm extends Form
     public $titre;
     public $date;
     public $phone;
+    public $client;
     public $email;
+    #[Rule('required')]
     public $type;
 
     function fix(){
@@ -25,7 +27,12 @@ class FicheForm extends Form
 
 
     function store(){
-        $this->validate();
+        // $this->validate();
+
+        if (!$this->titre) {
+
+        }
+
         Fiche::create($this->all());
     }
 
@@ -37,6 +44,8 @@ class FicheForm extends Form
         $this->date = $this->fiche->date;
         $this->phone = $this->fiche->phone;
         $this->email = $this->fiche->email;
+        $this->type = $this->fiche->type;
+        $this->client = $this->fiche->client;
     }
 
     function update(){

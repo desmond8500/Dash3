@@ -181,9 +181,9 @@ Route::get('arp_card_pdf2/{projet_id}', function ($projet_id) { return PDFContro
 Route::get('doe_pdf', function () {
     return PDFController::proces_verbal_pdf();
 })->name('doe_pdf');
-Route::get('supra_pdf', function () {
-    return PDFController::supra_pdf();
-})->name('supra_pdf');
+Route::get('supra_pdf/{fiche_id}', function ($fiche_id) {
+    return PDFController::fiche_pdf($fiche_id);
+})->name('fiche_pdf');
 
 
 // Test

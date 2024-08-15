@@ -2,7 +2,10 @@
 
 namespace App\Livewire\Erp;
 
+use App\Http\Controllers\DashController;
+use App\Livewire\Forms\FicheForm;
 use App\Models\Fiche;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Spatie\LaravelPdf\Facades\Pdf;
 
@@ -13,22 +16,24 @@ class BuildingFiche extends Component
     function mount($building_id){
         $this->building_id = $building_id;
     }
+    #[On('close-addFiche')]
     public function render()
     {
         return view('livewire.erp.building-fiche',[
-            'fiches' => Fiche::where('building_id', $this->building_id)->get()
+            'fiches' => Fiche::where('building_id', $this->building_id)->get(),
+            'types' => DashController::get_fiche_types(),
         ]);
     }
 
-    function pdf(){
-        // Pdf::view('_pdf.fiches.extinction.esser')
-        // ->format('a4')
-        // ->name('invoice-2023-04-10.pdf')
-        // ->assertViewIs('sdfsd');
-        // ->download();
-        // ->save('invoice.pdf');
+    public FicheForm $fiche_form;
 
-        Pdf::view('_pdf.fiches.extinction.esser')
-        ->name('invoice-2023-04-10.pdf');
+    function edit_fiche($fiche_id){
+            $this->fiche_form->set($fiche_id);
+            $this->dispatch('open-editFiche');
+    }
+
+    function update_fiche(){
+            $this->fiche_form->update();
+            $this->dispatch('close-editFiche');
     }
 }

@@ -2,10 +2,16 @@
     <label class="form-label">Type de fiche</label>
     <select class="form-select" wire:model="fiche_form.type">
         @foreach ($types as $type)
-            <option>{{ $type->name }}</option>
+        <option >Select</option>
+            <option value="{{ $type->route }}" wire:click="select_name('{{ $type->name }}')">{{ $type->name }}</option>
         @endforeach
     </select>
     @error('fiche_form.type') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+<div class="col-md-8 mb-3">
+    <label class="form-label">Client</label>
+    <input type="text" class="form-control" wire:model="fiche_form.client" placeholder="Client">
+    @error('fiche_form.client') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 <div class="col-md-8 mb-3">
     <label class="form-label">Titre</label>

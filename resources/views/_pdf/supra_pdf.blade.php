@@ -121,20 +121,22 @@
             </td>
             <td>
                 <div class="fw-bold fs-5 text-center mb-1">En cas de dérangement Prévenez le service de Maintenance</div>
-                @if ($phone)
-                    <div class="contact phone"> <i class="ti ti-user"></i> {{ $phone }}</div>
+                @if ($fiche->phone)
+                    <div class="contact phone"> <i class="ti ti-user"></i> {{ $fiche->phone }}</div>
                 @endif
-                @if ($email)
-                    <div class="contact email">{{ $email }}</div>
+                @if ($fiche->email)
+                    <div class="contact email">{{ $fiche->email }}</div>
                 @endif
             </td>
         </tr>
 
     </table>
 
-    <div class="client">
-        {{ $client }}
+    <div class="d-flex-between">
+        <div class="client"> {{ $fiche->client }} </div>
+        <div>{{ $fiche->date }}</div>
     </div>
+
 
 
 </body>

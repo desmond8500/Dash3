@@ -24,9 +24,14 @@ class FicheAdd extends Component
     }
 
     public FicheForm $fiche_form;
+
     function store(){
-        $this->fiche->building_id = $this->building_id;
+        $this->fiche_form->building_id = $this->building_id;
         $this->fiche_form->store();
         $this->dispatch('close-addFiche');
+    }
+
+    function select_name($name){
+        $this->fiche_form->titre = $name;
     }
 }

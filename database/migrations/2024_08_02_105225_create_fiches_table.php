@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('type')->nullable();
-            $table->string('client')->nullable();
+            // $table->string('client')->nullable();
             $table->timestamps();
         });
     }

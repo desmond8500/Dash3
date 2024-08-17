@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="card-title">Documents</div>
             <div class="card-actions">
-                @livewire('form.add-article-document', ['article_id' => $article_id])
+                {{-- @livewire('form.add-article-document', ['article_id' => $article_id]) --}}
             </div>
         </div>
         <div class="card-body">

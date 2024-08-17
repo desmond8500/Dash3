@@ -63,8 +63,6 @@
         </div>
     </div>
 
-    {{--
-
     <div class="col-md-4 mb-3">
         <label class="form-label">Priorite</label>
         <select class="form-control" wire:model="article_form.priority_id">
@@ -100,7 +98,7 @@
             @endforeach
         </select>
         @error('article_form.brand_id') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div> --}}
+    </div>
 
     <div class="col-md-12 mb-3">
         <label class="form-label">Description</label>

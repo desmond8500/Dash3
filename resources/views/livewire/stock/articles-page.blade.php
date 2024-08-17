@@ -1,7 +1,7 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Articles', 'breadcrumbs'=> $breadcrumbs])
         <div class="btn-list">
-            @livewire('form.article-add')
+            {{-- @livewire('form.article-add') --}}
             @livewire('form.provider-add')
             @livewire('form.brand-add')
             <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>

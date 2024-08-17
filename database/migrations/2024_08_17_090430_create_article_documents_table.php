@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('article_documents', function (Blueprint $table) {
             $table->id();
+            $table->integer('article_id')->constrained();
+            $table->string('name')->nullable();
+            $table->string('folder');
             $table->timestamps();
         });
     }

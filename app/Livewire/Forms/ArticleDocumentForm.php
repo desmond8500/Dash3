@@ -28,7 +28,7 @@ class ArticleDocumentForm extends Form
         $this->validate();
         $document = ArticleDocument::create($this->all());
 
-        $this->storeFile($document, $this->folder;);
+        $this->storeFile($document, $this->folder);
 
     }
 

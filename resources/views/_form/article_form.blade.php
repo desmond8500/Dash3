@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-12 mb-3">
+    {{-- <div class="col-12 mb-3">
         <div wire:loading wire:target='article_form.image'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
@@ -98,7 +98,7 @@
             @endforeach
         </select>
         @error('article_form.brand_id') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
+    </div> --}}
 
     <div class="col-md-12 mb-3">
         <label class="form-label">Description</label>

@@ -14,12 +14,6 @@ class ArticleAdd extends Component
 
     public ArticleForm $article_form;
 
-    // function mount(){
-    //     $this->article_form->quantity = 0;
-    //     $this->article_form->quantity_min = 0;
-    //     $this->article_form->price = 0;
-    // }
-
     public function render(){
         return view('livewire.form.article-add',[
             'providers' => Provider::all(),

@@ -89,37 +89,11 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Documents</div>
-                            <div class="card-actions">
-                                <button class="btn btn-primary btn-icon" disabled>
-                                    <i class="ti ti-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-
-                        </div>
-                    </div>
-
+                    @livewire('stock.article-documents', ['article_id' => $article->id])
                 </div>
 
                 <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Liens</div>
-                            <div class="card-actions">
-                                <button class="btn btn-primary btn-icon" disabled>
-                                    <i class="ti ti-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-
-                        </div>
-                    </div>
-
+                    @livewire('stock.article-links', ['article_id' => $article->id])
                 </div>
 
             </div>

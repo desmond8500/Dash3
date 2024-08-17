@@ -81,7 +81,7 @@
     <div class="col-md-4 mb-3">
         <label class="form-label">Fournisseur</label>
         <select class="form-control" wire:model="article_form.provider_id">
-            <option value="0" disabled>Sélectionner</option>
+            <option value="" class="text-muted">--Sélectionner--</option>
             @foreach ($providers as $provider)
                 <option value="{{ $provider->id }}">{{ $provider->name }}</option>
             @endforeach
@@ -92,7 +92,7 @@
     <div class="col-md-4 mb-3">
         <label class="form-label">Marque</label>
         <select class="form-control" wire:model="article_form.brand_id">
-            <option value="0" disabled>Sélectionner</option>
+            <option value="" >--Sélectionner--</option>
             @foreach ($brands as $brand)
             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
             @endforeach

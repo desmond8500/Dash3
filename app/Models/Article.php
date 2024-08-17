@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 
@@ -69,5 +70,10 @@ class Article extends Model
         if($this->priority_id == 7){
             return "Forfait";
         }
+    }
+
+    public function links(): HasMany
+    {
+        return $this->hasMany(ArticleLink::class);
     }
 }

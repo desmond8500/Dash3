@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Form;
 
+use App\Http\Controllers\ErpController;
 use App\Livewire\Forms\FicheZoneForm;
 use App\Models\Fiche;
 use App\Models\FicheZone;
@@ -10,22 +11,19 @@ use Livewire\Component;
 class AddFicheZone extends Component
 {
     public FicheZoneForm $zone_form;
+    public $fiche;
 
     function mount($fiche_id)
     {
-        $fiche = Fiche::find($fiche_id);
+        $this->fiche = Fiche::find($fiche_id);
 
         $this->zone_form->fiche_id = $fiche_id;
-        $this->zone_form->systeme = $fiche->systeme;
-
-
-
     }
 
     public function render()
     {
         return view('livewire.form.add-fiche-zone',[
-            'equipements' =>
+            'equipements' => ErpController::get_equipements($this->fiche->systeme)
         ]);
     }
 

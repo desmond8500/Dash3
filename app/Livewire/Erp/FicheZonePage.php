@@ -62,7 +62,7 @@ class FicheZonePage extends Component
 
         if ($type=='galaxy') {
             if ($n<=8) {
-                for ($i=1001; $i < 1009; $i++) {
+                for ($i=1000; $i < 1002; $i++) {
                     FicheZone::create([
                         'fiche_id' => $this->fiche->id,
                         'number' => $i+1,

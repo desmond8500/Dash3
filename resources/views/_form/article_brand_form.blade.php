@@ -2,7 +2,6 @@
     <div wire:loading wire:target='brand_form.logo'>
         Chargement <div class="spinner-border" role="status"></div>
     </div>
-    {{-- @if ($brand_form) --}}
         @if ($brand_form->logo)
             @if(is_string($brand_form->logo))
                 <img src="{{ asset($brand_form->logo) }}" alt="" class="avatar rounded avatar-upload p-1">
@@ -19,7 +18,6 @@
                 <span class="avatar-upload-text">Ajouter</span>
             </label>
         @endif
-    {{-- @endif --}}
     <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="brand_form.logo">
 </div>
 

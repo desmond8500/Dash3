@@ -30,6 +30,7 @@ class BrandForm extends Form
         if ($this->logo) {
             $this->storeAvatar($brand, $this->logo);
         }
+        $this->reset('name','description', 'logo');
     }
 
     function set($brand_id){

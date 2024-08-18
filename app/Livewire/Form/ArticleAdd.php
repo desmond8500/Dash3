@@ -26,7 +26,6 @@ class ArticleAdd extends Component
     }
 
     function store(){
-        $this->validate();
         $this->article_form->store();
 
         $this->dispatch('close-addArticle');

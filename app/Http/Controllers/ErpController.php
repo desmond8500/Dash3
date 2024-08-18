@@ -44,4 +44,33 @@ class ErpController extends Controller
             "8" => "Forfait",
         );
     }
+
+    static function get_equipements($systeme){
+        $ssi = array(
+            'Détecteur de fumée',
+            'Détecteur thermique',
+            'Détecteur thermovélocimétrique',
+            'Détecteur optico-thermique',
+            'Déclencheur manuel',
+        );
+
+        $alarme = array(
+            'Contact de porte',
+            'Détecteur de mouvement',
+            'Pédales',
+            'Bouton panique',
+            'Détecteur sismique',
+        );
+
+
+        if ($systeme =='ssi') {
+            return $ssi;
+        }elseif($systeme == 'alarme'){
+            return $alarme;
+        }
+    }
+
+    static function get_systems(){
+        return array('alarme', 'ssi');
+    }
 }

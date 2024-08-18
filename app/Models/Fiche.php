@@ -20,6 +20,7 @@ class Fiche extends Model
         'email',
         'client',
         'type',
+        'systeme',
     ];
 
     public function building(): BelongsTo

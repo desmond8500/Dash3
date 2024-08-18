@@ -9,9 +9,8 @@
                 <div class="structure_title">
                     {{ $title }}
                     @if ($fiche->client)
-
+                        <div style="font-size: 13px; text-transform:uppercase; ">{{ $fiche->client }}</div>
                     @endif
-                    <div style="font-size: 13px; text-transform:uppercase; ">client</div>
                 </div>
             </td>
         </tr>

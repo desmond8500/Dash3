@@ -13,12 +13,20 @@ class AddFicheZone extends Component
 
     function mount($fiche_id)
     {
+        $fiche = Fiche::find($fiche_id);
+
         $this->zone_form->fiche_id = $fiche_id;
+        $this->zone_form->systeme = $fiche->systeme;
+
+
+
     }
 
     public function render()
     {
-        return view('livewire.form.add-fiche-zone');
+        return view('livewire.form.add-fiche-zone',[
+            'equipements' =>
+        ]);
     }
 
     function add(){

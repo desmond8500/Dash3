@@ -123,8 +123,8 @@ class DashController extends Controller
 
     static function get_fiche_types(){
         return (object) array(
-            (object) array( 'name' => 'Fiche Extinction Rp1r-Supra', 'route'=>'supra_pdf' ),
-            (object) array( 'name' => 'Fiche Incendie Teletek', 'route'=>'teletek_ssi_pdf' ),
+            (object) array( 'name' => 'Fiche Extinction Rp1r-Supra', 'route'=>'supra_pdf', 'systeme'=>'incendie' ),
+            (object) array( 'name' => 'Fiche Incendie Teletek', 'route'=>'teletek_ssi_pdf', 'systeme'=>'incendie' ),
         );
     }
 }

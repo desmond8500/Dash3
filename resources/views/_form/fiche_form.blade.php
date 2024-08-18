@@ -3,7 +3,7 @@
     <select class="form-select" wire:model="fiche_form.type">
         <option >Select</option>
         @foreach ($types as $type)
-            <option value="{{ $type->route }}" wire:click="select_name('{{ $type->name }}')">{{ $type->name }}</option>
+            <option value="{{ $type->route }}" wire:click="select_name('{{ $type->name }}','{{ $type->systeme }}')">{{ $type->name }}</option>
         @endforeach
     </select>
     @error('fiche_form.type') <span class='text-danger'>{{ $message }}</span> @enderror
@@ -12,6 +12,11 @@
     <label class="form-label">Client</label>
     <input type="text" class="form-control" wire:model="fiche_form.client" placeholder="Client">
     @error('fiche_form.client') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+<div class="col-md-4 mb-3">
+    <label class="form-label">Système</label>
+    <input type="text" disabled class="form-control" wire:model="fiche_form.systeme" placeholder="Système">
+    @error('fiche_form.systeme') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 <div class="col-md-8 mb-3">
     <label class="form-label">Titre</label>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Form;
 
 use App\Http\Controllers\DashController;
+use App\Http\Controllers\ErpController;
 use App\Livewire\Forms\FicheForm;
 use App\Models\Building;
 use Livewire\Component;
@@ -19,7 +20,8 @@ class FicheAdd extends Component
     public function render()
     {
         return view('livewire.form.fiche-add',[
-            'types' => DashController::get_fiche_types()
+            'types' => DashController::get_fiche_types(),
+            'systemes' => ErpController::get_systems(),
         ]);
     }
 
@@ -31,7 +33,8 @@ class FicheAdd extends Component
         $this->dispatch('close-addFiche');
     }
 
-    function select_name($name){
+    function select_name($name,$systeme){
         $this->fiche_form->titre = $name;
+        $this->fiche_form->systeme = $systeme;
     }
 }

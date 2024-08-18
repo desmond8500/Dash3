@@ -40,4 +40,10 @@ class BuildingFiche extends Component
             $this->fiche_form->delete();
             $this->dispatch('close-editFiche');
     }
+
+    function select_name($name, $systeme)
+    {
+        $this->fiche_form->titre = $name;
+        $this->fiche_form->systeme = $systeme;
+    }
 }

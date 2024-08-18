@@ -1,7 +1,7 @@
 <div>
     <button class='btn btn-primary' wire:click="add" ><i class='ti ti-plus'></i> Zone</button>
 
-    @component('components.modal', ["id"=>'addZone', 'title' => 'Ajouter une zone'])
+    @component('components.modal', ["id"=>'addZone', 'title' => 'Ajouter une zone', 'refresh'=>true])
         <form class="row" wire:submit="store">
             @include('_form.fiche_zone_form')
             <div class="modal-footer">

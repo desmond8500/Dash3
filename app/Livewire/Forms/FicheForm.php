@@ -21,6 +21,7 @@ class FicheForm extends Form
     #[Rule('required')]
     public $type;
     public $user_id;
+    public $systeme;
 
     function fix(){
         $this->titre = ucfirst($this->titre);

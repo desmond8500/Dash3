@@ -5,7 +5,21 @@
 </div>
 <div class="col-md-6 mb-3">
     <label class="form-label">Equipement</label>
-    <input type="text" class="form-control" wire:model="zone_form.equipement" placeholder="Equipement">
+    <div class="input-group">
+        <input type="text" class="form-control" wire:model="zone_form.equipement" placeholder="Equipement">
+        <div class="dropdown open">
+            <button class="btn btn-secondary btn-icon" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <i class="ti ti-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="triggerId">
+                <button class="dropdown-item" href="#">Action</button>
+                <button class="dropdown-item disabled" href="#">
+                    Disabled action
+                </button>
+            </div>
+        </div>
+
+    </div>
     @error('zone_form.equipement') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 <div class="col-md-5 mb-3">

@@ -17,7 +17,9 @@
                                 </div> --}}
                                 <a class="col" href="{{ route('fiche_zone',['fiche_id'=>$fiche->id]) }}">
                                     <div class="card-title">{{ $fiche->titre }}</div>
-                                    <div class="text-muted">{{ $fiche->user->firstname }} {{ $fiche->user->lastname }}</div>
+                                    @isset($fiche->user)
+                                        <div class="text-muted">{{ $fiche->user->firstname }} {{ $fiche->user->lastname }}</div>
+                                    @endisset
                                 </a>
                                 <div class="col-auto">
                                     <button class="btn btn-primary btn-icon" wire:click="edit_fiche('{{ $fiche->id }}')">

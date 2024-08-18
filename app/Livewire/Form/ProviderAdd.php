@@ -27,7 +27,7 @@ class ProviderAdd extends Component
             'address' => ucfirst($this->address),
             'description' => ucfirst($this->description),
         ]);
-        session()->flash('status', 'Post successfully updated.');
+        // session()->flash('status', 'Post successfully updated.');
         $this->dispatch('close-addProvider');
         $this->dispatch('grefresh-article');
     }

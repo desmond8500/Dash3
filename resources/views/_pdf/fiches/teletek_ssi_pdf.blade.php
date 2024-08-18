@@ -19,20 +19,20 @@
 
     <table class="table ">
         <tr>
-            <td colspan="4" class="title4">Liste des zones</td>
+            <td colspan="3" class="title4">Liste des zones</td>
         </tr>
         <tr class="subtitle4">
-            <td>Zone</td>
+            <td width='10px'>Zone</td>
             <td>Equipement</td>
             <td>Nom </td>
-            <td>Code</td>
+            {{-- <td>Code</td> --}}
         </tr>
         @foreach ($zones as $zone)
             <tr>
-                <td>{{ $zone->number }}</td>
+                <td class="text-center">{{ $zone->number }}</td>
                 <td>{{ $zone->equipement }}</td>
                 <td>{{ $zone->name }}</td>
-                <td>{{ $zone->code }}</td>
+                {{-- <td>{{ $zone->code }}</td> --}}
             </tr>
         @endforeach
     </table>

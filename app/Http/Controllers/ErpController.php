@@ -63,7 +63,7 @@ class ErpController extends Controller
         );
 
 
-        if ($systeme =='ssi') {
+        if ($systeme =='incendie') {
             return $ssi;
         }elseif($systeme == 'alarme'){
             return $alarme;
@@ -72,5 +72,23 @@ class ErpController extends Controller
 
     static function get_systems(){
         return array('alarme', 'ssi');
+    }
+
+    static function get_locaux(){
+        return array(
+            'Enteée client',
+            'Entrée personnel',
+            'GAB',
+            'Archives',
+            'Cuisine',
+            'Hall',
+            'Hall Client',
+            'Hall Etage',
+            'Coffre',
+            'Caisse',
+            'Arrère Caisse',
+            'Directeur d\'agence',
+            'Local technique',
+        );
     }
 }

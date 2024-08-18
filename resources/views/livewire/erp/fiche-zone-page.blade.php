@@ -12,9 +12,17 @@
                 <div class="card-header">
                     <div class="card-title">Liste des zones</div>
                     <div class="card-actions">
-                        <a class="btn btn-outline-primary btn-icon" href="{{ route('fiche_pdf',['fiche_id'=>$fiche->id]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
-                        </a>
+                        <div class="btn-icon">
+                            <a class="btn btn-outline-primary btn-icon" href="{{ route('fiche_pdf',['fiche_id'=>$fiche->id]) }}" target="_blank">
+                                <i class="ti ti-file-type-pdf"></i>
+                            </a>
+
+                            <a class="btn" wire:click="create_zones(3)">8 Zones simples</a>
+                            <a class="btn" wire:click="create_zones(8, 'galaxy')">8 Zones Galaxy </a>
+                            <a class="btn" wire:click="create_zones(16, 'galaxy')">16 Zones Galaxy </a>
+
+                        </div>
+
                     </div>
                 </div>
                 <table class="table table-hover">
@@ -33,9 +41,9 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $zone->number }}</td>
+                                <td>{{ $zone->equipement }}</td>
                                 <td>{{ $zone->name }}</td>
                                 <td>{{ $zone->code }}</td>
-                                <td>{{ $zone->equipement }}</td>
                                 <td style="width:50px">
                                     <button class="btn btn-primary btn-icon" wire:click="edit('{{ $zone->id }}')">
                                         <i class="ti ti-edit"></i>

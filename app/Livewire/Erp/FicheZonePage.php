@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Http\Controllers\ErpController;
 use App\Livewire\Forms\FicheForm;
 use App\Livewire\Forms\FicheZoneForm;
 use App\Models\Fiche;
@@ -38,6 +39,8 @@ class FicheZonePage extends Component
     {
         return view('livewire.erp.fiche-zone-page',[
             'zones' => FicheZone::where('fiche_id',$this->fiche->id)->get(),
+            'equipements' => ErpController::get_equipements($this->fiche->systeme) ?? [],
+            'locaux' => ErpController::get_locaux(),
         ]);
     }
 
@@ -53,5 +56,48 @@ class FicheZonePage extends Component
     function delete(){
         $this->zone_form->delete();
         $this->dispatch('close-editFicheZone');
+    }
+
+    function create_zones($n, $type=null){
+
+        if ($type=='galaxy') {
+            if ($n<=8) {
+                for ($i=1001; $i < 1009; $i++) {
+                    FicheZone::create([
+                        'fiche_id' => $this->fiche->id,
+                        'number' => $i+1,
+                        'name' => ' '
+                    ]);
+                }
+            } elseif($n<=16) {
+                for ($i = 1010; $i < 1018; $i++) {
+                    FicheZone::create([
+                        'fiche_id' => $this->fiche->id,
+                        'number' => $i + 1,
+                        'name' => ' '
+                    ]);
+                }
+            }
+
+
+        } else {
+            for ($i=0; $i < $n; $i++) {
+                FicheZone::create([
+                    'fiche_id' => $this->fiche->id,
+                    'number' => $i+1,
+                    'name' => 'd'
+                ]);
+            }
+        }
+        $this->dispatch('get-fiche-zones');
+    }
+
+    function set_local($name)
+    {
+        $this->zone_form->name = $name;
+    }
+    function set_equipement($name)
+    {
+        $this->zone_form->equipement = $name;
     }
 }

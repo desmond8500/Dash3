@@ -51,4 +51,18 @@ class FicheZoneForm extends Form
     function delete(){
         $this->zone->delete();
     }
+
+    // ----
+
+    function alarme($id){
+        $count = FicheZoneForm::where('fiche_id', $id)->count() + 1;
+        $n = 1;
+
+
+        FicheZone::create([
+            'number' => $count,
+            'equipement' => 'Détecteur de fumée',
+            'equipement' => 'Détecteur de fumée',
+        ]);
+    }
 }

@@ -23,8 +23,16 @@ class AddFicheZone extends Component
     public function render()
     {
         return view('livewire.form.add-fiche-zone',[
-            'equipements' => ErpController::get_equipements($this->fiche->systeme)
+            'equipements' => ErpController::get_equipements($this->fiche->systeme) ?? [],
+            'locaux' => ErpController::get_locaux(),
         ]);
+    }
+
+    function set_equipement($name){
+        $this->zone_form->equipement = $name;
+    }
+    function set_local($name){
+        $this->zone_form->name = $name;
     }
 
     function add(){

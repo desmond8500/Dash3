@@ -1,5 +1,5 @@
 <div>
-    <button class='btn btn-primary' wire:click="$dispatch('open-addZone')" ><i class='ti ti-plus'></i> Zone</button>
+    <button class='btn btn-primary' wire:click="add" ><i class='ti ti-plus'></i> Zone</button>
 
     @component('components.modal', ["id"=>'addZone', 'title' => 'Ajouter une zone'])
         <form class="row" wire:submit="store">

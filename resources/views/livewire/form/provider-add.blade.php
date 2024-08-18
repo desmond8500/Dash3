@@ -3,11 +3,11 @@
         <i class="ti ti-plus"></i> Fournisseur
     </button>
 
-    @if (session('status'))
+    {{-- @if (session('status'))
         <div class="alert alert-success mt-1">
             {{ session('status') }}
         </div>
-    @endif
+    @endif --}}
 
 
 

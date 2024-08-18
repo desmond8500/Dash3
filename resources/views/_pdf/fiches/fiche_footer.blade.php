@@ -1,4 +1,4 @@
-<table class="table mt-1">
+<table class="table zone mt-1">
     <tr>
         <td colspan="2" class="title3">CONTACT DE LA MAINTENANCE</td>
     </tr>

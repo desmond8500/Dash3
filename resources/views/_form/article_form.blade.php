@@ -39,7 +39,12 @@
         </div>
 
         <label class="form-label required">Référence</label>
-        <textarea class="form-control" wire:model="article_form.reference" placeholder="Référence" cols="30" rows="1"></textarea>
+        <div class="input-group">
+            <textarea class="form-control" wire:model="article_form.reference" placeholder="Référence" cols="30" rows="1"></textarea>
+            <button class="btn btn-primary" >
+                <i class="ti ti-arrow-big-up"></i>
+            </button>
+        </div>
         @error('article_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 

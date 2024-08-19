@@ -31,4 +31,8 @@ class ArticleAdd extends Component
         $this->dispatch('close-addArticle');
         $this->dispatch('get-articles');
     }
+
+    function uppercase(){
+        $this->article_form->reference = ucfirst($this->article_form->reference);
+    }
 }

@@ -41,9 +41,9 @@
         <label class="form-label required">Référence</label>
         <div class="input-group">
             <textarea class="form-control" wire:model="article_form.reference" placeholder="Référence" cols="30" rows="1"></textarea>
-            <button class="btn btn-primary" >
+            <a class="btn btn-primary btn-icon" wire:click='uppercase'>
                 <i class="ti ti-arrow-big-up"></i>
-            </button>
+            </a>
         </div>
         @error('article_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
@@ -52,17 +52,17 @@
         <div class="row">
             <div class="mb-3 col-md-6">
                 <label class="form-label">Qte</label>
-                <input type="text" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
+                <input type="number" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
                 @error('article_form.quantity') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
             <div class="col-md-6">
                 <label class="form-label">Qte Min</label>
-                <input type="text" class="form-control" wire:model="article_form.quantity_min" placeholder="Quantite">
+                <input type="number" class="form-control" wire:model="article_form.quantity_min" placeholder="Quantite">
                 @error('article_form.quantity_min') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
             <div class="col-md-12">
                 <label class="form-label">Prix</label>
-                <input type="text" class="form-control" wire:model="article_form.price" placeholder="Prix">
+                <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
                 @error('article_form.price') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </div>

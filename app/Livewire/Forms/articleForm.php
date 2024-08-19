@@ -33,30 +33,31 @@ class ArticleForm extends Form
 
     function store(){
         $this->validate();
-        $article = Article::create($this->only(
-            'designation',
-            'reference',
-            'description',
-            'quantity',
-            'quantity_min',
-            'priority_id',
-            'brand_id',
-            'provider_id',
-            'price',
-        ));
+       Article::create($this->all());
+        // $article = Article::create($this->only(
+        //     'designation',
+        //     'reference',
+        //     'description',
+        //     'quantity',
+        //     'quantity_min',
+        //     'priority_id',
+        //     'brand_id',
+        //     'provider_id',
+        //     'price',
+        // ));
 
-        if ($this->image) {
-            $images = $this->image;
-            $dir = "stock/articles/$article->id/images";
-            foreach ($images as $key => $image) {
-                $name = $image->getClientOriginalName();
-                $image->storeAS("public/$dir", $name);
-            }
+        // if ($this->image) {
+        //     $images = $this->image;
+        //     $dir = "stock/articles/$article->id/images";
+        //     foreach ($images as $key => $image) {
+        //         $name = $image->getClientOriginalName();
+        //         $image->storeAS("public/$dir", $name);
+        //     }
 
-            $article->image = "storage/$dir/$name";
-            // $article->image = "stockage/$dir/$name";
-            $article->save();
-        }
+        //     $article->image = "storage/$dir/$name";
+        //     // $article->image = "stockage/$dir/$name";
+        //     $article->save();
+        // }
     }
 
     function set($model_id){

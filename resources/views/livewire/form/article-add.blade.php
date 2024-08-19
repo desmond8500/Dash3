@@ -1,7 +1,7 @@
 <div>
     <a class="btn btn-primary" wire:click="add"><i class="ti ti-plus"></i> Article </a>
 
-    @component('components.modal', ["id"=>'addArticle', 'title'=>'Ajouter un article'])
+    @component('components.modal', ["id"=>'addArticle', 'title'=>'Ajouter un article', 'refresh'=>true])
         <form class="row" wire:submit="store">
             @include('_form.article_form',['providers' => $providers, 'brands'=> $brands])
             <div class="modal-footer">

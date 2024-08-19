@@ -33,7 +33,7 @@
 
     <div class="col-md-8 mb-3">
         <div class="mb-3">
-            <label class="form-label required">Désignation</label>
+            <label class="form-label required">Désignation </label>
             <input type="text" class="form-control" wire:model="article_form.designation" placeholder="Désignation">
             @error('article_form.designation') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Form;
 
 use App\Livewire\Forms\ArticleForm;
+use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Provider;
 use Livewire\Component;

@@ -4,29 +4,37 @@ namespace App\Livewire\Forms;
 
 use App\Models\Article;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class ArticleForm extends Form
 {
     public Article $article;
 
-    #[Rule('required')]
+    #[Validate('required')]
     public $designation;
-    #[Rule('required')]
+
+    #[Validate('required')]
     public $reference;
-    public $description;
-    #[Rule('numeric')]
-    public $quantity = 1;
-    #[Rule('numeric')]
+
+    #[Validate('numeric')]
     public $quantity_min = 0;
-    #[Rule('numeric')]
+
+    #[Validate('numeric')]
     public $priority_id = 1;
-    // #[Rule('numeric')]
-    public $brand_id;
-    // #[Rule('numeric')]
-    public $provider_id;
-    #[Rule('numeric')]
+
+    #[Validate('numeric')]
+    public $quantity = 1;
+
+    #[Validate('numeric')]
     public $price = 0;
+
+    public $description;
+
+    public $brand_id;
+
+    public $provider_id;
+
     public $image;
 
     function store(){

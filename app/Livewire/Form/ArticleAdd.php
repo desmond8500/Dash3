@@ -3,7 +3,6 @@
 namespace App\Livewire\Form;
 
 use App\Livewire\Forms\ArticleForm;
-use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Provider;
 use Livewire\Component;
@@ -23,7 +22,7 @@ class ArticleAdd extends Component
     }
 
     function mount(){
-        dump($this->article_form);
+        // dump($this->article_form);
         // $this->article_form->quantity = 1;
         // $this->article_form->quantity_min = 0;
         // $this->article_form->priority_id = 1;

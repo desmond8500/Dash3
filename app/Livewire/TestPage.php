@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\Brand;
+use App\Models\Provider;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -12,7 +14,10 @@ class TestPage extends Component
     use WithFileUploads;
 
     public function render(){
-        return view('livewire.test-page');
+        return view('livewire.test-page',[
+            'providers' => Provider::all(),
+            'brands' => Brand::all(),
+        ]);
     }
 
     public $title;

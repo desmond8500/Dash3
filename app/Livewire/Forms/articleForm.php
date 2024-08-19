@@ -16,9 +16,9 @@ class ArticleForm extends Form
     public $reference;
     public $description;
     #[Rule('numeric')]
-    public $quantity;
+    public $quantity = 1;
     #[Rule('numeric')]
-    public $quantity_min;
+    public $quantity_min = 0;
     #[Rule('numeric')]
     public $priority_id;
     // #[Rule('numeric')]
@@ -26,7 +26,7 @@ class ArticleForm extends Form
     // #[Rule('numeric')]
     public $provider_id;
     #[Rule('numeric')]
-    public $price;
+    public $price = 0;
     public $image;
 
     function store(){

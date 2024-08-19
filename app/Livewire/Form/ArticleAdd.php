@@ -13,7 +13,7 @@ class ArticleAdd extends Component
 {
     use WithFileUploads;
 
-    public ?ArticleForm $article_form;
+    public ArticleForm $article_form;
 
     public function render(){
         return view('livewire.form.article-add',[

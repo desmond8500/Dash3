@@ -23,10 +23,11 @@ class ArticleAdd extends Component
     }
 
     function mount(){
-        $this->article_form->quantity = 1;
-        $this->article_form->quantity_min = 0;
-        $this->article_form->priority_id = 1;
-        $this->article_form->price = 0;
+        dump($this->article_form);
+        // $this->article_form->quantity = 1;
+        // $this->article_form->quantity_min = 0;
+        // $this->article_form->priority_id = 1;
+        // $this->article_form->price = 0;
         $this->dispatch('open-addArticle');
     }
 

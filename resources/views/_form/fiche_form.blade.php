@@ -1,7 +1,7 @@
 <div class="col-md-12 mb-3">
     <label class="form-label">Type de fiche</label>
     <select class="form-select" wire:model="fiche_form.type">
-        <option >Select</option>
+        <option >-- Selectionnez une fiche --</option>
         @foreach ($types as $type)
             <option value="{{ $type->route }}" wire:click="select_name('{{ $type->name }}','{{ $type->systeme }}')">{{ $type->name }}</option>
         @endforeach

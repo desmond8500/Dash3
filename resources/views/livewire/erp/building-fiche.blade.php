@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
+            <div class="row row-deck g-2">
                 @foreach ($fiches as $fiche)
                     <div class="col-md-4">
                         <div class="card p-2">

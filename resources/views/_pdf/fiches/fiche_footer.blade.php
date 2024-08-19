@@ -22,7 +22,14 @@
 
 </table>
 
-<div class="d-flex-between">
-    <div class="client"> {{ $fiche->client }} </div>
-    <div>{{ $fiche->date }}</div>
-</div>
+<table class="table">
+    <tr>
+        <td class="border-white">
+            <div class="client"> {{ $fiche->client }} </div>
+        </td>
+        <td class="border-white" width="100px">
+            <div>{{ $fiche->formatDate() }}</div>
+        </td>
+    </tr>
+</table>
+

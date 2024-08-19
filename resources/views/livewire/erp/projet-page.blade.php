@@ -86,23 +86,8 @@
                         </div>
 
                         <div class="tab-pane" id="tabs-journaux">
-                            <div class="d-flex justify-content-between mb-1">
-                                <h2>Journal d'activité</h2>
-                                @component("components.off-canvas", ['button'=>'Todo'])
-                                    <ul>
-                                        <li>Editer une entrée de journal</li>
-                                        <li>Consulter et remplir un journal</li>
-                                    </ul>
-                                @endcomponent
-                            </div>
-
                             <div class="row g-2">
                                 @livewire('erp.journaux', ['projet_id' => $projet_id],)
-                            </div>
-
-
-                            <div>
-
                             </div>
                         </div>
 
@@ -136,16 +121,14 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
     @component('components.modal', ["id"=>'editProjet', 'title'=> 'Editer un projet'])
-    <form class="row" wire:submit="update">
-        @include('_form.projet_form')
-    </form>
-    <script> window.addEventListener('open-editProjet', event => { $('#editProjet').modal('show'); }) </script>
-    <script> window.addEventListener('close-editProjet', event => { $('#editProjet').modal('hide'); }) </script>
+        <form class="row" wire:submit="update">
+            @include('_form.projet_form')
+        </form>
+        <script> window.addEventListener('open-editProjet', event => { $('#editProjet').modal('show'); }) </script>
+        <script> window.addEventListener('close-editProjet', event => { $('#editProjet').modal('hide'); }) </script>
     @endcomponent
 
 </div>

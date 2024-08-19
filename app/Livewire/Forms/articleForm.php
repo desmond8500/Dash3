@@ -20,7 +20,7 @@ class ArticleForm extends Form
     #[Rule('numeric')]
     public $quantity_min = 0;
     #[Rule('numeric')]
-    public $priority_id;
+    public $priority_id = 1;
     // #[Rule('numeric')]
     public $brand_id;
     // #[Rule('numeric')]

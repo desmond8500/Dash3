@@ -23,6 +23,10 @@ class ArticleAdd extends Component
     }
 
     function add(){
+        $this->article_form->quantity = 1;
+        $this->article_form->quantity_min = 0;
+        $this->article_form->priority_id = 1;
+        $this->article_form->price = 0;
         $this->dispatch('open-addArticle');
     }
 

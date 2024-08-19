@@ -14,22 +14,22 @@ class ArticleForm extends Form
 
     #[Validate('required')]
     public $designation;
-    public $image;
     #[Validate('required')]
     public $reference;
     public $description;
     #[Validate('numeric')]
-    public $quantity = 0;
+    public $quantity;
     #[Validate('numeric')]
-    public $quantity_min = 0;
+    public $quantity_min;
     #[Validate('numeric')]
-    public $priority_id = 1;
+    public $priority_id;
     // #[Validate('numeric')]
     public $brand_id;
     // #[Validate('numeric')]
     public $provider_id;
     #[Validate('numeric')]
-    public $price = 0;
+    public $price;
+    public $image;
 
     function store(){
         $this->validate();

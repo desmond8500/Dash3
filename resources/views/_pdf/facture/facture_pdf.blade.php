@@ -48,7 +48,7 @@
             <tr style="border: 1px solid gray" >
                 <td class="border-white" width="350px">
                     <div>
-                        <span class="fw-bold">Client : </span> <span>{{ $devis->projet->client->name }}</span>
+                        <span class="fw-bold">Client : </span> <span>{{ $invoice->client_name ?? $devis->projet->client->name }}</span>
                     </div>
                     <div>
                         <span class="fw-bold">Projet : </span> <span>{{ $devis->projet->name }}</span>

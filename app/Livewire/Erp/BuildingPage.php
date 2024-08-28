@@ -40,6 +40,7 @@ class BuildingPage extends Component
             (object) array('number'=> 1, 'name' => 'Niveaux'),
             (object) array('number'=> 2, 'name' => 'Quantitatif'),
             (object) array('number'=> 3, 'name' => 'Fiches'),
+            (object) array('number'=> 4, 'name' => 'Documents'),
         );
 
         if (!$building_id) {

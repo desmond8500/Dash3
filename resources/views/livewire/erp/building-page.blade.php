@@ -116,6 +116,8 @@
             @livewire('erp.building-quantitatif',['building_id'=> $building->id ])
         @elseif($selected_tab == 3)
             @livewire('erp.building-fiche',['building_id'=> $building->id ])
+        @elseif($selected_tab == 4)
+            @livewire('erp.building-document',['building_id'=> $building->id ])
         @endif
 
     </div>

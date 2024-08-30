@@ -9,7 +9,7 @@ use Livewire\Form;
 
 class ArticleForm extends Form
 {
-    public ?Article $article;
+    public Article $article;
 
     #[Validate('required')]
     public $designation;

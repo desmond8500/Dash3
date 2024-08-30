@@ -13,19 +13,14 @@ class ArticleForm extends Form
 
     #[Validate('required')]
     public $designation;
-
     #[Validate('required')]
     public $reference;
-
     #[Validate('numeric')]
     public $quantity_min = 0;
-
     #[Validate('numeric')]
     public $priority_id = 1;
-
     #[Validate('numeric')]
     public $quantity = 1;
-
     #[Validate('numeric')]
     public $price = 0;
 

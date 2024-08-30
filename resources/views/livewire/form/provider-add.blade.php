@@ -3,14 +3,6 @@
         <i class="ti ti-plus"></i> Fournisseur
     </button>
 
-    {{-- @if (session('status'))
-        <div class="alert alert-success mt-1">
-            {{ session('status') }}
-        </div>
-    @endif --}}
-
-
-
     @component('components.modal', ["id"=>'addProvider', 'title'=>'Ajouter un fournisseur'])
         <form class="row" wire:submit="store">
 

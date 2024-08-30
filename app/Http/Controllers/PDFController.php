@@ -14,6 +14,7 @@ use App\Models\Journal;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class PDFController extends Controller
 {
@@ -102,7 +103,7 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.journal_pdf', $data);
-        return $pdf->stream($journal->date.' - '.$journal->projet->name.' - ' . $data['title']);
+        return $pdf->stream($journal->date.' - '.$journal->projet->name. ' - ' . $journal->title . ' - ' . $data['title']);
         // return $pdf->download('sdfsd');
     }
     public static function facture_pdf($invoice_id,$type){
@@ -124,7 +125,7 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->stream($devis->reference.' - '.$devis->projet->name);
+        return $pdf->stream( Str::upper($type).' '. Str::upper($devis->reference). ' - '. $devis->projet->client->name . ' - ' . $devis->projet->name);
         // return $pdf->download('sdfsd');
     }
     public static function facture_acompte_pdf($invoice_id,$type, $acompte_id){
@@ -145,7 +146,7 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->stream($devis->date.' - '.$devis->projet->name);
+        return $pdf->stream($devis->date.' - '.$devis->projet->name . ' - ' . $devis->projet->name);
         // return $pdf->download('sdfsd');
     }
     public static function pdf_test(){

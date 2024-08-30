@@ -3,6 +3,7 @@
 namespace App\Livewire\Form;
 
 use App\Livewire\Forms\ArticleForm;
+use App\Livewire\Forms\ItemForm;
 use App\Models\Brand;
 use App\Models\Provider;
 use Livewire\Component;
@@ -12,7 +13,8 @@ class ArticleAdd extends Component
 {
     use WithFileUploads;
 
-    public ArticleForm $article_form;
+    public ItemForm $article_form;
+    // public ArticleForm $article_form;
 
     public function render(){
         return view('livewire.form.article-add',[
@@ -25,9 +27,9 @@ class ArticleAdd extends Component
 
         // dump($this->article_form);
         // dump($this->article_form);
-        $this->article_form->quantity = 2;
-        $this->article_form->quantity_min = 2;
-        $this->article_form->priority_id = 2;
+        // $this->article_form->quantity = 2;
+        // $this->article_form->quantity_min = 2;
+        // $this->article_form->priority_id = 2;
         // $this->article_form->price = 0;
         // $this->dispatch('open-addArticle');
     }

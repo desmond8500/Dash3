@@ -1,6 +1,5 @@
 <div>
     <a class="btn btn-primary" wire:click="add"><i class="ti ti-plus"></i> Article </a>
-    @dump($article_form)
 
     @component('components.modal', ["id"=>'addArticle', 'title'=>'Ajouter un article', 'refresh'=>true])
         <form class="row" wire:submit="store">

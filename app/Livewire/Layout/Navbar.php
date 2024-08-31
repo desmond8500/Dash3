@@ -11,7 +11,8 @@ class Navbar extends Component
         array('name' => "ERP", "icon" => "users", "can"=>"erp",
             'submenu' => [
                 array('name' => "Clients", "route" => "clients", "icon" => "users", "can" => "clients"),
-                array('name' => "Vidéos", "route" => "systemes", "icon" => "hammer"),
+                array('name' => "Modèle de devis", "route" => "invoice_model", "icon" => "file"),
+                array('name' => "Dcuments", "route" => "documents", "icon" => "file"),
             ]
         ),
         array('name' => "Journaux", "route" => "journaux", "icon" => "article", "can"=> "journaux"),

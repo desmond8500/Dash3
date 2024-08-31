@@ -6,8 +6,10 @@ use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
+use App\Livewire\Erp\DocumentsPage;
 use App\Livewire\Erp\FicheZonePage;
 use App\Livewire\Erp\FinancesPage;
+use App\Livewire\Erp\InvoiceModelPage;
 use App\Livewire\Erp\InvoicePage;
 use App\Livewire\Erp\InvoicesPage;
 use App\Livewire\Erp\ProjetPage;
@@ -71,6 +73,10 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('invoice_export/{invoice_id}',  function ($invoice_id){ return Excel::download(new InvoiceExport($invoice_id), 'invoices.xlsx'); })->name('invoice_export');
 
     Route::post('invoice_import', 'InvoiceController@import')->name('invoice_import');
+    Route::get('invoice_model', InvoiceModelPage::class)->name('invoice_model');
+
+    // Documents
+    Route::get('/documents', DocumentsPage::class)->name('documents');
 
     // Journaux
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');

@@ -3,6 +3,7 @@
 namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\ArticleForm;
+use App\Livewire\Forms\ItemForm;
 use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Commande;
@@ -20,7 +21,8 @@ class ArticlesPage extends Component
     protected $paginationTheme = 'bootstrap';
     public $search ='';
     public $breadcrumbs;
-    public ArticleForm $article_form;
+    public ItemForm $article_form;
+    // public ArticleForm $article_form;
 
     public function mount(){
         $this->breadcrumbs = array(

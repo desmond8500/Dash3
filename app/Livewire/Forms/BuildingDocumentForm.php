@@ -14,6 +14,7 @@ class BuildingDocumentForm extends Form
 
     #[Rule('required')]
     public $building_id;
+    #[Rule('required')]
     public $name;
     public $link;
     public $folder;
@@ -22,12 +23,16 @@ class BuildingDocumentForm extends Form
         $this->name = ucfirst($this->name);
     }
 
+    function erase(){
+        $this->reset('name', 'link', 'folder');
+    }
 
     function store(){
         $this->validate();
         $document = BuildingDocument::create($this->all());
-
-        $this->storeAvatar($document, $this->folder);
+        if ($this->folder) {
+            $this->storeAvatar($document, $this->folder);
+        }
 
     }
 
@@ -51,8 +56,6 @@ class BuildingDocumentForm extends Form
         $this->name = $this->document->name;
         $this->link = $this->document->link;
         $this->folder = $this->document->folder;
-
-
     }
 
     function update(){
@@ -60,7 +63,8 @@ class BuildingDocumentForm extends Form
         $this->document->update($this->all());
     }
 
-    function delete(){
-        $this->document->delete();
+    function delete($id){
+        $this->document = BuildingDocument::find($id);
+        $this->document->delete($id);
     }
 }

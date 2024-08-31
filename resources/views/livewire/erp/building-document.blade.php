@@ -1,24 +1,49 @@
-<div class="row">
+<div class="row g-2">
+    <div class="col-md-12">
+        <div class="card-title">Liens et document</div>
+    </div>
     <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Liens et document</div>
-                <div class="card-actions">
-
+        @foreach ($documents as $document)
+            <div class="card p-2 mb-1 ">
+                <div class="row">
+                    <div class="col-auto">
+                        <img src="" alt="A" class="avatar avatar-md">
+                    </div>
+                    <div class="col">
+                        @if ($document->link)
+                            <a href="{{ asset($document->link) }}" target="_blank">
+                        @endif
+                            <div class="card-title">{{ $document->name }}</div>
+                            <div class="text-muted">{!! $document->description !!}</div>
+                        @if ($document->link)
+                            </a>
+                        @endif
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-outline-primary btn-icon" wire:click="edit({{ $document->id }})">
+                            <i class="ti ti-edit"></i>
+                        </button>
+                        @if ($document->folder)
+                            <a class="btn btn-outline-primary btn-icon" href="{{ asset($document->folder) }}" target="_blank">
+                                <i class="ti ti-download"></i>
+                            </a>
+                        @endif
+                        <button class="btn btn-outline-danger btn-icon" wire:click="delete({{ $document->id }})">
+                            <i class="ti ti-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="card-body">
-
-            </div>
-            <div class="card-footer">
-
-            </div>
-        </div>
-
+        @endforeach
     </div>
     <div class="col-md-4">
         <div class="card card-body">
-            <form class="row">
+            <div class="card-title">Ajouter un document</div>
+            @if ($button == "Valider")
+                <form class="row" wire:submit='store()'>
+            @else
+                <form class="row" wire:submit='update()'>
+            @endif
                 <div class="col-md-12 mb-3">
                     <label class="form-label">Nom</label>
                     <input type="text" class="form-control" wire:model="document_form.name" placeholder="Nom">
@@ -38,6 +63,11 @@
                     <label class="form-label">Description</label>
                     <textarea class="form-control" wire:model="document_form.description" placeholder="Description" cols="30" rows="5"></textarea>
                     @error('document_form.description') <span class='text-danger'>{{ $message }}</span> @enderror
+                </div>
+
+                <div class="d-flex-between">
+                    <button class="btn btn-secondary">Effacer</button>
+                    <button class="btn btn-primary" type="submit">{{ $button }}</button>
                 </div>
 
             </form>

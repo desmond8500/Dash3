@@ -20,6 +20,7 @@ class Navbar extends Component
             'submenu' => [
                 array('name' => "Stock", "route" => "stock", "icon" => "packages", "can" => "stock"),
                 array('name' => "Articles", "route" => "articles", "icon" => "packages", "can" => "stock"),
+                array('name' => "Achats", "route" => "achats", "icon" => "packages", "can" => "stock"),
                 array('name' => "Marques", "route" => "brands", "icon" => "packages", "can" => "stock"),
                 array('name' => "Fournisseurs", "route" => "providers", "icon" => "packages", "can" => "stock"),
             ]

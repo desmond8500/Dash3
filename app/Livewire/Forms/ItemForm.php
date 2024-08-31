@@ -39,7 +39,17 @@ class ItemForm extends Form
 
     function store(){
         $this->validate();
-        Article::create($this->all());
+        $article = Article::create($this->all());
+
+        if ($this->image) {
+            $image = $this->image;
+            $dir = "stock/articles/$article->id/images";
+            $name = $image->getClientOriginalName();
+            $image->storeAS("public/$dir", $name);
+
+            $article->image = "storage/$dir/$name";
+            $article->save();
+        }
     }
 
     function set($model_id){
@@ -60,6 +70,18 @@ class ItemForm extends Form
     function update(){
         $this->validate();
         $this->article->update($this->all());
+
+        if (!is_string($this->image)) {
+            $this->article = Article::find($this->article->id);
+            $image = $this->image;
+            $dir = "stock/articles/" . $this->article->id . "/images";
+            $name = $image->getClientOriginalName();
+            $image->storeAS("public/$dir", $name);
+
+            $this->article->image = "$dir/$name";
+            // $article->image = "stockage/$dir/$name";
+            $this->article->save();
+        }
     }
 
     function delete($id)

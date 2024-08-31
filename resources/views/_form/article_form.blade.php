@@ -1,5 +1,5 @@
 <div class="row">
-    {{-- <div class="col-12 mb-3">
+    <div class="col-12 mb-3">
         <div wire:loading wire:target='article_form.image'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
@@ -10,9 +10,9 @@
                         <img src="{{ asset($article_form->image) }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
 
                     @else
-                        @foreach ($article_form->image as $image)
-                            <img src="{{ $image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
-                        @endforeach
+                        <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
+                        {{-- @foreach ($article_form->image as $image)
+                        @endforeach --}}
 
                     @endif
                     <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
@@ -28,8 +28,8 @@
 
             @endif
         </div>
-        <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="article_form.image">
-    </div>  --}}
+        <input type="file" id="file" accept="image/*" style="display: none" wire:model="article_form.image">
+    </div>
 
     <div class="col-md-8 mb-3">
         <div class="mb-3">

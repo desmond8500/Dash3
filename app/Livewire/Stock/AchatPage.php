@@ -92,6 +92,7 @@ class AchatPage extends Component
 
         AchatRow::create([
             'achat_id' => $this->achat->id,
+            'article_id' => $this->article->id,
             'designation' => $article->designation,
             'reference' => $article->reference,
             'quantite' => $this->row_quantity,

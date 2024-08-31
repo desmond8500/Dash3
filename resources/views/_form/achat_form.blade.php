@@ -23,4 +23,3 @@
     <textarea class="form-control" wire:model="achat_form.description" placeholder="Description" cols="30" rows="5"></textarea>
     @error('achat_form.description') <span class='text-danger'>{{ message }}</span> @enderror
 </div>
-@dump($user_form)

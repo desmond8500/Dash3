@@ -76,4 +76,9 @@ class Article extends Model
     {
         return $this->hasMany(ArticleLink::class);
     }
+
+    public function achat_row(): HasOne
+    {
+        return $this->hasOne(AchatRow::class);
+    }
 }

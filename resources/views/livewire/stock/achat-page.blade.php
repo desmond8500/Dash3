@@ -35,15 +35,15 @@
                     </tr>
                     <tr>
                         <td> TOTAL HT </td>
-                        <td class="text-end text-danger"> {{ $achat->total() }} CFA </td>
+                        <td class="text-end text-danger"> {{ number_format($achat->total(), 0, 2) }} CFA </td>
                     </tr>
                     <tr>
                         <td> TVA </td>
-                        <td class="text-end text-danger"> {{ $achat->tva() }} CFA </td>
+                        <td class="text-end text-danger"> {{ number_format($achat->tva(), 0, 2) }} CFA </td>
                     </tr>
                     <tr>
                         <td> TOTAL TTC </td>
-                        <td class="text-end text-danger"> {{ $achat->ttc() }} CFA </td>
+                        <td class="text-end text-danger"> {{ number_format($achat->ttc(), 0, 2) }} CFA </td>
                     </tr>
                 </table>
 
@@ -107,8 +107,14 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
+                                    @if ($row->article_id)
+                                        <a href="{{ route('article', ['article_id'=>$row->article_id]) }}" target="_blank">
+                                    @endif
                                     <div>{{ $row->designation }}</div>
                                     <div class="text-muted">{{ $row->reference }}</div>
+                                    @if ($row->article_id)
+                                        </a>
+                                    @endif
                                 </td>
                                 <td class="text-center">{{ $row->quantite }}</td>
                                 <td class="text-center">

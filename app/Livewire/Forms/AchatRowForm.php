@@ -14,6 +14,8 @@ class AchatRowForm extends Form
 
     #[Rule('required')]
     public $achat_id;
+    public $article_id;
+    #[Rule('required')]
     public $designation;
     public $reference;
     public $quantite=1;
@@ -30,6 +32,7 @@ class AchatRowForm extends Form
         $this->designation = $article->designation;
         $this->reference = $article->reference;
         $this->prix = $article->price;
+        $this->article_id = $article->id;
 
         $this->store();
     }
@@ -38,6 +41,7 @@ class AchatRowForm extends Form
         $this->row = AchatRow::find($model_id);
 
         $this->achat_id = $this->row->achat_id;
+        $this->article_id = $this->row->article_id;
         $this->designation = $this->row->designation;
         $this->reference = $this->row->reference;
         $this->quantite = $this->row->quantite;

@@ -12,6 +12,7 @@ class AchatRow extends Model
 
     protected $fillable = [
         'achat_id',
+        'article_id',
         'designation',
         'reference',
         'quantite',
@@ -22,5 +23,9 @@ class AchatRow extends Model
     public function achat(): BelongsTo
     {
         return $this->belongsTo(Achat::class);
+    }
+    public function article(): BelongsTo
+    {
+        return $this->belongsTo(Article::class);
     }
 }

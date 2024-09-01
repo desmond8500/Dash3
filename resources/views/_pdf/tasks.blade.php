@@ -41,14 +41,14 @@
                 <th width='10px'>#</th>
                 <th>Projet</th>
                 <th>Description</th>
-                <th>Infos</th>
-                <th>Statut</th>
+                <th width='70px' class="text-center">Infos</th>
+                <th width='70px'>Statut</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($tasks as $key => $task)
                 <tr>
-                    <td>{{ $key + 1 }}</td>
+                    <td class="text-center">{{ $key + 1 }}</td>
                     <td>
                         <div class="task_projet_name"> {{ $task->projet->name }} </div>
                     </td>
@@ -57,8 +57,10 @@
                         <div class="task_description">{!! $task->description !!}</div>
                     </td>
                     <td>
-                        <div class="task_statut">{{ $task->statut->name }}</div>
-                        <div class="task_priority">{{ $task->priority->name }}</div>
+                        <div class="fs-8">Statut</div>
+                        <div class="task_statut fs-7">{{ $task->statut->name }}</div>
+                        <div class="fs-8">Priorité</div>
+                        <div class="task_priority fs-7">{{ $task->priority->name }}</div>
                     </td>
                     <td>
 

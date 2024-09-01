@@ -1,10 +1,19 @@
-<div class="col-md-12 mb-3">
+<div class="col-md-6 mb-3">
     <label class="form-label">Fournisseur</label>
     <select class="form-control" wire:model="achat_form.provider_id">
         <option disabled selected value="0">Selectioner un fournisseur</option>
         @foreach ($providers as $provider)
             <option value="{{ $provider->id }}">{{ $provider->name }}</option>
         @endforeach
+    </select>
+    @error('achat_form.provider_id') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+<div class="col-md-6 mb-3">
+    <label class="form-label">Statut</label>
+    <select class="form-control" wire:model="achat_form.status">
+        <option>Prévu</option>
+        <option>Acheté</option>
+        <option>Annulé</option>
     </select>
     @error('achat_form.provider_id') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>

@@ -22,7 +22,7 @@
         <tr>
             <td width="150px" class="border_white">
                 <div class="logo">
-                    <div>logo</div>
+                    <img src="{{ env('LOGO') }}" alt="" class="logo">
 
                 </div>
             </td>
@@ -33,8 +33,6 @@
             </td>
         </tr>
     </table>
-
-
 
     <table class="table">
         <thead class="thead">
@@ -54,7 +52,7 @@
                 <td align="center" class="fw-bold">{{ $key+1 }}</td>
                 <td>
                     <div><b>{{ $row->designation }}</b></div>
-                    <div class="text-muted">{{ $row->reference }}</div>
+                    <div class="text-muted fs-7">{{ $row->reference }}</div>
                 </td>
                 <td align="center">{{ $row->quantite }}</td>
                 <td align="right">

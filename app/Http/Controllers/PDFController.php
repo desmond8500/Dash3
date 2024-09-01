@@ -11,7 +11,6 @@ use App\Models\Invoice;
 use App\Models\InvoiceAcompte;
 use App\Models\InvoiceSection;
 use App\Models\Journal;
-use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -43,7 +42,7 @@ class PDFController extends Controller
             'carbon' => $carbon,
         ];
         $pdf = Pdf::loadView('_pdf.achat', $data);
-        return $pdf->stream();
+        return $pdf->stream('Achat - '.$achat->name );
     }
 
     public static function commande_pdf(){

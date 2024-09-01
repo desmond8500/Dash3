@@ -1,4 +1,4 @@
-<?php
+                                <?php
 
 namespace App\Livewire\Forms;
 
@@ -17,6 +17,7 @@ class AchatForm extends Form
     public $description;
     public $date;
     public $provider_id;
+    public $status;
 
     function fix(){
         $this->name = ucfirst($this->name);
@@ -42,7 +43,7 @@ class AchatForm extends Form
     function store(){
         $this->validate();
         Achat::create($this->all());
-        $this->reset('name','date','provider_id', 'description');
+        $this->reset('name','date','provider_id', 'description', 'status');
     }
 
     function set($model_id){
@@ -51,6 +52,7 @@ class AchatForm extends Form
         $this->name = $this->achat->name;
         $this->description = $this->achat->description;
         $this->date = $this->achat->date;
+        $this->status = $this->achat->status;
     }
 
     function update(){

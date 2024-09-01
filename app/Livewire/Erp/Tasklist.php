@@ -98,6 +98,7 @@ class Tasklist extends Component
 
     function delete(){
         $this->form->delete();
+        $this->dispatch('close-editTaskModal');
     }
 
     // Subtask

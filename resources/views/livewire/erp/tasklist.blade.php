@@ -68,7 +68,9 @@
             @include('_form.task_form')
 
             <div class="d-flex-between">
-                <a type="button" class="btn btn-secondary"  wire:click='delete()'>Fermer</a>
+                <a type="button" class="btn btn-danger"  wire:click='delete()'>
+                    <i class="ti ti-trash"></i>
+                </a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>

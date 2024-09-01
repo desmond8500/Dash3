@@ -54,7 +54,7 @@
                     </td>
                     <td>
                         <div class="task_name">{{ $task->name }}</div>
-                        <div class="task_description">{{ $task->description }}</div>
+                        <div class="task_description">{!! $task->description !!}</div>
                     </td>
                     <td>
                         <div class="task_statut">{{ $task->statut->name }}</div>

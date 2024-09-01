@@ -96,6 +96,10 @@ class Tasklist extends Component
         return redirect()->route('tasks_pdf',['tasks'=> 12]);
     }
 
+    function delete(){
+        $this->form->delete();
+    }
+
     // Subtask
     public $show_subtask_bool = false;
     public SubtaskForm $subtask_form;

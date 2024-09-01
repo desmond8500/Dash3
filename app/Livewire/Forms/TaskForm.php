@@ -77,4 +77,8 @@ class TaskForm extends Form
         return $this->task;
     }
 
+    function delete(){
+        $this->task->delete();
+    }
+
 }

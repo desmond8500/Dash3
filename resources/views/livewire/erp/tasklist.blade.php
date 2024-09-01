@@ -12,23 +12,23 @@
                 <div class="btn-list">
                     @if ($client_id)
                         <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$client_id, 'type'=>'client_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i> client_id {{ $client_id }}
+                            <i class="ti ti-file-type-pdf"></i>
                         </a>
                     @elseif($projet_id)
                         <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$projet_id, 'type'=>'projet_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i> projet_id {{ $projet_id }}
+                            <i class="ti ti-file-type-pdf"></i>
                         </a>
                     @elseif($building_id)
                         <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$building_id, 'type'=>'building_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i> building_id {{ $building_id }}
+                            <i class="ti ti-file-type-pdf"></i>
                         </a>
                     @elseif($stage_id)
                         <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$stage_id, 'type'=>'stage_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i> stage_id {{ $stage_id }}
+                            <i class="ti ti-file-type-pdf"></i>
                         </a>
                     @elseif($room_id)
                         <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$room_id, 'type'=>'room_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i> room_id {{ $room_id }}
+                            <i class="ti ti-file-type-pdf"></i>
                         </a>
 
                     @endif
@@ -67,7 +67,8 @@
         <form class="row" wire:submit="update">
             @include('_form.task_form')
 
-            <div class="modal-footer">
+            <div class="d-flex-between">
+                <a type="button" class="btn btn-secondary"  wire:click='delete()'>Fermer</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>

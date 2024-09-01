@@ -80,6 +80,7 @@ class PDFController extends Controller
             'title' => 'Liste des taches',
             'tasks' => $tasks,
             'carbon' => $carbon,
+            'info' => [$id, $type, $search, $status ]
         ];
 
         $pdf = Pdf::loadView('_pdf.tasks', $data);

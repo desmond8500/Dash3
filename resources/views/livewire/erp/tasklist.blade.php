@@ -11,24 +11,24 @@
             <div class="card-actions">
                 <div class="btn-list">
                     @if ($client_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$client_id, 'type'=>'client', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$client_id, 'type'=>'client_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i> client_id {{ $client_id }}
                         </a>
                     @elseif($projet_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$projet_id, 'type'=>'projet', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$projet_id, 'type'=>'projet_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i> projet_id {{ $projet_id }}
                         </a>
                     @elseif($building_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$building_id, 'type'=>'building', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$building_id, 'type'=>'building_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i> building_id {{ $building_id }}
                         </a>
                     @elseif($stage_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$stage_id, 'type'=>'stage', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$stage_id, 'type'=>'stage_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i> stage_id {{ $stage_id }}
                         </a>
                     @elseif($room_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$room_id, 'type'=>'room', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
+                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$room_id, 'type'=>'room_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i> room_id {{ $room_id }}
                         </a>
 
                     @endif

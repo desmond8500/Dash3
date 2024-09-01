@@ -82,10 +82,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
     // Contacts
     Route::get('/contacts', ContactsPage::class)->name('contacts');
-    // Taches
-    Route::get('/tasks', TasksPage::class)->name('tasks');
 
-    Route::get('/tasks_pdf/{id}/{type?}/{search?}/{status?}',  function ($id, $type='', $search='', $status=true) { return PDFController::tasks_pdf($id, $type, $search, $status); })->name('tasks_pdf');
 
     // Avancements
     Route::get('/avancements/{building_id}', AvancementsPage::class)->name('avancements');
@@ -140,7 +137,13 @@ Route::middleware(['auth','can:medias'])->group(function () {
 Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/tasks', TasksPage::class)->name('tasks');
     Route::get('/task/{task_id}', TaskPage::class)->name('task');
+    Route::get('/tasks_pdf/{id}/{type?}/{search?}/{status?}',  function ($id, $type = '', $search = '', $status = false) {
+        return PDFController::tasks_pdf($id, $type, $search, $status);
+    })->name('tasks_pdf');
 });
+
+// Taches
+
 
 // Journal
 Route::middleware(['auth', 'can:erp'])->group(function () {

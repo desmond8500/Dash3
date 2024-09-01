@@ -45,7 +45,7 @@ class TaskController extends Controller
         }
     }
     static function getTasklist($id, $type='', $search= '', $status = true){
-        return Task::all();
+        // return Task::all();
         if ($status) {
             if ($type == 'client_id') {
                 return Task::orderBy('priority_id', 'desc')->where('client_id', $id)->finished($search)->paginate(4);

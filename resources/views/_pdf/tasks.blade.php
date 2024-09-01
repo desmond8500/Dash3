@@ -23,7 +23,7 @@
         <tr>
             <td width="150px" class="border_white">
                 <div class="logo">
-                    <div>Logo</div>
+                    <img src="{{ env('LOGO') }}" alt="" class="logo">
 
                 </div>
             </td>

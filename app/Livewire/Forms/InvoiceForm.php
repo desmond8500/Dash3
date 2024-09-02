@@ -27,6 +27,7 @@ class InvoiceForm extends Form
     public $tax;
     public $remise;
     public $favorite = 0;
+    public $image;
 
     function store(){
         $this->validate();

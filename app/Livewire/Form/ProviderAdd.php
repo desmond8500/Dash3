@@ -30,6 +30,7 @@ class ProviderAdd extends Component
         // session()->flash('status', 'Post successfully updated.');
         $this->dispatch('close-addProvider');
         $this->dispatch('grefresh-article');
+        $this->reset();
     }
 }
 

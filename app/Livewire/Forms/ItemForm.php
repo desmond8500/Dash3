@@ -7,6 +7,8 @@ use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
+use function App\Livewire\storeAvatar;
+
 class ItemForm extends Form
 {
     public Article $article;
@@ -71,15 +73,19 @@ class ItemForm extends Form
         $this->validate();
         $this->article->update($this->all());
 
+        $this->storeAvatar();
+    }
+
+    function storeAvatar()
+    {
         if (!is_string($this->image)) {
             $this->article = Article::find($this->article->id);
-            $image = $this->image;
             $dir = "stock/articles/" . $this->article->id . "/images";
-            $name = $image->getClientOriginalName();
-            $image->storeAS("public/$dir", $name);
 
-            $this->article->image = "$dir/$name";
-            // $article->image = "stockage/$dir/$name";
+            $name = $this->image->getClientOriginalName();
+            $this->image->storeAs("public/$dir", $name);
+
+            $this->article->image = "storage/$dir/$name";
             $this->article->save();
         }
     }

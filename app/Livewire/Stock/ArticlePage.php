@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Stock;
 
-use App\Livewire\Forms\ArticleForm;
 use App\Livewire\Forms\InvoiceForm;
 use App\Models\Article;
 use App\Models\Brand;
@@ -33,10 +32,6 @@ class ArticlePage extends Component
         );
     }
 
-    function ProjetSearch() {
-        // return Projet::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
-    }
-
     #[On('refresh-article')]
     public function render()
     {
@@ -55,8 +50,27 @@ class ArticlePage extends Component
     }
 
     public $files;
+    public $images;
 
-    function store_files()
-    {
+    function store_files(){
+        $article = Article::find($this->article->id);
+        $dir = "stock/articles/" . $article->id . "/images";
+
+        if ($this->images) {
+            foreach ($this->images as $key => $photo) {
+                $name = $photo->getClientOriginalName();
+                $photo->storeAS("public/$dir", $name);
+            }
+        }
+        $this->reset('images');
+    }
+
+    function set_image($image){
+        $article = Article::find($this->article->id);
+        $article->image = "storage/$image";
+        $article->save();
+    }
+    function unset_image($image){
+        unlink("storage/$image");
     }
 }

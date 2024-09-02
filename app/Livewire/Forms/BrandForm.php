@@ -58,7 +58,7 @@ class BrandForm extends Form
         $this->fix();
         $this->brand->update($this->all());
 
-        if ($this->logo) {
+        if (!$this->logo) {
             $this->storeAvatar($this->brand, $this->logo);
         }
     }

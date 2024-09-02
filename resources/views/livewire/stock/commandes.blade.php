@@ -20,6 +20,13 @@
                 ])
             </div>
         @endforeach
+        @if ($articles->links())
+            <div class="col-md-12">
+                <div class="card p-2">
+                    {{ $articles->links() }}
+                </div>
+            </div>
+        @endif
     </div>
 
 

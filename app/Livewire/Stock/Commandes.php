@@ -5,13 +5,17 @@ namespace App\Livewire\Stock;
 use App\Models\Article;
 use App\Models\Commande;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Commandes extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public function render()
     {
         return view('livewire.stock.commandes',[
-            'articles' => Article::whereRaw('`quantity` < `quantity_min`')->get(),
+            'articles' => Article::whereRaw('`quantity` < `quantity_min`')->paginate(8),
             'commandes' => Commande::all(),
         ]);
     }
@@ -26,7 +30,6 @@ class Commandes extends Component
         $commande = Commande::find($id);
         $commande->quantity++ ;
         $commande->save() ;
-
     }
 
     function decrement($id){
@@ -36,6 +39,5 @@ class Commandes extends Component
             $commande->save() ;
         }
     }
-
 
 }

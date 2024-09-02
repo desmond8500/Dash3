@@ -16,17 +16,37 @@
                     <img src="{{ asset("$article->image") }}" class="ratio ratio-1x1 rounded p-2"   alt="">
                 </div>
                 <div class="card-footer">
-                    @foreach ($article->images() as $image)
-                        <img src="{{ asset("storage/$image") }}" class="avatar avatar-md border-dark mt-1 border" alt="">
-                    @endforeach
-                    <input type="file" id="file" accept="image/*" multiple style="display: none" wire:model="files">
+                    <div class="row g-1">
+                        @foreach ($article->images() as $image)
+                        <div class="col-4">
+                            <div class="border rounded p-1 text-center bg-white">
+                                <img src="{{ asset("storage/$image") }}" class="avatar avatar-md " alt="">
+                                <div class="d-flex-between mt-1">
+                                    <i class="ti ti-trash btn btn-sm btn-danger rounded" wire:click="unset_image('{{ $image }}')"></i>
+                                    <i class="ti ti-plus btn btn-sm btn-primary rounded" wire:click="set_image('{{ $image }}')"></i>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    {{-- <input type="file" id="file" accept="image/*" style="display: none" wire:model="files">
                     <label for="file" href="#" class="avatar avatar-upload rounded">
                         <i class="ti ti-plus"></i>
                         <span class="avatar-upload-text">Ajouter</span>
                     </label>
                     @if ($files)
                         <button class="btn btn-primary" wire:click="store_files">Ajouter</button>
-                    @endif
+                    @endif --}}
+
+                    <div class="input-group mt-2">
+                        <div wire:loading>
+                            <div class="d-flex justify-content-between">
+                                <div>Chargement <span class="animated-dots"></div>
+                            </div>
+                        </div>
+                        <input type="file" id="file" class="form-control" accept="image/*" multiple wire:model="images">
+                        <button class="btn btn-primary" wire:click="store_files">Ajouter</button>
+                    </div>
                 </div>
             </div>
         </div>

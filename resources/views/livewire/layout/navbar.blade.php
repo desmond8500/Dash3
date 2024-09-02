@@ -130,22 +130,28 @@
                     </div>
                 </div> --}}
 
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                        <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm p-1">
-                        <div class="d-none d-xl-block ps-2">
-                            <div>{{ $user->firstname }} {{ $user->lastname }}</div>
-                            <div class="mt-1 small text-secondary">{{ $user->function ?? '_' }}</div>
+                <div class="btn-list align-items-center">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                            <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm p-1">
+                            <div class="d-none d-xl-block ps-2">
+                                <div>{{ $user->firstname }} {{ $user->lastname }}</div>
+                                <div class="mt-1 small text-secondary">{{ $user->function ?? '_' }}</div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            {{-- <a href="#" class="dropdown-item">Status</a> --}}
+                            <a href="{{ route('profile') }}" wire:navigate class="dropdown-item">Profile</a>
+                            {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ route('settings') }}" class="dropdown-item">Paramètres</a>
+                            <a wire:click="logout()" class="dropdown-item text-danger">Déconnexion</a>
                         </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        {{-- <a href="#" class="dropdown-item">Status</a> --}}
-                        <a href="{{ route('profile') }}" wire:navigate class="dropdown-item">Profile</a>
-                        {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ route('settings') }}" class="dropdown-item">Paramètres</a>
-                        <a wire:click="logout()" class="dropdown-item text-danger">Déconnexion</a>
                     </div>
+                    <div>
+                        <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+                    </div>
+
                 </div>
             @else
                 <div class="nav-item ">

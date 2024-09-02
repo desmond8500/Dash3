@@ -57,10 +57,14 @@
                         <div class="task_description">{!! $task->description !!}</div>
                     </td>
                     <td>
-                        <div class="fs-8">Statut</div>
-                        <div class="task_statut fs-7">{{ $task->statut->name }}</div>
-                        <div class="fs-8">Priorité</div>
-                        <div class="task_priority fs-7">{{ $task->priority->name }}</div>
+                        <div class="text-primary">
+                            <div class="fs-8 text-black">Statut</div>
+                            <div class="task_statut fs-7">{{ $task->statut->name }}</div>
+                        </div>
+                        <div class="text-purple">
+                            <div class="fs-8 text-black">Priorité</div>
+                            <div class="task_priority fs-7">{{ $task->priority->name }}</div>
+                        </div>
                     </td>
                     <td>
 

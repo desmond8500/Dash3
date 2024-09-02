@@ -2,6 +2,20 @@
     <div class="col-md-12">
         <div class="card-title">Liens et document</div>
     </div>
+    <div class="col-md-12">
+        <button class='btn btn-primary' wire:click="$dispatch('open-addModal')" ><i class='ti ti-plus'></i> Bouton</button>
+
+        @component('components.modal', ["id"=>'addModal', 'title' => 'Titre'])
+            <form class="row" wire:submit="store">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+            <script> window.addEventListener('open-addModal', event => { $('#addModal').modal('show'); }) </script>
+            <script> window.addEventListener('close-addModal', event => { $('#addModal').modal('hide'); }) </script>
+        @endcomponent
+    </div>
     <div class="col-md-8">
         @foreach ($documents as $document)
             <div class="card p-2 mb-1 ">

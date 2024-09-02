@@ -87,51 +87,54 @@ body {
 }
 /* Text color */
 .text-blue {
-    background: #0054a6;
+    color: #0054a6;
 }
 
 .text-azur {
-    background: #4299e1;
+    color: #4299e1;
 }
 
 .text-indigo {
-    background: #4263eb;
+    color: #4263eb;
 }
 
 .text-purple {
-    background: #ae3ec9;
+    color: #ae3ec9;
 }
 
 .text-pink {
-    background: #d6336c;
+    color: #d6336c;
 }
 
 .text-red {
-    background: #d63939;
+    color: #d63939;
 }
 
 .text-orange {
-    background: #f76707;
+    color: #f76707;
 }
 
 .text-yellow {
-    background: #f59f00;
+    color: #f59f00;
 }
 
 .text-lime {
-    background: #74b816;
+    color: #74b816;
 }
 
 .text-green {
-    background: #2fb344;
+    color: #2fb344;
 }
 
 .text-teal {
-    background: #0ca678;
+    color: #0ca678;
 }
 
 .text-cyan {
-    background: #17a2b8;
+    color: #17a2b8;
+}
+.text-black {
+    color: black;
 }
 
 /* BG */

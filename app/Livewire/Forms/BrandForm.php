@@ -41,7 +41,6 @@ class BrandForm extends Form
     }
 
     function storeAvatar($brand, $logo, $delete = false){
-        if (!is_string($this->logo)) {
             $dir = "stock/brands/$brand->id/logo";
             if ($delete) {
                 Storage::disk('public')->deleteDirectory($dir);
@@ -51,16 +50,15 @@ class BrandForm extends Form
 
             $brand->logo = "storage/$dir/$name";
             $brand->save();
-        }
     }
 
     function update(){
         $this->fix();
+        if ($this->logo) {
+            $this->storeAvatar($this->brand, $this->logo, true);
+        }
         $this->brand->update($this->all());
 
-        if (!$this->logo) {
-            $this->storeAvatar($this->brand, $this->logo);
-        }
     }
 
     function delete($id){

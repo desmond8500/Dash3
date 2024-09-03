@@ -27,8 +27,8 @@
             <td align="right" class="border_white">
                 <div class="doc_title" style="text-transform: ">{{ $name }}</div>
                 <div >
-                    <div class="text-right fw-bold" style="margin-top: 10px">Site: .........................................</div>
-                    <div class="text-right fw-bold" style="margin-top: 10px">Page: ...................</div>
+                    <div class="fw-bold text-left" style="margin-top: 10px">Site: </div>
+                    <div class="fw-bold text-left" style="margin-top: 10px">Page: </div>
                 </div>
 
             </td>

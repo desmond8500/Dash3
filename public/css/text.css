@@ -4,6 +4,14 @@
 
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Thin', sans-serif;
+    font-family: 'Roboto Light', sans-serif;
+    font-family: 'Roboto Medium', sans-serif;
+    font-family: 'Roboto Black', sans-serif;
+}
+
 /* Text Align */
 .text-left {
     text-align: left;
@@ -56,13 +64,7 @@
     text-overflow: ellipsis;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    font-family: 'Roboto Thin', sans-serif;
-    font-family: 'Roboto Light', sans-serif;
-    font-family: 'Roboto Medium', sans-serif;
-    font-family: 'Roboto Black', sans-serif;
-}
+
 
 .text-primary {
     color: #0092ca;
@@ -309,5 +311,8 @@ body {
 }
 
 .badge{
-
+    background: lavender;
+    border-radius: 20px;
+    padding: 5px 15px 5px 15px;
+    font-size: 0.75rem;
 }

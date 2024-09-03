@@ -44,6 +44,14 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.achat', $data);
         return $pdf->stream('Achat - '.$achat->name );
     }
+    public static function modeles_fiches_pdf($name){
+
+        $data = [
+            'name' => $name
+        ];
+        $pdf = Pdf::loadView('_pdf.modele_fiche', $data);
+        return $pdf->stream('Fiche Inventaire');
+    }
 
     public static function commande_pdf(){
         $carbon = new Carbon();

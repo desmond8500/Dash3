@@ -17,7 +17,7 @@ class AchatForm extends Form
     public $description;
     public $date;
     public $provider_id;
-    public $status;
+    public $status = "";
 
     function fix(){
         $this->name = ucfirst($this->name);

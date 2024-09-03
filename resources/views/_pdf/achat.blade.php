@@ -28,8 +28,11 @@
             </td>
             <td align="right" class="border_white">
                 <div class="doc_title">ACHAT</div>
-                <div><b>{{ $achat->name }}</b></div>
+                <div><b>{{ $achat->name }}</b> </div>
                 <div><i>{{ $carbon->day }} - {{ str_pad($carbon->month,2, '0', STR_PAD_LEFT) }} - {{ $carbon->year }}</i></div>
+                <div>
+                    <span class="badge">{{ $achat->status }}</span>
+                </div>
             </td>
         </tr>
     </table>

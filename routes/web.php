@@ -7,6 +7,7 @@ use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
 use App\Livewire\Erp\DocumentsPage;
+use App\Livewire\Erp\FichesPage;
 use App\Livewire\Erp\FicheZonePage;
 use App\Livewire\Erp\FinancesPage;
 use App\Livewire\Erp\InvoiceModelPage;
@@ -101,12 +102,15 @@ Route::middleware(['auth', 'can:stock'])->group(function () {
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
     Route::get('/stock/achats', AchatsPage::class)->name('achats');
     Route::get('/stock/achat/{achat_id}', AchatPage::class)->name('achat');
-    Route::get('/stock/achat_pdf/{achat_id}', function ($achat_id) {
-        return PDFController::achat_pdf($achat_id);
-    })->name('achat_pdf');
     Route::get('/stock/commande_pdf', function () {
         return PDFController::commande_pdf();
     })->name('commande_pdf');
+    Route::get('/stock/achat_pdf/{achat_id}', function ($achat_id) {
+        return PDFController::achat_pdf($achat_id);
+    })->name('achat_pdf');
+    Route::get('/stock/inventaire_pdf/{name}', function ($name) {
+        return PDFController::modeles_fiches_pdf($name);
+    })->name('modeles_fiches_pdf');
 });
 
 // Building management
@@ -184,3 +188,4 @@ Route::get('fiche_pdf/{fiche_id}', function ($fiche_id) {
 
 // Test
 Route::get('/systemes', SystemesPage::class)->name('systemes');
+Route::get('/fiches', FichesPage::class)->name('fiches');

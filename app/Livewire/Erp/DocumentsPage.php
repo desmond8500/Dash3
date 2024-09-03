@@ -17,7 +17,7 @@ class DocumentsPage extends Component
     public function mount()
     {
         $this->fiches = array(
-            (object) array('name'=> "Fiche d'inventaire", 'route'=> 'modeles_fiches_pdf', 'icon'=>'download')
+            (object) array('name'=> "Fiche Inventaire", 'route'=> 'modeles_fiches_pdf', 'icon'=>'download')
         );
         $this->breadcrumbs = array(
             array('name' => 'Documents', 'route' => route('documents')),

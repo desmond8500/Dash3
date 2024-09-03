@@ -13,15 +13,23 @@
 <body>
     <table class="table" style="margin-bottom: 10px;">
         <tr>
-            <td width="150px" class="border_white">
+            <td  class="border_white">
                 <div class="logo">
                     <img src="{{ env('LOGO') }}" alt="" class="logo">
 
                 </div>
+                <td class="border-white">
+                    <div class="doc_title ">
+                        {{ $title }}
+                    </div>
+                </td>
             </td>
             <td align="right" class="border_white">
-                <div class="doc_title">{{ $name }}</div>
-                <div class="text-right fw-bold" style="margin-top: 20px">Page: ...................</div>
+                <div class="doc_title" style="text-transform: ">{{ $name }}</div>
+                <div >
+                    <div class="text-right fw-bold" style="margin-top: 10px">Site: .............................................</div>
+                    <div class="text-right fw-bold" style="margin-top: 10px">Page: ...................</div>
+                </div>
 
             </td>
         </tr>

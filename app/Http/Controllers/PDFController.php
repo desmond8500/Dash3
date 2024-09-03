@@ -47,7 +47,8 @@ class PDFController extends Controller
     public static function modeles_fiches_pdf($name){
 
         $data = [
-            'name' => $name
+            'name' => $name,
+            'title' => env('MAIN_NAME'),
         ];
         $pdf = Pdf::loadView('_pdf.modele_fiche', $data);
         return $pdf->stream('Fiche Inventaire');

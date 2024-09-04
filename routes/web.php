@@ -7,9 +7,11 @@ use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
 use App\Livewire\Erp\DocumentsPage;
+use App\Livewire\Erp\ErpPage;
 use App\Livewire\Erp\FichesPage;
 use App\Livewire\Erp\FicheZonePage;
 use App\Livewire\Erp\FinancesPage;
+use App\Livewire\Erp\InvoiceListPage;
 use App\Livewire\Erp\InvoiceModelPage;
 use App\Livewire\Erp\InvoicePage;
 use App\Livewire\Erp\InvoicesPage;
@@ -60,6 +62,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     // Users
     // Route::get('/users', UsersPage::class)->name('users');
 
+    Route::get('/erp', ErpPage::class)->name('erp');
     // Clients
     Route::get('/clients', ClientsPage::class)->name('clients');
     // Projets
@@ -68,6 +71,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     // Devis
     Route::get('/invoices', InvoicesPage::class)->name('invoices');
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
+    Route::get('/invoicelist', InvoiceListPage::class)->name('invoicelist');
     Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf($invoice_id, $type); })->name('facture_pdf');
     Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) { return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id); })->name('facture_acompte_pdf');
 

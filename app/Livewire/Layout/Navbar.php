@@ -13,6 +13,7 @@ class Navbar extends Component
                 array('name' => "Clients", "route" => "clients", "icon" => "users", "can" => "clients"),
                 array('name' => "Modèle de devis", "route" => "invoice_model", "icon" => "file"),
                 array('name' => "Documents", "route" => "documents", "icon" => "file"),
+                array('name' => "Devis", "route" => "invoicelist", "icon" => "file"),
                 // array('name' => "Fiches", "route" => "fiches", "icon" => "file"),
             ]
         ),

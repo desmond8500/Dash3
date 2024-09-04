@@ -1,4 +1,4 @@
-<div class="row g-3">
+<div class="row g-2">
     <div class="row mt-3">
         <div class="col-md">
             <h2>Liste des devis</h2>
@@ -18,7 +18,9 @@
     </div>
 
     @forelse ($invoices as $invoice)
-        @include('_card.invoice_card')
+        <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="col-md-4 text-dark">
+            @include('_card.invoice_card')
+        </a>
     @empty
         @component('components.no-result', ['description'=>'Veuillez ajouter un devis à ce projet'])
 

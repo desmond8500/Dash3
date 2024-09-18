@@ -3,8 +3,6 @@
         <div class="card-title">Liens et document</div>
     </div>
     <div class="col-md-12">
-        <button class='btn btn-primary' wire:click="$dispatch('open-addModal')" ><i class='ti ti-plus'></i> Bouton</button>
-
         @component('components.modal', ["id"=>'addModal', 'title' => 'Titre'])
             <form class="row" wire:submit="store">
                 <div class="modal-footer">
@@ -19,7 +17,7 @@
     <div class="col-md-8">
         @foreach ($documents as $document)
             <div class="card p-2 mb-1 ">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-auto">
                         <img src="" alt="A" class="avatar avatar-md">
                     </div>

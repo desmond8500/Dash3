@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <hr>
+        {{-- <hr> --}}
 
         @if ($selected_tab == 0)
             <div class="row">

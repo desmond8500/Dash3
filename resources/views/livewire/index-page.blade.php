@@ -110,7 +110,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="fw-bold text-primary">{{ $invoice->projet->client->name }}</div>
-                                            <div class="fw-bold">{{ $projet->name }}</div>
+                                            <div class="fw-bold">{{ $invoice->projet->name }}</div>
                                             <div class="">{{ $invoice->reference }}</div>
                                             <div class="text-muted">{{ $invoice->description }}</div>
                                         </div>

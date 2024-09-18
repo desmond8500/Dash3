@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Avancement extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'building_id',
+        'name',
+    ];
 }

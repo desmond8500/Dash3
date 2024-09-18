@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer("building_id")->constrained();
             $table->string("name");
             $table->string("folder")->nullable();
-            $table->string("link")->nullable();
+            $table->text("link")->nullable();
             $table->text("description")->nullable();
             $table->timestamps();
         });

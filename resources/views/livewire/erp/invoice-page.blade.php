@@ -39,7 +39,6 @@
 
             @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
 
-
             <div class="card mb-1">
                 <div class="card-header">
                     <div class="card-title">Documents</div>
@@ -54,7 +53,6 @@
                 </div>
             </div>
 
-
         </div>
     </div>
 
@@ -64,12 +62,8 @@
             @include('_form.invoice_form')
         </form>
 
-        <script>
-            window.addEventListener('open-editInvoice', event => { $('#editInvoice').modal('show'); })
-        </script>
-        <script>
-            window.addEventListener('close-editInvoice', event => { $('#editInvoice').modal('hide'); })
-        </script>
+        <script> window.addEventListener('open-editInvoice', event => { $('#editInvoice').modal('show'); }) </script>
+        <script> window.addEventListener('close-editInvoice', event => { $('#editInvoice').modal('hide'); }) </script>
     @endcomponent
 
     {{-- Section --}}
@@ -98,12 +92,8 @@
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </form>
-            <script>
-                window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); })
-            </script>
-            <script>
-                window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); })
-            </script>
+            <script> window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); }) </script>
+            <script> window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); }) </script>
 
         @endif
     @endcomponent
@@ -132,8 +122,18 @@
         @if ($row_tab==2)
             <div class="row g-2">
                 @foreach ($articles as $article)
-                    <div class="col-md-4">
-                        @include('_card.articleCard')
+                    <div class="col-md-4 ">
+                       <div class="row g-2">
+                        <div class="col">
+                            @include('_card.articleCard', ['img_class'=>'avatar-md'])
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary btn-icon" wire:click="generateArticleRow('{{ $article->id }}')" >
+                                <i class="ti ti-plus"></i>
+                            </button>
+                        </div>
+                       </div>
+
                     </div>
                 @endforeach
                 <div class="col-md-12">

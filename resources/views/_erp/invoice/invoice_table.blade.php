@@ -59,12 +59,12 @@
                 </tr>
             </thead>
             @php
-            $total = 0;
-            $total_marge = 0;
+                $total = 0;
+                $total_marge = 0;
             @endphp
             @foreach ($sections as $key => $section)
             @php
-            $subtotal = 0;
+                $subtotal = 0;
             @endphp
             <tr>
                 <th scope="col" class="bg-primary-lt" colspan="2">

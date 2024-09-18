@@ -141,6 +141,21 @@ class InvoicePage extends Component
         $this->row_form->store();
         $this->dispatch('close-addRow');
     }
+
+    function setArticleRow($article_id){
+        $article = Article::find($article_id);
+        $this->row_form->designation = $article->designation;
+        $this->row_form->reference = $article->reference;
+    }
+    function generateArticleRow($article_id){
+        $article = Article::find($article_id);
+        $this->row_form->designation = $article->designation;
+        $this->row_form->reference = $article->reference;
+        $this->row_form->prix = $article->price;
+        $this->row_form->store();
+        $this->dispatch('close-addRow');
+    }
+
     function editRow($row_id){
         $this->row_form->set($row_id);
         $this->dispatch('open-editRow');

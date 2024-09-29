@@ -7,7 +7,6 @@ use App\Mail\ReportMail;
 use App\Models\Article;
 use App\Models\Client;
 use App\Models\Invoice;
-use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
 use App\Models\User;
@@ -35,7 +34,6 @@ class IndexPage extends Component
     }
 
     // Resume
-
     function getResume(){
         return (Object) array(
             (Object) array( 'name'=> 'Clients', 'all'=> Client::count(), 'icon'=> 'users', 'route'=> route('clients')),
@@ -53,6 +51,7 @@ class IndexPage extends Component
     function store(){
 
     }
+
     function delete(){
 
     }

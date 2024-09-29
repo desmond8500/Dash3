@@ -26,7 +26,7 @@ class InvoicesPage extends Component
     public function render()
     {
         return view('livewire.erp.invoices-page',[
-            'invoices' => Invoice::search($this->search,'reference')->paginate(10)
+            'invoices' => Invoice::search($this->search,'reference')->paginate(18)
         ]);
     }
 }

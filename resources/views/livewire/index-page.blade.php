@@ -1,6 +1,6 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Dashboard'])
-        <div class="btn-list mb-1">
+        <div class="btn-list">
             @if (!$init)
                 <button class="btn btn-primary" wire:click="initServer()">
                     Initialiser le serveur
@@ -26,9 +26,9 @@
     @auth
         <div class="row g-2">
             @foreach ($resumes as $resume)
-                <a class="col-md-3 mb-1" href="{{ $resume->route }}">
+                <a class="col-md-3 col-6" href="{{ $resume->route }}">
                     <div class="card p-2">
-                        <div class="row align-items-center">
+                        <div class="row g-1 align-items-center">
                             <div class="col-auto">
                                 <span class="bg-blue text-white avatar">
                                     <i class="ti ti-{{ $resume->icon }}"></i>
@@ -38,7 +38,7 @@
                                 <h4 class="font-weight-medium"> {{ $resume->name }} </h4>
                             </div>
                             <div class="col-auto">
-                                <div class="text-primary display-6" >
+                                <div class="text-primary" style="font-size: 20px" >
                                     {{ $resume->all }}
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
 
             @if ($clients->count())
                 <div class="col-md-12">
-                    <div class="hr-text hr-text-left">Clients Favoris</div>
+                    <div class="text-muted mb-1 border p-1 bg-white border">Clients Favoris</div>
 
                     <div class="row g-2">
                         @foreach ($clients as $client)
@@ -73,7 +73,7 @@
 
             @if ($projets->count())
                 <div class="col-md-12">
-                    <div class="hr-text hr-text-left">Projets Favoris</div>
+                    <div class="text-muted mb-1 border p-1 bg-white border">Projets Favoris</div>
 
                     <div class="row row-deck g-2">
                         @foreach ($projets as $projet)
@@ -98,7 +98,7 @@
 
             @if ($invoices->count())
                 <div class="col-md-12">
-                    <div class="hr-text hr-text-left">Devis Favoris</div>
+                    <div class="text-muted mb-1 border p-1 bg-white border">Devis Favoris</div>
 
                     <div class="row g-2">
                         @foreach ($invoices as $invoice)
@@ -141,12 +141,14 @@
         <div class="fw-bold mb-2 ">
             Dev tools !!!
         </div>
-        <a class="btn btn-cyan" href="/log-viewer" target="_blank">Logs Viewer page</a>
-        <button class="btn btn-danger" wire:click='init'>Initialiser</button>
-        @env('local')
-            <a class="btn btn-purple" href="/migrator" target="_blank">Migrator page</a>
-            <button class="btn btn-secondary" wire:click='send'>Send mail</button>
-        @endenv
+        <div class="btn-list">
+            <a class="btn btn-cyan" href="/log-viewer" target="_blank">Logs Viewer page</a>
+            <button class="btn btn-danger" wire:click='init'>Initialiser</button>
+            @env('local')
+                <a class="btn btn-purple" href="/migrator" target="_blank">Migrator page</a>
+                <button class="btn btn-secondary" wire:click='send'>Send mail</button>
+            @endenv
+        </div>
     </div>
 
 

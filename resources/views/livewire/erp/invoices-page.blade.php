@@ -12,8 +12,10 @@
     @endcomponent
 
     <div class="row g-2">
-        @foreach ($invoices->sortByDesc() as $invoice)
-            @include('_card.invoice_card')
+        @foreach ($invoices->sortByDesc('created_at') as $invoice)
+            <div class="col-md-4">
+                @include('_card.invoice_card')
+            </div>
         @endforeach
     </div>
 </div>

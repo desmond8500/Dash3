@@ -42,10 +42,6 @@ class InvoicePage extends Component
         $this->ordre = InvoiceSection::where('invoice_id', $this->devis->id)->count()+1;
     }
 
-    function ProjetSearch() {
-        // return ::where('client_id', $this->client_id)->where('name', 'like', '%' . $this->search . '%')->paginate(10);
-    }
-
     public function render()
     {
         return view('livewire.erp.invoice-page',[

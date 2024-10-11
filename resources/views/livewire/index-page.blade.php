@@ -8,8 +8,8 @@
             @endif
 
             @auth
-                @livewire('form.journal-add')
-                @livewire('form.task-add')
+                {{-- @livewire('form.journal-add')
+                @livewire('form.task-add') --}}
                 @env('local')
                     <div>
                         @component('components.off-canvas',['button'=>'Todos'])

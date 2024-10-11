@@ -14,10 +14,11 @@ class Navbar extends Component
                 array('name' => "Modèle de devis", "route" => "invoice_model", "icon" => "file"),
                 array('name' => "Documents", "route" => "documents", "icon" => "file"),
                 array('name' => "Devis", "route" => "invoicelist", "icon" => "file"),
-                // array('name' => "Fiches", "route" => "fiches", "icon" => "file"),
+                array('name' => "Système", "route" => "settings", "icon" => "hammer"),
+                array('name' => "Journaux", "route" => "journaux", "icon" =>"article", "can" => "journaux"),
+                array('name' => "Finances", "route" => "finances", "icon" => "coins", "can" => "finances"),
             ]
         ),
-        array('name' => "Journaux", "route" => "journaux", "icon" => "article", "can"=> "journaux"),
         array('name' => "Stock", "icon" => "packages", "can"=> "stock",
             'submenu' => [
                 array('name' => "Stock", "route" => "stock", "icon" => "packages", "can" => "stock"),
@@ -27,9 +28,7 @@ class Navbar extends Component
                 array('name' => "Fournisseurs", "route" => "providers", "icon" => "packages", "can" => "stock"),
             ]
         ),
-        array('name' => "Finances", "route" => "finances", "icon" => "coins", "can"=> "finances"),
         array('name' => "Test", "route" => "test", "icon" => "hammer", "can"=> "test"),
-        array('name' => "Systemes", "route" => "systemes", "icon" => "hammer", "can"=> "settings"),
         array('name' => "Medias", "icon" => "hammer", "can"=> "medias",
             'submenu' => [
                 array('name' => "Images", "route" => "systemes", "icon" => "hammer"),

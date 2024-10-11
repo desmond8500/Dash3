@@ -6,9 +6,9 @@ use Livewire\Component;
 
 class BatteryCalc extends Component
 {
-    public $charge = 0;
-    public $autonomie = 0;
-    public $batterie = 1;
+    public $charge = 1;
+    public $autonomie = 0.1;
+    public $batterie = 7;
     // public $consomation;
     public function render()
     {

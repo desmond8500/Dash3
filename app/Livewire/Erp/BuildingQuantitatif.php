@@ -7,6 +7,7 @@ use App\Livewire\Forms\QuantitatifRowForm;
 use App\Models\Building;
 use App\Models\Invoice;
 use App\Models\Quantitatif;
+use App\Models\QuantitatifRow;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -34,5 +35,16 @@ class BuildingQuantitatif extends Component
     function select_quantitatif($quantitatif_id)
     {
         $this->q_selected = Quantitatif::find($quantitatif_id);
+    }
+
+    function row_inc($row_id){
+        $row = QuantitatifRow::find($row_id);
+        $row->quantite++;
+        $row->save();
+    }
+    function row_dec($row_id){
+        $row = QuantitatifRow::find($row_id);
+        $row->quantite--;
+        $row->save();
     }
 }

@@ -48,7 +48,7 @@ class QuantitatifForm extends Form
                 'quantitatif_id' => $quantitatif->id,
                 'article_id' => $article->id,
                 'quantite' => $article->quantite,
-                'description' => $quantitatif->name,
+                'description' => $article->designation,
             ]);
         }
     }

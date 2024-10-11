@@ -40,17 +40,7 @@
             @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
 
             <div class="card mb-1">
-                <div class="card-header">
-                    <div class="card-title">Documents</div>
-                    <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" disabled>
-                            <i class="ti ti-plus"></i>
-                        </button>
-                    </div>
-                </div>
-               <div class="card-body">
-
-                </div>
+                {{-- @livewire('component', ['user' => $user], key($user->id)) --}}
             </div>
 
         </div>
@@ -112,7 +102,7 @@
     @endcomponent
 
     {{-- Rows --}}
-    @component('components.modal', ["id"=>'addRow', 'title'=>'Ajouter un article', 'class'=> $row_class])
+    @component('components.modal', ["id"=>'addRow', 'title'=>'Ajouter un article', 'class'=> "$row_class"])
         @slot('actions')
             <button class="btn btn-primary" wire:click="toggle_row(1)">Formulaire</button>
             <button class="btn btn-primary" wire:click="toggle_row(2)">Générer</button>
@@ -122,7 +112,7 @@
         @if ($row_tab==2)
             <div class="row g-2">
                 @foreach ($articles as $article)
-                    <div class="col-md-4 ">
+                    <div class="col-md-6 ">
                        <div class="row g-2">
                         <div class="col">
                             @include('_card.articleCard', ['img_class'=>'avatar-md'])

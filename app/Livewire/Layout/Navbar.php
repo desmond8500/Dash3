@@ -31,8 +31,8 @@ class Navbar extends Component
         array('name' => "Test", "route" => "test", "icon" => "hammer", "can"=> "test"),
         array('name' => "Medias", "icon" => "hammer", "can"=> "medias",
             'submenu' => [
-                array('name' => "Images", "route" => "systemes", "icon" => "hammer"),
-                array('name' => "Vidéos", "route" => "systemes", "icon" => "hammer"),
+                array('name' => "Images", "route" => "images", "icon" => "photo"),
+                array('name' => "Vidéos", "route" => "videos", "icon" => "video"),
             ]
         ),
     );

@@ -24,6 +24,8 @@ use App\Livewire\IndexPage;
 use App\Livewire\JournalPage;
 use App\Livewire\JournauxPage;
 use App\Livewire\LoginPage;
+use App\Livewire\Medias\ImagesPage;
+use App\Livewire\Medias\VideosPage;
 use App\Livewire\Modules\ContactsPage;
 use App\Livewire\ProfilePage;
 use App\Livewire\SettingsPage;
@@ -193,3 +195,7 @@ Route::get('fiche_pdf/{fiche_id}', function ($fiche_id) {
 // Test
 Route::get('/systemes', SystemesPage::class)->name('systemes');
 Route::get('/fiches', FichesPage::class)->name('fiches');
+
+// Medias
+Route::get('/images', ImagesPage::class)->name('images');
+Route::get('/videos', VideosPage::class)->name('videos');

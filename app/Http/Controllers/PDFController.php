@@ -216,11 +216,12 @@ class PDFController extends Controller
         ];
         if ($type == 2) {
             $pdf = Pdf::loadView('_pdf.pdf3', $data)->setPaper(array(0,0,246,492), 'landscape');
+            return $pdf->stream('Badges SCD');
         } else {
             $pdf = Pdf::loadView('_pdf.pdf2', $data)->setPaper(array(0,0,246,492), 'landscape');
+            return $pdf->stream('pdf');
         }
 
-        return $pdf->stream('pdf');
         // return $pdf->download('sdfsd');
     }
     public static function test_pdf(){

@@ -33,8 +33,9 @@
                 <tr>
                     <td>
                         <div style="padding-left: 5px">
-                            <div style="padding-bottom: 5px;">{{ $card->prenom }}</div>
-                            <div style="padding-bottom: 20px;">{{ strtoupper($card->nom )}}</div>
+                            <div style="padding-bottom: 10px;">{{ $card->prenom }}</div>
+                            <div style="padding-bottom: 25px;">{{ strtoupper($card->nom )}}</div>
+                            <div style="padding-bottom: 5px;">Entreprise:</div>
                             <div class="fw-bold">{{ $card->service }}</div>
                         </div>
                     </td>

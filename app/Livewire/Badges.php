@@ -23,7 +23,7 @@ class Badges extends Component
         return view('livewire.badges',[
             'badges' => Badge::where('projet_id', $this->projet_id)
             ->where('prenom', 'LIKE', "%{$this->search}%")
-            ->orWhere('nom', 'LIKE', "%{$this->search}%")
+            ->Where('nom', 'LIKE', "%{$this->search}%")
             ->get(),
         ]);
     }

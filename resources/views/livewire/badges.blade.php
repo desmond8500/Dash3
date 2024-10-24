@@ -10,7 +10,8 @@
             </div>
             <div class="btn-list col-auto">
                 @livewire('form.badge-add', ['projet_id' => $projet_id])
-                <a class="btn btn-primary" href="{{ route('arp_card_pdfs', ['projet_id'=>$projet_id]) }}" target="_blank">PDF</a>
+                <a class="btn btn-primary" href="{{ route('arp_card_pdfs', ['projet_id'=>$projet_id]) }}" target="_blank">ARP</a>
+                <a class="btn btn-primary" href="{{ route('card_pdfs', ['projet_id'=>$projet_id,'type'=>2]) }}" target="_blank">SCD</a>
                 <a class="btn btn-primary" wire:click="$dispatch('close-addbadge')" target="_blank">Actualiser</a>
             </div>
         </div>

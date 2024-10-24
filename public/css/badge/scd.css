@@ -1,0 +1,69 @@
+table,
+th,
+td {
+    /* border: 1px solid black; */
+    border-collapse: collapse;
+}
+
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.flag{
+    position: absolute;
+
+}
+
+.logo{
+    vertical-align: top;
+}
+
+.photo{
+    border-radius: 15px;
+    padding: 3px;
+    display: block;
+    margin: auto;
+}
+.img{
+    /* border: 1px solid black; */
+    height: 120px;
+    width: 100px;
+    margin-left: 12px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.avatar{
+    border-radius: 10px;
+    width: 100%;
+}
+
+.fonction{
+    background: #51c59e;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.direction{
+    color: #51c59e;
+    font-size: 13px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.service{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.nom{
+    text-transform: uppercase;
+    vertical-align: bottom;
+    font-size: 14px;
+}

@@ -182,6 +182,7 @@ Route::get('proces_verbal_pdf', function () { return PDFController::proces_verba
 // Badges PDF
 Route::get('arp_card_pdf/{card_id}', function ($card_id) { return PDFController::arp_card_pdf($card_id); })->name('arp_card_pdf');
 Route::get('arp_card_pdf2/{projet_id}', function ($projet_id) { return PDFController::arp_card_pdfs($projet_id); })->name('arp_card_pdfs');
+Route::get('arp_card_pdf3/{projet_id}/{type}', function ($projet_id, $type) { return PDFController::card_pdfs($projet_id, $type); })->name('card_pdfs');
 // Fiches PDF
 Route::get('doe_pdf', function () {
     return PDFController::proces_verbal_pdf();

@@ -206,6 +206,23 @@ class PDFController extends Controller
         return $pdf->stream('pdf');
         // return $pdf->download('sdfsd');
     }
+    public static function card_pdfs($projet_id, $type){
+        $cards = Badge::where("projet_id", $projet_id)->get();
+
+        $data = [
+            'logo' => "img/arp/logo.png",
+            'flag' => "img/arp/flag.png",
+            'cards' => $cards
+        ];
+        if ($type == 2) {
+            $pdf = Pdf::loadView('_pdf.pdf3', $data)->setPaper(array(0,0,246,492), 'landscape');
+        } else {
+            $pdf = Pdf::loadView('_pdf.pdf2', $data)->setPaper(array(0,0,246,492), 'landscape');
+        }
+
+        return $pdf->stream('pdf');
+        // return $pdf->download('sdfsd');
+    }
     public static function test_pdf(){
 
         $data = [

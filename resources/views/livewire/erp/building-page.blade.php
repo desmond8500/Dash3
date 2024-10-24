@@ -27,7 +27,8 @@
         {{-- <hr> --}}
 
         @if ($selected_tab == 0)
-            <div class="row">
+            <div>Résumé</div>
+            {{-- <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col">
@@ -55,9 +56,11 @@
                 <div class="col-md-8">
 
                 </div>
-            </div>
+            </div> --}}
+            @livewire('erp.building-resumes',['building_id'=> $building->id ])
         @elseif($selected_tab == 1)
-            <div class="row g-2">
+            <div>Niveaux</div>
+            {{-- <div class="row g-2">
                 @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
                 <div class="col-md-3">
                     @foreach ($stages->sortBy('order') as $stage)
@@ -111,13 +114,15 @@
                     @endif
 
                 </div>
-            </div>
+            </div> --}}
         @elseif($selected_tab == 2)
-
+            {{-- <div>Quantitatif</div> --}}
             @livewire('erp.building-quantitatif',['building_id'=> $building->id ])
         @elseif($selected_tab == 3)
+            {{-- <div>Fiches</div> --}}
             @livewire('erp.building-fiche',['building_id'=> $building->id ])
         @elseif($selected_tab == 4)
+            {{-- <div>Documents</div> --}}
             @livewire('erp.building-document',['building_id'=> $building->id ])
         @endif
 

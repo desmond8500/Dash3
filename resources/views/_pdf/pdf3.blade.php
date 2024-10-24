@@ -28,7 +28,7 @@
     </style>
 
     <div>
-        @foreach ($cards as $card)
+        @foreach ($cards->sortby('nom') as $card)
             <table class="table">
                 <tr>
                     <td>

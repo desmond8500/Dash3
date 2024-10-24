@@ -35,7 +35,7 @@
                         <div style="padding-left: 5px">
                             <div style="padding-bottom: 5px;">{{ $card->prenom }}</div>
                             <div style="padding-bottom: 20px;">{{ strtoupper($card->nom )}}</div>
-                            <div >{{ $card->service }}</div>
+                            <div class="fw-bold">{{ $card->service }}</div>
                         </div>
                     </td>
                     <td align="right">

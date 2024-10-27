@@ -14,8 +14,7 @@
             <div class="card-header">
                 <div class="card-title">{{ $building->name }}</div>
                 <div class="card-actions">
-                    <button class="btn btn-primary btn-icon" wire:click="editBuilding"><i
-                            class="ti ti-edit"></i></button>
+                    <button class="btn btn-primary btn-icon" wire:click="editBuilding"><i class="ti ti-edit"></i></button>
                 </div>
             </div>
             <div class="card-body">

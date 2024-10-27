@@ -36,4 +36,8 @@ class Building extends Model
     {
         return $this->belongsTo(Projet::class);
     }
+    public function documents(): HasMany
+    {
+        return $this->hasMany(BuildingDocument::class);
+    }
 }

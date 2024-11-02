@@ -7,11 +7,11 @@
                 </div>
                 <div class="col">
                     <h4>{{ $projet->name }}</h4>
-
                 </div>
                 <div class="col-auto">
                     <div class="dropdown open">
-                        <button class="btn btn-action border dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <button class="btn btn-action border dropdown-toggle" type="button" id="triggerId"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="ti ti-dots-vertical"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="triggerId">
@@ -45,21 +45,55 @@
             <div class="row">
                 <div class="col">
                     <h2>Taches </h2>
-                    <ul>
-                        <li>Nouvelles taches {{ $projet->tasks->count() }}</li>
-                        <li>Taches en cours</li>
-                    </ul>
                 </div>
                 <div class="col-auto">
                     @livewire('form.task-add', ['projet_id' => $projet->id])
+                </div>
+                <div class="col-12">
+                    @component('components.chartjs',[
+                        'labels' => [
+                            "Nouvelles (".$projet->tasks->where('statut_id', 1)->count().")",
+                            "En cours (".$projet->tasks->where('statut_id', 2)->count().")",
+                            "En pause (".$projet->tasks->where('statut_id', 3)->count().")",
+                            "Terminés (".$projet->tasks->where('statut_id', 4)->count().")",
+                            "Annulés (".$projet->tasks->where('statut_id', 5)->count().")",
+                        ],
+                        'data' => [
+                            $projet->tasks->where('statut_id', 1)->count(),
+                            $projet->tasks->where('statut_id', 2)->count(),
+                            $projet->tasks->where('statut_id', 3)->count(),
+                            $projet->tasks->where('statut_id', 4)->count(),
+                            $projet->tasks->where('statut_id', 5)->count(),
+                        ],
+                    ])
+                    @endcomponent
                 </div>
             </div>
         </div>
 
     </div>
     <div class="col-md-8">
-        {{-- @livewire('erp.building-list', ['projet_id' => $projet->id]) --}}
+        <div class="row">
+            <div class="col-md-8">
+                @component('components.chartjs',[
+                'title' => 'Taches',
+                'labels' => [
+                "Nouvelles (".$projet->tasks->where('statut_id', 1)->count().")",
+                "En cours (".$projet->tasks->where('statut_id', 2)->count().")",
+                "En pause (".$projet->tasks->where('statut_id', 3)->count().")",
+                "Terminés (".$projet->tasks->where('statut_id', 4)->count().")",
+                "Annulés (".$projet->tasks->where('statut_id', 5)->count().")",
+                ],
+                'data' => [
+                $projet->tasks->where('statut_id', 1)->count(),
+                $projet->tasks->where('statut_id', 2)->count(),
+                $projet->tasks->where('statut_id', 3)->count(),
+                $projet->tasks->where('statut_id', 4)->count(),
+                $projet->tasks->where('statut_id', 5)->count(),
+                ],
+                ])
+                @endcomponent
+            </div>
+        </div>
     </div>
-
-
 </div>

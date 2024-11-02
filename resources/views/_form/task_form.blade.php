@@ -63,5 +63,33 @@
        @error('form.description') <span class='text-danger'>{{ $message }}</span> @enderror
    </div>
 
+   <hr>
+
+
+
+   @isset ($clients)
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Client</label>
+            <select class="form-control" wire:model="form.client_id">
+                    <option value="">- Select -</option>
+                    @foreach ($clients as $client)
+                        <option value="{{ $client->id }}">{{ $client->name }}</option>
+                    @endforeach
+            </select>
+            @error('form.client_id') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
+    @endisset
+    @isset($projets)
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Projet</label>
+            <select class="form-control" wire:model="form.projet_id">
+                    <option value="">- Select -</option>
+                    @foreach ($projets as $projet)
+                        <option value="{{ $projet->id }}">{{ $projet->name }}</option>
+                    @endforeach
+            </select>
+            @error('form.projet_id') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
+   @endisset
 
 </div>

@@ -1,15 +1,15 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Clients', 'breadcrumbs' => $breadcrumbs])
         <div class="d-flex">
-            <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
+            <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher un client">
 
-            <button type="button" class="btn btn-primary mx-1" wire:click="add()">
+            <button type="button" class="btn btn-primary mx-1" wire:click="add()" data-bs-toggle="tooltip" title="Ajouter un client">
                 <i class="ti ti-plus me-2"></i> Client
             </button>
-            <button type="button" class="btn btn-primary btn-icon mx-1" wire:click='download_xls' data-bs-toggle="tooltip" title="Exporter en XLS">
+            <button type="button" class="btn btn-primary btn-icon mx-1" wire:click='download_xls' data-bs-toggle="tooltip" title="Exporter en au format Excel">
                 <i class="ti ti-file-spreadsheet "></i>
             </button>
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            <button class="btn btn-icon" wire:click='$refresh' data-bs-toggle="tooltip" title="Actualiser"><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
 

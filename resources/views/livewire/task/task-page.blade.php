@@ -30,33 +30,37 @@
                         <h2 class=""> {{ $task->name }} </h2>
                         <div class="">
                             @if ($task->client_id)
-                            <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->client->id]) }}"
-                                title="Client">{{ $task->client->name }}</a>
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->client->id]) }}" title="Client">
+                                    {{ $task->client->name }}
+                                </a>
+                                @isset($task->projet_id)
+                                    /
+                                @endisset
                             @endif
 
                             @if ($task->projet_id)
-                            <a data-bs-toggle="tooltip" data-bs-placement="top"
-                                href="{{ route('projets',['client_id'=>$task->projet->client->id]) }}" title="Client">{{
-                                $task->projet->client->name
-                                }}</a>
-                            <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projet',['projet_id'=>$task->projet->id]) }}"
-                                title="Projet">{{ $task->projet->name }}</a>
+                                {{-- <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->projet->client->id]) }}" title="Client">
+                                    {{ $task->projet->client->name }}
+                                </a> --}}
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projet',['projet_id'=>$task->projet->id]) }}" title="Projet">
+                                    {{ $task->projet->name }}
+                                </a>
                             @endif
 
                             @if ($task->building_id)
-                            <a data-bs-toggle="tooltip" data-bs-placement="top"
+                            {{-- <a data-bs-toggle="tooltip" data-bs-placement="top"
                                 href="{{ route('projets',['client_id'=>$task->building->projet->client->id]) }}" title="Client">{{
                                 $task->building->projet->client->name }}</a>
                             <a data-bs-toggle="tooltip" data-bs-placement="top"
                                 href="{{ route('projet',['projet_id'=>$task->building->projet->id]) }}" title="Projet">{{
-                                $task->building->projet->name }}</a>
-                            <a data-bs-toggle="tooltip" data-bs-placement="top"
-                                href="{{ route('building', ['building_id'=>$task->building->id]) }}" title="Batiment">{{ $task->building->name
-                                }}</a>
+                                $task->building->projet->name }}</a> --}}
+                                <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('building', ['building_id'=>$task->building->id]) }}" title="Batiment">
+                                    {{ $task->building->name }}
+                                </a>
                             @endif
 
                             @if ($task->stage_id)
-                            <a data-bs-toggle="tooltip" data-bs-placement="top"
+                            {{-- <a data-bs-toggle="tooltip" data-bs-placement="top"
                                 href="{{ route('projets',['client_id'=>$task->stage->building->projet->client->id]) }}" title="Client">{{
                                 $task->stage->building->projet->client->name }}</a> /
                             <a data-bs-toggle="tooltip" data-bs-placement="top"
@@ -64,13 +68,13 @@
                                 $task->stage->building->projet->name }}</a> /
                             <a data-bs-toggle="tooltip" data-bs-placement="top"
                                 href="{{ route('building', ['building_id'=>$task->stage->building->id]) }}" title="Batiment">{{
-                                $task->stage->building->name }}</a> /
+                                $task->stage->building->name }}</a> / --}}
                             <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('stage', ['stage_id'=>$task->stage->id]) }}"
                                 title="Niveau">{{ $task->stage->name }}</a>
                             @endif
 
                             @if ($task->room_id)
-                            <a data-bs-toggle="tooltip" data-bs-placement="top"
+                            {{-- <a data-bs-toggle="tooltip" data-bs-placement="top"
                                 href="{{ route('projets',['client_id'=>$task->room->stage->building->projet->client->id]) }}" title="Client">{{
                                 $task->room->stage->building->projet->client->name }}</a> /
                             <a data-bs-toggle="tooltip" data-bs-placement="top"
@@ -81,7 +85,7 @@
                                 $task->room->stage->building->name }}</a> /
                             <a data-bs-toggle="tooltip" data-bs-placement="top"
                                 href="{{ route('stage', ['stage_id'=>$task->room->stage->id]) }}" title="Niveau">{{ $task->room->stage->name
-                                }}</a>
+                                }}</a> --}}
                             <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('room', ['room_id'=>$task->room->id]) }}"
                                 title="Local">{{ $task->room->name }}/</a>
                             @endif

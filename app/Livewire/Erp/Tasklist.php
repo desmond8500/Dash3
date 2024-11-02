@@ -5,6 +5,8 @@ namespace App\Livewire\Erp;
 use App\Http\Controllers\TaskController;
 use App\Livewire\Forms\SubtaskForm;
 use App\Livewire\Forms\TaskForm;
+use App\Models\Client;
+use App\Models\Projet;
 use App\Models\Subtask;
 use App\Models\Task;
 use App\Models\TaskPriority;
@@ -57,6 +59,10 @@ class Tasklist extends Component
             'inactiveCount' => Task::inactiveCount(),
             'statuses' => TaskStatus::all(),
             'priorities' => TaskPriority::all(),
+
+            'clients' => Client::all(),
+            'projets' => Projet::all(),
+            // 'projets' => Projet::all(),
             // 'subtasks' => $this->getSubtasks()
         ]);
     }

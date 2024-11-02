@@ -1,5 +1,7 @@
 <div>
-    <button class='btn btn-primary' wire:click="$dispatch('open-addTask')"><i class='ti ti-plus'></i> Tache</button>
+    <button class='btn btn-primary' wire:click="$dispatch('open-addTask')" data-bs-toggle="tooltip" title="Ajouter une tache">
+        <i class='ti ti-plus'></i> Tache
+    </button>
 
     @component('components.modal', ["id"=>'addTask', 'title' => 'Ajouter une tache'])
         <form class="row" wire:submit="store">

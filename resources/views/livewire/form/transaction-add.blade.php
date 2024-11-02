@@ -1,5 +1,7 @@
 <div>
-    <button class='btn btn-primary' wire:click="dispatch('open-addTransaction')" ><i class='ti ti-plus'></i> Transaction</button>
+    <button class='btn btn-primary' wire:click="dispatch('open-addTransaction')" data-bs-toggle="tooltip" title="Ajouter une transaction">
+        <i class='ti ti-plus'></i> Transaction
+    </button>
 
     @component('components.modal', ["id"=>'addTransaction', 'title' => 'Ajouter une transaction'])
         <form class="row" wire:submit="store">

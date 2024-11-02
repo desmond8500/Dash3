@@ -1,12 +1,12 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Devis', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
-            <button class="btn" wire:click="$dispatch('open-importRows')">
+            <button class="btn" wire:click="$dispatch('open-importRows')" data-bs-toggle="tooltip" title="Ajouter un devis">
                 Importer Devis
             </button>
             @livewire('form.task-add', ['devis_id' => $devis->id])
             {{-- @livewire('form.article-add') --}}
-            <button class="btn btn-primary" wire:click="$dispatch('open-addSection')">
+            <button class="btn btn-primary" wire:click="$dispatch('open-addSection')" data-bs-toggle="tooltip" title="Ajouter une section">
                 <i class="ti ti-plus"></i> Section
             </button>
 

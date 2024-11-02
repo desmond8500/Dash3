@@ -4,7 +4,7 @@
         <div class="card-header">
             <div class="card-title">Documents</div>
             <div class="card-actions">
-                <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-add-invoiceDocument')">
+                <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-add-invoiceDocument')" data-bs-toggle="tooltip" title="Ajouter un document">
                     <i class="ti ti-plus"></i>
                 </button>
             </div>

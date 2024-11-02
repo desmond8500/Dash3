@@ -40,7 +40,7 @@
             @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
 
             <div class="card mb-1">
-                {{-- @livewire('component', ['user' => $user], key($user->id)) --}}
+                @livewire('erp.invoice-documents', ['invoice_id' => $devis->id])
             </div>
 
         </div>

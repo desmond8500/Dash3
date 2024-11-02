@@ -64,7 +64,7 @@ class Invoice extends Model
 
     public function documents(): HasMany
     {
-        return $this->hasMany(InvoiceAcompte::class);
+        return $this->hasMany(InvoiceDocument::class);
     }
 
     public function spents(): HasMany

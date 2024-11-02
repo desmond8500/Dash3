@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('building_quantitatif_rows', function (Blueprint $table) {
             $table->id();
+            $table->integer('building_quantitatif')->constrained();
+            // $table->integer('building_quantitatif');
             $table->timestamps();
         });
     }

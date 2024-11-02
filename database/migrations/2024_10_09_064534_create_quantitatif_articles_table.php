@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('quantitatif_row_id')->constrained();
             $table->integer('room_id')->constrained();
             $table->integer('article_id');
-            $table->id('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

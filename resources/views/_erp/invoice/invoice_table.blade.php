@@ -68,7 +68,10 @@
             @endphp
             <tr>
                 <th scope="col" class="bg-primary-lt" colspan="2">
-                    <div> <span class='text-danger'>{{ $section->id }}</span> {{ $section->section }}</div>
+                    <div>
+                        <div class='text-danger' style="font-size: 10px">{{ $section->id }}</div>
+                        <div>{{ ucfirst($section->section) }}</div>
+                    </div>
                 </th>
                 <th scope="col" class="bg-primary-lt " colspan="6">
                     <div class="d-flex justify-content-end">

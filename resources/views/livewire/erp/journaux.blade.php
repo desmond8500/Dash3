@@ -13,6 +13,9 @@
             <div class="col-md-4">
                 @component('_card.journal_card',['journal'=>$journal])
                 @endcomponent
+                <div>
+                    {{ $journaux->links() }}
+                </div>
             </div>
         @empty
             <div class="card mt-2">

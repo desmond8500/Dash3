@@ -30,7 +30,7 @@ class Journaux extends Component
     function getJournaux(){
         return Journal::where('projet_id', $this->projet_id)
             ->orderByDesc('date')
-            ->where('title', 'LIKE', "%{$this->search}%")
+            // ->where('title', 'LIKE', "%{$this->search}%")
             ->get();
             // ->paginate(20);
     }

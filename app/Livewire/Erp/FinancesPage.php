@@ -30,7 +30,9 @@ class FinancesPage extends Component
     {
         return view('livewire.erp.finances-page',[
             'transactions' => Transaction::search($this->search,'objet')->paginate(6),
-            'total' => Transaction::where('type','credit')->sum('montant') - Transaction::where('type', 'debit')->sum('montant')
+            'total' => Transaction::where('type','credit')->sum('montant') - Transaction::where('type', 'debit')->sum('montant'),
+            'credit' => Transaction::where('type','credit')->sum('montant'),
+            'debit' => Transaction::where('type', 'debit')->sum('montant'),
         ]);
     }
 

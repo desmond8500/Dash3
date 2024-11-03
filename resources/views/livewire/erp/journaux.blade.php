@@ -13,15 +13,15 @@
             <div class="col-md-4">
                 @component('_card.journal_card',['journal'=>$journal])
                 @endcomponent
-                <div>
-                    {{ $journaux->links() }}
-                </div>
             </div>
         @empty
             <div class="card mt-2">
                 <i class="ti ti-mood-empty"></i>
             </div>
         @endforelse
+        <div>
+            {{ $journaux->links() }}
+        </div>
     </div>
 
     @component('components.modal', ["id"=>'editJournal', 'title'=> 'Editer un journal'])

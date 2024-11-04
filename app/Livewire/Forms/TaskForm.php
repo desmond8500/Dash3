@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Building;
 use App\Models\Projet;
 use App\Models\Room;
 use App\Models\Task;
@@ -58,14 +59,20 @@ class TaskForm extends Form
     function store(){
         $this->fix();
         $this->validate();
-        if ($this->projet_id) {
-            $projet = Projet::find($this->projet_id);
-            $this->client_id = $projet->client->id;
-        }
+        // if ($this->projet_id) {
+        //     $projet = Projet::find($this->projet_id);
+        //     $this->client_id = $projet->client->id;
+        // }
         $task = Task::create( $this->all() );
         if ($this->projet_id) {
             $projet = Projet::find($this->projet_id);
             $task->client_id = $projet->client->id;
+            $task->save();
+        }
+        if ($this->building_id) {
+            $building = Building::find($this->building_id);
+            $task->projet_id = $building->projet->id;
+            $task->client_id = $building->projet->client->id;
             $task->save();
         }
         $this->reset('name','description','start_date', 'end_date', 'status_id', 'priority_id', 'expiration_date');

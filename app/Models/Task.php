@@ -72,7 +72,7 @@ class Task extends Model
         return $this->belongsTo(Projet::class);
     }
 
-    public function buiding(): BelongsTo{
+    public function building(): BelongsTo{
         return $this->belongsTo(Building::class);
     }
 

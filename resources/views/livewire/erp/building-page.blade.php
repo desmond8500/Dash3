@@ -9,6 +9,7 @@
             @elseif($selected_tab==3)
                 @livewire('form.fiche-add', ['building_id' => $building->id])
             @endif
+                @livewire('form.task-add', ['building_id' => $building->id])
 
             <a href="{{ route('avancements',['building_id'=>$building->id]) }}" class="btn btn-primary" >Avancements</a>
             <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
@@ -28,6 +29,9 @@
 
         @if ($selected_tab == 0)
             <div>Résumé</div>
+            @livewire('erp.building-resumes',['building_id'=> $building->id ])
+
+
             {{-- <div class="row">
                 <div class="col-md-12">
                     <div class="row">
@@ -57,7 +61,7 @@
 
                 </div>
             </div> --}}
-            @livewire('erp.building-resumes',['building_id'=> $building->id ])
+
         @elseif($selected_tab == 1)
             <div>Niveaux</div>
             {{-- <div class="row g-2">

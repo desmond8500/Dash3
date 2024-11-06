@@ -46,6 +46,8 @@ class BrandPage extends Component
 
     public BrandLinkForm $brand_link;
 
+    public $name_list = ['Catalogue','Liste de prix'];
+
     function link_store(){
         $this->brand_link->brand_id = $this->brand_id;
         $this->brand_link->store();

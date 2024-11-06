@@ -33,7 +33,7 @@
                 <div class="col-8">
                     <div class="text-muted">
                         @if ($article->brand)
-                        {{ $article->brand->name }}
+                        <a href="{{ route('brand', ['brand_id'=>$article->brand->id]) }}" target="_blank" class="text-muted">{{ $article->brand->name }}</a>
                         @else
                         _
                         @endif

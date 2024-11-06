@@ -50,7 +50,7 @@
 
         </div>
         <div class="col-md-8">
-            <div class="row">
+            <div class="row g-2">
                 <div class="col-md-12 mb-2">
                     <input type="text" class="form-control" wire:model.live="search" placeholder="Chercher">
                 </div>

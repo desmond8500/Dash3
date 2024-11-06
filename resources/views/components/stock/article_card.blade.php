@@ -7,8 +7,7 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{
-                            $article->designation }}</a>
+                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
                     </div>
                     @isset($edit)
                     <div class="col-auto">
@@ -21,8 +20,7 @@
                             <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')">Dupliquer</a>
                             <a class="dropdown-item" wire:click="buy('{{ $article->id }}')">Commander</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')"> <i
-                                    class="ti ti-trash"></i> Supprimer</a>
+                            <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                         </div>
                     </div>
 
@@ -34,7 +32,7 @@
                 @endisset
                 <div class="text-muted">
                     @if ($article->brand)
-                    {{ $article->brand->name }}
+                    <a href="{{ route('brand', ['brand_id'=>$article->brand->id]) }}">{{ $article->brand->name }}</a>
                     @else
                     _
                     @endif

@@ -20,16 +20,16 @@
                     </div>
                 @endif
             </div>
-            @if ($links->count())
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Liens</div>
-                        <div class="card-actions">
-                            <button class="btn btn-primary" wire:click="$dispatch('open-addBrandLink')">
-                                <i class="ti ti-plus"></i> Lien
-                            </button>
-                        </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Liens</div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" wire:click="$dispatch('open-addBrandLink')">
+                            <i class="ti ti-plus"></i> Lien
+                        </button>
                     </div>
+                </div>
+                @if ($links->count())
                     <div class="p-2">
                         @foreach ($links as $link)
                             <div class="d-flex justify-content-between align-items-center border m-1 p-1 rounded">
@@ -45,8 +45,8 @@
                             </div>
                         @endforeach
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
 
         </div>
         <div class="col-md-8">

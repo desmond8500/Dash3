@@ -36,7 +36,7 @@
 
         </div>
         <div class="col-md-5">
-            @livewire('erp.tasklist', ['room' => $room->id])
+            @livewire('erp.tasklist', ['room_id' => $room->id])
         </div>
     </div>
 

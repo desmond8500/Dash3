@@ -3,7 +3,7 @@
     <div class="row g-2">
         <div class="col">
             <div class="col-md-12 mb-3">
-                <input type="text" class="form-control" wire:model="search" placeholder="Rechercher">
+                <input type="text" class="form-control" wire:model="search" placeholder="Rechercher un contact">
             </div>
         </div>
         <div class="col-auto">

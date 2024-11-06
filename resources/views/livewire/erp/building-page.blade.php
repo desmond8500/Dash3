@@ -64,7 +64,7 @@
 
         @elseif($selected_tab == 1)
             <div>Niveaux</div>
-            {{-- <div class="row g-2">
+            <div class="row g-2">
                 @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
                 <div class="col-md-3">
                     @foreach ($stages->sortBy('order') as $stage)
@@ -88,6 +88,7 @@
                                     <button class="btn btn-danger btn-icon" wire:click="delete_stage('{{ $selected_stage->id }}')">
                                         <i class="ti ti-trash"></i>
                                     </button>
+                                    {{-- @livewire('form.task-add', ['stage_id' => $selected_stage->id], key($selected_stage->id)) --}}
                                 </div>
                             </div>
                         </div>
@@ -118,7 +119,7 @@
                     @endif
 
                 </div>
-            </div> --}}
+            </div>
         @elseif($selected_tab == 2)
             {{-- <div>Quantitatif</div> --}}
             @livewire('erp.building-quantitatif',['building_id'=> $building->id ])

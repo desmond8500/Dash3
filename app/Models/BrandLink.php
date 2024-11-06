@@ -4,20 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Brand extends Model
+class BrandLink extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'logo',
+        'brand_id',
         'name',
+        'link',
+        'folder',
         'description',
     ];
 
-    public function links(): HasMany
+    public function brand(): BelongsTo
     {
-        return $this->hasMany(BrandLink::class);
+        return $this->belongsTo(User::class);
     }
 }

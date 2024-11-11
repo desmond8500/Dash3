@@ -68,7 +68,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-resume">
-                            @component('components.erp.projet.projet-resume',['projet'=>$projet, 'buildings' => $buildings])
+                            @component('components.erp.projet.projet-resume',['projet'=>$projet, 'buildings' => $buildings, 'invoices' => $invoices])
 
                             @endcomponent
                         </div>

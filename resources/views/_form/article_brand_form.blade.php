@@ -12,13 +12,15 @@
                 <i class="ti ti-edit text-muted"></i>
                 <span class="avatar-upload-text">Modifier</span>
             </label>
+            <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="brand_form.logo2">
         @else
             <label for="file" href="#" class="avatar avatar-upload rounded">
                 <i class="ti ti-plus text-muted"></i>
                 <span class="avatar-upload-text">Ajouter</span>
             </label>
+
+            <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="brand_form.logo">
         @endif
-    <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="brand_form.logo">
 </div>
 
 <div class="col mb-3">

@@ -4,6 +4,7 @@ namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\projetForm;
 use App\Models\Building;
+use App\Models\Invoice;
 use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
@@ -49,6 +50,7 @@ class ProjetPage extends Component
             'projet_id' => $this->projet_id,
             'tasks' => $this->get_tasks(),
             'journaux' => $this->get_news(),
+            'invoices' => Invoice::where('projet_id', $this->projet_id)->paginate(5),
         ]);
     }
 

@@ -9,12 +9,26 @@
     @endcomponent
 
     <div class="row g-2">
-        <div class="col-md-2">
-            <div class="input-group">
-                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
+        <div class="col-md-3">
+            <div class="mb-1">
+                <div class="input-group">
+                    <input type="text" class="form-control" wire:model.live="search" placeholder="Trouver un article">
+                </div>
             </div>
+            {{-- <div class="card p-2 mb-1">
+                <b>Trié par :</b>
+            </div>
+            <div class="card p-2 mb-1">
+                <b>Marques :</b>
+            </div>
+            <div class="card p-2 mb-1">
+                <b>Fournisseurs :</b>
+            </div> --}}
         </div>
-        <div class="col-md-10">
+
+
+
+        <div class="col-md-9">
             <div class="row row-deck g-2">
                 @foreach ($articles as $article)
                     <div class="col-md-6">

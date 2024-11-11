@@ -31,14 +31,14 @@
             @endisset
             <div class="row">
                 <div class="col-8">
-                    <div class="text-muted">
+                    <div class="text-muted" data-bs-toggle="tooltip" title="Marque">
                         @if ($article->brand)
                         <a href="{{ route('brand', ['brand_id'=>$article->brand->id]) }}" target="_blank" class="text-muted">{{ $article->brand->name }}</a>
                         @else
                         _
                         @endif
                     </div>
-                    <div class="text-muted">
+                    <div class="text-muted" data-bs-toggle="tooltip" title="Fournisseur">
                         @if ($article->provider)
                         <span class="badge bg-blue-lt">{{ $article->provider->name }}</span>
                         @else
@@ -47,14 +47,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="d-flex-between">
-                        <div>Qte: </div>
-                        <div>{{ $article->quantity }}</div>
-                    </div>
-                    <div class="d-flex-between">
-                        <div>Qte_min: </div>
-                        <div>{{ $article->quantity_min }}</div>
-                    </div>
+                    <div class="text-end mt-2" style="font-size: 20px" data-bs-toggle="tooltip" title="Quantité">{{ $article->quantity }}</div>
                 </div>
             </div>
 

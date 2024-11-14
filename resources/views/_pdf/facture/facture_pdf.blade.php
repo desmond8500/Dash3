@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/text.css">
     <link rel="stylesheet" href="css/margin.css">
     <link rel="stylesheet" href="css/facture_pdf.css">
-    <title>Journal</title>
+    <title>{{ ucfirst($title) }}</title>
 </head>
 <body>
     @php
@@ -37,7 +37,7 @@
             <td align="right" class="border_white">
                 <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">{{ $title }}</div>
                 @if ($title !="quantitatif")
-                    <i>#{{ $devis->reference }}</i>
+                    <i>#{{ strtoupper($devis->reference) }}</i>
                 @endif
             </td>
         </tr>

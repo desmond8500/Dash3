@@ -1,6 +1,9 @@
 <table class="mt-3">
     <tr>
-        <td style="width: 400px"></td>
+        <td style="width: 400px;" align="center">
+            <img src="{{ env('BUFFER') }}" alt="" height="70px">
+            <img src="{{ env('SIGN') }}" alt="" height="70px">
+        </td>
         <td>
             <table class="fw-bold" style="background: #dddddd">
                 <tr>

@@ -31,7 +31,7 @@
     {{-- </div>
     <div class="col-md-4 mb-3"> --}}
         <label class="form-label">Priorite</label>
-        <select class="form-control" wire:model="row_form.priority_id">
+        <select class="form-control" wire:model="row_form.priorite_id">
             <option value="0">Centrale 1</option>
             <option value="1">Centrale 2</option>
             <option value="2">Organe 1</option>
@@ -41,7 +41,7 @@
             <option value="6">Accessoires</option>
             <option value="7">Forfait</option>
         </select>
-        @error('row_form.priority_id') <span class='text-danger'>{{ $message }}</span> @enderror
+        @error('row_form.priorite_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
         <label class="form-label">Section</label>
         <select class="form-control" wire:model="row_form.invoice_section_id">

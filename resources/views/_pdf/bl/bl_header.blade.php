@@ -21,7 +21,7 @@
     <tr>
         <td colspan="3" >
             <div class="fw-bold">Description :</div>
-            <div>{!! $invoice->description  !!}</div>
+            <div>@parsedown($invoice->description)</div>
         </td>
     </tr>
 </table>
@@ -31,7 +31,7 @@
         <tr>
             <td colspan="3" >
                 <div class="fw-bold">Travaux Effectués :</div>
-                <div>{!! $bl->done  !!}</div>
+                <div>@parsedown($bl->done)</div>
             </td>
         </tr>
     </table>
@@ -42,7 +42,7 @@
         <tr>
             <td colspan="3" >
                 <div class="fw-bold">Travaux restants :</div>
-                <div>{!! $bl->todo  !!}</div>
+                <div>@parsedown($bl->todo)</div>
             </td>
         </tr>
     </table>

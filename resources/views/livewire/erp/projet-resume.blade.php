@@ -2,7 +2,7 @@
     <div class="col-md-4">
         <div class="border rounded">
             <div class="bg-primary text-uppercase fw-bold text-white p-1">Résumé</div>
-            <p class="mt-2 p-2">{{ nl2br($projet->description) }}</p>
+            <div class="m-2">@parsedown($projet->description)</div>
         </div>
 
         <div class="card p-2 my-2">
@@ -89,7 +89,16 @@
                 <div class="card-header">
                     <div class="card-title">Devis</div>
                     <div class="card-actions">
-                        @livewire('form.invoice-add', ['projet_id' => $projet->id], key($projet->id))
+                        <div class="btn-list">
+                            <div class="input-icon mb-2">
+                                <input type="text" class="form-control form-control-rounded" wire:model.live="invoice_search" placeholder="Chercher">
+                                <span class="input-icon-addon">
+                                    <i class="ti ti-search"></i>
+                                </span>
+                            </div>
+                            @livewire('form.invoice-add', ['projet_id' => $projet->id], key($projet->id))
+
+                        </div>
                     </div>
 
                 </div>
@@ -127,5 +136,13 @@
             </div>
         </div>
     </div>
+
+    @component('components.modal', ["id"=>'editProjet', 'title'=> 'Editer un projet'])
+    <form class="row" wire:submit="update">
+        @include('_form.projet_form')
+    </form>
+    <script> window.addEventListener('open-editProjet', event => { $('#editProjet').modal('show'); }) </script>
+    <script> window.addEventListener('close-editProjet', event => { $('#editProjet').modal('hide'); }) </script>
+    @endcomponent
 
 </div>

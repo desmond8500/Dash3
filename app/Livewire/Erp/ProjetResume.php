@@ -12,6 +12,7 @@ class ProjetResume extends Component
 {
     use WithPagination;
     public $projet_id;
+    public $invoice_search;
 
     function mount($projet_id){
         $this->projet_id = $projet_id;
@@ -21,7 +22,10 @@ class ProjetResume extends Component
     {
         return view('livewire.erp.projet-resume',[
             'projet' => Projet::find($this->projet_id),
-            'invoices' => Invoice::where('projet_id', $this->projet_id)->paginate(5),
+            'invoices' => Invoice::where('projet_id', $this->projet_id)
+                ->search($this->invoice_search,'reference')
+                // ->search($this->invoice_search,'description')
+                ->paginate(6),
         ]);
     }
 
@@ -30,14 +34,13 @@ class ProjetResume extends Component
 
     function edit()
     {
-        $this->projetForm->set($this->projet->id);
+        $this->projetForm->set($this->projet_id);
         $this->dispatch('open-editProjet');
     }
 
     function update()
     {
         $this->projetForm->update();
-        $this->projet = Projet::find($this->projet->id);
         $this->dispatch('close-editProjet');
     }
 }

@@ -21,7 +21,7 @@
 
 <div class="col-md-12 mb-3">
     <label class="form-label">Travaux Effectués</label>
-    <textarea class="form-control" wire:model="bl_form.travaux" placeholder="Travaux Effectués" cols="30" rows="5"></textarea>
+    <textarea class="form-control" wire:model="bl_form.done" placeholder="Travaux Effectués" cols="30" rows="5"></textarea>
     @error('bl_form.done') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 <div class="col-md-12 mb-3">

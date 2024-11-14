@@ -9,6 +9,7 @@ use App\Models\Commande;
 use App\Models\Fiche;
 use App\Models\Invoice;
 use App\Models\InvoiceAcompte;
+use App\Models\InvoiceBl;
 use App\Models\InvoiceSection;
 use App\Models\Journal;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -271,6 +272,27 @@ class PDFController extends Controller
 
         $pdf = Pdf::loadView("_pdf.fiches.$fiche->type", $data);
         return $pdf->stream('fiche_pdf');
+    }
+    public static function bl_pdf($invoice_bl_id){
+        $bl = InvoiceBl::find($invoice_bl_id);
+        $invoice = Invoice::find($bl->invoice_id);
+        $carbon = new Carbon($bl->date);
+
+        $data = [
+            'logo' => env('LOGO', ''),
+            'title' => env('MAIN_NAME'),
+            'invoice' => $invoice,
+            'bl' => $bl,
+            'carbon' => $carbon,
+        ];
+
+        if ($bl->type) {
+            $pdf = Pdf::loadView("_pdf.bl.bl_travaux", $data);
+            return $pdf->stream('BL_pdf');
+        } elseif('travaux') {
+            $pdf = Pdf::loadView("_pdf.bl.bl_travaux", $data);
+            return $pdf->stream('BL_pdf');
+        }
     }
 
 }

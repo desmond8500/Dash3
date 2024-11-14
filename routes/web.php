@@ -77,6 +77,8 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf($invoice_id, $type); })->name('facture_pdf');
     Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) { return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id); })->name('facture_acompte_pdf');
 
+    Route::get('/bl/bl_travaux/{invoice_bl_id}', function ($invoice_bl_id) { return PDFController::bl_pdf($invoice_bl_id); })->name('bl_pdf');
+
     Route::get('invoice_export/{invoice_id}',  function ($invoice_id){ return Excel::download(new InvoiceExport($invoice_id), 'invoices.xlsx'); })->name('invoice_export');
 
     Route::post('invoice_import', 'InvoiceController@import')->name('invoice_import');

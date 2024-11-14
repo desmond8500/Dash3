@@ -68,9 +68,11 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-resume">
-                            @component('components.erp.projet.projet-resume',['projet'=>$projet, 'buildings' => $buildings, 'invoices' => $invoices])
+                            {{-- @component('components.erp.projet.projet-resume',['projet'=>$projet, 'buildings' => $buildings, 'invoices' => $invoices])
 
-                            @endcomponent
+                            @endcomponent --}}
+
+                            @livewire('erp.projet-resume', ['projet_id'=>$projet_id, 'buildings' => $buildings, 'invoices' => $invoices])
                         </div>
 
                         <div class="tab-pane  show" id="tabs-devis">

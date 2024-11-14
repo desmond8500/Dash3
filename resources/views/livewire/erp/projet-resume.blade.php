@@ -16,21 +16,21 @@
                 </div>
                 <div class="col-12">
                     @component('components.chartjs',[
-                        'labels' => [
-                            "Nouvelles (".$projet->tasks->where('statut_id', 1)->count().")",
-                            "En cours (".$projet->tasks->where('statut_id', 2)->count().")",
-                            "En pause (".$projet->tasks->where('statut_id', 3)->count().")",
-                            "Terminés (".$projet->tasks->where('statut_id', 4)->count().")",
-                            "Annulés (".$projet->tasks->where('statut_id', 5)->count().")",
-                        ],
-                        'data' => [
-                                $projet->tasks->where('statut_id', 1)->count(),
-                                $projet->tasks->where('statut_id', 2)->count(),
-                                $projet->tasks->where('statut_id', 3)->count(),
-                                $projet->tasks->where('statut_id', 4)->count(),
-                                $projet->tasks->where('statut_id', 5)->count(),
-                            ],
-                        ])
+                    'labels' => [
+                    "Nouvelles (".$projet->tasks->where('statut_id', 1)->count().")",
+                    "En cours (".$projet->tasks->where('statut_id', 2)->count().")",
+                    "En pause (".$projet->tasks->where('statut_id', 3)->count().")",
+                    "Terminés (".$projet->tasks->where('statut_id', 4)->count().")",
+                    "Annulés (".$projet->tasks->where('statut_id', 5)->count().")",
+                    ],
+                    'data' => [
+                    $projet->tasks->where('statut_id', 1)->count(),
+                    $projet->tasks->where('statut_id', 2)->count(),
+                    $projet->tasks->where('statut_id', 3)->count(),
+                    $projet->tasks->where('statut_id', 4)->count(),
+                    $projet->tasks->where('statut_id', 5)->count(),
+                    ],
+                    ])
                     @endcomponent
                 </div>
             </div>
@@ -50,8 +50,8 @@
                 </div>
                 <div class="col-auto">
                     <div class="dropdown open">
-                        <button class="btn btn-action border dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-action border dropdown-toggle" type="button" id="triggerId"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="ti ti-dots-vertical"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="triggerId">
@@ -103,17 +103,17 @@
                         </thead>
                         <tbody>
                             @foreach ($invoices as $key => $invoice)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>
-                                        <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank">
-                                            {{ ucfirst($invoice->reference) }}
-                                        </a>
-                                    </td>
-                                    <td>{{ $invoice->description }}</td>
-                                    <td>{{ $invoice->statut }}</td>
-                                    <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</td>
-                                </tr>
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>
+                                    <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank">
+                                        {{ ucfirst($invoice->reference) }}
+                                    </a>
+                                </td>
+                                <td>{{ $invoice->description }}</td>
+                                <td>{{ $invoice->statut }}</td>
+                                <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>

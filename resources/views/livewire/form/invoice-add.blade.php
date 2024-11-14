@@ -1,13 +1,7 @@
 <div>
-    {{-- <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInvoice">
-        <i class="ti ti-plus"></i>Devis
-    </a> --}}
     <a class="btn btn-primary" wire:click="ajouter()">
         <i class="ti ti-plus"></i>Devis
     </a>
-    {{-- <a class="btn btn-primary" wire:click="$dispatch('open-initInvoice')">
-        <i class="ti ti-plus"></i>Générer Devis
-    </a> --}}
 
     @component('components.modal', ["id"=>'addInvoice', 'title'=>'Ajouter un devis'])
         <form class="row" wire:submit="store">

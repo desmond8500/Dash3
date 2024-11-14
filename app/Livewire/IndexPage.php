@@ -10,6 +10,7 @@ use App\Models\Invoice;
 use App\Models\Projet;
 use App\Models\Task;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -23,6 +24,10 @@ class IndexPage extends Component
             'clients' => Client::favorite(),
             'projets' => Projet::favorite(),
             'invoices' => Invoice::favorite(),
+            'carbon' => Carbon::now()->settings([
+                'locale' => 'fr_FR',
+                'timezone' => 'Africa/Dakar'
+            ]),
         ]);
     }
     // Init

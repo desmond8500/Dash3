@@ -42,7 +42,7 @@ class ProjetPage extends Component
 
     // #[Session]
 
-
+    #[On('get-resume')]
     public function render()
     {
         return view('livewire.erp.projet-page',[

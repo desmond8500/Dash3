@@ -288,10 +288,10 @@ class PDFController extends Controller
 
         if ($bl->type) {
             $pdf = Pdf::loadView("_pdf.bl.bl_travaux", $data);
-            return $pdf->stream('BL_pdf');
+            return $pdf->stream("Bordereau de $bl->type _ ".$invoice->projet->name);
         } elseif('travaux') {
             $pdf = Pdf::loadView("_pdf.bl.bl_travaux", $data);
-            return $pdf->stream('BL_pdf');
+            return $pdf->stream("Bordereau de $bl->type _ ".$invoice->projet->name);
         }
     }
 

@@ -69,18 +69,6 @@ class ProjetPage extends Component
         return Journal::where('projet_id', $this->projet_id)->get();
     }
 
-    // Projets
     public projetForm $projetForm;
-    function edit()
-    {
-        $this->projetForm->set($this->projet->id);
-        $this->dispatch('open-editProjet');
-    }
 
-    function update()
-    {
-        $this->projetForm->update();
-        $this->projet = Projet::find($this->projet->id);
-        $this->dispatch('close-editProjet');
-    }
 }

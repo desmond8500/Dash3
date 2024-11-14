@@ -1,7 +1,6 @@
 <div class="row  g-2">
     <div class="col-md-4">
         <div class="border rounded">
-
             <div class="bg-primary text-uppercase fw-bold text-white p-1">Résumé</div>
             <p class="mt-2 p-2">{{ nl2br($projet->description) }}</p>
         </div>
@@ -69,14 +68,18 @@
                     <div class="fw-bold">PROJET</div>
                     <div class="text-muted">{{ $projet->name }}</div>
                 </li>
-                <li class="py-1 border-bottom d-flex justify-content-between">
-                    <div class="fw-bold">DATE DE DEBUT</div>
-                    <div class="text-muted">{{ $projet->start_date ?? 'NA' }}</div>
-                </li>
-                <li class="py-1 border-bottom d-flex justify-content-between">
-                    <div class="fw-bold">DATE DE FIN</div>
-                    <div class="text-muted">{{ $projet->end_date ?? 'NA' }}</div>
-                </li>
+                @if ($projet->start_date)
+                    <li class="py-1 border-bottom d-flex justify-content-between">
+                        <div class="fw-bold">DATE DE DEBUT</div>
+                        <div class="text-muted">{{ $projet->start_date ?? 'NA' }}</div>
+                    </li>
+                @endif
+                @if ($projet->end_date)
+                    <li class="py-1 border-bottom d-flex justify-content-between">
+                        <div class="fw-bold">DATE DE FIN</div>
+                        <div class="text-muted">{{ $projet->end_date ?? 'NA' }}</div>
+                    </li>
+                @endif
             </ul>
 
         </div>

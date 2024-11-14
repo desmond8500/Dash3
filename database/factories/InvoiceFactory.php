@@ -20,7 +20,7 @@ class InvoiceFactory extends Factory
         $reference = $this->faker->numberBetween($min = 5, $max = 10);
 
         return [
-            'reference' => "$name-$number-24",
+            'reference' => strtoupper("$name-$number-24"),
             'description' => $this->faker->text($reference),
             'modalite' => '',
             'note' => '',

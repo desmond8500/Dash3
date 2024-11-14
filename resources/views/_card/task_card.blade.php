@@ -7,8 +7,8 @@
                     <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->client->id]) }}" title="Client">{{ $task->client->name }}</a>
                 @endif
 
-                @if ($task->projet_id)/
-                    {{-- <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->projet->client->id]) }}" title="Client">{{ $task->projet->client->name }}</a> / --}}
+                @if ($task->projet_id)
+                    @if ($task->client_id) / @endif
                     <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projet',['projet_id'=>$task->projet->id]) }}" title="Projet">{{ $task->projet->name }}</a>
                 @endif
 

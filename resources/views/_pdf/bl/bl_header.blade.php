@@ -7,8 +7,8 @@
             <img src="{{ $logo }}" width="50px" alt="Logo">
         </td>
         <td>
-            <div  class="fw-bold">Client :</div>
-            <div>{{ $invoice->projet->client->name }}</div>
+            <div><b>Client :</b> {{ $invoice->projet->client->name }}</div>
+            <div><b>Projet :</b> {{ $invoice->projet->name }}</div>
         </td>
         <td width="200px" class="text-end">
             <div>{{ $carbon->format('d-m-Y')}}</div>

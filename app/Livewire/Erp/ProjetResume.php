@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\projetForm;
+use App\Models\Building;
 use App\Models\Invoice;
 use App\Models\Projet;
 use Livewire\Component;
@@ -24,8 +25,8 @@ class ProjetResume extends Component
             'projet' => Projet::find($this->projet_id),
             'invoices' => Invoice::where('projet_id', $this->projet_id)
                 ->search($this->invoice_search,'reference')
-                // ->search($this->invoice_search,'description')
                 ->paginate(6),
+            'buildings' => Building::where('projet_id', $this->projet_id)->get(),
         ]);
     }
 

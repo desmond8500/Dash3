@@ -65,7 +65,7 @@
         @elseif($selected_tab == 1)
             <div>Niveaux</div>
             <div class="row g-2">
-                @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
+                @livewire('form.stage-add', ['building_id' => $building->id])
                 <div class="col-md-3">
                     @foreach ($stages->sortBy('order') as $stage)
                         <div class="mb-2">

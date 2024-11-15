@@ -1,10 +1,12 @@
 <div class="row  g-2">
     <div class="col-md-4">
+        {{-- Résumé --}}
         <div class="border rounded">
             <div class="bg-primary text-uppercase fw-bold text-white p-1">Résumé</div>
             <div class="m-2">@parsedown($projet->description)</div>
         </div>
 
+        {{-- Taches --}}
         <div class="card p-2 my-2">
             <div class="row">
                 <div class="col">
@@ -34,8 +36,19 @@
                 </div>
             </div>
         </div>
+
+        {{-- Batiments --}}
+        <div class="card p-2 mb-2">
+            <div class="card-title">Batiments</div>
+            @foreach ($buildings as $building)
+                <a href="{{ route('building',['building_id'=> $building->id]) }}" class="card p-1" target="_blank">
+                    {{ $building->name }}
+                </a>
+            @endforeach
+        </div>
     </div>
     <div class="col-md-8">
+        {{-- Resumé --}}
         <div class="border rounded p-2">
             <div class="row">
                 <div class="col-auto">
@@ -84,6 +97,7 @@
 
         </div>
 
+        {{-- Devis --}}
         <div class="mt-2">
             <div class="card">
                 <div class="card-header">

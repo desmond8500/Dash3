@@ -15,7 +15,7 @@
         </div>
         <div class="w-100"></div>
         @foreach ($contacts as $contact)
-            <div class="{{ $card_class ?? 'col-md-6' }}">
+            <div class="{{ $card_class ?? 'col-md-4' }}">
                 <div class="card p-2">
                     <div class="row">
                         <div class="col-auto">

@@ -24,12 +24,12 @@
                 <div class="card p-2">
                     <div class="row">
                         <div class="col-auto">
-                            <img src="" alt="A" class="avatar avatar-md">
+                            <img src="" alt="A" class="avatar">
                         </div>
                         <div class="col">
                             <div class="fw-bold">{{ $contact->firstname }}</div>
                             <div class="fw-bold">{{ $contact->lastname }}</div>
-                            <div class="">{{ $contact->fonction }}</div>
+
                         </div>
                         <div class="col-auto">
                             <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $contact->id }}')">
@@ -38,6 +38,9 @@
                             <button class="btn btn-outline-danger btn-icon" wire:click="delete('{{ $contact->id }}')">
                                 <i class="ti ti-trash"></i>
                             </button>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="">{{ $contact->fonction }}</div>
                         </div>
                     </div>
                 </div>

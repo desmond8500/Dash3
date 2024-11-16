@@ -20,6 +20,7 @@ use App\Livewire\Erp\ProjetsPage;
 use App\Livewire\Erp\RoomPage;
 use App\Livewire\Erp\StagePage;
 use App\Livewire\Erp\SystemesPage;
+use App\Livewire\Erp\TeamPage;
 use App\Livewire\IndexPage;
 use App\Livewire\JournalPage;
 use App\Livewire\JournauxPage;
@@ -98,6 +99,9 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/avancements_pdf/{avancement_id}', function ($avancement_id) {
         return PDFController::avancement_pdf($avancement_id);
     })->name('avancements_pdf');
+
+    Route::get('/team', TeamPage::class)->name('team');
+
 });
 
 // Stock

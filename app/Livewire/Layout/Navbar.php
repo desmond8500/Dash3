@@ -17,6 +17,7 @@ class Navbar extends Component
                 array('name' => "Système", "route" => "settings", "icon" => "hammer"),
                 array('name' => "Journaux", "route" => "journaux", "icon" =>"article", "can" => "journaux"),
                 array('name' => "Finances", "route" => "finances", "icon" => "coins", "can" => "finances"),
+                array('name' => "Equipe", "route" => "team", "icon" => "coins", "can" => ""),
             ]
         ),
         array('name' => "Stock", "icon" => "packages", "can"=> "stock",

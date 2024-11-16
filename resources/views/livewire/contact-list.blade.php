@@ -44,4 +44,16 @@
             </div>
         @endforeach
     </div>
+
+    @component('components.modal', ["id"=>'editContact', 'title' => 'Titre'])
+        <form class="row" wire:submit="update">
+            @include('_form.contact_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editContact', event => { $('#editContact').modal('show'); }) </script>
+        <script> window.addEventListener('close-editContact', event => { $('#editContact').modal('hide'); }) </script>
+    @endcomponent
 </div>

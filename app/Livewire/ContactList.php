@@ -48,21 +48,17 @@ class ContactList extends Component
 
     public ContactForm $contact_form;
 
-    function store(){
-        $this->contact_form->store();
-        $this->dispatch('get-acomptes');
-    }
-
     function edit($id){
         $this->contact_form->set($id);
+        $this->dispatch('open-editContact');
     }
 
-    function update($id){
+    function update(){
         $this->contact_form->update();
-        $this->dispatch('get-acomptes');
+        $this->dispatch('close-editContact');
     }
 
-    function delete(){
-        $this->contact_form->delete();
+    function delete($id){
+        $this->contact_form->delete($id);
     }
 }

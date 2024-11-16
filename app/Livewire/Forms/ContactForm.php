@@ -43,6 +43,8 @@ class ContactForm extends Form
         $this->lastname = $this->contact->lastname;
         $this->fonction = $this->contact->fonction;
         $this->avatar = $this->contact->avatar;
+        $this->projet_id = $this->contact->projet_id;
+        $this->client_id = $this->contact->client_id;
     }
 
     function update(){

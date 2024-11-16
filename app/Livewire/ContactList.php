@@ -14,8 +14,6 @@ class ContactList extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public ContactForm $contact_form;
-
     public $projet_id;
     public $client_id;
     public $search;
@@ -46,5 +44,25 @@ class ContactList extends Component
             ->search($this->search, 'lastname')
             ->paginate(18);
         }
+    }
+
+    public ContactForm $contact_form;
+
+    function store(){
+        $this->contact_form->store();
+        $this->dispatch('get-acomptes');
+    }
+
+    function edit($id){
+        $this->contact_form->set($id);
+    }
+
+    function update($id){
+        $this->contact_form->update();
+        $this->dispatch('get-acomptes');
+    }
+
+    function delete(){
+        $this->contact_form->delete();
     }
 }

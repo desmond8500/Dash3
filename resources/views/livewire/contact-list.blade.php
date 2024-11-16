@@ -2,8 +2,13 @@
 
     <div class="row g-2">
         <div class="col">
-            <div class="col-md-12 mb-3">
-                <input type="text" class="form-control" wire:model="search" placeholder="Rechercher un contact">
+            <div class="col-md-12">
+                <div class="input-icon">
+                    <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher un contact">
+                    <span class="input-icon-addon">
+                        <i class="ti ti-search"></i>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="col-auto">
@@ -15,7 +20,7 @@
         </div>
         <div class="w-100"></div>
         @foreach ($contacts as $contact)
-            <div class="{{ $card_class ?? 'col-md-4' }}">
+            <div class="{{ $card_class ?? 'col-md-6' }}">
                 <div class="card p-2">
                     <div class="row">
                         <div class="col-auto">
@@ -24,13 +29,16 @@
                         <div class="col">
                             <div class="fw-bold">{{ $contact->firstname }}</div>
                             <div class="fw-bold">{{ $contact->lastname }}</div>
-                            <div class="">{{ $contact->focntion }}</div>
+                            <div class="">{{ $contact->fonction }}</div>
                         </div>
                         <div class="col-auto">
-                          <button class="btn btn-outline-primary btn-icon" >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path> <path d="M13.5 6.5l4 4"></path> </svg>
-                          </button>
-                      </div>
+                            <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $contact->id }}')">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                            <button class="btn btn-outline-danger btn-icon" wire:click="delete('{{ $contact->id }}')">
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -29,12 +29,11 @@ class ContactForm extends Form
     }
 
     function store(){
-        // $this->validate();
+        $this->validate();
+        $this->fix();
         if ($this->projet_id) {
             $this->client_id = Projet::find($this->projet_id)->id;
         }
-
-
         Contact::create($this->all());
     }
 
@@ -51,7 +50,8 @@ class ContactForm extends Form
         $this->contact->update($this->all());
     }
 
-    function delete(){
-        $this->contact->delete();
+    function delete($model_id){
+        $this->contact = Contact::find($model_id);
+        $this->contact->delete($model_id);
     }
 }

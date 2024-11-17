@@ -53,7 +53,7 @@ class ArticlesPage extends Component
 
     public $brand_id;
     public $provider_id;
-    public $priorite_id;
+    public $priorite_id = 25;
 
     public $priorites;
 
@@ -64,7 +64,7 @@ class ArticlesPage extends Component
         if ($this->provider_id) {
             return Article::orderByDesc('id')->where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate(10);
         }
-        if ($this->priorite_id) {
+        if ($this->priorite_id != 25 ) {
             return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate(10);
         }
         return Article::orderByDesc('id')->articleSearch($this->search)->paginate(10);

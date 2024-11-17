@@ -8,8 +8,9 @@
             @endif
 
             @auth
-                {{-- @livewire('form.journal-add')
-                @livewire('form.task-add') --}}
+                <div style="font-size: clamp(1rem, 2vw, 3rem);">
+                    {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
+                </div>
                 @env('local')
                     <div>
                         @component('components.off-canvas',['button'=>'Todos'])
@@ -130,20 +131,17 @@
         </div>
 
     @else
-        <div class="row">
-            <div class="col">
+        <div class="row align-items-center">
+            <div class="col-md">
                 <div class="btn-list mb-2">
                     <a class="btn btn-primary" wire:click="dispatch('open-login')">Connexion</a>
                     <a class="btn btn-secondary" wire:click="dispatch('open-register')">Inscription</a>
                 </div>
             </div>
-            <div class="col-auto">
+            <div class="col-md-auto">
                 <div style="font-size: clamp(1rem, 2vw, 3rem);">
                     {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
                 </div>
-                {{-- <div class="display-6">
-                    {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
-                </div> --}}
             </div>
         </div>
 

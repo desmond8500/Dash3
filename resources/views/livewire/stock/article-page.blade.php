@@ -74,30 +74,38 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="card card-body">
-                        <div class="row g-1">
-                            @foreach ($article->images() as $image)
-                            <div class="col-2">
-                                <div class="border rounded p-1 text-center bg-white">
-                                    <img src="{{ asset("storage/$image") }}" class="avatar avatar-md " alt="">
-                                    <div class="d-flex-between mt-2">
-                                        <i class="ti ti-trash btn btn-sm btn-outline-danger rounded" wire:click="unset_image('{{ $image }}')"></i>
-                                        <i class="ti ti-plus btn btn-sm btn-outline-primary rounded" wire:click="set_image('{{ $image }}')"></i>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Images</div>
+                            <div class="card-actions">
+                                <div class="input-group mt-2">
+                                    <div wire:loading>
+                                        <div class="d-flex justify-content-between">
+                                            <div>Chargement <span class="animated-dots"></div>
+                                        </div>
                                     </div>
+                                    <input type="file" id="file" class="form-control" accept="image/*" multiple wire:model="images">
+                                    <button class="btn btn-primary" wire:click="store_files">Ajouter</button>
                                 </div>
                             </div>
-                            @endforeach
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-1">
+                                @foreach ($article->images() as $image)
+                                    <div class="col-2">
+                                        <div class="border rounded p-1 text-center bg-white">
+                                            <img src="{{ asset("storage/$image") }}" class="avatar avatar-md " alt="">
+                                            <div class="d-flex-between mt-2">
+                                                <i class="ti ti-trash btn btn-sm btn-outline-danger rounded" wire:click="unset_image('{{ $image }}')"></i>
+                                                <i class="ti ti-plus btn btn-sm btn-outline-primary rounded" wire:click="set_image('{{ $image }}')"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
 
-                        <div class="input-group mt-2">
-                            <div wire:loading>
-                                <div class="d-flex justify-content-between">
-                                    <div>Chargement <span class="animated-dots"></div>
-                                </div>
-                            </div>
-                            <input type="file" id="file" class="form-control" accept="image/*" multiple wire:model="images">
-                            <button class="btn btn-primary" wire:click="store_files">Ajouter</button>
-                        </div>
+
                     </div>
                 </div>
 

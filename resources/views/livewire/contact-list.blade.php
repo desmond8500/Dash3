@@ -32,12 +32,22 @@
 
                         </div>
                         <div class="col-auto">
-                            <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $contact->id }}')">
+                            <div class="dropdown open">
+                                <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                    <i class="ti ti-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" wire:click="edit('{{ $contact->id }}')"> <i class="ti ti-edit"></i> Editer</a>
+                                    <a class="dropdown-item text-danger" wire:click="delete('{{ $contact->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
+                                </div>
+                            </div>
+
+                            {{-- <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $contact->id }}')">
                                 <i class="ti ti-edit"></i>
                             </button>
                             <button class="btn btn-outline-danger btn-icon" wire:click="delete('{{ $contact->id }}')">
                                 <i class="ti ti-trash"></i>
-                            </button>
+                            </button> --}}
                         </div>
                         <div class="col-md-12">
                             <div class="text-center">{{ $contact->fonction }}</div>

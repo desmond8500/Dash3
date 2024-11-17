@@ -34,7 +34,22 @@ class ContactForm extends Form
         if ($this->projet_id) {
             $this->client_id = Projet::find($this->projet_id)->id;
         }
-        Contact::create($this->all());
+        $contact = Contact::create($this->all());
+
+        if ($this->avatar) {
+            $dir = "erp/contacts/$contact->id/avatar";
+            // if ($delete) {
+            //     Storage::disk('public')->deleteDirectory($dir);
+            // }
+            $name = $this->avatar->getClientOriginalName();
+            $this->avatar->storeAs("public/$dir", $name);
+
+            $contact->avatar = "storage/$dir/$name";
+            $contact->save();
+        }
+
+
+        $this->reset('firstname', 'lastname', 'fonction', 'avatar');
     }
 
     function set($model_id){

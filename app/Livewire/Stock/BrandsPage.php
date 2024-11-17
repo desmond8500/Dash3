@@ -31,7 +31,7 @@ class BrandsPage extends Component
     #[On('get-brands')]
     function brandSearch()
     {
-        return Brand::where('name', 'like', '%' . $this->search . '%')->paginate(21);
+        return Brand::orderBy('name')->where('name', 'like', '%' . $this->search . '%')->paginate(21);
     }
 
     public function render()

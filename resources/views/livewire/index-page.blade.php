@@ -138,9 +138,12 @@
                 </div>
             </div>
             <div class="col-auto">
-                <div class="display-6">
+                <div style="font-size: clamp(1rem, 2vw, 3rem);">
                     {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
                 </div>
+                {{-- <div class="display-6">
+                    {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
+                </div> --}}
             </div>
         </div>
 

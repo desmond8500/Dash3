@@ -40,7 +40,7 @@
                             </button>
                         </div>
                         <div class="col-md-12">
-                            <div class="">{{ $contact->fonction }}</div>
+                            <div class="text-center">{{ $contact->fonction }}</div>
                         </div>
                     </div>
                 </div>

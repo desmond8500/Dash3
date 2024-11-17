@@ -7,10 +7,14 @@ use App\Livewire\Forms\BrandLinkForm;
 use App\Models\Article;
 use App\Models\Brand;
 use App\Models\BrandLink;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class BrandPage extends Component
 {
+    use WithFileUploads;
+
     public $brand_id;
     public $breadcrumbs;
     public $search;
@@ -22,7 +26,7 @@ class BrandPage extends Component
         $this->breadcrumbs = array(
             array('name' => 'Stock', 'route' => route('stock')),
             array('name' => 'Marques', 'route' => route('brands')),
-            array('name' => $brand->id, 'route' => route('brand',['brand_id'=>$this->brand_id])),
+            array('name' => $brand->name, 'route' => route('brand',['brand_id'=>$this->brand_id])),
         );
     }
 
@@ -65,5 +69,22 @@ class BrandPage extends Component
 
     function link_delete($id){
         $this->brand_link->delete($id);
+    }
+
+    // Logo
+    public $logo;
+
+    function update_logo(){
+
+        $dir = "stock/brands/$this->brand_id/logo";
+        Storage::disk('public')->deleteDirectory($dir);
+        $name = $this->logo->getClientOriginalName();
+        $this->logo->storeAs("public/$dir", $name);
+
+        $brand = Brand::find($this->brand_id);
+
+        $brand->logo = "storage/$dir/$name";
+        $brand->save();
+
     }
 }

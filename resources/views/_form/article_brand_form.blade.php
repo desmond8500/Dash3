@@ -8,11 +8,11 @@
             @else
                 <img src="{{ $brand_form->logo->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload p-1">
             @endif
-            <label for="file" href="#" class="avatar avatar-upload rounded">
+            {{-- <label for="file" href="#" class="avatar avatar-upload rounded">
                 <i class="ti ti-edit text-muted"></i>
                 <span class="avatar-upload-text">Modifier</span>
             </label>
-            <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="brand_form.logo2">
+            <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="brand_form.logo2"> --}}
         @else
             <label for="file" href="#" class="avatar avatar-upload rounded">
                 <i class="ti ti-plus text-muted"></i>

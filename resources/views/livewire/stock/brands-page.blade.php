@@ -35,6 +35,10 @@
                             </div>
 
                         </div>
+                        <div class="col-md-12">
+                            {{-- @dump($brand->article()->count()) --}}
+                            {{-- <div class="text-muted">{{ $brand->article}}</div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

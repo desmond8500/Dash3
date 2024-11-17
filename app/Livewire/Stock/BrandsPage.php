@@ -3,6 +3,7 @@
 namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\BrandForm;
+use App\Models\Article;
 use App\Models\Brand;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -53,6 +54,17 @@ class BrandsPage extends Component
     }
 
     function delete_brand($id){
-        $this->brand_form->delete($id);
+        $articles = Article::where('brand_id', $id)->count();
+
+        if ($articles) {
+            if ($articles >= 1) {
+                $this->js("alert('Cette marque est liée à un article' )");
+            }else{
+                $this->js("alert('Cette marque est liée à $articles articles ' )");
+            }
+        } else {
+            $this->brand_form->delete($id);
+        }
+
     }
 }

@@ -36,17 +36,14 @@ use App\Livewire\Stock\ArticlePage;
 use App\Livewire\Stock\ArticlesPage;
 use App\Livewire\Stock\BrandPage;
 use App\Livewire\Stock\BrandsPage;
+use App\Livewire\Stock\ProviderPage;
 use App\Livewire\Stock\ProvidersPage;
 use App\Livewire\Stock\StockPage;
 use App\Livewire\Task\TaskPage;
 use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
-use App\Livewire\UsersPage;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
-use Spatie\Browsershot\Browsershot;
-use Spatie\LaravelPdf\Facades\Pdf;
-use function Spatie\LaravelPdf\Support\pdf;
 
 // Index
 Route::get('/', IndexPage::class)->name('index');
@@ -107,13 +104,19 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
 // Stock
 Route::middleware(['auth', 'can:stock'])->group(function () {
     Route::get('/stock', StockPage::class)->name('stock');
+    // Providers
     Route::get('/stock/providers', ProvidersPage::class)->name('providers');
+    Route::get('/stock/provider/{provider_id}', ProviderPage::class)->name('provider');
+    // Brands
     Route::get('/stock/brands', BrandsPage::class)->name('brands');
     Route::get('/stock/brand/{brand_id}', BrandPage::class)->name('brand');
+    // Articles
     Route::get('/stock/articles', ArticlesPage::class)->name('articles');
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
+    // Achats
     Route::get('/stock/achats', AchatsPage::class)->name('achats');
     Route::get('/stock/achat/{achat_id}', AchatPage::class)->name('achat');
+
     Route::get('/stock/commande_pdf', function () {
         return PDFController::commande_pdf();
     })->name('commande_pdf');

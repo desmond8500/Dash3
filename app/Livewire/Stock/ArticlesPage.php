@@ -22,7 +22,6 @@ class ArticlesPage extends Component
     public $search ='';
     public $breadcrumbs;
     public ItemForm $article_form;
-    // public ArticleForm $article_form;
 
     public function mount(){
         $this->breadcrumbs = array(
@@ -59,7 +58,6 @@ class ArticlesPage extends Component
     // TODO: Voir les dépendnces de suppression
     function delete($article_id){
         $this->article_form->delete($article_id);
-        // $this->dispatch('get-articles');
     }
 
     function dupliquer($article_id){

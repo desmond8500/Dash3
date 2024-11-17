@@ -2,6 +2,9 @@
 
 namespace App\Livewire\Stock;
 
+use App\Http\Controllers\ImageController;
+use App\Livewire\Forms\ProviderForm;
+use App\Models\Article;
 use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -27,7 +30,7 @@ class ProvidersPage extends Component
 
     #[On('close-addProvider')]
     function ProviderSearch() {
-        return Provider::where('name', 'like', '%' . $this->search . '%')->paginate(10);
+        return Provider::where('name', 'like', '%' . $this->search . '%')->paginate(18);
     }
 
     public function render()
@@ -37,43 +40,47 @@ class ProvidersPage extends Component
         ]);
     }
 
-    #[Validate('required')]
-    public $name;
-    public $logo;
-    public $address;
-    public $description;
-    public $selected;
+    public $provider;
+    public ProviderForm $provider_form;
 
-    function edit($provider_id){
-        $this->selected = $provider_id;
-        $provider = Provider::find($provider_id);
-
-        $this->name = $provider->name;
-        $this->logo = $provider->logo;
-        $this->address = $provider->address;
-        $this->description = $provider->description;
-
+    function edit($id)
+    {
+        $this->provider_form->set($id);
         $this->dispatch('open-editProvider');
     }
-    function update(){
-        $provider = Provider::find($this->selected);
-        $this->validate();
 
-        $provider->name = $this->name;
-        $provider->logo = $this->logo;
-        $provider->address = $this->address;
-        $provider->description = $this->description;
+    function update()
+    {
+        $this->provider_form->update();
+        $this->dispatch('close-editProvider');
+    }
+
+    function delete($id)
+    {
+        $articles =  Article::where('provider_id', $id)->count();
+        if ($articles) {
+            $this->js("alert('Ce fournisseur a $articles articles liés')");
+        } else {
+            $this->provider_form->delete($id);
+        }
+    }
+
+    // Logo
+    public $logo;
+    public $provider_id;
+
+    function edit_logo($id){
+        $this->provider_id = $id;
+        $this->dispatch('open-editLogo');
+    }
+
+    function update_logo()
+    {
+        $dir = "stock/providers/$this->provider_id/logo";
+        $provider = Provider::find($this->provider_id);
+        $provider->logo = ImageController::update_logo($dir, $this->logo);;
         $provider->save();
-
-        $this->dispatch('close-editProvider');
-
+        $this->dispatch('close-editLogo');
     }
-
-    function delete(){
-        $provider = Provider::find($this->selected);
-        $provider->delete();
-        $this->dispatch('close-editProvider');
-    }
-
 
 }

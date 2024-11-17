@@ -30,14 +30,14 @@ class ArticlesPage extends Component
         );
 
         $this->priorites = (object) array(
-            (object) array('name' => 'Centrale 1', 'id' => 1),
-            (object) array('name' => 'Centrale 2', 'id' => 2),
-            (object) array('name' => 'Organe 1', 'id' => 3),
-            (object) array('name' => 'Organe 2', 'id' => 4),
-            (object) array('name' => 'Organe 3', 'id' => 5),
-            (object) array('name' => 'Cable 1', 'id' => 6),
-            (object) array('name' => 'Accessoire', 'id' => 7),
-            (object) array('name' => 'Forfait', 'id' => 8),
+            (object) array('name' => 'Centrale 1', 'id' => 0),
+            (object) array('name' => 'Centrale 2', 'id' => 1),
+            (object) array('name' => 'Organe 1', 'id' => 2),
+            (object) array('name' => 'Organe 2', 'id' => 3),
+            (object) array('name' => 'Organe 3', 'id' => 4),
+            (object) array('name' => 'Cable 1', 'id' => 5),
+            (object) array('name' => 'Accessoire', 'id' => 6),
+            (object) array('name' => 'Forfait', 'id' => 7),
         );
     }
 

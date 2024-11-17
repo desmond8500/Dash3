@@ -18,13 +18,12 @@ class ArticlePage extends Component
     protected $paginationTheme = 'bootstrap';
     public $search ='';
     public $breadcrumbs;
-    public $article;
+    public $article_id;
     public InvoiceForm $article_form;
 
     public function mount($article_id){
-        $this->article = Article::find($article_id);
         $this->article_form->set($article_id);
-
+        $this->article_id = $article_id;
         $this->breadcrumbs = array(
             array('name' => 'Stock', 'route' => route('stock')),
             array('name' => 'Articles', 'route' => route('articles')),
@@ -38,14 +37,13 @@ class ArticlePage extends Component
         return view('livewire.stock.article-page',[
             'providers' => Provider::all(),
             'brands' => Brand::all(),
+            'article' => Article::find($this->article_id),
         ]);
     }
 
     function update()
     {
         $this->article_form->update();
-        $this->article = Article::find($this->article->id);
-
         $this->dispatch('close-editArticle');
     }
 
@@ -66,9 +64,10 @@ class ArticlePage extends Component
     }
 
     function set_image($image){
-        $article = Article::find($this->article->id);
+        $article = Article::find($this->article_id);
         $article->image = "storage/$image";
         $article->save();
+        $this->dispatch('refresh-article');
     }
     function unset_image($image){
         unlink("storage/$image");

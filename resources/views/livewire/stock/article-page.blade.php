@@ -20,7 +20,6 @@
                         <img src="{{ asset("$article->image") }}" class="ratio ratio-1x1 rounded p-2"   alt="">
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -44,39 +43,33 @@
                                         <b>Référence :</b> {{ $article->reference }}
                                     </li>
 
-
                                     <li class="list-group-item d-flex justify-content-between {{ $article->quantity <= $article->quantity_min ? 'text-danger' : '' }}">
                                         <b class="">Quantité :</b> {{ $article->quantity }}
                                     </li>
+
                                     <li class="list-group-item d-flex justify-content-between">
                                         <b>Prix :</b> {{ number_format($article->price, 0, '.', ' ') }} CFA
                                     </li>
                                 </ul>
-
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
-
                                     @if ($article->brand)
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <b>Marque :</b> {{ $article->brand->name }}
-                                    </li>
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <b>Marque :</b> {{ $article->brand->name }}
+                                        </li>
                                     @endif
                                     @if ($article->provider)
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <b>Fournisseur :</b>
-                                        {{ $article->provider->name }}
-                                    </li>
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <b>Fournisseur :</b>
+                                            {{ $article->provider->name }}
+                                        </li>
                                     @endif
                                     <li class="list-group-item d-flex justify-content-between">
                                         <b>Priorité :</b> {{ $article->priority() }}
                                     </li>
                                 </ul>
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -84,25 +77,17 @@
                     <div class="card card-body">
                         <div class="row g-1">
                             @foreach ($article->images() as $image)
-                            <div class="col-3">
+                            <div class="col-2">
                                 <div class="border rounded p-1 text-center bg-white">
                                     <img src="{{ asset("storage/$image") }}" class="avatar avatar-md " alt="">
-                                    <div class="d-flex-between mt-1">
-                                        <i class="ti ti-trash btn btn-sm btn-danger rounded" wire:click="unset_image('{{ $image }}')"></i>
-                                        <i class="ti ti-plus btn btn-sm btn-primary rounded" wire:click="set_image('{{ $image }}')"></i>
+                                    <div class="d-flex-between mt-2">
+                                        <i class="ti ti-trash btn btn-sm btn-outline-danger rounded" wire:click="unset_image('{{ $image }}')"></i>
+                                        <i class="ti ti-plus btn btn-sm btn-outline-primary rounded" wire:click="set_image('{{ $image }}')"></i>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
                         </div>
-                        {{-- <input type="file" id="file" accept="image/*" style="display: none" wire:model="files">
-                        <label for="file" href="#" class="avatar avatar-upload rounded">
-                            <i class="ti ti-plus"></i>
-                            <span class="avatar-upload-text">Ajouter</span>
-                        </label>
-                        @if ($files)
-                        <button class="btn btn-primary" wire:click="store_files">Ajouter</button>
-                        @endif --}}
 
                         <div class="input-group mt-2">
                             <div wire:loading>

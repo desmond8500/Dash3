@@ -81,6 +81,7 @@ class ProvidersPage extends Component
         $provider->logo = ImageController::update_logo($dir, $this->logo);;
         $provider->save();
         $this->dispatch('close-editLogo');
+        $this->reset('logo');
     }
 
 }

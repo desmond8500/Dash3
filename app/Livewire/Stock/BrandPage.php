@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Stock;
 
+use App\Http\Controllers\ImageController;
 use App\Livewire\Forms\BrandForm;
 use App\Livewire\Forms\BrandLinkForm;
 use App\Models\Article;
@@ -75,16 +76,10 @@ class BrandPage extends Component
     public $logo;
 
     function update_logo(){
-
         $dir = "stock/brands/$this->brand_id/logo";
-        Storage::disk('public')->deleteDirectory($dir);
-        $name = $this->logo->getClientOriginalName();
-        $this->logo->storeAs("public/$dir", $name);
-
         $brand = Brand::find($this->brand_id);
-
-        $brand->logo = "storage/$dir/$name";
+        $brand->logo = ImageController::update_logo($dir, $this->logo);;
         $brand->save();
-
+        $this->dispatch('close-editLogo');
     }
 }

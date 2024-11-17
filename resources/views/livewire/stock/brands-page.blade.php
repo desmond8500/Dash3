@@ -30,6 +30,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
                                     <a class="dropdown-item" wire:click="edit_brand('{{ $brand->id }}')"> <i class="ti ti-edit"></i> Editer</a>
+                                    <a class="dropdown-item" wire:click="edit_logo('{{ $brand->id }}')"> <i class="ti ti-edit"></i> Editer image</a>
                                     <a class="dropdown-item text-danger" wire:click="delete_brand('{{ $brand->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                                 </div>
                             </div>
@@ -58,5 +59,32 @@
         </form>
         <script> window.addEventListener('open-editBrand', event => { $('#editBrand').modal('show'); }) </script>
         <script> window.addEventListener('close-editBrand', event => { $('#editBrand').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editBrandLogo', 'title' => 'Editer une marque'])
+        <form class="" wire:submit="update_logo">
+            <div class="text-center mb-3">
+                <div wire:loading>
+                    Chargement <div class="spinner-border" role="status"></div>
+                </div>
+                <div class="my-2">
+                    @if ($logo)
+                    @if (is_string($logo))
+                    <img src="{{ asset($logo) }}" class="avatar avatar-xl">
+                    @else
+                    <img src="{{ $logo->temporaryUrl() }}" class="avatar avatar-xl">
+                    @endif
+                    @else
+                    <input type="file" class="form-control" wire:model='logo'>
+                    @endif
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Modifier</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editBrandLogo', event => { $('#editBrandLogo').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBrandLogo', event => { $('#editBrandLogo').modal('hide'); }) </script>
     @endcomponent
 </div>

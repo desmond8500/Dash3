@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Stock;
 
+use App\Http\Controllers\ImageController;
 use App\Livewire\Forms\BrandForm;
 use App\Models\Article;
 use App\Models\Brand;
@@ -65,6 +66,24 @@ class BrandsPage extends Component
         } else {
             $this->brand_form->delete($id);
         }
+    }
 
+    // Logo
+    public $logo;
+    public $brand_id;
+
+    function edit_logo($brand_id){
+        $this->brand_id = $brand_id;
+        $this->dispatch('open-editBrandLogo');
+    }
+
+    function update_logo()
+    {
+        $dir = "stock/brands/$this->brand_id/logo";
+        $brand = Brand::find($this->brand_id);
+        $brand->logo = ImageController::update_logo($dir, $this->logo);;
+        $brand->save();
+        $this->dispatch('close-editBrandLogo');
+        $this->reset('logo');
     }
 }

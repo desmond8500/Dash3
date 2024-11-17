@@ -13,20 +13,27 @@
             <div class="mb-1">
                 <div class="input-group">
                     <input type="text" class="form-control" wire:model.live="search" placeholder="Trouver un article">
+
+                    <button class="btn btn-icon" wire:click='reset_filter()'><i class="ti ti-reload"></i> </button>
                 </div>
             </div>
-            {{-- <div class="card p-2 mb-1">
-                <b>Trié par :</b>
+
+            <div class="card">
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    @component('components.accordion-item',['id'=> 'brand', 'title'=>"Marques"])
+                        @foreach ($brands->sortby('name') as $brand)
+                            <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('brand_id','{{ $brand->id }}')">{{ $brand->name }}</button>
+                        @endforeach
+                    @endcomponent
+                    @component('components.accordion-item',['id'=> 'provider', 'title'=>"Fournisseurs"])
+                        @foreach ($providers->sortby('name') as $provider)
+                        <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('provider_id','{{ $provider->id }}')">{{ $provider->name }}</button>
+                        @endforeach
+                    @endcomponent
+                </div>
             </div>
-            <div class="card p-2 mb-1">
-                <b>Marques :</b>
-            </div>
-            <div class="card p-2 mb-1">
-                <b>Fournisseurs :</b>
-            </div> --}}
         </div>
-
-
 
         <div class="col-md-9">
             <div class="row row-deck g-2">
@@ -40,11 +47,9 @@
                 <div class="col-md-12">
                     {{ $articles->links() }}
                 </div>
-
             </div>
         </div>
     </div>
-
 
     @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article'])
         <form class="row" wire:submit="update">

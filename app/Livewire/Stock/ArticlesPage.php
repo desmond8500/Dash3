@@ -34,10 +34,27 @@ class ArticlesPage extends Component
     public function render()
     {
         return view('livewire.stock.articles-page',[
-            'articles' => Article::articleSearch($this->search)->paginate(10),
+            'articles' => $this->get_articles(),
             'providers' => Provider::all(),
             'brands' => Brand::all(),
         ]);
+    }
+
+    public $brand_id;
+    public $provider_id;
+
+    function get_articles(){
+        if ($this->brand_id) {
+            return Article::where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate(10);
+        }
+        if ($this->provider_id) {
+            return Article::where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate(10);
+        }
+        return Article::articleSearch($this->search)->paginate(10);
+    }
+
+    function reset_filter(){
+        $this->reset('brand_id', 'provider_id');
     }
 
     public $selected;

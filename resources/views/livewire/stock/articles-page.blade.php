@@ -31,6 +31,11 @@
                         <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('provider_id','{{ $provider->id }}')">{{ $provider->name }}</button>
                         @endforeach
                     @endcomponent
+                    @component('components.accordion-item',['id'=> 'priorite', 'title'=>"Priorités"])
+                        @foreach ($priorites as $priorite)
+                        <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
+                        @endforeach
+                    @endcomponent
                 </div>
             </div>
         </div>

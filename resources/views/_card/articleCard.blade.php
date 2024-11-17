@@ -1,8 +1,8 @@
 <div class="card p-2">
     <div class="row g-2">
-        <div class="col-auto">
+        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}">
             <img src="{{ asset("$article->image") }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
-        </div>
+        </a>
         <div class="col">
             <div class="row">
                 <div class="col">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="text-muted" data-bs-toggle="tooltip" title="Fournisseur">
                         @if ($article->provider)
-                        <span class="badge bg-blue-lt">{{ $article->provider->name }}</span>
+                        <a href="{{ route('provider', ['provider_id'=>$article->provider_id]) }}" target="_blank" class="badge bg-blue-lt">{{ $article->provider->name }}</a>
                         @else
                         _
                         @endif

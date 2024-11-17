@@ -28,6 +28,17 @@ class ArticlesPage extends Component
             array('name' => 'Stock', 'route' => route('stock')),
             array('name' => 'Articles', 'route' => route('articles')),
         );
+
+        $this->priorites = (object) array(
+            (object) array('name' => 'Centrale 1', 'id' => 1),
+            (object) array('name' => 'Centrale 2', 'id' => 2),
+            (object) array('name' => 'Organe 1', 'id' => 3),
+            (object) array('name' => 'Organe 2', 'id' => 4),
+            (object) array('name' => 'Organe 3', 'id' => 5),
+            (object) array('name' => 'Cable 1', 'id' => 6),
+            (object) array('name' => 'Accessoire', 'id' => 7),
+            (object) array('name' => 'Forfait', 'id' => 8),
+        );
     }
 
     #[On('get-articles')]
@@ -42,19 +53,25 @@ class ArticlesPage extends Component
 
     public $brand_id;
     public $provider_id;
+    public $priorite_id;
+
+    public $priorites;
 
     function get_articles(){
         if ($this->brand_id) {
-            return Article::where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate(10);
+            return Article::orderByDesc('id')->where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate(10);
         }
         if ($this->provider_id) {
-            return Article::where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate(10);
+            return Article::orderByDesc('id')->where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate(10);
         }
-        return Article::articleSearch($this->search)->paginate(10);
+        if ($this->priorite_id) {
+            return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate(10);
+        }
+        return Article::orderByDesc('id')->articleSearch($this->search)->paginate(10);
     }
 
     function reset_filter(){
-        $this->reset('brand_id', 'provider_id');
+        $this->reset('brand_id', 'provider_id', 'priorite_id');
     }
 
     public $selected;

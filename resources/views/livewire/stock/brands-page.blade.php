@@ -8,8 +8,11 @@
 
     <div class="row row-deck g-2">
         <div class="col-md-12">
-            <div class="input-group">
-                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
+            <div class="input-icon">
+                <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher une marque">
+                <span class="input-icon-addon">
+                    <i class="ti ti-search"></i>
+                </span>
             </div>
         </div>
         @foreach ($brands as $brand)

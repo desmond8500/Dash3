@@ -30,7 +30,7 @@ class ProvidersPage extends Component
 
     #[On('close-addProvider')]
     function ProviderSearch() {
-        return Provider::where('name', 'like', '%' . $this->search . '%')->paginate(18);
+        return Provider::where('name', 'like', '%' . $this->search . '%')->paginate(21);
     }
 
     public function render()

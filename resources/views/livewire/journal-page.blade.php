@@ -69,6 +69,21 @@
 
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Intervenants</div>
+                    <div class="card-actions">
+
+                    </div>
+                </div>
+                <div class="card-body">
+
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
         </div>
     </div>
 

@@ -51,7 +51,7 @@ class ArticlePage extends Component
     public $images;
 
     function store_files(){
-        $article = Article::find($this->article->id);
+        $article = Article::find($this->article_id);
         $dir = "stock/articles/" . $article->id . "/images";
 
         if ($this->images) {

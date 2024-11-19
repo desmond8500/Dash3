@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
                                     <input type="file" id="file" class="form-control" accept="image/*" multiple wire:model="images">
-                                    <button class="btn btn-primary" wire:click="store_files">Ajouter</button>
+                                    <button class="btn btn-primary" wire:click="store_files">Ajouter images</button>
                                 </div>
                             </div>
                         </div>
@@ -96,8 +96,8 @@
                                         <div class="border rounded p-1 text-center bg-white">
                                             <img src="{{ asset("storage/$image") }}" class="avatar avatar-md " alt="">
                                             <div class="d-flex-between mt-2">
-                                                <i class="ti ti-trash btn btn-sm btn-outline-danger rounded" wire:click="unset_image('{{ $image }}')"></i>
-                                                <i class="ti ti-plus btn btn-sm btn-outline-primary rounded" wire:click="set_image('{{ $image }}')"></i>
+                                                <i class="ti ti-trash btn btn-sm btn-outline-danger rounded" wire:click="unset_image('{{ $image }}')" data-bs-toggle="tooltip" title="Supprimer l'image"></i>
+                                                <i class="ti ti-plus btn btn-sm btn-outline-primary rounded" wire:click="set_image('{{ $image }}')" data-bs-toggle="tooltip" title="Définir comme image par défaut"></i>
                                             </div>
                                         </div>
                                     </div>

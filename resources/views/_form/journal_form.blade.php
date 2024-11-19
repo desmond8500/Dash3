@@ -43,10 +43,21 @@
         @error('journalForm.type') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-12 mb-3">
+    <div class="col-md-11 mb-3">
         <label class="form-label">Description</label>
         <textarea class="form-control" wire:model="journalForm.description" data-bs-toggle="autosize" placeholder="Description" cols="30" rows="5"></textarea>
         @error('journalForm.description') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
+    <div class="col-md-1">
+        <div class="dropdown open">
+            <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <i class="ti ti-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="triggerId">
+                <a class="dropdown-item" wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Travaux effectués\n\n#Travaux restants\n ')"></i> Editer</a>
+            </div>
+        </div>
     </div>
 
 

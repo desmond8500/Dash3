@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             @foreach ($documents as $document)
-                <div class="row align-items-center mb-1">
+                <div class="row align-items-center mb-1 pb-1 border-bottom">
                     <a class="col-auto" href="{{ asset($document->folder) }}" target="_blank">
                         <img src="{{ asset($document->folder) }}" alt="F" class="avatar">
                     </a>

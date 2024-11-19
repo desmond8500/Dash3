@@ -31,6 +31,7 @@ class InvoiceRowForm extends Form
 
         $this->invoice_section_id = $this->row->invoice_section_id;
         $this->designation = $this->row->designation;
+        $this->article_id = $this->row->article_id;
         $this->coef = $this->row->coef;
         $this->reference = $this->row->reference;
         $this->quantite = $this->row->quantite;

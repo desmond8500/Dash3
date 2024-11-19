@@ -100,7 +100,14 @@
                 @endphp
                 <tr class="">
                     <td scope="row">
-                        <div>{{ $row->designation }}</div>
+                        <div>
+                            @if ($row->article_id)
+                                <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{ $row->designation }}</a>
+                            @else
+                                {{ $row->designation }}
+                            @endif
+
+                        </div>
                         <div class="text-muted">{!! nl2br($row->reference) !!}</div>
                     </td>
                     <td class="text-center">{{ $row->quantite }}</td>

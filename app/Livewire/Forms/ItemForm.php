@@ -41,6 +41,7 @@ class ItemForm extends Form
 
     function store(){
         $this->validate();
+        $this->fix();
         $article = Article::create($this->all());
 
         if ($this->image) {
@@ -71,6 +72,7 @@ class ItemForm extends Form
 
     function update(){
         $this->validate();
+        $this->fix();
         $this->article->update($this->all());
 
         $this->storeAvatar();

@@ -89,20 +89,6 @@ class ArticleForm extends Form
             'provider_id',
             'price',
         ));
-
-        if ($this->image && is_array($this->image)) {
-            $this->article = Article::find($this->article->id);
-            $images = $this->image;
-            $dir = "stock/articles/".$this->article->id."/images";
-            foreach ($images as $key => $image) {
-                $name = $image->getClientOriginalName();
-                $image->storeAS("public/$dir", $name);
-            }
-
-            $this->article->image = "$dir/$name";
-            // $article->image = "stockage/$dir/$name";
-            $this->article->save();
-        }
         return $article;
     }
 

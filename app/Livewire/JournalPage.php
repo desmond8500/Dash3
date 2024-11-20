@@ -3,7 +3,10 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\JournalForm;
+use App\Models\Contact;
 use App\Models\Journal;
+use App\Models\JournalIntervenant;
+use App\Models\Team;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -24,7 +27,13 @@ class JournalPage extends Component
     #[On('close-editJournal')]
     public function render()
     {
-        return view('livewire.journal-page');
+        return view('livewire.journal-page',[
+            'contacts' => Contact::where('projet_id', $this->journal->projet->id)
+                                ->orWhere('client_id', $this->journal->projet->client->id)
+                                ->get(),
+            'team' => Team::get(),
+            'intervenants' => JournalIntervenant::get(),
+        ]);
     }
 
     public JournalForm $journalForm ;
@@ -38,8 +47,22 @@ class JournalPage extends Component
         $this->dispatch('close-editJournal');
     }
 
-    function delete_journal(){
+    function add_contact($contact_id){
+        JournalIntervenant::create([
+            'journal_id' => $this->journal->id,
+            'contact_id' => $contact_id,
+        ]);
+    }
+    function add_team($team_id){
+        JournalIntervenant::create([
+            'journal_id' => $this->journal->id,
+            'team_id' => $team_id,
+        ]);
+    }
 
+    function delete_intervenant($id){
+        $intervenant = JournalIntervenant::find($id);
+        $intervenant->delete();
     }
 
 

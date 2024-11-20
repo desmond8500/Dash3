@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Stock;
 
-use App\Livewire\Forms\InvoiceForm;
+use App\Livewire\Forms\ArticleForm;
 use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Provider;
@@ -19,10 +19,9 @@ class ArticlePage extends Component
     public $search ='';
     public $breadcrumbs;
     public $article_id;
-    public InvoiceForm $article_form;
+    public ArticleForm $article_form;
 
     public function mount($article_id){
-        $this->article_form->set($article_id);
         $this->article_id = $article_id;
         $this->breadcrumbs = array(
             array('name' => 'Stock', 'route' => route('stock')),
@@ -39,6 +38,11 @@ class ArticlePage extends Component
             'brands' => Brand::all(),
             'article' => Article::find($this->article_id),
         ]);
+    }
+
+    function edit($article_id){
+        $this->article_form->set($article_id);
+        $this->dispatch('open-editArticle');
     }
 
     function update()

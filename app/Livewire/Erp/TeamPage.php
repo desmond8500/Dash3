@@ -34,7 +34,7 @@ class TeamPage extends Component
 
     function store(){
         $this->team_form->store();
-        $this->dispatch('close-adTeam');
+        $this->dispatch('close-addTeam');
     }
 
     function edit($id){

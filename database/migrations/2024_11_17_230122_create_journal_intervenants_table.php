@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('journal_intervenants', function (Blueprint $table) {
             $table->id();
+            $table->integer('journal_id')->constrained();
+            $table->integer('contact_id')->constrained()->nullable();
+            $table->integer('team_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

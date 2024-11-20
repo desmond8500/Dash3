@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Building;
 use App\Models\Client;
+use App\Models\Contact;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
@@ -15,6 +16,7 @@ use App\Models\Provider;
 use App\Models\Task;
 use App\Models\TaskPriority;
 use App\Models\TaskStatus;
+use App\Models\Team;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -114,11 +116,15 @@ class DashController extends Controller
                     ->has(InvoiceSection::factory(2)
                     ->has(InvoiceRow::factory(5))))
                 ->has(Building::factory(1))
+                ->has(Contact::factory(10))
             )->create();
     }
 
     static function init_projets(){
 
+    }
+    static function init_team(){
+        Team::factory(10);
     }
 
     static function get_fiche_types(){

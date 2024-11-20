@@ -24,14 +24,13 @@
         </div>
 
         <div class="col-md-8">
-
             <div class="row g-2">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">{{ $article->designation }}</div>
                             <div class="card-actions">
-                                <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-editArticle')">
+                                <button class="btn btn-primary btn-icon" wire:click="edit('{{ $article->id }}')">
                                     <i class="ti ti-edit"></i>
                                 </button>
                             </div>

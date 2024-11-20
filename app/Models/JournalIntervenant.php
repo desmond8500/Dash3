@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class JournalIntervenant extends Model
 {
@@ -23,13 +24,13 @@ class JournalIntervenant extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function contacts(): HasMany
+    public function contact(): BelongsTo
     {
-        return $this->hasMany(Contact::class);
+        return $this->belongsTo(Contact::class, 'contact_id');
     }
 
-    public function teams(): HasMany
+    public function team(): BelongsTo
     {
-        return $this->hasMany(Team::class);
+        return $this->belongsTo(Team::class, 'team_id');
     }
 }

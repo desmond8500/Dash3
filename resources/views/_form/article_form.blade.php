@@ -62,7 +62,12 @@
             </div>
             <div class="col-md-12">
                 <label class="form-label">Prix</label>
-                <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
+                <div class="input-group">
+                    <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
+                    <a class="btn btn-primary btn-icon" wire:click="convert_euro()">
+                        <i class="ti ti-refresh"></i>
+                    </a>
+                </div>
                 @error('article_form.price') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </div>

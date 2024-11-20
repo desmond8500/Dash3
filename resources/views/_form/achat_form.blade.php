@@ -18,7 +18,7 @@
     @error('achat_form.provider_id') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 <div class="col-md-8 mb-3">
-    <label class="form-label">Titre du document</label>
+    <label class="form-label required">Titre du document</label>
     <input type="text" class="form-control" wire:model="achat_form.name" placeholder="Nom">
     @error('achat_form.name') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>

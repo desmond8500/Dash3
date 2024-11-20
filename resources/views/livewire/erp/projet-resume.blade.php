@@ -56,7 +56,7 @@
                 </div>
                 <div class="col">
                     <div class="text-center">
-                        <div class="fw-bold" style="font-size:1.5rem;">RESUME DU PROJET</div>
+                        <div class="fw-bold" style="font-size: clamp(0.8rem, 2vw, 3rem);">RESUME DU PROJET</div>
                         <div class="text-muted">{{ $projet->name }}</div>
                     </div>
                 </div>

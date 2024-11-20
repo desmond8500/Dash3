@@ -7,7 +7,7 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
+                        <a class="fw-bold"  href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
                     </div>
                     @isset($edit)
                     <div class="col-auto">

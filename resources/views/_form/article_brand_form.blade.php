@@ -24,7 +24,7 @@
 </div>
 
 <div class="col mb-3">
-    <label class="form-label">Nom </label>
+    <label class="form-label required">Nom </label>
     <input type="text" class="form-control" wire:model='brand_form.name' />
     @error('brand_form.name') <span class="text-danger">{{ $message }}</span> @enderror
 </div>

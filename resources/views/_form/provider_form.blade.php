@@ -22,7 +22,7 @@
 
 
     <div class="col mb-3">
-        <label class="form-label">Nom du fournisseur</label>
+        <label class="form-label required">Nom du fournisseur</label>
         <input type="text" class="form-control" wire:model="provider_form.name" placeholder="Nom">
         @error('provider_form.name') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>

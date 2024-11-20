@@ -28,7 +28,7 @@ class TeamPage extends Component
     public function render()
     {
         return view('livewire.erp.team-page',[
-            'equipe' => Team::paginate(5),
+            'equipe' => Team::paginate(18),
         ]);
     }
 

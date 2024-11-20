@@ -38,6 +38,9 @@
                 </div>
             </div>
         @endforeach
+        <div class="col-md-12">
+            {{ $equipe->links() }}
+        </div>
     </div>
 
     @component('components.modal', ["id"=>'addTeam', 'title' => 'Ajouter un membre'])

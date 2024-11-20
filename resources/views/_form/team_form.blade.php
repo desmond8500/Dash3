@@ -4,7 +4,7 @@
     @error('team_form.firstname') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 <div class="col-md-12 mb-3">
-    <label class="form-label">nom</label>
+    <label class="form-label">Nom</label>
     <input type="text" class="form-control" wire:model="team_form.lastname" placeholder="nom">
     @error('team_form.lastname') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>

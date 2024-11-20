@@ -41,7 +41,7 @@
         <div class="card p-2 mb-2">
             <div class="card-title">Batiments</div>
             @foreach ($buildings as $building)
-                <a href="{{ route('building',['building_id'=> $building->id]) }}" class="card p-1" target="_blank">
+                <a href="{{ route('building',['building_id'=> $building->id]) }}" class="card p-1 mb-1" target="_blank">
                     {{ $building->name }}
                 </a>
             @endforeach

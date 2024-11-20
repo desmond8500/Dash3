@@ -75,7 +75,7 @@ class ItemForm extends Form
         $this->fix();
         $this->article->update($this->all());
 
-        $this->storeAvatar();
+        // $this->storeAvatar();
     }
 
     function storeAvatar()

@@ -87,7 +87,7 @@
         <label class="form-label">Fournisseur</label>
         <select class="form-control" wire:model="article_form.provider_id">
             <option value="" class="text-muted">--Sélectionner--</option>
-            @foreach ($providers as $provider)
+            @foreach ($providers->sortBy('name') as $provider)
                 <option value="{{ $provider->id }}">{{ $provider->name }}</option>
             @endforeach
         </select>
@@ -98,7 +98,7 @@
         <label class="form-label">Marque</label>
         <select class="form-control" wire:model="article_form.brand_id">
             <option value="" >--Sélectionner--</option>
-            @foreach ($brands as $brand)
+            @foreach ($brands->sortBy('name') as $brand)
             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
             @endforeach
         </select>

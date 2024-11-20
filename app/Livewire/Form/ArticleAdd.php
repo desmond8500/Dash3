@@ -38,6 +38,6 @@ class ArticleAdd extends Component
     }
 
     function uppercase(){
-        $this->article_form->reference = ucfirst($this->article_form->reference);
+        $this->article_form->reference = strtoupper($this->article_form->reference);
     }
 }

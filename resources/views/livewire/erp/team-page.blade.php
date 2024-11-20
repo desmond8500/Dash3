@@ -12,7 +12,7 @@
                 </span>
             </div>
         </div>
-        @foreach ($equipe as $personne)
+        @foreach ($equipe->sortBy('lastname') as $personne)
             <div class="col-md-4">
                 <div class="card p-2">
                     <div class="row">

@@ -25,7 +25,7 @@ class ProjetResume extends Component
             'projet' => Projet::find($this->projet_id),
             'invoices' => Invoice::where('projet_id', $this->projet_id)
                 ->search($this->invoice_search,'reference')
-                ->paginate(6),
+                ->paginate(5),
             'buildings' => Building::where('projet_id', $this->projet_id)->get(),
         ]);
     }

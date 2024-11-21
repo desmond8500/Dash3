@@ -121,10 +121,10 @@
                         <thead class="sticky-top">
                             <tr>
                                 <th style="width:10px">#</th>
-                                <th>Références</th>
+                                <th style="width:100px">Références</th>
                                 <th>Description</th>
-                                <th>statut</th>
-                                <th class="text-end">Total</th>
+                                <th style="width: 90px">statut</th>
+                                <th class="text-end" style="width: 120px">Total</th>
                             </tr>
                         </thead>
                         <tbody>

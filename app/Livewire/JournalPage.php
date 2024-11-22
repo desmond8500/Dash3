@@ -32,7 +32,7 @@ class JournalPage extends Component
                                 ->orWhere('client_id', $this->journal->projet->client->id)
                                 ->get(),
             'team' => Team::get(),
-            'intervenants' => JournalIntervenant::get(),
+            'intervenants' => JournalIntervenant::where('journal_id', $this->journal->id)->get(),
         ]);
     }
 

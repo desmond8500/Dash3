@@ -33,6 +33,18 @@
     @endpush
 
     <div class="row g-2">
+        <div class="col-md-12">
+            <div class="status status-blue">
+                <div class="d-flex">
+                    <a class="" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets', ['client_id'=>$journal->projet->client->id]) }}" title="Client">{{ $journal->projet->client->name }}</a>
+                    <span class="mx-1">/</span>
+                    <a class="" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projet', ['projet_id'=>$journal->projet->id]) }}" title="Projet">{{ $journal->projet->name }}</a>
+                    <span class="mx-1">/</span>
+                    <a class="" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('journal', ['journal_id'=>$journal->id]) }}" title="Journal">Journal</a>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-8">
 
             <div class="card">
@@ -53,6 +65,7 @@
             </div>
 
         </div>
+
         <div class="col-md-4">
             <div class="card mb-2">
                 <div class="card-header">
@@ -82,22 +95,18 @@
                         <div class="row border-bottom my-1">
                             <div class="col-md">
                                 @if ($intervenant->contact_id)
-                                    {{ $intervenant->contact->firstname }} {{ $intervenant->contact->lastname }}
+                                    <i class="ti ti-user"></i> {{ $intervenant->contact->firstname }} {{ $intervenant->contact->lastname }}
                                 @else
-                                    {{ $intervenant->team->firstname }} {{ $intervenant->team->lastname }}
+                                    <i class="ti ti-user"></i> {{ $intervenant->team->firstname }} {{ $intervenant->team->lastname }}
                                 @endif
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-danger btn-icon " wire:click="delete_intervenant('{{ $intervenant->id }}')">
+                                <button class="btn btn-ghost-danger btn-icon " wire:click="delete_intervenant('{{ $intervenant->id }}')">
                                     <i class="ti ti-trash"></i>
                                 </button>
                             </div>
                         </div>
                     @endforeach
-
-                </div>
-                <div class="card-footer">
-
                 </div>
             </div>
         </div>
@@ -122,14 +131,20 @@
             <div class="col-md-12">
                 <div class="fw-bold mb-2">Equipe</div>
                 @foreach ($team as $personne)
-                    <a class="btn btn-primary mb-1"  wire:click="add_team('{{ $personne->id }}')">{{ $personne->firstname }} {{ $personne->lastname }}</a>
+                    <a class="btn btn-primary mb-1"  wire:click="add_team('{{ $personne->id }}')">
+                        <i class="ti ti-user"></i>
+                        {{ $personne->firstname }} {{ $personne->lastname }}
+                    </a>
                 @endforeach
 
             </div>
             <div class="col-md-12">
                 <div class="fw-bold mb-2">Contacts</div>
                 @foreach ($contacts as $contact)
-                    <a class="btn btn-primary mb-1" wire:click="add_contact('{{ $contact->id }}')">{{ $contact->firstname }} {{ $contact->lastname }}</a>
+                    <a class="btn btn-primary mb-1" wire:click="add_contact('{{ $contact->id }}')">
+                        <i class="ti ti-user"></i>
+                        {{ $contact->firstname }} {{ $contact->lastname }}
+                    </a>
                 @endforeach
             </div>
 

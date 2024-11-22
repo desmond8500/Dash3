@@ -10,7 +10,7 @@
                 </div>
                 @isset($edit)
                     <div class="col-auto">
-                        <button class="btn btn-outline-primary btn-icon" id="triggerId" data-bs-toggle="dropdown" >
+                        <button class="btn btn-ghost-primary btn-icon" id="triggerId" data-bs-toggle="dropdown" >
                             <i class="ti ti-dots-vertical"></i>
                         </button>
 
@@ -31,6 +31,9 @@
             @endisset
             <div class="row">
                 <div class="col-8">
+                    <div class="text-muted" data-bs-toggle="tooltip" title="Réference" style="font-size:10px">
+                        {{ strtoupper($article->reference) }}
+                    </div>
                     <div class="text-muted" data-bs-toggle="tooltip" title="Marque">
                         @if ($article->brand)
                         <a href="{{ route('brand', ['brand_id'=>$article->brand->id]) }}" target="_blank" class="text-muted">{{ $article->brand->name }}</a>
@@ -38,7 +41,7 @@
                         _
                         @endif
                     </div>
-                    <div class="text-muted" data-bs-toggle="tooltip" title="Fournisseur">
+                    <div class="text-muted" data-bs-toggle="tooltip" title="Fournisseur" style="font-size:12px">
                         @if ($article->provider)
                         <a href="{{ route('provider', ['provider_id'=>$article->provider_id]) }}" target="_blank" class="badge bg-blue-lt">{{ $article->provider->name }}</a>
                         @else
@@ -53,10 +56,10 @@
 
             <div class="row mt-1">
                 <div class="col-md-6">
-                    <div class="badge">{{ $article->priority() }}</div>
+                    <div class="badge " style="font-size:10px">{{ $article->priority() }}</div>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-danger text-end" style="font-size: 20px">{{ number_format($article->price, 0, 2) }} F</div>
+                    <div class="text-danger text-end" style="font-size: 18px">{{ number_format($article->price, 0, 2) }} F</div>
                 </div>
             </div>
         </div>

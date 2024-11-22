@@ -8,17 +8,13 @@
                 @if ($article_form->image)
                     @if(is_string($article_form->image))
                         <img src="{{ asset($article_form->image) }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
-
                     @else
                         <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
-                        {{-- @foreach ($article_form->image as $image)
-                        @endforeach --}}
-
                     @endif
-                    <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                    {{-- <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
                         <i class="ti ti-edit text-muted"></i>
                         <span class="avatar-upload-text">Modifier</span>
-                    </label>
+                    </label> --}}
                 @else
                     <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
                         <i class="ti ti-plus text-muted"></i>
@@ -28,7 +24,7 @@
 
             @endif
         </div>
-        <input type="file" id="file" accept="image/*" style="display: none" wire:model="article_form.image">
+        <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="article_form.image">
     </div>
 
     <div class="col-md-8 mb-3">

@@ -59,15 +59,15 @@ class ArticlesPage extends Component
 
     function get_articles(){
         if ($this->brand_id) {
-            return Article::orderByDesc('id')->where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate(10);
+            return Article::orderByDesc('id')->where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate(8);
         }
         if ($this->provider_id) {
-            return Article::orderByDesc('id')->where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate(10);
+            return Article::orderByDesc('id')->where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate(8);
         }
         if ($this->priorite_id != 25 ) {
-            return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate(10);
+            return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate(8);
         }
-        return Article::orderByDesc('id')->articleSearch($this->search)->paginate(10);
+        return Article::orderByDesc('id')->articleSearch($this->search)->paginate(8);
     }
 
     function reset_filter(){

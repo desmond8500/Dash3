@@ -1,4 +1,4 @@
-<div class="card p-2 ">
+<div class="card p-2 border border-primary">
     <div class="row ">
         <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
             <img class="avatar " src="{{ asset($projet->client->avatar) }}" alt="A">

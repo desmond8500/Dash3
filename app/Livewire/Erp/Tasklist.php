@@ -57,6 +57,7 @@ class Tasklist extends Component
             'tasks' => $this->getTasks(),
             'activeCount' => Task::activeCount(),
             'inactiveCount' => Task::inactiveCount(),
+            // 'inactiveCount' => Task::inactiveCount(),
             'statuses' => TaskStatus::all(),
             'priorities' => TaskPriority::all(),
 

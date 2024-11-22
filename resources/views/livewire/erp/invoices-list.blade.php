@@ -5,7 +5,7 @@
         </div>
         <div class="col-md-auto">
             <div class="input-icon">
-                <input type="text" class="form-control " wire:model="search"
+                <input type="text" class="form-control form-control-rounded " wire:model="search"
                     placeholder="Trouver un devis">
                 <span class="input-icon-addon">
                     <i class="ti ti-search"></i>

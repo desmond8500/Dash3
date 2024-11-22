@@ -68,10 +68,6 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-resume">
-                            {{-- @component('components.erp.projet.projet-resume',['projet'=>$projet, 'buildings' => $buildings, 'invoices' => $invoices])
-
-                            @endcomponent --}}
-
                             @livewire('erp.projet-resume', ['projet_id'=>$projet_id, 'buildings' => $buildings, 'invoices' => $invoices])
                         </div>
 
@@ -80,44 +76,42 @@
                         </div>
 
                         <div class="tab-pane" id="tabs-task">
-                            <h2>Liste des Taches</h2>
-
-                            <div>
-                                @livewire('erp.tasklist', ['projet_id' => $projet_id])
-                            </div>
+                            @livewire('erp.tasklist', ['projet_id' => $projet_id])
                         </div>
 
                         <div class="tab-pane" id="tabs-journaux">
-                            <div class="row g-2">
-                                @livewire('erp.journaux', ['projet_id' => $projet_id],)
-                            </div>
+                            @livewire('erp.journaux', ['projet_id' => $projet_id],)
                         </div>
 
                         <div class="tab-pane" id="tabs-dossier">
                             @livewire('erp.dossier', ['projet_id' => $projet_id])
                         </div>
 
+                        <div class="tab-pane" id="tabs-contact">
+                            <h2>Contats</h2>
+                            @livewire('contact-list', ['projet_id' => $projet->id, 'card_class'=>'col-md-4'])
+                        </div>
+
+                        <div class="tab-pane" id="tabs-badge">
+                            @livewire('badges', ['projet_id' => $projet_id])
+                        </div>
+
+                        <div class="tab-pane" id="tabs-notes">
+                            @livewire('erp.projet-notes', ['projet_id' => $projet->id], )
+                        </div>
+
+                        <div class="tab-pane" id="tabs-notes">
+                            @livewire('erp.projet-notes', ['projet_id' => $projet->id], )
+                        </div>
+
+                        <div class="tab-pane" id="tabs-structure">
+                            @livewire('erp.building-list', ['projet_id' => $projet->id])
+                        </div>
+
                         <div class="tab-pane" id="tabs-reglages">
                             <h2>Settings tab</h2>
                             <div>Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet, facilisi sit mauris
                                 accumsan nibh habitant senectus</div>
-                        </div>
-
-                        <div class="tab-pane" id="tabs-contact">
-                            <h2>Contats</h2>
-                            @livewire('contact-list', ['projet_id' => $projet->id])
-                        </div>
-                        <div class="tab-pane" id="tabs-badge">
-                            @livewire('badges', ['projet_id' => $projet_id])
-                        </div>
-                        <div class="tab-pane" id="tabs-notes">
-                            @livewire('erp.projet-notes', ['projet_id' => $projet->id], )
-                        </div>
-                        <div class="tab-pane" id="tabs-notes">
-                            @livewire('erp.projet-notes', ['projet_id' => $projet->id], )
-                        </div>
-                        <div class="tab-pane" id="tabs-structure">
-                            @livewire('erp.building-list', ['projet_id' => $projet->id])
                         </div>
                     </div>
                 </div>

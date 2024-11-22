@@ -22,14 +22,14 @@
         @foreach ($contacts as $contact)
             <div class="{{ $card_class ?? 'col-md-6' }}">
                 <div class="card p-2">
-                    <div class="row">
+                    <div class="row g-2">
                         <div class="col-auto">
-                            <img src="" alt="A" class="avatar">
+                            <img src="" alt="A" class="avatar avatar-md">
                         </div>
                         <div class="col">
-                            <div class="fw-bold">{{ $contact->firstname }}</div>
-                            <div class="fw-bold">{{ $contact->lastname }}</div>
-
+                            <div class="">{{ $contact->firstname }}</div>
+                            <div class="fw-bold">{{ strtoupper($contact->lastname) }}</div>
+                            <div class="text-primary">{{ $contact->fonction }}</div>
                         </div>
                         <div class="col-auto">
                             <div class="dropdown open">
@@ -41,16 +41,6 @@
                                     <a class="dropdown-item text-danger" wire:click="delete('{{ $contact->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                                 </div>
                             </div>
-
-                            {{-- <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $contact->id }}')">
-                                <i class="ti ti-edit"></i>
-                            </button>
-                            <button class="btn btn-outline-danger btn-icon" wire:click="delete('{{ $contact->id }}')">
-                                <i class="ti ti-trash"></i>
-                            </button> --}}
-                        </div>
-                        <div class="col-md-12">
-                            <div class="text-center">{{ $contact->fonction }}</div>
                         </div>
                     </div>
                 </div>

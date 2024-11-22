@@ -1,5 +1,5 @@
 <div>
-    <a class="btn btn-primary" wire:click="ajouter()">
+    <a class="btn btn-primary btn-pill" wire:click="ajouter()">
         <i class="ti ti-plus"></i>Devis
     </a>
 
@@ -8,14 +8,8 @@
             @include('_form.invoice_form')
         </form>
 
-        <script>
-            window.addEventListener('open-addInvoice', event => {
-                $('#addInvoice').modal('show');
-            })
-        </script>
-        <script>
-            window.addEventListener('close-addInvoice', event => { $('#addInvoice').modal('hide'); })
-        </script>
+        <script> window.addEventListener('open-addInvoice', event => { $('#addInvoice').modal('show'); }) </script>
+        <script> window.addEventListener('close-addInvoice', event => { $('#addInvoice').modal('hide'); }) </script>
     @endcomponent
 
 </div>

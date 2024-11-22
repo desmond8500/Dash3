@@ -16,6 +16,7 @@ class ContactList extends Component
 
     public $projet_id;
     public $client_id;
+    public $card_class;
     public $search;
 
     function mount($projet_id = 0, $client_id = 0){

@@ -51,19 +51,22 @@
         {{ $journal->title }}
     </div>
 
-    <div>
-        <h1>Intervenants</h1>
-        <ul type='dot'>
-            @foreach ($journal->intervenants as $intervenant)
-                @if ($intervenant->contact_id)
-                    <li>{{ $intervenant->contact->firstname }} {{ $intervenant->contact->lastname }}</li>
-                @else
-                    <li>{{ $intervenant->team->firstname }} {{ $intervenant->team->lastname }}</li>
-                @endif
-            @endforeach
-        </ul>
+    @if ($journal->intervenants->count())
+        <div>
+            <h1>Intervenants</h1>
+            <ul type='dot'>
+                @foreach ($journal->intervenants as $intervenant)
+                    @if ($intervenant->contact_id)
+                        <li>{{ $intervenant->contact->firstname }} {{ strtoupper($intervenant->contact->lastname) }}  ({{ $intervenant->contact->fonction }})</li>
+                    @else
+                        <li>{{ $intervenant->team->firstname }} {{ $intervenant->team->lastname }} </li>
+                    @endif
+                @endforeach
+            </ul>
 
-    </div>
+        </div>
+
+    @endif
 
     <div>
         @parsedown($journal->description)

@@ -43,6 +43,7 @@
 
     <hr>
     <div>
+        <span class="fw-bold">Client : </span> <span>{{ $journal->projet->client->name }}</span> <br>
         <span class="fw-bold">Projet : </span> <span>{{ $journal->projet->name }}</span>
     </div>
 

@@ -22,6 +22,7 @@ class InvoiceSystemForm extends Form
 
     function store(){
         $this->validate();
+        $this->fix();
         InvoiceSystem::create($this->all());
     }
 
@@ -33,6 +34,7 @@ class InvoiceSystemForm extends Form
 
     function update(){
         $this->validate();
+        $this->fix();
         $this->system->update($this->all());
     }
 

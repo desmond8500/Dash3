@@ -147,7 +147,7 @@
 
     @endauth
 
-    <div class="mt-5 border border-primary rounded p-2 bg-white">
+    <div class="mt-2 border border-primary rounded p-2 bg-white">
         <div class="fw-bold mb-2 ">
             Dev tools !!!
         </div>

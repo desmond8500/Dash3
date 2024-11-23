@@ -4,19 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class InvoiceSystem extends Model
+class InvoiceModel extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'invoice_system_id',
         'name',
         'description',
     ];
 
-    public function models(): HasMany
+    public function system(): BelongsTo
     {
-        return $this->hasMany(InvoiceModel::class, 'invoice_system_id');
+        return $this->belongsTo(InvoiceSystem::class, 'invoice_system_id');
     }
 }

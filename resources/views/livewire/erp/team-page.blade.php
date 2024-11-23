@@ -66,3 +66,4 @@
         <script> window.addEventListener('close-editTeam', event => { $('#editTeam').modal('hide'); }) </script>
     @endcomponent
 </div>
+

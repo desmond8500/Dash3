@@ -6,7 +6,9 @@
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
+                    <div style="height: 40px; overflow:hidden">
+                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
+                    </div>
                 </div>
                 @isset($edit)
                     <div class="col-auto">

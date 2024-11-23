@@ -22,7 +22,7 @@
                     <div class="card-title">Equipements</div>
                     <div class="card-actions">
                         <button class="btn btn-primary" disabled>
-                            <i class="ti ti-plus"></i> Equipment
+                            <i class="ti ti-plus"></i> Equipement
                         </button>
                     </div>
                 </div>

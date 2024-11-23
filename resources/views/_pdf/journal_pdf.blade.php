@@ -72,5 +72,41 @@
         @parsedown($journal->description)
     </div>
 
+    @if ($journal->tasks->count())
+        <h1>Taches</h1>
+
+        <table class="table" style="font-size:13px">
+            <thead class="thead">
+                <tr>
+                    <th width='15px'>#</th>
+                    <th>Description de la tache</th>
+                    <th width='70px' class="text-center">Statut</th>
+                    <th width='70px'>Priorité</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($journal->tasks as $key => $task)
+                    <tr>
+                        <td class="text-center">{{ $key + 1 }}</td>
+                        <td>
+                            <div class="task_name">{{ $task->name }}</div>
+                            <div class="task_description">{!! $task->description !!}</div>
+                        </td>
+                        <td class="text-center">
+                            <div class="text-primary">
+                                <div class="task_statut fs-7">{{ $task->statut->name }}</div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="text-purple">
+                                <div class="task_priority fs-7">{{ $task->priority->name }}</div>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
 </body>
 </html>

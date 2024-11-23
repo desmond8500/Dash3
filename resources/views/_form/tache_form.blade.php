@@ -21,6 +21,10 @@
                 <div class="text-muted">Room :</div>
                 <div>{{ $room_id }}</div>
             @endif
+            @if ($journal_id)
+                <div class="text-muted">Journal :</div>
+                <div>{{ $journal_id }}</div>
+            @endif
         </div>
     </div>
     <div class="col-md mb-3">

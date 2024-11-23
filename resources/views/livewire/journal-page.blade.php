@@ -2,6 +2,7 @@
     @component('components.layouts.page-header', ['title'=>'Journal', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             <a class="btn btn-*primary" target="_blank" href="{{ route('journal_pdf',['journal_id'=>$journal->id]) }}">PDF</a>
+            @livewire('form.task-add', ['journal_id' => $journal->id])
         </div>
     @endcomponent
 
@@ -62,6 +63,10 @@
                 <div class="card-body">
                     @parsedown($journal->description)
                 </div>
+            </div>
+
+            <div class="mt-2">
+                @livewire('erp.tasklist', ['journal_id' => $journal->id, 'paginate'=>3])
             </div>
 
         </div>

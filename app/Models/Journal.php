@@ -45,5 +45,9 @@ class Journal extends Model
     {
         return $this->hasMany(JournalIntervenant::class);
     }
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 
 }

@@ -29,6 +29,7 @@ class Task extends Model
         'start_date',
         'end_date',
         'favoris',
+        'journal_id',
     ];
 
     protected $with = ['room'];

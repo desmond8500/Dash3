@@ -6,6 +6,7 @@ use App\Livewire\Forms\JournalForm;
 use App\Models\Contact;
 use App\Models\Journal;
 use App\Models\JournalIntervenant;
+use App\Models\Task;
 use App\Models\Team;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -33,6 +34,7 @@ class JournalPage extends Component
                                 ->get(),
             'team' => Team::get(),
             'intervenants' => JournalIntervenant::where('journal_id', $this->journal->id)->get(),
+            'tasks' => Task::where('journal_id', $this->journal->id)->get(),
         ]);
     }
 

@@ -30,7 +30,7 @@
             </div>
             <a href="{{ route('task', ['task_id'=> $task->id]) }}" class="pl-2">
                 <div class="fw-bold">{{ $task->name }}</div>
-                <div class="text-muted">{{ @parsedown($task->description) }}</div>
+                <div class="text-muted">@parsedown($task->description)</div>
             </a>
         </div>
         <div class="col-auto text-end">

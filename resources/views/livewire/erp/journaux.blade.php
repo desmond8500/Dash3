@@ -25,7 +25,7 @@
             </div>
         @endforelse
         <div>
-            {{ $journaux->links() }}
+            {{-- {{ $journaux->links() }} --}}
         </div>
     </div>
 

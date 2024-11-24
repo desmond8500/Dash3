@@ -108,5 +108,65 @@
         </table>
     @endif
 
+    @if ($journal->achats->count())
+        <h1>Achats</h1>
+        @foreach ($journal->achats as $key => $achat)
+            <div class="text-gray fs-6">
+                <div class="text-primary">{{ $achat->name }}</div>
+                <div class="">@parsedown($achat->description)</div>
+            </div>
+
+            <table class="table" style="font-size:13px">
+                <thead class="thead">
+                    <tr>
+                        <th width='15px'>#</th>
+                        <th>Désignation</th>
+                        <th width='70px' class="text-center">Quantité</th>
+                        <th width='70px' class="text-center">Prix</th>
+                        <th width='70px'>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $total = 0;
+                    @endphp
+                    @foreach ($achat->rows as $key => $row)
+                        <tr>
+                            <td class="text-center">{{ $key + 1 }}</td>
+                            <td>
+                                <div class="task_name fw-bold fs-7">{{ $row->article->designation }}</div>
+                                <div class="task_description fs-7">{{ strtoupper($row->article->reference) }}</div>
+                            </td>
+                            <td class="text-center">
+                                <div class="task_statut fs-7">{{ $row->quantite }}</div>
+                            </td>
+                            <td class="text-center">
+                                <div class="task_priority fs-7">{{ number_format($row->prix, 0,'.', ' ') }} F</div>
+                            </td>
+                            <td class="text-center">
+                                <div class="task_priority fs-7">{{ number_format($row->prix* $row->quantite, 0,'.', ' ') }} F</div>
+                            </td>
+                        </tr>
+                        @php
+                            $total += $row->prix* $row->quantite;
+                        @endphp
+                    @endforeach
+                    <tr>
+                        <td class="text-center"></td>
+                        <td colspan="2">
+                            <b>TOTAL</b>
+                        </td>
+                        <td class="text-center" colspan="2">
+                            <div class="task_priority fw-bold fs-7">{{ number_format($total, 0,'.', ' ') }} F</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+
+        @endforeach
+
+    @endif
+
 </body>
 </html>

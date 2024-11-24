@@ -3,6 +3,7 @@
         <div class="btn-list">
             <a class="btn btn-*primary" target="_blank" href="{{ route('journal_pdf',['journal_id'=>$journal->id]) }}">PDF</a>
             @livewire('form.task-add', ['journal_id' => $journal->id])
+            @livewire('form.achat-add',['journal_id' => $journal->id])
         </div>
     @endcomponent
 
@@ -72,21 +73,6 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card mb-2">
-                <div class="card-header">
-                    <div class="card-title">Rapports</div>
-                    <div class="card-actions">
-
-                    </div>
-                </div>
-                <div class="card-body">
-
-
-                </div>
-                <div class="card-footer">
-
-                </div>
-            </div>
 
             <div class="card mb-2">
                 <div class="card-header">
@@ -114,6 +100,26 @@
                     @endforeach
                 </div>
             </div>
+
+            <div class="card mb-2">
+                <div class="card-header">
+                    <div class="card-title">Achats</div>
+                    <div class="card-actions">
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        @foreach ($achats as $achat)
+                            <div class="btn btn-outline-primary">
+                                <a href="{{ route('achat',['achat_id'=>$achat->id]) }}" target="_blank">{{ $achat->name }}</a>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

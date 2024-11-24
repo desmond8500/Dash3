@@ -15,12 +15,18 @@ class Achat extends Model
 
     protected $fillable = [
         'provider_id',
+        'journal_id',
+        'transaction_id',
         'name',
         'description',
         'date',
-        'transaction_id',
         'status',
     ];
+
+    public function journal(): BelongsTo
+    {
+        return $this->belongsTo(Journal::class);
+    }
 
     public function provider(): BelongsTo
     {

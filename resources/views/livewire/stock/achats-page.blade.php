@@ -49,11 +49,11 @@
                         </td>
                         <td class="text-end">
                             <div class="btn-list">
-                                <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')">
+                                <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Editer">
                                     <i class="ti ti-edit"></i>
                                 </button>
                                 @if (!$achat->transaction_id)
-                                    <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')">
+                                    <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Ajouter une transaction">
                                         <i class="ti ti-coins"></i>
                                     </button>
                                 @endif

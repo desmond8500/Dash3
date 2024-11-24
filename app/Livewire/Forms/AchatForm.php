@@ -14,9 +14,10 @@ class AchatForm extends Form
 
     #[Rule('required')]
     public $name;
+    public $provider_id;
+    public $journal_id;
     public $description;
     public $date;
-    public $provider_id;
     public $status = "";
 
     function fix(){
@@ -29,6 +30,7 @@ class AchatForm extends Form
         $achat = Achat::find($achat_id);
         $transaction = Transaction::create([
             'achat_id' => $achat_id,
+            'journal_id' => $this->journal_id,
             'objet' => $achat->name,
             'description' => $achat->description,
             'montant' => $achat->ttc(),
@@ -43,12 +45,13 @@ class AchatForm extends Form
     function store(){
         $this->validate();
         Achat::create($this->all());
-        $this->reset('name','date','provider_id', 'description', 'status');
+        $this->reset('name','date','provider_id', 'journal_id', 'description', 'status');
     }
 
     function set($model_id){
         $this->achat = Achat::find($model_id);
         $this->provider_id = $this->achat->provider_id;
+        $this->journal_id = $this->achat->journal_id;
         $this->name = $this->achat->name;
         $this->description = $this->achat->description;
         $this->date = $this->achat->date;

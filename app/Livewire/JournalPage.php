@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\JournalForm;
+use App\Models\Achat;
 use App\Models\Contact;
 use App\Models\Journal;
 use App\Models\JournalIntervenant;
@@ -35,6 +36,7 @@ class JournalPage extends Component
             'team' => Team::get(),
             'intervenants' => JournalIntervenant::where('journal_id', $this->journal->id)->get(),
             'tasks' => Task::where('journal_id', $this->journal->id)->get(),
+            'achats' => Achat::where('journal_id', $this->journal->id)->get(),
         ]);
     }
 

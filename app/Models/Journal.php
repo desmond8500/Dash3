@@ -4,10 +4,10 @@ namespace App\Models;
 
 use App\Traits\searchTrait;
 use App\Traits\dateTrait;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Journal extends Model
 {
@@ -39,6 +39,18 @@ class Journal extends Model
     public function invoice(): BelongsTo
     {
         return $this->belongsTo(Invoice::class);
+    }
+    public function intervenants(): HasMany
+    {
+        return $this->hasMany(JournalIntervenant::class);
+    }
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+    public function achats(): HasMany
+    {
+        return $this->hasMany(Achat::class);
     }
 
 }

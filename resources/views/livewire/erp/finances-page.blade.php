@@ -23,44 +23,21 @@
             </div>
         </div>
 
+        <div class="col-md-4"></div>
+
         <div class="col-md-4">
-
-        </div>
-
-        <div class="col-md-4" wire:ignore>
             <div class="card card-body">
-                <canvas id="myChart"></canvas>
+                @component('components.chartjs',[
+                'labels' => ["Crédit", "Débit"],
+                'data' => [$credit, $debit],
+                ])
+                @endcomponent
                 <div class="display-6 d-flex justify-content-between">
                     <div>TOTAL:</div>
                     <div>{{ number_format($total, 0,'.', ' ') }} F</div>
                 </div>
             </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-            <script>
-                const ctx = document.getElementById('myChart');
-
-              new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                  labels: ['Red', 'Blue'],
-                  datasets: [{
-                    label: '# of Votes',
-                    data: [50, 60],
-                    borderWidth: 1,
-                    legend: 'Résumé des dépenses'
-                  }]
-                },
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  }
-                }
-              });
-            </script>
         </div>
     </div>
 

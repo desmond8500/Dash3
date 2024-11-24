@@ -8,8 +8,9 @@
             @endif
 
             @auth
-                {{-- @livewire('form.journal-add')
-                @livewire('form.task-add') --}}
+                <div style="font-size: clamp(1rem, 2vw, 3rem);">
+                    {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
+                </div>
                 @env('local')
                     <div>
                         @component('components.off-canvas',['button'=>'Todos'])
@@ -18,7 +19,6 @@
                     </div>
                 @endenv
             @endauth
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
 
     @endcomponent
@@ -131,13 +131,23 @@
         </div>
 
     @else
-        <div class="btn-list">
-            <a class="btn btn-primary" wire:click="dispatch('open-login')">Connexion</a>
-            <a class="btn btn-secondary" wire:click="dispatch('open-register')">Inscription</a>
+        <div class="row align-items-center">
+            <div class="col-md">
+                <div class="btn-list mb-2">
+                    <a class="btn btn-primary" wire:click="dispatch('open-login')">Connexion</a>
+                    <a class="btn btn-secondary" wire:click="dispatch('open-register')">Inscription</a>
+                </div>
+            </div>
+            <div class="col-md-auto">
+                <div style="font-size: clamp(1rem, 2vw, 3rem);">
+                    {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
+                </div>
+            </div>
         </div>
+
     @endauth
 
-    <div class="mt-5 border border-primary rounded p-2 bg-white">
+    <div class="mt-2 border border-primary rounded p-2 bg-white">
         <div class="fw-bold mb-2 ">
             Dev tools !!!
         </div>

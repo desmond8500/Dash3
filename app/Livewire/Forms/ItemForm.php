@@ -22,7 +22,7 @@ class ItemForm extends Form
     #[Validate('numeric')]
     public $priority_id = 1;
     #[Validate('numeric')]
-    public $quantity = 1;
+    public $quantity = 0;
     #[Validate('numeric')]
     public $price = 0;
 
@@ -41,6 +41,7 @@ class ItemForm extends Form
 
     function store(){
         $this->validate();
+        $this->fix();
         $article = Article::create($this->all());
 
         if ($this->image) {
@@ -71,9 +72,8 @@ class ItemForm extends Form
 
     function update(){
         $this->validate();
+        $this->fix();
         $this->article->update($this->all());
-
-        $this->storeAvatar();
     }
 
     function storeAvatar()

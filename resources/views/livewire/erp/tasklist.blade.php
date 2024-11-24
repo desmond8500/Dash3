@@ -52,7 +52,7 @@
             </div>
             <div class="row row-deck g-2">
                 @foreach ($tasks as $task)
-                    <div class="{{ $class ?? 'col-md-12'}}">
+                    <div class="{{ $class ?? 'col-md-6'}}">
                         @include('_card.task_card',['task' => $task])
                     </div>
                 @endforeach

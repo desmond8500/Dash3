@@ -8,9 +8,12 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+use function Laravel\Prompts\search;
+
 class Journaux extends Component
 {
     public $projet_id;
+    public $search;
 
     function mount($projet_id){
         $this->projet_id = $projet_id;
@@ -25,7 +28,11 @@ class Journaux extends Component
     }
 
     function getJournaux(){
-        return Journal::where('projet_id', $this->projet_id)->paginate(20);
+        return Journal::where('projet_id', $this->projet_id)
+            ->orderByDesc('date')
+            ->where('title', 'LIKE', "%{$this->search}%")
+            ->get();
+            // ->paginate(20);
     }
 
     public JournalForm $journalForm;

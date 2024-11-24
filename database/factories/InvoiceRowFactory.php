@@ -23,7 +23,7 @@ class InvoiceRowFactory extends Factory
             'coef' => 1,
             'reference' => $this->faker->text($reference),
             'quantite'=> $this->faker->numberBetween($min = 1, $max = 30),
-            'priorite_id'=>1,
+            'priorite_id'=> $this->faker->numberBetween($min = 1, $max = 8),
             'prix'=> $this->faker->numberBetween($min = 1000, $max = 9000),
         ];
     }

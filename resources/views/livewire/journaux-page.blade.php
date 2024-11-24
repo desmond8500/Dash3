@@ -32,6 +32,11 @@
                         @endforelse
                     </ul>
                 </div>
+                <div class="card-footer">
+                    <div>
+                        {{ $journaux->links() }}
+                    </div>
+                </div>
             </div>
         </div>
 

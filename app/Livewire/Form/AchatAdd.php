@@ -10,6 +10,15 @@ use Livewire\Component;
 
 class AchatAdd extends Component
 {
+    public $journal_id;
+
+    function mount($journal_id=null){
+        $this->journal_id = $journal_id;
+        if ($this->journal_id) {
+            $this->achat_form->journal_id = $journal_id;
+        }
+    }
+
     public function render() {
         return view('livewire.form.achat-add',[
             'providers' => Provider::all(),

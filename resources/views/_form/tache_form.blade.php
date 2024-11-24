@@ -13,9 +13,17 @@
                 <div class="text-muted">Building :</div>
                 <div>{{ $building_id }}</div>
             @endif
+            @if ($stage_id)
+                <div class="text-muted">Stage :</div>
+                <div>{{ $stage_id }}</div>
+            @endif
             @if ($room_id)
                 <div class="text-muted">Room :</div>
                 <div>{{ $room_id }}</div>
+            @endif
+            @if ($journal_id)
+                <div class="text-muted">Journal :</div>
+                <div>{{ $journal_id }}</div>
             @endif
         </div>
     </div>

@@ -26,13 +26,13 @@
                     <div class="dropdown-divider"></div>
 
                     <span class="dropdown-header">Facture</span>
-                    <a class="dropdown-item" target="_blank"
-                        href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i
-                            class="ti ti-file-type-pdf"></i> Facture PDF </a>
-                    {{-- <a class="dropdown-item" target="_blank"
-                        href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>" Facture d'acompte"]) }}"> <i
-                            class="ti ti-file-type-pdf"></i> Facture d'acompte </a> --}}
+                    <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
                     <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    {{-- <span class="dropdown-header">Bordereau</span> --}}
+                    {{-- <a class="dropdown-item" target="_blank" href="{{ route('bl_pdf',['invoice_id'=>$devis->id, 'type'=>'Travaux']) }}"> <i class="ti ti-file-type-pdf"></i> BL de Travaux </a> --}}
 
                     <div class="dropdown-divider"></div>
 
@@ -100,7 +100,14 @@
                 @endphp
                 <tr class="">
                     <td scope="row">
-                        <div>{{ $row->designation }}</div>
+                        <div>
+                            @if ($row->article_id)
+                                <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{ $row->designation }}</a>
+                            @else
+                                {{ $row->designation }}
+                            @endif
+
+                        </div>
                         <div class="text-muted">{!! nl2br($row->reference) !!}</div>
                     </td>
                     <td class="text-center">{{ $row->quantite }}</td>

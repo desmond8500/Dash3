@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         DashController::init_task_priority();
         DashController::init_transaction();
         DashController::init_stock();
+        DashController::init_team();
 
         // Clients
         DashController::init_clients();

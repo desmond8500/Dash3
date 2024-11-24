@@ -30,9 +30,12 @@ class Tasklist extends Component
     public $building_id;
     public $stage_id;
     public $room_id;
+    public $journal_id;
     public $task;
+    public $paginate=8;
+    public $class='col-md-12';
 
-    public function mount($client_id=null, $projet_id = null, $building_id = null, $stage_id = null, $room_id = null){
+    public function mount($client_id=null, $projet_id = null, $building_id = null, $stage_id = null, $room_id =null, $journal_id = null){
 
         if ($client_id) {
             $this->client_id = $client_id;
@@ -57,6 +60,7 @@ class Tasklist extends Component
             'tasks' => $this->getTasks(),
             'activeCount' => Task::activeCount(),
             'inactiveCount' => Task::inactiveCount(),
+            // 'inactiveCount' => Task::inactiveCount(),
             'statuses' => TaskStatus::all(),
             'priorities' => TaskPriority::all(),
 
@@ -70,7 +74,7 @@ class Tasklist extends Component
     public $active;
     #[On('get-tasks')]
     function getTasks() {
-       return TaskController::getTask($this->active, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->search);
+       return TaskController::getTask($this->active, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->journal_id, $this->search, $this->paginate);
     }
 
     public TaskForm $form;

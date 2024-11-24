@@ -1,16 +1,18 @@
 <div class="card p-2">
     <div class="row g-2">
-        <div class="col-auto">
+        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}">
             <img src="{{ asset("$article->image") }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
-        </div>
+        </a>
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
+                    <div style="height: 40px; overflow:hidden">
+                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
+                    </div>
                 </div>
                 @isset($edit)
                     <div class="col-auto">
-                        <button class="btn btn-outline-primary btn-icon" id="triggerId" data-bs-toggle="dropdown" >
+                        <button class="btn btn-ghost-primary btn-icon" id="triggerId" data-bs-toggle="dropdown" >
                             <i class="ti ti-dots-vertical"></i>
                         </button>
 
@@ -31,39 +33,35 @@
             @endisset
             <div class="row">
                 <div class="col-8">
-                    <div class="text-muted">
+                    <div class="text-muted" data-bs-toggle="tooltip" title="Réference" style="font-size:10px">
+                        {{ strtoupper($article->reference) }}
+                    </div>
+                    <div class="text-muted" data-bs-toggle="tooltip" title="Marque">
                         @if ($article->brand)
-                        {{ $article->brand->name }}
+                        <a href="{{ route('brand', ['brand_id'=>$article->brand->id]) }}" target="_blank" class="text-muted">{{ $article->brand->name }}</a>
                         @else
                         _
                         @endif
                     </div>
-                    <div class="text-muted">
+                    <div class="text-muted" data-bs-toggle="tooltip" title="Fournisseur" style="font-size:12px">
                         @if ($article->provider)
-                        <span class="badge bg-blue-lt">{{ $article->provider->name }}</span>
+                        <a href="{{ route('provider', ['provider_id'=>$article->provider_id]) }}" target="_blank" class="badge bg-blue-lt">{{ $article->provider->name }}</a>
                         @else
                         _
                         @endif
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="d-flex-between">
-                        <div>Qte: </div>
-                        <div>{{ $article->quantity }}</div>
-                    </div>
-                    <div class="d-flex-between">
-                        <div>Qte_min: </div>
-                        <div>{{ $article->quantity_min }}</div>
-                    </div>
+                    <div class="text-end mt-2" style="font-size: 20px" data-bs-toggle="tooltip" title="Quantité">{{ $article->quantity }}</div>
                 </div>
             </div>
 
             <div class="row mt-1">
                 <div class="col-md-6">
-                    <div class="badge">{{ $article->priority() }}</div>
+                    <div class="badge " style="font-size:10px">{{ $article->priority() }}</div>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-danger text-end" style="font-size: 20px">{{ number_format($article->price, 0, 2) }} F</div>
+                    <div class="text-danger text-end" style="font-size: 18px">{{ number_format($article->price, 0, 2) }} F</div>
                 </div>
             </div>
         </div>

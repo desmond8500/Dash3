@@ -142,9 +142,11 @@ class InvoicePage extends Component
         $article = Article::find($article_id);
         $this->row_form->designation = $article->designation;
         $this->row_form->reference = $article->reference;
+        $this->row_form->article_id = $article->article_id;
     }
     function generateArticleRow($article_id){
         $article = Article::find($article_id);
+        $this->row_form->article_id = $article->id;
         $this->row_form->designation = $article->designation;
         $this->row_form->reference = $article->reference;
         $this->row_form->prix = $article->price;

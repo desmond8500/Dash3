@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             @foreach ($links as $link)
-                <div class="d-flex-between p-1">
+                <div class="d-flex-between p-1 pb-1 border-bottom align-items-center">
                     <div>
                         <a href="{{ $link->link }}" target="_blank">{{ $link->name ?? 'Lien' }}</a>
                     </div>

@@ -32,7 +32,7 @@
             @livewire('erp.tasklist', ['client_id' => $client_id])
         </div>
         <div class="col-md-6">
-            @livewire('contact-list', ['client_id' => $client_id, 'card_class'=> 'col-md-6'])
+            @livewire('contact-list', ['client_id' => $client_id])
         </div>
     </div>
 

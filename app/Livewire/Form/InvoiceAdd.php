@@ -4,13 +4,13 @@ namespace App\Livewire\Form;
 
 use App\Http\Controllers\ErpController;
 use App\Livewire\Forms\InvoiceForm;
-use App\Models\Invoice;
 use App\Models\Projet;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class InvoiceAdd extends Component
 {
+    use WithPagination;
     public InvoiceForm $invoice_form;
     public $client_name;
     public $projet;
@@ -35,6 +35,7 @@ class InvoiceAdd extends Component
         $this->invoice_form->tax = 0;
         $this->invoice_form->reference = ErpController::getInvoiceReference($this->projet);
         $this->dispatch('open-addInvoice');
+        $this->dispatch('get-resume');
     }
 
     function store(){

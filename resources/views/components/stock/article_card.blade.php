@@ -7,25 +7,22 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{
-                            $article->designation }}</a>
+                        <a class="fw-bold"  href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
                     </div>
                     @isset($edit)
-                    <div class="col-auto">
-                        <button class="btn btn-outline-primary btn-icon" id="triggerId" data-bs-toggle="dropdown">
-                            <i class="ti ti-dots-vertical"></i>
-                        </button>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-primary btn-icon" id="triggerId" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </button>
 
-                        <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
-                            <a class="dropdown-item" wire:click="edit('{{ $article->id }}')">Editer</a>
-                            <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')">Dupliquer</a>
-                            <a class="dropdown-item" wire:click="buy('{{ $article->id }}')">Commander</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')"> <i
-                                    class="ti ti-trash"></i> Supprimer</a>
+                            <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
+                                <a class="dropdown-item" wire:click="edit('{{ $article->id }}')">Editer</a>
+                                <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')">Dupliquer</a>
+                                <a class="dropdown-item" wire:click="buy('{{ $article->id }}')">Commander</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
+                            </div>
                         </div>
-                    </div>
-
                     @endisset
                 </div>
                 @isset ($img_class)
@@ -34,7 +31,14 @@
                 @endisset
                 <div class="text-muted">
                     @if ($article->brand)
-                    {{ $article->brand->name }}
+                    <a href="{{ route('brand', ['brand_id'=>$article->brand->id]) }}">{{ $article->brand->name }}</a>
+                    @else
+                    _
+                    @endif
+                </div>
+                <div class="text-muted"> qsdqs
+                    @if ($article->reference)
+                    <span class="badge bg-blue-lt">{{ $article->reference }}</span>
                     @else
                     _
                     @endif

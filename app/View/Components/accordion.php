@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\erp\projet;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class projetResume extends Component
+class accordion extends Component
 {
     /**
      * Create a new component instance.
@@ -17,10 +17,10 @@ class projetResume extends Component
     }
 
     /**
-     * Get the view / contents that represent the component.T
+     * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.erp.projet.projet-resume');
+        return view('components.accordion');
     }
 }

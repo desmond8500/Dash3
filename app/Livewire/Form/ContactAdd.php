@@ -4,9 +4,11 @@ namespace App\Livewire\Form;
 
 use App\Livewire\Forms\ContactForm;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ContactAdd extends Component
 {
+    use WithFileUploads;
     public ContactForm $contact_form;
 
     public $client_id;

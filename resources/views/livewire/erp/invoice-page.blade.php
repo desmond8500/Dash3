@@ -43,6 +43,10 @@
                 @livewire('erp.invoice-documents', ['invoice_id' => $devis->id])
             </div>
 
+            <div class="mb-1">
+                @livewire('erp.invoice-bordereau', ['invoice_id' => $devis->id])
+            </div>
+
         </div>
     </div>
 

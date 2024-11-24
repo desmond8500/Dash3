@@ -4,6 +4,7 @@ namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\projetForm;
 use App\Models\Building;
+use App\Models\Invoice;
 use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
@@ -41,7 +42,7 @@ class ProjetPage extends Component
 
     // #[Session]
 
-
+    #[On('get-resume')]
     public function render()
     {
         return view('livewire.erp.projet-page',[
@@ -49,6 +50,7 @@ class ProjetPage extends Component
             'projet_id' => $this->projet_id,
             'tasks' => $this->get_tasks(),
             'journaux' => $this->get_news(),
+            'invoices' => Invoice::where('projet_id', $this->projet_id)->paginate(5),
         ]);
     }
 
@@ -67,18 +69,6 @@ class ProjetPage extends Component
         return Journal::where('projet_id', $this->projet_id)->get();
     }
 
-    // Projets
     public projetForm $projetForm;
-    function edit()
-    {
-        $this->projetForm->set($this->projet->id);
-        $this->dispatch('open-editProjet');
-    }
 
-    function update()
-    {
-        $this->projetForm->update();
-        $this->projet = Projet::find($this->projet->id);
-        $this->dispatch('close-editProjet');
-    }
 }

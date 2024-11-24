@@ -24,7 +24,7 @@
         @endforeach
 
         <div class="col-md-4">
-            <a class="card p-2" href="{{ route('modeles_fiches_pdf',['name'=> 'Fiche d\'inventaire']) }}" target="_blank">
+            <a class="card p-2 mt-2" href="{{ route('modeles_fiches_pdf',['name'=> 'Fiche d\'inventaire']) }}" target="_blank">
                 <div class="d-flex-between">
                     <div>Fiche d'inventaire</div>
                     <i class="ti ti-download"></i>

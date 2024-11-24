@@ -50,13 +50,14 @@
                 <tr>
                     <td class="text-center">{{ $key + 1 }}</td>
                     <td>
-                        <div class="task_projet_name"> {{ $task->projet->name }} </div>
+                        <div class="task_client_name"> {{ $task->client->name ?? '' }} </div>
+                        <div class="task_projet_name"> {{ $task->projet->name ?? '' }} </div>
                     </td>
                     <td>
                         <div class="task_name">{{ $task->name }}</div>
                         <div class="task_description">{!! $task->description !!}</div>
                     </td>
-                    <td>
+                    <td class="text-center">
                         <div class="text-primary">
                             <div class="fs-8 text-black">Statut</div>
                             <div class="task_statut fs-7">{{ $task->statut->name }}</div>

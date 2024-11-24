@@ -8,8 +8,11 @@
 
     <div class="row row-deck g-2">
         <div class="col-md-12">
-            <div class="input-group">
-                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
+            <div class="input-icon">
+                <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher une marque">
+                <span class="input-icon-addon">
+                    <i class="ti ti-search"></i>
+                </span>
             </div>
         </div>
         @foreach ($brands as $brand)
@@ -30,10 +33,15 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
                                     <a class="dropdown-item" wire:click="edit_brand('{{ $brand->id }}')"> <i class="ti ti-edit"></i> Editer</a>
+                                    <a class="dropdown-item" wire:click="edit_logo('{{ $brand->id }}')"> <i class="ti ti-edit"></i> Editer image</a>
                                     <a class="dropdown-item text-danger" wire:click="delete_brand('{{ $brand->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="col-md-12">
+                            {{-- @dump($brand->article()->count()) --}}
+                            {{-- <div class="text-muted">{{ $brand->article}}</div> --}}
                         </div>
                     </div>
                 </div>
@@ -54,5 +62,32 @@
         </form>
         <script> window.addEventListener('open-editBrand', event => { $('#editBrand').modal('show'); }) </script>
         <script> window.addEventListener('close-editBrand', event => { $('#editBrand').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editBrandLogo', 'title' => 'Editer une marque'])
+        <form class="" wire:submit="update_logo">
+            <div class="text-center mb-3">
+                <div wire:loading>
+                    Chargement <div class="spinner-border" role="status"></div>
+                </div>
+                <div class="my-2">
+                    @if ($logo)
+                    @if (is_string($logo))
+                    <img src="{{ asset($logo) }}" class="avatar avatar-xl">
+                    @else
+                    <img src="{{ $logo->temporaryUrl() }}" class="avatar avatar-xl">
+                    @endif
+                    @else
+                    <input type="file" class="form-control" wire:model='logo'>
+                    @endif
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Modifier</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-editBrandLogo', event => { $('#editBrandLogo').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBrandLogo', event => { $('#editBrandLogo').modal('hide'); }) </script>
     @endcomponent
 </div>

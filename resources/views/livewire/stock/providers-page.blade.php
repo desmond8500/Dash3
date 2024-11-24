@@ -5,33 +5,46 @@
 
     <div class="row g-2">
         <div class="col-md-12">
-            <div class="input-group">
-                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
+            <div class="input-icon">
+                <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher un fournisseur">
+                <span class="input-icon-addon ">
+                    <i class="ti ti-search"></i>
+                </span>
             </div>
         </div>
         @foreach ($providers as $provider)
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card p-2">
                     <div class="row">
-                        <div class="col-auto">
-                            <img src="" alt="A" class="avatar avatar-md">
-                        </div>
-                        <div class="col">
+                        <a class="col-auto" href="{{ route('provider',['provider_id'=>$provider->id]) }}">
+                            <img src="{{ asset($provider->logo) }}" alt="A" class="avatar avatar-md">
+                        </a>
+                        <a class="col" href="{{ route('provider',['provider_id'=>$provider->id]) }}">
                             <div class="card-title">{{ $provider->name }}</div>
                             <div class="text-muted">{{ nl2br($provider->description) }}</div>
-                        </div>
+                        </a>
                         <div class="col-auto">
-                            <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $provider->id }}')">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path> <path d="M13.5 6.5l4 4"></path> </svg>
-                            </button>
+                            <div class="dropdown open">
+                                <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                    <i class="ti ti-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" wire:click="edit('{{ $provider->id }}')"> <i class="ti ti-edit"></i> Editer</a>
+                                    <a class="dropdown-item" wire:click="edit_logo('{{ $provider->id }}')"> <i class="ti ti-edit"></i> Editer Logo</a>
+                                    <a class="dropdown-item text-danger" wire:click="delete('{{ $provider->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
+        <div class="col-md-12">
+            {{ $providers->links() }}
+        </div>
     </div>
 
-    @component('components.modal', ["id"=>'editProvider'])
+    @component('components.modal', ["id"=>'editProvider', 'title' => 'Editer un fournisseur'])
         <form class="row" wire:submit="update">
             @include('_form.provider_form')
             <div class="modal-footer">
@@ -44,6 +57,33 @@
         </form>
         <script> window.addEventListener('open-editProvider', event => { $('#editProvider').modal('show'); }) </script>
         <script> window.addEventListener('close-editProvider', event => { $('#editProvider').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editLogo', 'title' => 'Editer un logo'])
+    <form class="" wire:submit="update_logo">
+        <div class="text-center mb-3">
+            <div wire:loading>
+                Chargement <div class="spinner-border" role="status"></div>
+            </div>
+            <div class="my-2">
+                @if ($logo)
+                    @if (is_string($logo))
+                        <img src="{{ asset($logo) }}" class="avatar avatar-xl">
+                    @else
+                        <img src="{{ $logo->temporaryUrl() }}" class="avatar avatar-xl">
+                    @endif
+                    @else
+                    <input type="file" class="form-control" wire:model='logo'>
+                @endif
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+    </form>
+    <script> window.addEventListener('open-editLogo', event => { $('#editLogo').modal('show'); }) </script>
+    <script> window.addEventListener('close-editLogo', event => { $('#editLogo').modal('hide'); }) </script>
     @endcomponent
 
 </div>

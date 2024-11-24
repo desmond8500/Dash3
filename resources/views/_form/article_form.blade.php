@@ -8,17 +8,13 @@
                 @if ($article_form->image)
                     @if(is_string($article_form->image))
                         <img src="{{ asset($article_form->image) }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
-
                     @else
                         <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
-                        {{-- @foreach ($article_form->image as $image)
-                        @endforeach --}}
-
                     @endif
-                    <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                    {{-- <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
                         <i class="ti ti-edit text-muted"></i>
                         <span class="avatar-upload-text">Modifier</span>
-                    </label>
+                    </label> --}}
                 @else
                     <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
                         <i class="ti ti-plus text-muted"></i>
@@ -28,7 +24,7 @@
 
             @endif
         </div>
-        <input type="file" id="file" accept="image/*" style="display: none" wire:model="article_form.image">
+        <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="article_form.image">
     </div>
 
     <div class="col-md-8 mb-3">
@@ -62,7 +58,12 @@
             </div>
             <div class="col-md-12">
                 <label class="form-label">Prix</label>
-                <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
+                <div class="input-group">
+                    <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
+                    <a class="btn btn-primary btn-icon" wire:click="convert_euro()">
+                        <i class="ti ti-refresh"></i>
+                    </a>
+                </div>
                 @error('article_form.price') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </div>
@@ -87,7 +88,7 @@
         <label class="form-label">Fournisseur</label>
         <select class="form-control" wire:model="article_form.provider_id">
             <option value="" class="text-muted">--Sélectionner--</option>
-            @foreach ($providers as $provider)
+            @foreach ($providers->sortBy('name') as $provider)
                 <option value="{{ $provider->id }}">{{ $provider->name }}</option>
             @endforeach
         </select>
@@ -98,7 +99,7 @@
         <label class="form-label">Marque</label>
         <select class="form-control" wire:model="article_form.brand_id">
             <option value="" >--Sélectionner--</option>
-            @foreach ($brands as $brand)
+            @foreach ($brands->sortBy('name') as $brand)
             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
             @endforeach
         </select>

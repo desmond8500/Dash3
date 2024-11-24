@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Articles a commander</div>
+                    <div class="card-title">Articles a commander 1</div>
                     <div class="card-actions">
                         <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
                     </div>

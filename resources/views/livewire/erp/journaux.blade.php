@@ -1,6 +1,11 @@
 <div>
     <div class="d-flex justify-content-between mb-1">
         <h2>Journal d'activité</h2>
+        <div>
+
+                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher" >
+
+        </div>
         @component("components.off-canvas", ['button'=>'Todo'])
             <ul>
                 <li>Editer une entrée de journal</li>
@@ -9,7 +14,7 @@
         @endcomponent
     </div>
     <div class="row g-2">
-        @forelse ($journaux->sortByDesc('date') as $journal)
+        @forelse ($journaux as $journal)
             <div class="col-md-4">
                 @component('_card.journal_card',['journal'=>$journal])
                 @endcomponent

@@ -23,7 +23,7 @@
     @endif
 </div>
 
-<div class="w-100"></div>
+{{-- <div class="w-100"></div>
 <div class="col-md-6 mb-3">
     <label class="form-label">Date de début</label>
     <input type="date" class="form-control" wire:model="projetForm.start_date" placeholder="Nom du projet">
@@ -33,7 +33,7 @@
     <label class="form-label">Date de fin</label>
     <input type="date" class="form-control" wire:model="projetForm.end_date" placeholder="Nom du projet">
     @error('projetForm.end_date') <span class="text-danger">{{ $message }}</span> @enderror
-</div>
+</div> --}}
 <div class="col-md-12 mb-3">
     <label class="form-label">Description</label>
     <textarea class="form-control" wire:model="projetForm.description" placeholder="Description du projet" cols="30"

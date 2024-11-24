@@ -2,8 +2,12 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Building;
+use App\Models\Invoice;
+use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Room;
+use App\Models\Stage;
 use App\Models\Task;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -19,6 +23,7 @@ class TaskForm extends Form
     public $building_id;
     public $stage_id;
     public $room_id;
+    public $journal_id;
     public $expiration_date;
     public $start_date;
     public $end_date;
@@ -40,6 +45,7 @@ class TaskForm extends Form
         $this->building_id = $this->task->building_id;
         $this->stage_id = $this->task->stage_id;
         $this->room_id = $this->task->room_id;
+        $this->journal_id = $this->task->journal_id;
 
         $this->expiration_date = $this->task->expiration_date;
         $this->name = $this->task->name;
@@ -58,14 +64,43 @@ class TaskForm extends Form
     function store(){
         $this->fix();
         $this->validate();
-        if ($this->projet_id) {
-            $projet = Projet::find($this->projet_id);
-            $this->client_id = $projet->client->id;
-        }
         $task = Task::create( $this->all() );
         if ($this->projet_id) {
             $projet = Projet::find($this->projet_id);
             $task->client_id = $projet->client->id;
+            $task->save();
+        }
+        if ($this->journal_id) {
+            $journal = Journal::find($this->journal_id);
+            $task->projet_id = $journal->projet->id;
+            $task->client_id = $journal->projet->client->id;
+            $task->save();
+        }
+        if ($this->building_id) {
+            $building = Building::find($this->building_id);
+            $task->projet_id = $building->projet->id;
+            $task->client_id = $building->projet->client->id;
+            $task->save();
+        }
+        if ($this->stage_id) {
+            $stage = Stage::find($this->stage_id);
+            $task->building_id = $stage->building->id;
+            $task->projet_id = $stage->building->projet->id;
+            $task->client_id = $stage->building->projet->client->id;
+            $task->save();
+        }
+        if ($this->room_id) {
+            $room = Room::find($this->room_id);
+            $task->stage_id = $room->stage->id;
+            $task->building_id = $room->stage->building->id;
+            $task->projet_id = $room->stage->building->projet->id;
+            $task->client_id = $room->stage->building->projet->client->id;
+            $task->save();
+        }
+        if ($this->devis_id) {
+            $invoice = Invoice::find($this->devis_id);
+            $task->projet_id = $invoice->projet->id;
+            $task->client_id = $invoice->projet->client->id;
             $task->save();
         }
         $this->reset('name','description','start_date', 'end_date', 'status_id', 'priority_id', 'expiration_date');

@@ -16,6 +16,7 @@ class BrandForm extends Form
     public $name;
     public $description;
     public $logo;
+    public $logo2;
 
     function fix(){
         $this->name = ucfirst($this->name);
@@ -54,8 +55,8 @@ class BrandForm extends Form
 
     function update(){
         $this->fix();
-        if ($this->logo) {
-            $this->storeAvatar($this->brand, $this->logo, true);
+        if ($this->logo2) {
+            $this->storeAvatar($this->brand, $this->logo2, true);
         }
         $this->brand->update($this->all());
 

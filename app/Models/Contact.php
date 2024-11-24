@@ -42,4 +42,5 @@ class Contact extends Model
     {
         return $this->hasMany(ContactMail::class);
     }
+
 }

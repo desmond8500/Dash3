@@ -22,7 +22,7 @@
                     <div class="card-title">Equipements</div>
                     <div class="card-actions">
                         <button class="btn btn-primary" disabled>
-                            <i class="ti ti-plus"></i> Equipment
+                            <i class="ti ti-plus"></i> Equipement
                         </button>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
 
         </div>
         <div class="col-md-5">
-            @livewire('erp.tasklist', ['room' => $room->id])
+            @livewire('erp.tasklist', ['room_id' => $room->id, 'class'=>'col-md-12'])
         </div>
     </div>
 

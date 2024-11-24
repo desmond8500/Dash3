@@ -29,6 +29,7 @@ class Task extends Model
         'start_date',
         'end_date',
         'favoris',
+        'journal_id',
     ];
 
     protected $with = ['room'];
@@ -72,7 +73,7 @@ class Task extends Model
         return $this->belongsTo(Projet::class);
     }
 
-    public function buiding(): BelongsTo{
+    public function building(): BelongsTo{
         return $this->belongsTo(Building::class);
     }
 

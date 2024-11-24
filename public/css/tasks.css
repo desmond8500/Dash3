@@ -13,5 +13,11 @@
     border: 1px solid black;
     padding: 3px; */
 }
+.task_client_name {
+    font-size: 13px;
+    color: purple;
+    text-transform: uppercase;
+}
 .task_projet_name {
+    font-size: 13px;
 }

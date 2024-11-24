@@ -47,4 +47,9 @@ class Projet extends Model
     {
         return $this->hasMany(Journal::class);
     }
+
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
 }

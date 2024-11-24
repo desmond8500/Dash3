@@ -59,7 +59,7 @@
                     @if ($intervenant->contact_id)
                         <li>{{ $intervenant->contact->firstname }} {{ strtoupper($intervenant->contact->lastname) }}  ({{ $intervenant->contact->fonction }})</li>
                     @else
-                        <li>{{ $intervenant->team->firstname }} {{ $intervenant->team->lastname }} </li>
+                        <li>{{ $intervenant->team->firstname }} {{ strtoupper($intervenant->team->lastname) }} </li>
                     @endif
                 @endforeach
             </ul>

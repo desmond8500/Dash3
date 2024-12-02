@@ -133,7 +133,7 @@
                 <div class="btn-list align-items-center">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-                            <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm p-1">
+                            <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm border border-secondary">
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ $user->firstname }} {{ $user->lastname }}</div>
                                 <div class="mt-1 small text-secondary">{{ $user->function ?? '_' }}</div>

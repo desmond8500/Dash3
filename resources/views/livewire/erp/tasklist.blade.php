@@ -9,38 +9,91 @@
                 @endif
             </a>
             <div class="card-actions">
-                <div class="btn-list">
-                    @if ($client_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$client_id, 'type'=>'client_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
-                        </a>
-                    @elseif($projet_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$projet_id, 'type'=>'projet_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
-                        </a>
-                    @elseif($building_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$building_id, 'type'=>'building_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
-                        </a>
-                    @elseif($stage_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$stage_id, 'type'=>'stage_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
-                        </a>
-                    @elseif($room_id)
-                        <a class="btn btn-primary btn-icon" href="{{ route('tasks_pdf',['id'=>$room_id, 'type'=>'room_id', 'search'=>$search]) }}" target="_blank">
-                            <i class="ti ti-file-type-pdf"></i>
-                        </a>
+                <div class="d-none d-sm-block">
+                    <div class="dropdown open">
+                        <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <i class="ti ti-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                            @if ($client_id)
+                            <a class="dropdown-item"
+                                href="{{ route('tasks_pdf',['id'=>$client_id, 'type'=>'client_id', 'search'=>$search]) }}" target="_blank">
+                                <i class="ti ti-file-type-pdf"></i> Exporter en PDF
+                            </a>
+                            @elseif($projet_id)
+                            <a class="dropdown-item"
+                                href="{{ route('tasks_pdf',['id'=>$projet_id, 'type'=>'projet_id', 'search'=>$search]) }}" target="_blank">
+                                <i class="ti ti-file-type-pdf"></i> Exporter en PDF
+                            </a>
+                            @elseif($building_id)
+                            <a class="dropdown-item"
+                                href="{{ route('tasks_pdf',['id'=>$building_id, 'type'=>'building_id', 'search'=>$search]) }}" target="_blank">
+                                <i class="ti ti-file-type-pdf"></i> Exporter en PDF
+                            </a>
+                            @elseif($stage_id)
+                            <a class="dropdown-item"
+                                href="{{ route('tasks_pdf',['id'=>$stage_id, 'type'=>'stage_id', 'search'=>$search]) }}" target="_blank">
+                                <i class="ti ti-file-type-pdf"></i> Exporter en PDF
+                            </a>
+                            @elseif($room_id)
+                            <a class="dropdown-item"
+                                href="{{ route('tasks_pdf',['id'=>$room_id, 'type'=>'room_id', 'search'=>$search]) }}" target="_blank">
+                                <i class="ti ti-file-type-pdf"></i> Exporter en PDF
+                            </a>
+                            @endif
 
-                    @endif
-                    <button class="btn btn-primary" wire:click="$toggle('active')">
-                        @if ($active)
-                            En cours {{ $activeCount }}
-                        @else
-                            Terminés {{ $inactiveCount }}
-                        @endif
-                    </button>
-                    <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+                            <a class="dropdown-item" wire:click="$toggle('active')">
+                                <i class="ti ti-circle"></i>
+                                @if ($active)
+                                En cours {{ $activeCount }}
+                                @else
+                                Terminés {{ $inactiveCount }}
+                                @endif
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
+
+                <div class="d-block d-sm-none">
+                    <div class="btn-list">
+                        @if ($client_id)
+                        <a class="btn btn-primary btn-icon"
+                            href="{{ route('tasks_pdf',['id'=>$client_id, 'type'=>'client_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                        @elseif($projet_id)
+                        <a class="btn btn-primary btn-icon"
+                            href="{{ route('tasks_pdf',['id'=>$projet_id, 'type'=>'projet_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                        @elseif($building_id)
+                        <a class="btn btn-primary btn-icon"
+                            href="{{ route('tasks_pdf',['id'=>$building_id, 'type'=>'building_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                        @elseif($stage_id)
+                        <a class="btn btn-primary btn-icon"
+                            href="{{ route('tasks_pdf',['id'=>$stage_id, 'type'=>'stage_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                        @elseif($room_id)
+                        <a class="btn btn-primary btn-icon"
+                            href="{{ route('tasks_pdf',['id'=>$room_id, 'type'=>'room_id', 'search'=>$search]) }}" target="_blank">
+                            <i class="ti ti-file-type-pdf"></i>
+                        </a>
+                        @endif
+                        <button class="btn btn-primary" wire:click="$toggle('active')">
+                            @if ($active)
+                            En cours {{ $activeCount }}
+                            @else
+                            Terminés {{ $inactiveCount }}
+                            @endif
+                        </button>
+                        <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="p-2">

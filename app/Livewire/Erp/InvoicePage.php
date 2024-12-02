@@ -151,7 +151,7 @@ class InvoicePage extends Component
         $this->row_form->reference = $article->reference;
         $this->row_form->prix = $article->price;
         $this->row_form->store();
-        $this->dispatch('close-addRow');
+        // $this->dispatch('close-addRow');
     }
 
     function editRow($row_id){

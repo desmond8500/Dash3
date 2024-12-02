@@ -18,6 +18,7 @@
         @foreach ($documents as $document)
             @include('_card.building_document',['edit'=>true])
         @endforeach
+        <div>{{ $documents->links() }}</div>
     </div>
     <div class="col-md-4">
         <div class="card card-body">

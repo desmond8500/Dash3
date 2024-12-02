@@ -6,10 +6,12 @@ use App\Livewire\Forms\BuildingDocumentForm;
 use App\Models\BuildingDocument as ModelsBuildingDocument;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithPagination;
 
 class BuildingDocument extends Component
 {
     use WithFileUploads;
+    use WithPagination;
     public $building_id;
     public BuildingDocumentForm $document_form;
 

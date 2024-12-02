@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 class DocumentsPage extends Component
 {
     use WithPagination;
+    use WithPagination;
     public $breadcrumbs;
     protected $paginationTheme = 'bootstrap';
 

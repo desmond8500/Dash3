@@ -1,13 +1,15 @@
-<div class="row  g-2">
+<div class="row g-2">
     <div class="col-md-4">
         {{-- Résumé --}}
-        <div class="border rounded">
-            <div class="bg-primary text-uppercase fw-bold text-white p-1">Résumé</div>
-            <div class="m-2">@parsedown($projet->description)</div>
-        </div>
+        @if ($projet->description)
+            <div class="border rounded">
+                <div class="bg-primary text-uppercase fw-bold text-white p-1">Résumé</div>
+                <div class="m-2">@parsedown($projet->description)</div>
+            </div>
+        @endif
 
         {{-- Taches --}}
-        <div class="card p-2 my-2">
+        <div class="card p-2 mb-2">
             <div class="row">
                 <div class="col">
                     <h2>Taches </h2>
@@ -16,35 +18,46 @@
                     @livewire('form.task-add', ['projet_id' => $projet->id])
                 </div>
                 <div class="col-12">
-                    @component('components.chartjs',[
-                    'labels' => [
-                    "Nouvelles (".$projet->tasks->where('statut_id', 1)->count().")",
-                    "En cours (".$projet->tasks->where('statut_id', 2)->count().")",
-                    "En pause (".$projet->tasks->where('statut_id', 3)->count().")",
-                    "Terminés (".$projet->tasks->where('statut_id', 4)->count().")",
-                    "Annulés (".$projet->tasks->where('statut_id', 5)->count().")",
-                    ],
-                    'data' => [
-                    $projet->tasks->where('statut_id', 1)->count(),
-                    $projet->tasks->where('statut_id', 2)->count(),
-                    $projet->tasks->where('statut_id', 3)->count(),
-                    $projet->tasks->where('statut_id', 4)->count(),
-                    $projet->tasks->where('statut_id', 5)->count(),
-                    ],
-                    ])
-                    @endcomponent
+                    @if ($projet->tasks->count())
+                        @component('components.chartjs',[
+                            'labels' => [
+                                "Nouvelles (".$projet->tasks->where('statut_id', 1)->count().")",
+                                "En cours (".$projet->tasks->where('statut_id', 2)->count().")",
+                                "En pause (".$projet->tasks->where('statut_id', 3)->count().")",
+                                "Terminés (".$projet->tasks->where('statut_id', 4)->count().")",
+                                "Annulés (".$projet->tasks->where('statut_id', 5)->count().")",
+                            ],
+                            'data' => [
+                                $projet->tasks->where('statut_id', 1)->count(),
+                                $projet->tasks->where('statut_id', 2)->count(),
+                                $projet->tasks->where('statut_id', 3)->count(),
+                                $projet->tasks->where('statut_id', 4)->count(),
+                                $projet->tasks->where('statut_id', 5)->count(),
+                            ],
+                        ])
+                        @endcomponent
+                    @endif
                 </div>
             </div>
         </div>
 
         {{-- Batiments --}}
-        <div class="card p-2 mb-2">
-            <div class="card-title">Batiments</div>
-            @foreach ($buildings as $building)
-                <a href="{{ route('building',['building_id'=> $building->id]) }}" class="card p-1 mb-1" target="_blank">
-                    {{ $building->name }}
-                </a>
-            @endforeach
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Batiments</div>
+                <div class="card-actions">
+                    @livewire('form.building-add', ['projet_id' => $projet_id])
+                </div>
+            </div>
+            @if ($buildings->count())
+                <div class="card-body">
+                    @foreach ($buildings as $building)
+                        <a href="{{ route('building',['building_id'=> $building->id]) }}" class="card p-1 mb-1" target="_blank">
+                            {{ $building->name }}
+                        </a>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
     <div class="col-md-8">
@@ -118,28 +131,30 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <thead class="sticky-top">
-                            <tr>
-                                <th style="width:10px">#</th>
-                                <th style="width:100px">Références</th>
-                                <th>Description</th>
-                                <th style="width: 90px">statut</th>
-                                <th class="text-end" style="width: 120px">Total</th>
-                            </tr>
-                        </thead>
+                        @if ($invoices->count())
+                            <thead class="sticky-top">
+                                <tr>
+                                    <th style="width:10px">#</th>
+                                    <th style="width:100px">Références</th>
+                                    <th>Description</th>
+                                    <th style="width: 90px">statut</th>
+                                    <th class="text-end" style="width: 120px">Total</th>
+                                </tr>
+                            </thead>
+                        @endif
                         <tbody>
                             @foreach ($invoices as $key => $invoice)
-                            <tr>
-                                <td>{{ $key+1 }}</td>
-                                <td>
-                                    <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank">
-                                        {{ ucfirst($invoice->reference) }}
-                                    </a>
-                                </td>
-                                <td>{{ $invoice->description }}</td>
-                                <td>{{ $invoice->statut }}</td>
-                                <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>
+                                        <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank">
+                                            {{ ucfirst($invoice->reference) }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $invoice->description }}</td>
+                                    <td>{{ $invoice->statut }}</td>
+                                    <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -152,11 +167,11 @@
     </div>
 
     @component('components.modal', ["id"=>'editProjet', 'title'=> 'Editer un projet'])
-    <form class="row" wire:submit="update">
-        @include('_form.projet_form')
-    </form>
-    <script> window.addEventListener('open-editProjet', event => { $('#editProjet').modal('show'); }) </script>
-    <script> window.addEventListener('close-editProjet', event => { $('#editProjet').modal('hide'); }) </script>
+        <form class="row" wire:submit="update">
+            @include('_form.projet_form')
+        </form>
+        <script> window.addEventListener('open-editProjet', event => { $('#editProjet').modal('show'); }) </script>
+        <script> window.addEventListener('close-editProjet', event => { $('#editProjet').modal('hide'); }) </script>
     @endcomponent
 
 </div>

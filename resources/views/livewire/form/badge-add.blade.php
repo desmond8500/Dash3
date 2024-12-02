@@ -1,5 +1,5 @@
 <div>
-    <button class='btn btn-primary' wire:click="dispatch('open-addbadge')" ><i class='ti ti-plus'></i> Badge</button>
+    <button class='btn btn-primary btn-pill' wire:click="dispatch('open-addbadge')" ><i class='ti ti-plus'></i> Badge</button>
 
     @component('components.modal', ["id"=>'addbadge', 'title' => 'Ajouter un badge'])
         <form class="row" wire:submit="store">

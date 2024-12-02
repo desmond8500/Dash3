@@ -47,7 +47,7 @@
 
     @component('components.modal', ["id"=>'editProjet', 'title'=> 'Editer un projet'])
         <form class="row" wire:submit="update">
-        @include('_form.projet_form')
+            @include('_form.projet_form')
         </form>
         <script> window.addEventListener('open-editProjet', event => { $('#editProjet').modal('show'); }) </script>
         <script> window.addEventListener('close-editProjet', event => { $('#editProjet').modal('hide'); }) </script>

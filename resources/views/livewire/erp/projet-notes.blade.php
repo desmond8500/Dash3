@@ -1,7 +1,7 @@
 <div>
     <div class="d-flex justify-content-between">
         <h2>Notes</h2>
-        <button class="btn btn-primary" wire:click="$dispatch('open-addProjetNote')">
+        <button class="btn btn-primary btn-pill" wire:click="$dispatch('open-addProjetNote')">
             <i class="ti ti-plus"></i> Note
         </button>
     </div>

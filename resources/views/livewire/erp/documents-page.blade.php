@@ -22,6 +22,8 @@
                 </a>
             @endforeach
 
+            <div>{{ $fiches->links() }}</div>
+
         </div>
         <div class="col-md-8">
             <div class="card">

@@ -22,7 +22,7 @@ class BuildingDocument extends Component
     public function render()
     {
         return view( 'livewire.erp.building-document', [
-            'documents' => ModelsBuildingDocument::where('building_id', $this->building_id)->get(),
+            'documents' => ModelsBuildingDocument::where('building_id', $this->building_id)->paginate(6),
         ]);
     }
 

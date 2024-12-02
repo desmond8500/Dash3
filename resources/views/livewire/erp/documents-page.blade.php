@@ -22,7 +22,7 @@
                 </a>
             @endforeach
 
-            <div>{{ $fiches->links() }}</div>
+            {{-- <div>{{ $fiches->links() }}</div> --}}
 
         </div>
         <div class="col-md-8">

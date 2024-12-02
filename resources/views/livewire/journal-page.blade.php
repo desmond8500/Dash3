@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 mb-2">
 
             <div class="card">
                 <div class="card-header">
@@ -66,9 +66,38 @@
                 </div>
             </div>
 
-            <div class="mt-2">
+            <div class="mb-2">
                 @livewire('erp.tasklist', ['journal_id' => $journal->id, 'paginate'=>3])
             </div>
+
+            <div class="mb-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Devis</div>
+                        <div class="card-actions">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Modalités</div>
+                        <div class="card-actions">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 
@@ -162,7 +191,7 @@
             {{-- @include('_form.document_form') --}}
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
+                {{-- <button type="submit" class="btn btn-primary">Valider</button> --}}
             </div>
         </form>
         <script> window.addEventListener('open-addTeam', event => { $('#addTeam').modal('show'); }) </script>

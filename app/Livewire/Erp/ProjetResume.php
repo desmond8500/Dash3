@@ -6,6 +6,7 @@ use App\Livewire\Forms\projetForm;
 use App\Models\Building;
 use App\Models\Invoice;
 use App\Models\Projet;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -19,6 +20,7 @@ class ProjetResume extends Component
         $this->projet_id = $projet_id;
     }
 
+    #[On('get-invoices')]
     public function render()
     {
         return view('livewire.erp.projet-resume',[

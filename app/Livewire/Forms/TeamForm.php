@@ -23,7 +23,7 @@ class TeamForm extends Form
 
     function store(){
         $this->validate();
-        Team::create($this->all());
+        return Team::create($this->all());
     }
 
     function set($model_id){

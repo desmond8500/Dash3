@@ -115,6 +115,12 @@
 
         @if ($row_tab==2)
             <div class="row g-2">
+                <div class="input-icon">
+                    <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher ">
+                    <span class="input-icon-addon">
+                        <i class="ti ti-search"></i>
+                    </span>
+                </div>
                 @foreach ($articles as $article)
                     <div class="col-md-6 ">
                        <div class="row g-2">
@@ -173,32 +179,30 @@
 
                 </div>
                 <div class="col-md-5">
-                    <div class="btn-group mb-1 w-100" role="group" aria-label="Button group with nested dropdown">
-                        <button type="button" class="btn btn-primary" wire:click="designation('Main d\'oeuvre')">Main d'oeuvre</button>
-                        <div class="btn-group" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> </button>
-                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a class="dropdown-item" wire:click="prix(30000)">30 000 CFA</a></li>
-                                <li><a class="dropdown-item" wire:click="prix(50000)">50 000 CFA</a></li>
-                                <li><a class="dropdown-item" wire:click="prix(100000)">100 000 CFA</a></li>
-                                <li><a class="dropdown-item" wire:click="prix(200000)">200 000 CFA</a></li>
-                                <li><a class="dropdown-item" wire:click="prix(300000)">300 000 CFA</a></li>
-                            </ul>
+                    <div class="dropdown open mb-1">
+                        <button class="btn btn-primary text-start w-100" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <i class="ti ti-chevron-down"></i> Désignation
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                            <a class="dropdown-item" wire:click="designation('Main d\'oeuvre')"> </i> Main d'oeuvre</a>
+                            <a class="dropdown-item" wire:click="designation('Forfait Accessoires')"> </i> Forfait Accessoires</a>
+                        </div>
+                    </div>
+                    <div class="dropdown open mb-1">
+                        <button class="btn btn-primary text-start w-100" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <i class="ti ti-chevron-down"></i> Tarifs
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                            <a class="dropdown-item" wire:click="prix(10000)">10 000 CFA</a>
+                            <a class="dropdown-item" wire:click="prix(20000)">20 000 CFA</a>
+                            <a class="dropdown-item" wire:click="prix(30000)">30 000 CFA</a>
+                            <a class="dropdown-item" wire:click="prix(50000)">50 000 CFA</a>
+                            <a class="dropdown-item" wire:click="prix(100000)">100 000 CFA</a>
+                            <a class="dropdown-item" wire:click="prix(150000)">150 000 CFA</a>
+                            <a class="dropdown-item" wire:click="prix(200000)">200 000 CFA</a>
                         </div>
                     </div>
 
-                    <div class="btn-group mb-1 w-100" role="group" aria-label="Button group with nested dropdown">
-                        <button type="button" class="btn btn-primary" wire:click="designation('Accessoires')">Accessoires</button>
-                        <div class="btn-group" role="group">
-                            <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> </button>
-                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a class="dropdown-item" wire:click="prix(20000)">20 000 CFA</a></li>
-                                <li><a class="dropdown-item" wire:click="prix(50000)">50 000 CFA</a></li>
-                                <li><a class="dropdown-item" wire:click="prix(100000)">100 000 CFA</a></li>
-                                <li><a class="dropdown-item" wire:click="prix(150000)">150 000 CFA</a></li>
-                            </ul>
-                        </div>
-                    </div>
 
                 </div>
 
@@ -224,8 +228,6 @@
                 </div>
 
             </div>
-
-
         @endif
     @endcomponent
     @component('components.modal', ["id"=>'editRow', 'title'=>'Editer un article', 'class'=> $row_class])

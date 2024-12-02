@@ -49,7 +49,7 @@ class InvoicePage extends Component
             'systemes' => Systeme::all(),
             'providers' => Provider::all(),
             'brands' => Brand::all(),
-            'articles' => Article::paginate(6),
+            'articles' => Article::search($this->search, 'designation')->paginate(6),
         ]);
     }
 

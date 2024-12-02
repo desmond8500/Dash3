@@ -122,10 +122,10 @@
                     </span>
                 </div>
                 @foreach ($articles as $article)
-                    <div class="col-md-6 ">
+                    <div class="col-md-4 ">
                        <div class="row g-2">
                         <div class="col">
-                            @include('_card.articleCard', ['img_class'=>'avatar-md'])
+                            @include('_card.articleCard', ['img_class'=>''])
                         </div>
                         <div class="col-auto">
                             <button class="btn btn-primary btn-icon" wire:click="generateArticleRow('{{ $article->id }}')" >

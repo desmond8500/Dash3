@@ -13,6 +13,30 @@ class TestPage extends Component
 {
     use WithFileUploads;
 
+    function mount(){
+        $this->widgets = (object) array(
+            (object) array(
+                'id'=> 1,
+                'name' => 'Invoice resume card',
+                'view'=> '_card.invoice_resume_card',
+                'class' => '',
+                'link'=>''),
+            (object) array(
+                'id'=> 2,
+                'name' => 'Calcul de batteries',
+                'view'=> 'tools.battery_calc',
+                'class' => '',
+                'link'=>''),
+            (object) array(
+                'id'=> 3,
+                'name' => 'User card card',
+                'view'=> '_card.user_card',
+                'class' => 'col-md-4',
+                'link'=> 'https://dribbble.com/shots/24839357-Meet-our-magic-team-Untitled-UI'),
+            // (object) array( 'id'=> 3, 'name' => 'Article card', 'view'=> '_card.articleCard'),
+        );
+    }
+
     public function render(){
         return view('livewire.test-page',[
             'providers' => Provider::all(),
@@ -21,6 +45,8 @@ class TestPage extends Component
     }
 
     public $title;
+    public $selected_widget = 0;
+    public $widgets;
 
     public function trix_save($content)
     {

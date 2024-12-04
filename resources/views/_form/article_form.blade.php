@@ -11,10 +11,10 @@
                     @else
                         <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
                     @endif
-                    {{-- <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                    <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
                         <i class="ti ti-edit text-muted"></i>
                         <span class="avatar-upload-text">Modifier</span>
-                    </label> --}}
+                    </label>
                 @else
                     <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
                         <i class="ti ti-plus text-muted"></i>

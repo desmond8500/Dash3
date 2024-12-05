@@ -2,7 +2,7 @@
     <div class="col-md-4">
         {{-- Résumé --}}
         @if ($projet->description)
-            <div class="border rounded">
+            <div class="border rounded mb-2">
                 <div class="bg-primary text-uppercase fw-bold text-white p-1">Résumé</div>
                 <div class="m-2">@parsedown($projet->description)</div>
             </div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             @if ($buildings->count())
-                <div class="card-body">
+                <div class="p-2">
                     @foreach ($buildings as $building)
                         <a href="{{ route('building',['building_id'=> $building->id]) }}" class="card p-1 mb-1" target="_blank">
                             {{ $building->name }}

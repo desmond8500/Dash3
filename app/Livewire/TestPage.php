@@ -20,18 +20,21 @@ class TestPage extends Component
                 'name' => 'Invoice resume card',
                 'view'=> '_card.invoice_resume_card',
                 'class' => '',
+                'type' => 'include',
                 'link'=>''),
             (object) array(
                 'id'=> 2,
                 'name' => 'Calcul de batteries',
                 'view'=> 'tools.battery_calc',
                 'class' => '',
+                'type' => 'livewire',
                 'link'=>''),
             (object) array(
                 'id'=> 3,
                 'name' => 'User card card',
                 'view'=> '_card.user_card',
                 'class' => 'col-md-4',
+                'type' => 'include',
                 'link'=> 'https://dribbble.com/shots/24839357-Meet-our-magic-team-Untitled-UI'),
             // (object) array( 'id'=> 3, 'name' => 'Article card', 'view'=> '_card.articleCard'),
         );

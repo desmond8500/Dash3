@@ -2,9 +2,15 @@
     <div class="col-md-9">
         <div class="row">
             @foreach ($widgets as $widget)
-                <a href="{{ $widget->link }}" target="_blank" class="{{ $widget->class }}">
-                    @includeWhen($widget->id == $selected_widget, $widget->view )
-                </a>
+                @if ($widget->type == "include")
+                    <a href="{{ $widget->link }}" target="_blank" class="{{ $widget->class }}">
+                        @includeWhen($widget->id == $selected_widget, $widget->view )
+                    </a>
+                @elseif($widget->type == "livewire")
+                    @if ($widget->id == $selected_widget)
+                        @livewire($widget->view)
+                    @endif
+                @endif
             @endforeach
         </div>
     </div>

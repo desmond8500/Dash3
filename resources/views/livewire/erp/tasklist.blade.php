@@ -9,7 +9,7 @@
                 @endif
             </a>
             <div class="card-actions">
-                <div class="d-none d-sm-block">
+                <div class="d-block d-sm-none">
                     <div class="dropdown open">
                         <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             <i class="ti ti-chevron-down"></i>
@@ -55,7 +55,7 @@
 
                 </div>
 
-                <div class="d-block d-sm-none">
+                <div class="d-none d-sm-block">
                     <div class="btn-list">
                         @if ($client_id)
                         <a class="btn btn-primary btn-icon"

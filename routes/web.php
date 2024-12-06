@@ -6,6 +6,7 @@ use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
+use App\Livewire\Erp\CVpage;
 use App\Livewire\Erp\DocumentsPage;
 use App\Livewire\Erp\ErpPage;
 use App\Livewire\Erp\FichesPage;
@@ -61,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'can:erp'])->group(function () {
     // Users
     // Route::get('/users', UsersPage::class)->name('users');
+    Route::get('/cv/{cv_id}', CVpage::class)->name('cv');
 
     Route::get('/erp', ErpPage::class)->name('erp');
     // Clients

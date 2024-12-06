@@ -72,7 +72,7 @@
         </div>
 
         <div class="col-md-4">
-            {{-- @dump($user_form) --}}
+            @livewire('erp.cv', ['user_id' => $user->id])
         </div>
     </div>
 

@@ -41,13 +41,15 @@ class ArticlesPage extends Component
         );
     }
 
+    public $search_brand;
+
     #[On('get-articles')]
     public function render()
     {
         return view('livewire.stock.articles-page',[
             'articles' => $this->get_articles(),
             'providers' => Provider::all(),
-            'brands' => Brand::all(),
+            'brands' => Brand::search($this->search_brand, 'name')->get(),
         ]);
     }
 

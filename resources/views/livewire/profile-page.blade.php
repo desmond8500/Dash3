@@ -72,7 +72,7 @@
         </div>
 
         <div class="col-md-4">
-            @livewire('erp.cv', ['user_id' => $user->id])
+            @livewire('erp.c-v', ['user_id' => $user->id])
         </div>
     </div>
 

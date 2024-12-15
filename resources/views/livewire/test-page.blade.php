@@ -1,5 +1,9 @@
 <div class="row mt-3">
     <div class="col-md-9">
+        <div>
+            @livewire('modal')
+        </div>
+
         <div class="row">
             @foreach ($widgets as $widget)
                 @if ($widget->type == "include")

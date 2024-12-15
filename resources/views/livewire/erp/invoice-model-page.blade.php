@@ -58,7 +58,7 @@
                     <div class="card-header">
                         <div class="card-title">{{ $selected_model->name }}</div>
                         <div class="card-actions">
-                            <button class="btn btn-primary" >
+                            <button class="btn btn-primary" wire:click="add_article">
                                 <i class="ti ti-plus"></i> Article
                             </button>
                         </div>
@@ -119,5 +119,17 @@
         </form>
         <script> window.addEventListener('open-editModel', event => { $('#editModel').modal('show'); }) </script>
         <script> window.addEventListener('close-editModel', event => { $('#editModel').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'addArticle', 'title' => 'Editer un système'])
+        <form class="row" wire:submit="update_model">
+            @include('_form.system_model_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+        <script> window.addEventListener('open-addArticle', event => { $('#addArticle').modal('show'); }) </script>
+        <script> window.addEventListener('close-addArticle', event => { $('#addArticle').modal('hide'); }) </script>
     @endcomponent
 </div>

@@ -4,7 +4,9 @@
             @livewire('form.task-add', ['projet_id' => $projet_id])
             @livewire('form.journal-add', ['projet_id' => $projet_id])
             @livewire('form.transaction-add', ['projet_id' => $projet_id])
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            @env('local')
+                <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            @endenv
         </div>
     @endcomponent
 

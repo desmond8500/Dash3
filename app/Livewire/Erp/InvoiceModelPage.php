@@ -76,4 +76,10 @@ class InvoiceModelPage extends Component
     function select_model($id){
         $this->selected_model = InvoiceModel::find($id);
     }
+
+    // Add Article row
+
+    function add_article(){
+        $this->dispatch('open-addArticle');
+    }
 }

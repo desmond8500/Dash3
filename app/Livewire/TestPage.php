@@ -23,6 +23,13 @@ class TestPage extends Component
                 'type' => 'include',
                 'link'=>''),
             (object) array(
+                'id'=> 1,
+                'name' => 'Invoice resume card',
+                'view'=> '_card.invoice_resume_card',
+                'class' => '',
+                'type' => 'include',
+                'link'=>''),
+            (object) array(
                 'id'=> 2,
                 'name' => 'Calcul de batteries',
                 'view'=> 'tools.battery_calc',
@@ -36,6 +43,14 @@ class TestPage extends Component
                 'class' => 'col-md-4',
                 'type' => 'include',
                 'link'=> 'https://dribbble.com/shots/24839357-Meet-our-magic-team-Untitled-UI'),
+            (object) array(
+                'id' => 5,
+                'name' => 'Modal',
+                'view' => 'modal',
+                'class' => '',
+                'type' => 'livewire',
+                'link' => ''
+            ),
             // (object) array( 'id'=> 3, 'name' => 'Article card', 'view'=> '_card.articleCard'),
         );
     }

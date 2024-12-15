@@ -6,8 +6,9 @@
             data-bs-target="#flush-{{ $id ?? 'collapseOne' }}"
             aria-expanded="true"
             aria-controls="flush-{{ $id ?? 'collapseOne' }}">
-            {{ $title ?? 'title' }}
         </button>
+
+
     </h2>
     <div id="flush-{{ $id ?? 'collapseOne' }}"
         class="accordion-collapse collapse"

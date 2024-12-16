@@ -1,9 +1,6 @@
 @extends('_pdf.bl.bl_page')
 
 @section('content')
-<div>
-   {{$color1}}
-</div>
     <table class="table mb-1">
         <tr>
             <td colspan="4" class="text-center text-uppercase bg-green" style="background: #{{ $color1 }}"> Equipements fournis</td>

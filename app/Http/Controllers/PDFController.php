@@ -284,6 +284,9 @@ class PDFController extends Controller
             'invoice' => $invoice,
             'bl' => $bl,
             'carbon' => $carbon,
+            'color1' => env('COLOR1'),
+            'color2' => env('COLOR2'),
+            'color3' => env('COLOR3'),
         ];
 
         if ($bl->type) {

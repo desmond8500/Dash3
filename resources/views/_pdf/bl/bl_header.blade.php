@@ -1,6 +1,6 @@
 <table class="table mb-1">
     <tr>
-        <td colspan="3" class="text-center bg-green">{{ strtoupper("Bordereau de $bl->type") }}</td>
+        <td colspan="3" class="text-center bg-green" style="background: #{{ $color1 }}">{{ strtoupper("Bordereau de $bl->type") }}</td>
     </tr>
     <tr>
         <td width="50px">

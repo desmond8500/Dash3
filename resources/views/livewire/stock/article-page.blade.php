@@ -141,7 +141,6 @@
 
     @component('components.modal', ["id"=>'addModal', 'title' => 'Titre'])
         <form class="row" wire:submit="store">
-            @include('_form.document_form')
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>

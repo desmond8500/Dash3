@@ -1,9 +1,8 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Article', 'breadcrumbs'=> $breadcrumbs])
         <div class="btn-list">
-            @livewire('form.provider-add')
-            @livewire('form.brand-add')
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            {{-- @livewire('form.provider-add') --}}
+            {{-- @livewire('form.brand-add') --}}
         </div>
 
     @endcomponent

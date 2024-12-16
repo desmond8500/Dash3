@@ -71,7 +71,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+
+                {{-- <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Images</div>
@@ -105,7 +106,7 @@
 
 
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col-md-6">
                     {{-- @livewire('stock.article-documents', ['article_id' => $article->id]) --}}

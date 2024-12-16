@@ -128,14 +128,14 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editTaskModal', event => { $('#editTaskModal').modal('show'); }) </script>
-        <script> window.addEventListener('close-editTaskModal', event => { $('#editTaskModal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editTaskModal', event => { window.$('#editTaskModal').modal('show'); }) </script>
+        <script> window.addEventListener('close-editTaskModal', event => { window.$('#editTaskModal').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal.link-modal', ["id"=>'taskDetail', 'title' => 'Editer une tache', 'task'=>$task])
         @include('_form.task_detail')
-        <script> window.addEventListener('open-taskDetail', event => { $('#taskDetail').modal('show'); }) </script>
-        <script> window.addEventListener('close-taskDetail', event => { $('#taskDetail').modal('hide'); }) </script>
+        <script> window.addEventListener('open-taskDetail', event => { window.$('#taskDetail').modal('show'); }) </script>
+        <script> window.addEventListener('close-taskDetail', event => { window.$('#taskDetail').modal('hide'); }) </script>
     @endcomponent
 
 </div>

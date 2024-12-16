@@ -39,8 +39,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editJournal', event => { $('#editJournal').modal('show'); }) </script>
-        <script> window.addEventListener('close-editJournal', event => { $('#editJournal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editJournal', event => { window.$('#editJournal').modal('show'); }) </script>
+        <script> window.addEventListener('close-editJournal', event => { window.$('#editJournal').modal('hide'); }) </script>
     @endcomponent
 
 </div>

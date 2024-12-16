@@ -83,7 +83,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editBadge', event => { $('#editBadge').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBadge', event => { $('#editBadge').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editBadge', event => { window.$('#editBadge').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBadge', event => { window.$('#editBadge').modal('hide'); }) </script>
     @endcomponent
 </div>

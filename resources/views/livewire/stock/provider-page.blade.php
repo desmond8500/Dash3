@@ -49,8 +49,8 @@
             <button type="submit" class="btn btn-primary">Valider</button>
         </div>
     </form>
-    <script> window.addEventListener('open-editProvider', event => { $('#editProvider').modal('show'); }) </script>
-    <script> window.addEventListener('close-editProvider', event => { $('#editProvider').modal('hide'); }) </script>
+    <script> window.addEventListener('open-editProvider', event => { window.$('#editProvider').modal('show'); }) </script>
+    <script> window.addEventListener('close-editProvider', event => { window.$('#editProvider').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editLogo', 'title' => 'Editer un logo'])
@@ -76,7 +76,7 @@
             <button type="submit" class="btn btn-primary">Valider</button>
         </div>
     </form>
-    <script> window.addEventListener('open-editLogo', event => { $('#editLogo').modal('show'); }) </script>
-    <script> window.addEventListener('close-editLogo', event => { $('#editLogo').modal('hide'); }) </script>
+    <script> window.addEventListener('open-editLogo', event => { window.$('#editLogo').modal('show'); }) </script>
+    <script> window.addEventListener('close-editLogo', event => { window.$('#editLogo').modal('hide'); }) </script>
     @endcomponent
 </div>

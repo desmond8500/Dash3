@@ -248,16 +248,16 @@
                 </div>
             </form>
 
-            <script> window.addEventListener('open-register', event => { $('#register').modal('show'); }) </script>
-            <script> window.addEventListener('close-register', event => { $('#register').modal('hide'); }) </script>
+            <script> window.addEventListener('open-register', event => { window.$('#register').modal('show'); }) </script>
+            <script> window.addEventListener('close-register', event => { window.$('#register').modal('hide'); }) </script>
         @endcomponent
 
         @component('components.modal', ["id"=>'login', 'title'=>'Connexion', 'class'=>'modal-sm'])
 
             @include('_form.login_form')
 
-            <script> window.addEventListener('open-login', event => { $('#login').modal('show'); }) </script>
-            <script> window.addEventListener('close-login', event => { $('#login').modal('hide'); }) </script>
+            <script> window.addEventListener('open-login', event => { window.$('#login').modal('show'); }) </script>
+            <script> window.addEventListener('close-login', event => { window.$('#login').modal('hide'); }) </script>
         @endcomponent
     </div>
 

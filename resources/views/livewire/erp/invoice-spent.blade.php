@@ -60,8 +60,8 @@
             <button type="submit" class="btn btn-primary">Valider</button>
         </div>
     </form>
-    <script> window.addEventListener('open-add-invoiceSpent', event => { $('#add-invoiceSpent').modal('show'); }) </script>
-    <script> window.addEventListener('close-add-invoiceSpent', event => { $('#add-invoiceSpent').modal('hide'); }) </script>
+    <script> window.addEventListener('open-add-invoiceSpent', event => { window.$('#add-invoiceSpent').modal('show'); }) </script>
+    <script> window.addEventListener('close-add-invoiceSpent', event => { window.$('#add-invoiceSpent').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'edit-invoiceSpent', 'title' => 'Editer une dépense'])
@@ -72,8 +72,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-edit-invoiceSpent', event => { $('#edit-invoiceSpent').modal('show'); }) </script>
-        <script> window.addEventListener('close-edit-invoiceSpent', event => { $('#edit-invoiceSpent').modal('hide'); }) </script>
+        <script> window.addEventListener('open-edit-invoiceSpent', event => { window.$('#edit-invoiceSpent').modal('show'); }) </script>
+        <script> window.addEventListener('close-edit-invoiceSpent', event => { window.$('#edit-invoiceSpent').modal('hide'); }) </script>
     @endcomponent
 
 </div>

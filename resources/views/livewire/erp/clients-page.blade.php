@@ -55,8 +55,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addClient', event => { $('#addClient').modal('show'); }) </script>
-        <script> window.addEventListener('close-addClient', event => { $('#addClient').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addClient', event => { window.$('#addClient').modal('show'); }) </script>
+        <script> window.addEventListener('close-addClient', event => { window.$('#addClient').modal('hide'); }) </script>
     @endcomponent
     @component('components.modal', ["id"=>'editClient', 'title'=>'Modifier un client'])
         <form class="row" wire:submit="update">
@@ -70,8 +70,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editClient', event => { $('#editClient').modal('show'); }) </script>
-        <script> window.addEventListener('close-editClient', event => { $('#editClient').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editClient', event => { window.$('#editClient').modal('show'); }) </script>
+        <script> window.addEventListener('close-editClient', event => { window.$('#editClient').modal('hide'); }) </script>
     @endcomponent
 
 </div>

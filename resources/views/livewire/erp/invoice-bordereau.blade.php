@@ -39,8 +39,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addBL', event => { $('#addBL').modal('show'); }) </script>
-        <script> window.addEventListener('close-addBL', event => { $('#addBL').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addBL', event => { window.$('#addBL').modal('show'); }) </script>
+        <script> window.addEventListener('close-addBL', event => { window.$('#addBL').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editBL', 'title' => 'Ajouter un bordereau'])
@@ -51,7 +51,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editBL', event => { $('#editBL').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBL', event => { $('#editBL').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editBL', event => { window.$('#editBL').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBL', event => { window.$('#editBL').modal('hide'); }) </script>
     @endcomponent
 </div>

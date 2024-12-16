@@ -83,8 +83,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addSystem', event => { $('#addSystem').modal('show'); }) </script>
-        <script> window.addEventListener('close-addSystem', event => { $('#addSystem').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addSystem', event => { window.$('#addSystem').modal('show'); }) </script>
+        <script> window.addEventListener('close-addSystem', event => { window.$('#addSystem').modal('hide'); }) </script>
     @endcomponent
     @component('components.modal', ["id"=>'editSystem', 'title' => 'Editer un système'])
         <form class="row" wire:submit="update_system">
@@ -94,8 +94,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editSystem', event => { $('#editSystem').modal('show'); }) </script>
-        <script> window.addEventListener('close-editSystem', event => { $('#editSystem').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editSystem', event => { window.$('#editSystem').modal('show'); }) </script>
+        <script> window.addEventListener('close-editSystem', event => { window.$('#editSystem').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'addModel', 'title' => 'Ajouter un modèle'])
@@ -106,8 +106,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addModel', event => { $('#addModel').modal('show'); }) </script>
-        <script> window.addEventListener('close-addModel', event => { $('#addModel').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addModel', event => { window.$('#addModel').modal('show'); }) </script>
+        <script> window.addEventListener('close-addModel', event => { window.$('#addModel').modal('hide'); }) </script>
     @endcomponent
     @component('components.modal', ["id"=>'editModel', 'title' => 'Editer un système'])
         <form class="row" wire:submit="update_model">
@@ -117,8 +117,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editModel', event => { $('#editModel').modal('show'); }) </script>
-        <script> window.addEventListener('close-editModel', event => { $('#editModel').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editModel', event => { window.$('#editModel').modal('show'); }) </script>
+        <script> window.addEventListener('close-editModel', event => { window.$('#editModel').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'addArticle', 'title' => 'Editer un système'])
@@ -129,7 +129,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addArticle', event => { $('#addArticle').modal('show'); }) </script>
-        <script> window.addEventListener('close-addArticle', event => { $('#addArticle').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addArticle', event => { window.$('#addArticle').modal('show'); }) </script>
+        <script> window.addEventListener('close-addArticle', event => { window.$('#addArticle').modal('hide'); }) </script>
     @endcomponent
 </div>

@@ -49,11 +49,7 @@
             <button type="submit" class="btn btn-primary">Valider</button>
         </div>
     </form>
-    <script>
-        window.addEventListener('open-editTransaction', event => { $('#editTransaction').modal('show'); })
-    </script>
-    <script>
-        window.addEventListener('close-editTransaction', event => { $('#editTransaction').modal('hide'); })
-    </script>
+    <script> window.addEventListener('open-editTransaction', event => { window.$('#editTransaction').modal('show'); }) </script>
+    <script> window.addEventListener('close-editTransaction', event => { window.$('#editTransaction').modal('hide'); }) </script>
     @endcomponent
 </div>

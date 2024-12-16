@@ -69,8 +69,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-add-invoiceAcompte', event => { $('#add-invoiceAcompte').modal('show'); }) </script>
-        <script> window.addEventListener('close-add-invoiceAcompte', event => { $('#add-invoiceAcompte').modal('hide'); }) </script>
+        <script> window.addEventListener('open-add-invoiceAcompte', event => { window.$('#add-invoiceAcompte').modal('show'); }) </script>
+        <script> window.addEventListener('close-add-invoiceAcompte', event => { window.$('#add-invoiceAcompte').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'edit-invoiceAcompte', 'title' => 'Editer un acompte'])
@@ -81,8 +81,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-edit-invoiceAcompte', event => { $('#edit-invoiceAcompte').modal('show'); }) </script>
-        <script> window.addEventListener('close-edit-invoiceAcompte', event => { $('#edit-invoiceAcompte').modal('hide'); }) </script>
+        <script> window.addEventListener('open-edit-invoiceAcompte', event => { window.$('#edit-invoiceAcompte').modal('show'); }) </script>
+        <script> window.addEventListener('close-edit-invoiceAcompte', event => { window.$('#edit-invoiceAcompte').modal('hide'); }) </script>
     @endcomponent
 
 </div>

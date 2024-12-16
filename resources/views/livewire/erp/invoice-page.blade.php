@@ -56,8 +56,8 @@
             @include('_form.invoice_form')
         </form>
 
-        <script> window.addEventListener('open-editInvoice', event => { $('#editInvoice').modal('show'); }) </script>
-        <script> window.addEventListener('close-editInvoice', event => { $('#editInvoice').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editInvoice', event => { window.$('#editInvoice').modal('show'); }) </script>
+        <script> window.addEventListener('close-editInvoice', event => { window.$('#editInvoice').modal('hide'); }) </script>
     @endcomponent
 
     {{-- Section --}}
@@ -86,8 +86,8 @@
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </form>
-            <script> window.addEventListener('open-addSection', event => { $('#addSection').modal('show'); }) </script>
-            <script> window.addEventListener('close-addSection', event => { $('#addSection').modal('hide'); }) </script>
+            <script> window.addEventListener('open-addSection', event => { window.$('#addSection').modal('show'); }) </script>
+            <script> window.addEventListener('close-addSection', event => { window.$('#addSection').modal('hide'); }) </script>
 
         @endif
     @endcomponent
@@ -101,8 +101,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editSection', event => { $('#editSection').modal('show'); }) </script>
-        <script> window.addEventListener('close-editSection', event => { $('#editSection').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editSection', event => { window.$('#editSection').modal('show'); }) </script>
+        <script> window.addEventListener('close-editSection', event => { window.$('#editSection').modal('hide'); }) </script>
     @endcomponent
 
     {{-- Rows --}}
@@ -148,8 +148,8 @@
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </form>
-            <script> window.addEventListener('open-addRow', event => { $('#addRow').modal('show'); }) </script>
-            <script> window.addEventListener('close-addRow', event => { $('#addRow').modal('hide'); }) </script>
+            <script> window.addEventListener('open-addRow', event => { window.$('#addRow').modal('show'); }) </script>
+            <script> window.addEventListener('close-addRow', event => { window.$('#addRow').modal('hide'); }) </script>
         @elseif($row_tab==3)
             <div class="row">
                 <div class="col-md-12 mb-3">
@@ -238,8 +238,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editRow', event => { $('#editRow').modal('show'); }) </script>
-        <script> window.addEventListener('close-editRow', event => { $('#editRow').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editRow', event => { window.$('#editRow').modal('show'); }) </script>
+        <script> window.addEventListener('close-editRow', event => { window.$('#editRow').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'importRows', 'title'=>'Importer des articles', 'class'=> $row_class])
@@ -257,8 +257,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-importRows', event => { $('#importRows').modal('show'); }) </script>
-        <script> window.addEventListener('close-importRows', event => { $('#importRows').modal('hide'); }) </script>
+        <script> window.addEventListener('open-importRows', event => { window.$('#importRows').modal('show'); }) </script>
+        <script> window.addEventListener('close-importRows', event => { window.$('#importRows').modal('hide'); }) </script>
     @endcomponent
 
     {{-- Informations --}}
@@ -266,7 +266,7 @@
 
         {!! nl2br($message ?? 'Description') !!}
 
-        <script> window.addEventListener('open-infoModal', event => { $('#infoModal').modal('show'); }) </script>
-        <script> window.addEventListener('close-infoModal', event => { $('#infoModal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-infoModal', event => { window.$('#infoModal').modal('show'); }) </script>
+        <script> window.addEventListener('close-infoModal', event => { window.$('#infoModal').modal('hide'); }) </script>
     @endcomponent
 </div>

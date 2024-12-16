@@ -52,8 +52,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addStatus', event => { $('#addStatus').modal('show'); }) </script>
-        <script> window.addEventListener('close-addStatus', event => { $('#addStatus').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addStatus', event => { window.$('#addStatus').modal('show'); }) </script>
+        <script> window.addEventListener('close-addStatus', event => { window.$('#addStatus').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editStatus', 'title' => 'Editer un statut'])
@@ -65,8 +65,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editStatus', event => { $('#editStatus').modal('show'); }) </script>
-        <script> window.addEventListener('close-editStatus', event => { $('#editStatus').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editStatus', event => { window.$('#editStatus').modal('show'); }) </script>
+        <script> window.addEventListener('close-editStatus', event => { window.$('#editStatus').modal('hide'); }) </script>
     @endcomponent
 </div>
 

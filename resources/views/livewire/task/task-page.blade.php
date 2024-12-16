@@ -191,8 +191,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editTaskModal', event => { $('#editTaskModal').modal('show'); }) </script>
-        <script> window.addEventListener('close-editTaskModal', event => { $('#editTaskModal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editTaskModal', event => { window.$('#editTaskModal').modal('show'); }) </script>
+        <script> window.addEventListener('close-editTaskModal', event => { window.$('#editTaskModal').modal('hide'); }) </script>
     @endcomponent
 
 

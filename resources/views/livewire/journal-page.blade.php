@@ -160,8 +160,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editJournal', event => { $('#editJournal').modal('show'); }) </script>
-        <script> window.addEventListener('close-editJournal', event => { $('#editJournal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editJournal', event => { window.$('#editJournal').modal('show'); }) </script>
+        <script> window.addEventListener('close-editJournal', event => { window.$('#editJournal').modal('hide'); }) </script>
     @endcomponent
 
 
@@ -194,8 +194,8 @@
                 {{-- <button type="submit" class="btn btn-primary">Valider</button> --}}
             </div>
         </form>
-        <script> window.addEventListener('open-addTeam', event => { $('#addTeam').modal('show'); }) </script>
-        <script> window.addEventListener('close-addTeam', event => { $('#addTeam').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addTeam', event => { window.$('#addTeam').modal('show'); }) </script>
+        <script> window.addEventListener('close-addTeam', event => { window.$('#addTeam').modal('hide'); }) </script>
     @endcomponent
 
 </div>

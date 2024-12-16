@@ -56,7 +56,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editContact', event => { $('#editContact').modal('show'); }) </script>
-        <script> window.addEventListener('close-editContact', event => { $('#editContact').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editContact', event => { window.$('#editContact').modal('show'); }) </script>
+        <script> window.addEventListener('close-editContact', event => { window.$('#editContact').modal('hide'); }) </script>
     @endcomponent
 </div>

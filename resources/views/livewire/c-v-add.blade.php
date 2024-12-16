@@ -9,7 +9,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addCV', event => { $('#addCV').modal('show'); }) </script>
-        <script> window.addEventListener('close-addCV', event => { $('#addCV').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addCV', event => { window.$('#addCV').modal('show'); }) </script>
+        <script> window.addEventListener('close-addCV', event => { window.$('#addCV').modal('hide'); }) </script>
     @endcomponent
 </div>

@@ -109,11 +109,11 @@
                 </div>
 
                 <div class="col-md-6">
-                    {{-- @livewire('stock.article-documents', ['article_id' => $article->id]) --}}
+                    @livewire('stock.article-documents', ['article_id' => $article->id])
                 </div>
 
                 <div class="col-md-6">
-                    {{-- @livewire('stock.article-links', ['article_id' => $article->id]) --}}
+                    @livewire('stock.article-links', ['article_id' => $article->id])
                 </div>
 
             </div>

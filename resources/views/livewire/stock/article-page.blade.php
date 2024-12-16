@@ -133,8 +133,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editArticle', event => { $('#editArticle').modal('show'); }) </script>
-        <script> window.addEventListener('close-editArticle', event => { $('#editArticle').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editArticle', event => { window.$('#editArticle').modal('show'); }) </script>
+        <script> window.addEventListener('close-editArticle', event => { window.$('#editArticle').modal('hide'); }) </script>
     @endcomponent
 
 

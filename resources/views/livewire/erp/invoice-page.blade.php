@@ -74,7 +74,7 @@
             <div> <b>Systèmes :</b> {{ $systems->count() }} </div>
 
             @foreach ($systems as $system)
-                <button class="btn btn-primary mb-1" wire:click="sectionGenerate('{{ $system->name }}')">{{ $system->name }}</button>
+                <button class="btn btn-primary mb-1" wire:click="section_generate('{{ $system->name }}')">{{ $system->name }}</button>
             @endforeach
 
         @else

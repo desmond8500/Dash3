@@ -77,7 +77,7 @@ class InvoicePage extends Component
         $this->dispatch('close-addSection');
     }
 
-    function sectionGenerate($name)
+    function section_generate($name)
     {
         InvoiceSection::create([
             'invoice_id' => $this->devis->id,

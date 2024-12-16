@@ -14,7 +14,7 @@ class Navbar extends Component
                 array('name' => "Modèle de devis", "route" => "invoice_model", "icon" => "file"),
                 array('name' => "Documents", "route" => "documents", "icon" => "file"),
                 array('name' => "Devis", "route" => "invoicelist", "icon" => "file"),
-                array('name' => "Système", "route" => "settings", "icon" => "hammer"),
+                array('name' => "Système", "route" => "systemes", "icon" => "hammer"),
                 array('name' => "Journaux", "route" => "journaux", "icon" =>"article", "can" => "journaux"),
                 array('name' => "Finances", "route" => "finances", "icon" => "coins", "can" => "finances"),
                 array('name' => "Equipe", "route" => "team", "icon" => "coins", "can" => ""),

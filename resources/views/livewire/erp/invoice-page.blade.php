@@ -71,10 +71,10 @@
         @endslot
 
         @if ($section_tab)
-            <div> <b>Systèmes :</b> {{ $systemes->count() }} </div>
+            <div> <b>Systèmes :</b> {{ $systems->count() }} </div>
 
-            @foreach ($systemes as $systeme)
-                <button class="btn btn-primary mb-1" wire:click="sectionGenerate('{{ $systeme->name }}')">{{ $systeme->name }}</button>
+            @foreach ($systems as $system)
+                <button class="btn btn-primary mb-1" wire:click="sectionGenerate('{{ $system->name }}')">{{ $system->name }}</button>
             @endforeach
 
         @else

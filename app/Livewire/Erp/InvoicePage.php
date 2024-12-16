@@ -46,7 +46,7 @@ class InvoicePage extends Component
     {
         return view('livewire.erp.invoice-page',[
             'sections' => $this->getSections(),
-            'systemes' => Systeme::all(),
+            'systems' => Systeme::all(),
             'providers' => Provider::all(),
             'brands' => Brand::all(),
             'articles' => Article::search($this->search, 'designation')->paginate(6),

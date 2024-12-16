@@ -12,7 +12,7 @@
         </div>
     </form>
 
-    <script> window.addEventListener('open-addBuilding', event => { $('#addBuilding').modal('show'); }) </script>
-    <script> window.addEventListener('close-addBuilding', event => { $('#addBuilding').modal('hide'); }) </script>
+    <script> window.addEventListener('open-addBuilding', event => { window.$('#addBuilding').modal('show'); }) </script>
+    <script> window.addEventListener('close-addBuilding', event => { window.$('#addBuilding').modal('hide'); }) </script>
     @endcomponent
 </div>

@@ -8,8 +8,8 @@
             @include('_form.invoice_form')
         </form>
 
-        <script> window.addEventListener('open-addInvoice', event => { $('#addInvoice').modal('show'); }) </script>
-        <script> window.addEventListener('close-addInvoice', event => { $('#addInvoice').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addInvoice', event => { window.$('#addInvoice').modal('show'); }) </script>
+        <script> window.addEventListener('close-addInvoice', event => { window.$('#addInvoice').modal('hide'); }) </script>
     @endcomponent
 
 </div>

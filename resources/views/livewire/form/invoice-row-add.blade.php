@@ -8,7 +8,7 @@
             @include('_form.invoice_row_form')
         </form>
 
-        <script> window.addEventListener('open-invoiceRowAdd', event => { $('#invoiceRowAdd').modal('show'); }) </script>
-        <script> window.addEventListener('close-invoiceRowAdd', event => { $('#invoiceRowAdd').modal('hide'); }) </script>
+        <script> window.addEventListener('open-invoiceRowAdd', event => { window.$('#invoiceRowAdd').modal('show'); }) </script>
+        <script> window.addEventListener('close-invoiceRowAdd', event => { window.$('#invoiceRowAdd').modal('hide'); }) </script>
     @endcomponent
 </div>

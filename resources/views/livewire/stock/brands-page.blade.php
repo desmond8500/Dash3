@@ -2,12 +2,12 @@
     @component('components.layouts.page-header', ['title'=>'Marques', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             @livewire('form.brand-add')
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+
         </div>
     @endcomponent
 
     <div class="row row-deck g-2">
-        <div class="col-md-12">
+        <div class="col-md">
             <div class="input-icon">
                 <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher une marque">
                 <span class="input-icon-addon">
@@ -15,6 +15,14 @@
                 </span>
             </div>
         </div>
+        <div class="col-auto">
+            <div class="btn-list">
+                <button class="btn btn-icon"><i class="ti ti-list"></i> </button>
+                <button class="btn btn-icon"><i class="ti ti-list-details"></i> </button>
+                <button class="btn btn-icon"><i class="ti ti-layout-grid"></i> </button>
+            </div>
+        </div>
+        <div class="w-100"></div>
         @foreach ($brands as $brand)
             <div class="col-md-4">
                 <div class="card p-2">
@@ -60,8 +68,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editBrand', event => { $('#editBrand').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBrand', event => { $('#editBrand').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editBrand', event => { window.$('#editBrand').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBrand', event => { window.$('#editBrand').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editBrandLogo', 'title' => 'Editer une marque'])
@@ -87,7 +95,7 @@
                 <button type="submit" class="btn btn-primary">Modifier</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editBrandLogo', event => { $('#editBrandLogo').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBrandLogo', event => { $('#editBrandLogo').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editBrandLogo', event => { window.$('#editBrandLogo').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBrandLogo', event => { window.$('#editBrandLogo').modal('hide'); }) </script>
     @endcomponent
 </div>

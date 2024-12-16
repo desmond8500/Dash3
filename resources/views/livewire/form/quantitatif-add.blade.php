@@ -56,7 +56,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </div>
-        <script> window.addEventListener('open-addQuantitatif', event => { $('#addQuantitatif').modal('show'); }) </script>
-        <script> window.addEventListener('close-addQuantitati', event => { $('#addQuantitati').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addQuantitatif', event => { window.$('#addQuantitatif').modal('show'); }) </script>
+        <script> window.addEventListener('close-addQuantitati', event => { window.$('#addQuantitati').modal('hide'); }) </script>
     @endcomponent
 </div>

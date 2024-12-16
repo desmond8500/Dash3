@@ -9,7 +9,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addArticleLink', event => { $('#addArticleLink').modal('show'); }) </script>
-        <script> window.addEventListener('close-addArticleLink', event => { $('#addArticleLink').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addArticleLink', event => { window.$('#addArticleLink').modal('show'); }) </script>
+        <script> window.addEventListener('close-addArticleLink', event => { window.$('#addArticleLink').modal('hide'); }) </script>
     @endcomponent
 </div>

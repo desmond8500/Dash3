@@ -13,7 +13,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addProvider', event => { $('#addProvider').modal('show'); }) </script>
-        <script> window.addEventListener('close-addProvider', event => { $('#addProvider').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addProvider', event => { window.$('#addProvider').modal('show'); }) </script>
+        <script> window.addEventListener('close-addProvider', event => { window.$('#addProvider').modal('hide'); }) </script>
     @endcomponent
 </div>

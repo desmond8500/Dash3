@@ -9,8 +9,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addArticle', event => { $('#addArticle').modal('show'); }) </script>
-        <script> window.addEventListener('close-addArticle', event => { $('#addArticle').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addArticle', event => { window.$('#addArticle').modal('show'); }) </script>
+        <script> window.addEventListener('close-addArticle', event => { window.$('#addArticle').modal('hide'); }) </script>
     @endcomponent
 
 </div>

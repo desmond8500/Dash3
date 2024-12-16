@@ -12,7 +12,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addJournal', event => { $('#addJournal').modal('show'); }) </script>
-        <script> window.addEventListener('close-addJournal', event => { $('#addJournal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addJournal', event => { window.$('#addJournal').modal('show'); }) </script>
+        <script> window.addEventListener('close-addJournal', event => { window.$('#addJournal').modal('hide'); }) </script>
     @endcomponent
 </div>

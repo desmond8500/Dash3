@@ -109,11 +109,11 @@
                 </div> --}}
 
                 <div class="col-md-6">
-                    {{-- @livewire('stock.article-documents', ['article_id' => $article->id]) --}}
+                    @livewire('stock.article-documents', ['article_id' => $article->id])
                 </div>
 
                 <div class="col-md-6">
-                    {{-- @livewire('stock.article-links', ['article_id' => $article->id]) --}}
+                    @livewire('stock.article-links', ['article_id' => $article->id])
                 </div>
 
             </div>
@@ -122,7 +122,7 @@
 
     </div>
 
-    {{-- @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article'])
+    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article'])
         <form class="row" wire:submit="update">
             @include('_form.article_form')
             <div class="modal-footer">
@@ -135,18 +135,7 @@
         </form>
         <script> window.addEventListener('open-editArticle', event => { $('#editArticle').modal('show'); }) </script>
         <script> window.addEventListener('close-editArticle', event => { $('#editArticle').modal('hide'); }) </script>
-    @endcomponent --}}
-
-    <button class='btn btn-primary' wire:click="$dispatch('open-addModal')" ><i class='ti ti-plus'></i> Bouton</button>
-
-    @component('components.modal', ["id"=>'addModal', 'title' => 'Titre'])
-        <form class="row" wire:submit="store">
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
-        </form>
-        <script> window.addEventListener('open-addModal', event => { $('#addModal').modal('show'); }) </script>
-        <script> window.addEventListener('close-addModal', event => { $('#addModal').modal('hide'); }) </script>
     @endcomponent
+
+
 </div>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\ArticleForm;
+use App\Livewire\Forms\ItemForm;
 use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Provider;
@@ -19,7 +20,7 @@ class ArticlePage extends Component
     public $search ='';
     public $breadcrumbs;
     public $article_id;
-    public ArticleForm $article_form;
+    public ItemForm $article_form;
 
     public function mount($article_id){
         $this->article_id = $article_id;

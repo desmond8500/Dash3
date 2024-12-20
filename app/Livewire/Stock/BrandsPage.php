@@ -19,6 +19,7 @@ class BrandsPage extends Component
     protected $paginationTheme = 'bootstrap';
     public $search = '';
     public $breadcrumbs;
+    public $card_type = 1;
 
     public function mount()
     {

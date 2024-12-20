@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="col-md-auto">
-           @livewire('form.invoice-add', ['projet_id' => $projet_id], key($projet_id))
+           {{-- @livewire('form.invoice-add', ['projet_id' => $projet_id]) --}}
         </div>
     </div>
 

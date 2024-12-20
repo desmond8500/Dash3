@@ -63,7 +63,7 @@
                                     <i class="ti ti-search"></i>
                                 </span>
                             </div>
-                            @livewire('form.invoice-add', ['projet_id' => $projet->id], key($projet->id))
+                            @livewire('form.invoice-add', ['projet_id' => $projet->id])
 
                         </div>
                     </div>

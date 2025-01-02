@@ -123,7 +123,8 @@ class TaskForm extends Form
         return $this->task;
     }
 
-    function delete(){
+    function delete($id){
+        $this->task = Task::find($id);
         $this->task->delete();
     }
 

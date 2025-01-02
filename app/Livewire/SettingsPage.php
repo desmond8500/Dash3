@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\StatusForm;
+use App\Models\Setting;
 use App\Models\TaskStatus;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 
 class SettingsPage extends Component
@@ -15,6 +17,7 @@ class SettingsPage extends Component
         ]);
     }
 
+    #[Session]
     public $tab = 0;
 
     // TACHES

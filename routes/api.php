@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DemoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Users
     Route::get('users', 'UserController@users')->name('users');
     Route::post('user_add', 'UserController@user_add')->name('user_add');
-    Route::post('user_update', 'UserController@user_update')->name('user_add');
-    Route::post('user_delete', 'UserController@user_delete')->name('user_add');
+    Route::post('user_update', 'UserController@user_update')->name('user_update');
+    Route::post('user_delete', 'UserController@user_delete')->name('user_delete');
+
 });
+
+// Demo
+Route::get('demos', [DemoController::class, 'index'])->name('demos');

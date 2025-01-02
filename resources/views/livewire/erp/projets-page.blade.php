@@ -31,6 +31,8 @@
 
     <div class="row g-2">
         <div class="col-md-6">
+            @livewire('erp.tasks.tasklist1', ['client_id' => $client_id])
+            <div class="mb-2"></div>
             @livewire('erp.tasklist', ['client_id' => $client_id])
         </div>
         <div class="col-md-6">

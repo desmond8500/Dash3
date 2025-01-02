@@ -40,5 +40,38 @@
         </div>
     </div>
 
+    {{-- <div class="col-md-4">
+        @include('_card.task1_card')
+    </div> --}}
+
+    <div class="col-md-4">
+        @foreach ($demos as $demo)
+            <div class="card card-body mb-1">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-title">{{ $demo->name }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-danger" wire:click="delete_demo('{{ $demo->id }}')">Delete</button>
+                    </div>
+                </div>
+                <div class="card-text">{{ $demo->description }}</div>
+            </div>
+        @endforeach
+    </div>
+
+    <div class="col-md-4">
+        <div class="mb-3">
+            <label for="">Nom</label>
+            <input type="text" wire:model="name" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="">Description</label>
+            <textarea wire:model="description" class="form-control"></textarea>
+        </div>
+        <button class="btn btn-primary" wire:click='add_demo'>valider</button>
+    </div>
+
+
 
 </div>

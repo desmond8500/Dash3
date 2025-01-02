@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Brand;
+use App\Models\Demo;
 use App\Models\Provider;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
@@ -51,6 +52,14 @@ class TestPage extends Component
                 'type' => 'livewire',
                 'link' => ''
             ),
+            (object) array(
+                'id' => 6,
+                'name' => 'Task card 1',
+                'view' => '_card.task1_card',
+                'class' => '',
+                'type' => 'include',
+                'link' => ''
+            ),
             // (object) array( 'id'=> 3, 'name' => 'Article card', 'view'=> '_card.articleCard'),
         );
     }
@@ -59,6 +68,7 @@ class TestPage extends Component
         return view('livewire.test-page',[
             'providers' => Provider::all(),
             'brands' => Brand::all(),
+            'demos' => Demo::all(),
         ]);
     }
 
@@ -80,17 +90,19 @@ class TestPage extends Component
         dd("storage/$dir/$name");
     }
 
-}
+    public $name;
+    public $description;
 
-function storeAvatar($client, $avatar, $delete = false){
-    if (!is_string($this->avatar)) {
-        $dir = "erp/clients/client->id/avatar";
-        if ($delete) {
-            Storage::disk('public')->deleteDirectory($dir);
-        }
-        $name = $avatar->getClientOriginalName();
+    function add_demo(){
+        Demo::create([
+            'name' => $this->name,
+            'description' => $this->description,
+        ]);
+        $this->reset('name', 'description');
+    }
 
-        $client->avatar = "storage/$dir/$name";
-        $client->save();
+    function delete_demo($id){
+        Demo::find($id)->delete();
     }
 }
+

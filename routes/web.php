@@ -126,8 +126,9 @@ Route::middleware(['auth', 'can:stock'])->group(function () {
         return PDFController::achat_pdf($achat_id);
     })->name('achat_pdf');
     Route::get('/stock/inventaire_pdf/{name}', function ($name) {
-        return PDFController::modeles_fiches_pdf($name);
-    })->name('modeles_fiches_pdf');
+        return PDFController::fiches_inventaire_pdf($name);
+    })->name('fiches_inventaire_pdf');
+
 });
 
 // Building management
@@ -211,3 +212,8 @@ Route::get('/fiches', FichesPage::class)->name('fiches');
 // Medias
 Route::get('/images', ImagesPage::class)->name('images');
 Route::get('/videos', VideosPage::class)->name('videos');
+
+// Fiches
+Route::get('/fiches/{type}/{name}', function ($name, $type) {
+    return PDFController::fiches_pdf($type, $name);
+})->name('fiches_pdf');

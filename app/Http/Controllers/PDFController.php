@@ -45,14 +45,30 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.achat', $data);
         return $pdf->stream('Achat - '.$achat->name );
     }
-    public static function modeles_fiches_pdf($name){
-
+    public static function fiches_inventaire_pdf($name){
         $data = [
             'name' => $name,
             'title' => env('MAIN_NAME'),
         ];
         $pdf = Pdf::loadView('_pdf.modele_fiche', $data);
         return $pdf->stream('Fiche Inventaire');
+    }
+
+    public static function fiches_pdf($type, $name){
+        $data = [
+            'name' => $name,
+            'title' => env('MAIN_NAME'),
+            'logo' => env('LOGO', ''),
+            'page_title' => $name,
+        ];
+        if ($type == 'presence') {
+            $pdf = Pdf::loadView('_pdf.fiches.fiche_presence_pdf', $data);
+            return $pdf->stream('Fiche de présence');
+        } else {
+            $pdf = Pdf::loadView('_pdf.modele_fiche', $data);
+            return $pdf->stream('Fiche Inventaire');
+        }
+
     }
 
     public static function commande_pdf(){

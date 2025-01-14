@@ -60,6 +60,30 @@ class TestPage extends Component
                 'type' => 'include',
                 'link' => ''
             ),
+            (object) array(
+                'id' => 7,
+                'name' => 'Article card 1',
+                'view' => '_card.articleCard1',
+                'class' => '',
+                'type' => 'include',
+                'link' => ''
+            ),
+            (object) array(
+                'id' => 8,
+                'name' => 'Article card 2',
+                'view' => '_card.articleCard2',
+                'class' => '',
+                'type' => 'include',
+                'link' => ''
+            ),
+            (object) array(
+                'id' => 9,
+                'name' => 'Article card 3',
+                'view' => '_card.articleCard3',
+                'class' => '',
+                'type' => 'include',
+                'link' => ''
+            ),
             // (object) array( 'id'=> 3, 'name' => 'Article card', 'view'=> '_card.articleCard'),
         );
     }

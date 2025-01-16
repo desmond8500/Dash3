@@ -6,6 +6,7 @@
             data-bs-target="#flush-{{ $id ?? 'collapseOne' }}"
             aria-expanded="true"
             aria-controls="flush-{{ $id ?? 'collapseOne' }}">
+            {{ $title }}
         </button>
 
 
@@ -20,3 +21,4 @@
         </div>
     </div>
 </div>
+

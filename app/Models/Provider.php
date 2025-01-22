@@ -19,6 +19,8 @@ class Provider extends Model
         'description',
     ];
 
+    protected $hidden = ['created_at','updated_at','deleted_at'];
+
     public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class, 'provider_id');

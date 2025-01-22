@@ -1,0 +1,66 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dash Server API",
+        "description": "Api de l'application Dash",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/brands": {
+            "get": {
+                "tags": [
+                    "Marques"
+                ],
+                "description": "Liste des marques",
+                "operationId": "bb2bd6798eb8f8bb417d5909305427ad",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/items": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "description": "Liste des articles",
+                "operationId": "0df34968107a5a285245db41b7101cad",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/providers": {
+            "get": {
+                "tags": [
+                    "Fournisseurs"
+                ],
+                "description": "Liste des fournisseurs",
+                "operationId": "8cdff875d964c79c8f6380749887ffce",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Marques",
+            "description": "Marques"
+        },
+        {
+            "name": "Articles",
+            "description": "Articles"
+        },
+        {
+            "name": "Fournisseurs",
+            "description": "Fournisseurs"
+        }
+    ]
+}

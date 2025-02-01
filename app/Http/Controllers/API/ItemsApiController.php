@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Http\Resources\ArticleResource;
 
 /**
  * @OA\Info(version="1.0",
@@ -29,6 +30,7 @@ class ItemsApiController extends Controller
      */
     function index(){
         $articles = Article::all();
+        $articles = ArticleResource::collection($articles);
 
         return ResponseController::response(true, "Les articles ont été récupérés",$articles);
     }

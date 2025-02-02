@@ -18,7 +18,8 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'designation' => $this->designation,
             'reference' => $this->reference,
-            'price' => number_format($this->price, 0, ',', ' '),
+            'price' => $this->price,
+            // 'price' => number_format($this->price, 0, ',', ' '),
             'image' => url($this->image),
         ];
     }

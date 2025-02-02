@@ -20,7 +20,7 @@ class ArticleResource extends JsonResource
             'reference' => $this->reference,
             'price' => $this->price,
             // 'price' => number_format($this->price, 0, ',', ' '),
-            'image' => url($this->image),
+            'image' => url($this->image ?? 'img/icons/no-camera.png'),
         ];
     }
 }

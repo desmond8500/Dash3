@@ -17,7 +17,7 @@ class ArticleResource extends JsonResource
         return [
             'designation' => $this->designation,
             'reference' => $this->reference,
-            'price' => $this->price,
+            'price' => number_format($this->price, 0, ',', ' '),
             'image' => url($this->image),
         ];
     }

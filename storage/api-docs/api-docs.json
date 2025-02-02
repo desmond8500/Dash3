@@ -34,6 +34,37 @@
                 }
             }
         },
+        "/api/v1/items/{id}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "description": "afficher un article",
+                "operationId": "099ce4e523f80e52b4ad983ba3af17ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Parameter with example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "an int value",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/v1/providers": {
             "get": {
                 "tags": [

@@ -34,4 +34,32 @@ class ItemsApiController extends Controller
 
         return ResponseController::response(true, "Les articles ont été récupérés",$articles);
     }
+
+    /**
+     * @OA\Get(
+     *      path="/api/v1/items/{id}",
+     *      tags={"Articles"},
+     *      description="afficher un article",
+     *        @OA\Parameter(
+     *          description="Parameter with example",
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          @OA\Schema(type="integer"),
+     *          @OA\Examples(example="int", value="1", summary="an int value"),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *       ),
+     *     )
+     */
+
+    public function show(string $id)
+    {
+        $article = Article::find($id);
+        $article = new ArticleResource($article);
+
+        return ResponseController::response(true, "L'article a été récupéré", $article);
+    }
 }

@@ -15,6 +15,7 @@ class ArticleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'designation' => $this->designation,
             'reference' => $this->reference,
             'price' => number_format($this->price, 0, ',', ' '),

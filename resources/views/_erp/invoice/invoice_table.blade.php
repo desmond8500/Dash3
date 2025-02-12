@@ -100,15 +100,22 @@
                 @endphp
                 <tr class="">
                     <td scope="row">
-                        <div>
-                            @if ($row->article_id)
-                                <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{ $row->designation }}</a>
-                            @else
-                                {{ $row->designation }}
-                            @endif
+                        <div class="row g-0">
+                            <div class="col-auto">
+                                <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
+                            </div>
+                            <div class="col">
+                                <div>
+                                    @if ($row->article_id)
+                                        <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{ $row->designation }}</a>
+                                    @else
+                                        {{ $row->designation }}
+                                    @endif
 
+                                </div>
+                                <div class="text-muted">{!! nl2br($row->reference) !!}</div>
+                            </div>
                         </div>
-                        <div class="text-muted">{!! nl2br($row->reference) !!}</div>
                     </td>
                     <td class="text-center">{{ $row->quantite }}</td>
                     <td class="text-center">{{ $row->coef }}</td>

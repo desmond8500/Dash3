@@ -8,7 +8,7 @@
                 </button>
             </div>
         </div>
-        <div class="card-body">
+        <div class="p-2">
             @foreach ($bls as $bl)
                 <div class="card rounded mb-1 p-1">
                     <div class="row">

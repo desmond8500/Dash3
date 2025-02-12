@@ -34,18 +34,25 @@
     </div>
 
     <div class="col-md-4 mb-3">
-        <label class="form-label">Reference</label>
-        <input type="text" class="form-control" wire:model="invoice_form.reference" disabled>
-        @error('invoice_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
-    {{-- </div>
+        <div class="mb-">
+            <label class="form-label">Reference</label>
+            <input type="text" class="form-control" wire:model="invoice_form.reference" disabled>
+            @error('invoice_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Taxes</label>
+            <select wire:model="invoice_form.tax" class="form-control">
+                <option value="0">Pas de TVA</option>
+                <option value="tva">TVA 18%</option>
+                <option value="brs">BRS 5%</option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Date de facturation</label>
+            <input type="date" class="form-control" wire:model="invoice_form.facture_date" >
+            @error('invoice_form.facture_date') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
 
-    <div class="col-md-4 mb-3"> --}}
-        <label class="form-label">Taxes</label>
-        <select wire:model="invoice_form.tax" class="form-control">
-            <option value="0">Pas de TVA</option>
-            <option value="tva">TVA 18%</option>
-            <option value="brs">BRS 5%</option>
-        </select>
     </div>
 
     <div class="col-md-6 mb-3">

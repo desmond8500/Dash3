@@ -10,15 +10,19 @@
             </div>
         </div>
         <table class="table">
-            <thead>
-                <tr>
-                    <th style="text-align:center; width: 5px;">#</th>
-                    <th>Nom</th>
-                    <th style="text-align:center; width: 10px;">Montant</th>
-                    <th style="text-align:center; width: 30px;">Date</th>
-                    <th style="text-align:center; width: 10px;">_</th>
-                </tr>
-            </thead>
+            @if ($spents->isEmpty())
+                <div class="text-center p-3 text-muted">Aucune dépense</div>
+                @else
+                <thead>
+                    <tr>
+                        <th style="text-align:center; width: 5px;">#</th>
+                        <th>Nom</th>
+                        <th style="text-align:center; width: 10px;">Montant</th>
+                        <th style="text-align:center; width: 30px;">Date</th>
+                        <th style="text-align:center; width: 10px;">_</th>
+                    </tr>
+                </thead>
+            @endif
             <tbody>
                 @foreach ($spents as $key => $spent)
                 <tr>

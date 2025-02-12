@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\BrandAPIController;
+use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
 use App\Http\Controllers\api\ProviderAPIController;
 use App\Http\Controllers\DemoController;
@@ -31,4 +32,8 @@ Route::get('demos', [DemoController::class, 'index'])->name('demos');
 Route::apiResource('v1/items', ItemsApiController::class);
 Route::resource('v1/providers', ProviderAPIController::class);
 Route::resource('v1/brands', BrandAPIController::class);
+Route::apiResource('v1/invoices', InvoiceAPIController::class);
+Route::post('v1/get_month_invoices', [InvoiceAPIController::class, 'get_month_invoices']);
+Route::post('v1/get_month_spents', [InvoiceAPIController::class, 'get_month_spents']);
+
 

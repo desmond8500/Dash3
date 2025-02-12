@@ -10,15 +10,20 @@
             </div>
         </div>
         <table class="table">
-            <thead>
-                <tr>
-                    <th style="text-align:center; width: 5px;">#</th>
-                    <th>Nom</th>
-                    <th style="text-align:center; width: 10px;">Montant</th>
-                    <th style="text-align:center; width: 30px;">Date</th>
-                    <th style="text-align:center; width: 10px;">_</th>
-                </tr>
-            </thead>
+            @if ($acomptes->isEmpty())
+                <div class="text-center p-3 text-muted">Aucun acompte</div>
+
+            @else
+                <thead>
+                    <tr>
+                        <th style="text-align:center; width: 5px;">#</th>
+                        <th>Nom</th>
+                        <th style="text-align:center; width: 10px;">Montant</th>
+                        <th style="text-align:center; width: 30px;">Date</th>
+                        <th style="text-align:center; width: 10px;">_</th>
+                    </tr>
+                </thead>
+            @endif
             <tbody>
                 @foreach ($acomptes as $key => $acompte)
                     <tr>

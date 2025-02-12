@@ -38,8 +38,10 @@
                 <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">{{ $title }}</div>
                 @if ($title !="quantitatif")
                     <i>#{{ strtoupper($devis->reference) }}</i>
-                    @endif
-                <i>#{{ strtoupper($devis->date) }}</i>
+                @endif
+                <div>
+                    <i class="text-muted">{{ ($devis->formatDate()) }}</i>
+                </div>
             </td>
         </tr>
     </table>

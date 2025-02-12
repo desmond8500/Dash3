@@ -10,14 +10,18 @@
             </div>
         </div>
         <table class="table">
-            <thead>
-                <tr>
-                    <th style="text-align:center; width: 5px;">#</th>
-                    <th>Document</th>
-                    <th style="text-align:center; width: 30px;">Type</th>
-                    <th style="text-align:center; width: 10px;">Action</th>
-                </tr>
-            </thead>
+            @if ($documents->isEmpty())
+                <div class="text-center p-3 text-muted">Aucun document</div>
+            @else
+                <thead>
+                    <tr>
+                        <th style="text-align:center; width: 5px;">#</th>
+                        <th>Document</th>
+                        <th style="text-align:center; width: 30px;">Type</th>
+                        <th style="text-align:center; width: 10px;">Action</th>
+                    </tr>
+                </thead>
+            @endif
             <tbody>
                 @foreach ($documents as $key => $document)
                 <tr>

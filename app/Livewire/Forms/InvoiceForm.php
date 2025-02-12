@@ -27,6 +27,7 @@ class InvoiceForm extends Form
     public $remise;
     public $favorite = 0;
     public $image;
+    public $facture_date;
 
     function store(){
         $this->validate();
@@ -47,6 +48,7 @@ class InvoiceForm extends Form
         $this->tax = $this->invoice->tax;
         $this->remise = $this->invoice->remise;
         $this->favorite = $this->invoice->favorite;
+        $this->facture_date = $this->invoice->facture_date;
     }
 
     function update(){

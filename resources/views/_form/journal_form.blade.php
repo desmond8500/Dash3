@@ -55,10 +55,13 @@
                 <i class="ti ti-chevron-down"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="triggerId">
-                <a class="dropdown-item" wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Travaux effectués\n\n#Travaux restants\n ')"></i> Editer</a>
+                <a class="dropdown-item" wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Travaux effectués\n\n# Travaux restants\n ')"></i> Contenu 1</a>
+                <a class="dropdown-item" wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Contexte  \n\n# Travaux restants\n ')"></i> Contenu 2</a>
             </div>
         </div>
     </div>
+
+    
 
 
 

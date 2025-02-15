@@ -67,4 +67,10 @@ class ProjetsPage extends Component
     {
         $this->projetForm->favorite();
     }
+
+    function toggleFavorite2($projet_id)
+    {
+        $this->projetForm->set($projet_id);
+        $this->projetForm->favorite();
+    }
 }

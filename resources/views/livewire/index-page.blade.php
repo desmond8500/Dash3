@@ -55,7 +55,7 @@
                         @foreach ($clients as $client)
                         <div class="col-md-3">
                             <a class="card p-2" href="{{ route('projets',['client_id'=>$client->id]) }}" style="height: 73px; overflow: hidden;">
-                                <div class="row">
+                                <div class="row g-2">
                                     <div class="col-auto">
                                         <img src="{{ asset($client->avatar) }}" alt="A" class="avatar">
                                     </div>
@@ -79,7 +79,7 @@
                         @foreach ($projets as $projet)
                             <div class="col-md-3">
                                 <a class="card p-2" href="{{ route('projet',['projet_id'=>$projet->id]) }}">
-                                    <div class="row">
+                                    <div class="row g-2">
                                         <div class="col-auto">
                                             <img src="{{ asset($projet->client->avatar) }}" alt="A" class="avatar">
                                         </div>
@@ -104,7 +104,7 @@
                         @foreach ($invoices as $invoice)
                             <div class="col-md-4">
                                 <a class="card p-2" href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}">
-                                    <div class="row">
+                                    <div class="row g-2">
                                         <div class="col-auto">
                                             <img src="{{ asset($invoice->projet->client->avatar) }}" alt="A" class="avatar">
                                         </div>

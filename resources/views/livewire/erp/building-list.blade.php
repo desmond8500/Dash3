@@ -4,7 +4,7 @@
         <div class="row row-deck g-2">
             <div class="col"><h2>Building management</h2></div>
             <div class="col-auto">
-                @livewire('form.building-add', ['projet_id' => $projet_id])
+                @livewire('form.building-add', ['projet_id' => $projet_id], key(2))
             </div>
             <div class="w-100"></div>
             @foreach ($buildings as $building)

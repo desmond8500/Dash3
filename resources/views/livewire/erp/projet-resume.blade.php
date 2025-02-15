@@ -152,7 +152,7 @@
             <div class="card-header">
                 <div class="card-title">Batiments</div>
                 <div class="card-actions">
-                    @livewire('form.building-add', ['projet_id' => $projet_id])
+                    @livewire('form.building-add', ['projet_id' => $projet_id], key(1))
                 </div>
             </div>
             @if ($buildings->count())

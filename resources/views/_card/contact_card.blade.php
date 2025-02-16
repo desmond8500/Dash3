@@ -11,9 +11,21 @@
                 @endif
             </div>
             <div class="col">
-                <div class="">{{ $contact->firstname }}</div>
-                <div class="fw-bold">{{ strtoupper($contact->lastname) }}</div>
+                <div class="">{{ $contact->firstname }} <b>{{ strtoupper($contact->lastname) }}</b></div>
                 <div class="text-primary">{{ $contact->fonction }}</div>
+                <div class="d-flex justify-content-between align-items-center mt-1">
+                    @if ($contact->phone)
+                    <div class="d-flex align-items-center">
+                        <i class="ti ti-phone"></i> <div class="ms-1">  {{ $contact->phone }}</div>
+                    </div>
+                    @endif
+                    @if ($contact->email)
+                        <div class="d-flex align-items-center">
+                            <i class="ti ti-mail"></i>
+                            <div class="ms-1"> {{ $contact->email }}</div>
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="col-auto">
                 <div class="dropdown open">
@@ -26,6 +38,9 @@
                         <a class="dropdown-item text-danger" wire:click="delete('{{ $contact->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12">
+
             </div>
         </div>
     </div>

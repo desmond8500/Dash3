@@ -20,6 +20,8 @@ class Contact extends Model
         'lastname',
         'fonction',
         'avatar',
+        'phone',
+        'email',
     ];
 
 

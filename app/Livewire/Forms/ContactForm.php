@@ -20,6 +20,8 @@ class ContactForm extends Form
     public $lastname;
     public $fonction;
     public $avatar;
+    public $phone;
+    public $email;
 
     function fix(){
         $this->firstname = ucfirst($this->firstname);
@@ -60,6 +62,8 @@ class ContactForm extends Form
         $this->avatar = $this->contact->avatar;
         $this->projet_id = $this->contact->projet_id;
         $this->client_id = $this->contact->client_id;
+        $this->phone = $this->contact->phone;
+        $this->email = $this->contact->email;
     }
 
     function update(){

@@ -32,3 +32,14 @@
     <input type="text" class="form-control" wire:model="contact_form.fonction" placeholder="Fonction">
     @error('contact_form.fonction') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
+<div class="w-100"></div>
+<div class="col-md-6 mb-3">
+    <label class="form-label">Téléphone</label>
+    <input type="tel" class="form-control" wire:model="contact_form.phone" placeholder="Téléphone">
+    @error('contact_form.phone') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+<div class="col-md-6 mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" wire:model="contact_form.email" placeholder="Email">
+    @error('contact_form.email') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>

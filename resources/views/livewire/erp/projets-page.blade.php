@@ -13,33 +13,32 @@
 
     @endcomponent
 
-    <div class="row row-deck g-2" >
-        @forelse ($projets as $projet)
-            <div class="col-md-3">
-                @include('_card.projet_card')
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row row-deck g-2">
+                @forelse ($projets as $projet)
+                <div class="col-md-4">
+                    @include('_card.projet_card')
+                </div>
+                @empty
+                @component('components.no-result')
+
+                @endcomponent
+                @endforelse
+                <div class="mt-1">
+                    {{ $projets->links() }}
+                </div>
             </div>
-        @empty
-            @component('components.no-result')
-
-            @endcomponent
-        @endforelse
-        <div class="mt-1">
-            {{ $projets->links() }}
         </div>
-    </div>
-    <hr>
-
-    <div class="row g-2">
-        <div class="col-md-6">
+        <div class="col-md-4">
             @livewire('erp.tasks.tasklist1', ['client_id' => $client_id])
-            <div class="mb-2"></div>
-            @livewire('erp.tasklist', ['client_id' => $client_id])
-        </div>
-        <div class="col-md-6">
-            @livewire('contact-list', ['client_id' => $client_id])
+            {{-- @livewire('erp.tasklist', ['client_id' => $client_id]) --}}
+            <div class="border border-primary p-2 rounded mt-2">
+
+                @livewire('contact-list', ['client_id' => $client_id, 'card_class' => 'col-md-12'])
+            </div>
         </div>
     </div>
-
 
     @component('components.modal', ["id"=>'addProjet', 'title'=> 'Ajouter un projet'])
         <form class="row" wire:submit="store">

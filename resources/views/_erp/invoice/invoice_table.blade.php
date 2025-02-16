@@ -102,7 +102,11 @@
                     <td scope="row">
                         <div class="row g-0">
                             <div class="col-auto">
-                                <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
+                                @isset ($row->article->image)
+                                    <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
+                                @else
+                                    <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar avatar-sm me-2 bg-white border border-white">
+                                @endisset
                             </div>
                             <div class="col">
                                 <div>

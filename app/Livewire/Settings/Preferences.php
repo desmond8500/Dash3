@@ -16,11 +16,17 @@ class Preferences extends Component
     public $color2;
     public $color3;
     public $year;
+    public $size;
 
     function mount(){
         $this->settings = Setting::where('user_id', auth()->user()->id)->first();
-        $this->dashboard = $this->settings->dashboard;
-        $this->color = $this->settings->color;
+        if(!$this->settings){
+            $this->init_settings();
+            $this->settings = Setting::where('user_id', auth()->user()->id)->first();
+        }
+        $this->dashboard = $this->settings->dashboard ?? 1;
+        $this->color = $this->settings->color ??  "#4e73df"; ;
+        $this->size = $this->settings->size ??  "container-xl"; ;
     }
 
     public function render()
@@ -44,6 +50,7 @@ class Preferences extends Component
         $this->settings->dashboard = $this->dashboard;
         $this->settings->color = $this->color;
         $this->settings->year = $this->year;
+        $this->settings->size = $this->size;
         $this->settings->save();
         $this->reset('form');
     }

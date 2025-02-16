@@ -14,5 +14,6 @@ class Setting extends Model
         'color2',
         'color3',
         'year',
+        'size',
     ];
 }

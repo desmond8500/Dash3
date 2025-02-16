@@ -48,10 +48,19 @@
 
                 <div class="col-md-2">
                     <label class="form-label">Année fiscale</label>
-                    <input type="number" class="form-control" wire:model="year" placeholder="Année fiscale">
+                    <input type="number" class="form-control" wire:model="year" min="2024" max="2100"  placeholder="Année fiscale">
+
                     @error('year') <span class='text-danger'>{{ $message }}</span> @enderror
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-2">
+                    <label class="form-label">Année fiscale</label>
+                    <select class="form-select" wire:model="size">
+                        <option value="container-xl">Container XL</option>
+                        <option value="container-fluid">Container Fluid</option>
+                    </select>
+                    @error('size') <span class='text-danger'>{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-12 mt-3">
                     <button class="btn btn-primary" wire:click="update">Modifier</button>
                 </div>
             </div>
@@ -81,6 +90,9 @@
                     </tr> --}}
                     <tr>
                         <td>Année fiscale</td> <td>{{ $settings->year }}</td>
+                    </tr>
+                    <tr>
+                        <td>Taille de page</td> <td>{{ $settings->size }}</td>
                     </tr>
                 </tbody>
             </table>

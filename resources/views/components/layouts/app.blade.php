@@ -71,9 +71,12 @@
         @livewire('layout.navbar')
 
         <div class="page-wrapper">
-            <div class="container-xl">
-                {{ $slot }}
+            @php
+                $settings = \App\Models\Setting::where('user_id', auth()->user()->id)->first();
+            @endphp
 
+            <div class="{{ $settings->size ?? "container-xl"}}">
+                {{ $slot }}
             </div>
             <footer class="footer footer-transparent d-print-none">
                 <div class="container-xl">

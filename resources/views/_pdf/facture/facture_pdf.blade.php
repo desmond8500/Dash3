@@ -39,12 +39,17 @@
                 @if ($title !="quantitatif")
                     <i>#{{ strtoupper($devis->reference) }}</i>
                 @endif
-                <div>
+                {{-- <div>
                     <i class="text-muted">Emis le : {{ ($devis->formatDate()) }}</i>
-                </div>
-                @if ($devis->facture_date)
+                </div> --}}
+                @if ($devis->facture_date && $title == 'facture')
                     <div>
                         <i class="text-muted">Facturé le : {{ ($devis->formatDate($devis->facture_date)) }}</i>
+                    </div>
+                @endif
+                @if ($devis->facture_date && $title == 'facture')
+                    <div>
+                        <i class="text-muted">Payé le : {{ ($devis->formatDate($devis->paydate)) }}</i>
                     </div>
                 @endif
             </td>

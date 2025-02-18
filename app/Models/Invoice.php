@@ -29,6 +29,7 @@ class Invoice extends Model
         'remise',
         'favorite',
         'facture_date',
+        'paydate',
     ];
 
     public function projet(): BelongsTo

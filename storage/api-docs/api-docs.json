@@ -6,6 +6,20 @@
         "version": "1.0"
     },
     "paths": {
+        "/api/v1/achats": {
+            "get": {
+                "tags": [
+                    "Achats"
+                ],
+                "summary": "Liste des achats",
+                "operationId": "6c3901ef3d30b06b2975bb285d6b410b",
+                "responses": {
+                    "200": {
+                        "description": "les achats ont été récupérés avec succès"
+                    }
+                }
+            }
+        },
         "/api/v1/brands": {
             "get": {
                 "tags": [
@@ -170,9 +184,27 @@
                     }
                 }
             }
+        },
+        "/api/v1/transactions": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Liste des transactions",
+                "operationId": "d1896d9e43f164ed711b6fb976065a2b",
+                "responses": {
+                    "200": {
+                        "description": "Transactions récupérés avec succès"
+                    }
+                }
+            }
         }
     },
     "tags": [
+        {
+            "name": "Achats",
+            "description": "Achats"
+        },
         {
             "name": "Marques",
             "description": "Marques"
@@ -188,6 +220,10 @@
         {
             "name": "Fournisseurs",
             "description": "Fournisseurs"
+        },
+        {
+            "name": "Transaction",
+            "description": "Transaction"
         }
     ]
 }

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\API\AchatController;
 use App\Http\Controllers\api\BrandAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
 use App\Http\Controllers\api\ProviderAPIController;
+use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,14 +32,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 // Demo
 Route::get('demos', [DemoController::class, 'index'])->name('demos');
+// Articles
 Route::apiResource('v1/items', ItemsApiController::class);
 Route::resource('v1/providers', ProviderAPIController::class);
 Route::resource('v1/brands', BrandAPIController::class);
+
+// Devis
 Route::apiResource('v1/invoices', InvoiceAPIController::class);
 Route::post('v1/get_month_invoices', [InvoiceAPIController::class, 'get_month_invoices']);
 Route::post('v1/get_month_spents', [InvoiceAPIController::class, 'get_month_spents']);
 
-// FActure
+// Facture
 Route::get('v1/factures', [FactureController::class, 'get_factures']);
+// Achats
+Route::get('v1/achats', [AchatController::class, 'get_achats']);
+// Transaction
+Route::get('v1/transactions', [TransactionController::class, 'get_transactions']);
 
 

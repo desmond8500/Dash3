@@ -72,10 +72,17 @@
 
         <div class="page-wrapper">
             @php
+            if (auth()->user()) {
                 $settings = \App\Models\Setting::where('user_id', auth()->user()->id)->first();
+            }
             @endphp
 
-            <div class="{{ $settings->size ?? "container-xl"}}">
+            @auth
+                <div class="{{ $settings->size ?? "container-xl"}}">
+            @else
+                <div class="container-xl">
+            @endauth
+
                 {{ $slot }}
             </div>
             <footer class="footer footer-transparent d-print-none">

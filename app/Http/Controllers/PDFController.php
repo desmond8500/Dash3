@@ -132,11 +132,12 @@ class PDFController extends Controller
         return $pdf->stream($journal->date.' - '.$journal->projet->name. ' - ' . $journal->title . ' - ' . $data['title']);
         // return $pdf->download('sdfsd');
     }
-    public static function facture_pdf($invoice_id,$type){
+
+    static function facture($invoice_id, $type){
         $devis = Invoice::find($invoice_id);
         $carbon = new Carbon($devis->date);
 
-        $data = [
+        return [
             'logo' => env('LOGO', ''),
             'title' => $type ?? "Facture",
             'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
@@ -149,11 +150,22 @@ class PDFController extends Controller
             'color2' => env('COLOR2', '219C90'),
             'color3' => env('COLOR3', '219C90'),
         ];
-
-        $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->stream( Str::upper($type).' '. Str::upper($devis->reference). ' - '. $devis->projet->client->name . ' - ' . $devis->projet->name);
-        // return $pdf->download('sdfsd');
     }
+
+    public static function facture_pdf($invoice_id,$type){
+        $data = PDFController::facture($invoice_id, $type);
+        $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
+        return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name);
+    }
+
+    // Télécharger PDF
+    public static function facture_pdf_save($invoice_id,$type){
+        $data = PDFController::facture($invoice_id, $type);
+        $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
+        return $pdf->download( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name);
+    }
+
+
     public static function facture_acompte_pdf($invoice_id,$type, $acompte_id){
         $devis = Invoice::find($invoice_id);
         $carbon = new Carbon($devis->date);

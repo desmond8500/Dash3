@@ -11,7 +11,7 @@
         </div>
         <table class="table">
             @if ($documents->isEmpty())
-                <div class="text-center p-3 text-muted">Aucun document</div>
+                <div class="text-center pt-1 text-muted">Aucun document</div>
             @else
                 <thead>
                     <tr>

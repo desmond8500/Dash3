@@ -28,6 +28,7 @@
                     <span class="dropdown-header">Facture</span>
                     <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
                     <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
+                    <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf_save',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Générer Facture </a>
 
                     <div class="dropdown-divider"></div>
 

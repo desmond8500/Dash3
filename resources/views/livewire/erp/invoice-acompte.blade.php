@@ -11,7 +11,7 @@
         </div>
         <table class="table">
             @if ($acomptes->isEmpty())
-                <div class="text-center p-3 text-muted">Aucun acompte</div>
+                <div class="text-center pt-1 text-muted">Aucun acompte</div>
 
             @else
                 <thead>

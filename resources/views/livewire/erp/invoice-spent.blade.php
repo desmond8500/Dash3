@@ -11,7 +11,7 @@
         </div>
         <table class="table">
             @if ($spents->isEmpty())
-                <div class="text-center p-3 text-muted">Aucune dépense</div>
+                <div class="text-center pt-1 text-muted">Aucune dépense</div>
                 @else
                 <thead>
                     <tr>

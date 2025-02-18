@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="p-2">
-            @foreach ($bls as $bl)
+            @forelse ($bls as $bl)
                 <div class="card rounded mb-1 p-1">
                     <div class="row">
                         <a class="col" href="{{ route('bl_pdf', ['invoice_bl_id'=>$bl->id, ]) }}" target="_blank">
@@ -23,10 +23,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-
-        </div>
-        <div class="card-footer">
+            @empty
+                <div class="text-muted text-center">Aucune facture</div>
+            @endforelse
 
         </div>
     </div>

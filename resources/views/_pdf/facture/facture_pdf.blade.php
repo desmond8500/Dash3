@@ -47,7 +47,7 @@
                         <i class="text-muted">Facturé le : {{ ($devis->formatDate($devis->facture_date)) }}</i>
                     </div>
                 @endif
-                @if ($devis->facture_date && $title == 'facture')
+                @if ($devis->paydate && $title == 'facture')
                     <div>
                         <i class="text-muted">Payé le : {{ ($devis->formatDate($devis->paydate)) }}</i>
                     </div>

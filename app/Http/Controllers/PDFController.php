@@ -152,6 +152,17 @@ class PDFController extends Controller
         ];
     }
 
+    /**
+     *@OA\Get(
+     *      path="/api/v1/facture_pdf/invoice_id/type",
+     *      tags={"Factures",},
+     *      summary="Récupérer une facture",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Facture récupéré avec succès",
+     *       ),
+     *     )
+     */
     public static function facture_pdf($invoice_id,$type){
         $data = PDFController::facture($invoice_id, $type);
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);

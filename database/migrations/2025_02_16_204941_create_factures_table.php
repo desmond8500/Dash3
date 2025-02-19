@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
             $table->integer('invoice_id');
-            $table->string('folder');
+            $table->string('folder')->nullable();
             $table->string('status');
             $table->string('reference');
             $table->text('description');

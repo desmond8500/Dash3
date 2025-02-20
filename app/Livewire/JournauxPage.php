@@ -24,7 +24,7 @@ class JournauxPage extends Component
             array('name' => 'Journaux', 'route' => route('journaux')),
         );
         return view('livewire.journaux-page',[
-            'journaux' => Journal::orderByDesc('date')search($this->search, 'title')->paginate(15),
+            'journaux' => Journal::orderByDesc('date')->search($this->search, 'title')->paginate(15),
         ]);
     }
 

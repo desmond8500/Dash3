@@ -61,12 +61,14 @@ class Facturelist extends Component
             'date' => $this->date,
         ]);
 
-        $dir = "erp/invoices/$this->invoice_id/factures/";
-        $name = $this->file->getClientOriginalName();
-        $this->file->storeAS("public/$dir", $name);
-        $facture->folder = "storage/$dir/$name";
-        $facture->save();
 
+        if($this->folder){
+            $dir = "erp/invoices/$this->invoice_id/factures/";
+            $name = $this->file->getClientOriginalName();
+            $this->file->storeAS("public/$dir", $name);
+            $facture->folder = "storage/$dir/$name";
+            $facture->save();
+        }
 
         $this->dispatch('close-addFacture');
     }

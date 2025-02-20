@@ -16,7 +16,7 @@ class Facturelist extends Component
 
     #[Validate('required')]
     public $invoice_id;
-    #[Validate('required')]
+    // #[Validate('required')]
     public $file;
     #[Validate('required')]
     public $montant;

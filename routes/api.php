@@ -47,7 +47,7 @@ Route::post('v1/get_month_spents', [InvoiceAPIController::class, 'get_month_spen
 Route::get('v1/factures', [FactureController::class, 'get_factures']);
 Route::get('/v1/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) {
     return PDFController::facture_pdf($invoice_id, $type);
-})->name('facture_pdf');
+})->name('facture_pdf_api');
 // Achats
 Route::get('v1/achats', [AchatController::class, 'get_achats']);
 // Transaction

@@ -13,11 +13,18 @@
             @forelse ($factures as $facture)
                 <div class="card rounded mb-1 p-1">
                     <div class="row align-items-center">
-                        <a class="col" href="{{ asset($facture->folder) }}" target="_blank">
-                            <div style="font-size:10px; " class="text-primary">{{ ucfirst($facture->status )}}</div>
-                            <div class="text-dark">{{ $facture->description }}</div>
-                            {{-- <div class="text-muted">{{ $facture->reference }}</div> --}}
-                        </a>
+                        @if ($facture->folder)
+                            <a class="col" href="{{ asset($facture->folder) }}" target="_blank">
+                                <div style="font-size:10px; " class="text-primary">{{ ucfirst($facture->status )}}</div>
+                                <div class="text-dark">{{ $facture->description }}</div>
+                            </a>
+                        @else
+                            <a class="col" href="{{ route('facture_pdf',['invoice_id'=>$facture->invoice_id, 'type'=>'facture'])}}" target="_blank">
+                                <div style="font-size:10px; " class="text-primary">{{ ucfirst($facture->status )}}</div>
+                                <div class="text-dark">{{ $facture->description }}</div>
+                            </a>
+
+                        @endif
                         <div class="col-auto">
                             <button class="btn btn-primary btn-icon" wire:click="edit('{{ $facture->id }}')">
                                 <i class="ti ti-edit"></i>

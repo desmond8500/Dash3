@@ -206,6 +206,23 @@
                 ],
                 "summary": "Récupérer une facture",
                 "operationId": "59bfe2d3765050d2c6ce230607b6c7ef",
+                "parameters": [
+                    {
+                        "name": "invoice_id",
+                        "in": "path",
+                        "description": "Parameter with example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "an int value",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Facture récupéré avec succès"

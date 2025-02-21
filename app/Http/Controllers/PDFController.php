@@ -157,6 +157,15 @@ class PDFController extends Controller
      *      path="/api/v1/facture_pdf/invoice_id/type",
      *      tags={"Factures",},
      *      summary="Récupérer une facture",
+     *      @OA\Parameter(
+     *          description="Parameter with example",
+     *          in="path",
+     *          name="invoice_id",
+     *          required=true,
+     *          @OA\Schema(type="integer"),
+     *          @OA\Examples(example="int", value="1", summary="an int value"),
+     *      ),
+     *
      *      @OA\Response(
      *          response=200,
      *          description="Facture récupéré avec succès",

@@ -53,7 +53,7 @@ class Facturelist extends Component
         $this->validate();
         $facture = Facture::create([
             'invoice_id' => $this->invoice_id,
-            'folder' => "facture",
+            'folder' => "api/v1/facture_pdf/$this->invoice_id/facture",
             'status' => $this->status ?? 'pending',
             'reference' => $this->reference,
             'description' => $this->description,

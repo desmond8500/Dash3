@@ -172,7 +172,7 @@ class PDFController extends Controller
      *       ),
      *     )
      */
-    public static function facture_pdf($invoice_id,$type){
+    public static function facture_pdf($invoice_id,$type='facture'){
         $data = PDFController::facture($invoice_id, $type);
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
         return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name);

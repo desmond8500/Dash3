@@ -39,6 +39,7 @@ class Facturelist extends Component
         $this->reference = $this->invoice->reference;
         $this->montant = $this->invoice->total();
         $this->description = $this->description ?? $this->invoice->description;
+
     }
 
     public function render()

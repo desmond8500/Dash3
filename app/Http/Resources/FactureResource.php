@@ -22,9 +22,11 @@ class FactureResource extends JsonResource
             'description' => $this->description,
             'montant' => $this->montant,
             'date' => $this->date,
+            'facture_date' => $this->facture_date,
+            'payment_date' => $this->invoice->paydate,
+            'date' => $this->date,
             'year' => $this->year,
             'month' => $this->month,
-
         ];
     }
 }

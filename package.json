@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "autosize": "^6.0.1",
+        "easymde": "^2.19.0",
         "puppeteer": "^23.0.2"
     }
 }

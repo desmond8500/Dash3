@@ -13,6 +13,11 @@ use Livewire\WithFileUploads;
 class TestPage extends Component
 {
     use WithFileUploads;
+    public $content = '';
+
+    function get(){
+
+    }
 
     function mount(){
         $this->widgets = (object) array(

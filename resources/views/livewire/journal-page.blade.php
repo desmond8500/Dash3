@@ -49,7 +49,7 @@
 
         <div class="col-md-8 mb-2">
 
-            <div class="card">
+            <div class="card mb-2">
                 <div class="card-header">
                     <div class="card-title">
                         <div style="font-size: 12px;" class="text-primary">{{ $journal->formatDate() }}</div>
@@ -64,10 +64,6 @@
                 <div class="card-body">
                     @parsedown($journal->description)
                 </div>
-            </div>
-
-            <div class="mb-2">
-                @livewire('erp.tasklist', ['journal_id' => $journal->id, 'paginate'=>3])
             </div>
 
             <div class="mb-2">
@@ -128,6 +124,10 @@
                         </div>
                     @endforeach
                 </div>
+            </div>
+
+            <div class="mb-2">
+                @livewire('erp.tasks.tasklist1', ['journal_id' => $journal->id, 'paginate'=>3])
             </div>
 
             <div class="card mb-2">

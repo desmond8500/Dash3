@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h3 class="card-title">{{ $title ?? 'List des taches' }}</h3>
+        <h3 class="card-title">{{ $title ?? 'Liste des taches' }}</h3>
 
         <div class="divide-y-2 ">
             @foreach ($tasks as $task)
@@ -11,6 +11,9 @@
                 <i class="ti ti-plus"></i>
                 <input type="text" class="form-control form-control-flush" wire:model="form.name" placeholder="Ajouter une tâche" wire:keydown.enter="store">
             </div>
+        </div>
+        <div class="mt-3">
+            {{ $tasks->links() }}
         </div>
     </div>
 

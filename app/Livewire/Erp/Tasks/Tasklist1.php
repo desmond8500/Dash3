@@ -35,6 +35,8 @@ class Tasklist1 extends Component
     public $paginate = 100;
     public $class = 'col-md-12';
 
+
+
     public function mount($client_id = null, $projet_id = null, $building_id = null, $stage_id = null, $room_id = null, $journal_id = null)
     {
         if ($client_id) {

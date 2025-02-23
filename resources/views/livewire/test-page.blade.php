@@ -4,8 +4,49 @@
             @livewire('modal')
         </div> --}}
 
-        <textarea class="form-control" data-bs-toggle="autosize" placeholder="Type something…"></textarea>
-        <textarea class="form-control"  placeholder="Type something…"></textarea>
+        <div wire:ignore.self>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+
+            <textarea id="markdown-editor" wire:model.debounce.500ms="content"></textarea>
+
+            <button class="btn btn-primary" wire:click='get'>Button</button>
+            <script>
+                // const easyMDE = new EasyMDE();
+                const easyMDE = new EasyMDE({element: document.getElementById('markdown-editor')});
+                easyMDE.codemirror.on("change", () => {
+                console.log(easyMDE.value());
+                // @this.content =
+                });
+            </script>
+
+            <div class="card p-2">
+                {{ $content }}
+            </div>
+
+            {{-- <textarea id="markdown-editor" wire:model.debounce.500ms="content"></textarea> --}}
+
+            {{-- <script>
+                document.addEventListener('livewire:load', () => {
+                    const editor = new EasyMDE({
+                        element: document.getElementById('markdown-editor'),
+                        autoDownloadFontAwesome: false,
+                    });
+
+                    // Synchronisation entre EasyMDE et Livewire
+                    editor.codemirror.on('change', () => {
+                        @this.set('content', editor.value());
+                    });
+
+                    // Si Livewire met à jour le contenu, synchroniser avec l'éditeur
+                    Livewire.on('contentUpdated', () => {
+                        editor.value(@this.get('content'));
+                    });
+                });
+            </script> --}}
+        </div>
+
+
 
         <div class="row">
             @foreach ($widgets as $widget)
@@ -44,3 +85,5 @@
     </div>
 
 </div>
+
+

@@ -113,7 +113,7 @@
                     @endphp
                     <tr class="">
                         <td scope="row" >
-                            <div class="fw-bold">{{ $row->designation }}</div>
+                            <div class="fw-bold">{!! nl2br($row->designation) !!}</div>
                             <div class="text-muted" style="font-size: 10px;">{!! nl2br($row->reference) !!}</div>
                         </td>
                         <td class="text-center">{{ $row->quantite }}</td>

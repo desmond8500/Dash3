@@ -4,6 +4,9 @@
             @livewire('modal')
         </div> --}}
 
+        <textarea class="form-control" data-bs-toggle="autosize" placeholder="Type something…"></textarea>
+        <textarea class="form-control"  placeholder="Type something…"></textarea>
+
         <div class="row">
             @foreach ($widgets as $widget)
                 @if ($widget->type == "include")

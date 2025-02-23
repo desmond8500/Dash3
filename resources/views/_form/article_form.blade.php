@@ -53,7 +53,7 @@
         <div class="input-group">
             <textarea class="form-control" wire:model="article_form.reference" placeholder="Référence" cols="30"
                 rows="1"></textarea>
-            <a class="btn btn-primary btn-icon" wire:click='uppercase'>
+            <a class="btn btn-primary btn-icon" wire:click='uppercase' data-bs-toggle="tooltip" title="Majuscule">
                 <i class="ti ti-arrow-big-up"></i>
             </a>
         </div>
@@ -63,10 +63,10 @@
         <label class="form-label">Prix</label>
         <div class="input-group">
             <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
-            <a class="btn btn-primary btn-icon" wire:click="convert_euro()">
+            {{-- <a class="btn btn-primary btn-icon" wire:click="convert_euro()">
                 <i class="ti ti-refresh"></i>
-            </a>
-            <a class="btn btn-icon btn-info" wire:click="convert_euro()">
+            </a> --}}
+            <a class="btn btn-icon btn-primary" wire:click="convert_euro()" data-bs-toggle="tooltip" title="Convertir en Euro">
                 <i class="ti ti-currency-euro"></i>
             </a>
         </div>
@@ -112,7 +112,7 @@
 
     <div class="col-md-12">
         <label class="form-label">Description</label>
-        <textarea class="form-control" wire:model="article_form.description" placeholder="Description" cols="30" rows="5"></textarea>
+        <textarea class="form-control"  wire:model="article_form.description" placeholder="Description" data-bs-toggle="autosize"></textarea>
         @error('article_form.description') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 

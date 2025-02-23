@@ -36,8 +36,7 @@
 </div> --}}
 <div class="col-md-12 mb-3">
     <label class="form-label">Description</label>
-    <textarea class="form-control" wire:model="projetForm.description" placeholder="Description du projet" cols="30"
-        rows="3"></textarea>
+    <textarea class="form-control" wire:model="projetForm.description" placeholder="Description du projet" data-bs-toggle="autosize"></textarea>
     @error('projetForm.description') <span class="text-danger">{{ $message }}</span> @enderror
 </div>
 

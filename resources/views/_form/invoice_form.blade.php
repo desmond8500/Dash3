@@ -30,7 +30,7 @@
     <div class="col-md-8 mb-3">
         <div class="mb-2">
             <label class="form-label">Description</label>
-            <textarea class="form-control" wire:model="invoice_form.description" placeholder="Description du devis" cols="30" rows="3"></textarea>
+            <textarea class="form-control" wire:model="invoice_form.description" placeholder="Description du devis" data-bs-toggle="autosize"></textarea>
             @error('invoice_form.description') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         <div class="row">
@@ -67,12 +67,12 @@
 
     <div class="col-md-6 mb-3">
         <label class="form-label">Modalités</label>
-        <textarea class="form-control" wire:model="invoice_form.modalite" placeholder="Modalités du devis" cols="30" rows="3"></textarea>
+        <textarea class="form-control" wire:model="invoice_form.modalite" placeholder="Modalités du devis" data-bs-toggle="autosize"></textarea>
         @error('invoice_form.modalite') <span class="text-danger">{{ $message }}</span> @enderror
     </div>
     <div class="col-md-6 mb-3">
         <label class="form-label">Notes</label>
-        <textarea class="form-control" wire:model="invoice_form.note" placeholder="Notes du devis" cols="30" rows="3"></textarea>
+        <textarea class="form-control" wire:model="invoice_form.note" placeholder="Notes du devis" data-bs-toggle="autosize"></textarea>
         @error('invoice_form.note') <span class="text-danger">{{ $message }}</span> @enderror
     </div>
 

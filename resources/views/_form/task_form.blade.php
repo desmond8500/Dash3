@@ -59,13 +59,11 @@
 
    <div class="col-md-12 mb-3">
        <label class="form-label">Description</label>
-       <textarea class="form-control" wire:model="form.description" placeholder="Description" cols="30" rows="5"></textarea>
+       <textarea class="form-control" wire:model="form.description" placeholder="Description" data-bs-toggle="autosize"></textarea>
        @error('form.description') <span class='text-danger'>{{ $message }}</span> @enderror
    </div>
 
    <hr>
-
-
 
    @isset ($clients)
         <div class="col-md-4 mb-3">

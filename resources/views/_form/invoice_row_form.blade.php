@@ -8,8 +8,7 @@
 
         <div class=" mb-3">
             <label class="form-label">Référence</label>
-            <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article" cols="30"
-                rows="4" data-bs-toggle="autosize"></textarea>
+            <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article"data-bs-toggle="autosize"></textarea>
             @error('row_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
     </div>

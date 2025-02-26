@@ -4,19 +4,23 @@
             @livewire('modal')
         </div> --}}
 
-        <div wire:ignore.self>
+        <div >
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
             <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
 
             <textarea id="markdown-editor" wire:model.debounce.500ms="content"></textarea>
 
-            <button class="btn btn-primary" wire:click='get'>Button</button>
+            <button class="btn btn-primary" wire:click="get()">Button</button>
             <script>
                 // const easyMDE = new EasyMDE();
                 const easyMDE = new EasyMDE({element: document.getElementById('markdown-editor')});
+
                 easyMDE.codemirror.on("change", () => {
-                console.log(easyMDE.value());
-                // @this.content =
+                    console.log(easyMDE.value());
+                    // @this.set('content', editor.value());
+                    // Livewire.on('contentUpdated', () => {
+                    //     editor.value(@this.get('content'));
+                    // });
                 });
             </script>
 

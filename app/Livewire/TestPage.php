@@ -13,10 +13,16 @@ use Livewire\WithFileUploads;
 class TestPage extends Component
 {
     use WithFileUploads;
-    public $content = '';
+    public $content = 'ff';
 
-    function get(){
+    public function updatedContent()
+    {
+        $this->dispatchBrowserEvent('contentUpdated');
+    }
 
+
+    function get($content){
+        $this->content = $content ?? 'ret';
     }
 
     function mount(){

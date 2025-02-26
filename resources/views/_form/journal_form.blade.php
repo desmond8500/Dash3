@@ -43,26 +43,30 @@
         @error('journalForm.type') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-11 mb-3">
-        <label class="form-label">Description</label>
+    <div class="col-md-12 mb-3">
+        <label class="form-label">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>Description</div>
+                <div class="dropdown open">
+                    <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="ti ti-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                        <a class="dropdown-item"
+                            wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Objet \n\n# Travaux effectués\n\n# Travaux restants\n ')"></i>
+                            Contenu 1</a>
+                        <a class="dropdown-item"
+                            wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Contexte  \n\n# Travaux restants\n ')"></i>
+                            Contenu 2</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </label>
         <textarea class="form-control" wire:model="journalForm.description" data-bs-toggle="autosize" placeholder="Description" data-bs-toggle="autosize"></textarea>
         @error('journalForm.description') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
-
-    <div class="col-md-1">
-        <div class="dropdown open">
-            <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                <i class="ti ti-chevron-down"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="triggerId">
-                <a class="dropdown-item" wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Travaux effectués\n\n# Travaux restants\n ')"></i> Contenu 1</a>
-                <a class="dropdown-item" wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Contexte  \n\n# Travaux restants\n ')"></i> Contenu 2</a>
-            </div>
-        </div>
-    </div>
-
-
-
-
 
 </div>

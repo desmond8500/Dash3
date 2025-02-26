@@ -94,58 +94,58 @@
             <tbody>
 
                 @foreach ($section->rows as $row)
-                @php
-                $total += $row->quantite*$row->prix;
-                $total_marge += $row->quantite*$row->coef*$row->prix;
-                $subtotal += $row->quantite*$row->coef*$row->prix;
-                @endphp
-                <tr class="">
-                    <td scope="row">
-                        <div class="row g-0">
-                            <div class="col-auto">
-                                @isset ($row->article->image)
-                                    <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
-                                @else
-                                    <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar avatar-sm me-2 bg-white border border-white">
-                                @endisset
-                            </div>
-                            <div class="col">
-                                <div>
-                                    @if ($row->article_id)
-                                        <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{ $row->designation }}</a>
+                    @php
+                        $total += $row->quantite*$row->prix;
+                        $total_marge += $row->quantite*$row->coef*$row->prix;
+                        $subtotal += $row->quantite*$row->coef*$row->prix;
+                    @endphp
+                    <tr class="">
+                        <td scope="row">
+                            <div class="row g-0">
+                                <div class="col-auto">
+                                    @isset ($row->article->image)
+                                        <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
                                     @else
-                                        {{ $row->designation }}
-                                    @endif
-
+                                        <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar avatar-sm me-2 bg-white border border-white">
+                                    @endisset
                                 </div>
-                                <div class="text-muted">{!! nl2br($row->reference) !!}</div>
+                                <div class="col">
+                                    <div>
+                                        @if ($row->article_id)
+                                            <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{ $row->designation }}</a>
+                                        @else
+                                            {{ $row->designation }}
+                                        @endif
+
+                                    </div>
+                                    <div class="text-muted">{!! nl2br($row->reference) !!}</div>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td class="text-center">{{ $row->quantite }}</td>
-                    <td class="text-center">{{ $row->coef }}</td>
-                    <td class="text-center">
-                        <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
-                        <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div>
-                    </td>
-                    <td class="text-center">
-                        <div>{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
-                        <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div>
-                    </td>
-                    <td class="text-center">
-                        <div></div>
-                        <div>{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', '
-                            ') }}</div>
-                    </td>
-                    <td class="text-center ">
-                        <div>
-                            <button class="btn  btn-icon btn-outline-success" wire:click="editRow('{{ $row->id }}')"><i
-                                    class="ti ti-edit"></i></button>
-                            <button class="btn btn-icon btn-outline-danger" wire:click="deleteRow('{{ $row->id }}')"><i
-                                    class="ti ti-trash"></i></button>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                        <td class="text-center">{{ $row->quantite }}</td>
+                        <td class="text-center">{{ $row->coef }}</td>
+                        <td class="text-center">
+                            <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
+                            <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div>
+                        </td>
+                        <td class="text-center">
+                            <div>{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
+                            <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div>
+                        </td>
+                        <td class="text-center">
+                            <div></div>
+                            <div>{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', '
+                                ') }}</div>
+                        </td>
+                        <td class="text-center ">
+                            <div>
+                                <button class="btn  btn-icon btn-outline-success" wire:click="editRow('{{ $row->id }}')"><i
+                                        class="ti ti-edit"></i></button>
+                                <button class="btn btn-icon btn-outline-danger" wire:click="deleteRow('{{ $row->id }}')"><i
+                                        class="ti ti-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
                 @endforeach
                 <tr class="fw-bold">
                     <td colspan="2">Sous Total</td>

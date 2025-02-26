@@ -49,7 +49,7 @@ class InvoicePage extends Component
             'systems' => Systeme::all(),
             'providers' => Provider::all(),
             'brands' => Brand::all(),
-            'articles' => Article::search($this->search, 'designation')->paginate(6),
+            'articles' => Article::search($this->search, 'designation')->paginate(9),
         ]);
     }
 
@@ -128,6 +128,7 @@ class InvoicePage extends Component
     }
     function designation($designation){
         $this->row_form->designation = $designation;
+        $this->row_form->reference = $designation;
     }
     function prix($prix){
         $this->row_form->prix = $prix;
@@ -144,12 +145,16 @@ class InvoicePage extends Component
         $this->row_form->reference = $article->reference;
         $this->row_form->article_id = $article->article_id;
     }
+    public $quantity = 1;
+
+    #[On('generateArticleRow')]
     function generateArticleRow($article_id){
         $article = Article::find($article_id);
         $this->row_form->article_id = $article->id;
         $this->row_form->designation = $article->designation;
         $this->row_form->reference = $article->reference;
         $this->row_form->prix = $article->price;
+
         $this->row_form->store();
         // $this->dispatch('close-addRow');
     }

@@ -35,10 +35,6 @@
         </div>
         <div class="col-md-4">
 
-            @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
-
-            @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
-
             <div class="card mb-1">
                 @livewire('erp.invoice-documents', ['invoice_id' => $devis->id])
             </div>
@@ -48,6 +44,9 @@
             <div class="mb-1">
                 @livewire('erp.facturelist', ['invoice_id' => $devis->id])
             </div>
+            @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
+
+            @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
 
         </div>
     </div>
@@ -110,9 +109,11 @@
     {{-- Rows --}}
     @component('components.modal', ["id"=>'addRow', 'title'=>'Ajouter un article', 'class'=> "$row_class"])
         @slot('actions')
-            <button class="btn btn-primary" wire:click="toggle_row(1)">Formulaire</button>
-            <button class="btn btn-primary" wire:click="toggle_row(2)">Générer</button>
-            <button class="btn btn-primary" wire:click="toggle_row(3)">Forfaits</button>
+            <div class="btn-list">
+                <button class="btn btn-primary btn-sm rounded p-1" wire:click="toggle_row(1)">Formulaire</button>
+                <button class="btn btn-primary btn-sm rounded p-1" wire:click="toggle_row(2)">Importer</button>
+                <button class="btn btn-primary btn-sm rounded p-1" wire:click="toggle_row(3)">Forfaits</button>
+            </div>
         @endslot
 
         @if ($row_tab==2)
@@ -125,17 +126,7 @@
                 </div>
                 @foreach ($articles as $article)
                     <div class="col-md-4 ">
-                       <div class="row g-2">
-                        <div class="col">
-                            @include('_card.articleCard', ['img_class'=>''])
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-primary btn-icon" wire:click="generateArticleRow('{{ $article->id }}')" >
-                                <i class="ti ti-plus"></i>
-                            </button>
-                        </div>
-                       </div>
-
+                        @include('_card.articleCard', ['img_class'=>'', 'form'=>true])
                     </div>
                 @endforeach
                 <div class="col-md-12">
@@ -204,14 +195,23 @@
                             <a class="dropdown-item" wire:click="prix(200000)">200 000 CFA</a>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class=" mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article" cols="30"
-                        rows="4" data-bs-toggle="autosize"></textarea>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <label class="form-label">Description</label>
+                        <div class="dropdown open">
+                            <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="ti ti-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                <a class="dropdown-item" wire:click="$set('row_form.reference','- Tirage \n- Pose \n- Connexion \n- Mise en service')">Main d'œuvre 1</a>
+                                <a class="dropdown-item" wire:click="$set('row_form.reference','- Platre \n - Goullotes')">Accessoires 1</a>
+                            </div>
+                        </div>
+                    </div>
+                    <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article"  data-bs-toggle="autosize"></textarea>
                 </div>
 
                 <div class="col-md-12" style="display: flex; justify-items-between">

@@ -44,6 +44,7 @@ class InvoiceRowForm extends Form
         $this->validate();
         $row = InvoiceRow::create($this->all());
         $row->designation = ucfirst($row->designation);
+        $this->reset('designation', 'reference', 'quantite', 'prix', 'coef', 'priorite_id');
         $row->save();
     }
 

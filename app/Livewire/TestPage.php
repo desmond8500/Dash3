@@ -6,7 +6,6 @@ use App\Models\Brand;
 use App\Models\Demo;
 use App\Models\Provider;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -19,7 +18,6 @@ class TestPage extends Component
     {
         $this->dispatchBrowserEvent('contentUpdated');
     }
-
 
     function get($content){
         $this->content = $content ?? 'ret';

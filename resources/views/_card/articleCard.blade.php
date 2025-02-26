@@ -1,7 +1,7 @@
 <div class="card p-2">
     <div class="row g-2">
         <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}">
-            <img src="{{ asset("$article->image") }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
+            <img src="{{ asset($article->image) }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
         </a>
         <div class="col">
             <div class="row">
@@ -24,7 +24,18 @@
                             <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')" > <i class="ti ti-trash"></i> Supprimer</a>
                         </div>
                     </div>
+                @endisset
 
+                @isset($form)
+                    <div class="col-auto">
+                        {{-- <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" wire:model="quantity" placeholder="Name"> --}}
+                            <button class="btn btn-primary btn-icon" wire:click="$dispatch('generateArticleRow', { article_id: {{ $article->id }}})">
+                                <i class="ti ti-plus"></i>
+                            </button>
+                                {{-- @error('Name') <span class='text-danger'>{{ $message }}</span> @enderror
+                        </div> --}}
+                    </div>
                 @endisset
             </div>
             @isset ($img_class)

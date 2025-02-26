@@ -64,11 +64,10 @@
                                 </span>
                             </div>
                             @livewire('form.invoice-add', ['projet_id' => $projet->id])
-
                         </div>
                     </div>
-
                 </div>
+
                 <div class="table-responsive">
                     <table class="table table-hover">
                         @if ($invoices->count())

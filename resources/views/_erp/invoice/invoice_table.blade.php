@@ -168,6 +168,45 @@
     <div class="card-footer">
         <div class="row">
             <div class="col">
+                <div class="row row-deck g-2">
+                    <div class="col-md-6 " >
+                        <div class="border rounded w-100 p-2">
+                            <div class="fw-bold">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>Modalités</div>
+                                    <div class="dropdown open">
+                                        <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            <i class="ti ti-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" wire:click="modalite_set(1)"> <i class="ti ti-plus"></i> Matériel puis reliquat</a>
+                                            <a class="dropdown-item" wire:click="modalite_set(0)"> <i class="ti ti-eraser"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>@parsedown($devis->modalite)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 " >
+                        <div class="border rounded w-100 p-2">
+                            <div class="fw-bold">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>Notes</div>
+                                    <div class="dropdown open">
+                                        <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            <i class="ti ti-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" wire:click="note_set(0)"> <i class="ti ti-eraser"></i> Supprimer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>@parsedown($devis->note)</div>
+                        </div>
+                        </div>
+                </div>
 
             </div>
             <div class="col-auto">

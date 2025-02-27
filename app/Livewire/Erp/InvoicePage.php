@@ -215,4 +215,21 @@ class InvoicePage extends Component
         // $sections = InvoiceSection::where('invoice_id', $this->devis->id)->get();
         Excel::import(new InvoiceImport, $this->file);
     }
+
+    function modalite_set($id){
+        if ($id == 0) {
+            $this->devis->modalite = "";
+        } elseif($id == 1){
+            $this->devis->modalite = "Paiement du montant du matériel à la commande.  Paiement du reliquat après la réception des travaux";
+        }
+        $this->devis->save();
+    }
+    function note_set($id){
+        if ($id == 0) {
+            $this->devis->note = "";
+        } elseif($id == 1){
+            $this->devis->note = "Paiement du montant du matériel à la commande.  Paiement du reliquat après la réception des travaux";
+        }
+        $this->devis->save();
+    }
 }

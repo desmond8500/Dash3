@@ -24,6 +24,7 @@ class InvoiceModelForm extends Form
         $this->validate();
         $this->fix();
         InvoiceModel::create($this->all());
+        $this->reset('name', 'description');
     }
 
     function set($model_id){

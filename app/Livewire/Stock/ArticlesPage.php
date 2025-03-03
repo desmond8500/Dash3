@@ -73,7 +73,7 @@ class ArticlesPage extends Component
     }
 
     function reset_filter(){
-        $this->reset('brand_id', 'provider_id', 'priorite_id');
+        $this->reset('brand_id', 'provider_id', 'priorite_id', "search");
     }
 
     public $selected;

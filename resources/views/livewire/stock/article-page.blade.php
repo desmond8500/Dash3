@@ -13,10 +13,10 @@
             <div class="card">
                 <div class="card-body-sm">
                     <div class="d-block d-sm-none">
-                        <img src="{{ asset("$article->image") }}" class="ratio ratio-1x1 rounded p-2"   alt="">
+                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"   alt="">
                     </div>
                     <div class="d-none d-sm-block">
-                        <img src="{{ asset("$article->image") }}" class="ratio ratio-1x1 rounded p-2"   alt="">
+                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"   alt="">
                     </div>
                 </div>
             </div>

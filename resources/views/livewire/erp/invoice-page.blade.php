@@ -9,6 +9,13 @@
             <button class="btn btn-primary" wire:click="$dispatch('open-addSection')" data-bs-toggle="tooltip" title="Ajouter une section">
                 <i class="ti ti-plus"></i> Section
             </button>
+            @empty($pvs)
+                <button class="btn btn-primary" wire:click="addPv()" title="Ajouter un PV">
+                    <i class="ti ti-plus"></i> PV
+                </button>
+            @else
+                <a href="{{ route('pv',['invoice_id'=>$devis->id]) }}" class="btn btn-primary" >PV</a>
+            @endempty
 
             @livewire('form.transaction-add', ['invoice_id' => $devis->id])
 

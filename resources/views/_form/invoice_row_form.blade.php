@@ -16,12 +16,12 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Quantité</label>
-                <input type="number" class="form-control" wire:model="row_form.quantite" placeholder="Quantité">
+                <input type="text" class="form-control" wire:model="row_form.quantite" placeholder="Quantité">
                 @error('row_form.quantite') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
             <div class="col-md-6">
                 <label class="form-label">Coef</label>
-                <input type="number" class="form-control" wire:model="row_form.coef" placeholder="Coféficient de marge">
+                <input type="text" class="form-control" wire:model="row_form.coef" placeholder="Coféficient de marge">
                 @error('row_form.coef') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </div>

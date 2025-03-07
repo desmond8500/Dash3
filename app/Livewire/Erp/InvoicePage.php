@@ -12,7 +12,9 @@ use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
 use App\Models\Provider;
+use App\Models\Pv;
 use App\Models\Systeme;
+use Carbon\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -50,6 +52,7 @@ class InvoicePage extends Component
             'providers' => Provider::all(),
             'brands' => Brand::all(),
             'articles' => Article::search($this->search, 'designation')->paginate(9),
+            'pvs' => Pv::where('invoice_id', $this->devis->id)->get(),
         ]);
     }
 
@@ -221,6 +224,8 @@ class InvoicePage extends Component
             $this->devis->modalite = "";
         } elseif($id == 1){
             $this->devis->modalite = "Paiement du montant du matériel à la commande.  Paiement du reliquat après la réception des travaux";
+        }elseif($id == 2){
+            $this->devis->modalite = "Acompte de 50% à payer avant les travaux.  Paiement du reliquat après la réception des travaux";
         }
         $this->devis->save();
     }
@@ -231,5 +236,13 @@ class InvoicePage extends Component
             $this->devis->note = "Paiement du montant du matériel à la commande.  Paiement du reliquat après la réception des travaux";
         }
         $this->devis->save();
+    }
+
+    // Procès verbeauxx
+    function addPv(){
+        Pv::create([
+            'invoice_id' => $this->devis->id,
+            'date' => Carbon::now(),
+        ]);
     }
 }

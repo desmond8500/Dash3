@@ -180,7 +180,8 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
                                             <a class="dropdown-item" wire:click="modalite_set(1)"> <i class="ti ti-plus"></i> Matériel puis reliquat</a>
-                                            <a class="dropdown-item" wire:click="modalite_set(0)"> <i class="ti ti-eraser"></i> Supprimer</a>
+                                            <a class="dropdown-item" wire:click="modalite_set(2)"> <i class="ti ti-plus"></i> Acompte de 50%</a>
+                                            <a class="dropdown-item" wire:click="modalite_set(0)"> <i class="ti ti-eraser"></i> Effacer</a>
                                         </div>
                                     </div>
                                 </div>

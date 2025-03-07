@@ -19,6 +19,7 @@ use App\Livewire\Erp\InvoicePage;
 use App\Livewire\Erp\InvoicesPage;
 use App\Livewire\Erp\ProjetPage;
 use App\Livewire\Erp\ProjetsPage;
+use App\Livewire\Erp\PvPage;
 use App\Livewire\Erp\RoomPage;
 use App\Livewire\Erp\StagePage;
 use App\Livewire\Erp\SystemesPage;
@@ -93,6 +94,11 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
     // Contacts
     Route::get('/contacts', ContactsPage::class)->name('contacts');
+    // PV
+    Route::get('/pv/{invoice_id}', PvPage::class)->name('pv');
+    Route::get('/pv_pdf/{invoice_id}', function ($invoice_id) {
+        return PDFController::pv_pdf($invoice_id);
+    })->name('pv_pdf');
 
 
     // Avancements

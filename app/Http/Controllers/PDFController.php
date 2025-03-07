@@ -346,4 +346,18 @@ class PDFController extends Controller
         }
     }
 
+    public static function pv_pdf($invoice_id){
+        $invoice = Invoice::find($invoice_id);
+        // $carbon = new Carbon($date);
+
+        $data = [
+            'logo' => env('LOGO', ''),
+            'title' => env('MAIN_NAME'),
+            'invoice' => $invoice,
+        ];
+
+        $pdf = Pdf::loadView("_pdf.pv.pv1_pdf", $data);
+        return $pdf->stream("Procès verbal");
+    }
+
 }

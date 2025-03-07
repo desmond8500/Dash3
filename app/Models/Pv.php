@@ -10,10 +10,20 @@ class Pv extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Système',
-        'societe',
+        'invoice_id',
+        'title',
+        'subtitle',
+        'date',
         'client',
-        'systeme_id',
+        'client_logo',
+        'bct',
+        'bct_logo',
+        'mo',
+        'mo_logo',
+        'me',
+        'me_logo',
+        'projet',
+        'projet_description',
     ];
 
 

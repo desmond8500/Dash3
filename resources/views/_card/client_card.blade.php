@@ -1,5 +1,5 @@
 
-<div class="card p-1 bg-light rounded  border-primary">
+<div class="card p-1 bg-light rounded  border-primary red_hover" >
     <div class="bg-{{ $client->type == 'Entreprise' ? "primary" : 'cyan' }} p-2 rounded">
         <div class="row ">
             <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}">
@@ -25,7 +25,6 @@
                                 <div class="text-muted"><i class="ti ti-heart"></i> Favoris</div>
                             @endif
                         </button>
-
                     </div>
                 </div>
 

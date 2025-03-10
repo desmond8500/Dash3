@@ -63,9 +63,9 @@
         <label class="form-label">Prix</label>
         <div class="input-group">
             <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
-            {{-- <a class="btn btn-primary btn-icon" wire:click="convert_euro()">
-                <i class="ti ti-refresh"></i>
-            </a> --}}
+            <a class="btn btn-primary btn-icon" wire:click="add_tva()">
+                tva
+            </a>
             <a class="btn btn-icon btn-primary" wire:click="convert_euro()" data-bs-toggle="tooltip" title="Convertir en Euro">
                 <i class="ti ti-currency-euro"></i>
             </a>

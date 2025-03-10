@@ -37,6 +37,7 @@
                     <a class="dropdown-item" wire:click="$set('journalForm.type','Rapport d\'intervention')">Rapport d'intervention</a>
                     <a class="dropdown-item" wire:click="$set('journalForm.type','Rapport de travaux')">Rapport de travaux</a>
                     <a class="dropdown-item" wire:click="$set('journalForm.type','Rapport de visite')">Rapport de visite</a>
+                    <a class="dropdown-item" wire:click="$set('journalForm.type','Rapport d'\incident')">Rapport d'incident</a>
                 </div>
             </div>
         </div>

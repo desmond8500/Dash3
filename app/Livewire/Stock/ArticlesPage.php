@@ -113,6 +113,9 @@ class ArticlesPage extends Component
     function convert_euro(){
         $this->article_form->price *= 655;
     }
+    function add_tva(){
+        $this->article_form->price *= 1.18;
+    }
 
     function uppercase(){
         $this->article_form->reference = strtoupper($this->article_form->reference);

@@ -36,7 +36,7 @@
                     </div>
                 </div>
             @empty
-                <div class="alert alert-info">Aucune facture</div>
+                <div class="text-muted">Aucune facture</div>
             @endforelse
 
         </div>

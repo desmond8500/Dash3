@@ -225,3 +225,7 @@ Route::get('/videos', VideosPage::class)->name('videos');
 Route::get('/fiches/{type}/{name}', function ($name, $type) {
     return PDFController::fiches_pdf($type, $name);
 })->name('fiches_pdf');
+
+Route::fallback(function() {
+    return view('errors.404page');
+});

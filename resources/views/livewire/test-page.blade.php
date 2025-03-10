@@ -1,5 +1,15 @@
 <div class="row mt-3">
 
+    <div class="col-md-12">
+        <div wire:loading>
+            <div class="d-flex justify-content-between">
+                <div>Chargement <span class="animated-dots"></div>
+            </div>
+        </div>
+        <button class="btn btn-primary" wire:click="pdf()">PDF</button>
+
+    </div>
+
     <div class="col-md-9">
         {{-- <div>
             @livewire('modal')

@@ -47,6 +47,7 @@ use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Browsershot\Browsershot;
 
 // Index
 Route::get('/', IndexPage::class)->name('index');
@@ -216,6 +217,11 @@ Route::get('fiche_pdf/{fiche_id}', function ($fiche_id) {
 // Test
 Route::get('/systemes', SystemesPage::class)->name('systemes');
 Route::get('/fiches', FichesPage::class)->name('fiches');
+Route::get('pdf_browser', function () {
+
+    $template = view('_pdf.test')->render();
+    return Browsershot::html($template)->save('example.pdf');
+});
 
 // Medias
 Route::get('/images', ImagesPage::class)->name('images');
@@ -225,6 +231,7 @@ Route::get('/videos', VideosPage::class)->name('videos');
 Route::get('/fiches/{type}/{name}', function ($name, $type) {
     return PDFController::fiches_pdf($type, $name);
 })->name('fiches_pdf');
+
 
 Route::fallback(function() {
     return view('errors.404page');

@@ -5,9 +5,11 @@ namespace App\Livewire;
 use App\Models\Brand;
 use App\Models\Demo;
 use App\Models\Provider;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Spatie\Browsershot\Browsershot;
 
 class TestPage extends Component
 {
@@ -136,6 +138,11 @@ class TestPage extends Component
 
     function delete_demo($id){
         Demo::find($id)->delete();
+    }
+
+    function pdf(){
+        $template = view('_pdf.test')->render();
+        return Browsershot::html($template)->save('example3.pdf');
     }
 }
 

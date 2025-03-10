@@ -5,7 +5,7 @@ use Livewire\Volt\Component;
 new class extends Component {
     public $status = 0;
 
-    function mount($status)
+    function mount($status="Demo")
     {
         $this->status = $status;
     }
@@ -29,6 +29,8 @@ new class extends Component {
     <span class="status status-azure">{{ $status }}</span>
     @elseif($status == "Terminé")
     <span class="status status-green">{{ $status }}</span>
+    @else
+    <span class="status">{{ $status }}</span>
     @endif
     {{--
     <span class="status status-purple">Purple</span>

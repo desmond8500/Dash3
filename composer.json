@@ -15,6 +15,7 @@
         "laravel/telescope": "^5.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4.7",
+        "livewire/volt": "^1.6",
         "maatwebsite/excel": "^3.1",
         "opcodesio/log-viewer": "^3.10",
         "parsedown/laravel": "^1.2",

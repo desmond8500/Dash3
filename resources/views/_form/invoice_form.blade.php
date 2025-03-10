@@ -14,7 +14,7 @@
             <option value="En Cours">En Cours</option>
             <option value="En Pause">En Pause</option>
             <option value="Annulé">Annulé</option>
-            <option value="A Bl a faire">A Bl a faire</option>
+            <option value="Bl a faire">Bl a faire</option>
             <option value="A Facturer">A Facturer</option>
             <option value="Terminé">Terminé</option>
         </select>

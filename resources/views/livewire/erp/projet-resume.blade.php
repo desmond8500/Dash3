@@ -76,8 +76,8 @@
                                 <th style="width:10px">#</th>
                                 <th style="width:100px">Références</th>
                                 <th>Description</th>
-                                <th style="width: 90px">statut</th>
-                                <th class="text-end" style="width: 120px">Total</th>
+                                <th style="width: 120px">statut</th>
+                                <th class="text-end" style="width: 130px">Total</th>
                             </tr>
                         </thead>
                         @endif
@@ -91,7 +91,10 @@
                                     </a>
                                 </td>
                                 <td>{{ $invoice->description }}</td>
-                                <td>{{ $invoice->statut }}</td>
+                                <td>
+                                    {{-- {{ $invoice->statut }} --}}
+                                    @livewire('volt/progress', ['status' => $invoice->statut])
+                                </td>
                                 <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</td>
                             </tr>
                             @endforeach

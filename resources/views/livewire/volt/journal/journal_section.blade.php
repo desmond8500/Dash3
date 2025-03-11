@@ -72,6 +72,15 @@ new class extends Component {
         $section->save();
     }
 
+    function generer_section($title, $content){
+        $section =  JournalSection::create([
+            'journal_id' => $this->journal_id,
+            'name' => $title,
+            'description' => $content,
+            'order' => JournalSection::count()+1
+        ]);
+    }
+
 
 }; ?>
 
@@ -89,14 +98,17 @@ new class extends Component {
                             <i class="ti ti-chevron-down"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="triggerId">
-                            <a class="dropdown-item" > <i class="ti ti-edit"></i> Editer</a>
+                            <a class="dropdown-item" wire:click="generer_section('Travaux en cours','')"> <i class="ti ti-edit"></i> Travaux en cours</a>
+                            <a class="dropdown-item" wire:click="generer_section('Travaux effectués','')"> <i class="ti ti-edit"></i> Travaux effectués</a>
+                            <a class="dropdown-item" wire:click="generer_section('Recommandations','')"> <i class="ti ti-edit"></i> Recommandations</a>
+                            <a class="dropdown-item" wire:click="generer_section('Recommandations','')"> <i class="ti ti-edit"></i> Notes</a>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        <div class="p-2">
             @foreach ($sections->sortBy('order') as $section)
                 <div class="card border border-primary mb-1 p-2">
                     <div class="row">

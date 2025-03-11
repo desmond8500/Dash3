@@ -115,7 +115,7 @@
     @endif
 
     @if ($journal->achats->count())
-        <h1>Achats</h1>
+        <h1>Achats à effectuer</h1>
         @foreach ($journal->achats as $key => $achat)
             <div class="text-gray fs-6">
                 <div class="text-primary">{{ $achat->name }}</div>

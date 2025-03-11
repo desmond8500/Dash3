@@ -136,7 +136,7 @@
 
             <div class="card mb-2">
                 <div class="card-header">
-                    <div class="card-title">Achats</div>
+                    <div class="card-title">Achats à effectuer</div>
                     <div class="card-actions">
 
                     </div>

@@ -72,6 +72,12 @@
         @parsedown($journal->description)
     </div>
 
+    @foreach ($journal->sections->sortBy('order') as $section)
+        <h1>{{ $section->name }}</h1>
+        @parsedown($section->description)
+    @endforeach
+
+
     @if ($journal->tasks->count())
         <h1>Taches</h1>
 

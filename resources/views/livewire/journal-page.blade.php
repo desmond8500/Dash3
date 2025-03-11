@@ -67,6 +67,10 @@
             </div>
 
             <div class="mb-2">
+                @livewire('volt.journal.journal_section', ['journal_id' => $journal->id], key($journal->id))
+            </div>
+
+            <div class="mb-2">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Devis</div>

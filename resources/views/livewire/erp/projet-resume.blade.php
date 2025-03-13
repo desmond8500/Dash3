@@ -121,6 +121,8 @@
         @endif
 
         {{-- Taches --}}
+        {{-- @livewire('erp/tasks/tasklist1', ['projet_id'=>$projet->id ]) --}}
+
         <div class="card p-2 mb-2">
             <div class="row">
                 <div class="col">

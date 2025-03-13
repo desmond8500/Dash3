@@ -94,10 +94,10 @@
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </form>
-            <script> window.addEventListener('open-addSection', event => { window.$('#addSection').modal('show'); }) </script>
-            <script> window.addEventListener('close-addSection', event => { window.$('#addSection').modal('hide'); }) </script>
-
         @endif
+        <script> window.addEventListener('open-addSection', event => { window.$('#addSection').modal('show'); }) </script>
+        <script> window.addEventListener('close-addSection', event => { window.$('#addSection').modal('hide'); }) </script>
+
     @endcomponent
 
     @component('components.modal', ["id"=>'editSection', 'title'=>'Editer une section'])

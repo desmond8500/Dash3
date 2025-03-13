@@ -16,4 +16,7 @@
         <div class="col-md-6"> {{ date_format($invoice->created_at, "d-m-Y") }} </div>
         <div class="col-md-6 text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} F</div>
     </div>
+
+
+
 </div>

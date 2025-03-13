@@ -16,6 +16,7 @@ use App\Models\Projet;
 use App\Models\Provider;
 use App\Models\Pv;
 use App\Models\Systeme;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Carbon\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -71,6 +72,8 @@ class InvoicePage extends Component
     }
 
     function addSection(){
+        Debugbar::info('section');
+        // $this->dispatch('open-infoModal');
         $this->dispatch('open-addSection');
         $this->section_form->ordre = InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1;
     }
@@ -80,7 +83,7 @@ class InvoicePage extends Component
         $this->section_form->invoice_id = $this->devis->id;
         $this->section_form->store();
         $this->ordre++;
-        $this->dispatch('close-addSection');
+        $this->dispatch('close-addSection2');
     }
 
     function section_generate($name)

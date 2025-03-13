@@ -144,8 +144,8 @@
                             <a href="{{ route('profile') }}" wire:navigate class="dropdown-item"><i class="ti ti-user"></i> Profile</a>
                             {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
                             <div class="dropdown-divider"></div>
-                            <a href="{{ route('settings') }}" wire:navigate class="dropdown-item"><i class="ti ti-settings"></i> Paramètres</a>
-                            <a wire:click="logout()" wire:navigate class="dropdown-item text-danger"> <i class="ti ti-logout"></i> Déconnexion</a>
+                            <a href="{{ route('settings') }}" class="dropdown-item"><i class="ti ti-settings"></i> Paramètres</a>
+                            <a wire:click="logout()" class="dropdown-item text-danger"> <i class="ti ti-logout"></i> Déconnexion</a>
                         </div>
                     </div>
                     <div>
@@ -257,7 +257,7 @@
             @include('_form.login_form')
 
             <script>  addEventListener('open-login', event => {$('#login').modal('show'); }) </script>
-            <script>  addEventListener('close-login', event => $('#login').modal('hide'); }) </script>
+            <script>  addEventListener('close-login', event => {$('#login').modal('hide'); }) </script>
         @endcomponent
     </div>
 

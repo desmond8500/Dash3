@@ -145,11 +145,23 @@
             @include('_pdf.facture.facture_total_pdf')
         @endif
 
-        <div class="mt-3">
-            @if ($devis->modalite && $title == 'devis')
-                <div class="fw-bold">Modalités :</div>
-                <div>{{ $devis->modalite }}</div>
-            @endif
+        <div class="mt-2">
+            <table class="table">
+                <tr>
+                    <td width="50%" class="border-white">
+                        @if ($devis->modalite && $title == 'devis')
+                            <div class="fw-bold">Modalités :</div>
+                            <div>{{ $devis->modalite }}</div>
+                        @endif
+                    </td>
+                    <td class="border-white">
+                        @if ($devis->note && $title == 'devis')
+                            <div class="fw-bold mt-2">Notes :</div>
+                            <div>{{ $devis->note }}</div>
+                        @endif
+                    </td>
+                </tr>
+            </table>
         </div>
 
         @if ($acompte)

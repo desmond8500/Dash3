@@ -64,12 +64,12 @@
             <label class="form-label">Projet</label>
             <select wire:model="invoice_form.projet_id" class="form-control">
                 @isset($devis)
-                    @foreach ($devis->projet->client->projets as $projet)
+                    @foreach ($devis->projet->client->projets->sortBy('name') as $projet)
                         <option value="{{ $projet->id }}">{{ $projet->name }}</option>
                     @endforeach
                 @endisset
                 @isset($invoice)
-                    @foreach ($invoice->projet->client->projets as $projet)
+                    @foreach ($invoice->projet->client->projets->sortBy('name') as $projet)
                         <option value="{{ $projet->id }}">{{ $projet->name }}</option>
                     @endforeach
                 @endisset

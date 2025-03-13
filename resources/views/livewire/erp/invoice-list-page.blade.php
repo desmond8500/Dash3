@@ -13,9 +13,8 @@
             </div>
             @foreach ($invoices->sortByDesc('created_at') as $invoice)
                 <div class="mb-1">
-                    <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="text-dark" target="_blank">
-                        @include('_card.invoice_card')
-                    </a>
+                    @include('_card.invoice_card')
+
                 </div>
             @endforeach
             <div>

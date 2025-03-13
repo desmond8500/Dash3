@@ -1,10 +1,12 @@
 <div class="card p-2 border-secondary">
     <div class="row">
         <div class="col">
-            <h4 style="text-transform: uppercase">{{ $invoice->reference }}</h4>
+            <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="text-dark" target="_blank">
+                <h4 style="text-transform: uppercase">{{ $invoice->reference }}</h4>
+            </a>
         </div>
         <div class="col-auto">
-            @component('components.status',['status'=>$invoice->statut])
+            @component('components.status',['status'=>$invoice->statut, 'invoice_id'=> $invoice->id, 'statuses'=>$statuses])
 
             @endcomponent
         </div>

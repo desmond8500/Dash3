@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Http\Controllers\InvoiceController;
 use App\Imports\InvoiceImport;
 use App\Livewire\Forms\InvoiceForm;
 use App\Livewire\Forms\InvoiceRowForm;
@@ -11,6 +12,7 @@ use App\Models\Brand;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
+use App\Models\Projet;
 use App\Models\Provider;
 use App\Models\Pv;
 use App\Models\Systeme;
@@ -53,11 +55,12 @@ class InvoicePage extends Component
             'brands' => Brand::all(),
             'articles' => Article::search($this->search, 'designation')->paginate(9),
             'pvs' => Pv::where('invoice_id', $this->devis->id)->get(),
+            'statuses' => InvoiceController::statut(),
         ]);
     }
 
     // Section
-    public $section, $ordre, $section_tab = false;
+    public $section, $ordre, $section_tab = true;
 
     public InvoiceSectionForm $section_form;
     public $section_info;
@@ -244,5 +247,11 @@ class InvoicePage extends Component
             'invoice_id' => $this->devis->id,
             'date' => Carbon::now(),
         ]);
+    }
+
+    function update_status($invoice_id, $status)
+    {
+        $this->devis->statut = $status;
+        $this->devis->save();
     }
 }

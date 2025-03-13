@@ -93,7 +93,11 @@
                                 <td>{{ $invoice->description }}</td>
                                 <td>
                                     {{-- {{ $invoice->statut }} --}}
-                                    @livewire('volt/progress', ['status' => $invoice->statut])
+                                    {{-- @livewire('volt/progress', ['status' => $invoice->statut]) --}}
+
+                                    @component('components.status',['status'=>$invoice->statut, 'invoice_id'=> $invoice->id, 'statuses'=>$statuses])
+
+                                    @endcomponent
                                 </td>
                                 <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</td>
                             </tr>

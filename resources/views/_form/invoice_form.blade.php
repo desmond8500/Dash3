@@ -11,7 +11,6 @@
             <option value="Proforma">Proforma</option>
             <option value="Nouveau">Nouveau</option>
             <option value="En Cours">En Cours</option>
-            <option value="En Cours">En Cours</option>
             <option value="En Pause">En Pause</option>
             <option value="Annulé">Annulé</option>
             <option value="Bl a faire">Bl a faire</option>
@@ -47,8 +46,8 @@
         </div>
     </div>
 
-    <div class="col-md-4 mb-3">
-        <div class="mb-">
+    <div class="col-md-4 mb-2">
+        <div class="mb-3">
             <label class="form-label">Reference</label>
             <input type="text" class="form-control" wire:model="invoice_form.reference" disabled>
             @error('invoice_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
@@ -59,6 +58,21 @@
                 <option value="0">Pas de TVA</option>
                 <option value="tva">TVA 18%</option>
                 <option value="brs">BRS 5%</option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Projet</label>
+            <select wire:model="invoice_form.projet_id" class="form-control">
+                @isset($devis)
+                    @foreach ($devis->projet->client->projets as $projet)
+                        <option value="{{ $projet->id }}">{{ $projet->name }}</option>
+                    @endforeach
+                @endisset
+                @isset($invoice)
+                    @foreach ($invoice->projet->client->projets as $projet)
+                        <option value="{{ $projet->id }}">{{ $projet->name }}</option>
+                    @endforeach
+                @endisset
             </select>
         </div>
 

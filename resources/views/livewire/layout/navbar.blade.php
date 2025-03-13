@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="{{ route('index') }}" >
+            <a href="{{ route('index') }}" wire:navigate>
                 {{ env('APP_NAME', 'Tabler') }}
             </a>
         </h1>
@@ -141,11 +141,11 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             {{-- <a href="#" class="dropdown-item">Status</a> --}}
-                            <a href="{{ route('profile') }}" wire:navigate class="dropdown-item">Profile</a>
+                            <a href="{{ route('profile') }}" wire:navigate class="dropdown-item"><i class="ti ti-user"></i> Profile</a>
                             {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
                             <div class="dropdown-divider"></div>
-                            <a href="{{ route('settings') }}" class="dropdown-item">Paramètres</a>
-                            <a wire:click="logout()" class="dropdown-item text-danger">Déconnexion</a>
+                            <a href="{{ route('settings') }}" wire:navigate class="dropdown-item"><i class="ti ti-settings"></i> Paramètres</a>
+                            <a wire:click="logout()" wire:navigate class="dropdown-item text-danger"> <i class="ti ti-logout"></i> Déconnexion</a>
                         </div>
                     </div>
                     <div>
@@ -248,16 +248,16 @@
                 </div>
             </form>
 
-            <script> window.addEventListener('open-register', event => { window.$('#register').modal('show'); }) </script>
-            <script> window.addEventListener('close-register', event => { window.$('#register').modal('hide'); }) </script>
+            <script>  addEventListener('open-register', event => { $('#register').modal('show'); }) </script>
+            <script>  addEventListener('close-register', event => {$('#register').modal('hide'); }) </script>
         @endcomponent
 
         @component('components.modal', ["id"=>'login', 'title'=>'Connexion', 'class'=>'modal-sm'])
 
             @include('_form.login_form')
 
-            <script> window.addEventListener('open-login', event => { window.$('#login').modal('show'); }) </script>
-            <script> window.addEventListener('close-login', event => { window.$('#login').modal('hide'); }) </script>
+            <script>  addEventListener('open-login', event => {$('#login').modal('show'); }) </script>
+            <script>  addEventListener('close-login', event => $('#login').modal('hide'); }) </script>
         @endcomponent
     </div>
 

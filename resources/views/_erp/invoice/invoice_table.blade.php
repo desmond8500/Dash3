@@ -8,7 +8,13 @@
             </div>
         </div>
         <div class="card-actions">
-            <div class="badge mb-1">{{ $devis->statut }}</div>
+            <div class="mb-1">
+                @component('components.status',['status'=>$devis->statut, 'invoice_id'=> $devis->id, 'statuses'=>$statuses, 'type'=> "badge bg"])
+
+                @endcomponent
+            </div>
+
+
             <div class="dropdown">
                 <a href="#" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Actions</a>
                 <div class="dropdown-menu">

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\UserForm;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class LoginPage extends Component
@@ -12,11 +13,14 @@ class LoginPage extends Component
         return view('livewire.login-page');
     }
 
-    // Register
     public UserForm $user_form;
     public $formtype = true;
+
+    public $email;
+    public $password;
     public $errorMessage;
 
+    #[Layout('components.layouts.login')]
     function login()
     {
         $this->validate([
@@ -33,4 +37,5 @@ class LoginPage extends Component
             $this->errorMessage = 'Les identifiants sont incorrects';
         }
     }
+
 }

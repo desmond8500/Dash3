@@ -1,13 +1,13 @@
 <div class="card p-2">
     <div class="row g-2">
-        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}">
+        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>
             <img src="{{ asset($article->image) }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
         </a>
         <div class="col">
             <div class="row">
                 <div class="col">
                     <div style="height: 40px; overflow:hidden">
-                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
+                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>{{ $article->designation }}</a>
                     </div>
                 </div>
                 @isset($edit)

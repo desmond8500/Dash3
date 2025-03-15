@@ -86,7 +86,7 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank">
+                                    <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" wire:navigate>
                                         {{ ucfirst($invoice->reference) }}
                                     </a>
                                 </td>

@@ -1,7 +1,7 @@
 <div class="card p-2 border-secondary">
     <div class="row">
         <div class="col">
-            <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="text-dark" target="_blank">
+            <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="text-dark" target="_blank" wire:navigate>
                 <h4 style="text-transform: uppercase">{{ $invoice->reference }}</h4>
             </a>
         </div>

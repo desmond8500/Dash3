@@ -1,9 +1,9 @@
 <div class="card p-2 border border-primary">
     <div class="row g-1">
-        <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}">
+        <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}" wire:navigate>
             <img class="avatar " src="{{ asset($projet->client->avatar) }}" alt="A">
         </a>
-        <a class="col" href="{{ route('projet',['projet_id'=> $projet->id]) }}" style="text-decoration: none">
+        <a class="col" href="{{ route('projet',['projet_id'=> $projet->id]) }}" style="text-decoration: none" wire:navigate>
             <div class="fw-bold">{{ $projet->name }}</div>
         </a>
         <div class="col-auto">

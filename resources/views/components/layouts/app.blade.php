@@ -41,7 +41,6 @@
     <meta property="og:url" content="https://tabler.io/demo/static/og.png">
     <meta property="og:description" content="Tabler comes with tons of well-designed components and features. Start your adventure with Tabler and make your dashboard great again. For free!">
     <!-- CSS files -->
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
@@ -51,7 +50,7 @@
     <link rel="stylesheet" href="{{ asset('css/tabler.css') }}">
 
     @stack('css')
-
+    {{-- @livewireStyles --}}
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -72,9 +71,9 @@
 
         <div class="page-wrapper">
             @php
-            if (auth()->user()) {
-                $settings = \App\Models\Setting::where('user_id', auth()->user()->id)->first();
-            }
+                if (auth()->user()) {
+                    $settings = \App\Models\Setting::where('user_id', auth()->user()->id)->first();
+                }
             @endphp
 
             @auth
@@ -112,7 +111,7 @@
 
         </div>
     </div>
-
+    {{-- @livewireScripts --}}
     <!-- Tabler Core -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
     {{-- Masonry --}}

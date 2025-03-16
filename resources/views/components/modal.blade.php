@@ -17,11 +17,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="{{ $id ?? 'exampleModal' }}Label">{{ $title ?? 'Modal title' }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                @isset($refresh)
+                <div class="card-actions">
+                    {{ $actions ?? '' }}
+                </div>
+                {{-- @isset($refresh)
                     <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
-                @endisset
-                {{ $actions ?? '' }}
+                @endisset --}}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 

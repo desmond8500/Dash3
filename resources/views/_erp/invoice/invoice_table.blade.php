@@ -176,7 +176,7 @@
             <div class="col">
                 <div class="row row-deck g-2">
                     <div class="col-md-6 " >
-                        <div class="border rounded w-100 p-2">
+                        <div class="card border rounded w-100 p-2">
                             <div class="fw-bold">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>Modalités</div>
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 " >
-                        <div class="border rounded w-100 p-2">
+                        <div class="card border rounded w-100 p-2">
                             <div class="fw-bold">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>Notes</div>

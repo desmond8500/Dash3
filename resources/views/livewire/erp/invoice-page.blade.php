@@ -69,7 +69,7 @@
     @endcomponent
 
     {{-- Section --}}
-    @component('components.modal', ["id"=>'addSection', 'title'=>'Ajouter une section'])
+    @component('components.modal', ["id"=>'addSection', 'title'=>'Ajouter une section', 'refresh'=>true])
         @slot('actions')
             @if ($section_tab)
                 <button class="btn btn-primary" wire:click="$toggle('section_tab')"> Formulaire </button>

@@ -225,6 +225,28 @@ class InvoicePage extends Component
         Excel::import(new InvoiceImport, $this->file);
     }
 
+    public $modalite;
+    function edit_modalite(){
+        $this->modalite = $this->devis->modalite;
+        $this->dispatch('open-editModalite');
+    }
+    function update_modalite(){
+        $this->devis->modalite = $this->modalite;
+        $this->devis->save();
+        $this->dispatch('close-editModalite');
+    }
+
+    public $note;
+    function edit_note(){
+        $this->note = $this->devis->note;
+        $this->dispatch('open-editNote');
+    }
+    function update_note(){
+        $this->devis->note = $this->note;
+        $this->devis->save();
+        $this->dispatch('close-editNote');
+    }
+
     function modalite_set($id){
         if ($id == 0) {
             $this->devis->modalite = "";

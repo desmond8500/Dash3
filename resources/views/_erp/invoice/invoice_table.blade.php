@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <div class="card-title">
-            <div>{{ $devis->client_name ?? $devis->projet->client->name.' - '.$devis->projet->name }}</div>
+            <div><span data-bs-toggle="tooltip" title="Client" >{{ $devis->client_name ?? $devis->projet->client->name }}</span> - <span data-bs-toggle="tooltip" title="Nom du projet" >{{ $devis->projet->name }}</span> </div>
             <div class="text-primary">#{{ $devis->reference }}</div>
             <div class="" style="font-size: 13px; font-weight:normal;">
                 <div>{!! nl2br($devis->description) !!}</div>
@@ -92,7 +92,9 @@
                             wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
                             <i class="ti ti-trash"></i>
                         </button>
-                        <button class="btn btn-sm p-1 btn-primary rounded" disabled>PDF</button>
+                        <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Exporter">
+                            <i class="ti ti-file-type-xls"></i>
+                        </button>
                     </div>
                 </th>
             </tr>
@@ -154,8 +156,8 @@
                     </tr>
                 @endforeach
                 <tr class="fw-bold">
-                    <td colspan="2">Sous Total</td>
-                    <td colspan="5" class="text-end"> {{ number_format($subtotal, 0,'.', ' ') }} F</td>
+                    <td colspan="5">Sous Total</td>
+                    <td colspan="2" class="text-end"> {{ number_format($subtotal, 0,'.', ' ') }} F</td>
                 </tr>
             </tbody>
 
@@ -185,6 +187,8 @@
                                             <i class="ti ti-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" wire:click="edit_modalite()"> <i class="ti ti-edit"></i> Editer les modalités</a>
+                                            <a class="dropdown-item" wire:click="modalite_set(1)"> <i class="ti ti-plus"></i> Matériel puis reliquat</a>
                                             <a class="dropdown-item" wire:click="modalite_set(1)"> <i class="ti ti-plus"></i> Matériel puis reliquat</a>
                                             <a class="dropdown-item" wire:click="modalite_set(2)"> <i class="ti ti-plus"></i> Acompte de 50%</a>
                                             <a class="dropdown-item" wire:click="modalite_set(0)"> <i class="ti ti-eraser"></i> Effacer</a>
@@ -205,6 +209,7 @@
                                             <i class="ti ti-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" wire:click="edit_note()"> <i class="ti ti-edit"></i> Editer les notes</a>
                                             <a class="dropdown-item" wire:click="note_set(0)"> <i class="ti ti-eraser"></i> Supprimer</a>
                                         </div>
                                     </div>
@@ -221,10 +226,12 @@
                     <div class="fw-bold me-3">TOTAL HT:</div>
                     <div>{{ number_format($total, 0,'.', ' ') }} F</div>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <div class="fw-bold me-3">MARGE:</div>
-                    <div>{{ number_format($total_marge - $total, 0,'.', ' ') }} F</div>
-                </div>
+                @if ($total_marge - $total)
+                    <div class="d-flex justify-content-between">
+                        <div class="fw-bold me-3">MARGE:</div>
+                        <div>{{ number_format($total_marge - $total, 0,'.', ' ') }} F</div>
+                    </div>
+                @endif
                 <div class="d-flex justify-content-between">
                     <div class="fw-bold me-3">TOTAL TTC:</div>
                     <div>{{ number_format($total_marge, 0,'.', ' ') }} F</div>
@@ -232,4 +239,30 @@
             </div>
         </div>
     </div>
+
+    @component('components.modal', ["id"=>'editModalite', 'title' => 'Editer les modalités', 'method'=> 'update_modalite'])
+        <form class="row" wire:submit="update_modalite">
+            <div class="col-md-12 mb-3">
+                <label class="form-label">Modalités</label>
+                <textarea class="form-control" wire:model="modalite" placeholder="Modalités"
+                    data-bs-toggle="autosize"></textarea>
+                @error('modalite') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+        </form>
+        <script> window.addEventListener('open-editModalite', event => { window.$('#editModalite').modal('show'); }) </script>
+        <script> window.addEventListener('close-editModalite', event => { window.$('#editModalite').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editNote', 'title' => 'Editer les notes', 'method'=> 'update_note'])
+        <form class="row" wire:submit="update_note">
+            <div class="col-md-12 mb-3">
+                <label class="form-label">Notes</label>
+                <textarea class="form-control" wire:model="note" placeholder="Notes"
+                    data-bs-toggle="autosize"></textarea>
+                @error('note') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+        </form>
+        <script> window.addEventListener('open-editNote', event => { window.$('#editNote').modal('show'); }) </script>
+        <script> window.addEventListener('close-editNote', event => { window.$('#editNote').modal('hide'); }) </script>
+    @endcomponent
 </div>

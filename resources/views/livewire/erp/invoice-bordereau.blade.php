@@ -3,8 +3,8 @@
         <div class="card-header">
             <div class="card-title">Bordereaux</div>
             <div class="card-actions">
-                <button class="btn btn-primary" wire:click="$dispatch('open-addBL')" data-bs-toggle="tooltip" title="Ajouter un bordereau">
-                    <i class="ti ti-plus"></i> BL
+                <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addBL')" data-bs-toggle="tooltip" title="Ajouter un bordereau">
+                    <i class="ti ti-plus"></i>
                 </button>
             </div>
         </div>
@@ -53,4 +53,5 @@
         <script> window.addEventListener('open-editBL', event => { window.$('#editBL').modal('show'); }) </script>
         <script> window.addEventListener('close-editBL', event => { window.$('#editBL').modal('hide'); }) </script>
     @endcomponent
+
 </div>

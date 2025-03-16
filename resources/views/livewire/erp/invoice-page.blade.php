@@ -1,21 +1,22 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Devis', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
-            <button class="btn" wire:click="$dispatch('open-importRows')" data-bs-toggle="tooltip" title="Ajouter un devis">
-                Importer Devis
-            </button>
-            @livewire('form.task-add', ['devis_id' => $devis->id])
-            {{-- @livewire('form.article-add') --}}
-            <button class="btn btn-primary" wire:click="$dispatch('open-addSection')" data-bs-toggle="tooltip" title="Ajouter une section">
-                <i class="ti ti-plus"></i> Section
-            </button>
-            @empty($pvs)
-                <button class="btn btn-primary" wire:click="addPv()" title="Ajouter un PV">
-                    <i class="ti ti-plus"></i> PV
+            <div class="dropdown open">
+                <button class="btn btn-primary" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <i class="ti ti-chevron-down"></i> Actions
                 </button>
-            @else
-                <a href="{{ route('pv',['invoice_id'=>$devis->id]) }}" class="btn btn-primary" >PV</a>
-            @endempty
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <a class="dropdown-item" wire:click="$dispatch('open-importRows')" data-bs-toggle="tooltip" title="Ajouter un devis"> <i class="ti ti-file-arrow-left"></i> Importer Devis</a>
+                    <a class="dropdown-item" wire:click="$dispatch('open-addSection')" data-bs-toggle="tooltip" title="Ajouter une section"> <i class="ti ti-plus"></i> Section</a>
+                    @empty($pvs)
+                        <a class="dropdown-item" wire:click="addPv()" title="Ajouter un PV"> <i class="ti ti-plus"></i> Procès Verbal</a>
+                    @else
+                        <a class="dropdown-item" href="{{ route('pv',['invoice_id'=>$devis->id]) }}" title="Consulter le PV"> <i class="ti ti-file"></i> Procès Verbal</a>
+                    @endempty
+                </div>
+            </div>
+
+            @livewire('form.task-add', ['devis_id' => $devis->id])
 
             @livewire('form.transaction-add', ['invoice_id' => $devis->id])
 
@@ -69,7 +70,7 @@
     @endcomponent
 
     {{-- Section --}}
-    @component('components.modal', ["id"=>'addSection', 'title'=>'Ajouter une section', 'refresh'=>true])
+    @component('components.modal', ["id"=>'addSection', 'title'=>'Ajouter une section', 'refresh'=>true, 'method'=> 'sectionStore', 'submit'=>'Ajouter'])
         @slot('actions')
             @if ($section_tab)
                 <button class="btn btn-primary" wire:click="$toggle('section_tab')"> Formulaire </button>
@@ -79,20 +80,12 @@
         @endslot
 
         @if ($section_tab)
-            <div> <b>Systèmes :</b> {{ $systems->count() }} </div>
-
             @foreach ($systems as $system)
                 <button class="btn btn-primary mb-1" wire:click="section_generate('{{ $system->name }}')">{{ $system->name }}</button>
             @endforeach
-
         @else
             <form class="row" wire:submit="sectionStore">
                 @include('_form.invoice_section_form')
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                    <button type="submit" class="btn btn-primary">Valider</button>
-                </div>
             </form>
         @endif
         <script> window.addEventListener('open-addSection', event => { window.$('#addSection').modal('show'); }) </script>
@@ -143,7 +136,7 @@
         @elseif($row_tab==1)
             <form class="row" wire:submit="storeRow">
                 @include('_form.invoice_row_form')
-                <div class="modal-footer">
+                <div class="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
@@ -165,15 +158,15 @@
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label>Tarif</label>
-                            <input type="text" class="form-control" wire:model.live="row_form.prix" placeholder="Prix">
+                            <input type="number" min="0" step="10000" class="form-control" wire:model.live="row_form.prix" placeholder="Prix">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label>Coéficient</label>
-                            <input type="text" class="form-control" wire:model="row_form.coef" placeholder="Coef">
+                            <input type="number" min="1" class="form-control" wire:model="row_form.coef" placeholder="Coef">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label>Quantité</label>
-                            <input type="text" class="form-control" wire:model="row_form.quantite" placeholder="Quantite">
+                            <input type="text" min="0" class="form-control" wire:model="row_form.quantite" placeholder="Quantite">
                         </div>
                     </div>
 
@@ -185,6 +178,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="triggerId">
                             <a class="dropdown-item" wire:click="designation('Main d\'oeuvre')"> </i> Main d'oeuvre</a>
+                            <a class="dropdown-item" wire:click="designation('Forfait accessoires et main d\'oeuvre')"> </i> Forfait accessoires et main d'oeuvre</a>
                             <a class="dropdown-item" wire:click="designation('Forfait Accessoires')"> </i> Forfait Accessoires</a>
                         </div>
                     </div>
@@ -196,8 +190,10 @@
                             <a class="dropdown-item" wire:click="prix(10000)">10 000 CFA</a>
                             <a class="dropdown-item" wire:click="prix(20000)">20 000 CFA</a>
                             <a class="dropdown-item" wire:click="prix(30000)">30 000 CFA</a>
+                            <a class="dropdown-item" wire:click="prix(40000)">40 000 CFA</a>
                             <a class="dropdown-item" wire:click="prix(50000)">50 000 CFA</a>
                             <a class="dropdown-item" wire:click="prix(100000)">100 000 CFA</a>
+                            <a class="dropdown-item" wire:click="prix(130000)">130 000 CFA</a>
                             <a class="dropdown-item" wire:click="prix(150000)">150 000 CFA</a>
                             <a class="dropdown-item" wire:click="prix(200000)">200 000 CFA</a>
                         </div>
@@ -214,7 +210,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="triggerId">
                                 <a class="dropdown-item" wire:click="$set('row_form.reference','- Tirage \n- Pose \n- Connexion \n- Mise en service')">Main d'œuvre 1</a>
-                                <a class="dropdown-item" wire:click="$set('row_form.reference','- Platre \n - Goullotes')">Accessoires 1</a>
+                                <a class="dropdown-item" wire:click="$set('row_form.reference','- Plâtre \n - Goulottes')">Accessoires 1</a>
                             </div>
                         </div>
                     </div>
@@ -222,7 +218,7 @@
                 </div>
 
                 <div class="col-md-12" style="display: flex; justify-items-between">
-                    <div class="modal-footer">
+                    <div class="">
                         <div class="w-100">
                             <div class="row">
                                 <div class="col">
@@ -239,21 +235,16 @@
             </div>
         @endif
     @endcomponent
-    @component('components.modal', ["id"=>'editRow', 'title'=>'Editer un article', 'class'=> $row_class])
+    @component('components.modal', ["id"=>'editRow', 'title'=>'Editer un article', 'class'=> $row_class, 'method'=>'updateRow'])
         <form class="row" wire:submit="updateRow">
             @include('_form.invoice_row_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editRow', event => { window.$('#editRow').modal('show'); }) </script>
         <script> window.addEventListener('close-editRow', event => { window.$('#editRow').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'importRows', 'title'=>'Importer des articles', 'class'=> $row_class])
+    @component('components.modal', ["id"=>'importRows', 'title'=>'Importer des articles', 'class'=> $row_class, 'method'=>'import'])
         <form class="row" wire:submit="import">
-            {{-- @include('_form.invoice_row_form') --}}
 
             <div class="col-md-12 mb-3">
                 <label class="form-label">Fichier</label>
@@ -261,10 +252,6 @@
                 @error('file') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-importRows', event => { window.$('#importRows').modal('show'); }) </script>
         <script> window.addEventListener('close-importRows', event => { window.$('#importRows').modal('hide'); }) </script>

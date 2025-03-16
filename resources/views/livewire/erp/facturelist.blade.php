@@ -3,9 +3,9 @@
         <div class="card-header">
             <div class="card-title">Factures</div>
             <div class="card-actions">
-                <button class="btn btn-primary" wire:click="$dispatch('open-addFacture')" data-bs-toggle="tooltip"
+                <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addFacture')" data-bs-toggle="tooltip"
                     title="Ajouter une facture">
-                    <i class="ti ti-plus"></i> Facture
+                    <i class="ti ti-plus"></i>
                 </button>
             </div>
         </div>

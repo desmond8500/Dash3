@@ -7,6 +7,7 @@
 
     <div class="row mt-3">
 
+
         <section class="col-md-8">
             <div class="row">
                 @foreach ($widgets as $widget)
@@ -33,12 +34,12 @@
                 </div>
                 <div class="card-body card-body-scrollable card-body-scrollable-shadow" style="height: 600px;">
                     @foreach ($widgets as $widget)
-                        <a class="card p-2 mb-1" wire:click="$set('selected_widget', '{{ $widget->id }}')">
+                        <a class="card p-2 mb-1" type="button" wire:click="$set('selected_widget', '{{ $widget->id }}')">
                             <div>
                                 @if ($widget->type == 'livewire')
-                                    <div class="badge bg-pink">{{ $widget->type }}</div>
+                                    <div class="badge text-white bg-pink">{{ $widget->type }}</div>
                                 @else
-                                    <div class="badge bg-purple">{{ $widget->type }}</div>
+                                    <div class="badge text-white bg-purple">{{ $widget->type }}</div>
                                 @endif
                             </div>
 

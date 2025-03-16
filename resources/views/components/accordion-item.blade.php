@@ -1,7 +1,7 @@
 <div class="accordion-item ">
-    <h2 class="accordion-header" id="flush-headingOne">
-        <button class="accordion-button collapsed p-2"
-            type="button"
+    <div class="p-2" id="flush-headingOne">
+        <button class="accordion-button collapsed btn w-100"
+            {{-- type="button" --}}
             data-bs-toggle="collapse"
             data-bs-target="#flush-{{ $id ?? 'collapseOne' }}"
             aria-expanded="true"
@@ -10,13 +10,13 @@
         </button>
 
 
-    </h2>
+    </div>
     <div id="flush-{{ $id ?? 'collapseOne' }}"
         class="accordion-collapse collapse"
         aria-labelledby="flush-headingOne"
         data-bs-parent="#accordionFlushExample">
 
-        <div class="accordion-body">
+        <div class="p-2">
             {{ $slot }}
         </div>
     </div>

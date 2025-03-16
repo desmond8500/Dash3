@@ -69,7 +69,7 @@
 
             <div class="row mt-1">
                 <div class="col-md-6">
-                    <div class="badge " style="font-size:10px">{{ $article->priority() }}</div>
+                    <div class="badge " style="font-size:10px" data-bs-toggle="tooltip" title="Priorité">{{ $article->priority() }}</div>
                 </div>
                 <div class="col-md-6">
                     <div class="text-danger text-end" style="font-size: 18px">{{ number_format($article->price, 0, 2) }} F</div>

@@ -22,6 +22,7 @@ class UserForm extends Form
     #[Rule('required|same:password')]
     public $password_confirmation;
     public $function;
+    public $avatar;
 
     public User $user;
 
@@ -29,6 +30,7 @@ class UserForm extends Form
         $this->firstname = ucfirst($this->firstname);
         $this->lastname = ucfirst($this->lastname);
         User::create($this->all());
+
     }
 
     function set() {
@@ -36,6 +38,7 @@ class UserForm extends Form
         $this->firstname = auth()->user()->firstname;
         $this->lastname = auth()->user()->lastname;
         $this->function = auth()->user()->function;
+        $this->avatar = auth()->user()->avatar;
     }
 
     function login($email, $password) {

@@ -3,7 +3,7 @@
         <div class="col">
             <div class="mb-1">
                 <ol class="breadcrumb" aria-label="breadcrumbs">
-                    <li class="breadcrumb-item"><a href="{{ route('index') }}">Accueil</a></li>
+                    <li class="breadcrumb-item"><a wire:navigate href="{{ route('index') }}">Accueil</a></li>
                     @isset($breadcrumbs)
                         @foreach ($breadcrumbs as $bread)
                             @if ($loop->last)

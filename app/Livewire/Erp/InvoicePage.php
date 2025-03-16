@@ -39,7 +39,7 @@ class InvoicePage extends Component
 
         $this->breadcrumbs = array(
             array('name' => 'Clients', 'route' => route('clients')),
-            array('name' => $this->devis->projet->client->name, 'route' => route('clients', ['client_id' => $this->devis->projet->client->id])),
+            array('name' => $this->devis->projet->client->name, 'route' => route('projets', ['client_id' => $this->devis->projet->client->id])),
             array('name' => $this->devis->projet->name, 'route' => route('projet', ['projet_id' => $this->devis->projet->id])),
             array('name' => "Devis", 'route' => route('invoice', ['invoice_id' => $this->devis->id])),
         );

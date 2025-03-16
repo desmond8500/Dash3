@@ -117,6 +117,15 @@ class TestPage extends Component
                 'link' => '',
                 'description' => 'Gestion des statuts dans des badges'
             ),
+            (object) array(
+                'id' => 10,
+                'name' => 'fabric',
+                'view' => 'test.fabric-test',
+                'class' => '',
+                'type' => 'livewire',
+                'link' => '',
+                'description' => 'Dessins graphiques'
+            ),
             // (object) array( 'id'=> 3, 'name' => 'Article card', 'view'=> '_card.articleCard'),
         );
     }

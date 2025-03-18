@@ -10,6 +10,7 @@ use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\PDFController;
 use Illuminate\Http\Request;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -38,19 +39,22 @@ Route::apiResource('v1/items', ItemsApiController::class);
 Route::resource('v1/providers', ProviderAPIController::class);
 Route::resource('v1/brands', BrandAPIController::class);
 
+Route::prefix('v1')->group(function () {
 // Devis
-Route::apiResource('v1/invoices', InvoiceAPIController::class);
-Route::post('v1/get_month_invoices', [InvoiceAPIController::class, 'get_month_invoices']);
-Route::post('v1/get_month_spents', [InvoiceAPIController::class, 'get_month_spents']);
+    Route::apiResource('invoices', InvoiceAPIController::class);
+    Route::post('get_month_invoices', [InvoiceAPIController::class, 'get_month_invoices']);
+    Route::post('get_month_spents', [InvoiceAPIController::class, 'get_month_spents']);
 
-// Facture
-Route::get('v1/factures', [FactureController::class, 'get_factures']);
-Route::get('/v1/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) {
-    return PDFController::facture_pdf($invoice_id, $type);
-})->name('facture_pdf_api');
-// Achats
-Route::get('v1/achats', [AchatController::class, 'get_achats']);
-// Transaction
-Route::get('v1/transactions', [TransactionController::class, 'get_transactions']);
+
+    // Facture
+    Route::get('factures', [FactureController::class, 'get_factures']);
+    Route::get('facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) {
+        return PDFController::facture_pdf($invoice_id, $type);
+    })->name('facture_pdf_api');
+    // Achats
+    Route::get('achats', [AchatController::class, 'get_achats']);
+    // Transaction
+    Route::get('transactions', [TransactionController::class, 'get_transactions']);
+});
 
 

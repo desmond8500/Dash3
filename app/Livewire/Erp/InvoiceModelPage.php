@@ -4,8 +4,11 @@ namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\InvoiceModelForm;
 use App\Livewire\Forms\InvoiceSystemForm;
+use App\Models\Article;
+use App\Models\Brand;
 use App\Models\InvoiceModel;
 use App\Models\InvoiceSystem;
+use App\Models\Provider;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,6 +17,14 @@ class InvoiceModelPage extends Component
     use WithPagination;
     public $breadcrumbs;
     protected $paginationTheme = 'bootstrap';
+
+    public $search;
+
+    public $brand_id;
+    public $provider_id;
+    public $priorite_id = 25;
+
+    public $priorites;
 
     public function mount(){
         $this->breadcrumbs = array(
@@ -25,7 +36,24 @@ class InvoiceModelPage extends Component
     {
         return view('livewire.erp.invoice-model-page',[
             'systems' => InvoiceSystem::all(),
+            'articles' => $this->get_articles(),
+            'providers' => Provider::all(),
+            'brands' => Brand::all(),
         ]);
+    }
+
+    function get_articles()
+    {
+        if ($this->brand_id) {
+            return Article::orderByDesc('id')->where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate(8);
+        }
+        if ($this->provider_id) {
+            return Article::orderByDesc('id')->where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate(8);
+        }
+        if ($this->priorite_id != 25) {
+            return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate(8);
+        }
+        return Article::orderByDesc('id')->articleSearch($this->search)->paginate(8);
     }
 
     // iNVOICE
@@ -81,5 +109,14 @@ class InvoiceModelPage extends Component
 
     function add_article(){
         $this->dispatch('open-addArticle');
+    }
+
+    public $row_tab = 1, $row_class = '';
+
+    // Systemes
+    public $selected_system;
+
+    function select_system($system_id){
+        $this->selected_system = InvoiceSystem::find($system_id);
     }
 }

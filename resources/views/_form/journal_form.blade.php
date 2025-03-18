@@ -44,6 +44,16 @@
         @error('journalForm.type') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
+    <div class="col-md-5 mb-3">
+        <label class="form-label">Projet</label>
+        <select class="form-select" wire:model="journalForm.projet_id">
+            @foreach ($projets as $projet)
+                <option value="{{ $projet->id }}">{{ $projet->name }}</option>
+            @endforeach
+        </select>
+        @error('journalForm.projet_id') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
     <div class="col-md-12 mb-3">
         <label class="form-label">
             <div class="d-flex justify-content-between align-items-center">

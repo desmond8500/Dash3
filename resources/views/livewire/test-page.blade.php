@@ -45,6 +45,7 @@
 
                             <div class="fw-bold">{{ $widget->name }}</div>
                             <div>{!! $widget->description !!}</div>
+                            <div class="muted">{{ $widget->view }}</div>
                         </a>
                     @endforeach
                 </div>

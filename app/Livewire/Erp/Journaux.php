@@ -3,7 +3,9 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\JournalForm;
+use App\Models\Client;
 use App\Models\Journal;
+use App\Models\Projet;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -13,10 +15,13 @@ use function Laravel\Prompts\search;
 class Journaux extends Component
 {
     public $projet_id;
+    public $projet;
     public $search;
 
     function mount($projet_id){
         $this->projet_id = $projet_id;
+        $this->projet = Projet::find($projet_id);
+
     }
 
     #[On('get-news')]
@@ -24,6 +29,7 @@ class Journaux extends Component
     {
         return view('livewire.erp.journaux',[
             'journaux' => $this->getJournaux(),
+            'projets' => $this->projet->client->projets,
         ]);
     }
 

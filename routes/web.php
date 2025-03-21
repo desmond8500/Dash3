@@ -13,6 +13,7 @@ use App\Livewire\Erp\ErpPage;
 use App\Livewire\Erp\FichesPage;
 use App\Livewire\Erp\FicheZonePage;
 use App\Livewire\Erp\FinancesPage;
+use App\Livewire\Erp\ForfaitsPage;
 use App\Livewire\Erp\InvoiceListPage;
 use App\Livewire\Erp\InvoiceModelPage;
 use App\Livewire\Erp\InvoicePage;
@@ -87,6 +88,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
 
     Route::post('invoice_import', [InvoiceController::class, 'import'])->name('invoice_import');
     Route::get('invoice_model', InvoiceModelPage::class)->name('invoice_model');
+    Route::get('forfaits', ForfaitsPage::class)->name('forfaits');
 
     // Documents
     Route::get('/documents', DocumentsPage::class)->name('documents');

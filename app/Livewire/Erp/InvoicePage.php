@@ -9,6 +9,7 @@ use App\Livewire\Forms\InvoiceRowForm;
 use App\Livewire\Forms\InvoiceSectionForm;
 use App\Models\Article;
 use App\Models\Brand;
+use App\Models\Forfait;
 use App\Models\Invoice;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
@@ -57,6 +58,7 @@ class InvoicePage extends Component
             'articles' => Article::search($this->search, 'designation')->paginate(9),
             'pvs' => Pv::where('invoice_id', $this->devis->id)->get(),
             'statuses' => InvoiceController::statut(),
+            'forfaits' => Forfait::all(),
         ]);
     }
 
@@ -138,6 +140,12 @@ class InvoicePage extends Component
     function designation($designation){
         $this->row_form->designation = $designation;
         $this->row_form->reference = $designation;
+    }
+    function forfait($id){
+        $forfait = Forfait::find($id);
+        $this->row_form->designation = $forfait->designation;
+        $this->row_form->reference = $forfait->description;
+        $this->row_form->prix = $forfait->price;
     }
     function prix($prix){
         $this->row_form->prix = $prix;

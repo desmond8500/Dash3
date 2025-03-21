@@ -180,6 +180,9 @@
                             <a class="dropdown-item" wire:click="designation('Main d\'oeuvre')"> </i> Main d'oeuvre</a>
                             <a class="dropdown-item" wire:click="designation('Forfait accessoires et main d\'oeuvre')"> </i> Forfait accessoires et main d'oeuvre</a>
                             <a class="dropdown-item" wire:click="designation('Forfait Accessoires')"> </i> Forfait Accessoires</a>
+                            @foreach ($forfaits as $forfait)
+                                <a class="dropdown-item" wire:click="forfait('{{ $forfait->id }}')"> </i>{{ $forfait->designation }}</a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="dropdown open mb-1">

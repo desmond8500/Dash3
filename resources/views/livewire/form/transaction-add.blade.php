@@ -3,13 +3,9 @@
         <i class='ti ti-plus'></i> Transaction
     </button>
 
-    @component('components.modal', ["id"=>'addTransaction', 'title' => 'Ajouter une transaction'])
+    @component('components.modal', ["id"=>'addTransaction', 'title' => 'Ajouter une transaction', "method"=>"store"])
         <form class="row" wire:submit="store">
             @include('_form.transaction_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-addTransaction', event => { window.$('#addTransaction').modal('show'); }) </script>
         <script> window.addEventListener('close-addTransaction', event => { window.$('#addTransaction').modal('hide'); }) </script>

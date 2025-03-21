@@ -145,16 +145,14 @@
             <script> window.addEventListener('close-addRow', event => { window.$('#addRow').modal('hide'); }) </script>
         @elseif($row_tab==3)
             <div class="row">
-                <div class="col-md-12 mb-3">
-                    <div class="card card-body card-active">
+                <div class="col-md-6">
+                    <div class="card card-body card-active mb-3">
                         <div class="d-flex justify-content-between">
                             <div>{{ $row_form->designation }}</div>
                             <div>{{ $row_form->prix }}</div>
                         </div>
-
                     </div>
-                </div>
-                <div class="col-md-7">
+
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label>Tarif</label>
@@ -171,7 +169,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="dropdown open mb-1">
                         <button class="btn btn-primary text-start w-100" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                             <i class="ti ti-chevron-down"></i> Désignation
@@ -203,7 +201,7 @@
                     </div>
                 </div>
 
-                <div class=" mb-3">
+                <div class="col-md-12 mb-3">
                     <div class="d-flex justify-content-between align-items-center">
                         <label class="form-label">Description</label>
                         <div class="dropdown open">

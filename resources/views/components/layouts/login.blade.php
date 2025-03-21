@@ -60,17 +60,11 @@
 
 <body>
     <!-- BEGIN DEMO THEME SCRIPT -->
-    <script src="./preview/js/demo-theme.min.js?1740838744"></script>
     <!-- END DEMO THEME SCRIPT -->
     <div class="page page-center">
         {{ $slot }}
     </div>
-    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="./dist/js/tabler.min.js?1740838744" defer></script>
-    <!-- END GLOBAL MANDATORY SCRIPTS -->
-    <!-- BEGIN DEMO SCRIPTS -->
-    <script src="./preview/js/demo.min.js?1740838744" defer></script>
-    <!-- END DEMO SCRIPTS -->
+
     <script defer
         src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
         integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="

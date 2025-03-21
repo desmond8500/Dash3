@@ -3,7 +3,7 @@
         <div class="col-lg">
             <div class="container-tight">
                 <div class="text-center mb-4">
-                    <img src="{{ asset(env('LOGO')) }}" alt="" class="avatar avatar-xl">
+                    <img src="{{ asset(env('LOGO')) }}" alt="L" class="avatar avatar-xl">
                 </div>
                 <div class="card card-md">
 

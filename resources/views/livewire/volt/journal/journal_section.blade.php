@@ -141,25 +141,17 @@ new class extends Component {
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'addJournalSection', 'title' => 'Ajouter une section'])
+    @component('components.modal', ["id"=>'addJournalSection', 'title' => 'Ajouter une section', 'method'=>"store"])
         <form class="row" wire:submit="store">
             @include('_form.journalSection_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-addJournalSection', event => { window.$('#addJournalSection').modal('show'); }) </script>
         <script> window.addEventListener('close-addJournalSection', event => { window.$('#addJournalSection').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editJournalSection', 'title' => 'Editer une section'])
+    @component('components.modal', ["id"=>'editJournalSection', 'title' => 'Editer une section', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.journalSection_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Modifier</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editJournalSection', event => { window.$('#editJournalSection').modal('show'); }) </script>
         <script> window.addEventListener('close-editJournalSection', event => { window.$('#editJournalSection').modal('hide'); }) </script>

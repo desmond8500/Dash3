@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('journal_id')->constrained();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->integer('order')->defaut(0);
             $table->timestamps();
         });

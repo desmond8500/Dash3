@@ -156,19 +156,13 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editJournal', 'title' => 'Editer un journal'])
+    @component('components.modal', ["id"=>'editJournal', 'title' => 'Editer un journal', 'method'=>'update_journal'])
         <form class="row" wire:submit="update_journal">
             @include('_form.journal_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editJournal', event => { window.$('#editJournal').modal('show'); }) </script>
         <script> window.addEventListener('close-editJournal', event => { window.$('#editJournal').modal('hide'); }) </script>
     @endcomponent
-
-
 
     @component('components.modal', ["id"=>'addTeam', 'title' => 'Ajouter un intervenant'])
         <form class="row" wire:submit="store_team">

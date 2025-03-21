@@ -37,6 +37,7 @@ class JournalPage extends Component
             'intervenants' => JournalIntervenant::where('journal_id', $this->journal->id)->get(),
             'tasks' => Task::where('journal_id', $this->journal->id)->get(),
             'achats' => Achat::where('journal_id', $this->journal->id)->get(),
+            'projets' => $this->journal->projet->client->projets,
         ]);
     }
 

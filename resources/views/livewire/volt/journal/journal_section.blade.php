@@ -15,14 +15,14 @@ new class extends Component {
 
     function mount($journal_id){
         $this->journal_id = $journal_id;
-        $this->order = JournalSection::count()+1;
+        $this->order = JournalSection::where('journal_id', $this->journal_id)->count()+1;
     }
 
 
     public function with(): array
     {
         return [
-            'sections' => JournalSection::paginate(10),
+            'sections' => JournalSection::where('journal_id', $this->journal_id)->paginate(10),
         ];
     }
 

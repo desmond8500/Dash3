@@ -9,6 +9,7 @@ use App\Http\Controllers\api\ProviderAPIController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
@@ -35,17 +36,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
 // Demo
 Route::get('demos', [DemoController::class, 'index'])->name('demos');
 // Articles
-Route::apiResource('v1/items', ItemsApiController::class);
-Route::resource('v1/providers', ProviderAPIController::class);
-Route::resource('v1/brands', BrandAPIController::class);
+Route::prefix('v1')->group(function () {
+    Route::apiResource('items', ItemsApiController::class);
+    Route::resource('providers', ProviderAPIController::class);
+    Route::resource('brands', BrandAPIController::class);
+});
 
 Route::prefix('v1')->group(function () {
-// Devis
+    // Devis
     Route::apiResource('invoices', InvoiceAPIController::class);
     Route::post('get_month_invoices', [InvoiceAPIController::class, 'get_month_invoices']);
     Route::post('get_month_spents', [InvoiceAPIController::class, 'get_month_spents']);
-
-
     // Facture
     Route::get('factures', [FactureController::class, 'get_factures']);
     Route::get('facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) {
@@ -55,6 +56,8 @@ Route::prefix('v1')->group(function () {
     Route::get('achats', [AchatController::class, 'get_achats']);
     // Transaction
     Route::get('transactions', [TransactionController::class, 'get_transactions']);
+    // Taches
+    Route::resource('tasks', TaskController::class);
 });
 
 

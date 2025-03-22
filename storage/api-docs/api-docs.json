@@ -229,6 +229,20 @@
                     }
                 }
             }
+        },
+        "/api/v1/tasks": {
+            "get": {
+                "tags": [
+                    "Taches"
+                ],
+                "summary": "Liste des taches",
+                "operationId": "4293c00a4cffdb881d9f6c2099875f96",
+                "responses": {
+                    "200": {
+                        "description": "Les taches ont été récupérés avec succès"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -259,6 +273,10 @@
         {
             "name": "Factures",
             "description": "Factures"
+        },
+        {
+            "name": "Taches",
+            "description": "Taches"
         }
     ]
 }

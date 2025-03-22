@@ -87,13 +87,9 @@
 
     <div style="color: black">
 
-        @component('components.modal', ["id"=>'register', 'title'=>' Inscription'])
+        @component('components.modal', ["id"=>'register', 'title'=>' Inscription', 'method'=>'register'])
         <form class="row" wire:submit="register">
             @include('_form.register_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
 
             <script> addEventListener('open-register', event => { window.$('#register').modal('show'); }) </script>
@@ -102,7 +98,7 @@
 
         @component('components.modal', ["id"=>'login', 'title'=>'Connexion', 'class'=>'modal-sm'])
 
-        @include('_form.login_form')
+            @include('_form.login_form')
 
             <script> addEventListener('open-login', event => { window.$('#login').modal('show'); }) </script>
             <script> addEventListener('close-login', event => { window.$('#login').modal('hide'); }) </script>

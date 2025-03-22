@@ -3,7 +3,7 @@
         <i class="ti ti-plus"></i>Devis
     </a>
 
-    @component('components.modal', ["id"=>'addInvoice', 'title'=>'Ajouter un devis'])
+    @component('components.modal', ["id"=>'addInvoice', 'title'=>'Ajouter un devis', 'method'=>'store'])
         <form class="row" wire:submit="store">
             @include('_form.invoice_form')
         </form>

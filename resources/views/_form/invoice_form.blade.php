@@ -89,9 +89,4 @@
         <textarea class="form-control" wire:model="invoice_form.note" placeholder="Notes du devis" data-bs-toggle="autosize"></textarea>
         @error('invoice_form.note') <span class="text-danger">{{ $message }}</span> @enderror
     </div>
-
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        <button type="submit" class="btn btn-primary">Valider</button>
-    </div>
 </div>

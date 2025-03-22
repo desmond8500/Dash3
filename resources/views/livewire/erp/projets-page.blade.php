@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'addProjet', 'title'=> 'Ajouter un projet'])
+    @component('components.modal', ["id"=>'addProjet', 'title'=> 'Ajouter un projet', 'method'=>'store'])
         <form class="row" wire:submit="store">
             @include('_form.projet_form')
         </form>
@@ -48,7 +48,7 @@
         <script> window.addEventListener('close-addProjet', event => { window.$('#addProjet').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editProjet', 'title'=> 'Editer un projet'])
+    @component('components.modal', ["id"=>'editProjet', 'title'=> 'Editer un projet', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.projet_form')
         </form>

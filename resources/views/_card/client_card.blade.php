@@ -3,7 +3,7 @@
     <div class="bg-{{ $client->type == 'Entreprise' ? "primary" : 'cyan' }} p-2 rounded">
         <div class="row ">
             <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}">
-                <img src="{{ $client->avatar ?? '' }}" alt="C" class="avatar p-1">
+                <img src="{{ $client->avatar ?? 'img/icons/user4.png' }}" alt="C" class="avatar p-1">
             </a>
             <a class="col cursor-pointer text-white" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}" style="text-decoration: none">
                 <div class="">{{ $client->type ?? 'Type' }}</div>
@@ -18,6 +18,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="triggerId">
                         <button class="dropdown-item" wire:click="edit('{{ $client->id ?? 1 }}')"> <i class="ti ti-edit"></i> Editer</button>
+                        <button class="dropdown-item text-danger" wire:click="delete('{{ $client->id ?? 1 }}')"> <i class="ti ti-trash"></i> Editer</button>
                         <button class="dropdown-item" wire:click="toggleFavorite('{{ $client->id }}')">
                             @if ($client->favorite)
                                 <div class="text-danger"><i class="ti ti-heart-filled"></i> Favoris</div>

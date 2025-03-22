@@ -1,7 +1,7 @@
 <div class="card p-2 border border-primary">
     <div class="row g-1">
         <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}" wire:navigate>
-            <img class="avatar " src="{{ asset($projet->client->avatar) }}" alt="A">
+            <img class="avatar " src="{{ asset($projet->client->avatar ?? 'img/icons/005-notebook.png') }}" alt="A">
         </a>
         <a class="col" href="{{ route('projet',['projet_id'=> $projet->id]) }}" style="text-decoration: none" wire:navigate>
             <div class="fw-bold">{{ $projet->name }}</div>
@@ -13,7 +13,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
                     <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')"> <i class="ti ti-edit me-2"></i> Editer</button>
-                    <button class="dropdown-item text-danger" wire:click="delete('{{ $projet->id }}')" wire:confirm='Etes vous sur de vouloir supprimer ce projet ?'> <i class="ti ti-trash me-2"></i> Supprimer</button>
+                    <button class="dropdown-item text-danger" type="button" wire:click="delete('{{ $projet->id }}')" wire:confirm='Etes vous sur de vouloir supprimer ce projet ?'> <i class="ti ti-trash me-2"></i> Supprimer</button>
                     <button class="dropdown-item" wire:click="toggleFavorite2('{{ $projet->id }}')">
                         @if ($projet->favorite)
                         <div class="text-danger"><i class="ti ti-heart-filled"></i> Favoris</div>

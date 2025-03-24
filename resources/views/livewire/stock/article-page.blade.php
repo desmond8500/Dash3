@@ -122,7 +122,7 @@
 
     </div>
 
-    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article', 'method'=>'update])
+    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.article_form')
         </form>

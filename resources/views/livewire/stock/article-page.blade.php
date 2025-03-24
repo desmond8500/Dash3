@@ -122,16 +122,9 @@
 
     </div>
 
-    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article'])
+    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article', 'method'=>'update])
         <form class="row" wire:submit="update">
             @include('_form.article_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger me-auto" wire:click='delete'>
-                    <i class="ti ti-trash"></i>
-                </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editArticle', event => { window.$('#editArticle').modal('show'); }) </script>
         <script> window.addEventListener('close-editArticle', event => { window.$('#editArticle').modal('hide'); }) </script>

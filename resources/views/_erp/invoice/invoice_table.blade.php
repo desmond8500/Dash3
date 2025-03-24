@@ -9,7 +9,7 @@
         </div>
         <div class="card-actions">
             <div class="mb-1">
-                @component('components.status',['status'=>$devis->statut, 'invoice_id'=> $devis->id, 'statuses'=>$statuses, 'type'=> "badge bg"])
+                @component('components.status',['status'=>$devis->statut, 'invoice_id'=> $devis->id, 'statuses'=>$statuses, 'type'=> "badge text-white bg"])
 
                 @endcomponent
             </div>

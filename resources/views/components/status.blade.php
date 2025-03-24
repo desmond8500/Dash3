@@ -12,8 +12,23 @@
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>
-            @elseif ($status=="En pause")
-            <div class="status">
+            @elseif ($status=="En Pause")
+            <div class="{{ $type ?? 'status status' }}-danger"">
+                <span class="status-dot"></span>
+                {{ $status }}
+            </div>
+            @elseif ($status=="Annulé")
+            <div class="{{ $type ?? 'status status' }}-vk">
+                <span class="status-dot"></span>
+                {{ $status }}
+            </div>
+            @elseif ($status=="Bl a faire")
+            <div class="{{ $type ?? 'status status' }}-blue">
+                <span class="status-dot"></span>
+                {{ $status }}
+            </div>
+            @elseif ($status=="A Facturer")
+            <div class="{{ $type ?? 'status status' }}-rss">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>

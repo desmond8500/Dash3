@@ -42,13 +42,9 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'addFacture', 'title' => 'Ajouter une facture'])
+    @component('components.modal', ["id"=>'addFacture', 'title' => 'Ajouter une facture','method'=>'store'])
     <form class="row" wire:submit="store">
         @include('_form.facture_form')
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn btn-primary">Valider</button>
-        </div>
     </form>
     <script>
         window.addEventListener('open-addFacture', event => { window.$('#addFacture').modal('show'); })
@@ -58,13 +54,9 @@
     </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editFacture', 'title' => 'Editer une facture'])
+    @component('components.modal', ["id"=>'editFacture', 'title' => 'Editer une facture', 'method'=>'update'])
     <form class="row" wire:submit="update">
         @include('_form.facture_form')
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn btn-primary">Valider</button>
-        </div>
     </form>
     <script>
         window.addEventListener('open-editFacture', event => { window.$('#editFacture').modal('show'); })

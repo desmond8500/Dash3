@@ -56,25 +56,17 @@
         </table>
     </div>
 
-    @component('components.modal', ["id"=>'add-invoiceSpent', 'title' => 'Ajouter une dépense'])
+    @component('components.modal', ["id"=>'add-invoiceSpent', 'title' => 'Ajouter une dépense', 'method'=>'store'])
     <form class="row" wire:submit="store">
         @include('_form.spent_form')
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn btn-primary">Valider</button>
-        </div>
     </form>
     <script> window.addEventListener('open-add-invoiceSpent', event => { window.$('#add-invoiceSpent').modal('show'); }) </script>
     <script> window.addEventListener('close-add-invoiceSpent', event => { window.$('#add-invoiceSpent').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'edit-invoiceSpent', 'title' => 'Editer une dépense'])
+    @component('components.modal', ["id"=>'edit-invoiceSpent', 'title' => 'Editer une dépense', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.spent_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-edit-invoiceSpent', event => { window.$('#edit-invoiceSpent').modal('show'); }) </script>
         <script> window.addEventListener('close-edit-invoiceSpent', event => { window.$('#edit-invoiceSpent').modal('hide'); }) </script>

@@ -60,7 +60,7 @@
     </div>
 
     {{-- Invoice --}}
-    @component('components.modal', ["id"=>'editInvoice', 'title'=>'Editer un devis'])
+    @component('components.modal', ["id"=>'editInvoice', 'title'=>'Editer un devis', 'method'=>'update_invoice'])
         <form class="row" wire:submit="update_invoice">
             @include('_form.invoice_form')
         </form>

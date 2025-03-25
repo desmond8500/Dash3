@@ -4,9 +4,12 @@ namespace App\Livewire\Layout;
 
 use App\Livewire\Forms\UserForm;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Navbar extends Component
 {
+    use WithFileUploads;
+
     public $menu1 = array(
         array('name' => "ERP", "icon" => "users", "can"=>"erp",
             'submenu' => [

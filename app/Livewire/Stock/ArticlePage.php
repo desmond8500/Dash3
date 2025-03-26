@@ -77,4 +77,8 @@ class ArticlePage extends Component
     function unset_image($image){
         unlink("storage/$image");
     }
+
+    function add_tva(){
+        $this->article_form->price = $this->article_form->price * 1.18;
+    }
 }

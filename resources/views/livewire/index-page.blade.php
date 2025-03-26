@@ -28,7 +28,7 @@
             @foreach ($resumes as $resume)
                 <a class="col-md-3 col-6" href="{{ $resume->route }}" wire:navigate>
                     <div class="card p-2">
-                        <div class="row g-1 align-items-center">
+                        <div class="row g-1 align-items-center ">
                             <div class="col-auto">
                                 <span class="bg-blue text-white avatar">
                                     <i class="ti ti-{{ $resume->icon }}"></i>

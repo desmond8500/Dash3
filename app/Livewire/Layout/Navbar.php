@@ -17,11 +17,11 @@ class Navbar extends Component
                 array('name' => "Modèle de devis", "route" => "invoice_model", "icon" => "file"),
                 array('name' => "Documents", "route" => "documents", "icon" => "file"),
                 array('name' => "Devis", "route" => "invoicelist", "icon" => "file"),
-                array('name' => "Système", "route" => "systemes", "icon" => "hammer"),
+                array('name' => "Système", "route" => "systemes", "icon" => "settings"),
                 array('name' => "Journaux", "route" => "journaux", "icon" =>"article", "can" => "journaux"),
                 array('name' => "Finances", "route" => "finances", "icon" => "coins", "can" => "finances"),
-                array('name' => "Equipe", "route" => "team", "icon" => "coins", "can" => ""),
-                array('name' => "Forfaits", "route" => "forfaits", "icon" => "reciept", "can" => ""),
+                array('name' => "Equipe", "route" => "team", "icon" => "users", "can" => ""),
+                array('name' => "Forfaits", "route" => "forfaits", "icon" => "receipt", "can" => ""),
             ]
         ),
         array('name' => "Stock", "icon" => "packages", "can"=> "stock",
@@ -34,7 +34,7 @@ class Navbar extends Component
             ]
         ),
         array('name' => "Test", "route" => "test", "icon" => "hammer", "can"=> "test"),
-        array('name' => "Medias", "icon" => "hammer", "can"=> "medias",
+        array('name' => "Medias", "icon" => "photo", "can"=> "medias",
             'submenu' => [
                 array('name' => "Images", "route" => "images", "icon" => "photo"),
                 array('name' => "Vidéos", "route" => "videos", "icon" => "video"),

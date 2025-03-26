@@ -78,6 +78,7 @@
                                 <th>Description</th>
                                 <th style="width: 120px">statut</th>
                                 <th class="text-end" style="width: 130px">Total</th>
+                                <th class="text-center" style="width: 10px"></th>
                             </tr>
                         </thead>
                         @endif
@@ -90,13 +91,28 @@
                                         {{ ucfirst($invoice->reference) }}
                                     </a>
                                 </td>
-                                <td>{{ $invoice->description }}</td>
+                                <td>
+                                    {{ $invoice->description }}
+                                </td>
                                 <td>
                                     @component('components.status',['status'=>$invoice->statut, 'invoice_id'=> $invoice->id, 'statuses'=>$statuses])
 
                                     @endcomponent
                                 </td>
-                                <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</td>
+                                <td class="text-end">
+                                    <div>{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</div>
+                                    <div class="text-muted">{{ $invoice->formatDate($invoice->created_at) }}</div>
+                                </td>
+                                <td>
+                                    <div class="dropdown open">
+                                        <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            <i class="ti ti-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" wire:click="dupliquer('{{ $invoice->id }}')"> <i class="ti ti-copy"></i> Dupliquer</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

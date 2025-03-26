@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Http\Controllers\ErpController;
 use App\Models\Invoice;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
@@ -22,9 +23,9 @@ class InvoiceForm extends Form
     public $modalite;
     public $note;
     #[Validate('required')]
-    public $statut;
-    public $tax;
-    public $remise;
+    public $statut='Nouveau';
+    public $tax=0;
+    public $remise=0;
     public $favorite = 0;
     public $image;
     public $facture_date;
@@ -33,6 +34,25 @@ class InvoiceForm extends Form
     function store(){
         $this->validate();
         Invoice::create($this->all());
+    }
+
+    function replicate($invoice_id){
+        $invoice = Invoice::find($invoice_id);
+        $new_invoice = $invoice->replicate();
+        $new_invoice->reference = ErpController::getInvoiceReference($invoice->projet);
+        $new_invoice->save();
+
+        foreach ($invoice->invoiceSection as $section) {
+            $new_section = $section->replicate();
+            $new_section->invoice_id = $new_invoice->id;
+            $new_section->save();
+
+            foreach ($section->invoiceRow as $row) {
+                $new_row = $row->replicate();
+                $new_row->invoice_section_id = $new_section->id;
+                $new_row->save();
+            }
+        }
     }
 
     function set($model_id){

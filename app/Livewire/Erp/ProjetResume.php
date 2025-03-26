@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Http\Controllers\InvoiceController;
+use App\Livewire\Forms\InvoiceForm;
 use App\Livewire\Forms\projetForm;
 use App\Models\Building;
 use App\Models\Invoice;
@@ -36,6 +37,7 @@ class ProjetResume extends Component
 
     // Projets
     public projetForm $projetForm;
+    public InvoiceForm $invoiceForm;
 
     function edit()
     {
@@ -54,5 +56,9 @@ class ProjetResume extends Component
         $invoice = Invoice::find($invoice_id);
         $invoice->statut = $status;
         $invoice->save();
+    }
+
+    function dupliquer($invoice_id){
+        $this->invoiceForm->replicate($invoice_id);
     }
 }

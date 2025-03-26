@@ -63,7 +63,9 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="text-end mt-2" style="font-size: 20px" data-bs-toggle="tooltip" title="Quantité">{{ $article->quantity }}</div>
+                    <div class="me-2">
+                        <div class="text-end mt-2" style="font-size: 20px" data-bs-toggle="tooltip" title="Quantité">{{ $article->quantity }}</div>
+                    </div>
                 </div>
             </div>
 

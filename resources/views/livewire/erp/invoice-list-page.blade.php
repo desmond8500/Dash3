@@ -1,5 +1,5 @@
 <div>
-    @component('components.layouts.page-header', ['title'=>'Achats', 'breadcrumbs'=>$breadcrumbs])
+    @component('components.layouts.page-header', ['title'=>'Liste des devis', 'breadcrumbs'=>$breadcrumbs])
 
     @endcomponent
 
@@ -14,15 +14,16 @@
             @foreach ($invoices->sortByDesc('created_at') as $invoice)
                 <div class="mb-1">
                     @include('_card.invoice_card')
-
                 </div>
             @endforeach
-            <div>
-                {{ $invoices->links() }}
-            </div>
+
         </div>
         <div class="col-md-8">
 
+        </div>
+
+        <div class="col-md-12">
+            {{ $invoices->links() }}
         </div>
     </div>
 

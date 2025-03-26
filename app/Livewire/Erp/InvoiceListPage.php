@@ -24,7 +24,7 @@ class InvoiceListPage extends Component
     public function render()
     {
         return view('livewire.erp.invoice-list-page',[
-            'invoices' => Invoice::orderByDesc('created_at')->search($this->search,'reference')->paginate(6),
+            'invoices' => Invoice::orderByDesc('created_at')->search($this->search,'reference')->paginate(5),
             'statuses' => InvoiceController::statut(),
         ]);
     }

@@ -234,4 +234,34 @@
             </div>
         </div>
     </div>
+    <div>
+        @component('components.modal', ["id"=>'register', 'title'=>'Inscription'])
+        <form class="row" wire:submit="register">
+            @include('_form.register_form')
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+
+        <script>
+            window.addEventListener('open-register', event => { window.$('#register').modal('show'); })
+        </script>
+        <script>
+            window.addEventListener('close-register', event => { window.$('#register').modal('hide'); })
+        </script>
+        @endcomponent
+
+        @component('components.modal', ["id"=>'login', 'title'=>'Connexion', 'class'=>'modal-sm'])
+
+        @include('_form.login_form')
+
+        <script>
+            window.addEventListener('open-login', event => { window.$('#login').modal('show'); })
+        </script>
+        <script>
+            window.addEventListener('close-login', event => { window.$('#login').modal('hide'); })
+        </script>
+        @endcomponent
+    </div>
 </header>

@@ -27,4 +27,8 @@ class AddArticleLink extends Component
         $this->dispatch('get-article-links');
     }
 
+    function set_name($name){
+        $this->article_link_form->name = $name;
+    }
+
 }

@@ -29,18 +29,18 @@ class ArticleDocuments extends Component
     function edit($id)
     {
         $this->article_document_form->set($id);
-        $this->dispatch('open-editArticleLink');
+        $this->dispatch('open-editArticleDocument');
     }
 
-    function update($id)
+    function update()
     {
         $this->article_document_form->update();
-        $this->dispatch('close-editArticleLink');
+        $this->dispatch('close-editArticleDocument');
     }
 
     function delete()
     {
         $this->article_document_form->delete();
-        $this->dispatch('close-editArticleLink');
+        $this->dispatch('close-editArticleDocument');
     }
 }

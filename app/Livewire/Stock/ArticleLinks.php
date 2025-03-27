@@ -30,7 +30,7 @@ class ArticleLinks extends Component
         $this->dispatch('open-editArticleLink');
     }
 
-    function update($id)
+    function update()
     {
         $this->article_link_form->update();
         $this->dispatch('close-editArticleLink');
@@ -40,5 +40,10 @@ class ArticleLinks extends Component
     {
         $this->article_link_form->delete();
         $this->dispatch('close-editArticleLink');
+    }
+
+    function set_name($name)
+    {
+        $this->article_link_form->name = $name;
     }
 }

@@ -26,6 +26,12 @@
         <div class="col-md-8">
             @if ($q_selected)
                 <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Quantitatif</div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" >Button</button>
+                        </div>
+                    </div>
                     <table class="table table-hover">
                         <thead class="sticky-top">
                             <tr>

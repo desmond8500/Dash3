@@ -2,10 +2,8 @@
 
 namespace App\Livewire\Erp;
 
-use App\Livewire\Forms\QuantitatifForm;
-use App\Livewire\Forms\QuantitatifRowForm;
 use App\Models\Building;
-use App\Models\Invoice;
+use App\Models\Device;
 use App\Models\Quantitatif;
 use App\Models\QuantitatifRow;
 use Livewire\Attributes\On;
@@ -46,5 +44,34 @@ class BuildingQuantitatif extends Component
         $row = QuantitatifRow::find($row_id);
         $row->quantite--;
         $row->save();
+    }
+    function sync_devices($row_id){
+        $row = QuantitatifRow::find($row_id);
+
+        if ($row->devices->count() < $row->quantite) {
+            for ($i = $row->devices->count(); $i < $row->quantite; $i++) {
+                Device::create([
+                    'quantitatif_row_id' => $row->id,
+                    'article_id' => $row->article_id ?? null,
+                    'designation' => $row->article->designation ?? null,
+                    'reference' => $row->article->reference ?? null,
+                    // 'type' => $row->article->type,
+                    'icon' => $row->article->icon ?? "circle",
+                    'description' => $row->description ?? null,
+                ]);
+            }
+        } elseif ($row->devices->count() > $row->quantite) {
+            for ($i = $row->devices>count(); $i > $row->quantite; $i--) {
+                $device = $row->devices->last();
+                $device->delete();
+            }
+        }
+    }
+
+    public $selected_device;
+
+    function show_device($device_id){
+        $this->selected_device = Device::find($device_id);
+        $this->dispatch('open-showDevice');
     }
 }

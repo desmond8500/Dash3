@@ -11,7 +11,6 @@ use App\Http\Controllers\DemoController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
-use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

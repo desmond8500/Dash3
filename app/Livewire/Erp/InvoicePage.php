@@ -11,14 +11,17 @@ use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Forfait;
 use App\Models\Invoice;
+use App\Models\InvoiceModel;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
+use App\Models\InvoiceSystem;
 use App\Models\Projet;
 use App\Models\Provider;
 use App\Models\Pv;
 use App\Models\Systeme;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -52,13 +55,15 @@ class InvoicePage extends Component
     {
         return view('livewire.erp.invoice-page',[
             'sections' => $this->getSections(),
-            'systems' => Systeme::all(),
+            // 'systems' => Systeme::all(),
+            'systems' => InvoiceSystem::all(),
             'providers' => Provider::all(),
             'brands' => Brand::all(),
             'articles' => Article::search($this->search, 'designation')->paginate(9),
             'pvs' => Pv::where('invoice_id', $this->devis->id)->get(),
             'statuses' => InvoiceController::statut(),
             'forfaits' => Forfait::all(),
+            'models' => InvoiceModel::all(),
         ]);
     }
 
@@ -90,13 +95,14 @@ class InvoicePage extends Component
 
     function section_generate($name)
     {
-        InvoiceSection::create([
+        $section = InvoiceSection::create([
             'invoice_id' => $this->devis->id,
             'section' => $name,
             'ordre' => $this->section_form->ordre,
         ]);
 
         $this->dispatch('close-addSection');
+        return $section;
     }
 
     function edit_section($section_id){
@@ -286,5 +292,35 @@ class InvoicePage extends Component
     {
         $this->devis->statut = $status;
         $this->devis->save();
+    }
+
+    public $section_system_select;
+
+    function section_show($invoice_system_id){
+        $this->section_system_select = InvoiceSystem::find($invoice_system_id);
+        $this->dispatch('open-selectSectionModel');
+    }
+
+    function section_model_add($section_model_id, $section_id=0){
+        if(!$section_id){
+            $section_id = InvoiceSection::count()+1;
+        }
+        $invoice_model = InvoiceModel::find($section_model_id);
+        $section = $this->section_generate($invoice_model->name);
+
+        foreach ($invoice_model->rows as $row) {
+            InvoiceRow::create([
+                'invoice_section_id' => $section->id ,
+                'article_id' => $row->article_id,
+                'designation' => $row->designation,
+                'coef' => $row->coef,
+                'reference' => $row->reference,
+                'prix' => $row->prix,
+                'quantite' => $row->quantite,
+                'priorite_id' => $row->priorite_id,
+            ]);
+        }
+
+        $this->dispatch('open-selectSectionModel');
     }
 }

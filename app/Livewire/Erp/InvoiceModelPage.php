@@ -3,12 +3,16 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\InvoiceModelForm;
+use App\Livewire\Forms\InvoiceModelRowForm;
 use App\Livewire\Forms\InvoiceSystemForm;
 use App\Models\Article;
 use App\Models\Brand;
+use App\Models\Invoice;
 use App\Models\InvoiceModel;
+use App\Models\InvoiceModelRow;
 use App\Models\InvoiceSystem;
 use App\Models\Provider;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -100,6 +104,7 @@ class InvoiceModelPage extends Component
         $this->dispatch('close-editModel');
     }
 
+    #[Session]
     public $selected_model;
     function select_model($id){
         $this->selected_model = InvoiceModel::find($id);
@@ -111,9 +116,59 @@ class InvoiceModelPage extends Component
         $this->dispatch('open-addArticle');
     }
 
+    public InvoiceModelRowForm $row_form;
+    function store_article($article_id){
+        $this->row_form->article_id = $article_id;
+        $this->row_form->invoice_model_id = $this->selected_model->id;
+
+        $article = Article::find($article_id);
+
+        $this->row_form->priorite_id = $article->priority_id;
+        $this->row_form->designation = $article->designation;
+        $this->row_form->reference = $article->reference;
+        // $this->row_form->coef = $article->coef;
+        $this->row_form->prix = $article->price;
+
+        $this->row_form->store();
+
+        $this->dispatch('close-addArticle');
+    }
+
+    function store_custom_article($designation){
+        InvoiceModelRow::create([
+            'invoice_model_id' => $this->selected_model->id,
+            'article_id' => 0,
+            'designation' => $designation,
+            'prix' => 0,
+            'quantite' => 1,
+            'coef' => 1,
+            'priorite_id' => 7,
+        ]);
+    }
+
+    public $selected_row;
+    function edit_row($invoice_model_row_id)
+    {
+        $this->row_form->set($invoice_model_row_id);
+        $this->dispatch('open-editRow');
+    }
+
+    function update_row()
+    {
+        $this->row_form->update();
+        $this->dispatch('close-editRow');
+    }
+
+    function delete_row($invoice_model_row_id)
+    {
+        $row = InvoiceModelRow::find($invoice_model_row_id);
+        $row->delete();
+    }
+
     public $row_tab = 1, $row_class = '';
 
     // Systemes
+    #[Session]
     public $selected_system;
 
     function select_system($system_id){

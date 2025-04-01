@@ -43,13 +43,20 @@
         </select>
         @error('row_form.priorite_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
-        <label class="form-label">Section</label>
-        <select class="form-control" wire:model="row_form.invoice_section_id">
-            @foreach ($sections as $section)
-                <option value="{{ $section->id }}">{{ $section->section }}</option>
-            @endforeach
-        </select>
-        @error('row_form.invoice_section_id') <span class='text-danger'>{{ $message }}</span> @enderror
+        <label class="form-label">ID Article</label>
+        <input type="text" class="form-control" wire:model="row_form.article_id" placeholder="Identifiant de l'article">
+        @error('row_form.article_id') <span class='text-danger'>{{ $message }}</span> @enderror
+
+        @if(!$nosection)
+            <label class="form-label">Section</label>
+            <select class="form-control" wire:model="row_form.invoice_section_id">
+                @foreach ($sections as $section)
+                    <option value="{{ $section->id }}">{{ $section->section }}</option>
+                @endforeach
+            </select>
+            @error('row_form.invoice_section_id') <span class='text-danger'>{{ $message }}</span> @enderror
+
+        @endif
     </div>
 
 </div>

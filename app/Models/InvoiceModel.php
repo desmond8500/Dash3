@@ -20,4 +20,9 @@ class InvoiceModel extends Model
     {
         return $this->belongsTo(InvoiceSystem::class, 'invoice_system_id');
     }
+
+    public function rows()
+    {
+        return $this->hasMany(InvoiceModelRow::class, 'invoice_model_id');
+    }
 }

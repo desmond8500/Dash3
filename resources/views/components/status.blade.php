@@ -3,42 +3,42 @@
         <div type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 
         @if ($status=="Nouveau")
-            <div class="{{ $type ?? 'status status' }}-primary">
+            <div class="{{ $type ?? 'status status' }}-primary w-100">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>
             @elseif ($status=="En Cours")
-            <div class="{{ $type ?? 'status status' }}-warning">
+            <div class="{{ $type ?? 'status status' }}-warning w-100">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>
             @elseif ($status=="En Pause")
-            <div class="{{ $type ?? 'status status' }}-danger"">
+            <div class="{{ $type ?? 'status status' }}-danger w-100">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>
             @elseif ($status=="Annulé")
-            <div class="{{ $type ?? 'status status' }}-vk">
+            <div class="{{ $type ?? 'status status' }}-vk w-100">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>
             @elseif ($status=="Bl a faire")
-            <div class="{{ $type ?? 'status status' }}-blue">
+            <div class="{{ $type ?? 'status status' }}-blue w-100">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>
             @elseif ($status=="A Facturer")
-            <div class="{{ $type ?? 'status status' }}-rss">
+            <div class="{{ $type ?? 'status status' }}-rss w-100">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>
             @elseif ($status=="Terminé")
-            <div class="{{ $type ?? 'status status' }}-success">
+            <div class="{{ $type ?? 'status status' }}-success w-100">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>
             @elseif ($status=="Proforma")
-            <div class="{{ $type ?? 'status status' }}-purple">
+            <div class="{{ $type ?? 'status status' }}-purple w-100">
                 <span class="status-dot"></span>
                 {{ $status }}
             </div>

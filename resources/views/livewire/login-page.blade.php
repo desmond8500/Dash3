@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="text-center text-secondary mt-3">Avez vous un compte ? <a href="./sign-up.html"
-                        tabindex="-1">S'incrire</a></div>
+                        tabindex="-1">S'inscrire</a></div>
             </div>
         </div>
         <div class="col-lg d-none d-lg-block">

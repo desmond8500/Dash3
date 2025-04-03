@@ -105,7 +105,7 @@
 
             <tbody style="font-size: 13px;">
 
-                @foreach ($section->rows as $row)
+                @foreach ($section->rows->sortBy('priorite_id') as $row)
                     @php
                         $total += $row->quantite*$row->prix;
                         $total_marge += $row->quantite*$row->coef*$row->prix;

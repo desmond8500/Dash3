@@ -83,8 +83,16 @@
             <div class="row g-2">
                 <div class="col-md-5">
                         @foreach ($systems as $system)
-                            <button class="btn btn-primary mb-1 w-100" wire:click="section_show('{{ $system->id }}')">{{ $system->name }}</button>
-                            {{-- <button class="btn btn-primary mb-1" wire:click="section_generate('{{ $system->name }}')">{{ $system->name }}</button> --}}
+                            <div class="row g-1">
+                                <div class="col">
+                                    <button class="btn btn-primary mb-1 w-100" wire:click="section_show('{{ $system->id }}')">{{ $system->name }}</button>
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-primary btn-icon mb-1" wire:click="section_generate('{{ $system->name }}')">
+                                        <i class="ti ti-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
                         @endforeach
                     </div>
                     <div class="col-md-7">

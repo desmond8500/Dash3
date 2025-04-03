@@ -26,8 +26,11 @@
                     <div class="card-header">
                         <div class="card-title">{{ $selected_system->name }}</div>
                         <div class="card-actions">
-                            <button class="btn btn-primary" wire:click="add_model('{{ $selected_system->id }}')">
-                                <i class="ti ti-plus"></i> Modèle
+                            <button class="btn btn-primary btn-icon" wire:click="add_model('{{ $selected_system->id }}')">
+                                <i class="ti ti-plus"></i>
+                            </button>
+                            <button class="btn btn-primary btn-icon" wire:click="edit_system('{{ $selected_system->id }}')">
+                                <i class="ti ti-edit"></i>
                             </button>
                         </div>
                     </div>

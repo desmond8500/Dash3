@@ -22,12 +22,14 @@ class ContactForm extends Form
     public $avatar;
     public $phone;
     public $email;
+    public $societe;
 
     function fix(){
         $this->firstname = ucfirst($this->firstname);
         $this->lastname = ucfirst($this->lastname);
         $this->fonction = ucfirst($this->fonction);
         $this->avatar = ucfirst($this->avatar);
+        $this->societe = ucfirst($this->societe);
     }
 
     function store(){
@@ -51,7 +53,7 @@ class ContactForm extends Form
         }
 
 
-        $this->reset('firstname', 'lastname', 'fonction', 'avatar');
+        $this->reset('firstname', 'lastname', 'fonction', 'avatar', 'phone', 'email', 'societe');
     }
 
     function set($model_id){
@@ -64,6 +66,7 @@ class ContactForm extends Form
         $this->client_id = $this->contact->client_id;
         $this->phone = $this->contact->phone;
         $this->email = $this->contact->email;
+        $this->societe = $this->contact->societe;
     }
 
     function update(){

@@ -4,15 +4,14 @@
             <div class="col-auto">
                 @if ($contact->photo)
                     <img src="{{ asset($contact->photo) }}" alt="A" class="avatar avatar-md">
-
                 @else
                     <img src="{{ asset("img/icons/user1.png") }}" style="height: 64px; width: 64px" alt="A" class="">
-
                 @endif
             </div>
             <div class="col">
                 <div class="">{{ $contact->firstname }} <b>{{ strtoupper($contact->lastname) }}</b></div>
                 <div class="text-primary">{{ $contact->fonction }}</div>
+                <div class="text-purple">{{ $contact->societe }}</div>
                 <div class="d-flex justify-content-between align-items-center mt-1">
                     @if ($contact->phone)
                     <div class="d-flex align-items-center">

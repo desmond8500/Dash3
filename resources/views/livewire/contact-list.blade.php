@@ -24,7 +24,7 @@
         @endforeach
     </div>
 
-    @component('components.modal', ["id"=>'editContact', 'title' => 'Titre', 'method'="update"])
+    @component('components.modal', ["id"=>'editContact', 'title' => 'Titre', 'method'=>"update"])
         <form class="row" wire:submit="update">
             @include('_form.contact_form')
         </form>

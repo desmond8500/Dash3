@@ -32,6 +32,11 @@
     <input type="text" class="form-control" wire:model="contact_form.fonction" placeholder="Fonction">
     @error('contact_form.fonction') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
+<div class="col-md-6 mb-3">
+    <label class="form-label">Societe</label>
+    <input type="text" class="form-control" wire:model="contact_form.societe" placeholder="Entreprise">
+    @error('contact_form.societe') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
 <div class="w-100"></div>
 <div class="col-md-6 mb-3">
     <label class="form-label">Téléphone</label>

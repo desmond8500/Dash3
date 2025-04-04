@@ -24,13 +24,9 @@
         @endforeach
     </div>
 
-    @component('components.modal', ["id"=>'editContact', 'title' => 'Titre'])
+    @component('components.modal', ["id"=>'editContact', 'title' => 'Titre', 'method'="update"])
         <form class="row" wire:submit="update">
             @include('_form.contact_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editContact', event => { window.$('#editContact').modal('show'); }) </script>
         <script> window.addEventListener('close-editContact', event => { window.$('#editContact').modal('hide'); }) </script>

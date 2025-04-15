@@ -6,7 +6,7 @@
 
     <div class=" mb-3">
         <label class="form-label">Email</label>
-        <input type="text" class="form-control" wire:model="email" placeholder="Email">
+        <input type="email" class="form-control" wire:model="email" placeholder="Email">
         @error('email') <span class="text-danger">{{ $message }}</span> @enderror
     </div>
 

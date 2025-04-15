@@ -71,4 +71,8 @@ class ProjetPage extends Component
 
     public projetForm $projetForm;
 
+    function favorite(){
+        $this->projetForm->favorite();
+    }
+
 }

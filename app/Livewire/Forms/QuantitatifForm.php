@@ -15,6 +15,7 @@ class QuantitatifForm extends Form
     #[Rule('required')]
     public $buiding_id;
     public $devis_id;
+    #[Rule('required')]
     public $name;
 
     function fix(){

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\QuantitatifForm;
 use App\Models\Building;
 use App\Models\Device;
 use App\Models\Quantitatif;
@@ -73,5 +74,27 @@ class BuildingQuantitatif extends Component
     function show_device($device_id){
         $this->selected_device = Device::find($device_id);
         $this->dispatch('open-showDevice');
+    }
+
+
+    // Quantitatif
+    public $quantitatif_name;
+    public QuantitatifForm $q_row;
+
+    function editQuantitatif($quantitatif_id)
+    {
+        $this->q_row->set($quantitatif_id);
+        $this->dispatch('open-editQuantitatif');
+    }
+
+    function update_quantitatif()
+    {
+        $this->q_row->update();
+        $this->dispatch('close-editQuantitatif');
+    }
+    function deleteQuantitatif()
+    {
+        $this->q_row->delete();
+        // $this->dispatch('get-quantitatif');
     }
 }

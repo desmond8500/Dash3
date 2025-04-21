@@ -1,5 +1,5 @@
 <div class="row">
-   <div class="col-md mb-3">
+   <div class="col mb-3">
        <label class="form-label">Nom de la tache</label>
        <input type="text" class="form-control" wire:model="form.name" placeholder="Nom">
        @error('form.name') <span class='text-danger'>{{ $message }}</span> @enderror
@@ -22,7 +22,7 @@
 
    <div class="w-100"></div>
 
-   <div class="col-md-4 mb-3">
+   <div class="col-xs-6 col-md-4 mb-3">
        <label class="form-label">Status</label>
        <select class="form-control" wire:model="form.statut_id">
            @foreach ($statuses as $status)
@@ -31,7 +31,7 @@
        </select>
        @error('form.status_id') <span class='text-danger'>{{ $message }}</span> @enderror
    </div>
-   <div class="col-md-4 mb-3">
+   <div class="col-xs-6 col-md-4 mb-3">
        <label class="form-label">Priorité</label>
        <select class="form-control" wire:model="form.priority_id">
             @foreach ($priorities as $priority)

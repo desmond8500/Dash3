@@ -9,6 +9,30 @@
 
 
         <section class="col-md-8">
+
+            <div class="mb-3" wire:ignore:self>
+                <label for="" class="form-label"></label>
+                <textarea class="form-control" name="" id="" rows="3" data-bs-toggle="autosize"></textarea>
+            </div>
+
+            <div wire:ignore:self>
+                <textarea id="autosizeTextarea" wire:model.defer="content" class="form-control"></textarea>
+            </div>
+
+            <script>
+                document.addEventListener('livewire:load', function () {
+                    // Appliquer Autosize à tous les <textarea> nécessaires
+                    autosize(document.querySelectorAll('textarea'));
+
+                    // Réappliquer Autosize après chaque mise à jour Livewire
+                    Livewire.hook('message.processed', () => {
+                        autosize(document.querySelectorAll('textarea'));
+                    });
+                });
+            </script>
+
+
+
             <div class="row">
                 @foreach ($widgets as $widget)
                 @if ($widget->type == "include")
@@ -56,4 +80,7 @@
         </nav>
 
     </div>
+
+
+
 </div>

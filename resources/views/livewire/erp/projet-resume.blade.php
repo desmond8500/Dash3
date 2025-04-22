@@ -19,7 +19,14 @@
                             <i class="ti ti-dots-vertical"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="triggerId">
-                            <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')">Editer</button>
+                            <button class="dropdown-item" wire:click="edit('{{ $projet->id }}')"><i class="ti ti-edit"></i> Editer</button>
+                            <button class="dropdown-item" wire:click="favorite()">
+                                @if ($projet->favorite)
+                                    <span class="text-danger"><i class="ti ti-heart-filled"></i> Favoris</span>
+                                @else
+                                    <span class="text-muted"><i class="ti ti-heart"></i> Favoris</span>
+                                @endif
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -46,6 +53,7 @@
                 </li>
                 @endif
             </ul>
+            <div class="my-2">@parsedown($projet->description)</div>
 
         </div>
 
@@ -125,47 +133,10 @@
         </div>
     </div>
     <div class="col-md-4">
-        {{-- Résumé --}}
-        @if ($projet->description)
-            <div class="border rounded mb-2">
-                <div class="bg-primary text-uppercase fw-bold text-white p-1">Résumé</div>
-                <div class="m-2">@parsedown($projet->description)</div>
-            </div>
-        @endif
-
         {{-- Taches --}}
-        {{-- @livewire('erp/tasks/tasklist1', ['projet_id'=>$projet->id ]) --}}
-
-        <div class="card p-2 mb-2">
-            <div class="row">
-                <div class="col">
-                    <h2>Taches </h2>
-                </div>
-                <div class="col-auto">
-                    @livewire('form.task-add', ['projet_id' => $projet->id])
-                </div>
-                <div class="col-12">
-                    @if ($projet->tasks->count())
-                        @component('components.chartjs',[
-                            'labels' => [
-                                "Nouvelles (".$projet->tasks->where('statut_id', 1)->count().")",
-                                "En cours (".$projet->tasks->where('statut_id', 2)->count().")",
-                                "En pause (".$projet->tasks->where('statut_id', 3)->count().")",
-                                "Terminés (".$projet->tasks->where('statut_id', 4)->count().")",
-                                "Annulés (".$projet->tasks->where('statut_id', 5)->count().")",
-                            ],
-                            'data' => [
-                                $projet->tasks->where('statut_id', 1)->count(),
-                                $projet->tasks->where('statut_id', 2)->count(),
-                                $projet->tasks->where('statut_id', 3)->count(),
-                                $projet->tasks->where('statut_id', 4)->count(),
-                                $projet->tasks->where('statut_id', 5)->count(),
-                            ],
-                        ])
-                        @endcomponent
-                    @endif
-                </div>
-            </div>
+        <div class="mb-2">
+            <h3>Taches</h3>
+            @livewire('erp.tasks.tasklist1', ['projet_id'=>$projet->id, 'paginate'=>3])
         </div>
 
         {{-- Batiments --}}

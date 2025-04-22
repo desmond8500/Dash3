@@ -20,6 +20,7 @@ class ProjetResume extends Component
 
     function mount($projet_id){
         $this->projet_id = $projet_id;
+        $this->projetForm->set($projet_id);
     }
 
     #[On('get-invoices')]
@@ -38,6 +39,11 @@ class ProjetResume extends Component
     // Projets
     public projetForm $projetForm;
     public InvoiceForm $invoiceForm;
+
+    function favorite()
+    {
+        $this->projetForm->favorite();
+    }
 
     function edit()
     {

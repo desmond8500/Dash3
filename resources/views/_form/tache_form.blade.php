@@ -27,7 +27,7 @@
             @endif
         </div>
     </div>
-    <div class="col-md mb-3">
+    <div class="col mb-3">
         <label class="form-label">Nom de la tache</label>
         <input type="text" class="form-control" wire:model="form.name" placeholder="Nom">
         @error('form.name') <span class='text-danger'>{{ $message }}</span> @enderror

@@ -41,7 +41,6 @@ class ProjetPage extends Component
     }
 
     // #[Session]
-
     #[On('get-resume')]
     public function render()
     {

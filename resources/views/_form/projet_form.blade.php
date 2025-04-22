@@ -3,7 +3,7 @@
     <input type="text" disabled class="form-control" wire:model="projetForm.client_id" placeholder="Nom du projet">
     @error('projetForm.client_id') <span class="text-danger">{{ $message }}</span> @enderror
 </div>
-<div class="col-md mb-3">
+<div class="col mb-3">
     <label class="form-label">Nom</label>
     <input type="text" class="form-control" wire:model="projetForm.name" placeholder="Nom du projet">
     @error('projetForm.name') <span class="text-danger">{{ $message }}</span> @enderror

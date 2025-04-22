@@ -11,16 +11,8 @@
                 <div style="font-size: clamp(1rem, 2vw, 3rem);">
                     {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
                 </div>
-                @env('local')
-                    <div>
-                        @component('components.off-canvas',['button'=>'Todos'])
-
-                        @endcomponent
-                    </div>
-                @endenv
             @endauth
         </div>
-
     @endcomponent
 
     @auth
@@ -34,7 +26,7 @@
                                     <i class="ti ti-{{ $resume->icon }}"></i>
                                 </span>
                             </div>
-                            <div class="col">
+                            <div class="col ">
                                 <h4 class="font-weight-medium"> {{ $resume->name }} </h4>
                             </div>
                             <div class="col-auto">
@@ -49,7 +41,7 @@
 
             @if ($clients->count())
                 <div class="col-md-12">
-                    <div class="text-muted mb-1 border p-1 bg-white border">Clients Favoris</div>
+                    <div class="text-white mb-1 border p-1 bg-blue-lt border">Clients Favoris</div>
 
                     <div class="row row-deck g-2">
                         @foreach ($clients as $client)
@@ -73,7 +65,7 @@
 
             @if ($projets->count())
                 <div class="col-md-12">
-                    <div class="text-muted mb-1 border p-1 bg-white border">Projets Favoris</div>
+                    <div class="text-white mb-1 border p-1 bg-blue-lt border">Projets Favoris</div>
 
                     <div class="row row-deck g-2">
                         @foreach ($projets as $projet)
@@ -98,7 +90,7 @@
 
             @if ($invoices->count())
                 <div class="col-md-12">
-                    <div class="text-muted mb-1 border p-1 bg-white border">Devis Favoris</div>
+                    <div class="text-white mb-1 border p-1 bg-blue-lt border">Devis Favoris</div>
 
                     <div class="row row-deck g-2">
                         @foreach ($invoices as $invoice)

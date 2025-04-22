@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Models\Invoice;
+use App\Models\TaskStatus;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\WithPagination;
@@ -26,7 +27,8 @@ class InvoicesPage extends Component
     public function render()
     {
         return view('livewire.erp.invoices-page',[
-            'invoices' => Invoice::search($this->search,'reference')->paginate(18)
+            'invoices' => Invoice::search($this->search,'reference')->paginate(18),
+            'statuses' => TaskStatus::all(),
         ]);
     }
 }

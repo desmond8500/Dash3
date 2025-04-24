@@ -1,4 +1,4 @@
-<div class="modal modal-dialog-scrollable fade" id="{{ $id ?? 'exampleModal' }}" tabindex="-1" aria-labelledby="{{ $id ?? 'exampleModal' }}Label" aria-hidden="true" wire:ignore.self>
+<div class="modal modal-dialog-scrollable fade" id="{{ $id ?? 'exampleModal' }}" tabindex="-1" aria-labelledby="{{ $id ?? 'exampleModal' }}Label" aria-hidden="true" wire:ignore>
     <style>
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,

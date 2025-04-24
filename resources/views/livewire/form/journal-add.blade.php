@@ -7,7 +7,9 @@
         <form class="row" wire:submit="store">
             @include('_form.journal_form')
         </form>
-        <script> window.addEventListener('open-addJournal', event => { window.$('#addJournal').modal('show'); }) </script>
-        <script> window.addEventListener('close-addJournal', event => { window.$('#addJournal').modal('hide'); }) </script>
+        @script
+            <script> addEventListener('open-addJournal', event => { window.$('#addJournal').modal('show'); }) </script>
+            <script> addEventListener('close-addJournal', event => { window.$('#addJournal').modal('hide'); }) </script>
+        @endscript
     @endcomponent
 </div>

@@ -3,6 +3,7 @@
         <tr>
             <th>Désignation</th>
             <th>Reference </th>
+            <th>Coef </th>
             <th>Quantite </th>
             <th>Prix </th>
             <th>invoice_section_id </th>
@@ -16,6 +17,7 @@
                 <td>{{ $row->designation }}</td>
                 <td>{{ $row->reference }}</td>
                 <td>{{ $row->quantite }}</td>
+                <td>{{ $row->coef }}</td>
                 <td>{{ $row->prix }}</td>
                 <td>{{ $row->invoice_section_id }}</td>
                 <td>{{ $row->priorite_id }}</td>

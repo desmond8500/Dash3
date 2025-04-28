@@ -35,12 +35,12 @@
 
     <div class="col-md-4">
         <div class="row g-2">
-            <div class="col-md-6">
+            <div class="col-6">
                 <label class="form-label">Qte</label>
                 <input type="number" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
                 @error('article_form.quantity') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
-            <div class="col-md-6">
+            <div class="col-6">
                 <label class="form-label">Qte Min</label>
                 <input type="number" class="form-control" wire:model="article_form.quantity_min" placeholder="Quantite">
                 @error('article_form.quantity_min') <span class='text-danger'>{{ $message }}</span> @enderror

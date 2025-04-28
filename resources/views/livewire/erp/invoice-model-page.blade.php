@@ -37,8 +37,8 @@
                     <div class="p-2">
                         @foreach ($selected_system->models as $model)
                         <div class="border rounded p-1 mb-1">
-                            <div class="row g-1 align-items-center" wire:click="select_model('{{ $model->id }}')" class="col cursor-pointer">
-                                <div class="col">
+                            <div class="row g-1 align-items-center"class="col cursor-pointer">
+                                <div class="col" wire:click="select_model('{{ $model->id }}')">
                                     <a  >{{ $model->name }}</a>
                                     <div class="text-muted">{{ $model->description }}</div>
                                 </div>
@@ -61,53 +61,6 @@
                 </div>
 
             @endif
-
-
-            {{-- <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Systèmes</div>
-                    <div class="card-actions">
-
-                    </div>
-                </div>
-                <div class="accordion" id="accordionExample">
-                    @foreach ($systems as $system)
-                        @component('components.accordion-item',['title'=>$system->name, 'id'=> "id$system->id"])
-                            <div class="row g-1">
-                                <div class="col"></div>
-                                <div class="col-auto">
-                                    <a class="btn btn-primary btn-icon" wire:click="edit_system('{{ $system->id }}')">
-                                        <i class="ti ti-edit"></i>
-                                    </a>
-                                </div>
-                                <div class="col-auto">
-                                    <a class="btn btn-primary btn-icon" wire:click="add_model('{{ $system->id }}')">
-                                        <i class="ti ti-plus"></i>
-                                    </a>
-                                </div>
-                                @foreach ($system->models as $model)
-                                    <div class="border rounded p-1">
-                                        <div class="row g-1 align-items-center">
-                                            <a wire:click="select_model('{{ $model->id }}')" class="col">{{ $model->name }}</a>
-                                            <div class="col-auto">
-                                                <span class="btn btn-ghost-success btn-icon" wire:click="edit_model('{{ $model->id }}')">
-                                                    <i class="ti ti-edit"></i>
-                                                </span>
-                                                <span class="btn btn-ghost-danger btn-icon" wire:click="delete_model('{{ $model->id }}')">
-                                                    <i class="ti ti-trash"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                @endforeach
-
-                            </div>
-                        @endcomponent
-                    @endforeach
-                </div>
-            </div> --}}
-
 
         </div>
         <div class="col-md-8">

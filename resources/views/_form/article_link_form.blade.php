@@ -8,9 +8,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="triggerId">
                 <a class="dropdown-item" wire:click="set_name('Site officiel')">Site officiel</a>
-                @foreach ($providers as $provider)
-                    <a class="dropdown-item" wire:click="set_name('{{ $provider->name }}')">{{ $provider->name }}</a>
-                @endforeach
+                <a class="dropdown-item" wire:click="set_name('{{ $article->provider->name }}')">{{ $article->provider->name }}</a>
             </div>
         </div>
     </div>

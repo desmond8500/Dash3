@@ -3,6 +3,7 @@
 namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\ArticleLinkForm;
+use App\Models\Article;
 use App\Models\ArticleLink;
 use App\Models\Provider;
 use Livewire\Attributes\On;
@@ -11,10 +12,12 @@ use Livewire\Component;
 class ArticleLinks extends Component
 {
     public $article_id;
+    public $article;
     public ArticleLinkForm $article_link_form;
 
     function mount($article_id){
         $this->article_id = $article_id;
+        $this->article = Article::find($article_id);
     }
 
     #[On('get-article-links')]
@@ -22,7 +25,6 @@ class ArticleLinks extends Component
     {
         return view('livewire.stock.article-links',[
             'links' => ArticleLink::where('article_id', $this->article_id)->get(),
-            'providers' => Provider::all(),
         ]);
     }
 

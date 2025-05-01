@@ -10,27 +10,24 @@
 
         <section class="col-md-8">
 
-            <div class="mb-3" wire:ignore:self>
-                <label for="" class="form-label"></label>
-                <textarea class="form-control" name="" id="" rows="3" data-bs-toggle="autosize"></textarea>
-            </div>
+          <div class="mb-3">
+            <label class="form-label">Datalist example</label>
+            <input class="form-control" list="datalistOptions" placeholder="Type to search..." />
+            <datalist id="datalistOptions">
+                <option value="Aruba" />
+                <option value="Afghanistan" />
+                <option value="Angola" />
+                <option value="Anguilla" />
+                <option value="Albania" />
+                <option value="Andorra" />
+                <option value="United Arab Emirates" />
+                <option value="Argentina" />
+                <option value="Armenia" />
+                <option value="American Samoa" />
+            </datalist>
+        </div>
 
-            <div wire:ignore:self>
-                <textarea id="autosizeTextarea" wire:model.defer="content" class="form-control"></textarea>
-            </div>
-
-            <script>
-                document.addEventListener('livewire:load', function () {
-                    // Appliquer Autosize à tous les <textarea> nécessaires
-                    autosize(document.querySelectorAll('textarea'));
-
-                    // Réappliquer Autosize après chaque mise à jour Livewire
-                    Livewire.hook('message.processed', () => {
-                        autosize(document.querySelectorAll('textarea'));
-                    });
-                });
-            </script>
-
+        Toggle switches
 
 
             <div class="row">

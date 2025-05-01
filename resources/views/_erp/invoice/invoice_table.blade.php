@@ -245,7 +245,7 @@
             <div class="col-md-12 mb-3">
                 <label class="form-label">Modalités</label>
                 <textarea class="form-control" wire:model="modalite" placeholder="Modalités"
-                    data-bs-toggle="autosize"></textarea>
+                    data-bs-toggle="autosize" ></textarea>
                 @error('modalite') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </form>

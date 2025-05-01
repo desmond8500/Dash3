@@ -27,7 +27,12 @@
         </div>
 
         <label class="form-label">Prix</label>
-        <input type="number" class="form-control" wire:model="row_form.prix" placeholder="Prix de l'article">
+        <div class="input-group">
+            <input type="number" class="form-control" wire:model="row_form.prix" placeholder="Prix de l'article">
+            <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.prix', 0)">
+                <i class="ti ti-x"></i>
+            </a>
+        </div>
         @error('row_form.prix') <span class='text-danger'>{{ $message }}</span> @enderror
 
         <label class="form-label">Priorite</label>
@@ -44,7 +49,12 @@
         @error('row_form.priorite_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
         <label class="form-label">ID Article</label>
-        <input type="number" class="form-control" wire:model="row_form.article_id" placeholder="Identifiant de l'article">
+        <div class="input-group">
+            <input type="number" class="form-control" wire:model="row_form.article_id" placeholder="Identifiant de l'article">
+            <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.article_id', 0)">
+                <i class="ti ti-x"></i>
+            </a>
+        </div>
         @error('row_form.article_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
         @if(!$nosection)

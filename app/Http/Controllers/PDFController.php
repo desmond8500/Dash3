@@ -175,14 +175,14 @@ class PDFController extends Controller
     public static function facture_pdf($invoice_id,$type='facture'){
         $data = PDFController::facture($invoice_id, $type);
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name);
+        return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
     }
 
     // Télécharger PDF
     public static function facture_pdf_save($invoice_id,$type){
         $data = PDFController::facture($invoice_id, $type);
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->download( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name);
+        return $pdf->download( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
     }
 
 
@@ -204,7 +204,7 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->stream($devis->date.' - '.$devis->projet->name . ' - ' . $devis->projet->name);
+        return $pdf->stream($devis->date.' - '.$devis->projet->name . ' - ' . $devis->projet->name . ' - ' . $devis->description);
         // return $pdf->download('sdfsd');
     }
     public static function pdf_test(){

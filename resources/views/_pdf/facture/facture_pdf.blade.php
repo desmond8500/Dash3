@@ -111,7 +111,7 @@
                         $total_marge += $row->quantite*$row->coef*$row->prix;
                         $subtotal += $row->quantite*$row->coef*$row->prix;
                     @endphp
-                    <tr class="">
+                    <tr @class(['text-danger' => $row->quantite == 0 || $row->prix == 0])>
                         <td scope="row" >
                             <div class="fw-bold">{!! nl2br($row->designation) !!}</div>
                             <div class="text-muted" style="font-size: 10px;">{!! nl2br($row->reference) !!}</div>

@@ -4,6 +4,7 @@ namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\ArticleLinkForm;
 use App\Models\ArticleLink;
+use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -20,7 +21,8 @@ class ArticleLinks extends Component
     public function render()
     {
         return view('livewire.stock.article-links',[
-            'links' => ArticleLink::where('article_id', $this->article_id)->get()
+            'links' => ArticleLink::where('article_id', $this->article_id)->get(),
+            'providers' => Provider::all(),
         ]);
     }
 

@@ -118,14 +118,9 @@
 
     @endcomponent
 
-    @component('components.modal', ["id"=>'editSection', 'title'=>'Editer une section'])
+    @component('components.modal', ["id"=>'editSection', 'title'=>'Editer une section', 'method'=>'update_section'])
         <form class="row" wire:submit="update_section">
             @include('_form.invoice_section_form')
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editSection', event => { window.$('#editSection').modal('show'); }) </script>
         <script> window.addEventListener('close-editSection', event => { window.$('#editSection').modal('hide'); }) </script>

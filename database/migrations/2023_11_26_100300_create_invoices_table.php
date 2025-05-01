@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('projet_name')->nullable();
             $table->string('reference');
             $table->text('description');
-            $table->string('modalite')->nullable();
-            $table->string('note')->nullable();
+            $table->text('modalite')->nullable();
+            $table->text('note')->nullable();
             $table->string('statut')->default('Nouveau');
             $table->decimal('tax')->default('0');
             $table->decimal('remise')->default('0');

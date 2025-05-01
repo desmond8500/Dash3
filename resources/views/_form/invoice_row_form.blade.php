@@ -16,18 +16,18 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Quantité</label>
-                <input type="text" class="form-control" wire:model="row_form.quantite" placeholder="Quantité">
+                <input type="number" class="form-control" wire:model="row_form.quantite" placeholder="Quantité">
                 @error('row_form.quantite') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
             <div class="col-md-6">
                 <label class="form-label">Coef</label>
-                <input type="text" class="form-control" wire:model="row_form.coef" placeholder="Coféficient de marge">
+                <input type="number" class="form-control" wire:model="row_form.coef" placeholder="Coféficient de marge">
                 @error('row_form.coef') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </div>
 
         <label class="form-label">Prix</label>
-        <input type="text" class="form-control" wire:model="row_form.prix" placeholder="Prix de l'article">
+        <input type="number" class="form-control" wire:model="row_form.prix" placeholder="Prix de l'article">
         @error('row_form.prix') <span class='text-danger'>{{ $message }}</span> @enderror
 
         <label class="form-label">Priorite</label>
@@ -44,7 +44,7 @@
         @error('row_form.priorite_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
         <label class="form-label">ID Article</label>
-        <input type="text" class="form-control" wire:model="row_form.article_id" placeholder="Identifiant de l'article">
+        <input type="number" class="form-control" wire:model="row_form.article_id" placeholder="Identifiant de l'article">
         @error('row_form.article_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
         @if(!$nosection)

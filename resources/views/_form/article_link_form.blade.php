@@ -8,7 +8,9 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="triggerId">
                 <a class="dropdown-item" wire:click="set_name('Site officiel')">Site officiel</a>
-                <a class="dropdown-item" wire:click="set_name('{{ $article->provider->name }}')">{{ $article->provider->name }}</a>
+                @if ($article->provider)
+                    <a class="dropdown-item" wire:click="set_name('{{ $article->provider->name }}')">{{ $article->provider->name }}</a>
+                @endif
             </div>
         </div>
     </div>

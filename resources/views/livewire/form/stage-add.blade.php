@@ -74,7 +74,7 @@
         @endif
 
 
-        <script> window.addEventListener('open-addStage', event => { $('#addStage').modal('show'); }) </script>
-        <script> window.addEventListener('close-addStage', event => { $('#addStage').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addStage', event => { window.$('#addStage').modal('show'); }) </script>
+        <script> window.addEventListener('close-addStage', event => { window.$('#addStage').modal('hide'); }) </script>
     @endcomponent
 </div>

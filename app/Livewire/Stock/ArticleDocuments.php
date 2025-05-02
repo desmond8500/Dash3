@@ -10,37 +10,37 @@ use Livewire\Component;
 
 class ArticleDocuments extends Component
 {
-    public $article_id;
+    public $article_id1;
     public ArticleDocumentForm $article_document_form;
 
     function mount($article_id)
     {
-        $this->article_id = $article_id;
+        $this->article_id1 = $article_id;
     }
 
     #[On('get-article-documents')]
     public function render()
     {
         return view('livewire.stock.article-documents', [
-            'documents' => ArticleDocument::where('article_id', $this->article_id)->get(),
+            'documents' => ArticleDocument::where('article_id', $this->article_id1)->get(),
         ]);
     }
 
     function edit($id)
     {
         $this->article_document_form->set($id);
-        $this->dispatch('open-editArticleLink');
+        $this->dispatch('open-editArticleDocument');
     }
 
-    function update($id)
+    function update()
     {
         $this->article_document_form->update();
-        $this->dispatch('close-editArticleLink');
+        $this->dispatch('close-editArticleDocument');
     }
 
     function delete()
     {
         $this->article_document_form->delete();
-        $this->dispatch('close-editArticleLink');
+        $this->dispatch('close-editArticleDocument');
     }
 }

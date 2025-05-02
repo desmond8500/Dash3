@@ -21,7 +21,7 @@ class InvoiceExport implements FromView
     {
 
         return view('_xls.invoice',[
-            'rows' => $this->invoice->rows
+            'rows' => $this->invoice->rows->sortBy('priorite_id')
         ]);
     }
 

@@ -18,6 +18,7 @@
                             <a href="#" wire:click="$set('tab', 2)" class="list-group-item list-group-item-action @if($tab==2)active @endif">Utilisateurs</a>
                             <a href="#" wire:click="$set('tab', 3)" class="list-group-item list-group-item-action @if($tab==3)active @endif">Status et priorités</a>
                             <a href="#" wire:click="$set('tab', 4)" class="list-group-item list-group-item-action @if($tab==4)active @endif">Permissions et Roles</a>
+                            <a href="#" wire:click="$set('tab', 5)" class="list-group-item list-group-item-action @if($tab==5)active @endif">Préférences</a>
                         </div>
                     </div>
                 </div>
@@ -37,6 +38,8 @@
                         @livewire('settings.task-status-list')
                     @elseif($tab == 4)
                         @livewire('settings.permissions')
+                    @elseif($tab == 5)
+                        @livewire('settings.preferences')
                     @endif
                 </div>
             </div>
@@ -52,8 +55,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addStatus', event => { $('#addStatus').modal('show'); }) </script>
-        <script> window.addEventListener('close-addStatus', event => { $('#addStatus').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addStatus', event => { window.$('#addStatus').modal('show'); }) </script>
+        <script> window.addEventListener('close-addStatus', event => { window.$('#addStatus').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editStatus', 'title' => 'Editer un statut'])
@@ -65,8 +68,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editStatus', event => { $('#editStatus').modal('show'); }) </script>
-        <script> window.addEventListener('close-editStatus', event => { $('#editStatus').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editStatus', event => { window.$('#editStatus').modal('show'); }) </script>
+        <script> window.addEventListener('close-editStatus', event => { window.$('#editStatus').modal('hide'); }) </script>
     @endcomponent
 </div>
 

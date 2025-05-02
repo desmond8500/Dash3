@@ -3,7 +3,6 @@
         <div class="btn-list">
             @livewire('form.provider-add')
             @livewire('form.brand-add')
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
 
     @endcomponent
@@ -14,10 +13,10 @@
             <div class="card">
                 <div class="card-body-sm">
                     <div class="d-block d-sm-none">
-                        <img src="{{ asset("$article->image") }}" class="ratio ratio-1x1 rounded p-2"   alt="">
+                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"   alt="">
                     </div>
                     <div class="d-none d-sm-block">
-                        <img src="{{ asset("$article->image") }}" class="ratio ratio-1x1 rounded p-2"   alt="">
+                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"   alt="">
                     </div>
                 </div>
             </div>
@@ -72,6 +71,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -122,18 +122,13 @@
 
     </div>
 
-    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article'])
+    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.article_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger me-auto" wire:click='delete'>
-                    <i class="ti ti-trash"></i>
-                </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
-        <script> window.addEventListener('open-editArticle', event => { $('#editArticle').modal('show'); }) </script>
-        <script> window.addEventListener('close-editArticle', event => { $('#editArticle').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editArticle', event => { window.$('#editArticle').modal('show'); }) </script>
+        <script> window.addEventListener('close-editArticle', event => { window.$('#editArticle').modal('hide'); }) </script>
     @endcomponent
+
+
 </div>

@@ -8,7 +8,10 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="triggerId">
                 <a class="dropdown-item" wire:click="$set('article_document_form.name','Fiche Technique')">Fiche Technique</a>
+                <a class="dropdown-item" wire:click="$set('article_document_form.name','Fiche Commerciale')">Fiche Commerciale</a>
+                <a class="dropdown-item" wire:click="$set('article_document_form.name','Schéma de cablage')">Schéma de cablage</a>
                 <a class="dropdown-item" wire:click="$set('article_document_form.name','Manuel d\'utilisation')">Manuel d'utilisation</a>
+                <a class="dropdown-item" wire:click="$set('article_document_form.name','Manuel d\'installation')">Manuel d'installation</a>
             </div>
             <a class="btn btn-primary btn-icon btn-secondary" wire:click="$set('article_document_form.name','')"
                 data-bs-toggle="tooltip" title="Effacer">

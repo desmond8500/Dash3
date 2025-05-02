@@ -21,11 +21,11 @@
 
 <div class="col-md-12 mb-3">
     <label class="form-label">Travaux Effectués</label>
-    <textarea class="form-control" wire:model="bl_form.done" placeholder="Travaux Effectués" cols="30" rows="5"></textarea>
+    <textarea class="form-control" wire:model="bl_form.done" placeholder="Travaux Effectués" data-bs-toggle="autosize"></textarea>
     @error('bl_form.done') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 <div class="col-md-12 mb-3">
     <label class="form-label">Travaux Restants</label>
-    <textarea class="form-control" wire:model="bl_form.todo" placeholder="Travaux Restants" cols="30" rows="5"></textarea>
+    <textarea class="form-control" wire:model="bl_form.todo" placeholder="Travaux Restants" data-bs-toggle="autosize"></textarea>
     @error('bl_form.todo') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>

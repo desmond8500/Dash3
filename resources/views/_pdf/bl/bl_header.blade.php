@@ -1,13 +1,13 @@
 <table class="table mb-1">
     <tr>
-        <td colspan="3" class="text-center bg-green">{{ strtoupper("Bordereau de $bl->type") }}</td>
+        <td colspan="3" class="text-center bg-green" style="background: #{{ $color1 }}">{{ strtoupper("Bordereau de $bl->type") }}</td>
     </tr>
     <tr>
         <td width="50px">
             <img src="{{ $logo }}" width="50px" alt="Logo">
         </td>
         <td>
-            <div><b>Client :</b> {{ $invoice->projet->client->name }}</div>
+            <div><b>Client :</b> {{ $invoice->client_name ?? $invoice->projet->client->name }}</div>
             <div><b>Projet :</b> {{ $invoice->projet->name }}</div>
         </td>
         <td width="200px" class="text-end">

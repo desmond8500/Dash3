@@ -6,12 +6,17 @@
 
     <div class=" mb-3">
         <label class="form-label">Email</label>
-        <input type="text" class="form-control" wire:model="email" placeholder="Email">
+        <input type="email" class="form-control" wire:model="email" placeholder="Email">
         @error('email') <span class="text-danger">{{ $message }}</span> @enderror
     </div>
 
     <div class=" mb-3">
-        <label class="form-label">Mot de passe</label>
+        <label class="form-label">
+            <div class="d-flex justify-content-between">
+                <div>Mot de passe</div>
+                <a href="" class="fw-light">Mot de passe oublié ?</a>
+            </div>
+        </label>
         <div class="input-group input-group-flat">
             <input type="{{ $formtype ? 'password' : " text" }}" class="form-control" wire:model="password" placeholder="Mot de passe">
             <span class="input-group-text">
@@ -33,7 +38,7 @@
 
     <div class="d-flex justify-content-evenly">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        <button type="submit" class="btn btn-primary">Valider</button>
+        <button type="submit" class="btn btn-primary">Connexion</button>
     </div>
 
 </form>

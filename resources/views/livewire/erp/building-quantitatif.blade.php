@@ -1,20 +1,15 @@
 <div>
-    <div class="mb-1 row g-2">
+    <div class="mb-1 row g-2 align-items-center justify-items-center">
         <div class="col">
             <h2>Quantitatif</h2>
         </div>
         <div class="col-auto">
-            {{-- <div class="btn-list">
-                <button class="btn btn-primary" >
-                    <i class="ti ti-plus"></i> Quantitatif
-                </button> --}}
-                <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
-            {{-- </div> --}}
+            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     </div>
 
     <div class="row g-2">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="d-grid gap-2">
                 @foreach ($quantitatifs as $quantitatif)
                     <div class="btn btn-full" wire:click="select_quantitatif('{{ $quantitatif->id }}')">
@@ -23,9 +18,17 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             @if ($q_selected)
                 <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Quantitatif</div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary btn-icon" wire:click="editQuantitatif('{{ $q_selected->id }}')">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                        </div>
+                    </div>
                     <table class="table table-hover">
                         <thead class="sticky-top">
                             <tr>
@@ -33,6 +36,7 @@
                                 <td>Désignation</td>
                                 <td class="text-center">Quantité</td>
                                 <td class="text-center">Actions</td>
+                                <td class="text-center">Devices</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,6 +53,19 @@
                                         <button class="btn btn-icon btn-primary" wire:click="row_dec({{ $row->id }})"><i class="ti ti-minus"></i></button>
 
                                     </td>
+                                    <td>
+                                        @if ($row->devices->count())
+                                            <div class="btn-list">
+                                                @foreach ($row->devices as $device)
+                                                    <button class="btn btn-primary btn-icon" wire:click="show_device('{{ $device->id }}')">
+                                                        <i class="ti ti-{{ $device->icon }}"></i>
+                                                    </button>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            <button class="btn btn-primary" wire:click="sync_devices('{{ $row->id }}')">Update devices</button>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -57,4 +74,27 @@
             @endif
         </div>
     </div>
+    <div>
+
+        @component('components.modal', ["id"=>'showDevice', 'title' => "Détails d'un appareil"])
+            @includeWhen($selected_device, '_form.device_form', ['device' => $selected_device])
+
+            <script> window.addEventListener('open-showDevice', event => { window.$('#showDevice').modal('show'); }) </script>
+            <script> window.addEventListener('close-showDevice', event => { window.$('#showDevice').modal('hide'); }) </script>
+        @endcomponent
+
+        @component('components.modal', ["id"=>'editQuantitatif', 'title' => "Editer un quantitatif", 'method'=>'update_quantitatif'])
+            <form class="row" wire:submit="update_quantitatif">
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">designation</label>
+                    <input type="text" class="form-control" wire:model="q_row.name" placeholder="designation">
+                    @error('q_row.name') <span class='text-danger'>{{ $message }}</span> @enderror
+                </div>
+            </form>
+            <script> window.addEventListener('open-editQuantitatif', event => { window.$('#editQuantitatif').modal('show'); }) </script>
+            <script> window.addEventListener('close-editQuantitatif', event => { window.$('#editQuantitatif').modal('hide'); }) </script>
+        @endcomponent
+
+    </div>
+
 </div>

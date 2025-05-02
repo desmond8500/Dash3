@@ -14,13 +14,15 @@
                 </div>
             </div>
             @foreach ($fiches as $fiche)
-                <a class="card p-2" href="{{ route($fiche->route,['name'=> $fiche->name]) }}" target="_blank">
+                <a class="card p-2 mb-1" href="{{ route($fiche->route,['name'=> $fiche->name, 'type'=> $fiche->type]) }}" target="_blank">
                     <div class="d-flex-between">
                         <div>{{ $fiche->name }}</div>
                         <i class="ti ti-download"></i>
                     </div>
                 </a>
             @endforeach
+
+            {{-- <div>{{ $fiches->links() }}</div> --}}
 
         </div>
         <div class="col-md-8">

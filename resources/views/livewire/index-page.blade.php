@@ -11,30 +11,22 @@
                 <div style="font-size: clamp(1rem, 2vw, 3rem);">
                     {{ ucfirst($carbon->dayName) }} {{ $carbon->format('d')}} {{ $carbon->monthName }} {{ $carbon->format('Y') }}
                 </div>
-                @env('local')
-                    <div>
-                        @component('components.off-canvas',['button'=>'Todos'])
-
-                        @endcomponent
-                    </div>
-                @endenv
             @endauth
         </div>
-
     @endcomponent
 
     @auth
         <div class="row g-2">
             @foreach ($resumes as $resume)
-                <a class="col-md-3 col-6" href="{{ $resume->route }}">
+                <a class="col-md-3 col-6" href="{{ $resume->route }}" wire:navigate>
                     <div class="card p-2">
-                        <div class="row g-1 align-items-center">
+                        <div class="row g-1 align-items-center ">
                             <div class="col-auto">
                                 <span class="bg-blue text-white avatar">
                                     <i class="ti ti-{{ $resume->icon }}"></i>
                                 </span>
                             </div>
-                            <div class="col">
+                            <div class="col ">
                                 <h4 class="font-weight-medium"> {{ $resume->name }} </h4>
                             </div>
                             <div class="col-auto">
@@ -49,13 +41,13 @@
 
             @if ($clients->count())
                 <div class="col-md-12">
-                    <div class="text-muted mb-1 border p-1 bg-white border">Clients Favoris</div>
+                    <div class="text-white mb-1 border p-1 bg-blue-lt border">Clients Favoris</div>
 
-                    <div class="row g-2">
+                    <div class="row row-deck g-2">
                         @foreach ($clients as $client)
                         <div class="col-md-3">
-                            <a class="card p-2" href="{{ route('projets',['client_id'=>$client->id]) }}" style="height: 73px; overflow: hidden;">
-                                <div class="row">
+                            <a class="card p-2" wire:navigate href="{{ route('projets',['client_id'=>$client->id]) }}" style="height: 73px; overflow: hidden;">
+                                <div class="row g-2">
                                     <div class="col-auto">
                                         <img src="{{ asset($client->avatar) }}" alt="A" class="avatar">
                                     </div>
@@ -73,13 +65,13 @@
 
             @if ($projets->count())
                 <div class="col-md-12">
-                    <div class="text-muted mb-1 border p-1 bg-white border">Projets Favoris</div>
+                    <div class="text-white mb-1 border p-1 bg-blue-lt border">Projets Favoris</div>
 
                     <div class="row row-deck g-2">
                         @foreach ($projets as $projet)
                             <div class="col-md-3">
-                                <a class="card p-2" href="{{ route('projet',['projet_id'=>$projet->id]) }}">
-                                    <div class="row">
+                                <a class="card p-2" wire:navigate href="{{ route('projet',['projet_id'=>$projet->id]) }}">
+                                    <div class="row g-2">
                                         <div class="col-auto">
                                             <img src="{{ asset($projet->client->avatar) }}" alt="A" class="avatar">
                                         </div>
@@ -98,13 +90,13 @@
 
             @if ($invoices->count())
                 <div class="col-md-12">
-                    <div class="text-muted mb-1 border p-1 bg-white border">Devis Favoris</div>
+                    <div class="text-white mb-1 border p-1 bg-blue-lt border">Devis Favoris</div>
 
-                    <div class="row g-2">
+                    <div class="row row-deck g-2">
                         @foreach ($invoices as $invoice)
                             <div class="col-md-4">
-                                <a class="card p-2" href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}">
-                                    <div class="row">
+                                <a class="card p-2" wire:navigate href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}">
+                                    <div class="row g-2">
                                         <div class="col-auto">
                                             <img src="{{ asset($invoice->projet->client->avatar) }}" alt="A" class="avatar">
                                         </div>

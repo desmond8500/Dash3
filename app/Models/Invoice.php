@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\dateTrait;
 use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,7 @@ class Invoice extends Model
 {
     use HasFactory;
     use searchTrait;
+    use dateTrait;
 
     protected $fillable = [
         'projet_id',
@@ -26,6 +28,8 @@ class Invoice extends Model
         'tax',
         'remise',
         'favorite',
+        'facture_date',
+        'paydate',
     ];
 
     public function projet(): BelongsTo

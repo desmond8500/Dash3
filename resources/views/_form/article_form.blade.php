@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-12 mb-3">
+<div class="row g-2">
+    <div class="col-12">
         <div wire:loading wire:target='article_form.image'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
@@ -11,10 +11,10 @@
                     @else
                         <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
                     @endif
-                    {{-- <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                    <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
                         <i class="ti ti-edit text-muted"></i>
                         <span class="avatar-upload-text">Modifier</span>
-                    </label> --}}
+                    </label>
                 @else
                     <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
                         <i class="ti ti-plus text-muted"></i>
@@ -27,49 +27,53 @@
         <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="article_form.image">
     </div>
 
-    <div class="col-md-8 mb-3">
-        <div class="mb-3">
-            <label class="form-label required">Désignation </label>
-            <input type="text" class="form-control" wire:model="article_form.designation" placeholder="Désignation">
-            @error('article_form.designation') <span class='text-danger'>{{ $message }}</span> @enderror
-        </div>
+    <div class="col-md-8">
+        <label class="form-label required">Désignation </label>
+        <input type="text" class="form-control" wire:model="article_form.designation" placeholder="Désignation">
+        @error('article_form.designation') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
 
+    <div class="col-md-4">
+        <div class="row g-2">
+            <div class="col-6">
+                <label class="form-label">Qte</label>
+                <input type="number" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
+                @error('article_form.quantity') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+            <div class="col-6">
+                <label class="form-label">Qte Min</label>
+                <input type="number" class="form-control" wire:model="article_form.quantity_min" placeholder="Quantite">
+                @error('article_form.quantity_min') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
         <label class="form-label required">Référence</label>
         <div class="input-group">
-            <textarea class="form-control" wire:model="article_form.reference" placeholder="Référence" cols="30" rows="1"></textarea>
-            <a class="btn btn-primary btn-icon" wire:click='uppercase'>
+            <textarea class="form-control" wire:model="article_form.reference" placeholder="Référence" cols="30"
+                rows="1"></textarea>
+            <a class="btn btn-primary btn-icon" wire:click='uppercase' data-bs-toggle="tooltip" title="Majuscule">
                 <i class="ti ti-arrow-big-up"></i>
             </a>
         </div>
         @error('article_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
-
-    <div class="col-md-4 mb-3">
-        <div class="row">
-            <div class="mb-3 col-md-6">
-                <label class="form-label">Qte</label>
-                <input type="number" class="form-control" wire:model="article_form.quantity" placeholder="Quantite">
-                @error('article_form.quantity') <span class='text-danger'>{{ $message }}</span> @enderror
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Qte Min</label>
-                <input type="number" class="form-control" wire:model="article_form.quantity_min" placeholder="Quantite">
-                @error('article_form.quantity_min') <span class='text-danger'>{{ $message }}</span> @enderror
-            </div>
-            <div class="col-md-12">
-                <label class="form-label">Prix</label>
-                <div class="input-group">
-                    <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
-                    <a class="btn btn-primary btn-icon" wire:click="convert_euro()">
-                        <i class="ti ti-refresh"></i>
-                    </a>
-                </div>
-                @error('article_form.price') <span class='text-danger'>{{ $message }}</span> @enderror
-            </div>
+    <div class="col-md-6">
+        <label class="form-label">Prix</label>
+        <div class="input-group">
+            <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
+            <a class="btn btn-primary btn-icon" wire:click="add_tva()">
+                tva
+            </a>
+            <a class="btn btn-icon btn-primary" wire:click="convert_euro()" data-bs-toggle="tooltip" title="Convertir en Euro">
+                <i class="ti ti-currency-euro"></i>
+            </a>
         </div>
+        @error('article_form.price') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-4 mb-3">
+    <div class="col-md-4">
         <label class="form-label">Priorite</label>
         <select class="form-control" wire:model="article_form.priority_id">
             <option value="0">Centrale 1</option>
@@ -84,7 +88,7 @@
         @error('article_form.priority_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-4 mb-3">
+    <div class="col-md-4">
         <label class="form-label">Fournisseur</label>
         <select class="form-control" wire:model="article_form.provider_id">
             <option value="" class="text-muted">--Sélectionner--</option>
@@ -95,7 +99,7 @@
         @error('article_form.brand_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-4 mb-3">
+    <div class="col-md-4">
         <label class="form-label">Marque</label>
         <select class="form-control" wire:model="article_form.brand_id">
             <option value="" >--Sélectionner--</option>
@@ -106,9 +110,9 @@
         @error('article_form.brand_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-12 mb-3">
+    <div class="col-md-12">
         <label class="form-label">Description</label>
-        <textarea class="form-control" wire:model="article_form.description" placeholder="Description" cols="30" rows="5"></textarea>
+        <textarea class="form-control"  wire:model="article_form.description" placeholder="Description" data-bs-toggle="autosize"></textarea>
         @error('article_form.description') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 

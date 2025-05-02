@@ -1,3 +1,5 @@
 <div>
-    {{-- The Master doesn't talk, he acts. --}}
+    @component('components.layouts.page-header', ['title'=> 'Vidéos', 'breadcrumbs'=>$breadcrumbs])
+
+    @endcomponent
 </div>

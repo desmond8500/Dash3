@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="card-title">Documents</div>
             <div class="card-actions">
-                @livewire('form.add-article-document', ['article_id' => $article_id])
+                @livewire('form.add-article-document', ['article_id' => $article_id1])
             </div>
         </div>
         <div class="card-body">
@@ -25,18 +25,18 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editArticleLink', 'title' => 'Editer un document'])
+    @component('components.modal', ["id"=>'editArticleDocument', 'title' => 'Editer un document', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.article_document_form')
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <button type="button" class="btn btn-danger" wire:click="delete">
                     <i class="ti ti-trash"></i>
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
+            </div> --}}
         </form>
-        <script> window.addEventListener('open-editArticleLink', event => { $('#editArticleLink').modal('show'); }) </script>
-        <script> window.addEventListener('close-editArticleLink', event => { $('#editArticleLink').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editArticleDocument', event => { window.$('#editArticleDocument').modal('show'); }) </script>
+        <script> window.addEventListener('close-editArticleDocument', event => { window.$('#editArticleDocument').modal('hide'); }) </script>
     @endcomponent
 </div>

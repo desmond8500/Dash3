@@ -6,10 +6,12 @@ use App\Livewire\Forms\BuildingDocumentForm;
 use App\Models\BuildingDocument as ModelsBuildingDocument;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithPagination;
 
 class BuildingDocument extends Component
 {
     use WithFileUploads;
+    use WithPagination;
     public $building_id;
     public BuildingDocumentForm $document_form;
 
@@ -22,7 +24,7 @@ class BuildingDocument extends Component
     public function render()
     {
         return view( 'livewire.erp.building-document', [
-            'documents' => ModelsBuildingDocument::where('building_id', $this->building_id)->get(),
+            'documents' => ModelsBuildingDocument::where('building_id', $this->building_id)->paginate(6),
         ]);
     }
 

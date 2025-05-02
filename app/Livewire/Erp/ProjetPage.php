@@ -41,7 +41,6 @@ class ProjetPage extends Component
     }
 
     // #[Session]
-
     #[On('get-resume')]
     public function render()
     {
@@ -70,5 +69,9 @@ class ProjetPage extends Component
     }
 
     public projetForm $projetForm;
+
+    function favorite(){
+        $this->projetForm->favorite();
+    }
 
 }

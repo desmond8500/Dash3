@@ -23,4 +23,9 @@ class InvoiceRow extends Model
     public function section(): BelongsTo {
         return $this->belongsTo(InvoiceSection::class);
     }
+
+    public function article(): BelongsTo
+    {
+        return $this->belongsTo(Article::class);
+    }
 }

@@ -2,17 +2,26 @@
 
 namespace App\Livewire\Erp;
 
+use App\Http\Controllers\InvoiceController;
 use App\Imports\InvoiceImport;
 use App\Livewire\Forms\InvoiceForm;
 use App\Livewire\Forms\InvoiceRowForm;
 use App\Livewire\Forms\InvoiceSectionForm;
 use App\Models\Article;
 use App\Models\Brand;
+use App\Models\Forfait;
 use App\Models\Invoice;
+use App\Models\InvoiceModel;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
+use App\Models\InvoiceSystem;
+use App\Models\Projet;
 use App\Models\Provider;
+use App\Models\Pv;
 use App\Models\Systeme;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -34,7 +43,7 @@ class InvoicePage extends Component
 
         $this->breadcrumbs = array(
             array('name' => 'Clients', 'route' => route('clients')),
-            array('name' => $this->devis->projet->client->name, 'route' => route('clients', ['client_id' => $this->devis->projet->client->id])),
+            array('name' => $this->devis->projet->client->name, 'route' => route('projets', ['client_id' => $this->devis->projet->client->id])),
             array('name' => $this->devis->projet->name, 'route' => route('projet', ['projet_id' => $this->devis->projet->id])),
             array('name' => "Devis", 'route' => route('invoice', ['invoice_id' => $this->devis->id])),
         );
@@ -46,15 +55,20 @@ class InvoicePage extends Component
     {
         return view('livewire.erp.invoice-page',[
             'sections' => $this->getSections(),
-            'systemes' => Systeme::all(),
+            // 'systems' => Systeme::all(),
+            'systems' => InvoiceSystem::all(),
             'providers' => Provider::all(),
             'brands' => Brand::all(),
-            'articles' => Article::paginate(6),
+            'articles' => Article::search($this->search, 'designation')->paginate(9),
+            'pvs' => Pv::where('invoice_id', $this->devis->id)->get(),
+            'statuses' => InvoiceController::statut(),
+            'forfaits' => Forfait::all(),
+            'models' => InvoiceModel::all(),
         ]);
     }
 
     // Section
-    public $section, $ordre, $section_tab = false;
+    public $section, $ordre, $section_tab = true;
 
     public InvoiceSectionForm $section_form;
     public $section_info;
@@ -65,6 +79,8 @@ class InvoicePage extends Component
     }
 
     function addSection(){
+        Debugbar::info('section');
+        // $this->dispatch('open-infoModal');
         $this->dispatch('open-addSection');
         $this->section_form->ordre = InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1;
     }
@@ -74,18 +90,19 @@ class InvoicePage extends Component
         $this->section_form->invoice_id = $this->devis->id;
         $this->section_form->store();
         $this->ordre++;
-        $this->dispatch('close-addSection');
+        $this->dispatch('close-addSection2');
     }
 
-    function sectionGenerate($name)
+    function section_generate($name)
     {
-        InvoiceSection::create([
+        $section = InvoiceSection::create([
             'invoice_id' => $this->devis->id,
             'section' => $name,
             'ordre' => $this->section_form->ordre,
         ]);
 
         $this->dispatch('close-addSection');
+        return $section;
     }
 
     function edit_section($section_id){
@@ -128,6 +145,13 @@ class InvoicePage extends Component
     }
     function designation($designation){
         $this->row_form->designation = $designation;
+        $this->row_form->reference = $designation;
+    }
+    function forfait($id){
+        $forfait = Forfait::find($id);
+        $this->row_form->designation = $forfait->designation;
+        $this->row_form->reference = $forfait->description;
+        $this->row_form->prix = $forfait->price;
     }
     function prix($prix){
         $this->row_form->prix = $prix;
@@ -144,14 +168,18 @@ class InvoicePage extends Component
         $this->row_form->reference = $article->reference;
         $this->row_form->article_id = $article->article_id;
     }
+    public $quantity = 1;
+
+    #[On('generateArticleRow')]
     function generateArticleRow($article_id){
         $article = Article::find($article_id);
         $this->row_form->article_id = $article->id;
         $this->row_form->designation = $article->designation;
         $this->row_form->reference = $article->reference;
         $this->row_form->prix = $article->price;
+
         $this->row_form->store();
-        $this->dispatch('close-addRow');
+        // $this->dispatch('close-addRow');
     }
 
     function editRow($row_id){
@@ -209,5 +237,90 @@ class InvoicePage extends Component
     function import(){
         // $sections = InvoiceSection::where('invoice_id', $this->devis->id)->get();
         Excel::import(new InvoiceImport, $this->file);
+    }
+
+    public $modalite;
+    function edit_modalite(){
+        $this->modalite = $this->devis->modalite;
+        $this->dispatch('open-editModalite');
+    }
+    function update_modalite(){
+        $this->devis->modalite = $this->modalite;
+        $this->devis->save();
+        $this->dispatch('close-editModalite');
+    }
+
+    public $note;
+    function edit_note(){
+        $this->note = $this->devis->note;
+        $this->dispatch('open-editNote');
+    }
+    function update_note(){
+        $this->devis->note = $this->note;
+        $this->devis->save();
+        $this->dispatch('close-editNote');
+    }
+
+    function modalite_set($id){
+        if ($id == 0) {
+            $this->devis->modalite = "";
+        } elseif($id == 1){
+            $this->devis->modalite = "Paiement du montant du matériel à la commande.  Paiement du reliquat après la réception des travaux";
+        }elseif($id == 2){
+            $this->devis->modalite = "Acompte de 50% à payer avant les travaux.  Paiement du reliquat après la réception des travaux";
+        }
+        $this->devis->save();
+    }
+    function note_set($id){
+        if ($id == 0) {
+            $this->devis->note = "";
+        } elseif($id == 1){
+            $this->devis->note = "Paiement du montant du matériel à la commande.  Paiement du reliquat après la réception des travaux";
+        }
+        $this->devis->save();
+    }
+
+    // Procès verbeauxx
+    function addPv(){
+        Pv::create([
+            'invoice_id' => $this->devis->id,
+            'date' => Carbon::now(),
+        ]);
+    }
+
+    function update_status($invoice_id, $status)
+    {
+        $this->devis->statut = $status;
+        $this->devis->save();
+    }
+
+    public $section_system_select;
+
+    function section_show($invoice_system_id){
+        $this->section_system_select = InvoiceSystem::find($invoice_system_id);
+        $this->dispatch('open-selectSectionModel');
+    }
+
+    function section_model_add($section_model_id, $section_id=0){
+        if(!$section_id){
+            $section_id = InvoiceSection::count()+1;
+        }
+        $invoice_model = InvoiceModel::find($section_model_id);
+        $section = $this->section_generate($invoice_model->name);
+
+        foreach ($invoice_model->rows as $row) {
+            InvoiceRow::create([
+                'invoice_section_id' => $section->id ,
+                'article_id' => $row->article_id,
+                'designation' => $row->designation,
+                'coef' => $row->coef,
+                'reference' => $row->reference,
+                'prix' => $row->prix,
+                'quantite' => $row->quantite,
+                'priorite_id' => $row->priorite_id,
+            ]);
+        }
+
+        $this->dispatch('open-selectSectionModel');
     }
 }

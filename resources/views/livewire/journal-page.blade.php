@@ -47,9 +47,9 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-8 mb-2">
 
-            <div class="card">
+            <div class="card mb-2">
                 <div class="card-header">
                     <div class="card-title">
                         <div style="font-size: 12px;" class="text-primary">{{ $journal->formatDate() }}</div>
@@ -66,9 +66,38 @@
                 </div>
             </div>
 
-            <div class="mt-2">
-                @livewire('erp.tasklist', ['journal_id' => $journal->id, 'paginate'=>3])
+            <div class="mb-2">
+                @livewire('volt.journal.journal_section', ['journal_id' => $journal->id], key($journal->id))
             </div>
+
+            <div class="mb-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Devis</div>
+                        <div class="card-actions">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Modalités</div>
+                        <div class="card-actions">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 
@@ -101,9 +130,13 @@
                 </div>
             </div>
 
+            <div class="mb-2">
+                @livewire('erp.tasks.tasklist1', ['journal_id' => $journal->id, 'paginate'=>3])
+            </div>
+
             <div class="card mb-2">
                 <div class="card-header">
-                    <div class="card-title">Achats</div>
+                    <div class="card-title">Achats à effectuer</div>
                     <div class="card-actions">
 
                     </div>
@@ -123,19 +156,13 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editJournal', 'title' => 'Editer un journal'])
+    @component('components.modal', ["id"=>'editJournal', 'title' => 'Editer un journal', 'method'=>'update_journal'])
         <form class="row" wire:submit="update_journal">
             @include('_form.journal_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
-        <script> window.addEventListener('open-editJournal', event => { $('#editJournal').modal('show'); }) </script>
-        <script> window.addEventListener('close-editJournal', event => { $('#editJournal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editJournal', event => { window.$('#editJournal').modal('show'); }) </script>
+        <script> window.addEventListener('close-editJournal', event => { window.$('#editJournal').modal('hide'); }) </script>
     @endcomponent
-
-
 
     @component('components.modal', ["id"=>'addTeam', 'title' => 'Ajouter un intervenant'])
         <form class="row" wire:submit="store_team">
@@ -162,11 +189,11 @@
             {{-- @include('_form.document_form') --}}
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
+                {{-- <button type="submit" class="btn btn-primary">Valider</button> --}}
             </div>
         </form>
-        <script> window.addEventListener('open-addTeam', event => { $('#addTeam').modal('show'); }) </script>
-        <script> window.addEventListener('close-addTeam', event => { $('#addTeam').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addTeam', event => { window.$('#addTeam').modal('show'); }) </script>
+        <script> window.addEventListener('close-addTeam', event => { window.$('#addTeam').modal('hide'); }) </script>
     @endcomponent
 
 </div>

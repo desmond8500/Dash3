@@ -20,7 +20,6 @@
         </div>
     </div>
 
-
     <div class="col mb-3">
         <label class="form-label required">Nom du fournisseur</label>
         <input type="text" class="form-control" wire:model="provider_form.name" placeholder="Nom">
@@ -29,7 +28,7 @@
 
     <div class="col-md-12 mb-3">
         <label class="form-label">Description</label>
-        <textarea class="form-control" wire:model="provider_form.description" placeholder="Description" cols="30" rows="5"></textarea>
+        <textarea class="form-control" wire:model="provider_form.description" placeholder="Description" data-bs-toggle="autosize"></textarea>
         @error('provider_form.description') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 </div>

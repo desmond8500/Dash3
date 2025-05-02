@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Livewire\Forms\JournalForm;
 use App\Models\Journal;
+use App\Models\Projet;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -24,7 +25,9 @@ class JournauxPage extends Component
             array('name' => 'Journaux', 'route' => route('journaux')),
         );
         return view('livewire.journaux-page',[
-            'journaux' => Journal::search($this->search, 'title')->paginate(15),
+            'journaux' => Journal::orderByDesc('date')->search($this->search, 'title')->paginate(15),
+            'projets' => [],
+            // 'projets' => Projet::where('id', $this->projet_id)->get(),
         ]);
     }
 

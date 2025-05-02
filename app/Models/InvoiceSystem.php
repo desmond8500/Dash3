@@ -19,4 +19,5 @@ class InvoiceSystem extends Model
     {
         return $this->hasMany(InvoiceModel::class, 'invoice_system_id');
     }
+    
 }

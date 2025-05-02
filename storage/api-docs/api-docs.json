@@ -1,0 +1,282 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dash Server API",
+        "description": "Api de l'application Dash",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/achats": {
+            "get": {
+                "tags": [
+                    "Achats"
+                ],
+                "summary": "Liste des achats",
+                "operationId": "6c3901ef3d30b06b2975bb285d6b410b",
+                "responses": {
+                    "200": {
+                        "description": "les achats ont été récupérés avec succès"
+                    }
+                }
+            }
+        },
+        "/api/v1/brands": {
+            "get": {
+                "tags": [
+                    "Marques"
+                ],
+                "description": "Liste des marques",
+                "operationId": "bb2bd6798eb8f8bb417d5909305427ad",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/invoices": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "description": "Liste des devis",
+                "operationId": "45e4936c6f9fcc032929d3ef16b36511",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/get_month_invoices": {
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "description": "Récupérer les factures du mois",
+                "operationId": "fd02603120789e695269d40a33d52ad0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "month",
+                                    "year"
+                                ],
+                                "properties": {
+                                    "month": {
+                                        "type": "integer"
+                                    },
+                                    "year": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateurs récupérés avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/get_month_spents": {
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "description": "Récupérer les factures du mois",
+                "operationId": "3786fc0dce3f07ae576f651d6da03bb1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "month",
+                                    "year"
+                                ],
+                                "properties": {
+                                    "month": {
+                                        "type": "integer"
+                                    },
+                                    "year": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateurs récupérés avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/items": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "description": "Liste des articles",
+                "operationId": "0df34968107a5a285245db41b7101cad",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/items/{id}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "description": "afficher un article",
+                "operationId": "099ce4e523f80e52b4ad983ba3af17ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Parameter with example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "an int value",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/providers": {
+            "get": {
+                "tags": [
+                    "Fournisseurs"
+                ],
+                "description": "Liste des fournisseurs",
+                "operationId": "8cdff875d964c79c8f6380749887ffce",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Liste des transactions",
+                "operationId": "d1896d9e43f164ed711b6fb976065a2b",
+                "responses": {
+                    "200": {
+                        "description": "Transactions récupérés avec succès"
+                    }
+                }
+            }
+        },
+        "/api/v1/facture_pdf/invoice_id/type": {
+            "get": {
+                "tags": [
+                    "Factures"
+                ],
+                "summary": "Récupérer une facture",
+                "operationId": "59bfe2d3765050d2c6ce230607b6c7ef",
+                "parameters": [
+                    {
+                        "name": "invoice_id",
+                        "in": "path",
+                        "description": "Parameter with example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "an int value",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Facture récupéré avec succès"
+                    }
+                }
+            }
+        },
+        "/api/v1/tasks": {
+            "get": {
+                "tags": [
+                    "Taches"
+                ],
+                "summary": "Liste des taches",
+                "operationId": "4293c00a4cffdb881d9f6c2099875f96",
+                "responses": {
+                    "200": {
+                        "description": "Les taches ont été récupérés avec succès"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Achats",
+            "description": "Achats"
+        },
+        {
+            "name": "Marques",
+            "description": "Marques"
+        },
+        {
+            "name": "Invoices",
+            "description": "Invoices"
+        },
+        {
+            "name": "Articles",
+            "description": "Articles"
+        },
+        {
+            "name": "Fournisseurs",
+            "description": "Fournisseurs"
+        },
+        {
+            "name": "Transactions",
+            "description": "Transactions"
+        },
+        {
+            "name": "Factures",
+            "description": "Factures"
+        },
+        {
+            "name": "Taches",
+            "description": "Taches"
+        }
+    ]
+}

@@ -4,7 +4,7 @@
         <div class="row row-deck g-2">
             <div class="col"><h2>Building management</h2></div>
             <div class="col-auto">
-                @livewire('form.building-add', ['projet_id' => $projet_id])
+                @livewire('form.building-add', ['projet_id' => $projet_id], key(2))
             </div>
             <div class="w-100"></div>
             @foreach ($buildings as $building)
@@ -49,7 +49,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editBuilding', event => { $('#editBuilding').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBuilding', event => { $('#editBuilding').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editBuilding', event => { window.$('#editBuilding').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBuilding', event => { window.$('#editBuilding').modal('hide'); }) </script>
     @endcomponent
 </div>

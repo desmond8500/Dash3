@@ -27,6 +27,15 @@ class Article extends Model
         'price',
     ];
 
+    protected $hidden = [
+        'quantity',
+        'quantity_min',
+        'brand_id',
+        'provider_id',
+        'created_at',
+        'updated_at',
+        'deleted_at'];
+
     public function provider(): HasOne
     {
         return $this->hasOne(Provider::class,'id','provider_id');

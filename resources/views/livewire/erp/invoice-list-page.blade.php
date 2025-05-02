@@ -1,9 +1,6 @@
 <div>
-    @component('components.layouts.page-header', ['title'=>'Achats', 'breadcrumbs'=>$breadcrumbs])
-    <div class="btn-list">
+    @component('components.layouts.page-header', ['title'=>'Liste des devis', 'breadcrumbs'=>$breadcrumbs])
 
-        <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
-    </div>
     @endcomponent
 
     <div class="row g-2">
@@ -16,17 +13,17 @@
             </div>
             @foreach ($invoices->sortByDesc('created_at') as $invoice)
                 <div class="mb-1">
-                    <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="text-dark" target="_blank">
-                        @include('_card.invoice_card')
-                    </a>
+                    @include('_card.invoice_card')
                 </div>
             @endforeach
-            <div>
-                {{ $invoices->links() }}
-            </div>
+
         </div>
         <div class="col-md-8">
 
+        </div>
+
+        <div class="col-md-12">
+            {{ $invoices->links() }}
         </div>
     </div>
 

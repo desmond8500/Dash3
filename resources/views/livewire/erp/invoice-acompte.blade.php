@@ -10,15 +10,20 @@
             </div>
         </div>
         <table class="table">
-            <thead>
-                <tr>
-                    <th style="text-align:center; width: 5px;">#</th>
-                    <th>Nom</th>
-                    <th style="text-align:center; width: 10px;">Montant</th>
-                    <th style="text-align:center; width: 30px;">Date</th>
-                    <th style="text-align:center; width: 10px;">_</th>
-                </tr>
-            </thead>
+            @if ($acomptes->isEmpty())
+                <div class="text-center pt-1 text-muted">Aucun acompte</div>
+
+            @else
+                <thead>
+                    <tr>
+                        <th style="text-align:center; width: 5px;">#</th>
+                        <th>Nom</th>
+                        <th style="text-align:center; width: 10px;">Montant</th>
+                        <th style="text-align:center; width: 30px;">Date</th>
+                        <th style="text-align:center; width: 10px;">_</th>
+                    </tr>
+                </thead>
+            @endif
             <tbody>
                 @foreach ($acomptes as $key => $acompte)
                     <tr>
@@ -61,28 +66,20 @@
         </table>
     </div>
 
-    @component('components.modal', ["id"=>'add-invoiceAcompte', 'title' => 'Ajouter un acompte'])
+    @component('components.modal', ["id"=>'add-invoiceAcompte', 'title' => 'Ajouter un acompte', 'method'=>'store'])
         <form class="row" wire:submit="store">
             @include('_form.acompte_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
-        <script> window.addEventListener('open-add-invoiceAcompte', event => { $('#add-invoiceAcompte').modal('show'); }) </script>
-        <script> window.addEventListener('close-add-invoiceAcompte', event => { $('#add-invoiceAcompte').modal('hide'); }) </script>
+        <script> window.addEventListener('open-add-invoiceAcompte', event => { window.$('#add-invoiceAcompte').modal('show'); }) </script>
+        <script> window.addEventListener('close-add-invoiceAcompte', event => { window.$('#add-invoiceAcompte').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'edit-invoiceAcompte', 'title' => 'Editer un acompte'])
+    @component('components.modal', ["id"=>'edit-invoiceAcompte', 'title' => 'Editer un acompte', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.acompte_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
-        <script> window.addEventListener('open-edit-invoiceAcompte', event => { $('#edit-invoiceAcompte').modal('show'); }) </script>
-        <script> window.addEventListener('close-edit-invoiceAcompte', event => { $('#edit-invoiceAcompte').modal('hide'); }) </script>
+        <script> window.addEventListener('open-edit-invoiceAcompte', event => { window.$('#edit-invoiceAcompte').modal('show'); }) </script>
+        <script> window.addEventListener('close-edit-invoiceAcompte', event => { window.$('#edit-invoiceAcompte').modal('hide'); }) </script>
     @endcomponent
 
 </div>

@@ -7,6 +7,22 @@
     @endcomponent
 
     <div class="row">
+        <div class="col-md-12">
+            <div class="card p-2 mb-3">
+                <nav class="nav nav-segmented" role="tablist">
+                    <button class="nav-link active" role="tab" data-bs-toggle="tab" aria-selected="true" aria-current="page">
+                        Dépenses
+                    </button>
+                    <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1">
+                        Factures
+                    </button>
+                    <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1">
+                        Redevances
+                    </button>
+            </div>
+            </nav>
+        </div>
+
         <div class="col-md-4">
             <div class="input-icon mb-2">
                 <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher">
@@ -49,11 +65,7 @@
             <button type="submit" class="btn btn-primary">Valider</button>
         </div>
     </form>
-    <script>
-        window.addEventListener('open-editTransaction', event => { $('#editTransaction').modal('show'); })
-    </script>
-    <script>
-        window.addEventListener('close-editTransaction', event => { $('#editTransaction').modal('hide'); })
-    </script>
+    <script> window.addEventListener('open-editTransaction', event => { window.$('#editTransaction').modal('show'); }) </script>
+    <script> window.addEventListener('close-editTransaction', event => { window.$('#editTransaction').modal('hide'); }) </script>
     @endcomponent
 </div>

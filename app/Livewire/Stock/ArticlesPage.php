@@ -41,13 +41,15 @@ class ArticlesPage extends Component
         );
     }
 
+    public $search_brand;
+
     #[On('get-articles')]
     public function render()
     {
         return view('livewire.stock.articles-page',[
             'articles' => $this->get_articles(),
             'providers' => Provider::all(),
-            'brands' => Brand::all(),
+            'brands' => Brand::search($this->search_brand, 'name')->get(),
         ]);
     }
 
@@ -71,7 +73,7 @@ class ArticlesPage extends Component
     }
 
     function reset_filter(){
-        $this->reset('brand_id', 'provider_id', 'priorite_id');
+        $this->reset('brand_id', 'provider_id', 'priorite_id', "search");
     }
 
     public $selected;
@@ -110,6 +112,9 @@ class ArticlesPage extends Component
 
     function convert_euro(){
         $this->article_form->price *= 655;
+    }
+    function add_tva(){
+        $this->article_form->price *= 1.18;
     }
 
     function uppercase(){

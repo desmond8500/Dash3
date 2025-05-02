@@ -1,22 +1,26 @@
 <?php
 
 use App\Exports\InvoiceExport;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PDFController;
 use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
 use App\Livewire\Erp\ClientsPage;
+use App\Livewire\Erp\CVpage;
 use App\Livewire\Erp\DocumentsPage;
 use App\Livewire\Erp\ErpPage;
 use App\Livewire\Erp\FichesPage;
 use App\Livewire\Erp\FicheZonePage;
 use App\Livewire\Erp\FinancesPage;
+use App\Livewire\Erp\ForfaitsPage;
 use App\Livewire\Erp\InvoiceListPage;
 use App\Livewire\Erp\InvoiceModelPage;
 use App\Livewire\Erp\InvoicePage;
 use App\Livewire\Erp\InvoicesPage;
 use App\Livewire\Erp\ProjetPage;
 use App\Livewire\Erp\ProjetsPage;
+use App\Livewire\Erp\PvPage;
 use App\Livewire\Erp\RoomPage;
 use App\Livewire\Erp\StagePage;
 use App\Livewire\Erp\SystemesPage;
@@ -44,6 +48,7 @@ use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Browsershot\Browsershot;
 
 // Index
 Route::get('/', IndexPage::class)->name('index');
@@ -61,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'can:erp'])->group(function () {
     // Users
     // Route::get('/users', UsersPage::class)->name('users');
+    Route::get('/cv/{cv_id}', CVpage::class)->name('cv');
+
     Route::get('/erp', ErpPage::class)->name('erp');
     // Clients
     Route::get('/clients', ClientsPage::class)->name('clients');
@@ -72,14 +79,16 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
     Route::get('/invoicelist', InvoiceListPage::class)->name('invoicelist');
     Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf($invoice_id, $type); })->name('facture_pdf');
+    Route::get('/facture/facture_pdf_save/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf_save($invoice_id, $type); })->name('facture_pdf_save');
     Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) { return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id); })->name('facture_acompte_pdf');
 
     Route::get('/bl/bl_travaux/{invoice_bl_id}', function ($invoice_bl_id) { return PDFController::bl_pdf($invoice_bl_id); })->name('bl_pdf');
 
     Route::get('invoice_export/{invoice_id}',  function ($invoice_id){ return Excel::download(new InvoiceExport($invoice_id), 'invoices.xlsx'); })->name('invoice_export');
 
-    Route::post('invoice_import', 'InvoiceController@import')->name('invoice_import');
+    Route::post('invoice_import', [InvoiceController::class, 'import'])->name('invoice_import');
     Route::get('invoice_model', InvoiceModelPage::class)->name('invoice_model');
+    Route::get('forfaits', ForfaitsPage::class)->name('forfaits');
 
     // Documents
     Route::get('/documents', DocumentsPage::class)->name('documents');
@@ -87,6 +96,13 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
     // Contacts
     Route::get('/contacts', ContactsPage::class)->name('contacts');
+    // PV
+    Route::get('/pv/{invoice_id}', PvPage::class)->name('pv');
+    Route::get('/pv_pdf/{invoice_id}', function ($invoice_id) {
+        return PDFController::pv_pdf($invoice_id);
+    })->name('pv_pdf');
+
+
     // Avancements
     Route::get('/avancements/{building_id}', AvancementsPage::class)->name('avancements');
     Route::get('/avancements_pdf/{avancement_id}', function ($avancement_id) {
@@ -120,8 +136,9 @@ Route::middleware(['auth', 'can:stock'])->group(function () {
         return PDFController::achat_pdf($achat_id);
     })->name('achat_pdf');
     Route::get('/stock/inventaire_pdf/{name}', function ($name) {
-        return PDFController::modeles_fiches_pdf($name);
-    })->name('modeles_fiches_pdf');
+        return PDFController::fiches_inventaire_pdf($name);
+    })->name('fiches_inventaire_pdf');
+
 });
 
 // Building management
@@ -201,7 +218,22 @@ Route::get('fiche_pdf/{fiche_id}', function ($fiche_id) {
 // Test
 Route::get('/systemes', SystemesPage::class)->name('systemes');
 Route::get('/fiches', FichesPage::class)->name('fiches');
+Route::get('pdf_browser', function () {
+
+    $template = view('_pdf.test')->render();
+    return Browsershot::html($template)->save('example.pdf');
+});
 
 // Medias
 Route::get('/images', ImagesPage::class)->name('images');
 Route::get('/videos', VideosPage::class)->name('videos');
+
+// Fiches
+Route::get('/fiches/{type}/{name}', function ($name, $type) {
+    return PDFController::fiches_pdf($type, $name);
+})->name('fiches_pdf');
+
+
+Route::fallback(function() {
+    return view('errors.404page');
+});

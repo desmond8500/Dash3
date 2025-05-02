@@ -2,7 +2,48 @@
     <div class="row">
 
         <div  class="col">
-            <div class="status status-blue" style="font-size: 12px;">
+
+            <div class="d-none d-sm-block">
+                <div class="dropdown open">
+                    <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <i class="ti ti-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                        @if ($task->client_id)
+                            <a class="dropdown-item " href="{{ route('projets',['client_id'=>$task->client->id]) }}" title="Client">
+                                Client - <span class="status status-blue">{{ $task->client->name }}</span>
+                            </a>
+                        @endif
+                        @if ($task->projet_id)
+                            <a class="dropdown-item" href="{{ route('projet',['projet_id'=>$task->projet->id]) }}" title="Projet">
+                                Projet - <span class="status status-blue"> {{ $task->projet->name }} </span>
+                            </a>
+                        @endif
+                        @if ($task->building_id)
+                            <a class="dropdown-item" href="{{ route('building', ['building_id'=>$task->building->id]) }}" title="Batiment">
+                               Batiment - <span class="status status-blue"> {{ $task->building->name }} </span>
+                            </a>
+                        @endif
+                        @if ($task->devis_id)
+                            <a class="dropdown-item" href="{{ route('invoice', ['invoice_id'=>$task->devis->id]) }}" title="Devis">
+                                Batiment - <span class="status status-blue"> {{ $task->devis->reference }} </span>
+                            </a>
+                        @endif
+                        @if ($task->stage_id)
+                            <a class="dropdown-item" href="{{ route('stage', ['stage_id'=>$task->stage->id]) }}" title="Niveau">
+                                Niveau - <span class="status status-blue"> {{ $task->stage->name }} </span>
+                            </a>
+                        @endif
+                        @if ($task->room_id)
+                            <a class="dropdown-item" href="{{ route('room', ['room_id'=>$task->room->id]) }}" title="Local">
+                                Local - <span class="status status-blue"> {{ $task->room->name }} </span>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <div class="status status-blue d-block d-sm-none" style="font-size: 12px;">
                 @if ($task->client_id)
                     <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->client->id]) }}" title="Client">{{ $task->client->name }}</a>
                 @endif
@@ -43,21 +84,8 @@
                 </button>
 
             </div>
-            {{-- <div class="dropdown open">
-                <button class="btn btn-action dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                    <i class="ti ti-dots-vertical"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="triggerId">
-                    <button class="dropdown-item" wire:click="edit('{{ $task->id }}')">
-                        <i class="ti ti-edit"></i> Modifier
-                    </button>
-                    <button class="dropdown-item" wire:click="show('{{ $task->id }}')">
-                        <i class="ti ti-eye"></i> Détails
-                    </button>
-                </div>
-            </div> --}}
 
-            <div class="badge badge-pill mb-1
+            <div class="badge badge-pill text-white mb-1
                     @if($task->priority_id ==1) bg-primary  @endif
                     @if($task->priority_id ==2) bg-warning  @endif
                     @if($task->priority_id ==3) bg-danger  @endif
@@ -65,7 +93,7 @@
             </div>
 
             <div>
-                <span class="badge badge-pill mb-1
+                <span class="badge badge-pill text-white mb-1
                     @if($task->statut_id ==1) bg-primary  @endif
                     @if($task->statut_id ==2) bg-warning  @endif
                     @if($task->statut_id ==3) bg-secondary @endif

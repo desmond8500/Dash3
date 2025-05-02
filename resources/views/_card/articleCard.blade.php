@@ -1,13 +1,13 @@
 <div class="card p-2">
     <div class="row g-2">
-        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}">
-            <img src="{{ asset("$article->image") }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
+        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>
+            <img src="{{ asset($article->image) }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
         </a>
         <div class="col">
             <div class="row">
                 <div class="col">
                     <div style="height: 40px; overflow:hidden">
-                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}">{{ $article->designation }}</a>
+                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>{{ $article->designation }}</a>
                     </div>
                 </div>
                 @isset($edit)
@@ -24,7 +24,18 @@
                             <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')" > <i class="ti ti-trash"></i> Supprimer</a>
                         </div>
                     </div>
+                @endisset
 
+                @isset($form)
+                    <div class="col-auto">
+                        {{-- <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" wire:model="quantity" placeholder="Name"> --}}
+                            <button class="btn btn-primary btn-icon" wire:click="$dispatch('generateArticleRow', { article_id: {{ $article->id }}})">
+                                <i class="ti ti-plus"></i>
+                            </button>
+                                {{-- @error('Name') <span class='text-danger'>{{ $message }}</span> @enderror
+                        </div> --}}
+                    </div>
                 @endisset
             </div>
             @isset ($img_class)
@@ -52,13 +63,15 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="text-end mt-2" style="font-size: 20px" data-bs-toggle="tooltip" title="Quantité">{{ $article->quantity }}</div>
+                    <div class="me-2">
+                        <div class="text-end mt-2" style="font-size: 20px" data-bs-toggle="tooltip" title="Quantité">{{ $article->quantity }}</div>
+                    </div>
                 </div>
             </div>
 
             <div class="row mt-1">
                 <div class="col-md-6">
-                    <div class="badge " style="font-size:10px">{{ $article->priority() }}</div>
+                    <div class="badge " style="font-size:10px" data-bs-toggle="tooltip" title="Priorité">{{ $article->priority() }}</div>
                 </div>
                 <div class="col-md-6">
                     <div class="text-danger text-end" style="font-size: 18px">{{ number_format($article->price, 0, 2) }} F</div>

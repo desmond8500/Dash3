@@ -82,7 +82,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addModal', event => { $('#addModal').modal('show'); }) </script>
-        <script> window.addEventListener('close-addModal', event => { $('#addModal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addModal', event => { window.$('#addModal').modal('show'); }) </script>
+        <script> window.addEventListener('close-addModal', event => { window.$('#addModal').modal('hide'); }) </script>
     @endcomponent --}}
 </div>

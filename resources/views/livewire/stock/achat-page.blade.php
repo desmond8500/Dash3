@@ -209,8 +209,8 @@
                         </div>
                     @endif
                 </div>
-                <script> window.addEventListener('open-addAchatArticle', event => { $('#addAchatArticle').modal('show'); }) </script>
-                <script> window.addEventListener('close-addAchatArticle', event => { $('#addAchatArticle').modal('hide'); }) </script>
+                <script> window.addEventListener('open-addAchatArticle', event => { window.$('#addAchatArticle').modal('show'); }) </script>
+                <script> window.addEventListener('close-addAchatArticle', event => { window.$('#addAchatArticle').modal('hide'); }) </script>
             @endcomponent
 
         </div>
@@ -224,8 +224,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editAchat', event => { $('#editAchat').modal('show'); }) </script>
-        <script> window.addEventListener('close-editAchat', event => { $('#editAchat').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editAchat', event => { window.$('#editAchat').modal('show'); }) </script>
+        <script> window.addEventListener('close-editAchat', event => { window.$('#editAchat').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editAchatRow', 'title'=>"Editer l'article"])
@@ -237,8 +237,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editAchatRow', event => { $('#editAchatRow').modal('show'); }) </script>
-        <script> window.addEventListener('close-editAchatRow', event => { $('#editAchatRow').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editAchatRow', event => { window.$('#editAchatRow').modal('show'); }) </script>
+        <script> window.addEventListener('close-editAchatRow', event => { window.$('#editAchatRow').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'addAchatFacture', 'title'=>"Ajouter une facture"])
@@ -254,7 +254,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addAchatFacture', event => { $('#addAchatFacture').modal('show'); }) </script>
-        <script> window.addEventListener('close-addAchatFacture', event => { $('#addAchatFacture').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addAchatFacture', event => { window.$('#addAchatFacture').modal('show'); }) </script>
+        <script> window.addEventListener('close-addAchatFacture', event => { window.$('#addAchatFacture').modal('hide'); }) </script>
     @endcomponent
 </div>

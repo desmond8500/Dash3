@@ -94,41 +94,31 @@ class TaskController extends Controller
             return Task::orderBy('priority_id', 'desc')->active($search)->get();
         }
     }
+
+    /**
+    *@OA\Get(
+    *      path="/api/v1/tasks",
+    *      tags={"Taches"},
+    *      summary="Liste des taches",
+    *      @OA\Response(
+    *          response=200,
+    *          description="Les taches ont été récupérés avec succès",
+    *       ),
+    *     )
+    */
+
+    function index(){
+        $users = Task::all();
+        return ResponseController::response(true, 'Les taches ont été récupérés avec succès', $users);
+    }
+
+    function show(){
+        return 'show';
+    }
+    function update(){
+        return 'update';
+    }
+    function delete(){
+        return 'delete';
+    }
 }
-
-
-// if ($this->active) {
-//     if ($this->client_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('client_id', $this->client_id)->finished($this->search)->paginate(8);
-//     }
-//     if ($this->projet_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('projet_id', $this->projet_id)->finished($this->search)->paginate(8);
-//     }
-//     if ($this->building_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('building_id', $this->building_id)->finished($this->search)->paginate(8);
-//     }
-//     if ($this->stage_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('stage_id', $this->stage_id)->finished($this->search)->paginate(8);
-//     }
-//     if ($this->room_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('room_id', $this->room_id)->finished($this->search)->orderBy('priority_id', 'desc')->paginate(8);
-//     }
-//     return Task::finished($this->search)->paginate(8);
-// } else {
-//     if ($this->client_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('client_id', $this->client_id)->active($this->search)->paginate(8);
-//     }
-//     if ($this->projet_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('projet_id', $this->projet_id)->active($this->search)->paginate(8);
-//     }
-//     if ($this->building_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('building_id', $this->building_id)->active($this->search)->paginate(8);
-//     }
-//     if ($this->stage_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('stage_id', $this->stage_id)->active($this->search)->paginate(8);
-//     }
-//     if ($this->room_id) {
-//         return Task::orderBy('priority_id', 'desc')->where('room_id', $this->room_id)->active($this->search)->paginate(8);
-//     }
-//     return Task::orderBy('priority_id', 'desc')->active($this->search)->paginate(8);
-// }

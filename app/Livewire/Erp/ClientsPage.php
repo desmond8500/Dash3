@@ -65,14 +65,14 @@ class ClientsPage extends Component
         $this->dispatch('close-editClient');
         $this->render();
     }
-    function delete()
+    function delete($id)
     {
-        $client = Client::find($this->selected->id);
+        $client = Client::find($id);
 
         if ($client->projets->count()) {
             $this->error_message = 'Ce client a des projets, il faut les supprimer avant';
         } else {
-            $this->selected->delete();
+            $client->delete();
             $this->dispatch('close-editClient');
         }
     }

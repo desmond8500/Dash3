@@ -51,8 +51,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-addTeam', event => { $('#addTeam').modal('show'); }) </script>
-        <script> window.addEventListener('close-addTeam', event => { $('#addTeam').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addTeam', event => { window.$('#addTeam').modal('show'); }) </script>
+        <script> window.addEventListener('close-addTeam', event => { window.$('#addTeam').modal('hide'); }) </script>
     @endcomponent
     @component('components.modal', ["id"=>'editTeam', 'title' => 'Editer un membre'])
         <form class="row" wire:submit="update">
@@ -62,8 +62,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editTeam', event => { $('#editTeam').modal('show'); }) </script>
-        <script> window.addEventListener('close-editTeam', event => { $('#editTeam').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editTeam', event => { window.$('#editTeam').modal('show'); }) </script>
+        <script> window.addEventListener('close-editTeam', event => { window.$('#editTeam').modal('hide'); }) </script>
     @endcomponent
 </div>
 

@@ -45,14 +45,30 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.achat', $data);
         return $pdf->stream('Achat - '.$achat->name );
     }
-    public static function modeles_fiches_pdf($name){
-
+    public static function fiches_inventaire_pdf($name){
         $data = [
             'name' => $name,
             'title' => env('MAIN_NAME'),
         ];
         $pdf = Pdf::loadView('_pdf.modele_fiche', $data);
         return $pdf->stream('Fiche Inventaire');
+    }
+
+    public static function fiches_pdf($type, $name){
+        $data = [
+            'name' => $name,
+            'title' => env('MAIN_NAME'),
+            'logo' => env('LOGO', ''),
+            'page_title' => $name,
+        ];
+        if ($type == 'presence') {
+            $pdf = Pdf::loadView('_pdf.fiches.fiche_presence_pdf', $data);
+            return $pdf->stream('Fiche de présence');
+        } else {
+            $pdf = Pdf::loadView('_pdf.modele_fiche', $data);
+            return $pdf->stream('Fiche Inventaire');
+        }
+
     }
 
     public static function commande_pdf(){
@@ -116,11 +132,12 @@ class PDFController extends Controller
         return $pdf->stream($journal->date.' - '.$journal->projet->name. ' - ' . $journal->title . ' - ' . $data['title']);
         // return $pdf->download('sdfsd');
     }
-    public static function facture_pdf($invoice_id,$type){
+
+    static function facture($invoice_id, $type){
         $devis = Invoice::find($invoice_id);
         $carbon = new Carbon($devis->date);
 
-        $data = [
+        return [
             'logo' => env('LOGO', ''),
             'title' => $type ?? "Facture",
             'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
@@ -133,11 +150,42 @@ class PDFController extends Controller
             'color2' => env('COLOR2', '219C90'),
             'color3' => env('COLOR3', '219C90'),
         ];
-
-        $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->stream( Str::upper($type).' '. Str::upper($devis->reference). ' - '. $devis->projet->client->name . ' - ' . $devis->projet->name);
-        // return $pdf->download('sdfsd');
     }
+
+    /**
+     *@OA\Get(
+     *      path="/api/v1/facture_pdf/invoice_id/type",
+     *      tags={"Factures",},
+     *      summary="Récupérer une facture",
+     *      @OA\Parameter(
+     *          description="Parameter with example",
+     *          in="path",
+     *          name="invoice_id",
+     *          required=true,
+     *          @OA\Schema(type="integer"),
+     *          @OA\Examples(example="int", value="1", summary="an int value"),
+     *      ),
+     *
+     *      @OA\Response(
+     *          response=200,
+     *          description="Facture récupéré avec succès",
+     *       ),
+     *     )
+     */
+    public static function facture_pdf($invoice_id,$type='facture'){
+        $data = PDFController::facture($invoice_id, $type);
+        $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
+        return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
+    }
+
+    // Télécharger PDF
+    public static function facture_pdf_save($invoice_id,$type){
+        $data = PDFController::facture($invoice_id, $type);
+        $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
+        return $pdf->download( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
+    }
+
+
     public static function facture_acompte_pdf($invoice_id,$type, $acompte_id){
         $devis = Invoice::find($invoice_id);
         $carbon = new Carbon($devis->date);
@@ -156,7 +204,7 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
-        return $pdf->stream($devis->date.' - '.$devis->projet->name . ' - ' . $devis->projet->name);
+        return $pdf->stream($devis->date.' - '.$devis->projet->name . ' - ' . $devis->projet->name . ' - ' . $devis->description);
         // return $pdf->download('sdfsd');
     }
     public static function pdf_test(){
@@ -284,6 +332,9 @@ class PDFController extends Controller
             'invoice' => $invoice,
             'bl' => $bl,
             'carbon' => $carbon,
+            'color1' => env('COLOR1'),
+            'color2' => env('COLOR2'),
+            'color3' => env('COLOR3'),
         ];
 
         if ($bl->type) {
@@ -293,6 +344,20 @@ class PDFController extends Controller
             $pdf = Pdf::loadView("_pdf.bl.bl_travaux", $data);
             return $pdf->stream("Bordereau de $bl->type _ ".$invoice->projet->name);
         }
+    }
+
+    public static function pv_pdf($invoice_id){
+        $invoice = Invoice::find($invoice_id);
+        // $carbon = new Carbon($date);
+
+        $data = [
+            'logo' => env('LOGO', ''),
+            'title' => env('MAIN_NAME'),
+            'invoice' => $invoice,
+        ];
+
+        $pdf = Pdf::loadView("_pdf.pv.pv1_pdf", $data);
+        return $pdf->stream("Procès verbal");
     }
 
 }

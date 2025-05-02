@@ -2,11 +2,11 @@
     <div class="d-flex align-items-center justify-content-between">
         <h2>Bagdes</h2>
         <div class="row mt-2">
-            <div class="input-group col">
-                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher" >
-                <button class="btn btn-primary btn-icon" >
+            <div class="input-icon col">
+                <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher ">
+                <span class="input-icon-addon">
                     <i class="ti ti-search"></i>
-                </button>
+                </span>
             </div>
             <div class="btn-list col-auto">
                 @livewire('form.badge-add', ['projet_id' => $projet_id])
@@ -83,7 +83,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editBadge', event => { $('#editBadge').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBadge', event => { $('#editBadge').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editBadge', event => { window.$('#editBadge').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBadge', event => { window.$('#editBadge').modal('hide'); }) </script>
     @endcomponent
 </div>

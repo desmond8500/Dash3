@@ -67,8 +67,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editStage', event => { $('#editStage').modal('show'); }) </script>
-        <script> window.addEventListener('close-editStage', event => { $('#editStage').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editStage', event => { window.$('#editStage').modal('show'); }) </script>
+        <script> window.addEventListener('close-editStage', event => { window.$('#editStage').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editRoom', 'title' => 'Editer un local'])
@@ -79,7 +79,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editRoom', event => { $('#editRoom').modal('show'); }) </script>
-        <script> window.addEventListener('close-editRoom', event => { $('#editRoom').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editRoom', event => { window.$('#editRoom').modal('show'); }) </script>
+        <script> window.addEventListener('close-editRoom', event => { window.$('#editRoom').modal('hide'); }) </script>
     @endcomponent
 </div>

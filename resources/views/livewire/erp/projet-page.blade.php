@@ -4,7 +4,9 @@
             @livewire('form.task-add', ['projet_id' => $projet_id])
             @livewire('form.journal-add', ['projet_id' => $projet_id])
             @livewire('form.transaction-add', ['projet_id' => $projet_id])
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            @env('local')
+                <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            @endenv
         </div>
     @endcomponent
 
@@ -18,11 +20,11 @@
                                 <i class="ti ti-home"></i> Résumé
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="#tabs-devis" class="nav-link " data-bs-toggle="tab">
                                 <i class="ti ti-file-description"></i> Devis
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="#tabs-task" class="nav-link" data-bs-toggle="tab">
                                 <i class="ti ti-file-description"></i> Taches
@@ -71,9 +73,9 @@
                             @livewire('erp.projet-resume', ['projet_id'=>$projet_id, 'buildings' => $buildings, 'invoices' => $invoices])
                         </div>
 
-                        <div class="tab-pane  show" id="tabs-devis">
+                        {{-- <div class="tab-pane  show" id="tabs-devis">
                             @livewire('erp.invoices-list', ['projet_id' => $projet_id])
-                        </div>
+                        </div> --}}
 
                         <div class="tab-pane" id="tabs-task">
                             @livewire('erp.tasklist', ['projet_id' => $projet_id])

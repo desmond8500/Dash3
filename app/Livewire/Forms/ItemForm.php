@@ -27,17 +27,13 @@ class ItemForm extends Form
     public $price = 0;
 
     public $description;
-
     public $brand_id;
-
     public $provider_id;
-
     public $image;
 
     function fix(){
         $this->designation = ucfirst($this->designation);
     }
-
 
     function store(){
         $this->validate();
@@ -53,6 +49,8 @@ class ItemForm extends Form
             $article->image = "storage/$dir/$name";
             $article->save();
         }
+
+        $this->reset('designation','reference','quantity','quantity_min','description','priority_id','brand_id','provider_id','image');
     }
 
     function set($model_id){

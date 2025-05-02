@@ -3,24 +3,28 @@
 namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\ArticleLinkForm;
+use App\Models\Article;
 use App\Models\ArticleLink;
+use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ArticleLinks extends Component
 {
     public $article_id;
+    public $article;
     public ArticleLinkForm $article_link_form;
 
     function mount($article_id){
         $this->article_id = $article_id;
+        $this->article = Article::find($article_id);
     }
 
     #[On('get-article-links')]
     public function render()
     {
         return view('livewire.stock.article-links',[
-            'links' => ArticleLink::where('article_id', $this->article_id)->get()
+            'links' => ArticleLink::where('article_id', $this->article_id)->get(),
         ]);
     }
 
@@ -30,7 +34,7 @@ class ArticleLinks extends Component
         $this->dispatch('open-editArticleLink');
     }
 
-    function update($id)
+    function update()
     {
         $this->article_link_form->update();
         $this->dispatch('close-editArticleLink');
@@ -40,5 +44,10 @@ class ArticleLinks extends Component
     {
         $this->article_link_form->delete();
         $this->dispatch('close-editArticleLink');
+    }
+
+    function set_name($name)
+    {
+        $this->article_link_form->name = $name;
     }
 }

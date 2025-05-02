@@ -3,13 +3,13 @@
         <div class="col">
             <div class="mb-1">
                 <ol class="breadcrumb" aria-label="breadcrumbs">
-                    <li class="breadcrumb-item"><a href="{{ route('index') }}">Accueil</a></li>
+                    <li class="breadcrumb-item"><a wire:navigate href="{{ route('index') }}">Accueil</a></li>
                     @isset($breadcrumbs)
                         @foreach ($breadcrumbs as $bread)
                             @if ($loop->last)
-                                <li class="breadcrumb-item active" aria-current="page"><a href="{{ $bread['route'] }}">{{ $bread['name'] }}</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><a wire:navigate href="{{ $bread['route'] }}">{{ $bread['name'] }}</a></li>
                             @else
-                                <li class="breadcrumb-item"><a href="{{ $bread['route'] }}">{{ $bread['name'] }}</a></li>
+                                <li class="breadcrumb-item"><a wire:navigate href="{{ $bread['route'] }}">{{ $bread['name'] }}</a></li>
                             @endif
                         @endforeach
                     @endisset

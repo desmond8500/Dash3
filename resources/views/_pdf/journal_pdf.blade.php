@@ -59,7 +59,7 @@
                     @if ($intervenant->contact_id)
                         <li>{{ $intervenant->contact->firstname }} {{ strtoupper($intervenant->contact->lastname) }}  ({{ $intervenant->contact->fonction }})</li>
                     @else
-                        <li>{{ $intervenant->team->firstname }} {{ $intervenant->team->lastname }} </li>
+                        <li>{{ $intervenant->team->firstname }} {{ strtoupper($intervenant->team->lastname) }} </li>
                     @endif
                 @endforeach
             </ul>
@@ -71,6 +71,12 @@
     <div>
         @parsedown($journal->description)
     </div>
+
+    @foreach ($journal->sections->sortBy('order') as $section)
+        <h1>{{ $section->name }}</h1>
+        @parsedown($section->description)
+    @endforeach
+
 
     @if ($journal->tasks->count())
         <h1>Taches</h1>
@@ -109,7 +115,7 @@
     @endif
 
     @if ($journal->achats->count())
-        <h1>Achats</h1>
+        <h1>Achats à effectuer</h1>
         @foreach ($journal->achats as $key => $achat)
             <div class="text-gray fs-6">
                 <div class="text-primary">{{ $achat->name }}</div>

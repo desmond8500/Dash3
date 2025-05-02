@@ -52,5 +52,9 @@ class Journal extends Model
     {
         return $this->hasMany(Achat::class);
     }
+    public function sections(): HasMany
+    {
+        return $this->hasMany(JournalSection::class);
+    }
 
 }

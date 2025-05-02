@@ -19,8 +19,8 @@
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </form>
-            <script> window.addEventListener('open-addRoom', event => { $('#addRoom').modal('show'); }) </script>
-            <script> window.addEventListener('close-addRoom', event => { $('#addRoom').modal('hide'); }) </script>
+            <script> window.addEventListener('open-addRoom', event => { window.$('#addRoom').modal('show'); }) </script>
+            <script> window.addEventListener('close-addRoom', event => { window.$('#addRoom').modal('hide'); }) </script>
         @endif
     @endcomponent
 </div>

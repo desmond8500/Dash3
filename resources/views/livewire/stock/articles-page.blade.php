@@ -19,34 +19,45 @@
 
             <div class="card">
 
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    @component('components.accordion-item',['id'=> 'brand', 'title'=>"Marques"])
-                        @foreach ($brands->sortby('name') as $brand)
-                            @if ($brand_id == $brand->id)
-                                <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('brand_id','{{ $brand->id }}')">{{ $brand->name }}</button>
-                            @else
-                                <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('brand_id','{{ $brand->id }}')">{{ $brand->name }}</button>
-                            @endif
-                        @endforeach
-                    @endcomponent
-                    @component('components.accordion-item',['id'=> 'provider', 'title'=>"Fournisseurs"])
-                        @foreach ($providers->sortby('name') as $provider)
-                            @if ($provider_id == $provider->id)
-                                <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('provider_id','{{ $provider->id }}')">{{ $provider->name }}</button>
-                            @else
-                                <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('provider_id','{{ $provider->id }}')">{{ $provider->name }}</button>
-                            @endif
-                        @endforeach
-                    @endcomponent
-                    @component('components.accordion-item',['id'=> 'priorite', 'title'=>"Priorités"])
-                        @foreach ($priorites as $priorite)
-                            @if ($priorite_id == $priorite->id)
-                                <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
-                            @else
-                                <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
-                            @endif
-                        @endforeach
-                    @endcomponent
+                <div wire:ignore.self>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        @component('components.accordion-item',['id'=> 'brand', 'title'=>"Marques"])
+                            {{-- <div class="input-icon">
+                                <input type="text" class="form-control form-control-rounded" wire:model.live="search_brand" placeholder="Chercher ">
+                                <span class="input-icon-addon">
+                                    <i class="ti ti-search"></i>
+                                </span>
+                            </div> --}}
+                            @foreach ($brands->sortby('name') as $brand)
+                                @if ($brand_id == $brand->id)
+                                    <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('brand_id','{{ $brand->id }}')">{{ $brand->name }}</button>
+                                @else
+                                    <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('brand_id','{{ $brand->id }}')">{{ $brand->name }}</button>
+                                @endif
+                            @endforeach
+
+
+                        @endcomponent
+                        @component('components.accordion-item',['id'=> 'provider', 'title'=>"Fournisseurs"])
+                            @foreach ($providers->sortby('name') as $provider)
+                                @if ($provider_id == $provider->id)
+                                    <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('provider_id','{{ $provider->id }}')">{{ $provider->name }}</button>
+                                @else
+                                    <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('provider_id','{{ $provider->id }}')">{{ $provider->name }}</button>
+                                @endif
+                            @endforeach
+                        @endcomponent
+                        @component('components.accordion-item',['id'=> 'priorite', 'title'=>"Priorités"])
+                            @foreach ($priorites as $priorite)
+                                @if ($priorite_id == $priorite->id)
+                                    <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
+                                @else
+                                    <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
+                                @endif
+                            @endforeach
+                        @endcomponent
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,18 +78,11 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article'])
+    @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.article_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger me-auto" wire:click='delete'>
-                    <i class="ti ti-trash"></i>
-                </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
-        <script> window.addEventListener('open-editArticle', event => { $('#editArticle').modal('show'); }) </script>
-        <script> window.addEventListener('close-editArticle', event => { $('#editArticle').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editArticle', event => { window.$('#editArticle').modal('show'); }) </script>
+        <script> window.addEventListener('close-editArticle', event => { window.$('#editArticle').modal('hide'); }) </script>
     @endcomponent
 </div>

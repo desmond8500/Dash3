@@ -2,9 +2,7 @@
     <div class="d-flex justify-content-between mb-1">
         <h2>Journal d'activité</h2>
         <div>
-
-                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher" >
-
+            <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher" >
         </div>
         @component("components.off-canvas", ['button'=>'Todo'])
             <ul>
@@ -16,7 +14,7 @@
     <div class="row g-2">
         @forelse ($journaux as $journal)
             <div class="col-md-4">
-                @component('_card.journal_card',['journal'=>$journal])
+                @component('_card.journal_card',['journal'=>$journal,])
                 @endcomponent
             </div>
         @empty
@@ -25,22 +23,17 @@
             </div>
         @endforelse
         <div>
-            {{ $journaux->links() }}
+            {{-- {{ $journaux->links() }} --}}
+            {{-- @dump($projets) --}}
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editJournal', 'title'=> 'Editer un journal'])
+    @component('components.modal', ["id"=>'editJournal', 'title'=> 'Editer un journal', "method"=>"update_journal"])
         <form class="row" wire:submit="update_journal">
-
-            @include('_form.journal_form')
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
+            @include('_form.journal_form',['projets'=>$projets])
         </form>
-        <script> window.addEventListener('open-editJournal', event => { $('#editJournal').modal('show'); }) </script>
-        <script> window.addEventListener('close-editJournal', event => { $('#editJournal').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editJournal', event => { window.$('#editJournal').modal('show'); }) </script>
+        <script> window.addEventListener('close-editJournal', event => { window.$('#editJournal').modal('hide'); }) </script>
     @endcomponent
 
 </div>

@@ -3,17 +3,20 @@
 namespace App\Livewire\Form;
 
 use App\Livewire\Forms\ArticleLinkForm;
+use App\Models\Article;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class AddArticleLink extends Component
 {
     public $article_id;
+    public $article;
     public ArticleLinkForm $article_link_form;
 
     function mount($article_id){
         $this->article_id = $article_id;
         $this->article_link_form->article_id = $article_id;
+        $this->article = Article::find($article_id);
     }
 
     public function render()
@@ -25,6 +28,10 @@ class AddArticleLink extends Component
         $this->article_link_form->store();
         $this->dispatch('close-addArticleLink');
         $this->dispatch('get-article-links');
+    }
+
+    function set_name($name){
+        $this->article_link_form->name = $name;
     }
 
 }

@@ -72,7 +72,7 @@
         </div>
 
         <div class="col-md-4">
-            {{-- @dump($user_form) --}}
+            @livewire('erp.c-v', ['user_id' => $user->id])
         </div>
     </div>
 
@@ -84,8 +84,8 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editUser', event => { $('#editUser').modal('show'); }) </script>
-        <script> window.addEventListener('close-editUser', event => { $('#editUser').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editUser', event => { window.$('#editUser').modal('show'); }) </script>
+        <script> window.addEventListener('close-editUser', event => { window.$('#editUser').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editPassword', 'title' => 'Editer avatar'])
@@ -105,7 +105,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editPassword', event => { $('#editPassword').modal('show'); }) </script>
-        <script> window.addEventListener('close-editPassword', event => { $('#editPassword').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editPassword', event => { window.$('#editPassword').modal('show'); }) </script>
+        <script> window.addEventListener('close-editPassword', event => { window.$('#editPassword').modal('hide'); }) </script>
     @endcomponent
 </div>

@@ -68,7 +68,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editFicheZone', event => { $('#editFicheZone').modal('show'); }) </script>
-        <script> window.addEventListener('close-editFicheZone', event => { $('#editFicheZone').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editFicheZone', event => { window.$('#editFicheZone').modal('show'); }) </script>
+        <script> window.addEventListener('close-editFicheZone', event => { window.$('#editFicheZone').modal('hide'); }) </script>
     @endcomponent
 </div>

@@ -79,16 +79,16 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editBrand', event => { $('#editBrand').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBrand', event => { $('#editBrand').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editBrand', event => { window.$('#editBrand').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBrand', event => { window.$('#editBrand').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'addBrandLink', 'title' => 'Ajouter un lien ou un document'])
         <form class="row" wire:submit="link_store">
             @include('_form.brand_link')
         </form>
-        <script> window.addEventListener('open-addBrandLink', event => { $('#addBrandLink').modal('show'); }) </script>
-        <script> window.addEventListener('close-addBrandLink', event => { $('#addBrandLink').modal('hide'); }) </script>
+        <script> window.addEventListener('open-addBrandLink', event => { window.$('#addBrandLink').modal('show'); }) </script>
+        <script> window.addEventListener('close-addBrandLink', event => { window.$('#addBrandLink').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'editLogo', 'title' => 'Editer un logo'])
@@ -114,7 +114,7 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
-        <script> window.addEventListener('open-editLogo', event => { $('#editLogo').modal('show'); }) </script>
-        <script> window.addEventListener('close-editLogo', event => { $('#editLogo').modal('hide'); }) </script>
+        <script> window.addEventListener('open-editLogo', event => { window.$('#editLogo').modal('show'); }) </script>
+        <script> window.addEventListener('close-editLogo', event => { window.$('#editLogo').modal('hide'); }) </script>
     @endcomponent
 </div>

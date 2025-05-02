@@ -39,6 +39,19 @@
                 @if ($title !="quantitatif")
                     <i>#{{ strtoupper($devis->reference) }}</i>
                 @endif
+                <div>
+                    <i class="text-muted">Emis le : {{ ($devis->formatDate()) }}</i>
+                </div>
+                @if ($devis->facture_date && $title == 'facture')
+                    <div>
+                        <i class="text-muted">Facturé le : {{ ($devis->formatDate($devis->facture_date)) }}</i>
+                    </div>
+                @endif
+                @if ($devis->paydate && $title == 'facture')
+                    <div>
+                        <i class="text-muted">Payé le : {{ ($devis->formatDate($devis->paydate)) }}</i>
+                    </div>
+                @endif
             </td>
         </tr>
     </table>
@@ -92,15 +105,15 @@
 
             <tbody style="font-size: 13px;">
 
-                @foreach ($section->rows as $row)
+                @foreach ($section->rows->sortBy('priorite_id') as $row)
                     @php
                         $total += $row->quantite*$row->prix;
                         $total_marge += $row->quantite*$row->coef*$row->prix;
                         $subtotal += $row->quantite*$row->coef*$row->prix;
                     @endphp
-                    <tr class="">
+                    <tr @class(['text-danger' => $row->quantite == 0 || $row->prix == 0])>
                         <td scope="row" >
-                            <div class="fw-bold">{{ $row->designation }}</div>
+                            <div class="fw-bold">{!! nl2br($row->designation) !!}</div>
                             <div class="text-muted" style="font-size: 10px;">{!! nl2br($row->reference) !!}</div>
                         </td>
                         <td class="text-center">{{ $row->quantite }}</td>
@@ -131,6 +144,25 @@
         @if ($title!="quantitatif")
             @include('_pdf.facture.facture_total_pdf')
         @endif
+
+        <div class="mt-2">
+            <table class="table">
+                <tr>
+                    <td width="50%" class="border-white">
+                        @if ($devis->modalite && $title == 'devis')
+                            <div class="fw-bold">Modalités :</div>
+                            <div>{{ $devis->modalite }}</div>
+                        @endif
+                    </td>
+                    <td class="border-white">
+                        @if ($devis->note && $title == 'devis')
+                            <div class="fw-bold mt-2">Notes :</div>
+                            <div>{{ $devis->note }}</div>
+                        @endif
+                    </td>
+                </tr>
+            </table>
+        </div>
 
         @if ($acompte)
             @include('_pdf.facture.facture_acompte_pdf')

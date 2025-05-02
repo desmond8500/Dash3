@@ -5,6 +5,7 @@ namespace App\Livewire\Form;
 use App\Livewire\Forms\JournalForm;
 use App\Models\Client;
 use App\Models\Journal;
+use App\Models\Projet;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -37,6 +38,7 @@ class JournalAdd extends Component
         return view('livewire.form.journal-add',[
             'Journal_count' => Journal::count(),
             'clients' => Client::all(),
+            'projets' => Projet::where('id', $this->projet_id)->get()
         ]);
     }
 
@@ -48,7 +50,6 @@ class JournalAdd extends Component
         $this->journalForm->devis_id= $this->devis_id;
         $this->journalForm->store();
         $this->dispatch('close-addJournal');
-        $this->dispatch('get-news');
     }
 
 }

@@ -61,7 +61,6 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'can:erp'])->group(function () {
     // Users
     // Route::get('/users', UsersPage::class)->name('users');
-
     Route::get('/erp', ErpPage::class)->name('erp');
     // Clients
     Route::get('/clients', ClientsPage::class)->name('clients');
@@ -84,13 +83,10 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
 
     // Documents
     Route::get('/documents', DocumentsPage::class)->name('documents');
-
     // Journaux
     Route::get('/journal/{journal_id}', JournalPage::class)->name('journal');
     // Contacts
     Route::get('/contacts', ContactsPage::class)->name('contacts');
-
-
     // Avancements
     Route::get('/avancements/{building_id}', AvancementsPage::class)->name('avancements');
     Route::get('/avancements_pdf/{avancement_id}', function ($avancement_id) {

@@ -1,5 +1,5 @@
 <div>
-    @component('components.layouts.page-header', ['title'=> "Marque", 'breadcrumbs'=>$breadcrumbs])
+    @component('components.layouts.page-header', ['title'=> "$brand->name", 'breadcrumbs'=>$breadcrumbs])
         <button class="btn btn-primary" wire:click="$dispatch('open-editLogo')">Editer Avatar</button>
         <button class="btn btn-primary btn-icon" wire:click="edit_brand('{{ $brand->id }}')">
             <i class="ti ti-edit"></i>
@@ -8,23 +8,20 @@
 
     <div class="row g-2">
         <div class="col-md-4">
+
+
             <div class="card card-body mb-2">
                 <img src="{{ asset($brand->logo) }}" class="img-fluid" alt="">
             </div>
 
             <div class="card mb-2">
-                <div class="card-header">
-                    <div class="card-title">{{ $brand->name }}</div>
-                    <div class="card-actions">
-
-                    </div>
-                </div>
                 @if ($brand->description)
                     <div class="card-body">
                         <div class="">{!! $brand->description !!}</div>
                     </div>
                 @endif
             </div>
+
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Liens</div>
@@ -71,19 +68,15 @@
             </div>
         </div>
     </div>
-    @component('components.modal', ["id"=>'editBrand', 'title' => 'Editer une marque'])
+    @component('components.modal', ["id"=>'editBrand', 'title' => 'Editer une marque', 'method'=>'update_brand'])
         <form class="row" wire:submit="update_brand">
             @include('_form.article_brand_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editBrand', event => { window.$('#editBrand').modal('show'); }) </script>
         <script> window.addEventListener('close-editBrand', event => { window.$('#editBrand').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'addBrandLink', 'title' => 'Ajouter un lien ou un document'])
+    @component('components.modal', ["id"=>'addBrandLink', 'title' => 'Ajouter un lien ou un document', 'method'=>'link_store'])
         <form class="row" wire:submit="link_store">
             @include('_form.brand_link')
         </form>
@@ -91,7 +84,7 @@
         <script> window.addEventListener('close-addBrandLink', event => { window.$('#addBrandLink').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editLogo', 'title' => 'Editer un logo'])
+    @component('components.modal', ["id"=>'editLogo', 'title' => 'Editer un logo', 'method'=>'update_logo'])
         <form class="" wire:submit="update_logo">
             <div class="text-center mb-3">
                 <div wire:loading>
@@ -108,10 +101,6 @@
                         <input type="file" class="form-control" wire:model='logo'>
                     @endif
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
         <script> window.addEventListener('open-editLogo', event => { window.$('#editLogo').modal('show'); }) </script>

@@ -92,36 +92,36 @@
                         @endif
                         <tbody>
                             @foreach ($invoices as $key => $invoice)
-                            <tr>
-                                <td>{{ $key+1 }}</td>
-                                <td>
-                                    <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" wire:navigate>
-                                        {{ ucfirst($invoice->reference) }}
-                                    </a>
-                                </td>
-                                <td>
-                                    {{ $invoice->description }}
-                                </td>
-                                <td>
-                                    @component('components.status',['status'=>$invoice->statut, 'invoice_id'=> $invoice->id, 'statuses'=>$statuses])
+                                <tr wire:key='{{ $invoice->id }}' class="cursor-pointer">
+                                    <td>{{ $key+1 }}</td>
+                                    <td>
+                                        <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" wire:navigate>
+                                            {{ ucfirst($invoice->reference) }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ $invoice->description }}
+                                    </td>
+                                    <td>
+                                        @component('components.status',['status'=>$invoice->statut, 'invoice_id'=> $invoice->id, 'statuses'=>$statuses])
 
-                                    @endcomponent
-                                </td>
-                                <td class="text-end">
-                                    <div>{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</div>
-                                    <div class="text-muted">{{ $invoice->formatDate($invoice->created_at) }}</div>
-                                </td>
-                                <td>
-                                    <div class="dropdown open">
-                                        <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                            <i class="ti ti-chevron-down"></i>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" wire:click="dupliquer('{{ $invoice->id }}')"> <i class="ti ti-copy"></i> Dupliquer</a>
+                                        @endcomponent
+                                    </td>
+                                    <td class="text-end">
+                                        <div>{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</div>
+                                        <div class="text-muted">{{ $invoice->formatDate($invoice->created_at) }}</div>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown open">
+                                            <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                                <i class="ti ti-chevron-down"></i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                                <a class="dropdown-item" wire:click="dupliquer('{{ $invoice->id }}')"> <i class="ti ti-copy"></i> Dupliquer</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

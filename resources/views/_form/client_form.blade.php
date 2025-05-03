@@ -44,6 +44,10 @@
 
 <div class="col-md-12 mb-3">
     <label class="form-label">Description</label>
-    <textarea class="form-control" wire:model="clientForm.description" placeholder="Description du client" id=""
-        data-bs-toggle="autosize"></textarea>
+    <textarea class="form-control" wire:model="clientForm.description" rows="5" placeholder="Description du client" data-bs-toggle="autosize"></textarea>
 </div>
+@script
+    <script>
+        autosize(document.querySelector('textarea'));
+    </script>
+@endscript

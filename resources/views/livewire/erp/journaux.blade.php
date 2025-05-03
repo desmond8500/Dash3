@@ -13,7 +13,7 @@
     </div>
     <div class="row g-2">
         @forelse ($journaux as $journal)
-            <div class="col-md-4">
+            <div class="col-md-4" wire:key='{{ $journal->id }}'>
                 @component('_card.journal_card',['journal'=>$journal,])
                 @endcomponent
             </div>

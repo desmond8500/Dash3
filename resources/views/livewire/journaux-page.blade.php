@@ -20,7 +20,7 @@
                 <div class="bg-blue-lt card-body card-body-scrollable card-body-scrollable-shadow">
                     <ul class="timeline timeline-simple">
                         @forelse ($journaux->sortByDesc('date') as $journal)
-                        <li class="timeline-event">
+                        <li class="timeline-event" wire:key='{{ $journal->id }}' >
                             <div class="mb-1">
                                 @component('_card.journal_card',['journal'=>$journal]) @endcomponent
                             </div>

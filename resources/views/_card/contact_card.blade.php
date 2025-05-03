@@ -1,4 +1,4 @@
-<div class="{{ $card_class ?? 'col-md-6' }}">
+{{-- <div class="{{ $card_class ?? 'col-md-6' }}"> --}}
     <div class="card p-2">
         <div class="row g-2">
             <div class="col-auto">
@@ -43,4 +43,4 @@
             </div>
         </div>
     </div>
-</div>
+{{-- </div> --}}

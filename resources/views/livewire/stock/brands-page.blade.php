@@ -2,7 +2,6 @@
     @component('components.layouts.page-header', ['title'=>'Marques', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             @livewire('form.brand-add')
-
         </div>
     @endcomponent
 
@@ -24,11 +23,7 @@
         </div>
         <div class="w-100"></div>
         @foreach ($brands as $brand)
-            @if ($card_type == 3)
-                <div class="col-md-2">
-            @else
-                <div class="col-md-4">
-            @endif
+            <div wire:key='{{ $brand->id }}' class="col-md-{{ $card_type == 3 ? '2' : '4' }} mb-2">
                 @include('_card.brand_card')
             </div>
         @endforeach
@@ -41,8 +36,10 @@
         <form class="row" wire:submit="update_brand">
             @include('_form.article_brand_form')
         </form>
-        <script> window.addEventListener('open-editBrand', event => { window.$('#editBrand').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBrand', event => { window.$('#editBrand').modal('hide'); }) </script>
+        @script
+            <script> window.addEventListener('open-editBrand', event => { window.$('#editBrand').modal('show'); }) </script>
+            <script> window.addEventListener('close-editBrand', event => { window.$('#editBrand').modal('hide'); }) </script>
+        @endscript
     @endcomponent
 
     @component('components.modal', ["id"=>'editBrandLogo', 'title' => 'Editer une marque', 'method'=>'update_logo'])
@@ -64,7 +61,9 @@
                 </div>
             </div>
         </form>
-        <script> window.addEventListener('open-editBrandLogo', event => { window.$('#editBrandLogo').modal('show'); }) </script>
-        <script> window.addEventListener('close-editBrandLogo', event => { window.$('#editBrandLogo').modal('hide'); }) </script>
+        @script
+            <script> window.addEventListener('open-editBrandLogo', event => { window.$('#editBrandLogo').modal('show'); }) </script>
+            <script> window.addEventListener('close-editBrandLogo', event => { window.$('#editBrandLogo').modal('hide'); }) </script>
+        @endscript
     @endcomponent
 </div>

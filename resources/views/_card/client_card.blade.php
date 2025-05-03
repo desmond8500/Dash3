@@ -18,7 +18,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="triggerId">
                         <button class="dropdown-item" wire:click="edit('{{ $client->id ?? 1 }}')"> <i class="ti ti-edit"></i> Editer</button>
-                        <button class="dropdown-item text-danger" wire:click="delete('{{ $client->id ?? 1 }}')"> <i class="ti ti-trash"></i> Editer</button>
+                        <button class="dropdown-item text-danger" wire:click="delete('{{ $client->id ?? 1 }}')"> <i class="ti ti-trash"></i> Supprimer</button>
                         <button class="dropdown-item" wire:click="toggleFavorite('{{ $client->id }}')">
                             @if ($client->favorite)
                                 <div class="text-danger"><i class="ti ti-heart-filled"></i> Favoris</div>

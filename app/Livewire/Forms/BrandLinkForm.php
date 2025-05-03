@@ -15,6 +15,7 @@ class BrandLinkForm extends Form
     public $brand_id;
     #[Rule('required')]
     public $name;
+    #[Rule('required')]
     public $link;
     public $folder;
     public $description;
@@ -24,7 +25,7 @@ class BrandLinkForm extends Form
     }
 
     function store(){
-        // $this->validate();
+        $this->validate();
         $this->fix();
         BrandLink::create($this->all());
     }

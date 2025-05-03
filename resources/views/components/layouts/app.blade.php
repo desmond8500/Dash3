@@ -101,7 +101,7 @@
     </div>
 
         {{-- Jquery --}}
-        {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
 
         <script wire:navigated src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>

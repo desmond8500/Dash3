@@ -19,7 +19,8 @@
             @endif
         </div>
         <div class="w-100"></div>
-        @foreach ($contacts as $contact)
+
+        @foreach ($contacts as $contact )
             @include('_card.contact_card', ['contact' => $contact])
         @endforeach
     </div>

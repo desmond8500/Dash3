@@ -3,7 +3,7 @@
         @livewire('form.provider-add')
     @endcomponent
 
-    <div class="row g-2">
+    <div class="row row-deck g-2">
         <div class="col-md-12">
             <div class="input-icon">
                 <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher un fournisseur">
@@ -21,7 +21,7 @@
                         </a>
                         <a class="col" href="{{ route('provider',['provider_id'=>$provider->id]) }}">
                             <div class="card-title">{{ $provider->name }}</div>
-                            <div class="text-muted">{{ nl2br($provider->description) }}</div>
+                            <div class="text-muted">{!! nl2br($provider->description) !!}</div>
                         </a>
                         <div class="col-auto">
                             <div class="dropdown open">
@@ -30,7 +30,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="triggerId">
                                     <a class="dropdown-item" wire:click="edit('{{ $provider->id }}')"> <i class="ti ti-edit"></i> Editer</a>
-                                    <a class="dropdown-item" wire:click="edit_logo('{{ $provider->id }}')"> <i class="ti ti-edit"></i> Editer Logo</a>
+                                    <a class="dropdown-item" wire:click="edit_logo('{{ $provider->id }}')"> <i class="ti ti-photo-edit"></i> Editer Logo</a>
                                     <a class="dropdown-item text-danger" wire:click="delete('{{ $provider->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                                 </div>
                             </div>
@@ -44,22 +44,15 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editProvider', 'title' => 'Editer un fournisseur'])
+    @component('components.modal', ["id"=>'editProvider', 'title' => 'Editer un fournisseur', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.provider_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-danger btn-icon" wire:click="delete()">
-                    <i class="ti ti-trash"></i>
-                </button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editProvider', event => { window.$('#editProvider').modal('show'); }) </script>
         <script> window.addEventListener('close-editProvider', event => { window.$('#editProvider').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editLogo', 'title' => 'Editer un logo'])
+    @component('components.modal', ["id"=>'editLogo', 'title' => 'Editer un logo', 'method'=>'update_logo'])
     <form class="" wire:submit="update_logo">
         <div class="text-center mb-3">
             <div wire:loading>
@@ -76,10 +69,6 @@
                     <input type="file" class="form-control" wire:model='logo'>
                 @endif
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn btn-primary">Valider</button>
         </div>
     </form>
     <script> window.addEventListener('open-editLogo', event => { window.$('#editLogo').modal('show'); }) </script>

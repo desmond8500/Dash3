@@ -37,19 +37,15 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editBrand', 'title' => 'Editer une marque'])
+    @component('components.modal', ["id"=>'editBrand', 'title' => 'Editer une marque', 'method'=>'update_brand'])
         <form class="row" wire:submit="update_brand">
             @include('_form.article_brand_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editBrand', event => { window.$('#editBrand').modal('show'); }) </script>
         <script> window.addEventListener('close-editBrand', event => { window.$('#editBrand').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editBrandLogo', 'title' => 'Editer une marque'])
+    @component('components.modal', ["id"=>'editBrandLogo', 'title' => 'Editer une marque', 'method'=>'update_logo'])
         <form class="" wire:submit="update_logo">
             <div class="text-center mb-3">
                 <div wire:loading>
@@ -66,10 +62,6 @@
                     <input type="file" class="form-control" wire:model='logo'>
                     @endif
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Modifier</button>
             </div>
         </form>
         <script> window.addEventListener('open-editBrandLogo', event => { window.$('#editBrandLogo').modal('show'); }) </script>

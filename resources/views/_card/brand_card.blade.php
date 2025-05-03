@@ -26,7 +26,7 @@
                     <div class="dropdown-menu" aria-labelledby="triggerId">
                         <a class="dropdown-item" wire:click="edit_brand('{{ $brand->id }}')"> <i class="ti ti-edit"></i>
                             Editer</a>
-                        <a class="dropdown-item" wire:click="edit_logo('{{ $brand->id }}')"> <i class="ti ti-edit"></i>
+                        <a class="dropdown-item" wire:click="edit_logo('{{ $brand->id }}')"> <i class="ti ti-photo-edit"></i>
                             Editer image</a>
                         <a class="dropdown-item text-danger" wire:click="delete_brand('{{ $brand->id }}')"> <i
                                 class="ti ti-trash"></i> Supprimer</a>

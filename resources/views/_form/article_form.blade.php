@@ -62,8 +62,8 @@
     <div class="col-md-6">
         <label class="form-label">Prix</label>
         <div class="input-group">
-            <input type="number" class="form-control" wire:model="article_form.price" placeholder="Prix">
-            <a class="btn btn-primary btn-icon" wire:click="add_tva()">
+            <input type="number" class="form-control" wire:model.live="article_form.price" placeholder="Prix">
+            <a class="btn btn-primary btn-icon" wire:click="$set('article_form.price', '{{ $article_form->price * 1,8 }}' )">
                 tva
             </a>
             <a class="btn btn-icon btn-primary" wire:click="convert_euro()" data-bs-toggle="tooltip" title="Convertir en Euro">

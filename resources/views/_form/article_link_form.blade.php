@@ -6,7 +6,7 @@
             <option>Site Officel</option>
             <option>Manuel</option>
             <option>Fiche</option>
-            <option>{{ $article->provider->name }}</option>
+            <option>{{ $article->provider->name ?? "" }}</option>
         </datalist>
     </div>
     @error('article_link_form.name') <span class='text-danger'>{{ $message }}</span> @enderror

@@ -18,7 +18,7 @@
     <div class="row row-deck g-2">
 
         @forelse ($clients as $client)
-            <div class="col-md-4">
+            <div class="col-md-4" wire:key="client-{{ $client->id }}">
                 @include('_card.client_card')
             </div>
         @empty
@@ -50,6 +50,7 @@
         <form class="row" wire:submit="store">
             @include('_form.client_form')
         </form>
+
         <script> window.addEventListener('open-addClient', event => { window.$('#addClient').modal('show'); }) </script>
         <script> window.addEventListener('close-addClient', event => { window.$('#addClient').modal('hide'); }) </script>
     @endcomponent

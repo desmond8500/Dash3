@@ -92,7 +92,7 @@
                         @endif
                         <tbody>
                             @foreach ($invoices as $key => $invoice)
-                                <tr wire:key='{{ $invoice->id }}' class="cursor-pointer">
+                                <tr wire:navigated' class="cursor-pointer">
                                     <td>{{ $key+1 }}</td>
                                     <td>
                                         <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" wire:navigate>

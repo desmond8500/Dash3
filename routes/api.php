@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AchatController;
 use App\Http\Controllers\api\BrandAPIController;
+use App\Http\Controllers\API\ClientAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
@@ -34,6 +35,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 // Demo
 Route::get('demos', [DemoController::class, 'index'])->name('demos');
+// Clients
+Route::prefix('v1')->group(function () {
+    // Route::get('demos', [DemoController::class, 'index'])->name('demos');
+    Route::resource('clients', ClientAPIController::class);
+    Route::get('clients/projets', [ClientAPIController::class, 'getProjets']);
+    Route::get('clients/tasks', [ClientAPIController::class, 'getClientsTasks']);
+
+    Route::resource('projets', ClientAPIController::class);
+});
+
 // Articles
 Route::prefix('v1')->group(function () {
     Route::apiResource('items', ItemsApiController::class);

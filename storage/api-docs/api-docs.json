@@ -34,6 +34,423 @@
                 }
             }
         },
+        "/api/v1/clients": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Liste des clients",
+                "operationId": "d999fb53802a1129e29bfc6e559113d7",
+                "responses": {
+                    "200": {
+                        "description": "Clients récupérés avec succès"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Ajouter un client",
+                "operationId": "94a7a13b3f07b590470cd73ad5cf8d9f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Client Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "type": {
+                                        "type": "1",
+                                        "example": "1"
+                                    },
+                                    "favorite": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Client créé avec succès"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la création du client"
+                    }
+                }
+            }
+        },
+        "/api/v1/clients/{id}": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Détails d'un client",
+                "operationId": "c0dfb2ffa55271df521af4639d2e2fb0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Client récupéré avec succès"
+                    },
+                    "404": {
+                        "description": "Client non trouvé"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Mettre à jour un client",
+                "operationId": "d1c1f6ae915d17e671c7b30f6a99dbf0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Client Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "type": {
+                                        "type": "1",
+                                        "example": "1"
+                                    },
+                                    "favorite": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Client mis à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Client non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la mise à jour du client"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Supprimer un client",
+                "operationId": "02682ab60057a176749c7e4a6d28a24b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Client supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Client non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la suppression du client"
+                    }
+                }
+            }
+        },
+        "/api/v1/clients/{id}/projets": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Liste des projets d'un client",
+                "operationId": "41f833633de608fd59784dd6444f5e42",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Projets récupérés avec succès"
+                    },
+                    "404": {
+                        "description": "Client non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la récupération des projets"
+                    }
+                }
+            }
+        },
+        "/api/v1/clients/{id}/tasks": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Liste des tâches d'un client",
+                "operationId": "e3330435da0406672ef5e299cb363967",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tâches récupérées avec succès"
+                    },
+                    "404": {
+                        "description": "Client non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la récupération des tâches"
+                    }
+                }
+            }
+        },
+        "/api/v1/clients/{id}/tasks/{task_id}": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Détails d'une tâche d'un client",
+                "operationId": "f66fd1a4e87822b1cd1752041b547274",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "task_id",
+                        "in": "path",
+                        "description": "ID de la tâche",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tâche récupérée avec succès"
+                    },
+                    "404": {
+                        "description": "Client ou tâche non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la récupération de la tâche"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Supprimer une tâche d'un client",
+                "operationId": "dd554484a2eb595fe7bf21a5358082a6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "task_id",
+                        "in": "path",
+                        "description": "ID de la tâche",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tâche supprimée avec succès"
+                    },
+                    "404": {
+                        "description": "Client ou tâche non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la suppression de la tâche"
+                    }
+                }
+            }
+        },
+        "/api/v1/clients/{id}/tasks/{task_id}/update": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Mettre à jour une tâche d'un client",
+                "operationId": "7599cddbbd6409c0060e4fda20cecf85",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du client",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "task_id",
+                        "in": "path",
+                        "description": "ID de la tâche",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Task Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "priority": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "due_date": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2023-10-01T00:00:00Z"
+                                    },
+                                    "assigned_to": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "project_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tâche mise à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Client ou tâche non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la mise à jour de la tâche"
+                    }
+                }
+            }
+        },
         "/api/v1/invoices": {
             "get": {
                 "tags": [
@@ -253,6 +670,10 @@
         {
             "name": "Marques",
             "description": "Marques"
+        },
+        {
+            "name": "Clients",
+            "description": "Clients"
         },
         {
             "name": "Invoices",

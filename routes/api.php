@@ -39,8 +39,8 @@ Route::get('demos', [DemoController::class, 'index'])->name('demos');
 Route::prefix('v1')->group(function () {
     // Route::get('demos', [DemoController::class, 'index'])->name('demos');
     Route::resource('clients', ClientAPIController::class);
-    Route::get('clients/projets', [ClientAPIController::class, 'getProjets']);
-    Route::get('clients/tasks', [ClientAPIController::class, 'getClientsTasks']);
+    Route::get('clients/projets/{id}', [ClientAPIController::class, 'getProjets']);
+    Route::get('clients/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
 
     Route::resource('projets', ClientAPIController::class);
 });

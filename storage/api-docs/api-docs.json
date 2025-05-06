@@ -26,7 +26,7 @@
                     "Marques"
                 ],
                 "description": "Liste des marques",
-                "operationId": "bb2bd6798eb8f8bb417d5909305427ad",
+                "operationId": "16d64d94135153b1998b7033636f8463",
                 "responses": {
                     "200": {
                         "description": "Success"
@@ -264,7 +264,7 @@
                     "Clients"
                 ],
                 "summary": "Liste des tâches d'un client",
-                "operationId": "e3330435da0406672ef5e299cb363967",
+                "operationId": "f6c6df4ed4357d9a1252fad79efe37ee",
                 "parameters": [
                     {
                         "name": "id",
@@ -285,168 +285,6 @@
                     },
                     "400": {
                         "description": "Erreur lors de la récupération des tâches"
-                    }
-                }
-            }
-        },
-        "/api/v1/clients/{id}/tasks/{task_id}": {
-            "get": {
-                "tags": [
-                    "Clients"
-                ],
-                "summary": "Détails d'une tâche d'un client",
-                "operationId": "f66fd1a4e87822b1cd1752041b547274",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID du client",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "task_id",
-                        "in": "path",
-                        "description": "ID de la tâche",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Tâche récupérée avec succès"
-                    },
-                    "404": {
-                        "description": "Client ou tâche non trouvé"
-                    },
-                    "400": {
-                        "description": "Erreur lors de la récupération de la tâche"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Clients"
-                ],
-                "summary": "Supprimer une tâche d'un client",
-                "operationId": "dd554484a2eb595fe7bf21a5358082a6",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID du client",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "task_id",
-                        "in": "path",
-                        "description": "ID de la tâche",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Tâche supprimée avec succès"
-                    },
-                    "404": {
-                        "description": "Client ou tâche non trouvé"
-                    },
-                    "400": {
-                        "description": "Erreur lors de la suppression de la tâche"
-                    }
-                }
-            }
-        },
-        "/api/v1/clients/{id}/tasks/{task_id}/update": {
-            "get": {
-                "tags": [
-                    "Clients"
-                ],
-                "summary": "Mettre à jour une tâche d'un client",
-                "operationId": "7599cddbbd6409c0060e4fda20cecf85",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID du client",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "task_id",
-                        "in": "path",
-                        "description": "ID de la tâche",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "name"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Task Name"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": ""
-                                    },
-                                    "status": {
-                                        "type": "integer",
-                                        "example": "1"
-                                    },
-                                    "priority": {
-                                        "type": "integer",
-                                        "example": "1"
-                                    },
-                                    "due_date": {
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "example": "2023-10-01T00:00:00Z"
-                                    },
-                                    "assigned_to": {
-                                        "type": "integer",
-                                        "example": "1"
-                                    },
-                                    "project_id": {
-                                        "type": "integer",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Tâche mise à jour avec succès"
-                    },
-                    "404": {
-                        "description": "Client ou tâche non trouvé"
-                    },
-                    "400": {
-                        "description": "Erreur lors de la mise à jour de la tâche"
                     }
                 }
             }

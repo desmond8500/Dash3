@@ -1,4 +1,4 @@
-<div class="modal modal-dialog-scrollable fade" id="{{ $id ?? 'exampleModal' }}" tabindex="-1" aria-labelledby="{{ $id ?? 'exampleModal' }}Label" aria-hidden="true" wire:ignore.self>
+<div class="modal fade" id="{{ $id ?? 'exampleModal' }}" aria-labelledby="{{ $id ?? 'exampleModal' }}Label" aria-hidden="true" wire:ignore.self tabindex="-1">
     <style>
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
@@ -20,9 +20,6 @@
                 <div class="card-actions">
                     {{ $actions ?? '' }}
                 </div>
-                {{-- @isset($refresh)
-                    <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
-                @endisset --}}
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

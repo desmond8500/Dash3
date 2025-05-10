@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Http\Controllers\DashController;
+use App\Livewire\Forms\UserForm;
 use App\Mail\ReportMail;
 use App\Models\Article;
 use App\Models\Client;
@@ -28,6 +29,7 @@ class IndexPage extends Component
                 'locale' => 'fr_FR',
                 'timezone' => 'Africa/Dakar'
             ]),
+            'user' => auth()->user(),
         ]);
     }
     // Init
@@ -69,5 +71,37 @@ class IndexPage extends Component
 
     function init(){
         DashController::init_app();
+    }
+
+    // Login
+
+    // Register
+    public UserForm $user_form;
+    public $formtype = true;
+
+    public $email;
+    public $password;
+    public $errorMessage;
+
+    function login()
+    {
+        $this->validate([
+            'email' => 'required|email|exists:App\Models\User,email',
+            'password' => 'required'
+        ]);
+
+        $login = $this->user_form->login($this->email, $this->password);
+        if ($login) {
+            $this->reset('email', 'password', 'errorMessage');
+            $this->dispatch('close-login');
+            return redirect()->intended('/');
+        } else {
+            $this->errorMessage = 'Les identifiants sont incorrects';
+        }
+    }
+
+    function logout()
+    {
+        $this->user_form->logout();
     }
 }

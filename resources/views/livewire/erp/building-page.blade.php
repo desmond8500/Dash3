@@ -41,25 +41,18 @@
 
     </div>
 
-    @component('components.modal', ["id"=>'editBuilding', 'title' => 'Editer un batiment'])
+    @component('components.modal', ["id"=>'editBuilding', 'title' => 'Editer un batiment', 'method'=>'update_building'])
         <form class="row" wire:submit="update_building">
             @include('_form.building_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
+
         </form>
         <script> window.addEventListener('open-editBuilding', event => { window.$('#editBuilding').modal('show'); }) </script>
         <script> window.addEventListener('close-editBuilding', event => { window.$('#editBuilding').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editStage', 'title' => 'Editer un niveau'])
+    @component('components.modal', ["id"=>'editStage', 'title' => 'Editer un niveau', 'method'=>'update_stage'])
         <form class="row" wire:submit="update_stage">
             @include('_form.stage_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editStage', event => { window.$('#editStage').modal('show'); }) </script>
         <script> window.addEventListener('close-editStage', event => { window.$('#editStage').modal('hide'); }) </script>

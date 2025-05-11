@@ -1,6 +1,6 @@
 <div class="accordion-item ">
-    <div class="p-2" id="flush-headingOne">
-        <button class="accordion-button collapsed btn w-100"
+    <div class="" id="flush-headingOne">
+        <button class="accordion-button collapsed p-2"
             {{-- type="button" --}}
             data-bs-toggle="collapse"
             data-bs-target="#flush-{{ $id ?? 'collapseOne' }}"

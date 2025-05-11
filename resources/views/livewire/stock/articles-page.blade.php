@@ -55,13 +55,13 @@
                             @endforeach
                         @endcomponent
                         @component('components.accordion-item',['id'=> 'type', 'title'=>"Types"])
-                            {{-- @foreach ($priorites as $priorite)
-                                @if ($priorite_id == $priorite->id)
-                                    <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
-                                @else
-                                    <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
-                                @endif
-                            @endforeach --}}
+                            <div class="btn-list">
+                                @foreach ($tags as $tag)
+                                <span class="badge bg-primary cursor-pointer text-light me-1" wire:click="$set('tag','{{ $tag->name }}')">
+                                    {{ $tag->name }}
+                                </span>
+                                @endforeach
+                            </div>
                         @endcomponent
 
                     </div>

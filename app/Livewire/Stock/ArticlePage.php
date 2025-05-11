@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Stock;
 
-use App\Livewire\Forms\ArticleForm;
 use App\Livewire\Forms\ItemForm;
 use App\Models\Article;
 use App\Models\Brand;
@@ -10,6 +9,7 @@ use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Spatie\Tags\Tag;
 
 class ArticlePage extends Component
 {
@@ -38,6 +38,7 @@ class ArticlePage extends Component
             'providers' => Provider::all(),
             'brands' => Brand::all(),
             'article' => Article::find($this->article_id),
+            "tags" => Tag::getWithType('stock_article'),
         ]);
     }
 
@@ -81,4 +82,35 @@ class ArticlePage extends Component
     function add_tva(){
         $this->article_form->price = $this->article_form->price * 1.18;
     }
+
+    // Tags
+    public $tag_name;
+
+    public function add_tag($tag = null)
+    {
+        $this->validate([
+            'tag_name' => 'required|string|max:255',
+        ]);
+        if ($tag == null) {
+            Tag::findOrCreate(strtolower($this->tag_name), 'stock_article');
+            // Tag::create(['name' => strtolower($this->tag_name), 'type' => 'stock_article']);
+            $this->tag_name = '';
+        } else {
+            Tag::findOrCreate(strtolower($tag), 'stock_article');
+            // Tag::create(['name' => strtolower($tag), 'type' => 'stock_article']);
+        }
+        $this->dispatch('close-addTag');
+    }
+
+    function attach_tag($tag){
+        $article = Article::find($this->article_id);
+        $article->attachTag($tag);
+        $this->dispatch('refresh-article');
+    }
+    function detach_tag($tag){
+        $article = Article::find($this->article_id);
+        $article->detachTag($tag);
+        $this->dispatch('refresh-article');
+    }
+
 }

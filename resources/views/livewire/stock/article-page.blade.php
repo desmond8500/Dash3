@@ -20,6 +20,33 @@
                     </div>
                 </div>
             </div>
+
+            <div class="my-2">
+                @foreach ($article->tags as $tag)
+                    <span class="badge bg-primary text-light me-1">
+                        {{ $tag->name }}
+                        <i class="ti ti-x cursor-pointer" wire:click="detach_tag('{{ $tag->name }}')"></i>
+                    </span>
+                @endforeach
+            </div>
+
+            <div class="input-group">
+                <input type="text" class="form-control" wire:model='tag_name' placeholder="Ajouter  un tag">
+                <button class="btn btn-primary" wire:click="add_tag()">
+                    <i class="ti ti-plus"></i>
+                </button>
+                <div class="dropdown open">
+                    <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <i class="ti ti-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                        @foreach ($tags as $tag)
+                            <a class="dropdown-item" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-8">

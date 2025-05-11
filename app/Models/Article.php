@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Tags\HasTags;
 
 class Article extends Model
 {
     use HasFactory;
     use searchTrait;
+    use HasTags;
 
     protected $fillable = [
         'designation',

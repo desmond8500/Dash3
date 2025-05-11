@@ -12,6 +12,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Spatie\Tags\Tag;
 
 class ArticlesPage extends Component
 {
@@ -50,6 +51,7 @@ class ArticlesPage extends Component
             'articles' => $this->get_articles(),
             'providers' => Provider::all(),
             'brands' => Brand::search($this->search_brand, 'name')->get(),
+            'tags' => Tag::getWithType('stock_article'),
         ]);
     }
 
@@ -58,6 +60,7 @@ class ArticlesPage extends Component
     public $priorite_id = 25;
 
     public $priorites;
+    public $tag;
 
     function get_articles(){
         if ($this->brand_id) {
@@ -68,6 +71,9 @@ class ArticlesPage extends Component
         }
         if ($this->priorite_id != 25 ) {
             return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate(8);
+        }
+        if($this->tag){
+            return Article::withAnyTags([$this->tag]) ->paginate(8);
         }
         return Article::orderByDesc('id')->articleSearch($this->search)->paginate(8);
     }

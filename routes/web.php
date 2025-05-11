@@ -38,6 +38,7 @@ use App\Livewire\Stock\AchatPage;
 use App\Livewire\Stock\AchatsPage;
 use App\Livewire\Stock\ArticlePage;
 use App\Livewire\Stock\ArticlesPage;
+use App\Livewire\Stock\ArticleTypesPage;
 use App\Livewire\Stock\BrandPage;
 use App\Livewire\Stock\BrandsPage;
 use App\Livewire\Stock\ProviderPage;
@@ -125,6 +126,7 @@ Route::middleware(['auth', 'can:stock'])->group(function () {
     // Articles
     Route::get('/stock/articles', ArticlesPage::class)->name('articles');
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
+    Route::get('/stock/types', ArticleTypesPage::class)->name('article_types');
     // Achats
     Route::get('/stock/achats', AchatsPage::class)->name('achats');
     Route::get('/stock/achat/{achat_id}', AchatPage::class)->name('achat');

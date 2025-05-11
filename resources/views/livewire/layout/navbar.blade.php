@@ -7,7 +7,7 @@
         <!-- END NAVBAR TOGGLER -->
         <!-- BEGIN NAVBAR LOGO -->
         <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="{{ route('index') }}" wire:navigate>
+            <a href="{{ route('index') }}" >
                 {{ env('APP_NAME', 'Tabler') }}
             </a>
         </div>
@@ -151,30 +151,30 @@
                 </div>
             </div> --}}
             <div class="nav-item dropdown">
-            @auth
-                <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown" aria-label="Open user menu">
-                    <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm border border-secondary">
-                    <div class="d-none d-xl-block ps-2">
-                        <div>{{ $user->firstname }} {{ $user->lastname }}</div>
-                        <div class="mt-1 small text-secondary">{{ $user->function ?? '_' }}</div>
+                @auth
+                    <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown" aria-label="Open user menu">
+                        <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm border border-secondary">
+                        <div class="d-none d-xl-block ps-2">
+                            <div>{{ $user->firstname }} {{ $user->lastname }}</div>
+                            <div class="mt-1 small text-secondary">{{ $user->function ?? '_' }}</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <a href="{{ route('profile') }}" class="dropdown-item"><i class="ti ti-user"></i>
+                            Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('settings') }}" class="dropdown-item"><i class="ti ti-settings"></i>
+                            Paramètres</a>
+                        <a wire:click="logout()" class="dropdown-item text-danger"> <i class="ti ti-logout"></i>
+                            Déconnexion</a>
                     </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="{{ route('profile') }}" wire:navigate class="dropdown-item"><i class="ti ti-user"></i>
-                        Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ route('settings') }}" class="dropdown-item"><i class="ti ti-settings"></i>
-                        Paramètres</a>
-                    <a wire:click="logout()" class="dropdown-item text-danger"> <i class="ti ti-logout"></i>
-                        Déconnexion</a>
-                </div>
                 @else
-                <div class="nav-item ">
-                    <div class="btn-list">
-                        <a class="btn btn-primary" wire:click="dispatch('open-login')">Connexion</a>
-                        <a class="btn btn-light" wire:click="dispatch('open-register')">Inscription</a>
+                    <div class="nav-item ">
+                        <div class="btn-list">
+                            <a class="btn btn-primary" wire:click="dispatch('open-login')">Connexion</a>
+                            <a class="btn btn-light" wire:click="dispatch('open-register')">Inscription</a>
+                        </div>
                     </div>
-                </div>
                 @endauth
             </div>
         </div>
@@ -183,7 +183,7 @@
                 <!-- BEGIN NAVBAR MENU -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('index') }}" wire:navigate>
+                        <a class="nav-link" href="{{ route('index') }}" >
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <i class="ti ti-home"></i>
                             </span>
@@ -195,7 +195,7 @@
                         @foreach ($menus as $menu)
                             @can($menu['can'])
                                 @isset ($menu['submenu'])
-                                    <li class="nav-item dropdown">
+                                    <li class="nav-item dropdown" wire:key="{{ $menu['name'] }}">
                                         <a class="nav-link dropdown-toggle" href="#navbar-third" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                             role="button" aria-expanded="false">
                                             <span class="nav-link-title text-dark">
@@ -207,7 +207,7 @@
                                         </a>
                                         <div class="dropdown-menu">
                                             @foreach ($menu['submenu'] as $submenu)
-                                            <a class="dropdown-item" href="{{ route($submenu['route']) }}">
+                                            <a class="dropdown-item" href="{{ route($submenu['route']) }}" >
                                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                     <i class="ti ti-{{ $submenu['icon'] }}"></i>
                                                 </span>
@@ -217,8 +217,8 @@
                                         </div>
                                     </li>
                                 @else
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
+                                    <li class="nav-item" wire:key="{{ $menu['name'] }}">
+                                        <a class="nav-link" href="{{ route($menu['route']) }}" >
                                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                 <i class="ti ti-{{ $menu['icon'] }}"></i>
                                             </span>

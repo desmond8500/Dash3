@@ -55,9 +55,9 @@
                             @endforeach
                         @endcomponent
                         @component('components.accordion-item',['id'=> 'type', 'title'=>"Types"])
-                            <div class="btn-list">
+                            <div class="">
                                 @foreach ($tags as $tag)
-                                <span class="badge bg-primary cursor-pointer text-light me-1" wire:click="$set('tag','{{ $tag->name }}')">
+                                <span class="badge bg-primary cursor-pointer text-light mb-1" wire:click="$set('tag','{{ $tag->name }}')">
                                     {{ $tag->name }}
                                 </span>
                                 @endforeach

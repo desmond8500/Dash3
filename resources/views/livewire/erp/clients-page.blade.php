@@ -57,14 +57,6 @@
     @component('components.modal', ["id"=>'editClient', 'title'=>'Modifier un client', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.client_form')
-
-            {{-- <div class="modal-footer">
-                <button type="button" class="btn btn-danger" wire:click="delete()">
-                    <i class="ti ti-trash"></i>
-                </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div> --}}
         </form>
         <script> window.addEventListener('open-editClient', event => { window.$('#editClient').modal('show'); }) </script>
         <script> window.addEventListener('close-editClient', event => { window.$('#editClient').modal('hide'); }) </script>

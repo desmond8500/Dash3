@@ -21,9 +21,8 @@
         <div class="w-100"></div>
 
         @foreach ($contacts as $contact )
-            <div wire:key="{{ $contact->id}}" class="col-md-4  mb-2">
+            <div wire:key="{{ $contact->id}}" class="{{ $card_class }} ">
                 @include('_card.contact_card', ['contact' => $contact])
-
             </div>
         @endforeach
     </div>

@@ -130,6 +130,11 @@ class TestPage extends Component
         );
     }
 
+    public $images = [
+        ['url' => 'img/icons/001-shield.png', 'title' => 'Image 1'],
+        ['url' => 'img/icons/002-cyber-security.png', 'title' => 'Image 2'],
+    ];
+
     public function render(){
         return view('livewire.test-page',[
             'providers' => Provider::all(),

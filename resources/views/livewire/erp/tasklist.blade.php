@@ -105,7 +105,7 @@
             </div>
             <div class="row row-deck g-2">
                 @foreach ($tasks as $task)
-                    <div class="{{ $class ?? 'col-md-6'}}">
+                    <div  class="col-md-6" wire:key='{{ $task->id }}'>
                         @include('_card.task_card',['task' => $task])
                     </div>
                 @endforeach

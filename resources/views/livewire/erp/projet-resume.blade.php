@@ -95,7 +95,7 @@
                                 <tr wire:navigated' class="cursor-pointer">
                                     <td>{{ $key+1 }}</td>
                                     <td>
-                                        <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" wire:navigate>
+                                        <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" >
                                             {{ ucfirst($invoice->reference) }}
                                         </a>
                                     </td>
@@ -118,6 +118,7 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="triggerId">
                                                 <a class="dropdown-item" wire:click="dupliquer('{{ $invoice->id }}')"> <i class="ti ti-copy"></i> Dupliquer</a>
+                                                <a class="dropdown-item" wire:click="editInvoice('{{ $invoice->id }}')"> <i class="ti ti-edit"></i> Editer</a>
                                             </div>
                                         </div>
                                     </td>

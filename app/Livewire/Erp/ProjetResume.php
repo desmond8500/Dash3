@@ -64,6 +64,26 @@ class ProjetResume extends Component
         $invoice->save();
     }
 
+    // Invoice
+    public InvoiceForm $invoice_form;
+
+    function editInvoice($id)
+    {
+        $this->invoice_form->set($id);
+        $this->dispatch('open-editInvoice');
+    }
+
+    function update_invoice()
+    {
+        $this->invoice_form->update();
+        $this->dispatch('close-editInvoice');
+    }
+
+    function toggleInvoiceFavorite()
+    {
+        $this->invoice_form->favorite();
+    }
+
     function dupliquer($invoice_id){
         $this->invoiceForm->replicate($invoice_id);
     }

@@ -12,12 +12,12 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body-sm">
-                    <div class="d-block d-sm-none">
-                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"   alt="">
-                    </div>
-                    <div class="d-none d-sm-block">
-                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"   alt="">
-                    </div>
+                    <a href="{{ asset($article->image) }}" data-lightbox="avatar"  class="d-block d-sm-none">
+                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"  alt="">
+                    </a>
+                    <a href="{{ asset($article->image) }}" data-lightbox="avatar"  class="d-none d-sm-block">
+                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"  alt="">
+                    </a>
                 </div>
             </div>
 
@@ -120,7 +120,9 @@
                                 @foreach ($article->images() as $image)
                                     <div class="col-2">
                                         <div class="border rounded p-1 text-center bg-white">
-                                            <img src="{{ asset("storage/$image") }}" class="avatar avatar-md " alt="">
+                                            <a href="{{ asset("storage/$image") }}" data-lightbox="avatarlist">
+                                                <img src="{{ asset("storage/$image") }}" class="avatar avatar-md " alt="">
+                                            </a>
                                             <div class="d-flex-between mt-2">
                                                 <i class="ti ti-trash btn btn-sm btn-outline-danger rounded" wire:click="unset_image('{{ $image }}')" data-bs-toggle="tooltip" title="Supprimer l'image"></i>
                                                 <i class="ti ti-plus btn btn-sm btn-outline-primary rounded" wire:click="set_image('{{ $image }}')" data-bs-toggle="tooltip" title="Définir comme image par défaut"></i>

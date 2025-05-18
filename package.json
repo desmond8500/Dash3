@@ -13,6 +13,7 @@
     "dependencies": {
         "autosize": "^6.0.1",
         "easymde": "^2.19.0",
+        "jquery": "^3.7.1",
         "lightbox2": "^2.11.5",
         "puppeteer": "^23.11.1"
     }

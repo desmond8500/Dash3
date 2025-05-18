@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"  />
         <link rel="stylesheet" href="{{ asset('css/tabler.css') }}">
 
-       <link href=" https://cdn.jsdelivr.net/npm/lightgallery@2.8.3/css/lightgallery-bundle.min.css " rel="stylesheet">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
 
@@ -104,7 +104,7 @@
     </div>
 
         {{-- Jquery --}}
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
 
         <script wire:navigated src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
@@ -123,7 +123,6 @@
             autosize(document.querySelectorAll('textarea'));
         </script>
 
-        <script src=" https://cdn.jsdelivr.net/npm/lightgallery@2.8.3/lightgallery.umd.min.js "></script>
 
 </body>
 

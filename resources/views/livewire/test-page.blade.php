@@ -11,24 +11,21 @@
         <section class="col-md-8">
 
 
-            <div id="lightgallery" wire:ignore.self>
+            <div >
                 @foreach ($images as $image)
-                <a href="{{ asset($image['url']) }}" data-sub-html="{{ $image['title'] }}">
-                    <img src="{{ asset($image['url']) }}" alt="{{ $image['title'] }}" style="width: 150px; height: auto;">
-                </a>
+                    <a href="{{ asset($image['url']) }}" data-lightbox="roadtrip">
+                        <img src="{{ asset($image['url']) }}" alt="img">
+                    </a>
                 @endforeach
             </div>
 
             @script
 
             <script>
-                document.addEventListener('livewire:load', function () {
-                    const gallery = document.getElementById('lightgallery');
-                    lightGallery(gallery, {
-                        plugins: [],
-                        speed: 500,
-                    });
-                });
+                lightbox.option({
+                  'resizeDuration': 200,
+                  'wrapAround': true
+                })
             </script>
 
             @endscript

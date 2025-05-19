@@ -172,7 +172,7 @@
             </div>
             <div class="col-md-12">
                 @foreach ($tags->sortBy('name') as $tag)
-                    <a class="badge bg-primary text-white" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
+                    <a class="badge bg-primary text-white mb-1" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
                 @endforeach
 
             </div>

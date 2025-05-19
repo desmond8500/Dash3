@@ -22,7 +22,7 @@
             </div>
 
             <div class="my-2">
-                @foreach ($article->tags as $tag)
+                @foreach ($article->tags->sortBy('name') as $tag)
                     <span class="badge bg-primary text-light me-1 mb-1">
                         {{ $tag->name }}
                         <i class="ti ti-x cursor-pointer" wire:click="detach_tag('{{ $tag->name }}')"></i>
@@ -171,7 +171,7 @@
                 </button>
             </div>
             <div class="col-md-12">
-                @foreach ($tags as $tag)
+                @foreach ($tags->sortBy('name') as $tag)
                     <a class="badge bg-primary text-white" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
                 @endforeach
 

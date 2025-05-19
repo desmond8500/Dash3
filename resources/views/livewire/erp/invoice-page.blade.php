@@ -174,9 +174,23 @@
                     </div>
 
                     <div class="row">
-                        <div class="mb-3 col-md-12">
+                        <div class="mb-3 col-md-6">
                             <label>Tarif</label>
                             <input type="number" min="0" step="10000" class="form-control" wire:model.live="row_form.prix" placeholder="Prix">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="">Priorite</label>
+                            <select class="form-control" wire:model="row_form.priorite_id">
+                                <option value="0">Centrale 1</option>
+                                <option value="1">Centrale 2</option>
+                                <option value="2">Organe 1</option>
+                                <option value="3">Organe 2</option>
+                                <option value="4">Organe 3</option>
+                                <option value="5">Cable</option>
+                                <option value="6">Accessoires</option>
+                                <option value="7">Forfait</option>
+                            </select>
+                            @error('row_form.priorite_id') <span class='text-danger'>{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3 col-md-6">
                             <label>Coéficient</label>

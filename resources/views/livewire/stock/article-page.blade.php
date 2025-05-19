@@ -33,7 +33,6 @@
            <button class='btn btn-primary' wire:click="$dispatch('open-attachTag')"><i class='ti ti-plus'></i> Ajouter un
                 tag
             </button>
--
 
         </div>
 

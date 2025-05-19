@@ -3,7 +3,7 @@
     <div class="input-group">
         <input type="text" class="form-control" list="articleLinksList" wire:model="article_link_form.name" placeholder="Nom">
         <datalist id="articleLinksList">
-            <option>Site Officel</option>
+            <option>Site Officiel</option>
             <option>Manuel</option>
             <option>Fiche</option>
             <option>{{ $article->provider->name ?? "" }}</option>

@@ -85,6 +85,7 @@ class ArticlePage extends Component
 
     // Tags
     public $tag_name;
+    public $tag_search;
 
     public function add_tag($tag = null)
     {

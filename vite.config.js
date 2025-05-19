@@ -10,8 +10,8 @@ export default defineConfig({
     ],
     server: {
         cors: true, // Active les CORS
-        host: 'localhost',
-        port: 5173,
+        // host: 'localhost',
+        // port: 5173,
     },
     optimizeDeps: {
         include: ['jquery', 'lightbox2'],

@@ -23,29 +23,17 @@
 
             <div class="my-2">
                 @foreach ($article->tags as $tag)
-                    <span class="badge bg-primary text-light me-1">
+                    <span class="badge bg-primary text-light me-1 mb-1">
                         {{ $tag->name }}
                         <i class="ti ti-x cursor-pointer" wire:click="detach_tag('{{ $tag->name }}')"></i>
                     </span>
                 @endforeach
             </div>
 
-            <div class="input-group">
-                <input type="text" class="form-control" wire:model='tag_name' placeholder="Ajouter  un tag">
-                <button class="btn btn-primary" wire:click="add_tag()">
-                    <i class="ti ti-plus"></i>
-                </button>
-                <div class="dropdown open">
-                    <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <i class="ti ti-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                        @foreach ($tags as $tag)
-                            <a class="dropdown-item" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+           <button class='btn btn-primary' wire:click="$dispatch('open-attachTag')"><i class='ti ti-plus'></i> Ajouter un
+                tag
+            </button>
+-
 
         </div>
 
@@ -157,6 +145,43 @@
         </form>
         <script> window.addEventListener('open-editArticle', event => { window.$('#editArticle').modal('show'); }) </script>
         <script> window.addEventListener('close-editArticle', event => { window.$('#editArticle').modal('hide'); }) </script>
+    @endcomponent
+
+    {{-- <button class='btn btn-primary' wire:click="$dispatch('open-addTag')" ><i class='ti ti-plus'></i> Ajouter un tag</button>
+
+    @component('components.modal', ["id"=>'addTag', 'title' => 'Ajouter un Tag', 'method' => 'add_tag'])
+
+        @foreach ($tags as $tag)
+            <a class="badge bg-primary text-white" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
+        @endforeach
+
+        <script> window.addEventListener('open-addTag', event => { window.$('#addTag').modal('show'); }) </script>
+        <script> window.addEventListener('close-addTag', event => { window.$('#addTag').modal('hide'); }) </script>
+    @endcomponent --}}
+
+
+
+    @component('components.modal', ["id"=>'attachTag', 'title' => 'Tags'])
+        <div class="row g-1">
+            <div class="col">
+                <input type="text" class="form-control" wire:model='tag_name' placeholder="Ajouter  un tag">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary" wire:click="add_tag()">
+                    <i class="ti ti-plus"></i> Ajouter un nouveau Tag
+                </button>
+            </div>
+            <div class="col-md-12">
+                @foreach ($tags as $tag)
+                    <a class="badge bg-primary text-white" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
+                @endforeach
+
+            </div>
+        </div>
+
+
+        <script> window.addEventListener('open-attachTag', event => { window.$('#attachTag').modal('show'); }) </script>
+        <script> window.addEventListener('close-attachTag', event => { window.$('#attachTag').modal('hide'); }) </script>
     @endcomponent
 
 

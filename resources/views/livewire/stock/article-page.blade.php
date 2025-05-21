@@ -108,7 +108,7 @@
                                     <div class="col-2">
                                         <div class="border rounded p-1 text-center bg-white">
                                             <a href="{{ asset("storage/$image") }}" data-lightbox="avatarlist">
-                                                <img src="{{ asset("storage/$image") }}" class="avatar avatar-md " alt="">
+                                                <img src="{{ asset("storage/$image") }}" class="avatar avatar-xl " alt="">
                                             </a>
                                             <div class="d-flex-between mt-2">
                                                 <i class="ti ti-trash btn btn-sm btn-outline-danger rounded" wire:click="unset_image('{{ $image }}')" data-bs-toggle="tooltip" title="Supprimer l'image"></i>
@@ -131,11 +131,44 @@
                 <div class="col-md-6">
                     @livewire('stock.article-links', ['article_id' => $article->id])
                 </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Articles associés</div>
+                            <div class="card-actions">
+                                <button class='btn btn-primary' wire:click="$dispatch('open-addLinkedArticle')"><i class='ti ti-plus'></i> Ajouter un
+                                    Article        </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-2">
+                                @foreach ($dependances as $dependance)
+                                    <div class="col-md-4">
+                                        @include('_card.articleCard1', ['item' => $dependance->dependence])
+                                        <div class="d-flex">
+                                            <button class="btn btn-outline-danger btn-sm" wire:click="remove_dependance({{ $dependance->id }})">
+                                                <i class="ti ti-trash"></i>
+                                            </button>
+                                            <div class="btn">{{ $dependance->quantity }}</div>
+                                            <div>
+                                                <button class="btn btn-icon btn-primary" wire:click="increase_dependance('{{ $dependance->id }}')"><i class="ti ti-plus"></i></button>
+                                                <button class="btn btn-icon btn-primary" wire:click="decrease_dependance('{{ $dependance->id }}')"><i class="ti ti-minus"></i></button>
+                                            </div>
 
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+
+                        </div>
+                        <div class="card-footer">
+
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
-
     </div>
 
     @component('components.modal', ["id"=>'editArticle', 'title'=>'Editer un article', 'method'=>'update'])
@@ -145,20 +178,6 @@
         <script> window.addEventListener('open-editArticle', event => { window.$('#editArticle').modal('show'); }) </script>
         <script> window.addEventListener('close-editArticle', event => { window.$('#editArticle').modal('hide'); }) </script>
     @endcomponent
-
-    {{-- <button class='btn btn-primary' wire:click="$dispatch('open-addTag')" ><i class='ti ti-plus'></i> Ajouter un tag</button>
-
-    @component('components.modal', ["id"=>'addTag', 'title' => 'Ajouter un Tag', 'method' => 'add_tag'])
-
-        @foreach ($tags as $tag)
-            <a class="badge bg-primary text-white" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
-        @endforeach
-
-        <script> window.addEventListener('open-addTag', event => { window.$('#addTag').modal('show'); }) </script>
-        <script> window.addEventListener('close-addTag', event => { window.$('#addTag').modal('hide'); }) </script>
-    @endcomponent --}}
-
-
 
     @component('components.modal', ["id"=>'attachTag', 'title' => 'Tags'])
         <div class="row g-1">
@@ -172,16 +191,52 @@
             </div>
             <div class="col-md-12">
                 @foreach ($tags->sortBy('name') as $tag)
-                    <a class="badge bg-primary text-white mb-1" wire:click="attach_tag('{{ $tag->name }}')"> {{ $tag->name }}</a>
+                    <a class="badge bg-primary text-white mb-1 cursor-pointer" wire:click="attach_tag('{{ $tag->name }}')"> {{ ucfirst($tag->name) }}</a>
                 @endforeach
-
             </div>
         </div>
-
 
         <script> window.addEventListener('open-attachTag', event => { window.$('#attachTag').modal('show'); }) </script>
         <script> window.addEventListener('close-attachTag', event => { window.$('#attachTag').modal('hide'); }) </script>
     @endcomponent
+
+    @component('components.modal', ["id"=>'addLinkedArticle', 'title' => 'Tags'])
+        <div class="row row-deck g-2">
+            @foreach ($articles as $article)
+                <div class="col-md-4 cursor-pointer" wire:click="add_dependence({{ $article->id }})">
+                    <div class="border border-1 rounded p-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="{{ asset($article->image) }}" alt="" max-height="50px" class="rounded">
+                            </div>
+                            <div class="col-md-12 fw-bold" style="height: 50px">
+                                {{ $article->designation }}
+                            </div>
+                            <div class="text-muted" style="height: 50px">
+                                {{ $article->reference }}
+                            </div>
+                            <div class="text-end text-danger fw-bold ">
+                                {{ $article->price }} F
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+            <div class="input-group">
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Quantité</label>
+                    <input type="text" class="form-control" wire:model="Name" placeholder="Quantité">
+                    @error('Name') <span class='text-danger'>{{ $message }}</span> @enderror
+                </div>
+            </div>
+        </div>
+
+        <script> window.addEventListener('open-addLinkedArticle', event => { window.$('#addLinkedArticle').modal('show'); }) </script>
+        <script> window.addEventListener('close-addLinkedArticle', event => { window.$('#addLinkedArticle').modal('hide'); }) </script>
+    @endcomponent
+
+
 
 
 </div>

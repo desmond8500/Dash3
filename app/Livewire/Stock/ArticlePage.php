@@ -4,6 +4,7 @@ namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\ItemForm;
 use App\Models\Article;
+use App\Models\ArticleDependence;
 use App\Models\Brand;
 use App\Models\Provider;
 use Livewire\Attributes\On;
@@ -18,6 +19,7 @@ class ArticlePage extends Component
 
     protected $paginationTheme = 'bootstrap';
     public $search ='';
+    public $article_search ='';
     public $breadcrumbs;
     public $article_id;
     public ItemForm $article_form;
@@ -39,6 +41,8 @@ class ArticlePage extends Component
             'brands' => Brand::all(),
             'article' => Article::find($this->article_id),
             "tags" => Tag::getWithType('stock_article'),
+            'dependances' => ArticleDependence::where('article_id', $this->article_id)->get(),
+            'articles' => Article::articleSearch($this->article_search)->paginate(6)
         ]);
     }
 
@@ -112,6 +116,34 @@ class ArticlePage extends Component
         $article = Article::find($this->article_id);
         $article->detachTag($tag);
         $this->dispatch('refresh-article');
+    }
+
+    // Dépendences
+    function add_dependence($dependence_id){
+        $article = Article::find($this->article_id);
+        ArticleDependence::create([
+            'article_id' => $article->id,
+            'dependence_id' => $dependence_id,
+        ]);
+        $this->dispatch('close-addLinkedArticle');
+    }
+
+    function remove_dependance($dependence_id){
+        $dependance = ArticleDependence::find($dependence_id);
+        $dependance->delete();
+    }
+
+    function increase_dependance($dependance_id){
+        $dependance = ArticleDependence::find($dependance_id);
+        $dependance->quantity += 1;
+        $dependance->save();
+    }
+    function decrease_dependance($dependance_id){
+        $dependance = ArticleDependence::find($dependance_id);
+        if ($dependance->quantity > 1) {
+            $dependance->quantity -= 1;
+            $dependance->save();
+        }
     }
 
 }

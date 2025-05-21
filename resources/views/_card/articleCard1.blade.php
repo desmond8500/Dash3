@@ -1,27 +1,31 @@
 <div class="card" style="max-width: 200px">
     <div class="p-2">
-        <div style="height: 100px; width: 100%; background-color: #f1f1f1; margin: 0 auto;"></div>
+        @if ($item->image)
+            <img src="{{ asset($item->image) }}" class="card-img-top" alt="...">
+        @else
+            <div style="height: 100px; width: 100%; background-color: #f1f1f1; margin: 0 auto;"></div>
+        @endif
 
         <div class="text-uppercase my-1" style="font-size: 12px">
-            Désignation de l'article
+            {{ $item->designation ?? "Désignation de l'article" }}
         </div>
 
         <div class="text-muted" style="font-size: 12px">
-            Lorem ipsum dolor sit amet consectetur
+            {!! nl2br($item->description) !!}
         </div>
         <div class="d-flex justify-content-between" style="position: relative">
             <div class="text-uppercase text-purple">
-                Marque
+                {{ $item->brand->name ?? "Marque" }}
             </div>
             <div class="text-uppercase text-purple">
-                Fournisseur
+                {{ $item->provider->name ?? "Fournisseur" }}
             </div>
 
         </div>
 
         <div class="d-flex justify-content-between ">
             <div>01</div>
-            <div>120 000 CFA</div>
+            <div class="text-danger fw-bold">{{ number_format($item->price, 0, '.', ' ') }} CFA</div>
         </div>
     </div>
 

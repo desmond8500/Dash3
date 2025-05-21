@@ -4,7 +4,6 @@
             @livewire('form.provider-add')
             @livewire('form.brand-add')
         </div>
-
     @endcomponent
 
     <div class="row g-2">
@@ -21,19 +20,24 @@
                 </div>
             </div>
 
-            <div class="my-2">
-                @foreach ($article->tags->sortBy('name') as $tag)
-                    <span class="badge bg-primary text-light me-1 mb-1">
-                        {{ $tag->name }}
-                        <i class="ti ti-x cursor-pointer" wire:click="detach_tag('{{ $tag->name }}')"></i>
-                    </span>
-                @endforeach
+            <div class="card mt-2">
+                <div class="card-header">
+                    <div class="card-title">Tags</div>
+                    <div class="card-actions">
+                        <button class='btn btn-primary' wire:click="$dispatch('open-attachTag')"><i class='ti ti-plus'></i> Tag </button>
+                    </div>
+                </div>
+                @if (!$article->tags->isEmpty())
+                    <div class="p-2">
+                        @foreach ($article->tags->sortBy('name') as $tag)
+                            <span class="badge bg-primary text-light me-1 mb-1">
+                                {{ $tag->name }}
+                                <i class="ti ti-x cursor-pointer" wire:click="detach_tag('{{ $tag->name }}')"></i>
+                            </span>
+                        @endforeach
+                    </div>
+                @endif
             </div>
-
-           <button class='btn btn-primary' wire:click="$dispatch('open-attachTag')"><i class='ti ti-plus'></i> Ajouter un
-                tag
-            </button>
-
         </div>
 
         <div class="col-md-8">
@@ -102,17 +106,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="p-2">
                             <div class="row g-1">
                                 @foreach ($article->images() as $image)
-                                    <div class="col-2">
+                                    <div class="col-4 col-xs-4 col-sm-4 col-md-2">
                                         <div class="border rounded p-1 text-center bg-white">
                                             <a href="{{ asset("storage/$image") }}" data-lightbox="avatarlist">
                                                 <img src="{{ asset("storage/$image") }}" class="avatar avatar-xl " alt="">
                                             </a>
                                             <div class="d-flex-between mt-2">
-                                                <i class="ti ti-trash btn btn-sm btn-outline-danger rounded" wire:click="unset_image('{{ $image }}')" data-bs-toggle="tooltip" title="Supprimer l'image"></i>
-                                                <i class="ti ti-plus btn btn-sm btn-outline-primary rounded" wire:click="set_image('{{ $image }}')" data-bs-toggle="tooltip" title="Définir comme image par défaut"></i>
+                                                <i class="ti ti-trash btn  btn-ghost-danger rounded" wire:click="unset_image('{{ $image }}')" data-bs-toggle="tooltip" title="Supprimer l'image"></i>
+                                                <i class="ti ti-photo btn  btn-ghost-primary rounded" wire:click="set_image('{{ $image }}')" data-bs-toggle="tooltip" title="Définir comme image par défaut"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -136,35 +140,33 @@
                         <div class="card-header">
                             <div class="card-title">Articles associés</div>
                             <div class="card-actions">
-                                <button class='btn btn-primary' wire:click="$dispatch('open-addLinkedArticle')"><i class='ti ti-plus'></i> Ajouter un
-                                    Article        </button>
+                                <button class='btn btn-primary' wire:click="$dispatch('open-addLinkedArticle')"><i class='ti ti-plus'></i> Article </button>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row g-2">
-                                @foreach ($dependances as $dependance)
-                                    <div class="col-md-4">
-                                        @include('_card.articleCard1', ['item' => $dependance->dependence])
-                                        <div class="d-flex">
-                                            <button class="btn btn-outline-danger btn-sm" wire:click="remove_dependance({{ $dependance->id }})">
-                                                <i class="ti ti-trash"></i>
-                                            </button>
-                                            <div class="btn">{{ $dependance->quantity }}</div>
-                                            <div>
-                                                <button class="btn btn-icon btn-primary" wire:click="increase_dependance('{{ $dependance->id }}')"><i class="ti ti-plus"></i></button>
-                                                <button class="btn btn-icon btn-primary" wire:click="decrease_dependance('{{ $dependance->id }}')"><i class="ti ti-minus"></i></button>
+                        @if (!$dependances->isEmpty())
+                            <div class="card-body">
+                                <div class="row g-2">
+                                    @foreach ($dependances as $dependance)
+                                        <div class="col-md-4">
+                                            @include('_card.articleCard1', ['item' => $dependance->dependence])
+                                            <div class="d-flex">
+                                                <button class="btn btn-outline-danger btn-sm" wire:click="remove_dependance({{ $dependance->id }})">
+                                                    <i class="ti ti-trash"></i>
+                                                </button>
+                                                <div class="btn">{{ $dependance->quantity }}</div>
+                                                <div>
+                                                    <button class="btn btn-icon btn-primary" wire:click="increase_dependance('{{ $dependance->id }}')"><i class="ti ti-plus"></i></button>
+                                                    <button class="btn btn-icon btn-primary" wire:click="decrease_dependance('{{ $dependance->id }}')"><i class="ti ti-minus"></i></button>
+                                                </div>
+
                                             </div>
-
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
+
+
                             </div>
-
-
-                        </div>
-                        <div class="card-footer">
-
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

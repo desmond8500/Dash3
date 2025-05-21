@@ -6,23 +6,25 @@
                 @livewire('form.add-article-document', ['article_id' => $article_id1])
             </div>
         </div>
-        <div class="card-body">
-            @foreach ($documents as $document)
-                <div class="row align-items-center mb-1 pb-1 border-bottom">
-                    <a class="col-auto" href="{{ asset($document->folder) }}" target="_blank">
-                        <img src="{{ asset($document->folder) }}" alt="F" class="avatar">
-                    </a>
-                    <a class="col" href="{{ asset($document->folder) }}" target="_blank">
-                        {{ $document->name ?? 'Lien' }}
-                    </a>
-                    <div class="col-auto">
-                        <button class="btn btn-primary btn-icon" wire:click="edit('{{ $document->id }}')">
-                            <i class="ti ti-edit"></i>
-                        </button>
+        @if (!$documents->isEmpty())
+            <div class="p-2">
+                @foreach ($documents as $document)
+                    <div class="row align-items-center mb-1 pb-1 border-bottom">
+                        <a class="col-auto" href="{{ asset($document->folder) }}" target="_blank">
+                            <img src="{{ asset($document->folder) }}" alt="F" class="avatar">
+                        </a>
+                        <a class="col" href="{{ asset($document->folder) }}" target="_blank">
+                            {{ $document->name ?? 'Lien' }}
+                        </a>
+                        <div class="col-auto">
+                            <button class="btn btn-primary btn-icon" wire:click="edit('{{ $document->id }}')">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
+        @endif
     </div>
 
     @component('components.modal', ["id"=>'editArticleDocument', 'title' => 'Editer un document', 'method'=>'update'])

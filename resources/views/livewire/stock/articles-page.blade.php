@@ -4,6 +4,12 @@
             @livewire('form.article-add')
             @livewire('form.provider-add')
             @livewire('form.brand-add')
+            <button class="btn btn-dark btn-icon disabled" >
+                <i class="ti ti-layout-grid"></i>
+            </button>
+            <button class="btn btn-dark btn-icon disabled" >
+                <i class="ti ti-layout-list"></i>
+            </button>
         </div>
     @endcomponent
 

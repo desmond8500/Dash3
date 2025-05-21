@@ -10,16 +10,17 @@ use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use Spatie\Tags\Tag;
 
 class ArticlePage extends Component
 {
-    // use WithPagination;
+    use WithPagination;
     use WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
     public $search ='';
-    public $article_search ='';
+
     public $breadcrumbs;
     public $article_id;
     public ItemForm $article_form;
@@ -119,6 +120,8 @@ class ArticlePage extends Component
     }
 
     // Dépendences
+    public $article_search = '';
+
     function add_dependence($dependence_id){
         $article = Article::find($this->article_id);
         ArticleDependence::create([

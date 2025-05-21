@@ -202,6 +202,9 @@
 
     @component('components.modal', ["id"=>'addLinkedArticle', 'title' => 'Tags'])
         <div class="row row-deck g-2">
+            <div class="col-md-12">
+                <input type="text" class="form-control" wire:model.live='article_search' placeholder="Rechercher un article">
+            </div>
             @foreach ($articles as $article)
                 <div class="col-md-4 cursor-pointer" wire:click="add_dependence({{ $article->id }})">
                     <div class="border border-1 rounded p-2">
@@ -222,13 +225,8 @@
                     </div>
                 </div>
             @endforeach
-
-            <div class="input-group">
-                <div class="col-md-12 mb-3">
-                    <label class="form-label">Quantité</label>
-                    <input type="text" class="form-control" wire:model="Name" placeholder="Quantité">
-                    @error('Name') <span class='text-danger'>{{ $message }}</span> @enderror
-                </div>
+            <div class="col-md-12 mt-3">
+                {{ $articles->links() }}
             </div>
         </div>
 

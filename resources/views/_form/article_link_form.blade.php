@@ -6,6 +6,8 @@
             <option>Site Officiel</option>
             <option>Manuel</option>
             <option>Fiche</option>
+            <option>Fiche Technique</option>
+            <option>Brochure</option>
             <option>{{ $article->provider->name ?? "" }}</option>
         </datalist>
     </div>

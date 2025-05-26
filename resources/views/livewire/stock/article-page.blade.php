@@ -86,6 +86,11 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="col-md-12">
+                                <div class="p-2">
+                                    {!! nl2br($article->description) !!}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

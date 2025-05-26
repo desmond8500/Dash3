@@ -13,9 +13,9 @@
     <div class="mb-3">
         <label class="form-label">Afficher le résumé</label>
         <label class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" wire:model="show" />
+            <input class="form-check-input" type="checkbox" wire:model="acompte_form.show" />
         </label>
-        @error('show') <span class='text-danger'>{{ $message }}</span> @enderror
+        @error('acompte_form.show') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 </div>
 

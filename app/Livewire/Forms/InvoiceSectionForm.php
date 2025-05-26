@@ -15,6 +15,8 @@ class InvoiceSectionForm extends Form
     public $invoice_id;
     public $section;
     public $ordre;
+    public $proposition;
+    public $status = false;
 
     function fix(){
         $this->section = ucfirst($this->section);
@@ -32,6 +34,8 @@ class InvoiceSectionForm extends Form
         $this->invoice_id = $this->invoice_section->invoice_id;
         $this->section = $this->invoice_section->section;
         $this->ordre = $this->invoice_section->ordre;
+        $this->proposition = $this->invoice_section->proposition;
+        $this->status = $this->invoice_section->status;
     }
 
     function update(){

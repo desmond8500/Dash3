@@ -13,7 +13,9 @@ class InvoiceSection extends Model
     protected $fillable = [
         'invoice_id',
         'section',
-        'ordre'
+        'ordre',
+        'proposition',
+        'status',
     ];
 
     public function rows(): HasMany

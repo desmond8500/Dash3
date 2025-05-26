@@ -219,7 +219,7 @@
                                         <div class="text-muted" style="font-size: 12px;">{!! nl2br($row->reference) !!}</div>
                                         <hr>
 
-                                        <div style="font-size: 14px;">{!! nl2br($row->article->description) !!}</div>
+                                        <div style="font-size: 14px;">{!! nl2br($row->article->description ?? ' ') !!}</div>
 
                                         <div class="mt-1">
                                             @if ($row->article->links)

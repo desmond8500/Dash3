@@ -82,6 +82,15 @@
                 </th>
                 <th scope="col" class="bg-primary-lt " colspan="6">
                     <div class="d-flex justify-content-end">
+                        @if ($section->status)
+                            <button class="btn btn-sm p-1 rounded btn-success me-1" wire:click="proposition_toggle('{{ $section->id }}')">
+                                <i class="ti ti-circle-check"></i>
+                            </button>
+                        @else
+                            <button class="btn btn-sm p-1 rounded btn-dark me-1" wire:click="proposition_toggle('{{ $section->id }}')">
+                                <i class="ti ti-circle-x"></i>
+                            </button>
+                        @endif
                         <button class="btn btn-sm p-1 rounded btn-primary me-1" wire:click="addRow('{{ $section->id }}')">
                             <i class="ti ti-plus"></i> Article
                         </button>

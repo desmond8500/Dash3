@@ -120,6 +120,12 @@ class InvoicePage extends Component
         $this->dispatch('open-infoModal');
     }
 
+    function proposition_toggle($section_id)
+    {
+        $this->section_form->set($section_id);
+        $this->section_form->proposition_toggle();
+    }
+
     // Row
     public $row_tab = 1, $row_class = '';
     public InvoiceRowForm $row_form;

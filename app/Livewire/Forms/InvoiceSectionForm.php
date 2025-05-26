@@ -53,4 +53,14 @@ class InvoiceSectionForm extends Form
             return 'La section a été supprimée';
         }
     }
+
+    function proposition_toggle()
+    {
+        if ($this->status) {
+            $this->status = false;
+        } else {
+            $this->status = true;
+        }
+        $this->invoice_section->update($this->only('status'));
+    }
 }

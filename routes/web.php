@@ -47,6 +47,7 @@ use App\Livewire\Stock\StockPage;
 use App\Livewire\Task\TaskPage;
 use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
+use App\Livewire\TimelinePage;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Browsershot\Browsershot;
@@ -111,6 +112,8 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     })->name('avancements_pdf');
 
     Route::get('/team', TeamPage::class)->name('team');
+
+    Route::get('/timeline', TimelinePage::class)->name('timeline');
 
 });
 

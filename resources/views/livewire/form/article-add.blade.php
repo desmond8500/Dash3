@@ -1,5 +1,7 @@
 <div>
-    <a class="btn btn-primary" wire:click="add"><i class="ti ti-plus"></i> Article </a>
+    <a class="btn btn-primary" wire:click="add"><i class="ti ti-plus"></i>
+        A<div class="d-none d-sm-block">rticle</div>
+    </a>
 
     @component('components.modal', ["id"=>'addArticle', 'title'=>'Ajouter un article', 'refresh'=>true, "method"=>"store"])
         <form class="row" wire:submit="store">

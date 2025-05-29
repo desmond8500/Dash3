@@ -1,12 +1,12 @@
 <div class="card p-2">
     <div class="row g-2">
         <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>
-            <img src="{{ asset($article->image) }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
+            <img src="{{ asset($article->image) }}" alt="A" class="avatar bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain;" >
         </a>
         <div class="col">
             <div class="row">
                 <div class="col">
-                    <div style="height: 40px; overflow:hidden">
+                    <div style="min-height: 20px; max-height: 40px; overflow:hidden">
                         <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>{{ $article->designation }}</a>
                     </div>
                 </div>
@@ -70,10 +70,10 @@
             </div>
 
             <div class="row mt-1">
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="badge " style="font-size:10px" data-bs-toggle="tooltip" title="Priorité">{{ $article->priority() }}</div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-6">
                     <div class="text-danger text-end" style="font-size: 18px">{{ number_format($article->price, 0, 2) }} F</div>
                 </div>
             </div>

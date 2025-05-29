@@ -7,16 +7,16 @@
             @if ($article_form)
                 @if ($article_form->image)
                     @if(is_string($article_form->image))
-                        <img src="{{ asset($article_form->image) }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
+                        <img src="{{ asset($article_form->image) }}" alt="" class="avatar avatar-xl rounded avatar-upload mt-1 col-auto">
                     @else
-                        <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload mt-1 col-auto">
+                        <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar avatar-xl rounded avatar-upload mt-1 col-auto">
                     @endif
-                    <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                    <label for="file" href="#" class="avatar avatar-xl avatar-upload rounded col-auto">
                         <i class="ti ti-edit text-muted"></i>
                         <span class="avatar-upload-text">Modifier</span>
                     </label>
                 @else
-                    <label for="file" href="#" class="avatar avatar-upload rounded col-auto">
+                    <label for="file" href="#" class="avatar avatar-xl avatar-upload rounded col-auto">
                         <i class="ti ti-plus text-muted"></i>
                         <span class="avatar-upload-text">Ajouter</span>
                     </label>
@@ -88,7 +88,7 @@
         @error('article_form.priority_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-4">
+    <div class="col-6 col-md-4">
         <label class="form-label">Fournisseur</label>
         <select class="form-control" wire:model="article_form.provider_id">
             <option value="" class="text-muted">--Sélectionner--</option>
@@ -99,7 +99,7 @@
         @error('article_form.brand_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-4">
+    <div class="col-6 col-md-4">
         <label class="form-label">Marque</label>
         <select class="form-control" wire:model="article_form.brand_id">
             <option value="" >--Sélectionner--</option>

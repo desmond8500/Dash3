@@ -230,21 +230,13 @@
                                                 @endforeach
                                             @endif
                                         </div>
-
-
-
                                     </td>
                                     <td class="text-center">{{ $row->quantite }}</td>
-
-
                                 </tr>
                             @endif
                         @endforeach
-
                     </tbody>
-
                 </table>
-
             @endif
         @endforeach
     @endif

@@ -1,6 +1,6 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'CV', 'breadcrumbs'=>$breadcrumbs])
-        <button class="btn btn-primary" >PDF</button>
+        <a class="btn btn-primary" href="{{ route('cv_pdf',['cv_id'=>$cv_id]) }}" target="_blank">PDF</a>
     @endcomponent
 
     <div class="row">

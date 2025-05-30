@@ -62,13 +62,16 @@ Route::get('/login', LoginPage::class)->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', ProfilePage::class)->name('profile');
     Route::get('/settings', SettingsPage::class)->name('settings');
+    Route::get('/cv/{cv_id}', CVpage::class)->name('cv');
+    Route::get('/cv_pdf/{cv_id}', function ($cv_id) {
+        return PDFController::cv_pdf($cv_id);
+    })->name('cv_pdf');
 });
 
 // ERP
 Route::middleware(['auth', 'can:erp'])->group(function () {
     // Users
     // Route::get('/users', UsersPage::class)->name('users');
-    Route::get('/cv/{cv_id}', CVpage::class)->name('cv');
 
     Route::get('/erp', ErpPage::class)->name('erp');
     // Clients

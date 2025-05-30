@@ -24,6 +24,7 @@ class ArticleLinkForm extends Form
     function store(){
         $this->validate();
         ArticleLink::create($this->all());
+        $this->reset(['article_id', 'link', 'name']);
     }
 
     function set($model_id){

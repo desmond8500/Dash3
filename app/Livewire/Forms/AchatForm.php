@@ -39,6 +39,7 @@ class AchatForm extends Form
         ]);
         $achat->transaction_id = $transaction->id;
         $achat->save();
+        $this->reset('name', 'date', 'provider_id', 'journal_id', 'description', 'status');
     }
 
 

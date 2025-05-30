@@ -76,19 +76,15 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editUser', 'title' => 'Editer profile'])
+    @component('components.modal', ["id"=>'editUser', 'title' => 'Editer profile', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.user_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editUser', event => { window.$('#editUser').modal('show'); }) </script>
         <script> window.addEventListener('close-editUser', event => { window.$('#editUser').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editPassword', 'title' => 'Editer avatar'])
+    @component('components.modal', ["id"=>'editPassword', 'title' => 'Editer avatar', 'method'=>'update_password'])
         <form class="row" wire:submit="update_password">
             <div class="col-md-12 mb-3">
                 <label class="form-label">Mot de passe</label>
@@ -99,10 +95,6 @@
                 <label class="form-label">Confirmer Mot de passe</label>
                 <input type="text" class="form-control" wire:model="user_form.password_confirmation" placeholder="Mot de passe">
                 @error('user_form.password_confirmation') <span class='text-danger'>{{ $message }}</span> @enderror
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
         <script> window.addEventListener('open-editPassword', event => { window.$('#editPassword').modal('show'); }) </script>

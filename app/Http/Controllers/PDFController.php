@@ -6,6 +6,7 @@ use App\Models\Achat;
 use App\Models\Badge;
 use App\Models\Building;
 use App\Models\Commande;
+use App\Models\CV;
 use App\Models\Fiche;
 use App\Models\Invoice;
 use App\Models\InvoiceAcompte;
@@ -357,6 +358,19 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView("_pdf.pv.pv1_pdf", $data);
+        return $pdf->stream("Procès verbal");
+    }
+
+
+    public static function cv_pdf($cv_id){
+        $cv = CV::find($cv_id);
+        // $carbon = new Carbon($date);
+
+        $data = [
+            // 'logo' => env('LOGO', ''),
+        ];
+
+        $pdf = Pdf::loadView("_pdf.cv.cv1_pdf", $data);
         return $pdf->stream("Procès verbal");
     }
 

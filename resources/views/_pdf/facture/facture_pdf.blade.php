@@ -222,7 +222,7 @@
                                         <div style="font-size: 14px;">{!! nl2br($row->article->description ?? ' ') !!}</div>
 
                                         <div class="mt-1">
-                                            @if ($row->article->links)
+                                            @if ($row->article && $row->article->links)
                                                 @foreach ($row->article->links as $link)
                                                     @if ($link->name == "Fiche Technique")
                                                         <a href="{{ $link->link }}" class="text-purple" target="_blank">{{ $link->name }}</a>

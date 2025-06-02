@@ -88,9 +88,18 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="p-2">
+                                    <h3>Description</h3>
                                     {!! nl2br($article->description) !!}
                                 </div>
                             </div>
+                            @if ($article->spec)
+                            <div class="col-md-12 ">
+                                <div class="p-2">
+                                    <h3>Spécifications techniques</h3>
+                                    {!! nl2br($article->spec) !!}
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

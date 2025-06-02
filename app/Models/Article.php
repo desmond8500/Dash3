@@ -27,6 +27,7 @@ class Article extends Model
         'brand_id',
         'provider_id',
         'price',
+        'spec',
     ];
 
     protected $hidden = [

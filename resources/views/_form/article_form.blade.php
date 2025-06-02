@@ -115,5 +115,10 @@
         <textarea class="form-control"  wire:model="article_form.description" placeholder="Description" data-bs-toggle="autosize"></textarea>
         @error('article_form.description') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
+    <div class="col-md-12">
+        <label class="form-label">Spécifications techniques</label>
+        <textarea class="form-control"  wire:model="article_form.spec" placeholder="Description" data-bs-toggle="autosize"></textarea>
+        @error('article_form.spec') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
 
 </div>

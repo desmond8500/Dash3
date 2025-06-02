@@ -27,6 +27,7 @@ class ItemForm extends Form
     public $price = 0;
 
     public $description;
+    public $spec;
     public $brand_id;
     public $provider_id;
     public $image;
@@ -66,6 +67,7 @@ class ItemForm extends Form
         $this->brand_id     = $this->article->brand_id;
         $this->provider_id  = $this->article->provider_id;
         $this->price        = $this->article->price;
+        $this->spec        = $this->article->spec;
     }
 
     function update(){

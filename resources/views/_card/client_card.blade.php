@@ -39,5 +39,8 @@
             <div> <i class="ti ti-box"></i> Taches: <b>{{ $client->tasks->count() }}</b></div>
         @endisset
     </div>
+    <div class="d-flex justify-content-between p-2 border-top">
+        {!! $client->description !!}
+    </div>
 
 </div>

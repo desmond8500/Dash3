@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\clientForm;
 use App\Livewire\Forms\projetForm;
 use App\Models\Client;
 use App\Models\Projet;
@@ -31,6 +32,7 @@ class ProjetsPage extends Component
             array('name' => $client->name, 'route' => route('projets',['client_id'=>$client->id])),
         );
     }
+
 
     public function render()
     {
@@ -72,5 +74,21 @@ class ProjetsPage extends Component
     {
         $this->projetForm->set($projet_id);
         $this->projetForm->favorite();
+    }
+
+    // Client
+    public clientForm $clientForm;
+
+    function edit_client($client_id)
+    {
+        $this->clientForm->set($client_id);
+        $this->dispatch('open-editClient');
+    }
+
+    function update_client()
+    {
+        $this->clientForm->update($this->selected);
+        $this->dispatch('close-editClient');
+        $this->render();
     }
 }

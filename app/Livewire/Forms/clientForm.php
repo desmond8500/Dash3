@@ -64,7 +64,7 @@ class clientForm extends Form
     }
 
     function update($selected) {
-        $client = Client::find($selected["id"]);
+        $client = Client::find($selected["id"] ?? $this->client->id);
         $client->name = ucfirst($this->name);
         $client->type =  $this->type;
         $client->description = ucfirst($this->description);

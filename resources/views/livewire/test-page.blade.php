@@ -9,45 +9,29 @@
 
 
         <section class="col-md-8">
-
-
-            <div >
-                @foreach ($images as $image)
-                    <a href="{{ asset($image['url']) }}" data-lightbox="roadtrip">
-                        <img src="{{ asset($image['url']) }}" alt="img">
-                    </a>
-                @endforeach
-            </div>
-
-            @script
-
-            <script>
-                lightbox.option({
-                  'resizeDuration': 200,
-                  'wrapAround': true
-                })
-            </script>
-
-            @endscript
-
-
-
-
+            @if ($selected_card)
+                @include($selected_card)
+            @endif
 
             <div class="row">
                 @foreach ($widgets as $widget)
-                @if ($widget->type == "include")
-                <a href="{{ $widget->link }}" target="_blank" class="{{ $widget->class }}">
-                    @includeWhen($widget->id == $selected_widget, $widget->view )
-                </a>
-                @elseif($widget->type == "livewire")
-                @if ($widget->id == $selected_widget)
-                @livewire($widget->view)
-                @endif
-                @endif
+                    @if ($widget->type == "include")
+                        <a href="{{ $widget->link }}" target="_blank" class="{{ $widget->class }}">
+                            @if ($widget->data)
+                                @includeWhen($widget->id == $selected_widget, $widget->view, [$widget->data_name => $widget->data] )
+                            @else
+                                @includeWhen($widget->id == $selected_widget, $widget->view )
+                            @endif
+                        </a>
+                    @elseif($widget->type == "livewire")
+                        @if ($widget->id == $selected_widget)
+
+                        @endif
+                    @endif
                 @endforeach
             </div>
         </section>
+
 
         <nav class="col-md-4">
             <div class="card">

@@ -2,10 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Demo;
 use App\Models\Provider;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -15,6 +17,8 @@ class TestPage extends Component
 {
     use WithFileUploads;
     public $content = 'ff';
+    public $cartes;
+    public $selected_card = 0;
 
     public function updatedContent()
     {
@@ -27,6 +31,7 @@ class TestPage extends Component
 
     function mount(){
         $this->widgets = (object) array(
+
             (object) array(
                 'id'=> 1,
                 'name' => 'Invoice resume card',
@@ -35,15 +40,8 @@ class TestPage extends Component
                 'type' => 'include',
                 'link'=>'',
                 'description' => '',
-            ),
-            (object) array(
-                'id'=> 1,
-                'name' => 'Invoice resume card',
-                'view'=> '_card.invoice_resume_card',
-                'class' => '',
-                'type' => 'include',
-                'link'=>'',
-                'description' => '',
+                "data" => 0,
+                "data_name" => "",
             ),
             (object) array(
                 'id'=> 2,
@@ -53,6 +51,8 @@ class TestPage extends Component
                 'type' => 'livewire',
                 'link'=>'',
                 'description' => '',
+                "data" => 0,
+                "data_name" => "",
             ),
             (object) array(
                 'id'=> 3,
@@ -62,6 +62,8 @@ class TestPage extends Component
                 'type' => 'include',
                 'link'=> 'https://dribbble.com/shots/24839357-Meet-our-magic-team-Untitled-UI',
                 'description' => '',
+                "data" => 0,
+                "data_name" => "",
             ),
             (object) array(
                 'id' => 5,
@@ -70,7 +72,9 @@ class TestPage extends Component
                 'class' => '',
                 'type' => 'livewire',
                 'link' => '',
-                'description' => ''
+                'description' => '',
+                "data" => 0,
+                "data_name" => "",
             ),
             (object) array(
                 'id' => 6,
@@ -79,7 +83,20 @@ class TestPage extends Component
                 'class' => '',
                 'type' => 'include',
                 'link' => '',
-                'description' => ''
+                'description' => '',
+                "data" => 0,
+                "data_name" => "",
+            ),
+            (object) array(
+                'id' => 4,
+                'name' => 'Article card',
+                'view' => '_card.articleCard',
+                'class' => '',
+                'type' => 'include',
+                'link' => '',
+                'description' => '',
+                "data" => Article::find(1),
+                "data_name" => "article",
             ),
             (object) array(
                 'id' => 7,
@@ -88,7 +105,9 @@ class TestPage extends Component
                 'class' => '',
                 'type' => 'include',
                 'link' => '',
-                'description' => ''
+                'description' => '',
+                "data" => 0,
+                "data_name" => "",
             ),
             (object) array(
                 'id' => 8,
@@ -97,7 +116,9 @@ class TestPage extends Component
                 'class' => '',
                 'type' => 'include',
                 'link' => '',
-                'description' => ''
+                'description' => '',
+                "data" => 0,
+                "data_name" => "",
             ),
             (object) array(
                 'id' => 9,
@@ -106,7 +127,9 @@ class TestPage extends Component
                 'class' => '',
                 'type' => 'include',
                 'link' => '',
-                'description' => ''
+                'description' => '',
+                "data" => 0,
+                "data_name" => "",
             ),
             (object) array(
                 'id' => 10,
@@ -115,7 +138,9 @@ class TestPage extends Component
                 'class' => '',
                 'type' => 'livewire',
                 'link' => '',
-                'description' => 'Gestion des statuts dans des badges'
+                'description' => 'Gestion des statuts dans des badges',
+                "data" => 0,
+                "data_name" => "",
             ),
             (object) array(
                 'id' => 10,
@@ -124,10 +149,15 @@ class TestPage extends Component
                 'class' => '',
                 'type' => 'livewire',
                 'link' => '',
-                'description' => 'Dessins graphiques'
+                'description' => 'Dessins graphiques',
+                "data" => 0,
+                "data_name" => "",
             ),
             // (object) array( 'id'=> 3, 'name' => 'Article card', 'view'=> '_card.articleCard'),
         );
+
+        $this->cartes = glob('../resources/views/_card/*');
+        // $this->cartes = Storage::disk('local')->directories("");
     }
 
     public $images = [
@@ -168,6 +198,8 @@ class TestPage extends Component
         Demo::create([
             'name' => $this->name,
             'description' => $this->description,
+            "data" => 0,
+            "data_name" => "",
         ]);
         $this->reset('name', 'description');
     }

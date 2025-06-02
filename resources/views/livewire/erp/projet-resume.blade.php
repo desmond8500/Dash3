@@ -92,7 +92,7 @@
                         @endif
                         <tbody>
                             @foreach ($invoices as $key => $invoice)
-                                <tr wire:navigated' class="cursor-pointer">
+                                <tr class="cursor-pointer" wire:key="{{ $invoice->id }}">
                                     <td>{{ $key+1 }}</td>
                                     <td>
                                         <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" >
@@ -151,7 +151,7 @@
             @if ($buildings->count())
                 <div class="p-2">
                     @foreach ($buildings as $building)
-                        <a href="{{ route('building',['building_id'=> $building->id]) }}" class="card p-1 mb-1" target="_blank">
+                        <a href="{{ route('building',['building_id'=> $building->id]) }}" class="card p-2 mb-1" target="_blank">
                             {{ $building->name }}
                         </a>
                     @endforeach

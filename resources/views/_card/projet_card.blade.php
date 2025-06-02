@@ -33,4 +33,7 @@
         <div> <b>Devis:</b> {{ $projet->devis->count() }}</div>
         <div> <b>Taches:</b> {{ $projet->tasks->count() }}</div>
     </div>
+    <div class="border-top">
+        {!! $projet->description !!}
+    </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="card p-2">
-    <div class="row g-2">
+    <div class="row">
         @if($card_type==3)
             <div class="col-md-12">
                 <img src="{{ asset($brand->logo) ?? 'https://avatar.iran.liara.run/public' }}" alt="M" class="img-fluid">
@@ -11,7 +11,7 @@
         @else
             <div class="col-auto">
                 <img src="{{ asset($brand->logo) ?? 'https://avatar.iran.liara.run/public' }}" alt="M"
-                    class="avatar avatar-md">
+                    class="avatar avatar-xl">
             </div>
             <div class="col">
                 <a class="card-title" href="{{ route('brand',['brand_id'=>$brand->id]) }}">{{ $brand->name }}</a>

@@ -15,13 +15,18 @@
 
     <div class="{{ $class ?? 'modal-dialog' }} modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="{{ $id ?? 'exampleModal' }}Label">{{ $title ?? 'Modal title' }}</h5>
-                <div class="card-actions">
-                    {{ $actions ?? '' }}
+            {{-- @if ($noheader ?? true) --}}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="{{ $id ?? 'exampleModal' }}Label">{{ $title ?? 'Modal title' }}</h5>
+                    <div class="card-actions">
+                        {{ $actions ?? '' }}
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+            {{-- @else
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+
+            @endif --}}
             <div class="modal-body">
 
                 {{ $slot }}

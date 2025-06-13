@@ -23,7 +23,7 @@
         </div>
         <div class="w-100"></div>
         @foreach ($brands as $brand)
-            <div wire:key='{{ $brand->id }}' class="col-md-{{ $card_type == 3 ? '2' : '4' }} mb-2">
+            <div wire:key='{{ $brand->id }}' class="col-md-{{ $card_type == 3 ? '2' : '4' }} ">
                 @include('_card.brand_card')
             </div>
         @endforeach

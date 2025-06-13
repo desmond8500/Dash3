@@ -19,8 +19,29 @@
                 <span class="text-truncate">{{ $title ?? 'Title' }}</span>
             </h2>
         </div>
-        <div class="col-md-auto col-xs-12">
-            {{ $slot }}
+        <div class="col-auto">
+
+            <div class="d-none d-sm-block">
+                {{ $slot }}
+            </div>
+
+            <div class="d-block d-sm-none">
+
+                <button class='btn btn-primary btn-icon' wire:click="$dispatch('open-actionButtons')"><i class='ti ti-plus'></i> </button>
+
+                @component('components.modal', ["id"=>'actionButtons', 'title' => 'Actions'])
+                    {{ $slot }}
+
+
+                    <script>
+                        window.addEventListener('open-actionButtons', event => { $('#actionButtons').modal('show'); })
+                    </script>
+                    <script>
+                        window.addEventListener('close-actionButtons', event => { $('#actionButtons').modal('hide'); })
+                    </script>
+                @endcomponent
+            </div>
+
         </div>
     </div>
 </div>

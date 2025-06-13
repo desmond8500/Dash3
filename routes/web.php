@@ -84,6 +84,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
     Route::get('/invoicelist', InvoiceListPage::class)->name('invoicelist');
     Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf($invoice_id, $type); })->name('facture_pdf');
+    Route::get('/facture/proposal_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::proposal_pdf($invoice_id, $type); })->name('proposal_pdf');
     Route::get('/facture/facture_pdf_save/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf_save($invoice_id, $type); })->name('facture_pdf_save');
     Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) { return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id); })->name('facture_acompte_pdf');
 

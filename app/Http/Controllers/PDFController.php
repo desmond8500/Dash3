@@ -178,6 +178,11 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
         return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
     }
+    public static function proposal_pdf($invoice_id,$type='facture'){
+        $data = PDFController::facture($invoice_id, $type);
+        $pdf = Pdf::loadView('_pdf.facture.proposal_pdf', $data);
+        return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
+    }
 
     // Télécharger PDF
     public static function facture_pdf_save($invoice_id,$type){

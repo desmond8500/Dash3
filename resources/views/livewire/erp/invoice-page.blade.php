@@ -56,6 +56,10 @@
 
             @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
 
+            <div class="mb-1">
+                @livewire('erp.invoice-proposal', ['invoice_id' => $devis->id])
+            </div>
+
         </div>
     </div>
 

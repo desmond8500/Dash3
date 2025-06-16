@@ -11,6 +11,7 @@ use App\Models\Fiche;
 use App\Models\Invoice;
 use App\Models\InvoiceAcompte;
 use App\Models\InvoiceBl;
+use App\Models\InvoiceProposal;
 use App\Models\InvoiceSection;
 use App\Models\Journal;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -153,6 +154,8 @@ class PDFController extends Controller
         ];
     }
 
+
+
     /**
      *@OA\Get(
      *      path="/api/v1/facture_pdf/invoice_id/type",
@@ -178,11 +181,7 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
         return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
     }
-    public static function proposal_pdf($invoice_id,$type='facture'){
-        $data = PDFController::facture($invoice_id, $type);
-        $pdf = Pdf::loadView('_pdf.facture.proposal_pdf', $data);
-        return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
-    }
+
 
     // Télécharger PDF
     public static function facture_pdf_save($invoice_id,$type){
@@ -377,6 +376,33 @@ class PDFController extends Controller
 
         $pdf = Pdf::loadView("_pdf.cv.cv1_pdf", $data);
         return $pdf->stream("Procès verbal");
+    }
+
+    public static function proposal_pdf($proposal_id, $type = 'devis')
+    {
+        $data = PDFController::proposal($proposal_id, $type);
+        $pdf = Pdf::loadView('_pdf.facture.proposal_pdf', $data);
+        return $pdf->stream(Str::upper($type) . ' ' . Str::upper($data['devis']->reference) . ' - ' . $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
+    }
+
+    static function proposal($proposal_id, $type)
+    {
+        $proposal = InvoiceProposal::find($proposal_id);
+        $devis = Invoice::find($proposal->invoice->id);
+        $carbon = new Carbon($devis->date);
+
+        return [
+            'logo' => env('LOGO', ''),
+            'title' => $type ?? "Facture",
+            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
+            'devis' => $devis,
+            'carbon' => $carbon,
+            'proposal' => $proposal,
+            'acompte' => 0,
+            'color1' => env('COLOR1', '219C90'),
+            'color2' => env('COLOR2', '219C90'),
+            'color3' => env('COLOR3', '219C90'),
+        ];
     }
 
 }

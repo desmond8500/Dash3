@@ -17,6 +17,7 @@ use App\Livewire\Erp\ForfaitsPage;
 use App\Livewire\Erp\InvoiceListPage;
 use App\Livewire\Erp\InvoiceModelPage;
 use App\Livewire\Erp\InvoicePage;
+use App\Livewire\Erp\InvoiceProposalPage;
 use App\Livewire\Erp\InvoicesPage;
 use App\Livewire\Erp\ProjetPage;
 use App\Livewire\Erp\ProjetsPage;
@@ -84,9 +85,13 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/invoice/{invoice_id}', InvoicePage::class)->name('invoice');
     Route::get('/invoicelist', InvoiceListPage::class)->name('invoicelist');
     Route::get('/facture/facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf($invoice_id, $type); })->name('facture_pdf');
-    Route::get('/facture/proposal_pdf/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::proposal_pdf($invoice_id, $type); })->name('proposal_pdf');
     Route::get('/facture/facture_pdf_save/{invoice_id}/{type}', function ($invoice_id, $type) { return PDFController::facture_pdf_save($invoice_id, $type); })->name('facture_pdf_save');
     Route::get('/facture/facture_acompte_pdf/{invoice_id}/{type}/{acompte_id?}', function ($invoice_id, $type, $acompte_id) { return PDFController::facture_acompte_pdf($invoice_id, $type, $acompte_id); })->name('facture_acompte_pdf');
+
+
+    Route::get('/facture/proposal_pdf/{proposal_id}/{type}', function ($proposal_id, $type) { return PDFController::proposal_pdf($proposal_id, $type); })->name('proposal_pdf');
+    Route::get('invoice_proposal/{proposal_id}', InvoiceProposalPage::class)->name('invoice_proposal');
+
 
     Route::get('/bl/bl_travaux/{invoice_bl_id}', function ($invoice_bl_id) { return PDFController::bl_pdf($invoice_bl_id); })->name('bl_pdf');
 

@@ -12,6 +12,7 @@ use App\Models\Brand;
 use App\Models\Forfait;
 use App\Models\Invoice;
 use App\Models\InvoiceModel;
+use App\Models\InvoiceProposal;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
 use App\Models\InvoiceSystem;

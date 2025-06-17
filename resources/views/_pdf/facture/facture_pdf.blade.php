@@ -77,7 +77,7 @@
 
     </div>
 
-    <div class="mt-1">
+    <div class="">
         <table class="table " >
             <thead style="border-radius: 10px;">
                 <tr class="bg-green3 text-white" >
@@ -164,11 +164,10 @@
             </table>
         </div>
 
-        @if ($acompte)
+        @if ($acomptes)
             @include('_pdf.facture.facture_acompte_pdf')
         @endif
     </div>
-
 
     @if ($sections)
         @foreach ($sections as $key => $section)

@@ -202,6 +202,7 @@ class PDFController extends Controller
             'devis' => $devis,
             'carbon' => $carbon,
             'acompte' => InvoiceAcompte::find($acompte_id),
+            'acomptes' => InvoiceAcompte::where('invoice_id', $devis->id)->get(),
             'sections' => InvoiceSection::where('invoice_id', $devis->id)->get(),
             'color1' => env('COLOR1', '219C90'),
             'color2' => env('COLOR2', '219C90'),

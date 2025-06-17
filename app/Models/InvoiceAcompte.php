@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\dateTrait;
 use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,8 @@ class InvoiceAcompte extends Model
 {
     use HasFactory;
     use searchTrait;
+    use dateTrait;
+
 
     protected $fillable = [
         'invoice_id',

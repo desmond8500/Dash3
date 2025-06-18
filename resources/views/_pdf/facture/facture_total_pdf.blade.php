@@ -1,4 +1,4 @@
-<table class="mt-3">
+<table class="mt-1">
     <tr>
         <td style="width: 400px; padding-top: 20px" align="center" >
             <img src="{{ env('BUFFER') }}" alt="" height="70px">
@@ -19,8 +19,6 @@
                     <td class="text-end">{{ number_format($total_marge, 0,'.', ' ') }} F CFA</td>
                 </tr>
             </table>
-
         </td>
     </tr>
-
 </table>

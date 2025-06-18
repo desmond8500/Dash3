@@ -145,18 +145,18 @@
             @include('_pdf.facture.facture_total_pdf')
         @endif
 
-        <div class="mt-2">
+        <div class="mt-1">
             <table class="table">
                 <tr>
-                    <td width="50%" class="border-white">
+                    <td width="@if($devis->note) 50% @endif" class="border-white">
                         @if ($devis->modalite && $title == 'devis')
-                            <div class="fw-bold">Modalités :</div>
+                            <div class="fw-bold text-underline" style="margin-bottom: 5px;">Modalités :</div>
                             <div>{{ $devis->modalite }}</div>
                         @endif
                     </td>
                     <td class="border-white">
                         @if ($devis->note && $title == 'devis')
-                            <div class="fw-bold mt-2">Notes :</div>
+                            <div class="fw-bold mt-1 text-underline" style="margin-bottom: 5px;">Notes :</div>
                             <div>{{ $devis->note }}</div>
                         @endif
                     </td>
@@ -164,9 +164,9 @@
             </table>
         </div>
 
-        @if ($acomptes)
+        @isset ($acomptes)
             @include('_pdf.facture.facture_acompte_pdf')
-        @endif
+        @endisset
     </div>
 
     @if ($sections)
@@ -176,17 +176,37 @@
         <div class="page-break"></div>
 
             @if ($loop->first)
-                <h3>Détails techniques</h3>
-            @endif
-                <div class="mb-3">
-                    <div class="fw-bold">{{ $section->section }}</div>
-                    <div class="text-muted  " style="font-size: 12px;">{{ $section->proposition }}</div>
-                    <div class="text-muted  " style="font-size: 12px;"> @parsedown($section->proposition)</div>
-                </div>
+                 <table  >
+                    <tr>
+                        <td width="40px" class="text-center border-white">
+                            <img src="{{ 'img/icons/writing.png' }}" height="40px" alt="" style="color: green;">
+                        </td>
 
-                <table class="table ">
+                        <td class="border-white">
+                            <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">Détails Techniques</div>
+                        </td>
+                    </tr>
+                 </table>
+
+                 <div style="border: 1px solid #219c90;">
+
+                 </div>
+
+            @endif
+
+            <table class="table mt-1">
+                <tr>
+                    <td colspan="3">
+                            <div class="my-0">
+                                <div class="fw-bold">{{ $section->section }}</div>
+                                <div class="text-muted  " style="font-size: 12px;">{!! $section->proposition !!}</div>
+                            </div>
+
+                        </td>
+
+                    </tr>
                     <thead>
-                        <tr>
+                        <tr style="background: #{{ $color1 }}; color: white;">
                             <th scope="col" style="width: 150px;">Photo</th>
                             <th scope="col" class="text-center">Description</th>
                             <th scope="col" style="width: 10px" class="text-center">Quantité</th>

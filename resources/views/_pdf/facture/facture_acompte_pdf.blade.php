@@ -27,7 +27,11 @@
                 </div>
             </td>
             <td>
-                <div class="text-center">{{ $acompte->formatDate() }}</div>
+                <div class="text-center">
+                    @if ($acompte->statut == 1)
+                        {{ $acompte->formatDate() }}
+                    @endif
+                    </div>
             </td>
         </tr>
     @endforeach
@@ -39,9 +43,9 @@
         @php
             $total_acompte = 0;
             foreach ($acomptes as $acompte) {
-                if ($acompte->statut == 1) {
+                // if ($acompte->statut == 1) {
                     $total_acompte += $acompte->montant;
-                }
+                // }
             }
         @endphp
 

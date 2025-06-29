@@ -15,6 +15,9 @@
                 </span>
             </div>
 
+            <hr>
+            <h2>Tags</h2>
+
         </div>
         <div class="col-md-7">
             <div class="card card-body">

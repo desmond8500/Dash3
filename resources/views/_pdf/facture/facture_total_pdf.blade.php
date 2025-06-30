@@ -10,10 +10,21 @@
                     <td>TOTAL HT</td>
                     <td class="text-end">{{ number_format($total_marge, 0,'.', ' ') }} F CFA</td>
                 </tr>
-                <tr>
-                    <td>TVA</td>
-                    <td class="text-end">0 F CFA</td>
-                </tr>
+
+                @if ($devis->tax == 'tva')
+                    <tr><td>TVA</td>
+                        <td class="text-end">{{ total_marge * 0.18 }} F CFA</td>
+                    </tr>
+                @elseif($devis->tax == 'brs')
+                    <tr><td>BRS</td>
+                        <td class="text-end">{{ total_marge * 0.05 }} 0 F CFA</td>
+                    </tr>
+                @else
+                    <tr>
+                        <td>TVA</td>
+                        <td class="text-end">0 F CFA</td>
+                    </tr>
+                @endif
                 <tr>
                     <td>TOTAL TTC</td>
                     <td class="text-end">{{ number_format($total_marge, 0,'.', ' ') }} F CFA</td>

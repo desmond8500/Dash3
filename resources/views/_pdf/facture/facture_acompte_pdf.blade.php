@@ -49,6 +49,12 @@
             }
         @endphp
 
-        <td class="text-end" colspan="3">{{ number_format($total_marge - $total_acompte, 0,'.', ' ') }} F CFA</td>
+        @if ($devis->tax == 'tva')
+            <td class="text-end" colspan="3">{{ number_format($(total_marge*1.18) - $total_acompte, 0,'.', ' ') }} F CFA</td>
+        @elseif($devis->tax == 'brs')
+            <td class="text-end" colspan="3">{{ number_format($(total_marge*1.05) - $total_acompte, 0,'.', ' ') }} F CFA</td>
+        @else
+            <td class="text-end" colspan="3">{{ number_format($total_marge - $total_acompte, 0,'.', ' ') }} F CFA</td>
+        @endif
     </tr>
 </table>

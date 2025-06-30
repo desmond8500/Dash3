@@ -29,7 +29,7 @@
                     <td>{{ $key+1 }}</td>
                     <td>
                         <div>{{ $spent->name }}</div>
-                        <div class="text-muted">{{ nl2br($spent->description) }}</div>
+                        <div class="text-muted">{!! nl2br($spent->description) !!}</div>
                     </td>
                     <td class="text-end">{{ number_format($spent->montant, 0,'.', ' ') }} F</td>
                     <td class="text-end">

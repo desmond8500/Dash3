@@ -31,7 +31,7 @@
                         @if ($devis->tax == 'tva')
                             {{ number_format($total_marge*1.18, 0,'.', ' ') }}
                         @elseif($devis->tax == 'brs')
-                            {{ number_format($total_marge*1.05, 0,'.', ' ') }}
+                            {{ number_format($total_marge - $total_marge * 0.05, 0,'.', ' ') }}
                         @else
                             {{ number_format($total_marge, 0,'.', ' ') }}
                         @endif

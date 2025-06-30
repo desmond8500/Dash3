@@ -82,7 +82,7 @@
                             <div class="tab-pane" id="tabs-profile-ex5">
                                 <button class="btn btn-danger" wire:click="delete()">Supprimer</button>
                                 <button class="btn btn-primary" wire:click="addTag()">
-                                    <i class="ti ti-plus"></i>
+                                    <i class="ti ti-plus"></i> Tag
                                 </button>
                             </div>
                         </div>

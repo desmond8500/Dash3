@@ -9,7 +9,7 @@
                 </button>
             </div>
         </div>
-        <table class="table">
+        <table class="table table-responsive table-hover ">
             @if ($acomptes->isEmpty())
                 <div class="text-center pt-1 text-muted">Aucun acompte</div>
 
@@ -30,7 +30,7 @@
                         <td>{{ $key+1 }}</td>
                         <td>
                             <div>{{ $acompte->name }}</div>
-                            <div class="text-muted">{{ nl2br($acompte->description) }}</div>
+                            <div class="text-muted">{!! nl2br($acompte->description) !!}</div>
                         </td>
                         <td class="text-end">{{ number_format($acompte->montant, 0,'.', ' ') }} F</td>
                         <td class="text-end">

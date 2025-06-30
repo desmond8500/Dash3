@@ -21,7 +21,12 @@
             </div>
             <div class="col-md-6">
                 <label class="form-label">Coef</label>
-                <input type="number" class="form-control" wire:model="row_form.coef" placeholder="Coféficient de marge">
+                <div class="input-group">
+                    <input type="number" class="form-control" wire:model="row_form.coef" placeholder="Coféficient de marge">
+                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.coef', 1)">
+                        <i class="ti ti-x"></i>
+                    </a>
+                </div>
                 @error('row_form.coef') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </div>

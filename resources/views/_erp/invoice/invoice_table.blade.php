@@ -42,7 +42,6 @@
                     {{-- <span class="dropdown-header">Bordereau</span> --}}
                     {{-- <a class="dropdown-item" target="_blank" href="{{ route('bl_pdf',['invoice_id'=>$devis->id, 'type'=>'Travaux']) }}"> <i class="ti ti-file-type-pdf"></i> BL de Travaux </a> --}}
 
-                    <div class="dropdown-divider"></div>
 
                     <span class="dropdown-header">Exporter</span>
                     <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>

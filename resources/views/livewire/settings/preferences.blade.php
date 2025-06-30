@@ -19,7 +19,7 @@
                 <div class="col-md-2">
                     <label class="form-label">Tableau de bord</label>
                     <select class="form-select" wire:model="dashboard">
-                        <option value="0">Select</option>
+                        {{-- <option value="0">Select</option> --}}
                         <option value="1">Base</option>
                     </select>
                     @error('dashboard') <span class='text-danger'>{{ $message }}</span> @enderror

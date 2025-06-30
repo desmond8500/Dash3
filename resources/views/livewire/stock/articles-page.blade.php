@@ -28,12 +28,6 @@
                 <div wire:ignore.self>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         @component('components.accordion-item',['id'=> 'brand', 'title'=>"Marques"])
-                            {{-- <div class="input-icon">
-                                <input type="text" class="form-control form-control-rounded" wire:model.live="search_brand" placeholder="Chercher ">
-                                <span class="input-icon-addon">
-                                    <i class="ti ti-search"></i>
-                                </span>
-                            </div> --}}
                             @foreach ($brands->sortby('name') as $brand)
                                 @if ($brand_id == $brand->id)
                                     <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('brand_id','{{ $brand->id }}')">{{ $brand->name }}</button>
@@ -63,7 +57,7 @@
                         @component('components.accordion-item',['id'=> 'type', 'title'=>"Types"])
                             <div class="">
                                 @foreach ($tags as $tag)
-                                <span class="badge bg-primary cursor-pointer text-light mb-1" wire:click="$set('tag','{{ $tag->name }}')">
+                                <span class="badge bg-primary cursor-pointer text-light mb-1" wire:click="$set('tag','{{ ucfirst($tag->name) }}')">
                                     {{ $tag->name }}
                                 </span>
                                 @endforeach

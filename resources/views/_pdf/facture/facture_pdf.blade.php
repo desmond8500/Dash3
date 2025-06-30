@@ -142,7 +142,7 @@
         </table>
 
         @if ($title!="quantitatif")
-            @include('_pdf.facture.facture_total_pdf',['total_marge'=> $total_marge, 'devis' => $devis])
+            @include('_pdf.facture.facture_total_pdf')
         @endif
 
         <div class="mt-1">

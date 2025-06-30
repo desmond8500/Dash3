@@ -13,11 +13,11 @@
 
                 @if ($devis->tax == 'tva')
                     <tr><td>TVA</td>
-                        <td class="text-end">{{ total_marge * 0.18 }} F CFA</td>
+                        <td class="text-end">{{ $total_marge * 0.18 }} F CFA</td>
                     </tr>
                 @elseif($devis->tax == 'brs')
                     <tr><td>BRS</td>
-                        <td class="text-end">{{ total_marge * 0.05 }} 0 F CFA</td>
+                        <td class="text-end">{{ $total_marge * 0.05 }} 0 F CFA</td>
                     </tr>
                 @else
                     <tr>

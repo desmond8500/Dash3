@@ -6,12 +6,36 @@ use Carbon\Carbon;
 
 trait dateTrait {
 
-    function formatDate($date=null)
+    function formatDate($date=null, $explode=false)
     {
         if ($date) {
-            return Carbon::parse($date)->format('d-m-Y');
+            if ($explode) {
+                return Carbon::parse($date)->format('d - m - Y');
+            } else {
+                return Carbon::parse($date)->format('d-m-Y');
+            }
         } else {
-            return Carbon::parse($this->date)->format('d-m-Y');
+            if ($explode) {
+                return Carbon::parse($this->date)->format('d - m - Y');
+            } else {
+                return Carbon::parse($this->date)->format('d-m-Y');
+            }
+        }
+    }
+    function dateFormat($date=null, $explode=false)
+    {
+        if ($date) {
+            if ($explode) {
+                return Carbon::parse($date)->format('d - m - Y');
+            } else {
+                return Carbon::parse($date)->format('d-m-Y');
+            }
+        } else {
+            if ($explode) {
+                return Carbon::parse($this->date)->format('d - m - Y');
+            } else {
+                return Carbon::parse($this->date)->format('d-m-Y');
+            }
         }
     }
     function fullDate($date=null)

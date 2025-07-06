@@ -1,4 +1,4 @@
-<div class="mb-2">
+<div class="">
 
     <div class="card">
         <div class="card-header">
@@ -9,10 +9,12 @@
                 </button>
             </div>
         </div>
-        <table class="table">
-            @if ($documents->isEmpty())
-                <div class="text-center pt-1 text-muted">Aucun document</div>
-            @else
+        @if ($documents->isEmpty())
+        <div class="card-body">
+            <div class="text-center text-muted">Aucun document</div>
+        </div>
+        @else
+            <table class="table">
                 <thead>
                     <tr>
                         <th style="text-align:center; width: 5px;">#</th>
@@ -21,34 +23,34 @@
                         <th style="text-align:center; width: 10px;">Action</th>
                     </tr>
                 </thead>
-            @endif
-            <tbody>
-                @foreach ($documents as $key => $document)
-                <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td>
-                        <a href="{{ asset($document->file) }}" target="_blank">{{ $document->name }}</a>
-                    </td>
-                    <td>
-                        <div>{{ $document->type }}</div>
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-icon" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ti ti-dots-vertical"></i>
-                            </button>
+                <tbody>
+                    @foreach ($documents as $key => $document)
+                    <tr>
+                        <td>{{ $key+1 }}</td>
+                        <td>
+                            <a href="{{ asset($document->file) }}" target="_blank">{{ $document->name }}</a>
+                        </td>
+                        <td>
+                            <div>{{ $document->type }}</div>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-icon" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti ti-dots-vertical"></i>
+                                </button>
 
-                            <div class="dropdown-menu" aria-labelledby="triggerId">
-                                {{-- <a class="dropdown-item text-success"  href="#" wire:click="edit('{{ $document->id }}')"><i class="ti ti-edit"></i> Editer</a> --}}
-                                <a class="dropdown-item text-danger" href="#" wire:click="delete('{{ $document->id }}')"><i class="ti ti-trash"></i> Supprimer</a>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    {{-- <a class="dropdown-item text-success"  href="#" wire:click="edit('{{ $document->id }}')"><i class="ti ti-edit"></i> Editer</a> --}}
+                                    <a class="dropdown-item text-danger" href="#" wire:click="delete('{{ $document->id }}')"><i class="ti ti-trash"></i> Supprimer</a>
+                                </div>
                             </div>
-                        </div>
 
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 
     @component('components.modal', ["id"=>'add-invoiceDocument', 'title' => 'Ajouter un document', 'method' => 'store'])

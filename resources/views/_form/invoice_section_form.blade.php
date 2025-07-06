@@ -29,6 +29,7 @@
     @error('section_form.invoice_id') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 
+
 <div class="col-md-12 mb-3">
     <label class="form-label">Description proposition</label>
     <textarea class="form-control" wire:model="section_form.proposition" placeholder="Description de la proposition"></textarea>

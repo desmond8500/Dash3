@@ -25,9 +25,6 @@
                 </div>
             @endforeach
         </div>
-        <div class="card-footer">
-
-        </div>
     </div>
 
 

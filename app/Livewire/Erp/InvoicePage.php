@@ -128,6 +128,8 @@ class InvoicePage extends Component
         $this->section_form->proposition_toggle();
     }
 
+
+
     // Row
     public $row_tab = 1, $row_class = '';
     public InvoiceRowForm $row_form;
@@ -315,6 +317,17 @@ class InvoicePage extends Component
     function section_show($invoice_system_id){
         $this->section_system_select = InvoiceSystem::find($invoice_system_id);
         $this->dispatch('open-selectSectionModel');
+    }
+
+    function section_toggle($section_id){
+        $section = InvoiceSection::find($section_id);
+        if ($section->show) {
+            $section->show = false;
+        } else {
+            $section->show = true;
+        }
+        $section->save();
+        $this->dispatch('invoice-section-reload');
     }
 
     function section_model_add($section_model_id, $section_id=0){

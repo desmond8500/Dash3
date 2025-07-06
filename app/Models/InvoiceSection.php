@@ -16,6 +16,7 @@ class InvoiceSection extends Model
         'ordre',
         'proposition',
         'status',
+        'show',
     ];
 
     public function rows(): HasMany

@@ -1,4 +1,4 @@
-<div class="mb-2">
+<div class="">
 
     <div class="card">
         <div class="card-header">
@@ -9,61 +9,63 @@
                 </button>
             </div>
         </div>
-        <table class="table table-responsive table-hover ">
-            @if ($acomptes->isEmpty())
-                <div class="text-center pt-1 text-muted">Aucun acompte</div>
+        <div class="card p-0">
+            <table class="table table-responsive table-hover ">
+                @if ($acomptes->isEmpty())
+                    <div class="text-center pt-1 text-muted">Aucun acompte</div>
 
-            @else
-                <thead>
-                    <tr>
-                        <th style="text-align:center; width: 5px;">#</th>
-                        <th>Nom</th>
-                        <th style="text-align:center; width: 10px;">Montant</th>
-                        <th style="text-align:center; width: 30px;">Date</th>
-                        <th style="text-align:center; width: 10px;">_</th>
-                    </tr>
-                </thead>
-            @endif
-            <tbody>
-                @foreach ($acomptes as $key => $acompte)
-                    <tr>
-                        <td>{{ $key+1 }}</td>
-                        <td>
-                            <div>{{ $acompte->name }}</div>
-                            <div class="text-muted">{!! nl2br($acompte->description) !!}</div>
-                        </td>
-                        <td class="text-end">{{ number_format($acompte->montant, 0,'.', ' ') }} F</td>
-                        <td class="text-end">
-                            <div>{{ $acompte->date }}</div>
-                            <div>
-                                @if ($acompte->statut)
-                                    <span class="text-success">Payé</span>
-                                @else
-                                    <span class="text-danger">Payé</span>
-                                @endif
-                            </div>
-                        </td>
-                        <td>
-
-                            <div class="dropdown">
-                                <button class="btn btn-icon" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                    <i class="ti ti-dots-vertical"></i>
-                                </button>
-
-                                <div class="dropdown-menu" aria-labelledby="triggerId">
-                                    <a class="dropdown-item text-success" href="#" wire:click="edit('{{ $acompte->id }}')"><i class="ti ti-edit"></i> Editer</a>
-                                    <a class="dropdown-item text-danger" href="#" wire:click="delete('{{ $acompte->id }}')"><i class="ti ti-trash"></i> Supprimer</a>
-                                    <a class="dropdown-item" target="_blank" href="{{ route('facture_acompte_pdf',[
-                                        'invoice_id'=>$acompte->invoice_id,
-                                        'type'=>" Facture d'acompte",'acompte_id'=>$acompte->id]) }}"> <i class="ti ti-file-type-pdf"></i> Facture d'acompte </a>
+                @else
+                    <thead>
+                        <tr>
+                            <th style="text-align:center; width: 5px;">#</th>
+                            <th>Nom</th>
+                            <th style="text-align:center; width: 10px;">Montant</th>
+                            <th style="text-align:center; width: 30px;">Date</th>
+                            <th style="text-align:center; width: 10px;">_</th>
+                        </tr>
+                    </thead>
+                @endif
+                <tbody>
+                    @foreach ($acomptes as $key => $acompte)
+                        <tr>
+                            <td>{{ $key+1 }}</td>
+                            <td>
+                                <div>{{ $acompte->name }}</div>
+                                <div class="text-muted">{!! nl2br($acompte->description) !!}</div>
+                            </td>
+                            <td class="text-end">{{ number_format($acompte->montant, 0,'.', ' ') }} F</td>
+                            <td class="text-end">
+                                <div>{{ $acompte->formatDate(null, true) }}</div>
+                                <div>
+                                    @if ($acompte->statut)
+                                        <span class="text-success">Payé</span>
+                                    @else
+                                        <span class="text-danger">Payé</span>
+                                    @endif
                                 </div>
-                            </div>
+                            </td>
+                            <td>
 
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                                <div class="dropdown">
+                                    <button class="btn btn-icon" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                        <i class="ti ti-dots-vertical"></i>
+                                    </button>
+
+                                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                                        <a class="dropdown-item text-success" href="#" wire:click="edit('{{ $acompte->id }}')"><i class="ti ti-edit"></i> Editer</a>
+                                        <a class="dropdown-item text-danger" href="#" wire:click="delete('{{ $acompte->id }}')"><i class="ti ti-trash"></i> Supprimer</a>
+                                        <a class="dropdown-item" target="_blank" href="{{ route('facture_acompte_pdf',[
+                                            'invoice_id'=>$acompte->invoice_id,
+                                            'type'=>" Facture d'acompte",'acompte_id'=>$acompte->id]) }}"> <i class="ti ti-file-type-pdf"></i> Facture d'acompte </a>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     @component('components.modal', ["id"=>'add-invoiceAcompte', 'title' => 'Ajouter un acompte', 'method'=>'store'])

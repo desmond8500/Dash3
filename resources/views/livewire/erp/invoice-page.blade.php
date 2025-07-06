@@ -43,18 +43,21 @@
         </div>
         <div class="col-md-4">
 
-            <div class="card mb-1">
+            <div class="card mb-2">
                 @livewire('erp.invoice-documents', ['invoice_id' => $devis->id])
             </div>
-            <div class="mb-1">
+            <div class="mb-2">
                 @livewire('erp.invoice-bordereau', ['invoice_id' => $devis->id])
             </div>
-            <div class="mb-1">
+            <div class="mb-2">
                 @livewire('erp.facturelist', ['invoice_id' => $devis->id])
             </div>
-            @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
-
-            @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
+            <div class="mb-2">
+                @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
+            </div>
+            <div class="mb-2">
+                @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
+            </div>
 
             <div class="mb-1">
                 @livewire('erp.invoice-proposal', ['invoice_id' => $devis->id])

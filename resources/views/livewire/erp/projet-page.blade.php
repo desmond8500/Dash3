@@ -1,6 +1,7 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Projet: '.$projet->name, 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
+            <a href="{{ route('timeline',['projet_id'=> $projet_id]) }}" class="btn ">Timeline</a>
             @livewire('form.task-add', ['projet_id' => $projet_id])
             @livewire('form.journal-add', ['projet_id' => $projet_id])
             @livewire('form.transaction-add', ['projet_id' => $projet_id])

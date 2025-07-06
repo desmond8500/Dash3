@@ -3,7 +3,9 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\ForfaitForm;
+use App\Models\Client;
 use App\Models\Forfait;
+use App\Models\Test;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -23,7 +25,9 @@ class ForfaitsPage extends Component
     public function render()
     {
         return view('livewire.erp.forfaits-page',[
-            'forfaits' => Forfait::paginate(12)
+            'forfaits' => Forfait::paginate(12),
+            'clients' => Client::all(),
+            'test' => Test::all(),
         ]);
     }
 
@@ -44,5 +48,27 @@ class ForfaitsPage extends Component
 
     function delete($id){
         $this->forfait_form->delete($id);
+    }
+
+    function save(){
+        Test::create(request()->all());
+    }
+
+    public $name;
+    public $name1;
+    function save2(){
+
+        Test::create([
+            'name' => $this->name,
+        ]);
+
+        $this->reset(['name']);
+    }
+
+    function deletef($test_id){
+        $test = Test::find($test_id);
+        if($test){
+            $test->delete();
+        }
     }
 }

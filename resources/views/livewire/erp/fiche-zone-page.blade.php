@@ -17,7 +17,7 @@
                                 <i class="ti ti-file-type-pdf"></i>
                             </a>
 
-                            <a class="btn" wire:click="create_zones(3)">8 Zones simples</a>
+                            <a class="btn" wire:click="create_zones(8)">8 Zones simples</a>
                             <a class="btn" wire:click="create_zones(8, 'galaxy')">8 Zones Galaxy </a>
                             <a class="btn" wire:click="create_zones(16, 'galaxy')">16 Zones Galaxy </a>
 
@@ -44,9 +44,12 @@
                                 <td>{{ $zone->equipement }}</td>
                                 <td>{{ $zone->name }}</td>
                                 <td>{{ $zone->code }}</td>
-                                <td style="width:50px">
+                                <td style="width:100px">
                                     <button class="btn btn-primary btn-icon" wire:click="edit('{{ $zone->id }}')">
                                         <i class="ti ti-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-icon" wire:click="delete('{{ $zone->id }}')">
+                                        <i class="ti ti-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -57,16 +60,16 @@
             </div>
     </div>
 
-    @component('components.modal', ["id"=>'editFicheZone', 'title' => 'Editer une zone'])
+    @component('components.modal', ["id"=>'editFicheZone', 'title' => 'Editer une zone', 'method'=> 'update'])
         <form class="row" wire:submit="update">
             @include('_form.fiche_zone_form')
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <button type="button" class="btn btn-danger" wire:click="delete">
                     <i class="ti ti-trash"></i>
                 </button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
+            </div> --}}
         </form>
         <script> window.addEventListener('open-editFicheZone', event => { window.$('#editFicheZone').modal('show'); }) </script>
         <script> window.addEventListener('close-editFicheZone', event => { window.$('#editFicheZone').modal('hide'); }) </script>

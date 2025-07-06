@@ -122,7 +122,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
 
     Route::get('/team', TeamPage::class)->name('team');
 
-    Route::get('/timeline', TimelinePage::class)->name('timeline');
+    Route::get('/timeline/{projet_id}', TimelinePage::class)->name('timeline');
 
 });
 

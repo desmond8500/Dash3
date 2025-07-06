@@ -17,11 +17,50 @@
 
     @php $key = 1; @endphp
 
-    <table class="table zone">
+    <table class="table zone" >
         <tr>
-            <td colspan="3" class="title4">Liste des zones</td>
+            <td colspan="2" class="title4">Liste des zones</td>
         </tr>
-        <tr class="subtitle4">
+        <tr>
+            <td width="50%" style="font-size: 12px">
+                <table width="100%">
+                    <tr class="subtitle4">
+                        <td width='10px'>Zone</td>
+                        <td>Equipement</td>
+                        <td>Nom </td>
+                    </tr>
+                    @foreach ($zones as $key => $zone)
+                        @if($key < 8)
+                        <tr>
+                            <td class="text-center">{{ $zone->number }}</td>
+                            <td>{{ $zone->equipement }}</td>
+                            <td>{{ $zone->name }}</td>
+                        </tr>
+                        @endif
+                    @endforeach
+                </table>
+            </td>
+            <td width="50%" style="font-size: 12px">
+                <table width="100%">
+                    <tr class="subtitle4">
+                        <td width='10px'>Zone</td>
+                        <td>Equipement</td>
+                        <td>Nom </td>
+                    </tr>
+                    @foreach ($zones as $key => $zone)
+                    @if($key >= 8)
+                    <tr>
+                        <td class="text-center">{{ $zone->number }}</td>
+                        <td>{{ $zone->equipement }}</td>
+                        <td>{{ $zone->name }}</td>
+                    </tr>
+                    @endif
+                    @endforeach
+                </table>
+            </td>
+        </tr>
+
+        {{-- <tr class="subtitle4">
             <td width='10px'>Zone</td>
             <td>Equipement</td>
             <td>Nom </td>
@@ -32,7 +71,7 @@
                 <td>{{ $zone->equipement }}</td>
                 <td>{{ $zone->name }}</td>
             </tr>
-        @endforeach
+        @endforeach --}}
     </table>
 
 

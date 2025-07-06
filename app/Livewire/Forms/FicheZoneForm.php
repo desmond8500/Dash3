@@ -48,8 +48,9 @@ class FicheZoneForm extends Form
         $this->zone->update($this->all());
     }
 
-    function delete(){
-        $this->zone->delete();
+    function delete($id){
+        $zone = FicheZone::find($id);
+        $zone->delete();
     }
 
     // ----

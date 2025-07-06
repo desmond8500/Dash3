@@ -65,6 +65,7 @@ class InvoicePage extends Component
             'statuses' => InvoiceController::statut(),
             'forfaits' => Forfait::all(),
             'models' => InvoiceModel::all(),
+            'forfaits' => Forfait::where('client_id', $this->devis->projet->client_id)->get(),
         ]);
     }
 
@@ -159,6 +160,14 @@ class InvoicePage extends Component
         $this->row_form->designation = $forfait->designation;
         $this->row_form->reference = $forfait->description;
         $this->row_form->prix = $forfait->price;
+
+        $this->row_form->article_id = 0; // Reset article_id if forfait is used
+        $this->row_form->coef = 1;
+        $this->row_form->quantite = 1;
+        $this->row_form->priorite_id = 7;
+
+
+        $this->row_form->store();
     }
     function prix($prix){
         $this->row_form->prix = $prix;

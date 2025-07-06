@@ -53,8 +53,8 @@ class FicheZonePage extends Component
         $this->zone_form->update();
         $this->dispatch('close-editFicheZone');
     }
-    function delete(){
-        $this->zone_form->delete();
+    function delete($id){
+        $this->zone_form->delete($id);
         $this->dispatch('close-editFicheZone');
     }
 
@@ -81,7 +81,13 @@ class FicheZonePage extends Component
 
 
         } else {
-            for ($i=0; $i < $n; $i++) {
+            $count = FicheZone::where('fiche_id', $this->fiche->id)->count();
+
+            if(!$count){
+                $count = 0;
+            }
+
+            for ($i=$count; $i < $n+$count; $i++) {
                 FicheZone::create([
                     'fiche_id' => $this->fiche->id,
                     'number' => $i+1,

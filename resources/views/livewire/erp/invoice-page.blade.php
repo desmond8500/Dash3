@@ -137,6 +137,7 @@
                 <button class="btn btn-primary btn-sm rounded p-1" wire:click="toggle_row(1)">Formulaire</button>
                 <button class="btn btn-primary btn-sm rounded p-1" wire:click="toggle_row(2)">Importer</button>
                 <button class="btn btn-primary btn-sm rounded p-1" wire:click="toggle_row(3)">Forfaits</button>
+                <button class="btn btn-primary btn-sm rounded p-1" wire:click="toggle_row(4)">Forfaits2</button>
             </div>
         @endslot
 
@@ -272,6 +273,36 @@
                 </div>
 
             </div>
+        @elseif($row_tab==4)
+
+            <div class="row g-2">
+                @foreach ($forfaits as $forfait)
+                    <div class="col-md-6" wire:click="forfait('{{ $forfait->id }}')">
+                        <div class="card p-2">
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="badge bg-primary text-white">{{ $forfait->client->name }}</div>
+                                    <div class="fw-bold">{{ $forfait->designation }}</div>
+                                    <div class="text-muted">@parsedown($forfait->description)</div>
+                                    <div class="fs-3 text-end">{{ number_format($forfait->price, 0,'.', ' ') }} F</div>
+                                </div>
+                                {{-- <div class="col-auto">
+                                    <div>
+                                        <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $forfait->id }}')">
+                                            <i class="ti ti-edit"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger btn-icon" wire:click="delete('{{ $forfait->id }}')">
+                                            <i class="ti ti-trash"></i>
+                                        </button>
+                                    </div>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
         @endif
     @endcomponent
     @component('components.modal', ["id"=>'editRow', 'title'=>'Editer un article', 'class'=> $row_class, 'method'=>'updateRow'])

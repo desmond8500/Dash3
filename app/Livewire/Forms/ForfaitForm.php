@@ -12,10 +12,12 @@ class ForfaitForm extends Form
     public Forfait $forfait;
 
     #[Rule('required')]
+    public $client_id;
+    #[Rule('required')]
     public $description;
     #[Rule('required')]
     public $designation;
-    #[Rule('required')]
+    #[Rule('required|integer|min:0')]
     public $price;
 
     function fix(){
@@ -31,6 +33,7 @@ class ForfaitForm extends Form
 
     function set($model_id){
         $this->forfait = Forfait::find($model_id);
+        $this->client_id = $this->forfait->client_id;
         $this->description = $this->forfait->description;
         $this->designation = $this->forfait->designation;
         $this->price = $this->forfait->price;

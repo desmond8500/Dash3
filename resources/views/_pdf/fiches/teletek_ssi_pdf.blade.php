@@ -52,7 +52,7 @@
 
                         @foreach ($zones as $key => $zone)
                             @if($key >= 8)
-                                <tr>
+                                <tr style="font-size: 12px">
                                     <td class="text-center">{{ $zone->number }}</td>
                                     <td>{{ $zone->equipement }}</td>
                                     <td>{{ $zone->name }}</td>

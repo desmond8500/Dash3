@@ -26,8 +26,8 @@
                         <img src="{{ $logo }}" alt="logo" style="width:100%; height:100%;">
                     </div>
                 @else
-                    <div class="logo"  style="background: #{{ $color1 ?? '6b8a7a' }}">
-                        <div class="text-center" style="padding-top: 30px;">Logo</div>
+                    <div class="logo"  style="background: #{{ $color1 ?? '6b8a7a' }}; border-radius: 5px;">
+                        <div class="text-center" style="padding-top: 30px;"></div>
                     </div>
                 @endif
             </td>

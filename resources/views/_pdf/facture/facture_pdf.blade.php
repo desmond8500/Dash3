@@ -26,16 +26,16 @@
                         <img src="{{ $logo }}" alt="logo" style="width:100%; height:100%;">
                     </div>
                 @else
-                    <div class="logo"  style="background: #{{ $color1 }}">
+                    <div class="logo"  style="background: #{{ $color1 ?? '6b8a7a' }}">
                         <div class="text-center" style="padding-top: 30px;">Logo</div>
                     </div>
                 @endif
             </td>
-            <td width="300px" class="border_white fw-bold" align="left" style="{{ $title_css }}; color: #{{ $color1 }}" >
+            <td width="300px" class="border_white fw-bold" align="left" style="{{ $title_css ?? '6b8a7a' }}; color: #{{ $color1 ?? '6b8a7a' }}" >
                 <div>{{ env('MAIN_NAME') }}</div>
             </td>
             <td align="right" class="border_white">
-                <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">{{ $title }}</div>
+                <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 ?? '6b8a7a'}} ">{{ $title }}</div>
                 @if ($title !="quantitatif")
                     <i>#{{ strtoupper($devis->reference) }}</i>
                 @endif
@@ -216,7 +216,7 @@
                     <tbody>
 
                         @foreach ($section->rows->sortBy('priorite_id') as $row)
-                            @if ($row->priorite_id<5   )
+                            @if ($row->priorite_id < 5   )
                                 <tr >
                                     <td>
                                         @isset ($row->article->image)

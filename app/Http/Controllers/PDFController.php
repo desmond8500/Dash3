@@ -28,9 +28,9 @@ class PDFController extends Controller
             'logo' => env('LOGO', ''),
             'title' => $type ?? "Facture",
             'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
-            'color1' => env('COLOR1', '219C90'),
-            'color2' => env('COLOR2', '219C90'),
-            'color3' => env('COLOR3', '219C90'),
+            'color1' => env('COLOR1', '6b8a7a'),
+            'color2' => env('COLOR2', '6b8a7a'),
+            'color3' => env('COLOR3', '6b8a7a'),
             'date' => $carbon->now()->format('d-m-Y')
         ];
         $pdf = Pdf::loadView('_pdf.pdf', $data);
@@ -125,9 +125,9 @@ class PDFController extends Controller
             'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
             'journal' => $journal,
             'carbon' => $carbon,
-            'color1' => env('COLOR1', '219C90'),
-            'color2' => env('COLOR2', '219C90'),
-            'color3' => env('COLOR3', '219C90'),
+            'color1' => env('COLOR1', '6b8a7a'),
+            'color2' => env('COLOR2', '6b8a7a'),
+            'color3' => env('COLOR3', '6b8a7a'),
         ];
 
         $pdf = Pdf::loadView('_pdf.journal_pdf', $data);
@@ -148,9 +148,9 @@ class PDFController extends Controller
             'acompte' => 0,
             // 'acompte' => InvoiceAcompte::find($acompte_id),
             'sections' => InvoiceSection::where('invoice_id', $devis->id)->get(),
-            'color1' => env('COLOR1', '219C90'),
-            'color2' => env('COLOR2', '219C90'),
-            'color3' => env('COLOR3', '219C90'),
+            'color1' => env('COLOR1', '6b8a7a'),
+            'color2' => env('COLOR2', '6b8a7a'),
+            'color3' => env('COLOR3', '6b8a7a'),
         ];
     }
 
@@ -204,9 +204,9 @@ class PDFController extends Controller
             'acompte' => InvoiceAcompte::find($acompte_id),
             'acomptes' => InvoiceAcompte::where('invoice_id', $devis->id)->get(),
             'sections' => InvoiceSection::where('invoice_id', $devis->id)->get(),
-            'color1' => env('COLOR1', '219C90'),
-            'color2' => env('COLOR2', '219C90'),
-            'color3' => env('COLOR3', '219C90'),
+            'color1' => env('COLOR1', '6b8a7a'),
+            'color2' => env('COLOR2', '6b8a7a'),
+            'color3' => env('COLOR3', '6b8a7a'),
         ];
 
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
@@ -400,9 +400,9 @@ class PDFController extends Controller
             'carbon' => $carbon,
             'proposal' => $proposal,
             'acompte' => 0,
-            'color1' => env('COLOR1', '219C90'),
-            'color2' => env('COLOR2', '219C90'),
-            'color3' => env('COLOR3', '219C90'),
+            'color1' => env('COLOR1', '6b8a7a'),
+            'color2' => env('COLOR2', '6b8a7a'),
+            'color3' => env('COLOR3', '6b8a7a'),
         ];
     }
 

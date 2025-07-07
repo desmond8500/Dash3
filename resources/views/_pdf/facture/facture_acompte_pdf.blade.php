@@ -22,7 +22,7 @@
                     @if ($acompte->statut)
                         Payé
                     @else
-                        A Payer
+                        {{-- A Payer --}}
                     @endif
                 </div>
             </td>

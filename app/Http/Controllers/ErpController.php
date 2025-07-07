@@ -87,7 +87,7 @@ class ErpController extends Controller
             'Coffre',
             'Caisse',
             'Arrère Caisse',
-            'Directeur d\'agence',
+            'Directeur Agence',
             'Local technique',
         );
     }

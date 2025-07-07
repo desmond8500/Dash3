@@ -37,16 +37,16 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editFiche', 'title' => 'Editer la fiche'])
+    @component('components.modal', ["id"=>'editFiche', 'title' => 'Editer la fiche', 'method'=>'update_fiche'])
         <form class="row" wire:submit="update_fiche">
             @include('_form.fiche_form')
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <a type="button" class="btn btn-danger" wire:click='delete_fiche'>
                     <i class="ti ti-trash"></i>
                 </a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
+            </div> --}}
         </form>
         <script> window.addEventListener('open-editFiche', event => { window.$('#editFiche').modal('show'); }) </script>
         <script> window.addEventListener('close-editFiche', event => { window.$('#editFiche').modal('hide'); }) </script>

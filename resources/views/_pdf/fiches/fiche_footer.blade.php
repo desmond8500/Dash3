@@ -9,7 +9,8 @@
             </div>
         </td>
         <td>
-            <div class="fw-bold fs-5 text-center mb-1">En cas de dérangement Prévenez le service de Maintenance
+            <div class="fw-bold fs-5 text-center mb-1">
+                {{ $fiche->maintenance ?? 'En cas de dérangement Prévenez le service de Maintenance' }}
             </div>
             @if ($fiche->phone)
             <div class="contact phone"> <i class="ti ti-user"></i> {{ $fiche->phone }}</div>
@@ -20,16 +21,5 @@
         </td>
     </tr>
 
-</table>
-
-<table class="table">
-    <tr>
-        <td class="border-white">
-            <div class="client"> {{ $fiche->client }} </div>
-        </td>
-        <td class="border-white" width="100px">
-            <div>{{ $fiche->formatDate() }}</div>
-        </td>
-    </tr>
 </table>
 

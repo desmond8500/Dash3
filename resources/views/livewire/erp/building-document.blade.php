@@ -3,12 +3,12 @@
         <div class="card-title">Liens et document</div>
     </div>
     <div class="col-md-12">
-        @component('components.modal', ["id"=>'addModal', 'title' => 'Titre'])
+        @component('components.modal', ["id"=>'addModal', 'title' => 'Titre', 'method'=>'store'])
             <form class="row" wire:submit="store">
-                <div class="modal-footer">
+                {{-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                     <button type="submit" class="btn btn-primary">Valider</button>
-                </div>
+                </div> --}}
             </form>
             <script> window.addEventListener('open-addModal', event => { window.$('#addModal').modal('show'); }) </script>
             <script> window.addEventListener('close-addModal', event => { window.$('#addModal').modal('hide'); }) </script>

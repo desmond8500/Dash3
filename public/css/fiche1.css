@@ -14,9 +14,10 @@ body{
 }
 .structure_title{
     color: #0054a6;
-    font-size: 1.75rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
+    text-transform: uppercase;
 }
 .title1{
     background: red;

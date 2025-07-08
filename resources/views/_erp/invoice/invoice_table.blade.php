@@ -66,12 +66,19 @@
                 </tr>
             </thead>
             @php
+                // Total
                 $total = 0;
                 $total_marge = 0;
                 $total_equipment = 0;
                 $total_cable = 0;
                 $total_accessoires = 0;
                 $total_mainoeuvre = 0;
+                // Subtotal
+                $subtotal = 0;
+                $subtotal_equipment = 0;
+                $subtotal_cable = 0;
+                $subtotal_accessoires = 0;
+                $subtotal_mainoeuvre = 0;
             @endphp
             @foreach ($sections as $key => $section)
                 @php

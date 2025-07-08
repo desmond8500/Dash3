@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <table class="table table-hover">
-                    <thead class="sticky-top">
+                    <thead>
                         <tr>
                             <td>#</td>
                             <td>Zone</td>
@@ -63,13 +63,6 @@
     @component('components.modal', ["id"=>'editFicheZone', 'title' => 'Editer une zone', 'method'=> 'update'])
         <form class="row" wire:submit="update">
             @include('_form.fiche_zone_form')
-            {{-- <div class="modal-footer">
-                <button type="button" class="btn btn-danger" wire:click="delete">
-                    <i class="ti ti-trash"></i>
-                </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div> --}}
         </form>
         <script> window.addEventListener('open-editFicheZone', event => { window.$('#editFicheZone').modal('show'); }) </script>
         <script> window.addEventListener('close-editFicheZone', event => { window.$('#editFicheZone').modal('hide'); }) </script>

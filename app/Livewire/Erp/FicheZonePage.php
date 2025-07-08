@@ -91,7 +91,7 @@ class FicheZonePage extends Component
                 FicheZone::create([
                     'fiche_id' => $this->fiche->id,
                     'number' => $i+1,
-                    'name' => 'd'
+                    'name' => '_'
                 ]);
             }
         }

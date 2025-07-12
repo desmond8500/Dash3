@@ -26,7 +26,7 @@
     <link rel="shortcut icon" href="{{ asset('fav.ico') }}" type="image/x-icon" />
     <meta name="description" content="Tabler comes with tons of well-designed components and features. Start your adventure with Tabler and make your dashboard great again. For free!" />
 
-    @trixassets
+    {{-- @trixassets --}}
 
     @assets
         <!-- CSS files -->

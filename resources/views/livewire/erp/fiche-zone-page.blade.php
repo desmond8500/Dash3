@@ -16,13 +16,10 @@
                             <a class="btn btn-outline-primary btn-icon" href="{{ route('fiche_pdf',['fiche_id'=>$fiche->id]) }}" target="_blank">
                                 <i class="ti ti-file-type-pdf"></i>
                             </a>
-
                             <a class="btn" wire:click="create_zones(8)">8 Zones simples</a>
                             <a class="btn" wire:click="create_zones(8, 'galaxy')">8 Zones Galaxy </a>
                             <a class="btn" wire:click="create_zones(16, 'galaxy')">16 Zones Galaxy </a>
-
                         </div>
-
                     </div>
                 </div>
                 <table class="table table-hover">

@@ -19,11 +19,13 @@ class InvoiceRowForm extends Form
     public $coef = 1;
     #[Validate('required')]
     public $reference;
-    #[Validate('numeric')]
+    #[Validate('integer')]
     public $quantite= 1;
     #[Validate('numeric')]
     public $prix = 0;
     public $priorite_id=1;
+    #[Validate('integer')]
+    public $bought=0;
 
     function set($row_id)
     {
@@ -37,6 +39,7 @@ class InvoiceRowForm extends Form
         $this->quantite = $this->row->quantite;
         $this->prix = $this->row->prix;
         $this->priorite_id = $this->row->priorite_id;
+        $this->bought = $this->row->bought;
     }
 
     function store()
@@ -44,7 +47,7 @@ class InvoiceRowForm extends Form
         $this->validate();
         $row = InvoiceRow::create($this->all());
         $row->designation = ucfirst($row->designation);
-        $this->reset('designation', 'reference', 'quantite', 'prix', 'coef', 'priorite_id', 'article_id');
+        $this->reset('designation', 'reference', 'quantite', 'prix', 'coef', 'priorite_id', 'article_id', 'bought');
         $row->save();
     }
 

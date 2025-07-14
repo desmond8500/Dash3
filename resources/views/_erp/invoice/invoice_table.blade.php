@@ -13,41 +13,17 @@
 
                 @endcomponent
             </div>
+            <button class="btn btn-primary btn-icon">
+                <i class="ti ti-pdf" wire:click="$dispatch('open-exportPDF')"></i>
+            </button>
+            <button class="btn btn-primary btn-icon" wire:click="edit({{ $devis->id }})">
+                <i class="ti ti-edit"></i>
+            </button>
 
+            {{-- <a class="dropdown-item text-success" href="#" > <i class="ti ti-edit"></i> Modifier
+            </a>
+            <button class="dropdown-item text-danger" href="#"> <i class="ti ti-trash"></i> Supprimer </button> --}}
 
-            <div class="dropdown">
-                <a href="#" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Actions</a>
-                <div class="dropdown-menu">
-                    <span class="dropdown-header">Devis</span>
-                    <a class="dropdown-item text-success" href="#" wire:click="edit({{ $devis->id }})"> <i class="ti ti-edit"></i> Modifier </a>
-                    <a class="dropdown-item text-danger" href="#"> <i class="ti ti-trash"></i> Supprimer </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <span class="dropdown-header">Devis</span>
-                    <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'devis']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
-                    {{-- <a class="dropdown-item" target="_blank" href="{{ route('proposal_pdf',['invoice_id'=>$devis->id, 'type'=>'proposition technique']) }}"> <i class="ti ti-file-type-pdf"></i> Proposition PDF </a> --}}
-                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
-                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <span class="dropdown-header">Facture</span>
-                    <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
-                    <a class="dropdown-item" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
-                    <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf_save',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Générer Facture </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    {{-- <span class="dropdown-header">Bordereau</span> --}}
-                    {{-- <a class="dropdown-item" target="_blank" href="{{ route('bl_pdf',['invoice_id'=>$devis->id, 'type'=>'Travaux']) }}"> <i class="ti ti-file-type-pdf"></i> BL de Travaux </a> --}}
-
-
-                    <span class="dropdown-header">Exporter</span>
-                    <a class="dropdown-item" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
-                    <a class="dropdown-item" target="_blank" href="{{ route('invoice_export',['invoice_id'=>$devis->id]) }}"> <i class="ti ti-file-type-pdf"></i> Exporter Quantitatif XLS </a>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -73,12 +49,15 @@
                 $total_cable = 0;
                 $total_accessoires = 0;
                 $total_mainoeuvre = 0;
+                $total_bought = 0;
+
                 // Subtotal
                 $subtotal = 0;
                 $subtotal_equipment = 0;
                 $subtotal_cable = 0;
                 $subtotal_accessoires = 0;
                 $subtotal_mainoeuvre = 0;
+                $subtotal_bought = 0;
             @endphp
             @foreach ($sections as $key => $section)
                 @php
@@ -87,6 +66,7 @@
                     $subtotal_cable = 0;
                     $subtotal_accessoires = 0;
                     $subtotal_mainoeuvre = 0;
+                    $subtotal_bought = 0;
                 @endphp
                 <tr>
                     <th scope="col" class="bg-primary-lt" colspan="2">
@@ -145,8 +125,10 @@
                         @foreach ($section->rows->sortBy('priorite_id') as $row)
                             @php
                                 $total += $row->quantite*$row->prix;
+                                $total_bought += $row->bought*$row->prix;
                                 $total_marge += $row->quantite*$row->coef*$row->prix;
                                 $subtotal += $row->quantite*$row->coef*$row->prix;
+                                $subtotal_bought += $row->bought*$row->prix;
 
                             if ($row->priorite_id >= 0 && $row->priorite_id <= 4) {
                                 $subtotal_equipment += $row->quantite*$row->coef*$row->prix;
@@ -163,7 +145,6 @@
                             }elseif ($row->priorite_id == 7 ) {
                                 $subtotal_mainoeuvre += $row->quantite*$row->coef*$row->prix;
                                 $total_mainoeuvre += $row->quantite*$row->coef*$row->prix;
-
                             }
 
                             @endphp
@@ -190,7 +171,10 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center">{{ $row->quantite }}</td>
+                                <td class="text-center">
+                                    <div>{{ $row->quantite }}</div>
+                                    <div class="text-success" data-bs-toggle="tooltip" title="Quantitée acheté">{{ $row->bought }}</div>
+                                </td>
                                 <td class="text-center">{{ $row->coef }}</td>
                                 <td class="text-center">
                                     <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
@@ -228,11 +212,18 @@
                                 <div>
                                     <span class="fw-bold">Main d'oeuvre :</span> {{ number_format($subtotal_mainoeuvre, 0,'.', ' ') }} F
                                 </div>
+                                <div>
+                                    <span class="fw-bold">Total achat :</span> {{ number_format($subtotal_bought, 0,'.', ' ') }} F
+                                </div>
                             </td>
                             <td colspan="1" class="bg-azure-lt">
                                 <div>Sous Total</div>
+                                <div>Sous Total Achat :</div>
                             </td>
-                            <td colspan="2" class="text-end bg-azure-lt"> {{ number_format($subtotal, 0,'.', ' ') }} F</td>
+                            <td colspan="2" class="text-end bg-azure-lt">
+                                <div>{{ number_format($subtotal, 0,'.', ' ') }} F</div>
+                                <div>{{ number_format($subtotal_bought, 0,'.', ' ') }} F</div>
+                            </td>
                         </tr>
                     </tbody>
                 @endif
@@ -397,5 +388,36 @@
         </form>
         <script> window.addEventListener('open-editNote', event => { window.$('#editNote').modal('show'); }) </script>
         <script> window.addEventListener('close-editNote', event => { window.$('#editNote').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'exportPDF', 'title' => 'Exporter le devis'])
+        <div class="row g-2">
+            <div class="col-md-12">
+                <span class="dropdown-header mb-2">Devis</span>
+                <div class="btn-list">
+                    <a class="btn mb-1" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'devis']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                    <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
+                    <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <span class="dropdown-header mb-2">Facture</span>
+                <div class="btn-icon">
+                    <a class="btn mb-1 " target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
+                    <a class="btn mb-1 " target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
+                    <a class="btn mb-1 " target="_blank" href="{{ route('facture_pdf_save',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Générer Facture </a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <span class="dropdown-header mb-2">Quantité</span>
+                <div class="btn-list">
+                    <a class="btn " target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
+                    <a class="btn " target="_blank" href="{{ route('invoice_export',['invoice_id'=>$devis->id]) }}"> <i class="ti ti-file-type-pdf"></i> Exporter Quantitatif XLS </a>
+                </div>
+            </div>
+        </div>
+
+        <script> window.addEventListener('open-exportPDF', event => { window.$('#exportPDF').modal('show'); }) </script>
+        <script> window.addEventListener('close-exportPDF', event => { window.$('#exportPDF').modal('hide'); }) </script>
     @endcomponent
 </div>

@@ -11,13 +11,14 @@ class InvoiceRow extends Model
     use HasFactory;
     protected $fillable = [
         'invoice_section_id',
+        'priorite_id',
+        'article_id',
         'designation',
         'coef',
         'reference',
         'quantite',
         'prix',
-        'priorite_id',
-        'article_id',
+        'bought',
     ];
 
     public function section(): BelongsTo {

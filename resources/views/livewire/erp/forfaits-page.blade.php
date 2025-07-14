@@ -12,7 +12,7 @@
                             <img src="" alt="A" class="avatar avatar-md">
                         </div> --}}
                         <div class="col">
-                            <div class="badge bg-primary text-white">{{ $forfait->client->name }}</div>
+                            <div class="badge bg-primary text-white">{{ $forfait->client->name ?? '' }}</div>
                             <div class="card-title">{{ $forfait->designation }}</div>
                             <div class="text-muted">@parsedown($forfait->description)</div>
                         </div>

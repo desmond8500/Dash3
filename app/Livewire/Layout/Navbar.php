@@ -57,7 +57,7 @@ class Navbar extends Component
     public $formtype = true;
 
     function register(){
-        $this->validate();
+
         $this->user_form->store();
         $this->user_form->reset();
         $this->dispatch('close-register');

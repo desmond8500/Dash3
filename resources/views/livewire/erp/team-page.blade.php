@@ -27,6 +27,11 @@
                             <div class="text-muted">{{ $personne->function }}</div>
                         </div>
                         <div class="col-auto">
+                            @if ($personne->function == 'Stagiaire')
+                                <a class="btn btn-outline-primary btn-icon" target="_blank" href="{{ route('attestation_pdf',['team_id'=> $personne->id]) }}">
+                                    <i class="ti ti-file"></i>
+                                </a>
+                            @endif
                         <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $personne->id }}')">
                             <i class="ti ti-edit"></i>
                         </button>

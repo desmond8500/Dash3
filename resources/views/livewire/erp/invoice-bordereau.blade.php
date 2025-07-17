@@ -41,10 +41,6 @@
     @component('components.modal', ["id"=>'editBL', 'title' => 'Ajouter un bordereau', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.bl_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editBL', event => { window.$('#editBL').modal('show'); }) </script>
         <script> window.addEventListener('close-editBL', event => { window.$('#editBL').modal('hide'); }) </script>

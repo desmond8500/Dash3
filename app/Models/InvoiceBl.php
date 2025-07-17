@@ -17,6 +17,7 @@ class InvoiceBl extends Model
         'done',
         'todo',
         'type',
+        'logo',
     ];
 
     public function invoice(): BelongsTo

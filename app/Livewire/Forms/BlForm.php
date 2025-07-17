@@ -21,6 +21,7 @@ class BlForm extends Form
     public $date;
     public $todo;
     public $done;
+    public $logo = false;
 
     function fix(){
         $this->name = ucfirst($this->name);
@@ -41,6 +42,7 @@ class BlForm extends Form
         $this->done = $this->bl->done;
         $this->date = $this->bl->date;
         $this->type = $this->bl->type;
+        $this->logo = $this->bl->logo;
     }
 
     function update(){

@@ -121,6 +121,9 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     })->name('avancements_pdf');
 
     Route::get('/team', TeamPage::class)->name('team');
+    Route::get('/attestation/{team_id}', function ($team_id) {
+        return PDFController::attestation_pdf($team_id);
+    })->name('attestation_pdf');
 
     Route::get('/timeline/{projet_id}', TimelinePage::class)->name('timeline');
 

@@ -14,6 +14,7 @@ use App\Models\InvoiceBl;
 use App\Models\InvoiceProposal;
 use App\Models\InvoiceSection;
 use App\Models\Journal;
+use App\Models\Team;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -404,6 +405,26 @@ class PDFController extends Controller
             'color2' => env('COLOR2', '6b8a7a'),
             'color3' => env('COLOR3', '6b8a7a'),
         ];
+    }
+    static function attestation_pdf($team_id)
+    {
+        $team = Team::find($team_id);
+        $carbon = new Carbon();
+
+        $data = [
+            'logo' => env('LOGO', ''),
+            'title' => $type ?? "Attestation de Stage",
+            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
+            'carbon' => $carbon,
+            'team' => $team,
+            'acompte' => 0,
+            'color1' => env('COLOR1', '6b8a7a'),
+            'color2' => env('COLOR2', '6b8a7a'),
+            'color3' => env('COLOR3', '6b8a7a'),
+        ];
+
+        $pdf = Pdf::loadView("_pdf.attestation", $data);
+        return $pdf->stream("Attestation $team->firstname $team->lastname ");
     }
 
 }

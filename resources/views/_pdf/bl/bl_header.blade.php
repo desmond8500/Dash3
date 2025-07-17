@@ -4,7 +4,11 @@
     </tr>
     <tr>
         <td width="50px">
-            <img src="{{ $logo }}" width="50px" alt="Logo">
+            @if ($bl->logo)
+                <img src="{{ $bl->invoice->projet->client->avatar }}" width="50px" alt="Logo">
+            @else
+                <img src="{{ $logo }}" width="50px" alt="Logo">
+            @endif
         </td>
         <td>
             <div><b>Client :</b> {{ $invoice->client_name ?? $invoice->projet->client->name }}</div>

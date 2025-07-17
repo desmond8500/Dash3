@@ -159,20 +159,21 @@
                         </div>
                         @if (!$dependances->isEmpty())
                             <div class="card-body">
-                                <div class="row g-2">
+                                <div class="row row-deck g-2">
                                     @foreach ($dependances as $dependance)
                                         <div class="col-md-4">
-                                            @include('_card.articleCard1', ['item' => $dependance->dependence])
-                                            <div class="d-flex">
-                                                <button class="btn btn-outline-danger btn-sm" wire:click="remove_dependance({{ $dependance->id }})">
-                                                    <i class="ti ti-trash"></i>
-                                                </button>
-                                                <div class="btn">{{ $dependance->quantity }}</div>
-                                                <div>
-                                                    <button class="btn btn-icon btn-primary" wire:click="increase_dependance('{{ $dependance->id }}')"><i class="ti ti-plus"></i></button>
-                                                    <button class="btn btn-icon btn-primary" wire:click="decrease_dependance('{{ $dependance->id }}')"><i class="ti ti-minus"></i></button>
+                                            <div>
+                                                @include('_card.articleCard1', ['item' => $dependance->dependence])
+                                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                                    <button class="btn btn-outline-danger btn-icon" wire:click="remove_dependance({{ $dependance->id }})">
+                                                        <i class="ti ti-trash"></i>
+                                                    </button>
+                                                    <div>
+                                                        <button class="btn btn-icon btn-primary" wire:click="increase_dependance('{{ $dependance->id }}')"><i class="ti ti-plus"></i></button>
+                                                        <div class="btn">{{ $dependance->quantity }}</div>
+                                                        <button class="btn btn-icon btn-primary" wire:click="decrease_dependance('{{ $dependance->id }}')"><i class="ti ti-minus"></i></button>
+                                                    </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     @endforeach

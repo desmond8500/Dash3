@@ -1,4 +1,4 @@
-<div class="card" style="max-width: 200px">
+<div class="card" >
     <div class="p-2">
         @if ($item->image)
             <img src="{{ asset($item->image) }}" class="card-img-top" alt="...">

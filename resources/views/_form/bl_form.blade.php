@@ -14,7 +14,16 @@
     <label class="form-label">Type</label>
     <select class="form-select" wire:model="bl_form.type">
         <option value="travaux">Bordereau de travaux</option>
-        <option value="livraison">Bordereau de livraision</option>
+        <option value="livraison">Bordereau de livraison</option>
+    </select>
+    @error('bl_form.type') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+<div class="col-md-6 mb-3">
+    <label class="form-label">Logo</label>
+    <select class="form-select" wire:model="bl_form.logo">
+        <option value="">- Select -</option>
+        <option value="true">True</option>
+        <option value="false">False</option>
     </select>
     @error('bl_form.type') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>

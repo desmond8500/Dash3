@@ -100,6 +100,12 @@ class IndexPage extends Component
         }
     }
 
+    function register()
+    {
+        $this->user_form->store();
+        $this->dispatch('close-register');
+    }
+
     function logout()
     {
         $this->user_form->logout();

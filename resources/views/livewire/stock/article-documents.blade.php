@@ -9,9 +9,16 @@
         @if (!$documents->isEmpty())
             <div class="p-2">
                 @foreach ($documents as $document)
+                    @php
+                        $file = pathinfo($document->folder);
+                    @endphp
                     <div class="row align-items-center mb-1 pb-1 border-bottom">
                         <a class="col-auto" href="{{ asset($document->folder) }}" target="_blank">
-                            <img src="{{ asset($document->folder) }}" alt="F" class="avatar">
+                            @if ($file['extension'] == 'pdf')
+                                <img src="{{ asset('img/icons/012-pdf.png') }}" alt="F" class="avatar p-1">
+                            @else
+                                <img src="{{ asset($document->folder) }}" alt="F" class="avatar">
+                            @endif
                         </a>
                         <a class="col" href="{{ asset($document->folder) }}" target="_blank">
                             {{ $document->name ?? 'Lien' }}

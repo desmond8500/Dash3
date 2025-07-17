@@ -154,14 +154,9 @@
     </div>
 
     <div>
-        @component('components.modal', ["id"=>'register', 'title'=>'Inscription'])
+        @component('components.modal', ["id"=>'register', 'title'=>'Inscription', 'method'=>'register'])
         <form class="row" wire:submit="register">
-            {{-- @includeWhen($user_form, 'register_form') --}}
             @include('_form.register_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
 
         <script>

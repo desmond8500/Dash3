@@ -11,9 +11,9 @@ use Livewire\Form;
 
 class UserForm extends Form
 {
-    #[Rule('required')]
+    #[Rule('required', message: 'Le prénom est requis')]
     public $firstname;
-    #[Rule('required')]
+    #[Rule('required', message: 'Le nom est requis')]
     public $lastname;
     #[Rule('required|email|unique:App\Models\User,email')]
     public $email;
@@ -27,6 +27,7 @@ class UserForm extends Form
     public User $user;
 
     function store() {
+        $this->validate();
         $this->firstname = ucfirst($this->firstname);
         $this->lastname = ucfirst($this->lastname);
         User::create($this->all());

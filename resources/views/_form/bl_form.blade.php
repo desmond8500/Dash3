@@ -22,8 +22,8 @@
     <label class="form-label">Logo</label>
     <select class="form-select" wire:model="bl_form.logo">
         <option value="">- Select -</option>
-        <option value="true">True</option>
-        <option value="false">False</option>
+        <option value="1">True</option>
+        <option value="0">False</option>
     </select>
     @error('bl_form.type') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>

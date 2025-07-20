@@ -29,6 +29,7 @@ class InvoiceResource extends JsonResource
             'favorite' => $this->favorite,
             'facture_date' => $this->facture_date,
             'paydate' => $this->paydate,
+            'montant' => $this->total(),
             'folder' => "https://dash3.yonkou.info/api/v1/$this->id/'facture'"
 
         ];

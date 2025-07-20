@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
-use App\Http\Resources\FactureResource;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
@@ -160,7 +159,7 @@ class InvoiceAPIController extends Controller
         }else{
             $invoices = Invoice::orderBy('paydate')->where('paydate','!=',null)->whereYear('paydate', $year ?? 2025)->get();
         }
-        $invoices = FactureResource::collection($invoices);
+        $invoices = InvoiceResource::collection($invoices);
 
 
         return ResponseController::response(true, "Les dépenses du mois ont été récupérées", $invoices);

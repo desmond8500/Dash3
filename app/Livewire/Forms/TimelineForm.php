@@ -1,8 +1,9 @@
 <?php
 
-titlespace App\Livewire\Forms;
+namespace App\Livewire\Forms;
 
 use App\Models\Timeline;
+use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 

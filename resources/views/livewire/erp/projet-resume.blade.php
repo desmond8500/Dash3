@@ -98,6 +98,9 @@
                                         <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" >
                                             {{ ucfirst($invoice->reference) }}
                                         </a>
+                                        @if($invoice->paydate)
+                                            <div class="text-purple">{{ $invoice->dateFormat($invoice->paydate) }}</div>
+                                        @endif
                                     </td>
                                     <td>
                                         {{ $invoice->description }}

@@ -381,6 +381,45 @@
                 }
             }
         },
+        "/api/v1/paid_invoices": {
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "description": "Récupérer les factures du mois",
+                "operationId": "990186738eb8405432a8b41c113056e8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "month",
+                                    "year"
+                                ],
+                                "properties": {
+                                    "month": {
+                                        "type": "integer"
+                                    },
+                                    "year": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateurs récupérés avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
         "/api/v1/items": {
             "get": {
                 "tags": [
@@ -432,7 +471,7 @@
                     "Fournisseurs"
                 ],
                 "description": "Liste des fournisseurs",
-                "operationId": "8cdff875d964c79c8f6380749887ffce",
+                "operationId": "e5adb4839aa4bc7f8b6a8896d266a62d",
                 "responses": {
                     "200": {
                         "description": "Success"

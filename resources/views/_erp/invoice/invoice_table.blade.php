@@ -5,6 +5,9 @@
             <div class="text-primary">#{{ $devis->reference }}</div>
             <div class="" style="font-size: 13px; font-weight:normal;">
                 <div>{!! nl2br($devis->description) !!}</div>
+                @if($devis->paydate)
+                    <div class="text-purple">{{ $devis->formatDate($devis->paydate)  }}</div>
+                @endif
             </div>
         </div>
         <div class="card-actions">

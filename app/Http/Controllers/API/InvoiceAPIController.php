@@ -124,4 +124,44 @@ class InvoiceAPIController extends Controller
 
         return ResponseController::response(true, "Les dépenses du mois ont été récupérées", $invoices);
     }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/paid_invoices",
+     *      tags={"Invoices"},
+     *      description="Récupérer les factures du mois",
+     *
+     *      @OA\RequestBody(
+     *          required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                  @OA\Property(property="month", type="int"),
+     *                  @OA\Property(property="year", type="int"),
+     *                  required={"month", "year"}
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="Utilisateurs récupérés avec succès"),
+     *      @OA\Response(response=401, description="Unauthorized")
+     * )
+     */
+    function paid_invoices(Request $request)
+    {
+        $month = $request->month;
+        $year = $request->year;
+        if (!$year) {
+            $year = 2025;
+        }
+
+        if ($month){
+            $invoices = Invoice::orderBy('paydate')->where('paydate','!=',null)->whereMonth('paydate', $month)->whereYear('paydate', $year)->get();
+        }else{
+            $invoices = Invoice::orderBy('paydate')->where('paydate','!=',null)->whereYear('paydate', $year ?? 2025)->get();
+        }
+        $invoices = InvoiceResource::collection($invoices);
+
+
+        return ResponseController::response(true, "Les dépenses du mois ont été récupérées", $invoices);
+    }
 }

@@ -28,6 +28,7 @@ class InvoiceResource extends JsonResource
             'remise' => $this->remise,
             'favorite' => $this->favorite,
             'facture_date' => $this->facture_date,
+            'paydate' => $this->paydate,
 
         ];
     }

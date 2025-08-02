@@ -90,11 +90,11 @@
                                 </button>
                             @endif
                             @if ($section->status)
-                                <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Ajouter à la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
+                                <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Supprimer de la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
                                     <i class="ti ti-circle-check"></i>
                                 </button>
                             @else
-                                <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Supprimer de la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
+                                <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Ajouter à la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
                                     <i class="ti ti-circle-x"></i>
                                 </button>
                             @endif
@@ -158,7 +158,7 @@
                                             @isset ($row->article->image)
                                                 <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
                                             @else
-                                                <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar avatar-sm me-2 bg-white border border-white">
+                                                <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar avatar-md me-2 bg-white border border-white">
                                             @endisset
                                         </div>
                                         <div class="col">

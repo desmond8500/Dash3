@@ -4,12 +4,12 @@
             <div wire:loading>
                 Chargement <div class="spinner-border" role="status"></div>
             </div>
-                <label href="#" class="avatar avatar-upload rounded" for="file">
+                <label href="#" class="avatar avatar-xl avatar-upload rounded" for="file">
                     @if ($provider_form->logo)
                         @if (is_string($provider_form->logo))
-                            <img src="{{ asset($provider_form->logo) }}" class="avatar">
+                            <img src="{{ asset($provider_form->logo) }}" class="avatar avatar-xl">
                         @else
-                            <img src="{{ $provider_form->logo->temporaryUrl() }}" class="avatar">
+                            <img src="{{ $provider_form->logo->temporaryUrl() }}" class="avatar avatar-xl">
                         @endif
                     @else
                     <i class="ti ti-plus"></i>

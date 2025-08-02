@@ -164,7 +164,7 @@
     </div>
 
 
-    @component('components.modal', ["id"=>'editProjet', 'title'=> 'Editer un projet'])
+    @component('components.modal', ["id"=>'editProjet', 'title'=> 'Editer un projet', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.projet_form')
         </form>

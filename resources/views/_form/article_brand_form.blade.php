@@ -4,9 +4,9 @@
     </div>
         @if ($brand_form->logo)
             @if(is_string($brand_form->logo))
-                <img src="{{ asset($brand_form->logo) }}" alt="" class="avatar rounded avatar-upload p-1">
+                <img src="{{ asset($brand_form->logo) }}" alt="" class="avatar avatar-xl rounded avatar-upload p-1">
             @else
-                <img src="{{ $brand_form->logo->temporaryUrl() }}" alt="" class="avatar rounded avatar-upload p-1">
+                <img src="{{ $brand_form->logo->temporaryUrl() }}" alt="" class="avatar avatar-xl rounded avatar-upload p-1">
             @endif
             {{-- <label for="file" href="#" class="avatar avatar-upload rounded">
                 <i class="ti ti-edit text-muted"></i>
@@ -14,7 +14,7 @@
             </label>
             <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="brand_form.logo2"> --}}
         @else
-            <label for="file" href="#" class="avatar avatar-upload rounded">
+            <label for="file" href="#" class="avatar avatar-xl avatar-upload rounded">
                 <i class="ti ti-plus text-muted"></i>
                 <span class="avatar-upload-text">Ajouter</span>
             </label>

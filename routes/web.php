@@ -19,6 +19,7 @@ use App\Livewire\Erp\InvoiceModelPage;
 use App\Livewire\Erp\InvoicePage;
 use App\Livewire\Erp\InvoiceProposalPage;
 use App\Livewire\Erp\InvoicesPage;
+use App\Livewire\Erp\PlanningsPage;
 use App\Livewire\Erp\ProjetPage;
 use App\Livewire\Erp\ProjetsPage;
 use App\Livewire\Erp\PvPage;
@@ -249,6 +250,9 @@ Route::get('/videos', VideosPage::class)->name('videos');
 Route::get('/fiches/{type}/{name}', function ($name, $type) {
     return PDFController::fiches_pdf($type, $name);
 })->name('fiches_pdf');
+
+// Plannings
+Route::get('/plannings', PlanningsPage::class )->name('plannings');
 
 
 Route::fallback(function() {

@@ -138,9 +138,9 @@
                                             <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div>
                                         </td>
                                         <td class="text-center">
-                                            <div></div>
                                             <div>{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', '
                                                 ') }}</div>
+                                                <div class="badge mt-1">{{ $row->priority() }} </div>
                                         </td>
                                         <td class="text-center " style="vertical-align: middle;">
                                             <div>

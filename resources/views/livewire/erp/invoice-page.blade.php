@@ -308,7 +308,7 @@
 
         @endif
     @endcomponent
-    @component('components.modal', ["id"=>'editRow', 'title'=>'Editer un article', 'class'=> $row_class, 'method'=>'updateRow'])
+    @component('components.modal', ["id"=>'editRow', 'title'=>'Editer un article', 'class'=> $row_class, 'method'=>'updateRow', 'class'=>'modal-lg'])
         <form class="row" wire:submit="updateRow">
             @include('_form.invoice_row_form',['nosection'=>false])
         </form>

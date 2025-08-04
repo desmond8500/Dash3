@@ -13,7 +13,12 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Quantité achetés</label>
-            <input type="number" class="form-control" wire:model="row_form.bought" placeholder="Quantité achetée">
+            <div class="input-group">
+                <input type="number" class="form-control" wire:model="row_form.bought" placeholder="Quantité achetée">
+                <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.bought', 0)">
+                    <i class="ti ti-x"></i>
+                </a>
+            </div>
             @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
     </div>
@@ -21,7 +26,12 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Quantité</label>
-                <input type="number" class="form-control" wire:model="row_form.quantite" placeholder="Quantité">
+                <div class="input-group">
+                    <input type="number" class="form-control" wire:model="row_form.quantite" placeholder="Quantité">
+                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.quantite', 1)">
+                        <i class="ti ti-x"></i>
+                    </a>
+                </div>
                 @error('row_form.quantite') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
             <div class="col-md-6">
@@ -38,7 +48,10 @@
 
         <label class="form-label">Prix</label>
         <div class="input-group">
-            <input type="number" class="form-control" wire:model="row_form.prix" placeholder="Prix de l'article">
+            <input type="number" class="form-control" wire:model.live="row_form.prix" placeholder="Prix de l'article">
+            <a class="btn btn-primary btn-icon" wire:click="$set('row_form.prix', '{{ $row_form->prix*656 }}')">
+                €
+            </a>
             <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.prix', 0)">
                 <i class="ti ti-x"></i>
             </a>

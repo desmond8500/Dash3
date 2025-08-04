@@ -189,7 +189,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div>{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', ' ') }}</div>
-                                    <div class="badge mt-1">{{ $row->priority() }} {{ $row->priorite_id }}</div>
+                                    <div class="badge mt-1">{{ $row->priority() }} </div>
                                 </td>
                                 <td class="text-center ">
                                     <div>

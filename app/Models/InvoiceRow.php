@@ -32,28 +32,28 @@ class InvoiceRow extends Model
 
     public function priority()
     {
-        if ($this->priority_id == 0) {
+        if ($this->priorite_id == 0) {
             return "Centrale 1";
         }
-        if ($this->priority_id == 1) {
+        if ($this->priorite_id == 1) {
             return "Centrale 2";
         }
-        if ($this->priority_id == 2) {
+        if ($this->priorite_id == 2) {
             return "Organe 1";
         }
-        if ($this->priority_id == 3) {
+        if ($this->priorite_id == 3) {
             return "Organe 2";
         }
-        if ($this->priority_id == 4) {
+        if ($this->priorite_id == 4) {
             return "Organe 3";
         }
-        if ($this->priority_id == 5) {
+        if ($this->priorite_id == 5) {
             return "Cable";
         }
-        if ($this->priority_id == 6) {
+        if ($this->priorite_id == 6) {
             return "Accessoires";
         }
-        if ($this->priority_id == 7) {
+        if ($this->priorite_id == 7) {
             return "Forfait";
         }
     }

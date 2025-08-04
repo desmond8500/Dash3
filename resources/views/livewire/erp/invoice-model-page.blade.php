@@ -217,7 +217,7 @@
         <script> window.addEventListener('close-addArticle', event => { window.$('#addArticle').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editRow', 'title' => 'Editer un champ', 'method'=>'update_row'])
+    @component('components.modal', ["id"=>'editRow', 'title' => 'Editer un champ', 'method'=>'update_row', 'class'=>'modal-lg'])
         <form class="row" wire:submit="update_row">
             @include('_form.invoice_row_form', ['nosection'=>true])
         </form>

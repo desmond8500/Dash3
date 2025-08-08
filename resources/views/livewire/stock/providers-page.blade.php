@@ -5,7 +5,7 @@
 
     <div class="row row-deck g-2">
         <div class="col-md-12">
-            <div class="input-icon">
+            <div class="input-icon w-100">
                 <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher un fournisseur">
                 <span class="input-icon-addon ">
                     <i class="ti ti-search"></i>
@@ -17,7 +17,7 @@
                 <div class="card p-2">
                     <div class="row">
                         <a class="col-auto" href="{{ route('provider',['provider_id'=>$provider->id]) }}">
-                            <img src="{{ asset($provider->logo) }}" alt="A" class="avatar avatar-md">
+                            <img src="{{ asset($provider->logo) }}" alt="A" class="avatar avatar-xl">
                         </a>
                         <a class="col" href="{{ route('provider',['provider_id'=>$provider->id]) }}">
                             <div class="card-title">{{ $provider->name }}</div>

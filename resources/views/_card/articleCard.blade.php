@@ -1,6 +1,6 @@
 <div class="card p-2">
     <div class="row g-2">
-        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>
+        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" >
             <img src="{{ asset($article->image) }}" alt="A" class="avatar p-1 bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain;" >
         </a>
         <div class="col">

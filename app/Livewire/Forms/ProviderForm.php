@@ -17,6 +17,11 @@ class ProviderForm extends Form
     public $logo;
     public $address;
     public $description;
+    #[Rule('email')]
+    public $email;
+    public $phone;
+    #[Rule('url')]
+    public $website;
 
     function fix(){
         $this->name = ucfirst($this->name);
@@ -38,6 +43,9 @@ class ProviderForm extends Form
         $this->logo = $this->provider->logo;
         $this->address = $this->provider->address;
         $this->description = $this->provider->description;
+        $this->email = $this->provider->email;
+        $this->phone = $this->provider->phone;
+        $this->website = $this->provider->website;
     }
 
     function update(){

@@ -17,6 +17,9 @@ class Provider extends Model
         'logo',
         'address',
         'description',
+        'email',
+        'phone',
+        'website'
     ];
 
     protected $hidden = ['created_at','updated_at','deleted_at'];

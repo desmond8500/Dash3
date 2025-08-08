@@ -3,6 +3,7 @@
 use App\Exports\InvoiceExport;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PDFController;
+use App\Livewire\Dashboard\Dashboard1Page;
 use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
@@ -254,6 +255,8 @@ Route::get('/fiches/{type}/{name}', function ($name, $type) {
 // Plannings
 Route::get('/plannings', PlanningsPage::class )->name('plannings');
 
+// Dashboard
+Route::get('/dashboard1', Dashboard1Page::class )->name('dashboard.1');
 
 Route::fallback(function() {
     return view('errors.404page');

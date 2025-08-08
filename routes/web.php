@@ -212,7 +212,10 @@ Route::middleware(['auth', 'can:finances'])->group(function () {
 });
 
 // Test
-    // PDF
+// PDF
+Route::middleware(['auth'])->group(function () {
+
+});
     Route::get('pdf', function () { return PDFController::pdf(); })->name('pdf');
 
 Route::get('/test', TestPage::class)->name('test');
@@ -221,42 +224,62 @@ Route::get('test_pdf', function () { return PDFController::test_pdf(); })->name(
 Route::get('proces_verbal_pdf', function () { return PDFController::proces_verbal_pdf(); })->name('proces_verbal_pdf');
 
 // Badges PDF
-Route::get('arp_card_pdf/{card_id}', function ($card_id) { return PDFController::arp_card_pdf($card_id); })->name('arp_card_pdf');
-Route::get('arp_card_pdf2/{projet_id}', function ($projet_id) { return PDFController::arp_card_pdfs($projet_id); })->name('arp_card_pdfs');
-Route::get('arp_card_pdf3/{projet_id}/{type}', function ($projet_id, $type) { return PDFController::card_pdfs($projet_id, $type); })->name('card_pdfs');
-// Fiches PDF
-Route::get('doe_pdf', function () {
-    return PDFController::proces_verbal_pdf();
-})->name('doe_pdf');
+Route::middleware(['auth'])->group(function () {
+    Route::get('arp_card_pdf/{card_id}', function ($card_id) { return PDFController::arp_card_pdf($card_id); })->name('arp_card_pdf');
+    Route::get('arp_card_pdf2/{projet_id}', function ($projet_id) { return PDFController::arp_card_pdfs($projet_id); })->name('arp_card_pdfs');
+    Route::get('arp_card_pdf3/{projet_id}/{type}', function ($projet_id, $type) { return PDFController::card_pdfs($projet_id, $type); })->name('card_pdfs');
 
-Route::get('fiche_pdf/{fiche_id}', function ($fiche_id) {
-    return PDFController::fiche_pdf($fiche_id);
-})->name('fiche_pdf');
+});
+// Fiches PDF
+Route::middleware(['auth'])->group(function () {
+    Route::get('doe_pdf', function () {
+        return PDFController::proces_verbal_pdf();
+    })->name('doe_pdf');
+
+    Route::get('fiche_pdf/{fiche_id}', function ($fiche_id) {
+        return PDFController::fiche_pdf($fiche_id);
+    })->name('fiche_pdf');
+
+});
 
 
 // Test
-Route::get('/systemes', SystemesPage::class)->name('systemes');
-Route::get('/fiches', FichesPage::class)->name('fiches');
-Route::get('pdf_browser', function () {
+Route::middleware(['auth'])->group(function () {
+    Route::get('/systemes', SystemesPage::class)->name('systemes');
+    Route::get('/fiches', FichesPage::class)->name('fiches');
+    Route::get('pdf_browser', function () {
+        $template = view('_pdf.test')->render();
+        return Browsershot::html($template)->save('example.pdf');
+    });
 
-    $template = view('_pdf.test')->render();
-    return Browsershot::html($template)->save('example.pdf');
 });
 
 // Medias
-Route::get('/images', ImagesPage::class)->name('images');
-Route::get('/videos', VideosPage::class)->name('videos');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/images', ImagesPage::class)->name('images');
+    Route::get('/videos', VideosPage::class)->name('videos');
+
+});
 
 // Fiches
-Route::get('/fiches/{type}/{name}', function ($name, $type) {
-    return PDFController::fiches_pdf($type, $name);
-})->name('fiches_pdf');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/fiches/{type}/{name}', function ($name, $type) {
+        return PDFController::fiches_pdf($type, $name);
+    })->name('fiches_pdf');
+
+});
 
 // Plannings
-Route::get('/plannings', PlanningsPage::class )->name('plannings');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/plannings', PlanningsPage::class )->name('plannings');
+
+});
 
 // Dashboard
-Route::get('/dashboard1', Dashboard1Page::class )->name('dashboard.1');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard1', Dashboard1Page::class )->name('dashboard.1');
+
+});
 
 Route::fallback(function() {
     return view('errors.404page');

@@ -1,3 +1,113 @@
 <div>
-    {{-- Be like water. --}}
+    @component('components.layouts.page-header', ['title'=> 'Dashboard 1'])
+
+    @endcomponent
+
+    <div class="row g-2">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Pages</div>
+                    <div class="card-actions">
+                        <button class='btn btn-primary' wire:click="$dispatch('open-addWebpage')"><i class='ti ti-plus'></i> Site Web</button>
+                        @if ($edit)
+                            <button class='btn btn-success btn-icon' wire:click="$toggle('edit')"><i class='ti ti-edit'></i> </button>
+                        @else
+                            <button class='btn btn-secondary btn-icon' wire:click="$toggle('edit')"><i class='ti ti-edit'></i> </button>
+                        @endif
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row g-2">
+                        @foreach($websites as $website)
+                            <div class="col-md-2">
+                                <div class="card">
+                                    <div class="text-center p-2">
+                                        <a href="{{ $website->url }}" target="_blank">
+                                            <img src="{{ asset($website->logo) }}" alt="logo" class="avatar avatar-xl">
+                                        </a>
+                                        <div class="mt-2">{{ $website->name }}</div>
+                                    </div>
+                                    @if ($edit)
+                                        <div class="text-center">
+                                            <div class="btn btn-danger btn-sm" wire:click="delete('{{ $website->id }}')">
+                                                <i class="ti ti-trash"></i>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Catégories</div>
+                    <div class="card-actions">
+                        <button class='btn btn-primary' wire:click="$dispatch('open-addWebpageCategory')"><i class='ti ti-plus'></i> Catégorie </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @foreach ($categories as $category)
+                        <div class="card p-2 mb-2 ">
+                            <div class="row">
+                                <div class="col cursor-pointer" wire:click="selectCategory('{{ $category->id }}')">
+                                    <div class="card-title">{{ $category->name }}</div>
+                                    <div class="text-muted">{!! $category->description !!}</div>
+                                </div>
+                                <div class="col-auto ">
+                                    <div>
+                                        <button class="btn btn-outline-primary btn-sm" wire:click="edit_category('{{ $category->id }}')">
+                                          <i class="ti ti-edit"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger btn-sm" wire:click="edit_category('{{ $category->id }}')">
+                                          <i class="ti ti-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="text-center mt-1">
+                                        {{ $category->webpages->count() }}
+                                    </div>
+                              </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @component('components.modal', ["id"=>'addWebpageCategory', 'title' => 'Ajouter une catégorie', 'method'=>'store_category'])
+        <form class="row" wire:submit="store_category">
+            @include('_form.webpage_category_form')
+        </form>
+        <script> window.addEventListener('open-addWebpageCategory', event => { window.$('#addWebpageCategory').modal('show'); }) </script>
+        <script> window.addEventListener('close-addWebpageCategory', event => { window.$('#addWebpageCategory').modal('hide'); }) </script>
+    @endcomponent
+    @component('components.modal', ["id"=>'editWebpageCategory', 'title' => 'Editer une catégorie', 'method'=>'update_category'])
+        <form class="row" wire:submit="update_category">
+            @include('_form.webpage_category_form')
+        </form>
+        <script> window.addEventListener('open-editWebpageCategory', event => { window.$('#editWebpageCategory').modal('show'); }) </script>
+        <script> window.addEventListener('close-editWebpageCategory', event => { window.$('#editWebpageCategory').modal('hide'); }) </script>
+    @endcomponent
+
+
+
+    @component('components.modal', ["id"=>'addWebpage', 'title' => 'Ajouter un Site Web', 'method'=>'store'])
+        <form class="row" wire:submit="store">
+            @include('_form.webpage_form')
+        </form>
+        <script> window.addEventListener('open-addWebpage', event => { window.$('#addWebpage').modal('show'); }) </script>
+        <script> window.addEventListener('close-addWebpage', event => { window.$('#addWebpage').modal('hide'); }) </script>
+    @endcomponent
 </div>

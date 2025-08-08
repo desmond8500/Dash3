@@ -43,7 +43,7 @@ class Navbar extends Component
                 array('name' => "Vidéos", "route" => "videos", "icon" => "video"),
             ]
         ),
-        array('name' => "Tableaux", "icon" => "dashboard", "can"=> "medias",
+        array('name' => "Tableaux", "icon" => "dashboard", "can"=> "",
             'submenu' => [
             array('name' => "Tableau de bord 1", "route" => "dashboard.1", "icon" => "dashboard"),
             ]

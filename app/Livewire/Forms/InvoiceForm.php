@@ -12,7 +12,7 @@ class InvoiceForm extends Form
 {
     public Invoice $invoice;
 
-    #[Rule('required')]
+    #[Rule('required|integer')]
     public $projet_id;
     public $client_name;
     public $projet_name;
@@ -78,7 +78,11 @@ class InvoiceForm extends Form
     }
 
     function delete(){
+        if($this->invoice->sections()->count()){
+            return 'error';
+        }
         $this->invoice->delete();
+        return 'success';
     }
 
     function favorite()

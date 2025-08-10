@@ -12,7 +12,9 @@ class ContactForm extends Form
 {
     public Contact $contact;
 
+    #[Rule('integer|nullable')]
     public $projet_id;
+    #[Rule('integer|nullable')]
     public $client_id;
     #[Rule('required')]
     public $firstname;
@@ -20,7 +22,9 @@ class ContactForm extends Form
     public $lastname;
     public $fonction;
     public $avatar;
+    #[Rule('integer')]
     public $phone;
+    #[Rule('email')]
     public $email;
     public $societe;
 

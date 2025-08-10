@@ -53,7 +53,7 @@
                 </li>
                 @endif
             </ul>
-            <div class="my-2">@parsedown($projet->description)</div>
+            <div class="my-2">{{ $projet->description }}</div>
 
         </div>
 
@@ -81,7 +81,7 @@
                         @if ($invoices->count())
                         <thead class="sticky-top">
                             <tr>
-                                <th style="width:10px">#</th>
+                                <th style="width:5px">#</th>
                                 <th style="width:100px">Références</th>
                                 <th>Description</th>
                                 <th style="width: 120px">statut</th>
@@ -92,14 +92,14 @@
                         @endif
                         <tbody>
                             @foreach ($invoices as $key => $invoice)
-                                <tr class="cursor-pointer" wire:key="{{ $invoice->id }}">
+                                <tr class="cursor-pointer " wire:key="{{ $invoice->id }}">
                                     <td>{{ $key+1 }}</td>
                                     <td>
                                         <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank" >
                                             {{ ucfirst($invoice->reference) }}
                                         </a>
                                         @if($invoice->paydate)
-                                            <div class="text-purple">{{ $invoice->dateFormat($invoice->paydate) }}</div>
+                                            <div class="text-purple" data-bs-toggle="tooltip" title="Date de paiement">{{ $invoice->dateFormat($invoice->paydate) }}</div>
                                         @endif
                                     </td>
                                     <td>
@@ -111,8 +111,8 @@
                                         @endcomponent
                                     </td>
                                     <td class="text-end">
-                                        <div>{{ number_format($invoice->total(), 0,'.', ' ') }} CFA</div>
-                                        <div class="text-muted">{{ $invoice->formatDate($invoice->created_at) }}</div>
+                                        <div>{{ number_format($invoice->total(), 0,'.', ' ') }} F</div>
+                                        <div class="text-muted" data-bs-toggle="tooltip" title="Date de création">{{ $invoice->formatDate($invoice->created_at) }}</div>
                                     </td>
                                     <td>
                                         <div class="dropdown open">
@@ -122,6 +122,7 @@
                                             <div class="dropdown-menu" aria-labelledby="triggerId">
                                                 <a class="dropdown-item" wire:click="dupliquer('{{ $invoice->id }}')"> <i class="ti ti-copy"></i> Dupliquer</a>
                                                 <a class="dropdown-item" wire:click="editInvoice('{{ $invoice->id }}')"> <i class="ti ti-edit"></i> Editer</a>
+                                                <a class="dropdown-item text-danger" wire:click="delete_invoice('{{ $invoice->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                                             </div>
                                         </div>
                                     </td>

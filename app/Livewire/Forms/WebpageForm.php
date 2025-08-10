@@ -57,8 +57,8 @@ class WebpageForm extends Form
     }
 
     function update(){
-        $this->validate();
-        $this->webpage->update($this->all());
+        // $this->validate();
+        $this->webpage->update($this->only(['webpage_category_id', 'name', 'description', 'url']));
     }
 
     function delete($model_id){

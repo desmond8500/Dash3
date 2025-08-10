@@ -277,7 +277,8 @@ Route::middleware(['auth'])->group(function () {
 
 // Dashboard
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard1', Dashboard1Page::class )->name('dashboard.1');
+    Route::get('/dashboard1', Dashboard1Page::class )->name('dashboard1');
+    Route::get('/dashboard2', Dashboard1Page::class )->name('dashboard2');
 
 });
 

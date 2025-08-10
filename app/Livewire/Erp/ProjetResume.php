@@ -78,6 +78,17 @@ class ProjetResume extends Component
         $this->invoice_form->update();
         $this->dispatch('close-editInvoice');
     }
+    function delete_invoice($id)
+    {
+        $this->invoice_form->set($id);
+        $message = $this->invoice_form->delete();
+
+        if ($message == 'error') {
+            $this->js("alert('Ce devis contient des sections, veuillez les supprimer avant ')");
+        }
+
+        $this->dispatch('close-editInvoice');
+    }
 
     function toggleInvoiceFavorite()
     {

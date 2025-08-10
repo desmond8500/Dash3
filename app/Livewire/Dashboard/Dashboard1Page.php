@@ -26,7 +26,8 @@ class Dashboard1Page extends Component
 
     #[Session]
     public $selected = 1;
-    public $edit= 0;
+    #[Session]
+    public $edit_form= 0;
 
     function getWebsites(){
         return Webpage::where('webpage_category_id', $this->selected)->get();
@@ -41,6 +42,14 @@ class Dashboard1Page extends Component
     function store(){
         $this->webpage_form->store();
         $this->dispatch('close-addWebpage');
+    }
+    function edit($id){
+        $this->webpage_form->set($id);
+        $this->dispatch('open-editWebpage');
+    }
+    function update(){
+        $this->webpage_form->update();
+        $this->dispatch('close-editWebpage');
     }
     function delete($id){
         $this->webpage_form->delete($id);

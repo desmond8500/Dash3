@@ -1,8 +1,15 @@
-<div class="col-auto">
+<div>
+    @error('contact_form.client_id') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+<div>
+    @error('contact_form.projet_id') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+
+<div class="col-auto mb-3">
     <div wire:loading>
         Chargement <div class="spinner-border" role="status"></div>
     </div>
-        <label href="#" class="avatar avatar-upload rounded" for="file">
+        <label href="#" class="avatar avatar-xl avatar-upload rounded" for="file">
             @if ($contact_form->avatar)
                 @if (is_string($contact_form->avatar))
                     <img src="{{ asset($contact_form->avatar) }}" class="avatar">
@@ -16,6 +23,7 @@
         <input type="file" style="display: none" id="file" accept="image/*" wire:model.defer="contact_form.avatar">
     </label>
 </div>
+<div class="w-100"></div>
 
 <div class="col-md-5 mb-3">
     <label class="form-label">Prénom</label>

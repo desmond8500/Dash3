@@ -45,7 +45,7 @@ class Navbar extends Component
         ),
         array('name' => "Tableaux", "icon" => "dashboard", "can"=> "erp",
             'submenu' => [
-            array('name' => "Tableau de bord 1", "route" => "dashboard.1", "icon" => "dashboard"),
+            array('name' => "Tableau de bord 1", "route" => "dashboard1", "icon" => "dashboard"),
             ]
         ),
     );

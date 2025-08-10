@@ -1,6 +1,6 @@
 {{-- <div class="{{ $card_class ?? 'col-md-6' }}"> --}}
     <div class="card p-2">
-        <div class="row g-2">
+        <div class="row g-2 align-items-center">
             <div class="col-auto">
                 @if ($contact->photo)
                     <img src="{{ asset($contact->photo) }}" alt="A" class="avatar avatar-md">
@@ -10,21 +10,25 @@
             </div>
             <div class="col">
                 <div class="">{{ $contact->firstname }} <b>{{ strtoupper($contact->lastname) }}</b></div>
-                <div class="text-primary">{{ $contact->fonction }}</div>
-                <div class="text-purple">{{ $contact->societe }}</div>
-                <div class="d-flex justify-content-between align-items-center mt-1">
+                @if ($contact->fonction)
+                    <div class="text-primary d-flex align-items-center my-1" data-bs-toggle="tooltip" title="Fonction"> <i class="ti ti-briefcase-2"></i> {{ $contact->fonction }}</div>
+                @endif
+                @if ($contact->societe)
+                    <div class="text-purple d-flex align-items-center my-1" data-bs-toggle="tooltip" title="Societe"><i class="ti ti-building"></i> {{ $contact->societe }}</div>
+                @endif
+                {{-- <div class="d-flex justify-content-between align-items-center mt-1"> --}}
                     @if ($contact->phone)
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center" data-bs-toggle="tooltip" title="Téléphone">
                         <i class="ti ti-phone"></i> <div class="ms-1">  {{ $contact->phone }}</div>
                     </div>
                     @endif
                     @if ($contact->email)
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center" data-bs-toggle="tooltip" title="Email">
                             <i class="ti ti-mail"></i>
                             <div class="ms-1"> {{ $contact->email }}</div>
                         </div>
                     @endif
-                </div>
+                {{-- </div> --}}
             </div>
             <div class="col-auto">
                 <div class="dropdown open">

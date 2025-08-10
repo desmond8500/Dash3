@@ -20,12 +20,6 @@
         @error('invoice_form.statut') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    {{-- <div class="col-md-8 mb-3">
-        <label class="form-label">Nom du projet</label>
-        <input type="text" class="form-control" wire:model="invoice_form.projet_name" placeholder="Nom du projet">
-        @error('invoice_form.projet_name') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div> --}}
-
     <div class="col-md-8 mb-3">
         <div class="mb-2">
             <label class="form-label">Description</label>
@@ -43,6 +37,19 @@
                 <input type="date" class="form-control" wire:model="invoice_form.paydate">
                 @error('invoice_form.paydate') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Modalités</label>
+            <textarea class="form-control" wire:model="invoice_form.modalite" placeholder="Modalités du devis"
+                data-bs-toggle="autosize"></textarea>
+            @error('invoice_form.modalite') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Notes</label>
+            <textarea class="form-control" wire:model="invoice_form.note" placeholder="Notes du devis"
+                data-bs-toggle="autosize"></textarea>
+            @error('invoice_form.note') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
     </div>
 
@@ -75,18 +82,5 @@
                 @endisset
             </select>
         </div>
-
-
-    </div>
-
-    <div class="col-md-6 mb-3">
-        <label class="form-label">Modalités</label>
-        <textarea class="form-control" wire:model="invoice_form.modalite" placeholder="Modalités du devis" data-bs-toggle="autosize"></textarea>
-        @error('invoice_form.modalite') <span class="text-danger">{{ $message }}</span> @enderror
-    </div>
-    <div class="col-md-6 mb-3">
-        <label class="form-label">Notes</label>
-        <textarea class="form-control" wire:model="invoice_form.note" placeholder="Notes du devis" data-bs-toggle="autosize"></textarea>
-        @error('invoice_form.note') <span class="text-danger">{{ $message }}</span> @enderror
     </div>
 </div>

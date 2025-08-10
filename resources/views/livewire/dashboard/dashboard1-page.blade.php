@@ -10,29 +10,32 @@
                     <div class="card-title">Pages</div>
                     <div class="card-actions">
                         <button class='btn btn-primary' wire:click="$dispatch('open-addWebpage')"><i class='ti ti-plus'></i> Site Web</button>
-                        @if ($edit)
-                            <button class='btn btn-success btn-icon' wire:click="$toggle('edit')"><i class='ti ti-edit'></i> </button>
+                        @if ($edit_form)
+                            <button class='btn btn-success btn-icon' wire:click="$toggle('edit_form')"><i class='ti ti-edit'></i> </button>
                         @else
-                            <button class='btn btn-secondary btn-icon' wire:click="$toggle('edit')"><i class='ti ti-edit'></i> </button>
+                            <button class='btn btn-secondary btn-icon' wire:click="$toggle('edit_form')"><i class='ti ti-edit'></i> </button>
                         @endif
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row g-2">
+                    <div class="row row-deck g-2">
                         @foreach($websites as $website)
                             <div class="col-md-2">
-                                <div class="card">
+                                <div class="card bg-gray-50 ">
                                     <div class="text-center p-2">
                                         <a href="{{ $website->url }}" target="_blank">
-                                            <img src="{{ asset($website->logo) }}" alt="logo" class="avatar avatar-xl">
+                                            <img src="{{ asset($website->logo) }}" alt="l" class="avatar avatar-xl p-1 bg-white" style="object-fit: contain">
                                         </a>
                                         <div class="mt-2">{{ $website->name }}</div>
                                     </div>
-                                    @if ($edit)
-                                        <div class="text-center">
-                                            <div class="btn btn-danger btn-sm" wire:click="delete('{{ $website->id }}')">
+                                    @if ($edit_form)
+                                        <div class="text-center mb-1">
+                                            <button class="btn btn-primary btn-sm" wire:click="edit('{{ $website->id }}')">
+                                                <i class="ti ti-edit"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm" wire:click="delete('{{ $website->id }}')">
                                                 <i class="ti ti-trash"></i>
-                                            </div>
+                                            </button>
                                         </div>
                                     @endif
                                 </div>
@@ -109,5 +112,12 @@
         </form>
         <script> window.addEventListener('open-addWebpage', event => { window.$('#addWebpage').modal('show'); }) </script>
         <script> window.addEventListener('close-addWebpage', event => { window.$('#addWebpage').modal('hide'); }) </script>
+    @endcomponent
+    @component('components.modal', ["id"=>'editWebpage', 'title' => 'Editer un Site Web', 'method'=>'edit'])
+        <form class="row" wire:submit="edit">
+            @include('_form.webpage_form')
+        </form>
+        <script> window.addEventListener('open-editWebpage', event => { window.$('#editWebpage').modal('show'); }) </script>
+        <script> window.addEventListener('close-editWebpage', event => { window.$('#editWebpage').modal('hide'); }) </script>
     @endcomponent
 </div>

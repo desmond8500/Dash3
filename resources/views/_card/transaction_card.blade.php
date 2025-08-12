@@ -14,7 +14,9 @@
         </div>
         <div class="col">
             <div class="fw-bold">{{ $transaction->objet }}</div>
-            <div>@parsedown($transaction->description)</div>
+            <x-markdown>
+             {{ $transaction->description }}
+            </x-markdown>
         </div>
         <div class="col-auto">
             <div class="dropdown open">

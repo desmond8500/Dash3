@@ -4,6 +4,7 @@ use App\Exports\InvoiceExport;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PDFController;
 use App\Livewire\Dashboard\Dashboard1Page;
+use App\Livewire\Dashboard\Dashboard2Page;
 use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
@@ -278,7 +279,7 @@ Route::middleware(['auth'])->group(function () {
 // Dashboard
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard1', Dashboard1Page::class )->name('dashboard1');
-    Route::get('/dashboard2', Dashboard1Page::class )->name('dashboard2');
+    Route::get('/dashboard2', Dashboard2Page::class )->name('dashboard2');
 
 });
 

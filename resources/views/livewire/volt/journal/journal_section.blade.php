@@ -133,7 +133,7 @@ new class extends Component {
                             </button>
                         </div>
                         <div class="col-md-12">
-                            <div>@parsedown($section->description) </div>
+                            <x-markdown>{{ $section->description }} </x-markdown>
                         </div>
                     </div>
                 </div>

@@ -63,7 +63,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @parsedown($selected->description)
+                        <x-markdown>
+                         {{ $selected->description }}
+                        </x-markdown>
                     </div>
                     <div class="card-footer">
 

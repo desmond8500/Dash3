@@ -10,6 +10,25 @@
 
     <div class="row mt-3">
 
+        <div class="col-md-12">
+
+
+        <x-markdown>
+            # My title
+            ## My title
+
+            This is a [link to our website](https://spatie.be)
+
+            ```php
+            echo 'Hello world';
+            ```
+        </x-markdown>
+
+
+
+
+        </div>
+
 
         <section class="col-md-8">
             @if ($selected_card)

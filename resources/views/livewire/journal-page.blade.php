@@ -62,7 +62,9 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @parsedown($journal->description)
+                    <x-markdown>
+                        {{ $journal->description }}
+                    </x-markdown>
                 </div>
             </div>
 

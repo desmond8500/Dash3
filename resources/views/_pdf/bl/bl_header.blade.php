@@ -25,7 +25,11 @@
     <tr>
         <td colspan="3" >
             <div class="fw-bold">Description :</div>
-            <div>@parsedown($invoice->description)</div>
+            <div>
+                <x-markdown>
+                 {{ $invoice->description }}
+                </x-markdown>
+            </div>
         </td>
     </tr>
 </table>
@@ -35,7 +39,11 @@
         <tr>
             <td colspan="3" >
                 <div class="fw-bold">Travaux Effectués :</div>
-                <div>@parsedown($bl->done)</div>
+                <div>
+                    <x-markdown>
+                     {{ $bl->done }}
+                    </x-markdown>
+                </div>
             </td>
         </tr>
     </table>
@@ -46,7 +54,11 @@
         <tr>
             <td colspan="3" >
                 <div class="fw-bold">Travaux restants :</div>
-                <div>@parsedown($bl->todo)</div>
+                <div>
+                    <x-markdown>
+                     {{ $bl->todo }}
+                    </x-markdown>
+                </div>
             </td>
         </tr>
     </table>

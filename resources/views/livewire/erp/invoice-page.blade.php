@@ -287,7 +287,11 @@
                                 <div class="col">
                                     <div class="badge bg-primary text-white">{{ $forfait->client->name }}</div>
                                     <div class="fw-bold">{{ $forfait->designation }}</div>
-                                    <div class="text-muted">@parsedown($forfait->description)</div>
+                                    <div class="text-muted">
+                                        <x-markdown>
+                                            {{ $forfait->description }}
+                                        </x-markdown>
+                                    </div>
                                     <div class="fs-3 text-end">{{ number_format($forfait->price, 0,'.', ' ') }} F</div>
                                 </div>
                                 {{-- <div class="col-auto">

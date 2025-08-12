@@ -69,12 +69,16 @@
     @endif
 
     <div>
-        @parsedown($journal->description)
+        <x-markdown>
+         {{ $journal->description }}
+        </x-markdown>
     </div>
 
     @foreach ($journal->sections->sortBy('order') as $section)
         <h1>{{ $section->name }}</h1>
-        @parsedown($section->description)
+        <x-markdown>
+         {{ $section->description }}
+        </x-markdown>
     @endforeach
 
 
@@ -119,7 +123,9 @@
         @foreach ($journal->achats as $key => $achat)
             <div class="text-gray fs-6">
                 <div class="text-primary">{{ $achat->name }}</div>
-                <div class="">@parsedown($achat->description)</div>
+                <x-markdown>
+                 {{ $achat->description }}
+                </x-markdown>
             </div>
 
             <table class="table" style="font-size:13px">

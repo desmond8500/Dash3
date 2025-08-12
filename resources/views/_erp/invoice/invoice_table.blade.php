@@ -338,7 +338,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>@parsedown($devis->modalite)</div>
+                            <div>
+                                <x-markdown>
+                                 {{ $devis->modalite }}
+                                </x-markdown>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 ">
@@ -360,7 +364,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div>@parsedown($devis->note)</div>
+                            <div>
+                                <x-markdown>
+                                 {{ $devis->note }}
+                                </x-markdown>
+                            </div>
                         </div>
                     </div>
                 </div>

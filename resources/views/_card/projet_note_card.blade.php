@@ -3,7 +3,9 @@
         <div class="col">
             <div class="card-title">{{ $note->titre }}</div>
             <div class="text-muted">
-                @parsedown($note->description)
+                <x-markdown>
+                 {{ $note->description }}
+                </x-markdown>
             </div>
         </div>
         <div class="col-auto">

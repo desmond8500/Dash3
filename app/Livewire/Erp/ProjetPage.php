@@ -23,7 +23,7 @@ class ProjetPage extends Component
     public $journal_search ='';
     public $breadcrumbs;
     public $projet, $projet_id;
-    public $tab = 0;
+    public $tab = 3;
 
     public function mount($projet_id){
         $this->projet = Projet::find($projet_id);

@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row row-deck g-2">
-                        @foreach($websites as $website)
+                        @foreach($websites->sortBy('name') as $website)
                             <div class="col-md-2">
                                 <div class="card bg-gray-50 ">
                                     <div class="text-center p-2">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @foreach ($categories as $category)
+                    @foreach ($categories->sortBy('name') as $category)
                         <div class="card p-2 mb-2 ">
                             <div class="row">
                                 <div class="col cursor-pointer" wire:click="selectCategory('{{ $category->id }}')">
@@ -113,8 +113,8 @@
         <script> window.addEventListener('open-addWebpage', event => { window.$('#addWebpage').modal('show'); }) </script>
         <script> window.addEventListener('close-addWebpage', event => { window.$('#addWebpage').modal('hide'); }) </script>
     @endcomponent
-    @component('components.modal', ["id"=>'editWebpage', 'title' => 'Editer un Site Web', 'method'=>'edit'])
-        <form class="row" wire:submit="edit">
+    @component('components.modal', ["id"=>'editWebpage', 'title' => 'Editer un Site Web', 'method'=>'update'])
+        <form class="row" wire:submit="update">
             @include('_form.webpage_form')
         </form>
         <script> window.addEventListener('open-editWebpage', event => { window.$('#editWebpage').modal('show'); }) </script>

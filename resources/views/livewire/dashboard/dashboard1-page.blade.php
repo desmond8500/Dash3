@@ -1,15 +1,15 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Dashboard 1'])
-
+        <button class='btn btn-primary' wire:click="$dispatch('open-webpageCategory')"> Catégories</button>
     @endcomponent
 
     <div class="row g-2">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Pages</div>
+                    <div class="card-title"> Pages </div>
                     <div class="card-actions">
-                        <button class='btn btn-primary' wire:click="$dispatch('open-addWebpage')"><i class='ti ti-plus'></i> Site Web</button>
+                        <button class='btn btn-primary' wire:click="$dispatch('open-addWebpage')"><i class='ti ti-plus'></i> Siteweb </button>
                         @if ($edit_form)
                             <button class='btn btn-success btn-icon' wire:click="$toggle('edit_form')"><i class='ti ti-edit'></i> </button>
                         @else
@@ -19,6 +19,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row row-deck g-2">
+
                         @foreach($websites->sortBy('name') as $website)
                             <div class="col-md-2">
                                 <div class="card bg-gray-50 ">
@@ -41,53 +42,14 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div>
-                </div>
-                <div class="card-footer">
 
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Catégories</div>
-                    <div class="card-actions">
-                        <button class='btn btn-primary' wire:click="$dispatch('open-addWebpageCategory')"><i class='ti ti-plus'></i> Catégorie </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    @foreach ($categories->sortBy('name') as $category)
-                        <div class="card p-2 mb-2 ">
-                            <div class="row">
-                                <div class="col cursor-pointer" wire:click="selectCategory('{{ $category->id }}')">
-                                    <div class="card-title">{{ $category->name }}</div>
-                                    <div class="text-muted">{!! $category->description !!}</div>
-                                </div>
-                                <div class="col-auto ">
-                                    <div>
-                                        <button class="btn btn-outline-primary btn-sm" wire:click="edit_category('{{ $category->id }}')">
-                                          <i class="ti ti-edit"></i>
-                                        </button>
-                                        <button class="btn btn-outline-danger btn-sm" wire:click="edit_category('{{ $category->id }}')">
-                                          <i class="ti ti-trash"></i>
-                                        </button>
-                                    </div>
-                                    <div class="text-center mt-1">
-                                        {{ $category->webpages->count() }}
-                                    </div>
-                              </div>
-                            </div>
-                        </div>
-                    @endforeach
 
-                </div>
-            </div>
-        </div>
     </div>
-
-
 
     @component('components.modal', ["id"=>'addWebpageCategory', 'title' => 'Ajouter une catégorie', 'method'=>'store_category'])
         <form class="row" wire:submit="store_category">
@@ -102,6 +64,48 @@
         </form>
         <script> window.addEventListener('open-editWebpageCategory', event => { window.$('#editWebpageCategory').modal('show'); }) </script>
         <script> window.addEventListener('close-editWebpageCategory', event => { window.$('#editWebpageCategory').modal('hide'); }) </script>
+    @endcomponent
+    @component('components.modal', ["id"=>'webpageCategory', 'title' => 'Sélectionner une catégorie'])
+        <div class="row" >
+            <div class="col-md-12">
+                <div class="input-icon mb-3">
+                    <input type="text" class="form-control form-control-rounded" wire:model.live="searchcat" placeholder="Chercher ">
+                    <span class="input-icon-addon">
+                        <i class="ti ti-search"></i>
+                    </span>
+                </div>
+            </div>
+            @foreach ($categories->sortBy('name') as $category)
+            <div class="col-md-6">
+                <div class="card p-2 mb-2 ">
+                    <div class="row">
+                        <div class="col cursor-pointer" wire:click="selectCategory('{{ $category->id }}')">
+                            <div class="card-title">{{ $category->name }}</div>
+                            {{-- <div class="text-muted">{!! $category->description !!}</div> --}}
+                        </div>
+                        <div class="col-auto ">
+                            <div>
+                                <button class="btn btn-outline-primary btn-sm" wire:click="edit_category('{{ $category->id }}')">
+                                    <i class="ti ti-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" wire:click="edit_category('{{ $category->id }}')">
+                                    <i class="ti ti-trash"></i>
+                                </button>
+                            </div>
+                            {{-- <div class="text-center mt-1">
+                                {{ $category->webpages->count() }}
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            @endforeach
+
+
+        </div>
+        <script> window.addEventListener('open-webpageCategory', event => { window.$('#webpageCategory').modal('show'); }) </script>
+        <script> window.addEventListener('close-webpageCategory', event => { window.$('#webpageCategory').modal('hide'); }) </script>
     @endcomponent
 
 

@@ -20,9 +20,13 @@ class Dashboard1Page extends Component
     {
         return view('livewire.dashboard.dashboard1-page',[
             'websites' => $this->getWebsites(),
-            'categories' => WebpageCategory::all(),
+            'categories' => WebpageCategory::search($this->searchcat)->get(),
         ]);
     }
+
+
+    public $search;
+    public $searchcat;
 
     #[Session]
     public $selected = 1;

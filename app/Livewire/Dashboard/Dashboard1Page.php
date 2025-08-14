@@ -24,7 +24,6 @@ class Dashboard1Page extends Component
         ]);
     }
 
-
     public $search;
     public $searchcat;
 

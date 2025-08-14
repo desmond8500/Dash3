@@ -1,6 +1,7 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Dashboard 1'])
         <button class='btn btn-primary' wire:click="$dispatch('open-webpageCategory')"> Catégories</button>
+        <button class='btn btn-primary' wire:click="$dispatch('open-addWebpageCategory')"><i class='ti ti-plus'></i> Catégorie</button>
     @endcomponent
 
     <div class="row g-2">

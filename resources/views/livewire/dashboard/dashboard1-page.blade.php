@@ -76,6 +76,9 @@
                     </span>
                 </div>
             </div>
+            <div class="col-md-6">
+                <button class="btn btn-primary" wire:click="set('all', 1)">Tous</button>
+            </div>
             @foreach ($categories->sortBy('name') as $category)
             <div class="col-md-6">
                 <div class="card p-2 mb-2 ">

@@ -26,6 +26,7 @@ class Dashboard1Page extends Component
 
     public $search;
     public $searchcat;
+    public $all = 0;
 
     #[Session]
     public $selected = 1;
@@ -33,7 +34,13 @@ class Dashboard1Page extends Component
     public $edit_form= 0;
 
     function getWebsites(){
-        return Webpage::where('webpage_category_id', $this->selected)->get();
+        if ($this->all) {
+            return Webpage::all();
+        } else {
+            $this->all =0 ;
+            return Webpage::where('webpage_category_id', $this->selected)->get();
+        }
+
     }
 
     function selectCategory($id){

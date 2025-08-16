@@ -36,6 +36,8 @@ use App\Livewire\LoginPage;
 use App\Livewire\Medias\ImagesPage;
 use App\Livewire\Medias\VideosPage;
 use App\Livewire\Modules\ContactsPage;
+use App\Livewire\MyprojectPage;
+use App\Livewire\MyprojectsPage;
 use App\Livewire\ProfilePage;
 use App\Livewire\SettingsPage;
 use App\Livewire\Stock\AchatPage;
@@ -280,6 +282,13 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard1', Dashboard1Page::class )->name('dashboard1');
     Route::get('/dashboard2', Dashboard2Page::class )->name('dashboard2');
+
+});
+
+// MyProjects
+Route::middleware(['auth'])->group(function () {
+    Route::get('/myprojects', MyprojectsPage::class )->name('myprojects');
+    Route::get('/myproject', MyprojectPage::class )->name('myproject');
 
 });
 

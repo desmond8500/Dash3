@@ -49,6 +49,11 @@ class Navbar extends Component
             array('name' => "Tableau de bord 2", "route" => "dashboard2", "icon" => "dashboard"),
             ]
         ),
+        array('name' => "Perso", "icon" => "dashboard", "can"=> "erp",
+            'submenu' => [
+            array('name' => "Mes Projets", "route" => "myprojects", "icon" => "circle"),
+            ]
+        ),
     );
 
     public function render()

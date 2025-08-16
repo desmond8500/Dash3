@@ -246,68 +246,70 @@
     <div class="card-footer">
         <div class="row">
             <div class="col">
-                <table class="table table-responsive table-bordered bg-white">
-                    <tr class="fw-bold">
-                        <td class="">
-                            <div class="d-flex justify-content-between">
-                                <span class="fw-bold">Materiel :</span> <span class="text-end">{{ number_format($subtotal_equipment, 0,'.', ' ') }} F</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span class="fw-bold">Cable :</span> <span class="text-end">{{ number_format($subtotal_cable, 0,'.', ' ') }} F</span>
-                            </div>
-                        </td>
-                        <td class="">
-                            <div class="d-flex justify-content-between">
-                                <span class="fw-bold">Accessoires :</span> <span class="text-end">{{ number_format($subtotal_accessoires, 0,'.', ' ') }} F</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span class="fw-bold">Main d'oeuvre :</span> <span class="text-end">{{ number_format($subtotal_mainoeuvre, 0,'.', ' ') }} F</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-between">
-                                <div class="fw-bold me-3">TOTAL HT:</div>
-                                <div>{{ number_format($total, 0,'.', ' ') }} F</div>
-                            </div>
-                            @if ($total_marge - $total)
+                <div class="table-responsive mb-3">
+                    <table class="table  table-bordered bg-white">
+                        <tr class="fw-bold">
+                            <td class="">
                                 <div class="d-flex justify-content-between">
-                                    <div class="fw-bold me-3">MARGE:</div>
-                                    <div>{{ number_format($total_marge - $total, 0,'.', ' ') }} F</div>
+                                    <span class="fw-bold">Materiel :</span> <span class="text-end">{{ number_format($subtotal_equipment, 0,'.', ' ') }} F</span>
                                 </div>
-                            @endif
-                            @if ($devis->tax == 'tva')
                                 <div class="d-flex justify-content-between">
-                                    <div class="fw-bold me-3">TVA :</div>
-                                    <div>{{ number_format($total_marge*0.18, 0,'.', ' ') }} F</div>
+                                    <span class="fw-bold">Cable :</span> <span class="text-end">{{ number_format($subtotal_cable, 0,'.', ' ') }} F</span>
                                 </div>
-                            @elseif($devis->tax == 'brs')
+                            </td>
+                            <td class="">
                                 <div class="d-flex justify-content-between">
-                                    <div class="fw-bold me-3">BRS :</div>
-                                    <div>{{ number_format($total_marge*0.05, 0,'.', ' ') }} F</div>
+                                    <span class="fw-bold">Accessoires :</span> <span class="text-end">{{ number_format($subtotal_accessoires, 0,'.', ' ') }} F</span>
                                 </div>
-                            @else
-                                Pas de taxe
-                            @endif
-                            <div class="d-flex justify-content-between">
-                                <div class="fw-bold me-3">TOTAL TTC:</div>
-                                @if ($devis->tax == 'tva')
-                                    @php
-                                        $total_marge += $total_marge*0.18;
-                                    @endphp
-
-                                @elseif($devis->tax == 'brs')
-                                    @php
-                                        $total_marge += $total_marge*0.05;
-                                    @endphp
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-bold">Main d'oeuvre :</span> <span class="text-end">{{ number_format($subtotal_mainoeuvre, 0,'.', ' ') }} F</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-bold me-3">TOTAL HT:</div>
+                                    <div>{{ number_format($total, 0,'.', ' ') }} F</div>
+                                </div>
+                                @if ($total_marge - $total)
+                                    <div class="d-flex justify-content-between">
+                                        <div class="fw-bold me-3">MARGE:</div>
+                                        <div>{{ number_format($total_marge - $total, 0,'.', ' ') }} F</div>
+                                    </div>
                                 @endif
-                                <div>{{ number_format($total_marge, 0,'.', ' ') }} F</div>
+                                @if ($devis->tax == 'tva')
+                                    <div class="d-flex justify-content-between">
+                                        <div class="fw-bold me-3">TVA :</div>
+                                        <div>{{ number_format($total_marge*0.18, 0,'.', ' ') }} F</div>
+                                    </div>
+                                @elseif($devis->tax == 'brs')
+                                    <div class="d-flex justify-content-between">
+                                        <div class="fw-bold me-3">BRS :</div>
+                                        <div>{{ number_format($total_marge*0.05, 0,'.', ' ') }} F</div>
+                                    </div>
+                                @else
+                                    Pas de taxe
+                                @endif
+                                <div class="d-flex justify-content-between">
+                                    <div class="fw-bold me-3">TOTAL TTC:</div>
+                                    @if ($devis->tax == 'tva')
+                                        @php
+                                            $total_marge += $total_marge*0.18;
+                                        @endphp
 
-                            </div>
+                                    @elseif($devis->tax == 'brs')
+                                        @php
+                                            $total_marge += $total_marge*0.05;
+                                        @endphp
+                                    @endif
+                                    <div>{{ number_format($total_marge, 0,'.', ' ') }} F</div>
 
-                        </td>
+                                </div>
 
-                    </tr>
-                </table>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <div class="w-100 "></div>

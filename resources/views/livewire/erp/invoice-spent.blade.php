@@ -9,51 +9,54 @@
                 </button>
             </div>
         </div>
-        <table class="table">
-            @if ($spents->isEmpty())
-                <div class="text-center pt-1 text-muted">Aucune dépense</div>
-                @else
-                <thead>
+        <div class="table-responsive">
+            <table class="table">
+                @if ($spents->isEmpty())
+                    <div class="text-center pt-1 text-muted">Aucune dépense</div>
+                    @else
+                    <thead>
+                        <tr>
+                            <th style="text-align:center; width: 5px;">#</th>
+                            <th>Nom</th>
+                            <th style="text-align:center; width: 10px;">Montant</th>
+                            <th style="text-align:center; width: 30px;">Date</th>
+                            <th style="text-align:center; width: 10px;">_</th>
+                        </tr>
+                    </thead>
+                @endif
+                <tbody>
+                    @foreach ($spents as $key => $spent)
                     <tr>
-                        <th style="text-align:center; width: 5px;">#</th>
-                        <th>Nom</th>
-                        <th style="text-align:center; width: 10px;">Montant</th>
-                        <th style="text-align:center; width: 30px;">Date</th>
-                        <th style="text-align:center; width: 10px;">_</th>
-                    </tr>
-                </thead>
-            @endif
-            <tbody>
-                @foreach ($spents as $key => $spent)
-                <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td>
-                        <div>{{ $spent->name }}</div>
-                        <div class="text-muted">{!! nl2br($spent->description) !!}</div>
-                    </td>
-                    <td class="text-end">{{ number_format($spent->montant, 0,'.', ' ') }} F</td>
-                    <td class="text-end">
-                        <div>{{ $spent->date }}</div>
-                    </td>
-                    <td>
+                        <td>{{ $key+1 }}</td>
+                        <td>
+                            <div>{{ $spent->name }}</div>
+                            <div class="text-muted">{!! nl2br($spent->description) !!}</div>
+                        </td>
+                        <td class="text-end">{{ number_format($spent->montant, 0,'.', ' ') }} F</td>
+                        <td class="text-end">
+                            <div>{{ $spent->date }}</div>
+                        </td>
+                        <td>
 
-                        <div class="dropdown">
-                            <button class="btn btn-icon" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="ti ti-dots-vertical"></i>
-                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-icon" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="ti ti-dots-vertical"></i>
+                                </button>
 
-                            <div class="dropdown-menu" aria-labelledby="triggerId">
-                                <a class="dropdown-item text-success" href="#" wire:click="edit('{{ $spent->id }}')"><i class="ti ti-edit"></i> Editer</a>
-                                <a class="dropdown-item text-danger" href="#" wire:click="delete('{{ $spent->id }}')"><i class="ti ti-trash"></i> Supprimer</a>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <a class="dropdown-item text-success" href="#" wire:click="edit('{{ $spent->id }}')"><i class="ti ti-edit"></i> Editer</a>
+                                    <a class="dropdown-item text-danger" href="#" wire:click="delete('{{ $spent->id }}')"><i class="ti ti-trash"></i> Supprimer</a>
+                                </div>
                             </div>
-                        </div>
 
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+        </div>
     </div>
 
     @component('components.modal', ["id"=>'add-invoiceSpent', 'title' => 'Ajouter une dépense', 'method'=>'store'])

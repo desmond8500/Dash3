@@ -9,8 +9,8 @@
                 </button>
             </div>
         </div>
-        <div class="card p-0">
-            <table class="table table-responsive table-hover ">
+        <div class="table-responsive">
+            <table class="table  table-hover ">
                 @if ($acomptes->isEmpty())
                     <div class="text-center pt-1 text-muted">Aucun acompte</div>
 

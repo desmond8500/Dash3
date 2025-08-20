@@ -75,7 +75,7 @@
 
     <div class="col-md-4">
         <label class="form-label">Priorite</label>
-        <select class="form-control" wire:model="article_form.priority_id">
+        <select class="form-select" wire:model="article_form.priority_id">
             <option value="0">Centrale 1</option>
             <option value="1">Centrale 2</option>
             <option value="2">Organe 1</option>
@@ -90,7 +90,7 @@
 
     <div class="col-6 col-md-4">
         <label class="form-label">Fournisseur</label>
-        <select class="form-control" wire:model="article_form.provider_id">
+        <select class="form-select" wire:model="article_form.provider_id">
             <option value="" class="text-muted">--Sélectionner--</option>
             @foreach ($providers->sortBy('name') as $provider)
                 <option value="{{ $provider->id }}">{{ $provider->name }}</option>
@@ -101,7 +101,7 @@
 
     <div class="col-6 col-md-4">
         <label class="form-label">Marque</label>
-        <select class="form-control" wire:model="article_form.brand_id">
+        <select class="form-select" wire:model="article_form.brand_id">
             <option value="" >--Sélectionner--</option>
             @foreach ($brands->sortBy('name') as $brand)
             <option value="{{ $brand->id }}">{{ $brand->name }}</option>

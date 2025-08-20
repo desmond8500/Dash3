@@ -1,6 +1,6 @@
 <div class="col-md-4 mb-3">
     <label class="form-label">Fournisseur</label>
-    <select class="form-control" wire:model="achat_form.provider_id">
+    <select class="form-select" wire:model="achat_form.provider_id">
         <option disabled selected value="0">Selectioner un fournisseur</option>
         @foreach ($providers as $provider)
             <option value="{{ $provider->id }}">{{ $provider->name }}</option>
@@ -10,7 +10,7 @@
 </div>
 <div class="col-md-3 mb-3">
     <label class="form-label">Statut</label>
-    <select class="form-control" wire:model="achat_form.status">
+    <select class="form-select" wire:model="achat_form.status">
         <option>Prévu</option>
         <option>Acheté</option>
         <option>Annulé</option>

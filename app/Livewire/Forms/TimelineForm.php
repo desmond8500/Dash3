@@ -4,7 +4,6 @@ namespace App\Livewire\Forms;
 
 use App\Models\Timeline;
 use Livewire\Attributes\Rule;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class TimelineForm extends Form
@@ -69,5 +68,16 @@ class TimelineForm extends Form
     function delete($model_id){
         $this->timeline = Timeline::find($model_id);
         $this->timeline->delete();
+    }
+
+    // Invoice
+    function add_invoice($projet_id, $invoice_id){
+        Timeline::create([
+            'user_id'=> auth()->user()->id,
+            'title' => "Ajout d'un devis",
+            'invoice_id' => $invoice_id,
+            'projet_id' => $projet_id,
+
+        ]);
     }
 }

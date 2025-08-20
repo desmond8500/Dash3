@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-8 mb-3">
+    <div class="col-md-7 mb-3">
         <div class="mb-3">
             <label class="form-label">Désignation</label>
             <input type="text" class="form-control" wire:model="row_form.designation" placeholder="Désignation de l'article">
@@ -22,7 +22,7 @@
             @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
     </div>
-    <div class="col-md-4 mb-3">
+    <div class="col-md-5 mb-3">
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Quantité</label>
@@ -37,10 +37,22 @@
             <div class="col-md-6">
                 <label class="form-label">Coef</label>
                 <div class="input-group">
-                    <input type="number" class="form-control" wire:model="row_form.coef" placeholder="Coféficient de marge">
+                    <input type="number" class="form-control" list="coefList"  wire:model="row_form.coef" lis placeholder="Coféficient de marge">
                     <a class="btn btn-primary btn-icon" wire:click="$set('row_form.coef', 1)">
                         <i class="ti ti-x"></i>
                     </a>
+                    <datalist id="coefList">
+                        <option>1,1</option>
+                        <option>1,2</option>
+                        <option>1,3</option>
+                        <option>1,4</option>
+                        <option>1,5</option>
+                        <option>1,6</option>
+                        <option>1,7</option>
+                        <option>1,8</option>
+                        <option>1,9</option>
+                        <option>2</option>
+                    </datalist>
                 </div>
                 @error('row_form.coef') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
@@ -59,7 +71,7 @@
         @error('row_form.prix') <span class='text-danger'>{{ $message }}</span> @enderror
 
         <label class="form-label">Priorite</label>
-        <select class="form-control" wire:model="row_form.priorite_id">
+        <select class="form-select" wire:model="row_form.priorite_id">
             <option value="0">Centrale 1</option>
             <option value="1">Centrale 2</option>
             <option value="2">Organe 1</option>
@@ -82,7 +94,7 @@
 
         @if(!$nosection)
             <label class="form-label">Section</label>
-            <select class="form-control" wire:model="row_form.invoice_section_id">
+            <select class="form-select" wire:model="row_form.invoice_section_id">
                 @foreach ($sections as $section)
                     <option value="{{ $section->id }}">{{ $section->section }}</option>
                 @endforeach

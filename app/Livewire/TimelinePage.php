@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\InvoiceController;
 use App\Models\Projet;
+use App\Models\Timeline;
 use Livewire\Component;
 
 class TimelinePage extends Component
@@ -24,6 +26,9 @@ class TimelinePage extends Component
 
     public function render()
     {
-        return view('livewire.timeline-page');
+        return view('livewire.timeline-page',[
+            'timelines' => Timeline::where('projet_id', $this->projet->id)->orderByDesc('created_at')->get(),
+            'statuses' => InvoiceController::statut(),
+        ]);
     }
 }

@@ -7,7 +7,7 @@
 
     <div class="col-md-4 mb-3">
         <label class="form-label">Statut</label>
-        <select wire:model="invoice_form.statut" class="form-control">
+        <select wire:model="invoice_form.statut" class="form-select">
             <option value="Proforma">Proforma</option>
             <option value="Nouveau">Nouveau</option>
             <option value="En Cours">En Cours</option>
@@ -39,29 +39,29 @@
             </div>
         </div>
 
-        <div class="mb-2">
-            <label class="form-label">Modalités</label>
+        <div class="mb-2" x-data="{ expanded_modalite: false }" data-bs-toggle="tooltip" title="Cliquez pour dérouler">
+            <label class="form-label cursor-pointer" x-on:click="expanded_modalite = ! expanded_modalite">Modalités</label>
             <textarea class="form-control" wire:model="invoice_form.modalite" placeholder="Modalités du devis"
-                data-bs-toggle="autosize"></textarea>
+                data-bs-toggle="autosize" x-show="expanded_modalite"></textarea>
             @error('invoice_form.modalite') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-        <div class="mb-2">
-            <label class="form-label">Notes</label>
+        <div class="mb-2" x-data="{ expanded_note: false }" data-bs-toggle="tooltip" title="Cliquez pour dérouler">
+            <label class="form-label cursor-pointer" x-on:click="expanded_note = ! expanded_note">Notes</label>
             <textarea class="form-control" wire:model="invoice_form.note" placeholder="Notes du devis"
-                data-bs-toggle="autosize"></textarea>
+                data-bs-toggle="autosize" x-show="expanded_note"></textarea>
             @error('invoice_form.note') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
     </div>
 
     <div class="col-md-4 mb-2">
-        <div class="mb-3">
-            <label class="form-label">Reference</label>
-            <input type="text" class="form-control" wire:model="invoice_form.reference" disabled>
+        <div class="mb-3" x-data="{ expanded_reference: false }">
+            <label class="form-label" type="button" x-on:click="expanded_reference = ! expanded_reference">Reference</label>
+            <input type="text" class="form-control" wire:model="invoice_form.reference" disabled x-show="expanded_reference">
             @error('invoice_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
         <div class="mb-2">
             <label class="form-label">Taxes</label>
-            <select wire:model="invoice_form.tax" class="form-control">
+            <select wire:model="invoice_form.tax" class="form-select">
                 <option value="0">Pas de TVA</option>
                 <option value="tva">TVA 18%</option>
                 <option value="brs">BRS 5%</option>
@@ -69,7 +69,7 @@
         </div>
         <div class="mb-2">
             <label class="form-label">Projet</label>
-            <select wire:model="invoice_form.projet_id" class="form-control">
+            <select wire:model="invoice_form.projet_id" class="form-select">
                 @isset($devis)
                     @foreach ($devis->projet->client->projets->sortBy('name') as $projet)
                         <option value="{{ $projet->id }}">{{ $projet->name }}</option>
@@ -77,6 +77,11 @@
                 @endisset
                 @isset($invoice)
                     @foreach ($invoice->projet->client->projets->sortBy('name') as $projet)
+                        <option value="{{ $projet->id }}">{{ $projet->name }}</option>
+                    @endforeach
+                @endisset
+                @isset($projet)
+                    @foreach ($projet->client->projets->sortBy('name') as $projet)
                         <option value="{{ $projet->id }}">{{ $projet->name }}</option>
                     @endforeach
                 @endisset

@@ -10,7 +10,7 @@
 </div>
 <div class="col-md-3 mb-3">
     <label class="form-label">Couleur</label>
-    <select class="form-control" wire:model="status_form.color">
+    <select class="form-select" wire:model="status_form.color">
         <option value="">Blanc</option>
         <option class="text-blue" value="blue">Blue</option>
         <option class="text-azure" value="azure">Azure</option>

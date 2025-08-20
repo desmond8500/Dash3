@@ -52,7 +52,7 @@
 
     <div class="col-md-4 mb-3">
         <label class="form-label">Status</label>
-        <select class="form-control" wire:model="form.statut_id">
+        <select class="form-select" wire:model="form.statut_id">
             @foreach ($statuses as $status)
             <option value="{{ $status->level }}">{{ $status->name }}</option>
             @endforeach
@@ -61,7 +61,7 @@
     </div>
     <div class="col-md-4 mb-3">
         <label class="form-label">Priorité</label>
-        <select class="form-control" wire:model="form.priority_id">
+        <select class="form-select" wire:model="form.priority_id">
             @foreach ($priorities as $priority)
             <option value="{{ $priority->level }}">{{ $priority->name }}</option>
             @endforeach

@@ -32,7 +32,7 @@
     </div>
     <div class="mb-2">
         <label class="form-label">Statut </label>
-        <select class="form-control" wire:model="acompte_form.statut">
+        <select class="form-select" wire:model="acompte_form.statut">
             <option value="0" class="text-danger">Pas payé</option>
             <option value="1" class="text-success">Payé</option>
         </select>

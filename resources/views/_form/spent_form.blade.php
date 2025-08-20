@@ -25,7 +25,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Statut</label>
-        <select class="form-control" wire:model="spent_form.status">
+        <select class="form-select" wire:model="spent_form.status">
             <option value="prevue">Prévue</option>
             <option value="achete">achete</option>
         </select>

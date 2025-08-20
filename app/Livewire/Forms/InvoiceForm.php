@@ -33,7 +33,7 @@ class InvoiceForm extends Form
 
     function store(){
         $this->validate();
-        Invoice::create($this->all());
+        return Invoice::create($this->all());
     }
 
     function replicate($invoice_id){

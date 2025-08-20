@@ -24,7 +24,7 @@
 
    <div class="col-6  mb-3">
        <label class="form-label">Status</label>
-       <select class="form-control" wire:model="form.statut_id">
+       <select class="form-select" wire:model="form.statut_id">
            @foreach ($statuses as $status)
                 <option value="{{ $status->level }}">{{ $status->name }}</option>
             @endforeach
@@ -33,7 +33,7 @@
    </div>
    <div class="col-6  mb-3">
        <label class="form-label">Priorité</label>
-       <select class="form-control" wire:model="form.priority_id">
+       <select class="form-select" wire:model="form.priority_id">
             @foreach ($priorities as $priority)
                 <option value="{{ $priority->level }}">{{ $priority->name }}</option>
             @endforeach
@@ -68,7 +68,7 @@
    @isset ($clients)
         <div class="col-md-4 mb-3">
             <label class="form-label">Client</label>
-            <select class="form-control" wire:model="form.client_id">
+            <select class="form-select" wire:model="form.client_id">
                     <option value="">- Select -</option>
                     @foreach ($clients as $client)
                         <option value="{{ $client->id }}">{{ $client->name }}</option>
@@ -80,7 +80,7 @@
     @isset($projets)
         <div class="col-md-4 mb-3">
             <label class="form-label">Projet</label>
-            <select class="form-control" wire:model="form.projet_id">
+            <select class="form-select" wire:model="form.projet_id">
                     <option value="">- Select -</option>
                     @foreach ($projets as $projet)
                         <option value="{{ $projet->id }}">{{ $projet->name }}</option>

@@ -4,6 +4,7 @@ namespace App\Livewire\Form;
 
 use App\Http\Controllers\ErpController;
 use App\Livewire\Forms\InvoiceForm;
+use App\Livewire\Forms\TimelineForm;
 use App\Models\Projet;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,6 +16,7 @@ class InvoiceAdd extends Component
     public $client_name;
     public $projet;
     public $projet_name;
+    public TimelineForm $timeline_form;
 
     function mount($projet_id){
         $this->projet = Projet::find($projet_id);
@@ -36,11 +38,13 @@ class InvoiceAdd extends Component
         $this->invoice_form->reference = ErpController::getInvoiceReference($this->projet);
         $this->dispatch('open-addInvoice');
         $this->dispatch('get-resume');
+
     }
 
     function store(){
         // $this->validate();
-        $this->invoice_form->store();
+        $invoice  = $this->invoice_form->store();
+        $this->timeline_form->add_invoice($this->projet->id, $invoice->id);
         // Invoice::firstOrCreate([
         //     'projet_id' => $this->projet->id,
         //     'client_name' => $this->client_name,

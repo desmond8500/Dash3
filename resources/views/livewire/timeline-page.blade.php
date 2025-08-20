@@ -10,25 +10,25 @@
                 <i class="ti ti-plus"></i>
             </div>
             <div class="card timeline-event-card">
-                <div class="card-body">
-                    <div class="text-secondary float-end">10 hrs ago</div>
-                    <h4>+1150 Followers</h4>
-                    <p class="text-secondary">You’re getting more and more followers, keep it up!</p>
+                <div class="row g-2 p-2">
+                    <div class="col-auto">
+                        <img src="{{ asset($projet->client->avatar) }}" alt="avatar" class="avatar avatar-xl">
+                    </div>
+                    <div class="col">
+                        <h1>{{ $projet->name }}</h1>
+                        <p>{{ $projet->description }}</p>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-primary disabled btn-icon" >
+                            <i class="ti ti-edit"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </li>
-        <li class="timeline-event">
-            <div class="timeline-event-icon bg-x-lt">
-                <i class="ti ti-plus"></i>
-            </div>
-            <div class="card timeline-event-card">
-                <div class="card-body">
-                    <div class="text-secondary float-end">10 hrs ago</div>
-                    <h4>+1150 Followers</h4>
-                    <p class="text-secondary">You’re getting more and more followers, keep it up!</p>
-                </div>
-            </div>
-        </li>
+        @foreach ($timelines as $timeline)
+            @include('_card.timeline_card')
+        @endforeach
     </ul>
 
 

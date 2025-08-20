@@ -19,7 +19,7 @@
 
 <div class="col-md-4 mb-3">
     <label class="form-label">Type de document</label>
-    <select class="form-control" wire:model="document_form.type">
+    <select class="form-select" wire:model="document_form.type">
         <option selected>Bon de commande</option>
         <option >Devis</option>
         <option >Décharge</option>

@@ -19,7 +19,7 @@
                 <span class="text-truncate">{{ $title ?? 'Title' }}</span>
             </h2>
         </div>
-        <div class="col-auto">
+        <div class="col-xs-12 col-sm-auto ">
             {{ $slot }}
         </div>
     </div>

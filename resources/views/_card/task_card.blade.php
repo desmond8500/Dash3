@@ -3,7 +3,7 @@
 
         <div  class="col">
 
-            <div class="d-none d-sm-block">
+            {{-- <div class="d-none d-sm-block">
                 <div class="dropdown open">
                     <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <i class="ti ti-chevron-down"></i>
@@ -41,9 +41,10 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="status status-blue d-block d-sm-none" style="font-size: 12px;">
+            <div class="status status-blue " style="font-size: 12px;">
+            {{-- <div class="status status-blue d-block d-sm-none" style="font-size: 12px;"> --}}
                 @if ($task->client_id)
                     <a data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets',['client_id'=>$task->client->id]) }}" title="Client">{{ $task->client->name }}</a>
                 @endif

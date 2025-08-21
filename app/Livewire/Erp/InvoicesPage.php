@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Http\Controllers\InvoiceController;
 use App\Models\Invoice;
 use App\Models\TaskStatus;
 use Livewire\Component;
@@ -29,6 +30,7 @@ class InvoicesPage extends Component
         return view('livewire.erp.invoices-page',[
             'invoices' => $this->filter_invoices(),
             'statuses' => TaskStatus::all(),
+            'statuses' => InvoiceController::statut(),
         ]);
     }
 

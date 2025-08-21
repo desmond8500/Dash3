@@ -13,7 +13,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
                     @foreach ($statuses as $status)
-                        <a class="dropdown-item" wire:click="$set('filter' ,'{{ $status->name }}')"> <i class="ti ti-edit"></i> {{ $status->name }}</a>
+                        <a class="dropdown-item" wire:click="$set('filter' ,'{{ $status }}')"> <i class="ti ti-edit"></i> {{ $status }}</a>
                     @endforeach
                 </div>
             </div>

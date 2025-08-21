@@ -27,8 +27,20 @@ class InvoicesPage extends Component
     public function render()
     {
         return view('livewire.erp.invoices-page',[
-            'invoices' => Invoice::search($this->search,'reference')->paginate(18),
+            'invoices' => $this->filter_invoices(),
             'statuses' => TaskStatus::all(),
         ]);
+    }
+
+
+    public $filter;
+
+    function filter_invoices(){
+        if ($this->filter) {
+            return Invoice::where('statut', $this->filter)->search($this->search, 'reference')->paginate(18);
+        } else {
+            return Invoice::search($this->search, 'reference')->paginate(18);
+        }
+
     }
 }

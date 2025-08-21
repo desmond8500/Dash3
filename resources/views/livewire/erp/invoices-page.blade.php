@@ -7,7 +7,16 @@
                     <i class="ti ti-search"></i>
                 </span>
             </div>
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            <div class="dropdown open" data-bs-toggle="tooltip" title="Filtrer">
+                <button class="btn btn-icon" type="button" id="triggerId"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <i class="ti ti-filter"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    @foreach ($statuses as $status)
+                        <a class="dropdown-item" wire:click="$set('filter' ,'{{ $status->name }}')"> <i class="ti ti-edit"></i> {{ $status->name }}</a>
+                    @endforeach
+                </div>
+            </div>
         </div>
     @endcomponent
 

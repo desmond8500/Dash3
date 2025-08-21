@@ -43,6 +43,13 @@ class InvoicesPage extends Component
         } else {
             return Invoice::search($this->search, 'reference')->paginate(18);
         }
-
     }
+    function update_status($invoice_id, $status)
+    {
+        $invoice = Invoice::find($invoice_id);
+        $invoice->statut = $status;
+        $invoice->save();
+    }
+
+
 }

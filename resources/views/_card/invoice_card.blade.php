@@ -3,7 +3,8 @@
         <div class="col-md-12">
             <div class="d-flex justify-content-between pb-1">
                 <div class="border-bottom pb-1 mb-1">
-                    <span class="text-primary">{{ $invoice->projet->client->name }}</span> / <span class="text-purple">{{ $invoice->projet->name }}</span>
+                    <a href="{{ route('projets', ['client_id'=> $invoice->projet->client->id]) }}" class="text-primary">{{ $invoice->projet->client->name }}</a> /
+                    <a  href="{{ route('projet', ['projet_id'=> $invoice->projet->id]) }}"  class="text-purple">{{ $invoice->projet->name }}</a>
                 </div>
                 <div>
                     <button class="btn btn-primary btn-sm" wire:click="edit({{ $invoice->id }})">

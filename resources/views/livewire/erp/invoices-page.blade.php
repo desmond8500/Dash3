@@ -23,10 +23,13 @@
     <div class="row row-deck g-2">
         @foreach ($invoices->sortByDesc('created_at') as $invoice)
             <div class="col-md-4">
-                <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank">
+                {{-- <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" target="_blank"> --}}
                     @include('_card.invoice_card')
-                </a>
+                {{-- </a> --}}
             </div>
         @endforeach
+        <div class="col-12">
+            {{ $invoices->links() }}
+        </div>
     </div>
 </div>

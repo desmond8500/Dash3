@@ -3,6 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Http\Controllers\InvoiceController;
+use App\Livewire\Forms\InvoiceForm;
 use App\Models\Invoice;
 use App\Models\TaskStatus;
 use Livewire\Component;
@@ -51,5 +52,33 @@ class InvoicesPage extends Component
         $invoice->save();
     }
 
+    public InvoiceForm $invoice_form;
 
+    function edit($id)
+    {
+        $this->invoice_form->set($id);
+        $this->dispatch('open-editInvoice');
+    }
+
+    function update_invoice()
+    {
+        $this->invoice_form->update();
+        $this->dispatch('close-editInvoice');
+    }
+    function delete_invoice($id)
+    {
+        $this->invoice_form->set($id);
+        $message = $this->invoice_form->delete();
+
+        if ($message == 'error') {
+            $this->js("alert('Ce devis contient des sections, veuillez les supprimer avant ')");
+        }
+
+        $this->dispatch('close-editInvoice');
+    }
+
+    function toggleInvoiceFavorite()
+    {
+        $this->invoice_form->favorite();
+    }
 }

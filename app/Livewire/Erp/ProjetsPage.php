@@ -6,6 +6,7 @@ use App\Livewire\Forms\clientForm;
 use App\Livewire\Forms\projetForm;
 use App\Models\Client;
 use App\Models\Projet;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -20,6 +21,8 @@ class ProjetsPage extends Component
     public $breadcrumbs;
     public $client_id, $selected;
     public projetForm $projetForm;
+    #[Session()]
+    public $tab = 'projets';
 
     public function mount($client_id)
     {

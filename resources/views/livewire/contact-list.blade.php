@@ -1,6 +1,6 @@
 <div>
 
-    <div class="row g-2">
+    <div class="row row-deck g-2">
         <div class="col">
             <div class="col-md-12">
                 <div class="input-icon">

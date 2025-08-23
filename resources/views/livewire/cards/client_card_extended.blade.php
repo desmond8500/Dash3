@@ -40,10 +40,17 @@ new class extends Component {
 <div>
     <div class="card p-2">
         <div class="position-absolut top-0 ">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between align-items-center">
                 <button class="btn btn-icon rounded btn-primary" wire:click="edit('{{ $client->id ?? 1 }}')">
                     <i class="ti ti-edit"></i>
                 </button>
+                <div class="text-warning">
+                    <i class="ti ti-star"></i>
+                    <i class="ti ti-star"></i>
+                    <i class="ti ti-star"></i>
+                    <i class="ti ti-star"></i>
+                    <i class="ti ti-star"></i>
+                </div>
                 @if ($client->favorite)
                     <button class="btn btn-icon btn-danger" data-bs-toggle="tooltip" title="Supprimer des favoris" wire:click="toggleFavorite('{{ $client->id }}')">
                         <i class="ti ti-heart-filled"></i>
@@ -54,24 +61,6 @@ new class extends Component {
                     </button>
                 @endif
             </div>
-
-            {{-- <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <i class="ti ti-chevron-down "></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="triggerId">
-                <button class="dropdown-item" wire:click="edit('{{ $client->id ?? 1 }}')"> <i class="ti ti-edit"></i>
-                    Editer</button>
-                <button class="dropdown-item text-danger" wire:click="delete('{{ $client->id ?? 1 }}')"> <i class="ti ti-trash"></i>
-                    Supprimer</button>
-                <button class="dropdown-item" wire:click="toggleFavorite('{{ $client->id }}')">
-                    @if ($client->favorite)
-                    <div class="text-danger"><i class="ti ti-heart-filled"></i> Favoris</div>
-                    @else
-                    <div class="text-muted"><i class="ti ti-heart"></i> Favoris</div>
-                    @endif
-                </button>
-            </div> --}}
         </div>
         <img src="{{ asset($client->avatar) }}" alt="img" class="w-100">
         <h2 class="text-center mt-1 border-top mt-3 pt-1">{{ $client->name }}</h2>

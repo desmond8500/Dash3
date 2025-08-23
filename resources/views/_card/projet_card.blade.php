@@ -34,6 +34,6 @@
         <div> <b>Taches:</b> {{ $projet->tasks->count() }}</div>
     </div>
     <div class="border-top">
-        {!! $projet->description !!}
+        {!! nl2br($projet->description) !!}
     </div>
 </div>

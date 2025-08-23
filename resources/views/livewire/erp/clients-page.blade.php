@@ -49,7 +49,7 @@
     </div>
 
     @component('components.modal', ["id"=>'addClient', 'title'=>'Ajouter un client', 'method'=>'store'])
-        <form class="row" wire:submit="store">
+        <form class="row align-items-center" wire:submit="store">
             @include('_form.client_form')
         </form>
 

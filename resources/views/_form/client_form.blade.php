@@ -21,9 +21,7 @@
     <input type="file" id="file" accept="image/*" style="display: none" wire:model="clientForm.avatar">
 </div>
 
-<div class="w-100"></div>
-
-<div class="col-12 mb-3">
+<div class="col mb-3">
     <label class="form-label">Nom du client</label>
     <input type="text" class="form-control" wire:model='clientForm.name' />
     @error('clientForm.name') <span class="text-danger">{{ $message }}</span> @enderror

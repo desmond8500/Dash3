@@ -12,11 +12,7 @@
                 </a>
                 <span class="text-decoration-line-through">
             @endif
-            {{-- @if ($task_id == $task->id)
-                <input type="text" class="form-control form-control-flush" wire:model="form.name" wire:keydown.enter="update_task">
-            @else
-                <span wire:click="select_task('{{ $task->id }}')">{{ $task->name }}</span>
-            @endif --}}
+
             {{ $task->name }}
                 </span>
         </div>

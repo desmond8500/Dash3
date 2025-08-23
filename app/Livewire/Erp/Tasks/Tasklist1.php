@@ -32,7 +32,7 @@ class Tasklist1 extends Component
     public $room_id;
     public $journal_id;
     public $task;
-    public $paginate = 100;
+    public $paginate = 8;
     public $class = 'col-md-12';
 
 
@@ -59,6 +59,7 @@ class Tasklist1 extends Component
             $this->room_id = $room_id;
             $this->form->room_id = $room_id;
         }
+
     }
 
     public function render()
@@ -77,6 +78,14 @@ class Tasklist1 extends Component
     public $active;
     #[On('get-tasks')]
     function getTasks()
+    {
+        return TaskController::getTask($this->active, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->journal_id, $this->search, $this->paginate);
+    }
+    function get_active_tasks()
+    {
+        return TaskController::getTask($this->active, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->journal_id, $this->search, $this->paginate);
+    }
+    function get_finished_tasks()
     {
         return TaskController::getTask($this->active, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->journal_id, $this->search, $this->paginate);
     }

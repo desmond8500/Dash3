@@ -4,8 +4,11 @@
 
         <div class="divide-y-2 ">
             @foreach ($tasks as $task)
-                @include('_card.task1_card',['task' => $task])
+                @if ($task->statut_id < 4)
+                    @include('_card.task1_card',['task' => $task])
+                @endif
             @endforeach
+
 
             <div class="d-flex align-items-center">
                 <i class="ti ti-plus"></i>
@@ -15,6 +18,14 @@
         <div class="mt-3">
             {{ $tasks->links() }}
         </div>
+
+        <hr>
+        <h3>Taches terminées</h3>
+        @foreach ($tasks as $task)
+            @if ($task->statut_id > 3)
+                @include('_card.task1_card',['task' => $task])
+            @endif
+        @endforeach
     </div>
 
     @component('components.modal', ["id"=>'editTaskModal', 'title' => 'Editer une tache'])

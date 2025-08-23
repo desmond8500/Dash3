@@ -30,10 +30,10 @@
                             Projets <span class="badge bg-blue text-blue-fg badge-pill">{{ $projets->count() }}</span>
                         </button>
                         <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tab', 'taches')">
-                            Taches
+                            Taches <span class="badge bg-blue text-blue-fg badge-pill">{{ $taches->count() }}</span>
                         </button>
                         <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tab', 'contacts')">
-                            Contacts
+                            Contacts <span class="badge bg-blue text-blue-fg badge-pill">{{ $contacts->count() }}</span>
                         </button>
                         <button class="nav-link" disabled role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tab', 'contacts')">
                             Timeline

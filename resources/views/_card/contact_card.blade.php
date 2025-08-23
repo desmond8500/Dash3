@@ -19,7 +19,10 @@
                 {{-- <div class="d-flex justify-content-between align-items-center mt-1"> --}}
                     @if ($contact->phone)
                     <div class="d-flex align-items-center" data-bs-toggle="tooltip" title="Téléphone">
-                        <i class="ti ti-phone"></i> <div class="ms-1">  {{ $contact->phone }}</div>
+                        @php
+                            $phone = new Propaganistas\LaravelPhone\PhoneNumber($contact->phone, 'SN');
+                        @endphp
+                        <i class="ti ti-phone"></i> <div class="ms-1">  {{ $phone->formatForCountry('SN') }}</div>
                     </div>
                     @endif
                     @if ($contact->email)

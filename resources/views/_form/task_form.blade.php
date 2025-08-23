@@ -22,6 +22,13 @@
 
    <div class="w-100"></div>
 
+   <div class="col-md-12 mb-3">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" wire:model="form.description" placeholder="Description"
+            data-bs-toggle="autosize"></textarea>
+        @error('form.description') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
    <div class="col-6  mb-3">
        <label class="form-label">Status</label>
        <select class="form-select" wire:model="form.statut_id">
@@ -55,12 +62,6 @@
         <label class="form-label">Fin</label>
         <input type="date" class="form-control" wire:model="form.end_date" placeholder="Nom">
         @error('form.end_date') <span class='text-danger'>{{ $message }}</span> @enderror
-    </div>
-
-    <div class="col-md-12 mb-3">
-        <label class="form-label">Description</label>
-        <textarea class="form-control" wire:model="form.description" placeholder="Description" data-bs-toggle="autosize"></textarea>
-        @error('form.description') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
    <hr>

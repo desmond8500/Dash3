@@ -5,7 +5,9 @@ namespace App\Livewire\Erp;
 use App\Livewire\Forms\clientForm;
 use App\Livewire\Forms\projetForm;
 use App\Models\Client;
+use App\Models\Contact;
 use App\Models\Projet;
+use App\Models\Task;
 use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -41,6 +43,8 @@ class ProjetsPage extends Component
     {
         return view('livewire.erp.projets-page', [
             'projets' => Projet::where('client_id',$this->client_id)->search($this->search)->paginate(20),
+            'taches' => Task::where('client_id', $this->client_id)->get(),
+            'contacts' => Contact::where('client_id', $this->client_id)->get(),
         ]);
     }
 

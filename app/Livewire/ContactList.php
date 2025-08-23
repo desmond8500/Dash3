@@ -18,8 +18,9 @@ class ContactList extends Component
     public $client_id;
     public $card_class;
     public $search;
+    public $paginate;
 
-    function mount($projet_id = 0, $client_id = 0){
+    function mount($projet_id = 0, $client_id = 0, ){
         $this->projet_id = $projet_id;
         $this->client_id = $client_id;
     }
@@ -39,7 +40,7 @@ class ContactList extends Component
             ->orWhere('lastname', $this->search)
             // ->search($this->search,'firstname')
             // ->search($this->search, 'lastname')
-            ->paginate(18);
+            ->paginate($this->paginate ?? 18);
         }
         if ($this->client_id) {
             return Contact::where('client_id', $this->client_id)
@@ -47,7 +48,7 @@ class ContactList extends Component
                 ->orWhere('lastname', $this->search)
             // ->search($this->search,'firstname')
             // ->search($this->search, 'lastname')
-            ->paginate(18);
+            ->paginate($this->paginate ?? 18);
         }
     }
 

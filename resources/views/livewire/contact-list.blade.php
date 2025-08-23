@@ -25,6 +25,10 @@
                 @include('_card.contact_card', ['contact' => $contact])
             </div>
         @endforeach
+
+        @if ($paginate)
+            {{ $contacts->links() }}
+        @endif
     </div>
 
     @component('components.modal', ["id"=>'editContact', 'title' => 'Titre', 'method'=>"update"])

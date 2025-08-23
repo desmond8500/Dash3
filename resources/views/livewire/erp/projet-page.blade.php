@@ -52,7 +52,7 @@
                 @break
                 @case("contacts")
                     <div class="border border-primary p-2 rounded mt-2">
-                        @livewire('contact-list', ['projet_id' => $projet_id, 'card_class' => 'col-md-6'])
+                        @livewire('contact-list', ['projet_id' => $projet_id, 'card_class' => 'col-md-6', 'paginate'=>10])
                     </div>
                 @break
 

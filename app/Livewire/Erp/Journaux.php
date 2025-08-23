@@ -9,19 +9,24 @@ use App\Models\Projet;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 use function Laravel\Prompts\search;
 
 class Journaux extends Component
 {
+    use WithPagination;
+
     public $projet_id;
     public $projet;
     public $search;
+    public $class;
+    public $paginate;
 
-    function mount($projet_id){
+    function mount($projet_id, $class = null, $paginate = null){
         $this->projet_id = $projet_id;
         $this->projet = Projet::find($projet_id);
-
+        $this->class = $class;
     }
 
     #[On('get-news')]
@@ -34,11 +39,18 @@ class Journaux extends Component
     }
 
     function getJournaux(){
-        return Journal::where('projet_id', $this->projet_id)
-            ->orderByDesc('date')
-            ->where('title', 'LIKE', "%{$this->search}%")
-            ->get();
-            // ->paginate(20);
+        if ($this->paginate) {
+            return Journal::where('projet_id', $this->projet_id)
+                ->orderByDesc('date')
+                ->where('title', 'LIKE', "%{$this->search}%")
+                ->paginate($this->paginate);
+        } else {
+            return Journal::where('projet_id', $this->projet_id)
+                ->orderByDesc('date')
+                ->where('title', 'LIKE', "%{$this->search}%")
+                ->get();
+        }
+
     }
 
     public JournalForm $journalForm;

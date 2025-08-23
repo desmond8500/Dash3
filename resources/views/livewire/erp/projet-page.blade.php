@@ -11,6 +11,74 @@
         </div>
     @endcomponent
 
+    <div class="row mb-3">
+        <div class="col-md-4">
+            @livewire('cards/projet_card_extended', ['projet_id' => $projet_id])
+        </div>
+        <div class="col-md-8">
+            <nav class="nav nav-segmented w-100 mb-2 border border-primary bg-white" role="tablist" wire:ignore>
+                <button class="nav-link active" role="tab" data-bs-toggle="tab" aria-selected="true" aria-current="page" wire:click="$set('tabs', 'devis')">
+                    Devis
+                </button>
+                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'taches')">
+                    Taches
+                </button>
+                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'contacts')">
+                    Contacts
+                </button>
+                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'badges')">
+                    Badges
+                </button>
+                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'notes')">
+                    Notes
+                </button>
+                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'batiments')">
+                    Batiments
+                </button>
+                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'journaux')">
+                    Journaux
+                </button>
+                <button class="nav-link" disabled  role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'documents')">
+                    Documents
+                </button>
+            </nav>
+
+            @switch($tabs)
+                @case("devis")
+                    @livewire('tables/invoices_table_extended', ['projet_id' => $projet_id])
+                @break
+                @case("taches")
+                    @livewire('erp.tasks.tasklist1', ['projet_id' => $projet_id])
+                @break
+                @case("contacts")
+                    <div class="border border-primary p-2 rounded mt-2">
+                        @livewire('contact-list', ['projet_id' => $projet_id, 'card_class' => 'col-md-6'])
+                    </div>
+                @break
+
+                @case("badges")
+                    @livewire('badges', ['projet_id' => $projet_id])
+                @break
+                @case("notes")
+                    @livewire('erp.projet-notes', ['projet_id' => $projet_id])
+                @break
+                @case("documents")
+                    @livewire('documents', ['projet_id' => $projet_id])
+                @break
+                @case("batiments")
+                    @livewire('erp.building-list', ['projet_id' => $projet_id])
+                @break
+                @case("journaux")
+                    @livewire('erp.journaux', ['projet_id' => $projet_id, 'class'=> 'col-md-6', 'paginate' => 8],)
+                @break
+
+                @default
+
+            @endswitch
+        </div>
+    </div>
+
+
     <div class="row g-2" wire:ignore>
         <div class="col-md-12">
             <div class="card">

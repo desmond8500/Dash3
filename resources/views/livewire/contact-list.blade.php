@@ -4,7 +4,7 @@
         <div class="col">
             <div class="col-md-12">
                 <div class="input-icon">
-                    <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher un contact">
+                    <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher un contact" >
                     <span class="input-icon-addon">
                         <i class="ti ti-search"></i>
                     </span>

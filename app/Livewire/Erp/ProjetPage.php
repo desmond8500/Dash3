@@ -9,6 +9,7 @@ use App\Models\Journal;
 use App\Models\Projet;
 use App\Models\Task;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -24,6 +25,8 @@ class ProjetPage extends Component
     public $breadcrumbs;
     public $projet, $projet_id;
     public $tab = 3;
+    #[Session()]
+    public $tabs = 'devis';
 
     public function mount($projet_id){
         $this->projet = Projet::find($projet_id);

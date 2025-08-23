@@ -22,9 +22,9 @@ class ContactForm extends Form
     public $lastname;
     public $fonction;
     public $avatar;
-    #[Rule('integer')]
+    #[Rule('integer|nullable')]
     public $phone;
-    #[Rule('email')]
+    #[Rule('email|nullable')]
     public $email;
     public $societe;
 

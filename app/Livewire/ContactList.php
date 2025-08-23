@@ -35,14 +35,18 @@ class ContactList extends Component
     function getContacts(){
         if ($this->projet_id) {
             return Contact::where('projet_id', $this->projet_id)
-            ->search($this->search,'firstname')
-            ->search($this->search, 'lastname')
+            ->orWhere('firstname', $this->search)
+            ->orWhere('lastname', $this->search)
+            // ->search($this->search,'firstname')
+            // ->search($this->search, 'lastname')
             ->paginate(18);
         }
         if ($this->client_id) {
             return Contact::where('client_id', $this->client_id)
-            ->search($this->search,'firstname')
-            ->search($this->search, 'lastname')
+                ->orWhere('firstname', $this->search)
+                ->orWhere('lastname', $this->search)
+            // ->search($this->search,'firstname')
+            // ->search($this->search, 'lastname')
             ->paginate(18);
         }
     }

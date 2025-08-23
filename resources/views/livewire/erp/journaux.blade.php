@@ -4,16 +4,10 @@
         <div>
             <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher" >
         </div>
-        @component("components.off-canvas", ['button'=>'Todo'])
-            <ul>
-                <li>Editer une entrée de journal</li>
-                <li>Consulter et remplir un journal</li>
-            </ul>
-        @endcomponent
     </div>
     <div class="row g-2">
         @forelse ($journaux as $journal)
-            <div class="col-md-4" wire:key='{{ $journal->id }}'>
+            <div @class(['col-md-4', $class]) wire:key='{{ $journal->id }}'>
                 @component('_card.journal_card',['journal'=>$journal,])
                 @endcomponent
             </div>
@@ -23,8 +17,9 @@
             </div>
         @endforelse
         <div>
-            {{-- {{ $journaux->links() }} --}}
-            {{-- @dump($projets) --}}
+            @if ($paginate)
+                {{ $journaux->links() }}
+            @endif
         </div>
     </div>
 

@@ -20,9 +20,9 @@
                     @if ($contact->phone)
                     <div class="d-flex align-items-center" data-bs-toggle="tooltip" title="Téléphone">
                         @php
-                            $phone = new Propaganistas\LaravelPhone\PhoneNumber($contact->phone, 'SN');
+                            // $phone = new Propaganistas\LaravelPhone\PhoneNumber($contact->phone, 'SN');
                         @endphp
-                        <i class="ti ti-phone"></i> <div class="ms-1">  {{ $phone->formatForCountry('SN') }}</div>
+                        {{-- <i class="ti ti-phone"></i> <div class="ms-1">  {{ $phone->formatForCountry('SN') }}</div> --}}
                     </div>
                     @endif
                     @if ($contact->email)

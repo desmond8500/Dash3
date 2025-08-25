@@ -44,6 +44,16 @@
         <div class="col-md-4">
 
             <div class="card mb-2">
+                @livewire('cards.invoice_budget_card_extended', ['invoice_id' => $devis->id])
+            </div>
+            <div class="mb-2">
+                @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
+            </div>
+            <div class="mb-2">
+                @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
+            </div>
+
+            <div class="card mb-2">
                 @livewire('erp.invoice-documents', ['invoice_id' => $devis->id])
             </div>
             <div class="mb-2">
@@ -52,12 +62,7 @@
             <div class="mb-2">
                 @livewire('erp.facturelist', ['invoice_id' => $devis->id])
             </div>
-            <div class="mb-2">
-                @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
-            </div>
-            <div class="mb-2">
-                @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
-            </div>
+
 
             <div class="mb-1">
                 @livewire('erp.invoice-proposal', ['invoice_id' => $devis->id])

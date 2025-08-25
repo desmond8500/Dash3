@@ -50,6 +50,12 @@ class BuildingForm extends Form
 
     function delete()
     {
-        $this->building->delete();
+        if ($this->building->stages()->count() > 0) {
+            return "Vous ne pouvez pas supprimer ce batiment car il contient des niveaux.";
+        } else {
+            $this->building->delete();
+            return "Success";
+        }
+
     }
 }

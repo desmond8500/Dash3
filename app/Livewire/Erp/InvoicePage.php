@@ -12,17 +12,15 @@ use App\Models\Brand;
 use App\Models\Forfait;
 use App\Models\Invoice;
 use App\Models\InvoiceModel;
-use App\Models\InvoiceProposal;
 use App\Models\InvoiceRow;
 use App\Models\InvoiceSection;
+use App\Models\InvoiceSpent;
 use App\Models\InvoiceSystem;
-use App\Models\Projet;
 use App\Models\Provider;
 use App\Models\Pv;
-use App\Models\Systeme;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -351,5 +349,22 @@ class InvoicePage extends Component
         }
 
         $this->dispatch('open-selectSectionModel');
+    }
+
+    // Acompte
+
+    function add_to_acompte($row_id){
+        $row = InvoiceRow::find($row_id);
+
+        $acompte = InvoiceSpent::create([
+            'invoice_id' => $this->devis->id,
+            'name' => $row->designation,
+            'description' => $row->reference,
+            'montant' => $row->prix*$row->quantite,
+            'date' => Date::now(),
+        ]);
+
+        $this->dispatch('get_invoice_spent');
+
     }
 }

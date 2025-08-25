@@ -34,7 +34,7 @@
                         </td>
                         <td class="text-end">{{ number_format($spent->montant, 0,'.', ' ') }} F</td>
                         <td class="text-end">
-                            <div>{{ $spent->date }}</div>
+                            <div>{{ $spent->formatDate() }}</div>
                         </td>
                         <td>
 

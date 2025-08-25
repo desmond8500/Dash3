@@ -5,12 +5,15 @@ namespace App\Livewire\Erp;
 use App\Livewire\Forms\InvoiceSpentForm;
 use App\Models\Invoice;
 use App\Models\InvoiceSpent as ModelsInvoiceSpent;
+use App\Traits\dateTrait;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class InvoiceSpent extends Component
 {
     use WithPagination;
+
 
     protected $paginationTheme = 'bootstrap';
     public $search = '';
@@ -20,6 +23,7 @@ class InvoiceSpent extends Component
         $this->invoice = Invoice::find($invoice_id);
     }
 
+    #[On('get_invoice_spent')]
     function getSearch()
     {
         return $this->invoice->spents;

@@ -427,4 +427,18 @@ class PDFController extends Controller
         return $pdf->stream("Attestation $team->firstname $team->lastname ");
     }
 
+    static function browserShot()
+    {
+        $carbon = new Carbon();
+
+        $data = [
+            'logo' => env('LOGO', ''),
+            'title' => $type ?? "Attestation de Stage",
+            'carbon' => $carbon,
+        ];
+
+        $pdf = Pdf::loadView("_pdf.attestation", $data);
+        return $pdf->stream("Attestation  ");
+    }
+
 }

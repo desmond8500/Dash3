@@ -57,6 +57,7 @@ use App\Livewire\TimelinePage;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Browsershot\Browsershot;
+use Spatie\LaravelPdf\Facades\Pdf;
 
 // Index
 Route::get('/', IndexPage::class)->name('index');
@@ -251,8 +252,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/systemes', SystemesPage::class)->name('systemes');
     Route::get('/fiches', FichesPage::class)->name('fiches');
     Route::get('pdf_browser', function () {
-        $template = view('_pdf.test')->render();
-        return Browsershot::html($template)->save('example.pdf');
+        // $template = view('_pdf.test')->render();
+        // return Browsershot::html($template)->save('example.pdf');
+        return Browsershot::url('https://example.com')->save('test.pdf');
+        // return Browsershot::url('https://example.com')->pdf();
     });
 
 });
@@ -292,6 +295,25 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+// Browsershot
+Route::get('browsershot_test_page', function () {
+    return view('_pdf.test');
+})->name('browsershot_test_page');
+
+Route::get('browsershot', function () {
+
+    // return Pdf::view('_pdf.test', [])
+    //     ->format('a4')
+    //     ->save('invoice.pdf');
+
+    return pdf()
+        ->view('_pdf.test')
+        ->name('invoice-2023-04-10.pdf');
+
+})->name('browsershot');
+
+
+// Fallback
 Route::fallback(function() {
     return view('errors.404page');
 });

@@ -13,7 +13,12 @@
 
     <div class="row mb-3">
         <div class="col-md-4">
-            @livewire('cards/projet_card_extended', ['projet_id' => $projet_id])
+            <div class="mb-3">
+                @livewire('cards/projet_card_extended', ['projet_id' => $projet_id])
+            </div>
+            <div class="mb-3">
+                @livewire('tables/buildings_list_extended', ['projet_id' => $projet_id])
+            </div>
         </div>
         <div class="col-md-8">
             <nav class="nav nav-segmented w-100 mb-2 border border-primary bg-white" role="tablist" wire:ignore>
@@ -32,13 +37,10 @@
                 <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'notes')">
                     Notes
                 </button>
-                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'batiments')">
-                    Batiments
-                </button>
                 <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'journaux')">
                     Journaux
                 </button>
-                <button class="nav-link" disabled  role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'documents')">
+                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'documents')">
                     Documents
                 </button>
             </nav>
@@ -63,11 +65,9 @@
                     @livewire('erp.projet-notes', ['projet_id' => $projet_id])
                 @break
                 @case("documents")
-                    @livewire('documents', ['projet_id' => $projet_id])
+                    @livewire('tables/documents_list_extended', ['projet_id' => $projet_id])
                 @break
-                @case("batiments")
-                    @livewire('erp.building-list', ['projet_id' => $projet_id])
-                @break
+
                 @case("journaux")
                     @livewire('erp.journaux', ['projet_id' => $projet_id, 'class'=> 'col-md-6', 'paginate' => 8],)
                 @break

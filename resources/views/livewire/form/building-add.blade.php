@@ -3,9 +3,7 @@
 
     @component('components.modal', ["id"=>'addBuilding', 'title' => 'Ajouter un batiment', "method"=>"store"])
         <form class="row" wire:submit="store">
-
             @include('_form.building_form')
-
         </form>
 
         <script> window.addEventListener('open-addBuilding', event => { window.$('#addBuilding').modal('show'); }) </script>

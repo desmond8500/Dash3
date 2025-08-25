@@ -40,7 +40,7 @@
                                     @if ($acompte->statut)
                                         <span class="text-success">Payé</span>
                                     @else
-                                        <span class="text-danger">Payé</span>
+                                        <span class="text-danger">Pas Payé</span>
                                     @endif
                                 </div>
                             </td>

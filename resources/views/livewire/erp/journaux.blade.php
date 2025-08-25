@@ -2,7 +2,12 @@
     <div class="d-flex justify-content-between mb-1">
         <h2>Journal d'activité</h2>
         <div>
-            <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher" >
+            <div class="input-group">
+                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher">
+                <button class="btn btn-primary btn-icon"  wire:click="$set('search','')">
+                    <i class=" ti ti-x"></i>
+                </button>
+            </div>
         </div>
     </div>
     <div class="row g-2">

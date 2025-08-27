@@ -1,3 +1,6 @@
 <div>
-    {{-- Do your work, then step back. --}}
+    @component('components.layouts.page-header', ['title'=> 'Mon projet'])
+
+
+    @endcomponent
 </div>

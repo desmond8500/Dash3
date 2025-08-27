@@ -291,7 +291,7 @@ Route::middleware(['auth'])->group(function () {
 // MyProjects
 Route::middleware(['auth'])->group(function () {
     Route::get('/myprojects', MyprojectsPage::class )->name('myprojects');
-    Route::get('/myproject', MyprojectPage::class )->name('myproject');
+    Route::get('/myproject/{project_id}', MyprojectPage::class )->name('myproject');
 
 });
 

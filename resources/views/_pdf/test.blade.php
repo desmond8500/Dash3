@@ -26,15 +26,11 @@
                     <h1>Rapport de visite</h1>
                 </div>
 
-
-
             </div>
-
 
         </header>
 
         <main >
-
 
         </main>
 

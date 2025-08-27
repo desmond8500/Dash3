@@ -61,7 +61,7 @@
         <label class="form-label">Prix</label>
         <div class="input-group">
             <input type="number" class="form-control" wire:model.live="row_form.prix" placeholder="Prix de l'article">
-            <a class="btn btn-primary btn-icon" wire:click="$set('row_form.prix', '{{ $row_form->prix*656 }}')">
+            <a class="btn btn-primary btn-icon" wire:click="$set('row_form.prix', '{{ $row_form->prix ?? 1 *656 }}')">
                 €
             </a>
             <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.prix', 0)">

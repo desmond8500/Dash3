@@ -16,7 +16,7 @@ class MyprojectForm extends Form
     #[Rule('required')]
     public $name;
     public $logo;
-    public $favorite;
+    public $favorite = false;
     public $description;
 
     function fix(){
@@ -25,6 +25,7 @@ class MyprojectForm extends Form
 
     function store(){
         $this->fix();
+        $this->user_id = auth()->user()->id;
         $this->validate();
         Myproject::create($this->all());
     }

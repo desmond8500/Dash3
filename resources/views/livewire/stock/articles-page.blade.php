@@ -14,7 +14,7 @@
     @endcomponent
 
     <div class="row g-2">
-        <div class="col-md-3">
+        <div class="col-md-3 col-xl-2">
             <div class="mb-1">
                 <div class="input-group">
                     <input type="text" class="form-control" wire:model.live="search" placeholder="Trouver un article">
@@ -69,10 +69,10 @@
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9 col-xl-10">
             <div class="row row-deck g-2">
                 @foreach ($articles as $article)
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xl-3">
                         @include('_card.articleCard',[
                             'edit' => true
                         ])

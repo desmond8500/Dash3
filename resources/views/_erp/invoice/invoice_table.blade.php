@@ -111,6 +111,9 @@
                             <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Exporter">
                                 <i class="ti ti-file-type-xls"></i>
                             </button>
+                            <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Dupliquer la section" wire:click="duplicate_section('{{ $section->id }}')">
+                                <i class="ti ti-copy"></i>
+                            </button>
                         </div>
                     </th>
                 </tr>

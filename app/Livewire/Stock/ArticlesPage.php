@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Stock;
 
-use App\Livewire\Forms\ArticleForm;
 use App\Livewire\Forms\ItemForm;
 use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Commande;
 use App\Models\Provider;
+use App\Models\Setting;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -23,8 +23,16 @@ class ArticlesPage extends Component
     public $search ='';
     public $breadcrumbs;
     public ItemForm $article_form;
+    public $paginate = 8;
 
     public function mount(){
+        $settings = \App\Models\Setting::where('user_id', auth()->user()->id)->first();;
+
+        if ($settings->size =='container-fluid') {
+            $this->paginate = 10;
+        }
+
+
         $this->breadcrumbs = array(
             array('name' => 'Stock', 'route' => route('stock')),
             array('name' => 'Articles', 'route' => route('articles')),
@@ -64,18 +72,18 @@ class ArticlesPage extends Component
 
     function get_articles(){
         if ($this->brand_id) {
-            return Article::orderByDesc('id')->where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate(8);
+            return Article::orderByDesc('id')->where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate($this->paginate);
         }
         if ($this->provider_id) {
-            return Article::orderByDesc('id')->where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate(8);
+            return Article::orderByDesc('id')->where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate($this->paginate);
         }
         if ($this->priorite_id != 25 ) {
-            return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate(8);
+            return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate($this->paginate);
         }
         if($this->tag){
-            return Article::withAnyTags([$this->tag]) ->paginate(8);
+            return Article::withAnyTags([$this->tag]) ->paginate($this->paginate);
         }
-        return Article::orderByDesc('id')->articleSearch($this->search)->paginate(8);
+        return Article::orderByDesc('id')->articleSearch($this->search)->paginate($this->paginate);
     }
 
     function reset_filter(){

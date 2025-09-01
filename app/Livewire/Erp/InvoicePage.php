@@ -367,4 +367,30 @@ class InvoicePage extends Component
         $this->dispatch('get_invoice_spent');
 
     }
+
+    // Section
+    function duplicate_section($section_id){
+        $section = InvoiceSection::find($section_id);
+
+        $new_section = InvoiceSection::create([
+            'invoice_id' => $this->devis->id,
+            'section' => $section->section . ' (copie)',
+            'ordre' => InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1,
+        ]);
+
+        foreach ($section->rows as $row) {
+            InvoiceRow::create([
+                'invoice_section_id' => $new_section->id ,
+                'article_id' => $row->article_id,
+                'designation' => $row->designation,
+                'coef' => $row->coef,
+                'reference' => $row->reference,
+                'prix' => $row->prix,
+                'quantite' => $row->quantite,
+                'priorite_id' => $row->priorite_id,
+            ]);
+        }
+
+        $this->dispatch('invoice-section-reload');
+    }
 }

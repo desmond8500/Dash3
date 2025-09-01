@@ -18,7 +18,7 @@
     @auth
         <div class="row g-2">
             @foreach ($resumes as $resume)
-                <a class="col-md-3 col-6" href="{{ $resume->route }}" >
+                <a class="col-sm-6 col-md-3 col-xl-2 " href="{{ $resume->route }}" >
                     <div class="card p-2">
                         <div class="row g-1 align-items-center ">
                             <div class="col-auto">

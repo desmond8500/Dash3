@@ -62,7 +62,7 @@
                 $subtotal_mainoeuvre = 0;
                 $subtotal_bought = 0;
             @endphp
-            @foreach ($sections as $key => $section)
+            @foreach ($sections->sortBy('order') as $key => $section)
                 @php
                     $subtotal = 0;
                     $subtotal_equipment = 0;

@@ -10,19 +10,45 @@
 
     <div class="row mt-3">
 
-        <div class="col-md-12">
+        <div class="col-md-12" >
+
+            @script
+
+            <script src="https://cdn.jsdelivr.net/npm/konva@9/konva.min.js"></script>
 
 
-        <x-markdown>
-            # My title
-            ## My title
+           <div id="container"></div>
 
-            This is a [link to our website](https://spatie.be)
+            <script>
+                // Créer une scène (canvas)
+                var stage = new Konva.Stage({
+                  container: 'container', // id du conteneur
+                  width: 500,
+                  height: 500,
+                });
 
-            ```php
-            echo 'Hello world';
-            ```
-        </x-markdown>
+                // Créer un calque
+                var layer = new Konva.Layer();
+
+                // Ajouter un cercle
+                var circle = new Konva.Circle({
+                  x: 250,
+                  y: 250,
+                  radius: 80,
+                  fill: 'red',
+                  stroke: 'black',
+                  strokeWidth: 4,
+                  draggable: true, // on peut le déplacer
+                });
+
+                // Ajouter le cercle au calque
+                layer.add(circle);
+
+                // Ajouter le calque à la scène
+                stage.add(layer);
+            </script>
+
+            @endscript
 
 
 

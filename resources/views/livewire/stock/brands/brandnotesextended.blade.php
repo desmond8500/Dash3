@@ -19,6 +19,13 @@ new class extends Component {
     public $title;
     public $description;
     public $note_id;
+    public $selected_note;
+
+    function show($id){
+        $this->selected_note = \App\Models\Brandnotes::find($id);
+
+        $this->dispatch('open-showBrandNote');
+    }
 
     function store(){
         \App\Models\Brandnotes::create([
@@ -70,7 +77,7 @@ new class extends Component {
             @foreach ($notes as $note)
                 <div class="card p-2 mb-1">
                     <div class="row ">
-                        <div class="col">
+                        <div class="col" wire:click="show('{{ $note->id }}')">
                             {{ $note->title }}
                         </div>
                         <div class="col-auto">
@@ -103,5 +110,13 @@ new class extends Component {
         </form>
         <script> window.addEventListener('open-editBrandNote', event => { window.$('#editBrandNote').modal('show'); }) </script>
         <script> window.addEventListener('close-editBrandNote', event => { window.$('#editBrandNote').modal('hide'); }) </script>
+    @endcomponent
+    @component('components.modal', ["id"=>'showBrandNote', 'title' => $selected_note->title ?? '' , 'method'=>'update'])
+        <form class="row" >
+            @markdown($selected_note->description ?? '')
+            {{-- {{ $selected_note->description ?? '' }} --}}
+        </form>
+        <script> window.addEventListener('open-showBrandNote', event => { window.$('#showBrandNote').modal('show'); }) </script>
+        <script> window.addEventListener('close-showBrandNote', event => { window.$('#showBrandNote').modal('hide'); }) </script>
     @endcomponent
 </div>

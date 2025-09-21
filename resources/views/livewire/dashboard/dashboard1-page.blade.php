@@ -32,7 +32,7 @@
                                 <div class="card bg-gray-50 ">
                                     <div class="text-center p-2">
                                         <a href="{{ $website->url ?? $website->webpage->url }}" target="_blank">
-                                            <img src="{{ asset($website->logo ?? $website->webpage->logo) }}" alt="l" class="avatar avatar-xl p-1 bg-white" style="object-fit: contain">
+                                            <img src="{{ asset($website->logo ?? $website->webpage->logo ?? '') }}" alt="l" class="avatar avatar-xl p-1 bg-white" style="object-fit: contain">
                                         </a>
                                         <div class="mt-2">{{ $website->name ?? $website->webpage->name }}</div>
                                     </div>

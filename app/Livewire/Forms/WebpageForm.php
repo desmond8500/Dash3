@@ -20,7 +20,7 @@ class WebpageForm extends Form
     public $url;
     public $logo;
     public $description;
-    public $favorite;
+    public $favorite = false;
 
     function fix(){
         $this->name = ucfirst($this->name);

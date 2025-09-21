@@ -72,13 +72,15 @@
                                 <ul class="list-group list-group-flush">
                                     @if ($article->brand)
                                         <li class="list-group-item d-flex justify-content-between">
-                                            <b>Marque :</b> {{ $article->brand->name }}
+                                            <b>Marque :</b> <a href="{{ route('brand', ['brand_id'=>$article->brand->id]) }}">{{ $article->brand->name }}</a>
                                         </li>
                                     @endif
                                     @if ($article->provider)
                                         <li class="list-group-item d-flex justify-content-between">
                                             <b>Fournisseur :</b>
-                                            {{ $article->provider->name }}
+                                            <a href="{{ route('provider', ['provider_id'=>$article->provider->id]) }}">
+                                                {{ $article->provider->name }}
+                                            </a>
                                         </li>
                                     @endif
                                     <li class="list-group-item d-flex justify-content-between">

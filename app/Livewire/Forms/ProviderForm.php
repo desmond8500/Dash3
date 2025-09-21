@@ -17,10 +17,11 @@ class ProviderForm extends Form
     public $logo;
     public $address;
     public $description;
-    #[Rule('email')]
+    #[Rule('email|nullable')]
     public $email;
+    #[Rule('number|nullable')]
     public $phone;
-    #[Rule('url')]
+    #[Rule('url|nullable')]
     public $website;
 
     function fix(){

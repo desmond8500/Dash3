@@ -1,5 +1,5 @@
 <div>
-    @component('components.layouts.page-header', ['title'=> 'Fournisseur', 'breadcrumbs'=>$breadcrumbs])
+    @component('components.layouts.page-header', ['title'=> $provider->name, 'breadcrumbs'=>$breadcrumbs])
         <button class="btn btn-primary" wire:click="edit()">Editer</button>
         <button class="btn btn-primary" wire:click="$dispatch('open-editLogo')">Editer Logo</button>
     @endcomponent
@@ -11,7 +11,26 @@
             </div>
 
             <div class="card card-body mb-2">
-                {{ $provider->name }}
+                {{ $provider->description }}
+            </div>
+            <div class="card p-1 mb-1">
+                <div class="d-flex justify-content-between mx-3">
+                    <i class="ti ti-map me-2"></i>
+                    {{ $provider->address }}
+                </div>
+            </div>
+            <div class="card p-1 mb-1">
+                <div class="d-flex justify-content-between mx-3">
+                    <i class="ti ti-phone me-2"></i>
+                    {{ $provider->phone }}
+
+                </div>
+            </div>
+            <div class="card p-1 mb-1">
+                <div class="d-flex justify-content-between mx-3">
+                    <i class="ti ti-world me-2"></i>
+                    <a href="{{ $provider->website }}" target="_blank">Site Web</a>
+                </div>
             </div>
         </div>
 

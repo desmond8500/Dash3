@@ -22,13 +22,13 @@ new class extends Component {
     public $selected_note;
 
     function show($id){
-        $this->selected_note = App\Models\Brandnotes::find($id);
+        $this->selected_note = App\Models\BrandNotes::find($id);
 
         $this->dispatch('open-showBrandNote');
     }
 
     function store(){
-        App\Models\Brandnotes::create([
+        App\Models\BrandNotes::create([
             'brand_id' => $this->brand_id,
             'title' => $this->title,
             'description' => $this->description,
@@ -39,7 +39,7 @@ new class extends Component {
 
     function edit($id){
         $this->note_id = $id;
-        $note = App\Models\Brandnotes::find($id);
+        $note = App\Models\BrandNotes::find($id);
         if ($note) {
             $this->title = $note->title ;
             $this->description = $note->description ;
@@ -48,7 +48,7 @@ new class extends Component {
     }
 
     function update(){
-        $note = App\Models\Brandnotes::find($this->note_id);
+        $note = App\Models\BrandNotes::find($this->note_id);
         if ($note) {
             $note->title = $this->title;
             $note->description = $this->description;
@@ -58,7 +58,7 @@ new class extends Component {
     }
 
     function delete($id){
-        $note = \App\Models\Brandnotes::find($id);
+        $note = \App\Models\BrandNotes::find($id);
         if ($note) {
             $note->delete();
         }

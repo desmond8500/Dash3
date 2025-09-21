@@ -113,7 +113,9 @@ new class extends Component {
     @endcomponent
     @component('components.modal', ["id"=>'showBrandNote', 'title' => $selected_note->title ?? '' , 'method'=>'update'])
         <form class="row" >
-           {{ {$selected_note->description} }}
+            @if ($selected_note)
+                @markdown($selected_note->description)
+            @endif
         </form>
         <script> window.addEventListener('open-showBrandNote', event => { window.$('#showBrandNote').modal('show'); }) </script>
         <script> window.addEventListener('close-showBrandNote', event => { window.$('#showBrandNote').modal('hide'); }) </script>

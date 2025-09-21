@@ -23,7 +23,6 @@ class Dashboard1Page extends Component
     {
         return view('livewire.dashboard.dashboard1-page',[
             'websites' => $this->getWebsites(),
-            'favorites' => Webpagefavorite::with('webpage')->get(),
             'categories' => WebpageCategory::search($this->searchcat)->get(),
         ]);
     }

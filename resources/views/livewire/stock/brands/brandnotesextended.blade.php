@@ -3,9 +3,105 @@
 use Livewire\Volt\Component;
 
 new class extends Component {
-    //
+
+    public $brand_id;
+
+    function mount($brand_id){
+        $this->brand_id = $brand_id;
+    }
+
+    function with(){
+        return [
+            'notes' => \App\Models\BrandNotes::where('brand_id', $this->brand_id)->get(),
+        ];
+    }
+
+    public $title;
+    public $description;
+    public $note_id;
+
+    function store(){
+        \App\Models\Brandnotes::create([
+            'brand_id' => $this->brand_id,
+            'title' => $this->title,
+            'description' => $this->description,
+        ]);
+
+        $this->dispatch('close-addBrandNote');
+    }
+
+    function edit($id){
+        $this->note_id = $id;
+        $note = \App\Models\Brandnotes::find($id);
+        if ($note) {
+            $this->title = $note->title ;
+            $this->description = $note->description ;
+        }
+        $this->dispatch('open-editBrandNote');
+    }
+
+    function update(){
+        $note = \App\Models\Brandnotes::find($this->note_id);
+        if ($note) {
+            $note->title = $this->title;
+            $note->description = $this->description;
+            $note->save();
+        }
+        $this->dispatch('close-editBrandNote');
+    }
+
+    function delete($id){
+        $note = \App\Models\Brandnotes::find($id);
+        if ($note) {
+            $note->delete();
+        }
+    }
 }; ?>
 
 <div>
-    //
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Notes</div>
+            <div class="card-actions">
+                <button class='btn btn-primary' wire:click="$dispatch('open-addBrandNote')" ><i class='ti ti-plus'></i> Note</button>
+            </div>
+        </div>
+        <div class="p-2">
+            @foreach ($notes as $note)
+                <div class="card p-2 mb-1">
+                    <div class="row ">
+                        <div class="col">
+                            {{ $note->title }}
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary btn-sm btn-icon" wire:click="edit('{{ $note->id }}')">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm btn-icon" wire:click="delete('{{ $note->id }}')" wire:confirm>
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
+    </div>
+
+
+    @component('components.modal', ["id"=>'addBrandNote', 'title' => 'Ajouter une note', 'method'=>'store'])
+        <form class="row" wire:submit="store">
+            @include('_form.brand_note_form')
+        </form>
+        <script> window.addEventListener('open-addBrandNote', event => { window.$('#addBrandNote').modal('show'); }) </script>
+        <script> window.addEventListener('close-addBrandNote', event => { window.$('#addBrandNote').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editBrandNote', 'title' => 'Editer une note', 'method'=>'update'])
+        <form class="row" wire:submit="update">
+            @include('_form.brand_note_form')
+        </form>
+        <script> window.addEventListener('open-editBrandNote', event => { window.$('#editBrandNote').modal('show'); }) </script>
+        <script> window.addEventListener('close-editBrandNote', event => { window.$('#editBrandNote').modal('hide'); }) </script>
+    @endcomponent
 </div>

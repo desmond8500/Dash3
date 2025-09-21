@@ -9,7 +9,8 @@ class BrandNotes extends Model
 {
     protected $fillable = [
         'brand_id',
-        'note',
+        'title',
+        'description',
     ];
 
     public function brand(): BelongsTo

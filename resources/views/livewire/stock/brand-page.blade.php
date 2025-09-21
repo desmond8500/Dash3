@@ -50,6 +50,10 @@
                 @endif
             </div>
 
+            <div class="mt-2">
+                @livewire('stock/brands/brandnotesextended', ['brand_id' => $brand->id], key($brand->id))
+            </div>
+
         </div>
         <div class="col-md-8">
             <div class="row g-2">
@@ -65,10 +69,6 @@
                         @include('_card.articleCard')
                     </div>
                 @endforeach
-            </div>
-
-            <div class="row g-2 mt-3">
-                @livewire('stock/brands/brandnotesextended', ['brand_id' => $brand->id], key($brand->id))
             </div>
         </div>
     </div>

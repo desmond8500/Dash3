@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('brand_notes', function (Blueprint $table) {
             $table->id();
             $table->integer('brand_id')->constrained();
-            $table->text('note');
+            $table->text('title');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

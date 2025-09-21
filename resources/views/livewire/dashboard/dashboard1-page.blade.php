@@ -28,7 +28,7 @@
                             @endif
                         </div>
                         @foreach($websites->sortBy('name') as $website)
-                            <div class="col-6 col-md-2 ">
+                            <div class="col-4 col-md-2 ">
                                 <div class="card bg-gray-50 ">
                                     <div class="text-center p-2">
                                         <a href="{{ $website->url ?? $website->webpage->url }}" target="_blank">
@@ -38,18 +38,18 @@
                                     </div>
                                     @if ($edit_form)
                                         <div class="text-center mb-1">
-                                            <button class="btn btn-primary btn-sm" wire:click="edit('{{ $website->id ?? $website->webpage->id }}')">
+                                            <button class="btn btn-primary btn-sm btn-icon" wire:click="edit('{{ $website->id ?? $website->webpage->id }}')">
                                                 <i class="ti ti-edit"></i>
                                             </button>
-                                            <button class="btn btn-danger btn-sm" wire:click="delete('{{ $website->id ?? $website->webpage->id }}')">
+                                            <button class="btn btn-danger btn-sm btn-icon" wire:click="delete('{{ $website->id ?? $website->webpage->id }}')">
                                                 <i class="ti ti-trash"></i>
                                             </button>
                                             @if ($website->favorite)
-                                                <button class="btn btn-warning btn-sm" wire:click="favorite('{{ $website->id }}')">
+                                                <button class="btn btn-warning btn-sm btn-icon" wire:click="favorite('{{ $website->id }}')">
                                                     <i class="ti ti-star"></i>
                                                 </button>
                                             @else
-                                                <button class="btn btn-secondary btn-sm" wire:click="favorite('{{ $website->id }}')">
+                                                <button class="btn btn-secondary btn-sm btn-icon" wire:click="favorite('{{ $website->id }}')">
                                                     <i class="ti ti-star"></i>
                                                 </button>
                                             @endif

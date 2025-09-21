@@ -49,11 +49,11 @@ new class extends Component {
 
     function update(){
         $note = \App\Models\Brandnotes::find($this->note_id);
-        // if ($note) {
-        //     $note->title = $this->title;
-        //     $note->description = $this->description;
-        //     $note->save();
-        // }
+        if ($note) {
+            $note->title = $this->title;
+            $note->description = $this->description;
+            $note->save();
+        }
         $this->dispatch('close-editBrandNote');
     }
 

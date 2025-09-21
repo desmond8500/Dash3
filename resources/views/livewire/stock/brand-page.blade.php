@@ -66,6 +66,10 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="row g-2 mt-3">
+                @livewire('stock/brands/brandnotesextended', ['brand_id' => $brand->id], key($brand->id))
+            </div>
         </div>
     </div>
     @component('components.modal', ["id"=>'editBrand', 'title' => 'Editer une marque', 'method'=>'update_brand'])

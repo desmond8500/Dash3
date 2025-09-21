@@ -12,7 +12,8 @@ class Webpage extends Model
         'logo',
         'name',
         'url',
-        'description'
+        'description',
+        'favorite',
     ];
 
     public function categories(): BelongsTo

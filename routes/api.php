@@ -9,6 +9,7 @@ use App\Http\Controllers\API\ItemsApiController;
 use App\Http\Controllers\api\ProviderAPIController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\LiensControlleur;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
@@ -69,6 +70,8 @@ Route::prefix('v1')->group(function () {
     Route::get('transactions', [TransactionController::class, 'get_transactions']);
     // Taches
     Route::resource('tasks', TaskController::class);
+    // Liens
+    Route::resource('liens', LiensControlleur::class);
 });
 
 

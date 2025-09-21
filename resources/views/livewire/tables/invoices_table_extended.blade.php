@@ -18,6 +18,7 @@ new class extends Component {
         $this->projet_id = $projet_id;
     }
 
+    #[On('get-invoices')]
     public function with(): array
     {
         return [
@@ -61,6 +62,12 @@ new class extends Component {
 }; ?>
 
 <div class="card">
+    <div class="card-header">
+        <div class="card-title">Devis</div>
+        <div class="card-actions">
+            @livewire('form.invoice-add', ['projet_id' => $projet_id], key(1))
+        </div>
+    </div>
     <div class="table-responsive">
         <table class="table table-hover">
             @if ($invoices->count())

@@ -2,6 +2,7 @@
 
 use App\Exports\InvoiceExport;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\KonvaController;
 use App\Http\Controllers\PDFController;
 use App\Livewire\Dashboard\Dashboard1Page;
 use App\Livewire\Dashboard\Dashboard2Page;
@@ -55,6 +56,7 @@ use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use App\Livewire\TimelinePage;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Browsershot\Browsershot;
 use Spatie\LaravelPdf\Facades\Pdf;
@@ -312,6 +314,7 @@ Route::get('browsershot', function () {
 
 })->name('browsershot');
 
+Volt::route('/konva', 'test.konvapage')->name('konva');
 
 // Fallback
 Route::fallback(function() {

@@ -493,6 +493,20 @@
                 }
             }
         },
+        "/api/v1/liens": {
+            "get": {
+                "tags": [
+                    "Liens utiles"
+                ],
+                "summary": "Liste des liens vers des ressources",
+                "operationId": "ff48531d813db46021c3c1a63afbbe27",
+                "responses": {
+                    "200": {
+                        "description": "Liste des catégories"
+                    }
+                }
+            }
+        },
         "/api/v1/facture_pdf/invoice_id/type": {
             "get": {
                 "tags": [
@@ -567,6 +581,10 @@
         {
             "name": "Transactions",
             "description": "Transactions"
+        },
+        {
+            "name": "Liens utiles",
+            "description": "Liens utiles"
         },
         {
             "name": "Factures",

@@ -20,6 +20,7 @@ class WebpageForm extends Form
     public $url;
     public $logo;
     public $description;
+    public $favorite;
 
     function fix(){
         $this->name = ucfirst($this->name);
@@ -54,6 +55,7 @@ class WebpageForm extends Form
         $this->logo = $this->webpage->logo;
         $this->description = $this->webpage->description;
         $this->url = $this->webpage->url;
+        $this->favorite = $this->webpage->favorite;
     }
 
     function update(){
@@ -70,5 +72,16 @@ class WebpageForm extends Form
     function delete($model_id){
         $this->webpage = Webpage::find($model_id);
         $this->webpage->delete();
+    }
+
+    function favorite($id)
+    {
+        $this->set($id);
+        if ($this->favorite) {
+            $this->favorite = 0;
+        } else {
+            $this->favorite = 1;
+        }
+        $this->webpage->update($this->only('favorite'));
     }
 }

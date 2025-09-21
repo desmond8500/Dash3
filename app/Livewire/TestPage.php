@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Livewire;
@@ -157,6 +156,8 @@ class TestPage extends Component
             // (object) array( 'id'=> 3, 'name' => 'Article card', 'view'=> '_card.articleCard'),
         );
 
+        $this->size = (object) array('height' => 1500, 'width' => 600);
+
         $this->cartes = glob('../resources/views/_card/*');
         // $this->cartes = Storage::disk('local')->directories("");
     }
@@ -194,6 +195,10 @@ class TestPage extends Component
 
     public $name;
     public $description;
+    public $size;
+
+    public $height = 600;
+    public $width = 600;
 
     function add_demo(){
         Demo::create([
@@ -212,6 +217,34 @@ class TestPage extends Component
     function pdf(){
         $template = view('_pdf.test')->render();
         return Browsershot::html($template)->save('example3.pdf');
+    }
+
+    public $shapes = [];
+
+    public $count = 'bet';
+    public $cercle =  array(
+        'x' => 400,
+        'y' => 100,
+        'radius' => 70,
+        'fill' => 'yellow',
+        'stroke' => 'black',
+        'strokeWidth' => 4,
+    );
+
+    public function addCircle()
+    {
+        $this->shapes[] = [
+            'type' => 'circle',
+            'x' => rand(50, 300),
+            'y' => rand(50, 300),
+            'radius' => 30,
+            'fill' => 'red',
+        ];
+    }
+
+
+    function test(){
+        $this->js('alert("test");');
     }
 }
 

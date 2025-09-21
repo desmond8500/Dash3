@@ -8,52 +8,62 @@
 
     @endcomponent
 
-    <div class="row mt-3">
 
-        <div class="col-md-12" >
 
-            @script
 
+
+
+        <button class="btn btn-primary" wire:click='test'>Test</button>
+
+        <div wire:ignore>
             <script src="https://cdn.jsdelivr.net/npm/konva@9/konva.min.js"></script>
+            <div id="container" class="border rounded"></div>
+
+            @php
+                $name = 'test';
+                echo "<script>
+                    var height = '$size['height']';
+                    var width = '$size['width']';
+                </script>";
+            @endphp
 
 
-           <div id="container"></div>
 
             <script>
-                // Créer une scène (canvas)
+                // let components = Livewire.all()
+                console.log(name);
+
+
                 var stage = new Konva.Stage({
-                  container: 'container', // id du conteneur
-                  width: 500,
-                  height: 500,
+                container: 'container', // id of container <div>
+                    width: width,
+                    height: height,
                 });
 
-                // Créer un calque
                 var layer = new Konva.Layer();
 
-                // Ajouter un cercle
                 var circle = new Konva.Circle({
-                  x: 250,
-                  y: 250,
-                  radius: 80,
-                  fill: 'red',
-                  stroke: 'black',
-                  strokeWidth: 4,
-                  draggable: true, // on peut le déplacer
+                    x: stage.width() / 2,
+                    y: stage.height() / 2,
+                    radius: 70,
+                    fill: 'red',
+                    stroke: 'black',
+                    strokeWidth: 4,
                 });
 
-                // Ajouter le cercle au calque
+                circle.draggable(true);
+
                 layer.add(circle);
 
-                // Ajouter le calque à la scène
                 stage.add(layer);
             </script>
 
-            @endscript
-
-
-
-
         </div>
+
+
+
+
+    {{-- <div class="row mt-3">
 
 
         <section class="col-md-8">
@@ -112,7 +122,7 @@
             </div>
         </nav>
 
-    </div>
+    </div> --}}
 
 
 

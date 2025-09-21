@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Dashboard;
 
+use App\Http\Resources\WebpageFavoriteResource;
 use App\Livewire\Forms\WebpageCategoryForm;
 use App\Livewire\Forms\WebpageForm;
 use App\Models\Webpage;
 use App\Models\WebpageCategory;
+use App\Models\Webpagefavorite;
+use App\Models\WebpageFavorite as ModelsWebpageFavorite;
 use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -20,13 +23,14 @@ class Dashboard1Page extends Component
     {
         return view('livewire.dashboard.dashboard1-page',[
             'websites' => $this->getWebsites(),
+            'favorites' => Webpagefavorite::with('webpage')->get(),
             'categories' => WebpageCategory::search($this->searchcat)->get(),
         ]);
     }
 
     public $search;
     public $searchcat;
-    public $all = 0;
+    public $all = 1;
 
     #[Session]
     public $selected = 1;
@@ -35,16 +39,22 @@ class Dashboard1Page extends Component
 
     function getWebsites(){
         if ($this->all) {
-            return Webpage::all();
+            // $favorites = Webpagefavorite::with('webpage')->get();
+            // return $favorites;
+            return Webpage::where('favorite', true)->get();
         } else {
-            $this->all =0 ;
+            // $this->all =0 ;
             return Webpage::where('webpage_category_id', $this->selected)->get();
         }
 
     }
 
+    public $categorie;
     function selectCategory($id){
         $this->selected = $id;
+        $this->all = 0;
+        $this->categorie = WebpageCategory::find($id);
+        $this->dispatch('close-webpageCategory');
     }
 
     // Webpage
@@ -63,6 +73,9 @@ class Dashboard1Page extends Component
     }
     function delete($id){
         $this->webpage_form->delete($id);
+    }
+    function favorite($webpage_id){
+        $this->webpage_form->favorite($webpage_id);
     }
 
     // WebpageCategory

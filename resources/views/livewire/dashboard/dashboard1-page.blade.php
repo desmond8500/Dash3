@@ -79,7 +79,7 @@
                     <button class="btn btn-primary" wire:click="set('all', 1)">Tous</button>
                 </div>
                 @foreach ($categories->sortBy('name') as $category)
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                         <div @class(['card p-1', 'bg-primary text-white'=>$selected == $category->id])>
                             <div class="row align-items-center" >
                                 <div class="col cursor-pointer" wire:click="selectCategory('{{ $category->id }}')">

@@ -142,10 +142,6 @@
                             @livewire('erp.projet-resume', ['projet_id'=>$projet_id, 'buildings' => $buildings, 'invoices' => $invoices])
                         </div>
 
-                        {{-- <div class="tab-pane  show" id="tabs-devis">
-                            @livewire('erp.invoices-list', ['projet_id' => $projet_id])
-                        </div> --}}
-
                         <div class="tab-pane" id="tabs-task">
                             @livewire('erp.tasklist', ['projet_id' => $projet_id])
                         </div>

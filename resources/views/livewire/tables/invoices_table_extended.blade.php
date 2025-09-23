@@ -11,21 +11,32 @@ new class extends Component {
     public $projet_id;
     public $search;
 
-    public InvoiceForm $invoiceForm;
+    public InvoiceForm $invoice_form;
 
     function mount($projet_id)
     {
         $this->projet_id = $projet_id;
+
     }
 
     #[On('get-invoices')]
     public function with(): array
     {
         return [
-            'invoices' => Invoice::orderByDesc('id')->where('projet_id', $this->projet_id)->paginate(8),
+            'invoices' => Invoice::orderByDesc('id')->where('projet_id', $this->projet_id)->search($this->search,'reference')->paginate(8),
             'statuses' => InvoiceController::statut(),
         ];
     }
+
+    // Status
+    function update_status($invoice_id, $status)
+    {
+        $invoice = Invoice::find($invoice_id);
+        $invoice->statut = $status;
+        $invoice->save();
+    }
+
+    // Invoice
 
     function editInvoice($id)
     {
@@ -50,8 +61,9 @@ new class extends Component {
         $this->dispatch('close-editInvoice');
     }
 
-    function toggleInvoiceFavorite()
+    function toggleInvoiceFavorite($id)
     {
+        $this->invoice_form->set($id);
         $this->invoice_form->favorite();
     }
 
@@ -65,7 +77,16 @@ new class extends Component {
     <div class="card-header">
         <div class="card-title">Devis</div>
         <div class="card-actions">
-            @livewire('form.invoice-add', ['projet_id' => $projet_id], key(1))
+            <div class="btn-list">
+                <div class="input-icon mb-2">
+                    <input type="text" class="form-control form-control-rounded" wire:model.live="search"
+                        placeholder="Chercher">
+                    <span class="input-icon-addon">
+                        <i class="ti ti-search"></i>
+                    </span>
+                </div>
+                @livewire('form.invoice-add', ['projet_id' => $projet_id], key(1))
+            </div>
         </div>
     </div>
     <div class="table-responsive">
@@ -119,6 +140,7 @@ new class extends Component {
                                     <a class="dropdown-item" wire:click="dupliquer('{{ $invoice->id }}')"> <i class="ti ti-copy"></i> Dupliquer</a>
                                     <a class="dropdown-item" wire:click="editInvoice('{{ $invoice->id }}')"> <i class="ti ti-edit"></i> Editer</a>
                                     <a class="dropdown-item text-danger" wire:click="delete_invoice('{{ $invoice->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
+                                    <a @class(["dropdown-item text-danger"=>$invoice->favorite == 1, "dropdown-item text-secondary"=> $invoice->favorite == 0 ]) wire:click="toggleInvoiceFavorite('{{ $invoice->id }}')"> <i class="ti ti-heart"></i> Favoris</a>
                                 </div>
                             </div>
                         </td>

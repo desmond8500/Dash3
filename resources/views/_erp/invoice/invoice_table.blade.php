@@ -199,7 +199,7 @@
                                         <button class="btn btn-sm btn-icon btn-outline-success" wire:click="editRow('{{ $row->id }}')"><i class="ti ti-edit"></i></button>
                                         <button class="btn btn-sm btn-icon btn-outline-danger" wire:click="deleteRow('{{ $row->id }}')"><i class="ti ti-trash"></i></button>
                                     </div>
-                                    <div class="dropdown open mt-2">
+                                    <div class="dropdown open mt-1 ">
                                         <button class="btn btn-outline-primary btn-sm" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                             <i class="ti ti-chevron-down"></i>
                                         </button>

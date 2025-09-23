@@ -27,9 +27,12 @@
             <div class="col-md-6">
                 <label class="form-label">Quantité</label>
                 <div class="input-group">
-                    <input type="number" class="form-control" wire:model="row_form.quantite" placeholder="Quantité">
-                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.quantite', 1)">
-                        <i class="ti ti-x"></i>
+                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.quantite', '{{ $row_form->quantite-1 }}')">
+                        <i class="ti ti-minus"></i>
+                    </a>
+                    <input type="number" class="form-control text-center" wire:model="row_form.quantite" placeholder="Quantité">
+                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.quantite', '{{ $row_form->quantite+1 }}')">
+                        <i class="ti ti-plus"></i>
                     </a>
                 </div>
                 @error('row_form.quantite') <span class='text-danger'>{{ $message }}</span> @enderror
@@ -37,22 +40,13 @@
             <div class="col-md-6">
                 <label class="form-label">Coef</label>
                 <div class="input-group">
-                    <input type="number" class="form-control" list="coefList"  wire:model="row_form.coef" lis placeholder="Coféficient de marge">
-                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.coef', 1)">
-                        <i class="ti ti-x"></i>
+                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.coef', '{{ $row_form->coef - 0.1 }}')">
+                        <i class="ti ti-minus"></i>
                     </a>
-                    <datalist id="coefList">
-                        <option>1,1</option>
-                        <option>1,2</option>
-                        <option>1,3</option>
-                        <option>1,4</option>
-                        <option>1,5</option>
-                        <option>1,6</option>
-                        <option>1,7</option>
-                        <option>1,8</option>
-                        <option>1,9</option>
-                        <option>2</option>
-                    </datalist>
+                    <input type="number" class="form-control text-center" list="coefList"  wire:model="row_form.coef" lis placeholder="Coféficient de marge">
+                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.coef', '{{ $row_form->coef + 0.1 }}')">
+                        <i class="ti ti-plus"></i>
+                    </a>
                 </div>
                 @error('row_form.coef') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
@@ -61,8 +55,11 @@
         <label class="form-label">Prix</label>
         <div class="input-group">
             <input type="number" class="form-control" wire:model.live="row_form.prix" placeholder="Prix de l'article">
-            <a class="btn btn-primary btn-icon" wire:click="$set('row_form.prix', '{{ $row_form->prix ?? 1 *656 }}')">
+            <a class="btn btn-primary btn-icon" wire:click="$set('row_form.prix', '{{ $row_form->prix*655 ?? 1 *656 }}')">
                 €
+            </a>
+            <a class="btn btn-azure btn-icon" wire:click="$set('row_form.prix', '{{ $row_form->prix*1.2 ?? 1 }}')">
+                TVA
             </a>
             <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.prix', 0)">
                 <i class="ti ti-x"></i>
@@ -70,7 +67,7 @@
         </div>
         @error('row_form.prix') <span class='text-danger'>{{ $message }}</span> @enderror
 
-        <label class="form-label">Priorite</label>
+        <label class="form-label mt-5">Priorite</label>
         <select class="form-select" wire:model="row_form.priorite_id">
             <option value="0">Centrale 1</option>
             <option value="1">Centrale 2</option>
@@ -83,25 +80,34 @@
         </select>
         @error('row_form.priorite_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
-        <label class="form-label">ID Article</label>
-        <div class="input-group">
-            <input type="number" class="form-control" wire:model="row_form.article_id" placeholder="Identifiant de l'article">
-            <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.article_id', 0)">
-                <i class="ti ti-x"></i>
-            </a>
+        <div class="row mt-3">
+            <div class="col-md-5">
+                <label class="form-label">ID Article</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" wire:model="row_form.article_id" placeholder="Identifiant de l'article">
+                    <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.article_id', 0)">
+                        <i class="ti ti-x"></i>
+                    </a>
+                </div>
+                @error('row_form.article_id') <span class='text-danger'>{{ $message }}</span> @enderror
+
+            </div>
+            <div class="col-md-7 ">
+                @if(!$nosection)
+                    <label class="form-label">Section</label>
+                    <select class="form-select" wire:model="row_form.invoice_section_id">
+                        @foreach ($sections as $section)
+                            <option value="{{ $section->id }}">{{ $section->section }}</option>
+                        @endforeach
+                    </select>
+                    @error('row_form.invoice_section_id') <span class='text-danger'>{{ $message }}</span> @enderror
+
+                @endif
+
+            </div>
         </div>
-        @error('row_form.article_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
-        @if(!$nosection)
-            <label class="form-label">Section</label>
-            <select class="form-select" wire:model="row_form.invoice_section_id">
-                @foreach ($sections as $section)
-                    <option value="{{ $section->id }}">{{ $section->section }}</option>
-                @endforeach
-            </select>
-            @error('row_form.invoice_section_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
-        @endif
     </div>
 
 </div>

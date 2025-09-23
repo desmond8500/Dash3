@@ -24,13 +24,9 @@
         @endforeach
     </div>
 
-    @component('components.modal', ["id"=>'editSysteme', 'title' => 'Editer le système'])
+    @component('components.modal', ["id"=>'editSysteme', 'title' => 'Editer le système', 'method'=>'update'])
         <form class="row" wire:submit="update">
             @include('_form.systeme_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editSysteme', event => { window.$('#editSysteme').modal('show'); }) </script>
         <script> window.addEventListener('close-editSysteme', event => { window.$('#editSysteme').modal('hide'); }) </script>

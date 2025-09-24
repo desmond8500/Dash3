@@ -2,13 +2,16 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\ErpDocForm;
+use App\Models\ErpDoc;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class DocumentsPage extends Component
 {
     use WithPagination;
-    use WithPagination;
+    use WithFileUploads;
     public $breadcrumbs;
     protected $paginationTheme = 'bootstrap';
 
@@ -28,6 +31,30 @@ class DocumentsPage extends Component
 
     public function render()
     {
-        return view('livewire.erp.documents-page');
+        return view('livewire.erp.documents-page',[
+            'documents' => ErpDoc::search($this->search)->paginate(10),
+        ]);
+    }
+
+    public ErpDocForm $document_form;
+    public $search;
+
+    function store(){
+        $this->document_form->store();
+        $this->dispatch('close-addDocument');
+    }
+
+    function edit($id){
+        $this->document_form->set($id);
+        $this->dispatch('open-editDocument');
+    }
+
+    function update(){
+        $this->document_form->update();
+        $this->dispatch('close-editDocument');
+    }
+
+    function delete($id){
+        $this->document_form->delete($id);
     }
 }

@@ -71,7 +71,7 @@
                     $subtotal_mainoeuvre = 0;
                     $subtotal_bought = 0;
                 @endphp
-                <tr>
+                <tr ">
                     <th scope="col" class="bg-primary-lt" colspan="2">
                         <div>
                             <div class='text-danger' style="font-size: 10px">{{ $section->id }}</div>
@@ -181,7 +181,11 @@
                                     <div>{{ $row->quantite }}</div>
                                     <div class="text-success" data-bs-toggle="tooltip" title="Quantitée acheté">{{ $row->bought }}</div>
                                 </td>
-                                <td class="text-center">{{ $row->coef }}</td>
+                                <td class="text-center">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <div>{{ $row->coef }}</div>
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
                                     <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div>
@@ -226,9 +230,6 @@
                                 <div>
                                     <span class="fw-bold">Main d'oeuvre :</span> {{ number_format($subtotal_mainoeuvre, 0,'.', ' ') }} F
                                 </div>
-                                <div>
-                                    <span class="fw-bold">Total achat :</span> {{ number_format($subtotal_bought, 0,'.', ' ') }} F
-                                </div>
                             </td>
                             <td colspan="1" class="bg-azure-lt">
                                 <div>Sous Total</div>
@@ -247,147 +248,140 @@
                 <th scope="col" class="bg-primary-lt " colspan="8">
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-primary" wire:click="addSection()">
-                            <i class="ti ti-plus"></i> Ajouter une section
+                            <i class="ti ti-plus"></i> Section
                         </button>
                     </div>
                 </th>
             </tr>
         </table>
     </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="col">
-                <div class="table-responsive mb-3">
-                    <table class="table  table-bordered bg-white">
-                        <tr class="fw-bold">
-                            <td class="">
-                                <div class="d-flex justify-content-between">
-                                    <span class="fw-bold">Materiel :</span> <span class="text-end">{{ number_format($subtotal_equipment, 0,'.', ' ') }} F</span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="fw-bold">Cable :</span> <span class="text-end">{{ number_format($subtotal_cable, 0,'.', ' ') }} F</span>
-                                </div>
-                            </td>
-                            <td class="">
-                                <div class="d-flex justify-content-between">
-                                    <span class="fw-bold">Accessoires :</span> <span class="text-end">{{ number_format($subtotal_accessoires, 0,'.', ' ') }} F</span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="fw-bold">Main d'oeuvre :</span> <span class="text-end">{{ number_format($subtotal_mainoeuvre, 0,'.', ' ') }} F</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-bold me-3">TOTAL HT:</div>
-                                    <div>{{ number_format($total, 0,'.', ' ') }} F</div>
-                                </div>
-                                @if ($total_marge - $total)
-                                    <div class="d-flex justify-content-between">
-                                        <div class="fw-bold me-3">MARGE:</div>
-                                        <div>{{ number_format($total_marge - $total, 0,'.', ' ') }} F</div>
-                                    </div>
-                                @endif
-                                @if ($devis->tax == 'tva')
-                                    <div class="d-flex justify-content-between">
-                                        <div class="fw-bold me-3">TVA :</div>
-                                        <div>{{ number_format($total_marge*0.18, 0,'.', ' ') }} F</div>
-                                    </div>
-                                @elseif($devis->tax == 'brs')
-                                    <div class="d-flex justify-content-between">
-                                        <div class="fw-bold me-3">BRS :</div>
-                                        <div>{{ number_format($total_marge*0.05, 0,'.', ' ') }} F</div>
-                                    </div>
-                                @else
-                                    Pas de taxe
-                                @endif
-                                <div class="d-flex justify-content-between">
-                                    <div class="fw-bold me-3">TOTAL TTC:</div>
-                                    @if ($devis->tax == 'tva')
-                                        @php
-                                            $total_marge += $total_marge*0.18;
-                                        @endphp
+    <div class="card-footer p-0">
 
-                                    @elseif($devis->tax == 'brs')
-                                        @php
-                                            $total_marge += $total_marge*0.05;
-                                        @endphp
-                                    @endif
-                                    <div>{{ number_format($total_marge, 0,'.', ' ') }} F</div>
+        <div class="table-responsive mb-2">
+            <table class="table  table-bordered bg-white">
+                <tr class="fw-bold">
+                    <td class="">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">Materiel :</span> <span class="text-end">{{ number_format($subtotal_equipment, 0,'.', ' ') }} F</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">Cable :</span> <span class="text-end">{{ number_format($subtotal_cable, 0,'.', ' ') }} F</span>
+                        </div>
 
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">Accessoires :</span> <span class="text-end">{{ number_format($subtotal_accessoires, 0,'.', ' ') }} F</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">Main d'oeuvre :</span> <span class="text-end">{{ number_format($subtotal_mainoeuvre, 0,'.', ' ') }} F</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-between">
+                            <div class="fw-bold me-3">TOTAL HT:</div>
+                            <div>{{ number_format($total, 0,'.', ' ') }} F</div>
+                        </div>
+                        @if ($total_marge - $total)
+                            <div class="d-flex justify-content-between">
+                                <div class="fw-bold me-3">MARGE:</div>
+                                <div>{{ number_format($total_marge - $total, 0,'.', ' ') }} F</div>
+                            </div>
+                        @endif
+                        @if ($devis->tax == 'tva')
+                            <div class="d-flex justify-content-between">
+                                <div class="fw-bold me-3">TVA :</div>
+                                <div>{{ number_format($total_marge*0.18, 0,'.', ' ') }} F</div>
+                            </div>
+                        @elseif($devis->tax == 'brs')
+                            <div class="d-flex justify-content-between">
+                                <div class="fw-bold me-3">BRS :</div>
+                                <div>{{ number_format($total_marge*0.05, 0,'.', ' ') }} F</div>
+                            </div>
+                        @else
+                            Pas de taxe
+                        @endif
+                        <div class="d-flex justify-content-between">
+                            <div class="fw-bold me-3">TOTAL TTC:</div>
+                            @if ($devis->tax == 'tva')
+                                @php
+                                    $total_marge += $total_marge*0.18;
+                                @endphp
+
+                            @elseif($devis->tax == 'brs')
+                                @php
+                                    $total_marge += $total_marge*0.05;
+                                @endphp
+                            @endif
+                            <div>{{ number_format($total_marge, 0,'.', ' ') }} F</div>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+        <div class="row row-deck g-2">
+            <div class="col-md-6 ">
+                <div class="card border rounded w-100 p-2">
+                    <div class="fw-bold">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>Modalités</div>
+                            <div class="dropdown open">
+                                <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti ti-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" wire:click="edit_modalite()"> <i class="ti ti-edit"></i> Editer
+                                        les modalités</a>
+                                    <a class="dropdown-item" wire:click="modalite_set(1)"> <i class="ti ti-plus"></i>
+                                        Matériel puis reliquat</a>
+                                    <a class="dropdown-item" wire:click="modalite_set(1)"> <i class="ti ti-plus"></i>
+                                        Matériel puis reliquat</a>
+                                    <a class="dropdown-item" wire:click="modalite_set(2)"> <i class="ti ti-plus"></i>
+                                        Acompte de 50%</a>
+                                    <a class="dropdown-item" wire:click="modalite_set(0)"> <i class="ti ti-eraser"></i>
+                                        Effacer</a>
                                 </div>
-
-                            </td>
-
-                        </tr>
-                    </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <x-markdown>
+                            {{ $devis->modalite }}
+                        </x-markdown>
+                    </div>
                 </div>
             </div>
-
-            <div class="w-100 "></div>
-            <div class="col">
-                <div class="row row-deck g-2">
-                    <div class="col-md-6 ">
-                        <div class="card border rounded w-100 p-2">
-                            <div class="fw-bold">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>Modalités</div>
-                                    <div class="dropdown open">
-                                        <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="ti ti-chevron-down"></i>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" wire:click="edit_modalite()"> <i class="ti ti-edit"></i> Editer
-                                                les modalités</a>
-                                            <a class="dropdown-item" wire:click="modalite_set(1)"> <i class="ti ti-plus"></i>
-                                                Matériel puis reliquat</a>
-                                            <a class="dropdown-item" wire:click="modalite_set(1)"> <i class="ti ti-plus"></i>
-                                                Matériel puis reliquat</a>
-                                            <a class="dropdown-item" wire:click="modalite_set(2)"> <i class="ti ti-plus"></i>
-                                                Acompte de 50%</a>
-                                            <a class="dropdown-item" wire:click="modalite_set(0)"> <i class="ti ti-eraser"></i>
-                                                Effacer</a>
-                                        </div>
-                                    </div>
+            <div class="col-md-6 ">
+                <div class="card border rounded w-100 p-2">
+                    <div class="fw-bold">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>Notes</div>
+                            <div class="dropdown open">
+                                <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti ti-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" wire:click="edit_note()"> <i class="ti ti-edit"></i> Editer les
+                                        notes</a>
+                                    <a class="dropdown-item" wire:click="note_set(0)"> <i class="ti ti-eraser"></i>
+                                        Supprimer</a>
                                 </div>
-                            </div>
-                            <div>
-                                <x-markdown>
-                                 {{ $devis->modalite }}
-                                </x-markdown>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 ">
-                        <div class="card border rounded w-100 p-2">
-                            <div class="fw-bold">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>Notes</div>
-                                    <div class="dropdown open">
-                                        <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="ti ti-chevron-down"></i>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" wire:click="edit_note()"> <i class="ti ti-edit"></i> Editer les
-                                                notes</a>
-                                            <a class="dropdown-item" wire:click="note_set(0)"> <i class="ti ti-eraser"></i>
-                                                Supprimer</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <x-markdown>
-                                 {{ $devis->note }}
-                                </x-markdown>
-                            </div>
-                        </div>
+                    <div>
+                        <x-markdown>
+                            {{ $devis->note }}
+                        </x-markdown>
                     </div>
                 </div>
-
             </div>
         </div>
+
     </div>
 
     @component('components.modal', ["id"=>'editModalite', 'title' => 'Editer les modalités', 'method'=> 'update_modalite'])

@@ -43,25 +43,32 @@
         </div>
         <div class="col-md-4">
 
-            <div class="card mb-2">
-                @livewire('cards.invoice_budget_card_extended', ['invoice_id' => $devis->id])
-            </div>
+            @if ($devis->statut != "Proforma" && $devis->statut != "Nouveau" && $devis->statut != "Annulé" && $devis->statut != "En Pause")
+                <div class="card mb-2">
+                    @livewire('cards.invoice_budget_card_extended', ['invoice_id' => $devis->id])
+                </div>
+            @endif
             <div class="mb-2">
                 @livewire('erp.invoice-acompte', ['invoice_id' => $devis->id])
             </div>
-            <div class="mb-2">
-                @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
-            </div>
-
+            @if ($devis->statut != "Proforma" && $devis->statut != "Nouveau" && $devis->statut != "Annulé" && $devis->statut != "En Pause")
+                <div class="mb-2">
+                    @livewire('erp.invoice-spent', ['invoice_id' => $devis->id])
+                </div>
+            @endif
             <div class="card mb-2">
                 @livewire('erp.invoice-documents', ['invoice_id' => $devis->id])
             </div>
-            <div class="mb-2">
-                @livewire('erp.invoice-bordereau', ['invoice_id' => $devis->id])
-            </div>
-            <div class="mb-2">
-                @livewire('erp.facturelist', ['invoice_id' => $devis->id])
-            </div>
+            @if ($devis->statut != "Proforma" && $devis->statut != "Nouveau" && $devis->statut != "Annulé" && $devis->statut != "En Pause")
+                <div class="mb-2">
+                    @livewire('erp.invoice-bordereau', ['invoice_id' => $devis->id])
+                </div>
+            @endif
+            @if ($devis->statut != "Proforma" && $devis->statut != "Nouveau" && $devis->statut != "Annulé" && $devis->statut != "En Pause")
+                <div class="mb-2">
+                    @livewire('erp.facturelist', ['invoice_id' => $devis->id])
+                </div>
+            @endif
 
 
             <div class="mb-1">

@@ -11,6 +11,7 @@
             <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article" data-bs-toggle="autosize"></textarea>
             @error('row_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
+        @isset($row_form->bought)
         <div class="mb-3">
             <label class="form-label">Quantité achetés</label>
             <div class="input-group">
@@ -27,6 +28,8 @@
             </div>
             @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
+
+        @endisset
     </div>
     <div class="col-md-5 mb-3">
         <div class="row mb-3">

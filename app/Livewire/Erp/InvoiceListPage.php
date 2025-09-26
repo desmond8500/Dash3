@@ -5,6 +5,7 @@ namespace App\Livewire\Erp;
 use App\Http\Controllers\InvoiceController;
 use App\Livewire\Forms\InvoiceForm;
 use App\Models\Invoice;
+use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -25,9 +26,20 @@ class InvoiceListPage extends Component
     public function render()
     {
         return view('livewire.erp.invoice-list-page',[
-            'invoices' => Invoice::orderByDesc('created_at')->search($this->search,'reference')->paginate(16),
+            'invoices' => $this->get_invoices(),
             'statuses' => InvoiceController::statut(),
         ]);
+    }
+
+    #[Session()]
+    public $statut;
+    function get_invoices(){
+        if ($this->statut) {
+            return Invoice::orderByDesc('created_at')->where('statut', $this->statut)->search($this->search,'reference')->paginate(16);
+        } else {
+            return Invoice::orderByDesc('created_at')->search($this->search,'reference')->paginate(16);
+        }
+
     }
 
     function update_status($invoice_id, $status){

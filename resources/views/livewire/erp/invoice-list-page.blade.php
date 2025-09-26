@@ -4,7 +4,7 @@
     @endcomponent
 
     <div class="row g-2">
-        <div class="col-md-4">
+        <div class="col-10">
             <div class="input-icon mb-2">
                 <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher">
                 <span class="input-icon-addon">
@@ -12,13 +12,27 @@
                 </span>
             </div>
         </div>
+        <div class="col-2 text-center">
+            <div class="dropdown open">
+                <button class="btn " type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <i class="ti ti-chevron-down"></i>{{ $statut ? $statut : 'Statut' }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    @foreach ($statuses as $status)
+                        <a class="dropdown-item" wire:click="$set('statut', '{{ $status }}')"> <i class="ti ti-circle"></i> {{ $status }}</a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="row row-deck g-2">
-                @foreach ($invoices->sortByDesc('created_at') as $invoice)
+                @forelse ($invoices->sortByDesc('created_at') as $invoice)
                     <div class="col-md-3">
                         @include('_card.invoice_card')
                     </div>
-                @endforeach
+                @empty
+                    <div>Pas de résultat</div>
+                @endforelse
             </div>
         </div>
         <div class="col-md-12">

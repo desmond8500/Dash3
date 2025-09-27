@@ -20,14 +20,14 @@
                     </a>
                 @endisset
                 <input type="number" class="form-control" wire:model="row_form.bought" placeholder="Quantité achetée">
-                <a class="btn btn-primary btn-icon" wire:click="$set('row_form.bought', '{{ $row_form->bought+1 }}')">
-                    <i class="ti ti-plus"></i>
-                </a>
                 @isset($row_form->bought)
+                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.bought', '{{ $row_form->bought+1 }}')">
+                        <i class="ti ti-plus"></i>
+                    </a>
+                @endisset
                 <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.bought', 0)">
                     <i class="ti ti-x"></i>
                 </a>
-                @endisset
                 @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </div>

@@ -151,13 +151,13 @@
                     <td width="@if($devis->note) 50% @endif" class="border-white">
                         @if ($devis->modalite && $title == 'devis')
                             <div class="fw-bold text-underline" style="margin-bottom: 5px;">Modalités :</div>
-                            <div>{{ $devis->modalite }}</div>
+                            <div>{!! nl2br($devis->modalite) !!}</div>
                         @endif
                     </td>
                     <td class="border-white">
                         @if ($devis->note && $title == 'devis')
                             <div class="fw-bold mt-1 text-underline" style="margin-bottom: 5px;">Notes :</div>
-                            <div>{{ $devis->note }}</div>
+                            <div>{!! nl2br($devis->note) !!}</div>
                         @endif
                     </td>
                 </tr>

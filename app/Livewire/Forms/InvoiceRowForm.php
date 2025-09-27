@@ -44,6 +44,9 @@ class InvoiceRowForm extends Form
 
     function store()
     {
+        if (!$this->bought) {
+            $this->bought = 0;
+        }
         $this->validate();
         $row = InvoiceRow::create($this->all());
         $row->designation = ucfirst($row->designation);

@@ -16,7 +16,7 @@ class InvoiceForm extends Form
     public $projet_id;
     public $client_name;
     public $projet_name;
-    #[Validate('nullable|required')]
+    // #[Validate('nullable|required')]
     public $reference;
     #[Validate('required')]
     public $description;

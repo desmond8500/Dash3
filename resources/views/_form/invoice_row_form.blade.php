@@ -15,10 +15,10 @@
             <label class="form-label">Quantité achetés</label>
             <div class="input-group">
                 @isset($row_form->bought)
-                <a class="btn btn-primary btn-icon" wire:click="$set('row_form.bought', '{{ $row_form->bought-1 }}')">
-                    <i class="ti ti-minus"></i>
-                </a>
-                @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
+                    <a class="btn btn-primary btn-icon" wire:click="$set('row_form.bought', '{{ $row_form->bought-1 }}')">
+                        <i class="ti ti-minus"></i>
+                    </a>
+                @endisset
                 <input type="number" class="form-control" wire:model="row_form.bought" placeholder="Quantité achetée">
                 <a class="btn btn-primary btn-icon" wire:click="$set('row_form.bought', '{{ $row_form->bought+1 }}')">
                     <i class="ti ti-plus"></i>
@@ -27,11 +27,11 @@
                 <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.bought', 0)">
                     <i class="ti ti-x"></i>
                 </a>
+                @endisset
                 @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
         </div>
 
-        @endisset
     </div>
     <div class="col-md-5 mb-3">
         <div class="row mb-3">

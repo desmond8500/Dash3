@@ -11,22 +11,24 @@
             <textarea class="form-control" wire:model="row_form.reference" placeholder="Référence de l'article" data-bs-toggle="autosize"></textarea>
             @error('row_form.reference') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
-        @isset($row_form->bought)
         <div class="mb-3">
             <label class="form-label">Quantité achetés</label>
             <div class="input-group">
+                @isset($row_form->bought)
                 <a class="btn btn-primary btn-icon" wire:click="$set('row_form.bought', '{{ $row_form->bought-1 }}')">
                     <i class="ti ti-minus"></i>
                 </a>
+                @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
                 <input type="number" class="form-control" wire:model="row_form.bought" placeholder="Quantité achetée">
                 <a class="btn btn-primary btn-icon" wire:click="$set('row_form.bought', '{{ $row_form->bought+1 }}')">
                     <i class="ti ti-plus"></i>
                 </a>
+                @isset($row_form->bought)
                 <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.bought', 0)">
                     <i class="ti ti-x"></i>
                 </a>
+                @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
-            @error('row_form.bought') <span class='text-danger'>{{ $message }}</span> @enderror
         </div>
 
         @endisset

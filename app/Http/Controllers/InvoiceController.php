@@ -24,7 +24,26 @@ class InvoiceController extends Controller
             "Annulé",
             "Bl a faire",
             "A Facturer",
+            "Paiement en attente",
             "Terminé",
+        );
+    }
+    static function quotation_status(){
+        return (object) array(
+            "Brouillon",
+            "Envoyé /sent",
+            "Accepté",
+            "Refusé",
+            "Annulé",
+        );
+    }
+    static function invoice_status(){
+        return (object) array(
+            "Bl a faire",
+            "Facturer",
+            "Facturé",
+            "Payé",
+            "Impayéayé",
         );
     }
 }

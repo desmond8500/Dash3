@@ -10,6 +10,7 @@ new class extends Component {
     use WithPagination;
     public $projet_id;
     public $search;
+    public $statut;
 
     public InvoiceForm $invoice_form;
 
@@ -23,7 +24,7 @@ new class extends Component {
     public function with(): array
     {
         return [
-            'invoices' => Invoice::orderByDesc('id')->where('projet_id', $this->projet_id)->search($this->search,'reference')->paginate(8),
+            'invoices' => $this->get_invoices(),
             'statuses' => InvoiceController::statut(),
         ];
     }
@@ -37,6 +38,22 @@ new class extends Component {
     }
 
     // Invoice
+
+    function get_invoices(){
+        if ($this->statut) {
+            return Invoice::orderByDesc('created_at')
+            ->where('projet_id',$this->projet_id)
+            ->where('statut',$this->statut)
+            ->search($this->search,'reference')
+            ->paginate(8);
+        } else {
+            return Invoice::orderByDesc('created_at')
+            ->where('projet_id',$this->projet_id)
+            ->search($this->search,'reference')
+            ->paginate(8);
+        }
+
+    }
 
     function editInvoice($id)
     {
@@ -86,13 +103,16 @@ new class extends Component {
                     </span>
                 </div>
                 @livewire('form.invoice-add', ['projet_id' => $projet_id], key(1))
+                <div class="col-2 text-center" >
+                    @include('_buttons.quotation_filter')
+                </div>
             </div>
         </div>
     </div>
     <div class="table-responsive">
         <table class="table table-hover">
             @if ($invoices->count())
-                <thead class="sticky-top">
+                <thead >
                     <tr>
                         <th style="width:5px">#</th>
                         <th style="width:100px">Références</th>

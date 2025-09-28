@@ -7,15 +7,18 @@ use App\Livewire\Forms\BuildingForm;
 new class extends Component {
     public int $projet_id;
 
+    protected $listeners = ['get_buildings'];
+
     public function with(): array {
         return [
             'buildings' => $this->get_buildings(),
+            'projet_id' => $this->projet_id,
         ];
     }
 
     #[On('get-buildings')]
     function get_buildings(){
-        return Building::where('projet_id', $this->projet_id)->get();
+        return Building::where('projet_id', $this->projet_id)->paginate(5);
     }
 
     public BuildingForm $building_form;
@@ -41,19 +44,13 @@ new class extends Component {
 
 <div class="card">
     <div class="card-header">
-        <div class="card-title">Batiments</div>
+        <div class="card-title" wire:click='get_buildings' style="cursor: pointer">Batiments</div>
         <div class="card-actions">
-            @livewire('form.building-add', ['projet_id' => $projet_id], key(2))
+            @livewire('_forms.building_add', ['projet_id' => $projet_id])
         </div>
     </div>
     <div class="table-responsive">
         <table class="table table-hover">
-            {{-- <thead class="sticky-top">
-                <tr>
-                    <td>Batiment</td>
-                    <td width="100px" class="text-center">Actions</td>
-                </tr>
-            </thead> --}}
             <tbody>
                 @foreach ($buildings as $key => $building)
                     <tr>
@@ -78,6 +75,10 @@ new class extends Component {
             </tbody>
         </table>
     </div>
+    <div class="card-footer">
+        {{ $buildings->links() }}
+    </div>
+
 
     @component('components.modal', ["id"=>'editBuilding', 'title' => 'Editer le batiment', 'method'=>'update'])
     <form class="row" wire:submit="update">

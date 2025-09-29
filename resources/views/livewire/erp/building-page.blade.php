@@ -3,7 +3,8 @@
     @component('components.layouts.page-header', ['title'=>'Gestion de batiment', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             @if ($selected_tab==1)
-                @livewire('form.stage-add', ['building_id' => $building->id], key($building->id))
+                {{-- @livewire('form.stage-add', ['building_id' => $building->id], key($building->id)) --}}
+                @livewire('_forms.stage_add', ['building_id' => $building->id], key($building->id))
             @elseif ($selected_tab==2)
                 @livewire('form.quantitatif-add', ['building_id' => $building->id], key($building->id))
             @elseif($selected_tab==3)
@@ -15,6 +16,12 @@
             <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
         </div>
     @endcomponent
+
+    <div class="row g-2">
+
+    </div>
+
+    <hr>
 
     <div class="row g-2">
         <div class="col-md-12">

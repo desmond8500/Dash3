@@ -29,6 +29,8 @@ class BuildingPage extends Component
     public RoomForm $room_form;
     public $form;
 
+    protected $listeners = ['get_stages'];
+
     public $tabs;
     #[Session]
     public $selected_tab=0;

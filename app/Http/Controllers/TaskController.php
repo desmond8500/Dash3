@@ -69,7 +69,7 @@ class TaskController extends Controller
                 return Task::orderBy('priority_id', 'desc')->where('room_id', $id)->finished($search)->orderBy('priority_id', 'desc')->get();
             }
             if ($type == 'journal_id') {
-                return Task::orderBy('priority_id', 'desc')->where('journal_id', $id)->finished($search)->orderBy('priority_id', 'desc')->get();
+                return Task::orderBy('priority_id', 'desc')->where('journal_id', $id)->finished($search)->get();
             }
             return Task::finished($search)->get();
         } else {

@@ -1,11 +1,10 @@
-<div class="row">
    <div class="col mb-3">
        <label class="form-label">Nom de la tache</label>
        <input type="text" class="form-control" wire:model="form.name" placeholder="Nom">
        @error('form.name') <span class='text-danger'>{{ $message }}</span> @enderror
    </div>
 
-   <div class="col-auto md-3">
+   <div class="col-auto mb-3">
         <label class="form-label text-white">Favoris</label>
         @if ($form->favoris)
             <button class="btn btn-secondary btn-icon" data-bs-toggle="tooltip" wire:click="toggleFavorite()"
@@ -67,7 +66,7 @@
    <hr>
 
    @isset ($clients)
-        <div class="col-md-4 mb-3">
+        <div class="col-md-6 mb-3">
             <label class="form-label">Client</label>
             <select class="form-select" wire:model="form.client_id">
                     <option value="">- Select -</option>
@@ -91,4 +90,3 @@
         </div>
    @endisset
 
-</div>

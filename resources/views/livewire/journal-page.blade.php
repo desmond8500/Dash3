@@ -133,7 +133,7 @@
             </div>
 
             <div class="mb-2">
-                @livewire('erp.tasks.tasklist1', ['journal_id' => $journal->id, 'paginate'=>3])
+                @livewire('erp.tasks.tasklist1', ['journal_id' => $journal->id, 'paginate'=>6])
             </div>
 
             <div class="card mb-2">

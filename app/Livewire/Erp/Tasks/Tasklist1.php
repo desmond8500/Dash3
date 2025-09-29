@@ -59,6 +59,10 @@ class Tasklist1 extends Component
             $this->room_id = $room_id;
             $this->form->room_id = $room_id;
         }
+        if ($journal_id) {
+            $this->journal_id = $journal_id;
+            $this->form->journal_id = $journal_id;
+        }
 
     }
 

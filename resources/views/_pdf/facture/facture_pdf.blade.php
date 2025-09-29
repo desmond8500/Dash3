@@ -97,11 +97,13 @@
             @php
                 $subtotal = 0;
             @endphp
-            <tr>
-                <th scope="col" class="bg-green2" colspan="{{ $title !="quantitatif" ? 4 : 2 }}">
-                    <div class="facture_section">{{ $section->section }}</div>
-                </th>
-            </tr>
+            @if (!$section->rows->count())
+                <tr>
+                    <th scope="col" class="bg-green2" colspan="{{ $title !="quantitatif" ? 4 : 2 }}">
+                        <div class="facture_section">{{ $section->section }}</div>
+                    </th>
+                </tr>
+            @endif
 
             <tbody style="font-size: 13px;">
 

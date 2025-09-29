@@ -104,11 +104,13 @@
                             <button class="btn btn-sm p-1 rounded btn-primary btn-icon me-1" wire:click="edit_section('{{ $section->id }}')">
                                 <i class="ti ti-edit"></i>
                             </button>
-                            <button class="btn btn-sm p-1 rounded btn-danger btn-icon me-1" wire:click="delete_section('{{ $section->id }}')"
-                                wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
-                                <i class="ti ti-trash"></i>
-                            </button>
-                            <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Exporter">
+                            @if (!$section->rows->count())
+                                <button class="btn btn-sm p-1 rounded btn-danger btn-icon me-1" wire:click="delete_section('{{ $section->id }}')"
+                                    wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
+                                    <i class="ti ti-trash"></i>
+                                </button>
+                            @endif
+                            <button class="btn btn-sm p-1 btn-primary rounded me-1" disabled data-bs-toggle="tooltip" title="Exporter">
                                 <i class="ti ti-file-type-xls"></i>
                             </button>
                             <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Dupliquer la section" wire:click="duplicate_section('{{ $section->id }}')">

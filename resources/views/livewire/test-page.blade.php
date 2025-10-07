@@ -10,55 +10,18 @@
 
 
 
+    <div class="row">
+        <div class="col-md-8">
+            <button class="btn btn-primary mb-3" wire:click="addItem">Ajouter un item</button>
 
-
-
-        <button class="btn btn-primary" wire:click='test'>Test</button>
-
-        <div wire:ignore>
-            <script src="https://cdn.jsdelivr.net/npm/konva@9/konva.min.js"></script>
-            <div id="container" class="border rounded"></div>
-
-            @php
-                $name = 'test';
-                echo "<script>
-                    var height = '$size['height']';
-                    var width = '$size['width']';
-                </script>";
-            @endphp
-
-
-
-            <script>
-                // let components = Livewire.all()
-                console.log(name);
-
-
-                var stage = new Konva.Stage({
-                container: 'container', // id of container <div>
-                    width: width,
-                    height: height,
-                });
-
-                var layer = new Konva.Layer();
-
-                var circle = new Konva.Circle({
-                    x: stage.width() / 2,
-                    y: stage.height() / 2,
-                    radius: 70,
-                    fill: 'red',
-                    stroke: 'black',
-                    strokeWidth: 4,
-                });
-
-                circle.draggable(true);
-
-                layer.add(circle);
-
-                stage.add(layer);
-            </script>
-
+            <form>
+                @foreach ($items as $index => $item)
+                    {{-- <div class="avatar avatar-md" ></div> --}}
+                    <div class="avatar avatar-md" wire:click="addSubItem('{{ $item }}')"></div>
+                @endforeach
+            </form>
         </div>
+
 
 
 

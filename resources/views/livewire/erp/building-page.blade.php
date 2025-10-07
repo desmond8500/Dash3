@@ -32,6 +32,19 @@
             </div>
         </div>
 
+        <div class="row  g-2 mb-3">
+            <div class="col-md-6">
+                <div class="border rounded p-3 mb-3">
+                    @livewire('building.diagram_extended', ['building_id' => $building->id], key($building->id))
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="border rounded p-3 mb-3">
+                    @livewire('building.item_list_extended', [], key($building->id))
+                </div>
+            </div>
+        </div>
+
 
         @if ($selected_tab == 0)
             <div>Résumé</div>

@@ -23,6 +23,7 @@
             <td width="80px" class="border_white">
                 @if ($logo)
                     <div style="width: 80px; height: 80px;" >
+                        <div>{{ $logo }}</div>{{ $logo }}
                         <img src="{{ $logo }}" alt="logo" style="width:100%; height:100%;">
                     </div>
                 @else

@@ -246,5 +246,15 @@ class TestPage extends Component
     function test(){
         $this->js('alert("test");');
     }
+
+
+    public $items = [];
+    public $subitems = [];
+    public function addItem(){
+        $this->items[] = (object) array('name' => '', 'quantity' => 1, 'subitems' => (object) array());
+    }
+    public function addSubItem(object $item){
+        $item[] = ['name' => '', 'quantity' => 1];
+    }
 }
 

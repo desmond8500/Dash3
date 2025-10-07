@@ -1,13 +1,17 @@
 <?php
 
 use Livewire\Volt\Component;
-use App\Livewire\Forms\myprojectForm;
+use App\Livewire\Forms\MyprojectForm;
+use Livewire\WithFileUploads;
 
 new class extends Component {
-    public myprojectForm $project_form;
+    use WithFileUploads;
+
+    public MyprojectForm $project_form;
 
     function store(){
         $this->project_form->store();
+        $this->dispatch('get_my_projects');
         $this->dispatch('close-addProject');
     }
 

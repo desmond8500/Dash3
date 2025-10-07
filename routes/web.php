@@ -27,6 +27,7 @@ use App\Livewire\Erp\ProjetPage;
 use App\Livewire\Erp\ProjetsPage;
 use App\Livewire\Erp\PvPage;
 use App\Livewire\Erp\RoomPage;
+use App\Livewire\Erp\SchemaPage;
 use App\Livewire\Erp\StagePage;
 use App\Livewire\Erp\SystemesPage;
 use App\Livewire\Erp\TeamPage;
@@ -175,6 +176,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/room/{room_id}', RoomPage::class)->name('room');
 
     Route::get('/fiche_zone/{fiche_id}', FicheZonePage::class)->name('fiche_zone');
+    Route::get('/schema/{schema_id}', SchemaPage::class)->name('schema');
 });
 
 // Medias

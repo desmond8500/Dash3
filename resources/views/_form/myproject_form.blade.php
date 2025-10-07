@@ -24,7 +24,7 @@
     </div>
 
     <div class="col mb-3">
-        <label class="form-label">Nom</label>
+        <label class="form-label">Nom </label>
         <input type="text" class="form-control" wire:model="project_form.name" placeholder="Nom du projet">
         @error('project_form.name') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>

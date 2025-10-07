@@ -23,8 +23,8 @@
             <td width="80px" class="border_white">
                 @if ($logo)
                     <div style="width: 80px; height: 80px;" >
-                        <div>{{ $logo }}</div>{{ $logo }}
-                        <img src="{{ $logo }}" alt="logo" style="width:100%; height:100%;">
+                        <img src="https://mydash1.yonkou.info/storage/Modules/Medias/images/Brand%20Model.png" alt="logo" style="width:100%; height:100%;">
+                        {{-- <img src="{{ $logo }}" alt="logo" style="width:100%; height:100%;"> --}}
                     </div>
                 @else
                     <div class="logo"  style="background: #{{ $color1 ?? '6b8a7a' }}; border-radius: 5px;">

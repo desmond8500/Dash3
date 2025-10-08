@@ -7,7 +7,7 @@
             @if ($bl->logo)
                 <img src="{{ public_path('img/tyto/logo.png') }}" width="50px" alt="Logo">
             @else
-                <img src="{{ $logo }}" width="50px" alt="Logo">
+                <img src="{{ public_path('img/tyto/logo.png') }}" width="50px" alt="Logo">
             @endif
         </td>
         <td>

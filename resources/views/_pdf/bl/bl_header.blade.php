@@ -5,7 +5,7 @@
     <tr>
         <td width="50px">
             @if ($bl->logo)
-                <img src="{{ $bl->invoice->projet->client->avatar }}" width="50px" alt="Logo">
+                <img src="{{ public_path('img/tyto/logo.png') }}" width="50px" alt="Logo">
             @else
                 <img src="{{ $logo }}" width="50px" alt="Logo">
             @endif

@@ -15,7 +15,7 @@
         <td rowspan="2" style="vertical-align:top">Observations du client :</td>
         <td class="signature">
             <div>Signature Technicien</div>
-            <img src="{{ env('SIGN') }}" alt="" height="50px">
+            <img src="{{ public_path('img/tyto/signature.jpg') }}" alt="" height="50px">
         </td>
     </tr>
     <tr >

@@ -1,8 +1,10 @@
 <table class="mt-1">
     <tr>
         <td style="width: 400px; padding-top: 20px" align="center" >
-            <img src="https://mydash1.yonkou.info/storage/Modules/Medias/images/Scan1%20-%20Copie.jpg" alt="" height="70px">
-            <img src="https://mydash1.yonkou.info/storage/Modules/Medias/images/Scan%20-%20Copie.jpg" alt="" height="70px">
+            {{-- <img src="https://mydash1.yonkou.info/storage/Modules/Medias/images/Scan1%20-%20Copie.jpg" alt="" height="70px">
+            <img src="https://mydash1.yonkou.info/storage/Modules/Medias/images/Scan%20-%20Copie.jpg" alt="" height="70px"> --}}
+            <img src="{{ public_path('img/tyto/signature.jpg') }}" alt="" height="70px">
+            <img src="{{ public_path('img/tyto/tampon.jpg') }}" alt="" height="70px">
             {{-- <img src="{{ env('BUFFER') }}" alt="" height="70px">
             <img src="{{ env('SIGN') }}" alt="" height="70px"> --}}
         </td>

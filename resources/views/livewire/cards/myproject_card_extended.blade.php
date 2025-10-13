@@ -24,12 +24,12 @@ new class extends Component {
     <div class="card p-2">
         <div class="row">
             <div class="col-auto">
-                <img src="{{ asset($project->logo) }}" alt="A" class="avatar avatar-md">
+                <img src="{{ asset($project->logo) }}" alt="A" class="avatar avatar-xl">
             </div>
-            <div class="col">
+            <a class="col" href="{{ route('myproject',['project_id'=> $project->id]) }}">
                 <div class="card-title">{{ $project->name }}</div>
                 <div class="text-muted">{!! nl2br($project->description) !!}</div>
-            </div>
+            </a>
             <div class="col-auto">
               <div class="dropdown open">
                   <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >

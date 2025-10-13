@@ -23,7 +23,7 @@ class ArticlesPage extends Component
     public $search ='';
     public $breadcrumbs;
     public ItemForm $article_form;
-    public $paginate = 8;
+    public $paginate = 12;
 
     public function mount(){
         $settings = \App\Models\Setting::where('user_id', auth()->user()->id)->first();;

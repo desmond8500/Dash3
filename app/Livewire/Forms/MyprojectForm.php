@@ -54,9 +54,9 @@ class MyprojectForm extends Form
     function storeAvatar($myproject, $logo, $delete = true){
         if (!is_string($this->logo)) {
             $dir = "Project/$myproject->id/logo";
-            if ($delete) {
-                Storage::disk('public')->deleteDirectory($dir);
-            }
+            // if ($delete) {
+            //     Storage::disk('public')->deleteDirectory($dir);
+            // }
             $name = $logo->getClientOriginalName();
             $logo->storeAs("public/$dir", $name);
 

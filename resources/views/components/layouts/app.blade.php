@@ -85,15 +85,23 @@
                         <div class="col-auto mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
-                                    Copyright &copy; 2023
+                                    Copyright &copy; 2025
                                     <a href="." class="link-secondary">Tabler</a>.
                                     All rights reserved.
                                 </li>
-                                <li class="list-inline-item">
-                                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                        v1.0.0-beta19
+                                <li class="list-inline-item" wire:ignore.seft>
+                                    <a href="#" wire:click.prevent="$emit('scrollTop')" class="btn btn-primary btn-icon" >
+                                        <i class="ti ti-arrow-up"></i>
                                     </a>
                                 </li>
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                    Livewire.on('scrollTop', () => {
+                                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    });
+                                  });
+                                </script>
                             </ul>
                         </div>
                     </div>

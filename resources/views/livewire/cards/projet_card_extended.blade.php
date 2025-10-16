@@ -1,9 +1,13 @@
 <?php
 
 use Livewire\Volt\Component;
+use App\Livewire\Forms\projetForm;
 
 new class extends Component {
     public $projet_id;
+    public projetForm $projetForm;
+
+    protected $listeners = ['close-editProjet'=>'with'];
 
     function mount($projet_id) {
         $this->projet_id = $projet_id;
@@ -13,6 +17,23 @@ new class extends Component {
         return [
             'projet' => \App\Models\Projet::with('client')->find($this->projet_id),
         ];
+    }
+
+    function favorite()
+    {
+        $this->projetForm->favorite();
+    }
+
+    function edit()
+    {
+        $this->projetForm->set($this->projet_id);
+        $this->dispatch('open-editProjet');
+    }
+
+    function update()
+    {
+        $this->projetForm->update();
+        $this->dispatch('close-editProjet');
     }
 }; ?>
 
@@ -50,11 +71,11 @@ new class extends Component {
         </div>
         <ul class="list-group list-group-flush mt-2">
             <li class="py-1 border-bottom d-flex justify-content-between">
-                <div class="fw-bold">CLIENT</div>
+                <div class="fw-bold text-primary">CLIENT</div>
                 <div class="text-muted">{{ $projet->client->name }}</div>
             </li>
             <li class="py-1 border-bottom d-flex justify-content-between">
-                <div class="fw-bold">PROJET</div>
+                <div class="fw-bold text-primary">PROJET</div>
                 <div class="text-muted">{{ $projet->name }}</div>
             </li>
             @if ($projet->start_date)

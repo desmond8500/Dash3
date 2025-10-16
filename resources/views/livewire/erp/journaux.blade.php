@@ -1,4 +1,4 @@
-<div>
+<div class="card card-body">
     <div class="d-flex justify-content-between mb-1">
         <h2>Journal d'activité</h2>
         <div>

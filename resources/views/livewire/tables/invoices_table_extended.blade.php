@@ -86,7 +86,7 @@ new class extends Component {
 
     function dupliquer($invoice_id)
     {
-        $this->invoiceForm->replicate($invoice_id);
+        $this->invoice_form->replicate($invoice_id);
     }
 }; ?>
 

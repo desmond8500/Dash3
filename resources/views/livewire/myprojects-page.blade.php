@@ -7,7 +7,7 @@
 
     <div class="row g-2">
         @foreach($projects as $project)
-            <div class="col-md-4 col-lg-3 col-xl-2">
+            <div class="col-md-4 col-lg-4 col-xl-4">
                 @livewire('cards.myproject_card_extended', ['project' => $project], key("project_$project->id"))
             </div>
         @endforeach

@@ -18,6 +18,13 @@ class MyprojectsPage extends Component
     public $search = '';
     public MyprojectForm $project_form;
 
+    public $breadcrumbs = '';
+    public function mount(){
+        $this->breadcrumbs = array(
+            array('name' => 'Mes Projets', 'route' => route('myprojects')),
+        );
+    }
+
     public function render()
     {
         return view('livewire.myprojects-page',[

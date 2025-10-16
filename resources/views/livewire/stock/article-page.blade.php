@@ -1,5 +1,5 @@
 <div>
-    @component('components.layouts.page-header', ['title'=> 'Article', 'breadcrumbs'=> $breadcrumbs])
+    @component('components.layouts.page-header', ['title'=> $article->designation , 'breadcrumbs'=> $breadcrumbs])
         <div class="btn-list">
             @livewire('form.provider-add')
             @livewire('form.brand-add')

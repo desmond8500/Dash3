@@ -23,7 +23,7 @@
             <td width="80px" class="border_white">
                 @if ($logo)
                     <div style="width: 80px; height: 80px;" >
-                        <img src="{{ $logo }}" alt="logo" style="width:100%; height:100%;">
+                        <img src="{{ public_path('img/tyto/logo.png') }}" alt="logo" style="width:100%; height:100%;">
                     </div>
                 @else
                     <div class="logo"  style="background: #{{ $color1 }}">

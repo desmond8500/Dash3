@@ -21,6 +21,8 @@
                     <select class="form-select" wire:model="dashboard">
                         {{-- <option value="0">Select</option> --}}
                         <option value="1">Base</option>
+                        <option value="2">Dashboard 2</option>
+                        <option value="3">Dashboard 3</option>
                     </select>
                     @error('dashboard') <span class='text-danger'>{{ $message }}</span> @enderror
                 </div>
@@ -77,7 +79,9 @@
                         <td>Tableau de bord</td> <td>{{ $settings->dashboard }}</td>
                     </tr>
                     <tr>
-                        <td>Couleur</td> <td>{{ $settings->color }}</td>
+                        <td>Couleur</td> <td>{{ $settings->color }}
+                            @dump(auth()->user()->setting->dashboard)
+                        </td>
                     </tr>
                     {{-- <tr>
                         <td>Couleur 1</td> <td>{{ $settings->color1 }}</td>

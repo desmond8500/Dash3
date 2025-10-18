@@ -56,6 +56,7 @@ use App\Livewire\Task\TaskPage;
 use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use App\Livewire\TimelinePage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Maatwebsite\Excel\Facades\Excel;

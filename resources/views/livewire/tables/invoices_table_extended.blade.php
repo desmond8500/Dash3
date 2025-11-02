@@ -12,6 +12,8 @@ new class extends Component {
     public $search;
     public $statut;
 
+    protected $listeners = ['get-invoices' => 'render'];
+
     public InvoiceForm $invoice_form;
 
     function mount($projet_id)
@@ -103,6 +105,7 @@ new class extends Component {
                     </span>
                 </div>
                 @livewire('form.invoice-add', ['projet_id' => $projet_id], key(1))
+                @livewire('invoice_add_extended', ['projet_id' => $projet_id], key(2))
                 <div class="col-2 text-center" >
                     @include('_buttons.quotation_filter')
                 </div>

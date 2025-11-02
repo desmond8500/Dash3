@@ -19,6 +19,7 @@ class IndexPage extends Component
 {
     public function render()
     {
+        
         return view('livewire.index-page',[
             'init' => User::count(),
             'resumes' => $this->getResume(),

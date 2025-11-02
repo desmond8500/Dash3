@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Livewire\Form;
-
-use App\Http\Controllers\ErpController;
+use Livewire\Volt\Component;
 use App\Livewire\Forms\InvoiceForm;
 use App\Livewire\Forms\TimelineForm;
 use App\Models\Projet;
-use Livewire\Component;
 use Livewire\WithPagination;
+use App\Http\Controllers\ErpController;
 
-class InvoiceAdd extends Component
-{
+new class extends Component {
     use WithPagination;
     public InvoiceForm $invoice_form;
     public $client_name;
@@ -25,12 +22,7 @@ class InvoiceAdd extends Component
         $this->client_name = $this->projet->client->name;
     }
 
-    public function render()
-    {
-        return view('livewire.form.invoice-add');
-    }
-
-    function ajouter(){
+       function ajouter(){
         $this->invoice_form->projet_id = $this->projet->id;
         $this->invoice_form->statut = 'Nouveau';
         $this->invoice_form->remise = 0;
@@ -42,23 +34,25 @@ class InvoiceAdd extends Component
     }
 
     function store(){
-        // $this->validate();
         $invoice  = $this->invoice_form->store();
         $this->timeline_form->add_invoice($this->projet->id, $invoice->id);
-        // Invoice::firstOrCreate([
-        //     'projet_id' => $this->projet->id,
-        //     'client_name' => $this->client_name,
-        //     'projet_name' => $this->projet_name,
-        //     'reference' => $this->reference,
-        //     'description' => $this->description,
-        //     'modalite' => $this->modalite,
-        //     'note' => $this->note,
-        //     'statut' => $this->statut,
-        //     'tax' => $this->tax,
-        //     'remise' => $this->remise,
-        // ]);
 
         $this->dispatch('close-addInvoice');
         $this->dispatch('get-invoices');
     }
-}
+}; ?>
+
+<div>
+     <a class="btn btn-primary btn-pill" wire:click="ajouter()">
+        <i class="ti ti-plus"></i>Devis
+    </a>
+
+    @component('components.modal', ["id"=>'addInvoice', 'title'=>'Ajouter un devis', 'method'=>'store'])
+        <form class="row" wire:submit="store">
+            @include('_form.invoice_form')
+        </form>
+
+        <script> window.addEventListener('open-addInvoice', event => { window.$('#addInvoice').modal('show'); }) </script>
+        <script> window.addEventListener('close-addInvoice', event => { window.$('#addInvoice').modal('hide'); }) </script>
+    @endcomponent
+</div>

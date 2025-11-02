@@ -35,7 +35,7 @@ class Tasklist1 extends Component
     public $paginate = 8;
     public $class = 'col-md-12';
 
-
+    public $toggle = true;
 
     public function mount($client_id = null, $projet_id = null, $building_id = null, $stage_id = null, $room_id = null, $journal_id = null)
     {
@@ -70,6 +70,8 @@ class Tasklist1 extends Component
     {
         return view('livewire.erp.tasks.tasklist1',[
             'tasks' => $this->getTasks(),
+            'tasks_active' => $this->get_active_tasks(),
+            'tasks_finisehd' => $this->get_finished_tasks(),
             'activeCount' => Task::activeCount(),
             'inactiveCount' => Task::inactiveCount(),
             'statuses' => TaskStatus::all(),
@@ -87,11 +89,11 @@ class Tasklist1 extends Component
     }
     function get_active_tasks()
     {
-        return TaskController::getTask($this->active, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->journal_id, $this->search, $this->paginate);
+        return TaskController::getTask(false, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->journal_id, $this->search, $this->paginate);
     }
     function get_finished_tasks()
     {
-        return TaskController::getTask($this->active, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->journal_id, $this->search, $this->paginate);
+        return TaskController::getTask(false, $this->client_id, $this->projet_id, $this->building_id, $this->stage_id, $this->room_id, $this->journal_id, $this->search, $this->paginate);
     }
 
     public TaskForm $form;

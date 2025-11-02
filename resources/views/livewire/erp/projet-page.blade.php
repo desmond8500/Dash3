@@ -50,7 +50,8 @@
                     @livewire('tables/invoices_table_extended', ['projet_id' => $projet_id])
                 @break
                 @case("taches")
-                    @livewire('erp.tasks.tasklist1', ['projet_id' => $projet_id])
+                    @livewire('tasklist_simple_extended', ['projet_id' => $projet_id], key("project-tasks-".$projet_id))
+                    {{-- @livewire('erp.tasks.tasklist1', ['projet_id' => $projet_id]) --}}
                 @break
                 @case("contacts")
                     <div class="border border-primary p-2 rounded mt-2">

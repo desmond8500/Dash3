@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\MyprojectForm;
 use Livewire\Component;
 
 class MyprojectPage extends Component
@@ -23,5 +24,18 @@ class MyprojectPage extends Component
         return view('livewire.myproject-page',[
             'project' => \App\Models\Myproject::find($this->project_id),
         ]);
+    }
+
+    public MyprojectForm $project_form;
+    function edit_project()
+    {
+        $this->project_form->set($this->project_id);
+        $this->dispatch('open-editProject');
+    }
+    function update()
+    {
+        $this->project_form->update();
+        $this->dispatch('close-editProject');
+        $this->dispatch('get_my_projects');
     }
 }

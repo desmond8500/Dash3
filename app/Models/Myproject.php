@@ -6,6 +6,7 @@ use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Myproject extends Model
 {
@@ -26,4 +27,19 @@ class Myproject extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function photos(): HasMany
+    {
+        return $this->hasMany(MyprojectPhoto::class);
+    }
+    public function files(): HasMany
+    {
+        return $this->hasMany(MyprojectFile::class);
+    }
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(MyprojectTransaction::class);
+    }
+
 }

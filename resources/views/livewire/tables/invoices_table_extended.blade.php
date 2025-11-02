@@ -19,15 +19,13 @@ new class extends Component {
     function mount($projet_id)
     {
         $this->projet_id = $projet_id;
-
     }
 
-    #[On('get-invoices')]
     public function with(): array
     {
         return [
             'invoices' => $this->get_invoices(),
-            'statuses' => InvoiceController::statut(),
+            'statuses' => \App\Http\Controllers\InvoiceController::statut(),
         ];
     }
 
@@ -90,6 +88,8 @@ new class extends Component {
     {
         $this->invoice_form->replicate($invoice_id);
     }
+
+
 }; ?>
 
 <div class="card">
@@ -104,7 +104,7 @@ new class extends Component {
                         <i class="ti ti-search"></i>
                     </span>
                 </div>
-                @livewire('form.invoice-add', ['projet_id' => $projet_id], key(1))
+                {{-- @livewire('form.invoice-add', ['projet_id' => $projet_id], key(1)) --}}
                 @livewire('invoice_add_extended', ['projet_id' => $projet_id], key(2))
                 <div class="col-2 text-center" >
                     @include('_buttons.quotation_filter')
@@ -120,7 +120,7 @@ new class extends Component {
                         <th style="width:5px">#</th>
                         <th style="width:100px">Références</th>
                         <th>Description</th>
-                        <th style="width: 120px">statut</th>
+                        <th style="width: 120px" class="text-center">statut</th>
                         <th class="text-end" style="width: 130px">Total</th>
                         <th class="text-center" style="width: 10px"></th>
                     </tr>
@@ -175,4 +175,14 @@ new class extends Component {
     <div class="card-footer">
         {{ $invoices->links() }}
     </div>
+
+    {{-- Invoice --}}
+    @component('components.modal', ["id"=>'editInvoice', 'title'=>'Editer un devis', 'method'=>'update_invoice'])
+        <form class="row" wire:submit="update_invoice">
+            @include('_form.invoice_form',['nosection'=>false])
+        </form>
+
+        <script> window.addEventListener('open-editInvoice', event => { window.$('#editInvoice').modal('show'); }) </script>
+        <script> window.addEventListener('close-editInvoice', event => { window.$('#editInvoice').modal('hide'); }) </script>
+    @endcomponent
 </div>

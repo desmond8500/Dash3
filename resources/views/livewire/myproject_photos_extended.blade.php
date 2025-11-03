@@ -114,6 +114,16 @@ new class extends Component {
                 </div>
             @endif
         </div>
+        <div class="card mt-2">
+            <div class="card-header">
+                <div class="card-title">Taches</div>
+                <div class="card-actions">
+                    <button class="btn btn-primary" disabled>
+                        <i class="ti ti-plus"></i> Taches
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-5">
         <div class="card">

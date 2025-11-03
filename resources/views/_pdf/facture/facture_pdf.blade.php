@@ -95,50 +95,52 @@
                 $total_marge = 0;
             @endphp
             @foreach ($sections->sortBy('ordre') as $key => $section)
-            @php
-                $subtotal = 0;
-            @endphp
-            @if (!$section->rows->count())
-                <tr>
-                    <th scope="col" class="bg-green2" colspan="{{ $title !="quantitatif" ? 4 : 2 }}">
-                        <div class="facture_section">{{ $section->section }}</div>
-                    </th>
-                </tr>
-            @endif
+                @php
+                    $subtotal = 0;
+                @endphp
+                @if ($section->rows->count())
+                    <tr>
+                        <th scope="col" class="bg-green2" colspan="{{ $title !="quantitatif" ? 4 : 2 }}">
+                            <div class="facture_section">{{ $section->section }}</div>
+                        </th>
+                    </tr>
 
-            <tbody style="font-size: 13px;">
+                    <tbody style="font-size: 13px;">
 
-                @foreach ($section->rows->sortBy('priorite_id') as $row)
-                    @php
-                        $total += $row->quantite*$row->prix;
-                        $total_marge += $row->quantite*$row->coef*$row->prix;
-                        $subtotal += $row->quantite*$row->coef*$row->prix;
-                    @endphp
-                    <tr @class(['text-danger' => $row->quantite == 0 || $row->prix == 0])>
-                        <td scope="row" >
-                            <div class="fw-bold">{!! nl2br($row->designation) !!}</div>
-                            <div class="text-muted" style="font-size: 10px;">{!! nl2br($row->reference) !!}</div>
-                        </td>
-                        <td class="text-center">{{ $row->quantite }}</td>
-                        @if ($title !="quantitatif")
-                            <td class="text-center">
-                                <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
-                                {{-- <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div> --}}
-                            </td>
-                            <td class="text-center">
-                                <div>{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
-                                {{-- <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div> --}}
-                            </td>
+                        @foreach ($section->rows->sortBy('priorite_id') as $row)
+                            @php
+                                $total += $row->quantite*$row->prix;
+                                $total_marge += $row->quantite*$row->coef*$row->prix;
+                                $subtotal += $row->quantite*$row->coef*$row->prix;
+                            @endphp
+                            <tr @class(['text-danger' => $row->quantite == 0 || $row->prix == 0])>
+                                <td scope="row" >
+                                    <div class="fw-bold">{!! nl2br($row->designation) !!}</div>
+                                    <div class="text-muted" style="font-size: 10px;">{!! nl2br($row->reference) !!}</div>
+                                </td>
+                                <td class="text-center">{{ $row->quantite }}</td>
+                                @if ($title !="quantitatif")
+                                    <td class="text-center">
+                                        <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
+                                        {{-- <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div> --}}
+                                    </td>
+                                    <td class="text-center">
+                                        <div>{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
+                                        {{-- <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div> --}}
+                                    </td>
+                                @endif
+                            </tr>
+                        @endforeach
+
+                        @if ($title!="quantitatif")
+                            <tr class="sous-total">
+                                <td colspan="3">Sous Total</td>
+                                <td colspan="1" class="text-end"> {{ number_format($subtotal, 0,'.', ' ') }} F</td>
+                            </tr>
                         @endif
-                    </tr>
-                @endforeach
-                @if ($title!="quantitatif")
-                    <tr class="sous-total">
-                        <td colspan="3">Sous Total</td>
-                        <td colspan="1" class="text-end"> {{ number_format($subtotal, 0,'.', ' ') }} F</td>
-                    </tr>
+                    </tbody>
                 @endif
-            </tbody>
+
 
             @endforeach
 

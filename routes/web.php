@@ -56,6 +56,7 @@ use App\Livewire\Task\TaskPage;
 use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use App\Livewire\TimelinePage;
+use App\Livewire\VideoPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -269,6 +270,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/images', ImagesPage::class)->name('images');
     Route::get('/videos', VideosPage::class)->name('videos');
+    Route::get('/video/{video_id}', VideoPage::class)->name('video');
 
 });
 

@@ -389,7 +389,8 @@ class InvoicePage extends Component
             'invoice_id' => $this->devis->id,
             'section' => 'copie',
             // 'section' => $section->section . ' copie',
-            'ordre' => InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1,
+            'ordre' => 1,
+            // 'ordre' => InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1,
         ]);
 
         // foreach ($section->rows as $row) {

@@ -11,13 +11,18 @@ class InvoiceSectionForm extends Form
 {
     public InvoiceSection $invoice_section;
 
-    #[Rule('required')]
+    #[Rule('required|integer')]
     public $invoice_id;
+    #[Rule('required|string|max:255')]
     public $section;
+    #[Rule('required|integer')]
     public $ordre;
+    #[Rule('nullable|string')]
     public $proposition;
-    public $status = false;
-    public $show = true;
+    #[Rule('required|boolean')]
+    public $status = 0;
+    #[Rule('required|boolean')]
+    public $show = 1;
 
     function fix(){
         $this->section = ucfirst($this->section);

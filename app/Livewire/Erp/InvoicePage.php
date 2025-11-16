@@ -387,7 +387,8 @@ class InvoicePage extends Component
 
         $new_section = InvoiceSection::create([
             'invoice_id' => $this->devis->id,
-            'section' => $section->section . ' copie',
+            'section' => 'copie',
+            // 'section' => $section->section . ' copie',
             'ordre' => InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1,
         ]);
 

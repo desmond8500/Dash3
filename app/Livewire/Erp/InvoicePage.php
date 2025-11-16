@@ -19,6 +19,7 @@ use App\Models\InvoiceSystem;
 use App\Models\Provider;
 use App\Models\Pv;
 use Barryvdh\Debugbar\Facades\Debugbar;
+use Barryvdh\Debugbar\Twig\Extension\Debug;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Date;
 use Livewire\Attributes\On;
@@ -138,6 +139,8 @@ class InvoicePage extends Component
                     'quantite' => $row->quantite,
                     'priorite_id' => $row->priorite_id,
                 ]);
+
+                Debugbar::info('Ligne créée : ' . $iv);
             } catch (\Exception $e) {
                 Debugbar::info('Erreur lors de la création de la ligne : ' . $e->getMessage());
             }

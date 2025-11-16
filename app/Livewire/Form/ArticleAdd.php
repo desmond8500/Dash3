@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Form;
 
+use App\Http\Controllers\ArticleController;
 use App\Livewire\Forms\ArticleForm;
 use App\Livewire\Forms\ItemForm;
 use App\Models\Brand;
@@ -20,10 +21,8 @@ class ArticleAdd extends Component
         return view('livewire.form.article-add',[
             'providers' => Provider::all(),
             'brands' => Brand::all(),
+            'priorites' => ArticleController::priorites(),
         ]);
-    }
-
-    function mount(){
     }
 
     function add(){

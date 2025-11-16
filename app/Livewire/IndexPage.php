@@ -17,9 +17,19 @@ use Livewire\Component;
 
 class IndexPage extends Component
 {
+    public $tags = [
+            ['value' => 'active', 'label' => 'Active'],
+            ['value' => 'inactive', 'label' => 'Inactive'],
+        ];
+
+    public $test = ['active1', 'Active2'];
+
+    function mount(){
+        // $this->test = ['value' => 'active', 'label' => 'Active'];
+    }
     public function render()
     {
-        
+
         return view('livewire.index-page',[
             'init' => User::count(),
             'resumes' => $this->getResume(),

@@ -75,6 +75,7 @@
 
     <div class="col-md-4">
         <label class="form-label">Priorite</label>
+
         <select class="form-select" wire:model="article_form.priority_id">
             <option value="0">Centrale 1</option>
             <option value="1">Centrale 2</option>

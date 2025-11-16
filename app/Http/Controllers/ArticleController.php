@@ -62,4 +62,17 @@ class ArticleController extends Controller
     {
         //
     }
+
+    static function priorites(){
+        return (object) array(
+            (object) array('label' => 'Centrale 1', 'value' => 0),
+            (object) array('label' => 'Centrale 2', 'value' => 1),
+            (object) array('label' => 'Organe 1', 'value' => 2),
+            (object) array('label' => 'Organe 2', 'value' => 3),
+            (object) array('label' => 'Organe 3', 'value' => 4),
+            (object) array('label' => 'Cable 1', 'value' => 5),
+            (object) array('label' => 'Accessoires', 'value' => 6),
+            (object) array('label' => 'Forfait', 'value' => 7),
+        );
+    }
 }

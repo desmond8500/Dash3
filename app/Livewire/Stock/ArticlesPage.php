@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Stock;
 
+use App\Http\Controllers\ArticleController;
 use App\Livewire\Forms\ItemForm;
 use App\Models\Article;
 use App\Models\Brand;
@@ -38,16 +39,7 @@ class ArticlesPage extends Component
             array('name' => 'Articles', 'route' => route('articles')),
         );
 
-        $this->priorites = (object) array(
-            (object) array('name' => 'Centrale 1', 'id' => 0),
-            (object) array('name' => 'Centrale 2', 'id' => 1),
-            (object) array('name' => 'Organe 1', 'id' => 2),
-            (object) array('name' => 'Organe 2', 'id' => 3),
-            (object) array('name' => 'Organe 3', 'id' => 4),
-            (object) array('name' => 'Cable 1', 'id' => 5),
-            (object) array('name' => 'Accessoire', 'id' => 6),
-            (object) array('name' => 'Forfait', 'id' => 7),
-        );
+
     }
 
     public $search_brand;
@@ -60,6 +52,7 @@ class ArticlesPage extends Component
             'providers' => Provider::all(),
             'brands' => Brand::search($this->search_brand, 'name')->get(),
             'tags' => Tag::getWithType('stock_article'),
+            'priorites' => ArticleController::priorites(),
         ]);
     }
 
@@ -67,7 +60,6 @@ class ArticlesPage extends Component
     public $provider_id;
     public $priorite_id = 25;
 
-    public $priorites;
     public $tag;
 
     function get_articles(){

@@ -47,10 +47,10 @@
                         @endcomponent
                         @component('components.accordion-item',['id'=> 'priorite', 'title'=>"Priorités"])
                             @foreach ($priorites as $priorite)
-                                @if ($priorite_id == $priorite->id)
-                                    <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
+                                @if ($priorite_id == $priorite->value)
+                                    <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->value }}')">{{ $priorite->label }}</button>
                                 @else
-                                    <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->id }}')">{{ $priorite->name }}</button>
+                                    <button class="btn btn-outline-primary btn-sm rounded mb-1" wire:click="$set('priorite_id','{{ $priorite->value }}')">{{ $priorite->label }}</button>
                                 @endif
                             @endforeach
                         @endcomponent

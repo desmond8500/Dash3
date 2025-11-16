@@ -80,7 +80,6 @@
                     </tr>
                     <tr>
                         <td>Couleur</td> <td>{{ $settings->color }}
-                            @dump(auth()->user()->setting->dashboard)
                         </td>
                     </tr>
                     {{-- <tr>

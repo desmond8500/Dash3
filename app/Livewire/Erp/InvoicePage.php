@@ -149,7 +149,7 @@ class InvoicePage extends Component
 
         }
 
-        $this->dispatch('open-selectSectionModel');
+        // $this->dispatch('open-selectSectionModel');
     }
 
 

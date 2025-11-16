@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('invoice_sections', function (Blueprint $table) {
-            $table->boolean('show')->default(true)->after('status');
+            $table->boolean('show')->default(1)->after('status');
         });
     }
 

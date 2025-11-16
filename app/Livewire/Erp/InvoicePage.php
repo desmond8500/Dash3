@@ -391,18 +391,18 @@ class InvoicePage extends Component
             'ordre' => InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1,
         ]);
 
-        foreach ($section->rows as $row) {
-            InvoiceRow::create([
-                'invoice_section_id' => $new_section->id ,
-                'article_id' => $row->article_id,
-                'designation' => $row->designation,
-                'coef' => $row->coef,
-                'reference' => $row->reference,
-                'prix' => $row->prix,
-                'quantite' => $row->quantite,
-                'priorite_id' => $row->priorite_id,
-            ]);
-        }
+        // foreach ($section->rows as $row) {
+        //     InvoiceRow::create([
+        //         'invoice_section_id' => $new_section->id ,
+        //         'article_id' => $row->article_id,
+        //         'designation' => $row->designation,
+        //         'coef' => $row->coef,
+        //         'reference' => $row->reference,
+        //         'prix' => $row->prix,
+        //         'quantite' => $row->quantite,
+        //         'priorite_id' => $row->priorite_id,
+        //     ]);
+        // }
 
         $this->dispatch('invoice-section-reload');
     }

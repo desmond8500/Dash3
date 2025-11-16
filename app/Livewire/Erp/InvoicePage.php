@@ -393,6 +393,8 @@ class InvoicePage extends Component
             // 'ordre' => InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1,
         ]);
 
+        Debugbar::info('Section dupliquée : ' . $new_section);
+
         // foreach ($section->rows as $row) {
         //     InvoiceRow::create([
         //         'invoice_section_id' => $new_section->id ,

@@ -79,8 +79,6 @@ class InvoicePage extends Component
     }
 
     function addSection(){
-        Debugbar::info('section');
-        // $this->dispatch('open-infoModal');
         $this->dispatch('open-addSection');
         $this->section_form->ordre = InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1;
     }
@@ -119,6 +117,39 @@ class InvoicePage extends Component
         $this->message= $this->section_form->delete($id);
         $this->dispatch('open-infoModal');
     }
+
+    function section_model_add($section_model_id, $section_id = 0)
+    {
+        if (!$section_id) {
+            $section_id = InvoiceSection::count() + 1;
+        }
+        $invoice_model = InvoiceModel::find($section_model_id);
+        $section = $this->section_generate($invoice_model->name);
+
+        foreach ($invoice_model->rows as $row) {
+            try {
+                $iv = InvoiceRow::create([
+                    'invoice_section_id' => $section->id,
+                    'article_id' => $row->article_id,
+                    'designation' => $row->designation,
+                    'coef' => $row->coef,
+                    'reference' => $row->reference,
+                    'prix' => $row->prix,
+                    'quantite' => $row->quantite,
+                    'priorite_id' => $row->priorite_id,
+                ]);
+            } catch (\Exception $e) {
+                Debugbar::info('Erreur lors de la création de la ligne : ' . $e->getMessage());
+            }
+
+
+
+        }
+
+        $this->dispatch('open-selectSectionModel');
+    }
+
+
 
     function proposition_toggle($section_id)
     {
@@ -328,28 +359,7 @@ class InvoicePage extends Component
         $this->dispatch('invoice-section-reload');
     }
 
-    function section_model_add($section_model_id, $section_id=0){
-        if(!$section_id){
-            $section_id = InvoiceSection::count()+1;
-        }
-        $invoice_model = InvoiceModel::find($section_model_id);
-        $section = $this->section_generate($invoice_model->name);
 
-        foreach ($invoice_model->rows as $row) {
-            InvoiceRow::create([
-                'invoice_section_id' => $section->id ,
-                'article_id' => $row->article_id,
-                'designation' => $row->designation,
-                'coef' => $row->coef,
-                'reference' => $row->reference,
-                'prix' => $row->prix,
-                'quantite' => $row->quantite,
-                'priorite_id' => $row->priorite_id,
-            ]);
-        }
-
-        $this->dispatch('open-selectSectionModel');
-    }
 
     // Acompte
 

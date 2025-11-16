@@ -385,12 +385,12 @@ class InvoicePage extends Component
     function duplicate_section($section_id){
         $section = InvoiceSection::find($section_id);
 
-        $new_section = InvoiceSection::create([
-            'invoice_id' => $this->devis->id,
-            'section' => 'copie',
-            // 'section' => $section->section . ' copie',
-            'ordre' => InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1,
-        ]);
+        // $new_section = InvoiceSection::create([
+        //     'invoice_id' => $this->devis->id,
+        //     'section' => 'copie',
+        //     // 'section' => $section->section . ' copie',
+        //     'ordre' => InvoiceSection::where('invoice_id', $this->devis->id)->count() + 1,
+        // ]);
 
         // foreach ($section->rows as $row) {
         //     InvoiceRow::create([

@@ -32,6 +32,7 @@ class InvoiceResource extends JsonResource
             'montant' => $this->total(),
             'folder' => "https://dash3.yonkou.info/api/v1/facture_pdf/$this->id/facture",
             'spents' => $this->spents,
+            'total_spents' => $this->total,
 
         ];
     }

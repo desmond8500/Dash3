@@ -125,31 +125,31 @@ class InvoicePage extends Component
             $section_id = InvoiceSection::count() + 1;
         }
         $invoice_model = InvoiceModel::find($section_model_id);
-        // $section = $this->section_generate($invoice_model->name);
+        $section = $this->section_generate($invoice_model->name);
 
-        // foreach ($invoice_model->rows as $row) {
-        //     try {
-        //         $iv = InvoiceRow::create([
-        //             'invoice_section_id' => $section->id,
-        //             'article_id' => $row->article_id,
-        //             'designation' => $row->designation,
-        //             'coef' => $row->coef,
-        //             'reference' => $row->reference,
-        //             'prix' => $row->prix,
-        //             'quantite' => $row->quantite,
-        //             'priorite_id' => $row->priorite_id,
-        //         ]);
+        foreach ($invoice_model->rows as $row) {
+            try {
+                $iv = InvoiceRow::create([
+                    'invoice_section_id' => $section->id,
+                    'article_id' => $row->article_id,
+                    'designation' => $row->designation,
+                    'coef' => $row->coef,
+                    'reference' => $row->reference,
+                    'prix' => $row->prix,
+                    'quantite' => $row->quantite,
+                    'priorite_id' => $row->priorite_id,
+                ]);
 
-        //         Debugbar::info('Ligne créée : ' . $iv);
-        //     } catch (\Exception $e) {
-        //         Debugbar::info('Erreur lors de la création de la ligne : ' . $e->getMessage());
-        //     }
+                Debugbar::info('Ligne créée : ' . $iv);
+            } catch (\Exception $e) {
+                Debugbar::info('Erreur lors de la création de la ligne : ' . $e->getMessage());
+            }
 
 
 
-        // }
+        }
 
-        // $this->dispatch('open-selectSectionModel');
+        $this->dispatch('open-selectSectionModel');
     }
 
 
@@ -393,19 +393,19 @@ class InvoicePage extends Component
 
         Debugbar::info('Section dupliquée : ' . $new_section);
 
-        // foreach ($section->rows as $row) {
-        //     InvoiceRow::create([
-        //         'invoice_section_id' => $new_section->id ,
-        //         'article_id' => $row->article_id,
-        //         'designation' => $row->designation,
-        //         'coef' => $row->coef,
-        //         'reference' => $row->reference,
-        //         'prix' => $row->prix,
-        //         'quantite' => $row->quantite,
-        //         'priorite_id' => $row->priorite_id,
-        //     ]);
-        // }
+        foreach ($section->rows as $row) {
+            InvoiceRow::create([
+                'invoice_section_id' => $new_section->id ,
+                'article_id' => $row->article_id,
+                'designation' => $row->designation,
+                'coef' => $row->coef,
+                'reference' => $row->reference,
+                'prix' => $row->prix,
+                'quantite' => $row->quantite,
+                'priorite_id' => $row->priorite_id,
+            ]);
+        }
 
-        // $this->dispatch('invoice-section-reload');
+        $this->dispatch('invoice-section-reload');
     }
 }

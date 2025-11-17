@@ -21,6 +21,7 @@ class InvoiceSpentForm extends Form
     #[Rule('date')]
     public $date;
     public $status;
+    public $file;
 
     function store($id)
     {

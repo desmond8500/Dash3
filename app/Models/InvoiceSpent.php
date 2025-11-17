@@ -19,6 +19,7 @@ class InvoiceSpent extends Model
         'montant',
         'status',
         'date',
+        'file',
     ];
 
     public function invoice(): BelongsTo

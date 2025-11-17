@@ -8,11 +8,13 @@ use App\Models\InvoiceSpent as ModelsInvoiceSpent;
 use App\Traits\dateTrait;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class InvoiceSpent extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
 
     protected $paginationTheme = 'bootstrap';
@@ -61,4 +63,36 @@ class InvoiceSpent extends Component
     {
         $this->spent_form->delete($id);
     }
+
+    public $file;
+    public $spent_id;
+
+    function add_file($spent_id){
+        $this->spent_id = $spent_id;
+        $this->dispatch('open-add-invoiceSpentFile');
+    }
+
+    function store_file()
+    {
+        $spent = ModelsInvoiceSpent::find($this->spent_id);
+
+        $dir = "erp/clients/".$spent->invoice->projet->client->id."/".$spent->invoice->projet->id."/".$spent->invoice->id."/".$spent->id."/files";
+
+        $name = $this->file->getClientOriginalName();
+        $this->file->storeAs("public/$dir", $name);
+
+        $spent->file = "storage/$dir/$name";
+        $spent->save();
+
+        $this->dispatch('close-add-invoiceSpentFile');
+    }
+    function delete_file($spent_id)
+    {
+        $spent = ModelsInvoiceSpent::find($spent_id);
+        unlink($spent->file);
+        $spent->file = null;
+        $spent->save();
+    }
+
+
 }

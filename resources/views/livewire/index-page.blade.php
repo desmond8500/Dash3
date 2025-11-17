@@ -179,22 +179,4 @@
         </script>
         @endcomponent
     </div>
-    <hr>
-    <div>
-        <h3>Demo</h3>
-        <div class="card card-body">
-            <livewire:async-select
-                name="tags[]"
-                wire:model.live="test"
-
-                :options="$tags"
-                :multiple="true"
-                placeholder="Select an option1 ..."
-            />
-
-        </div>
-    </div>
-
-    @dump($test)
-
 </div>

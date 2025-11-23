@@ -2,6 +2,7 @@
 
 use Livewire\Volt\Component;
 use App\Livewire\Forms\projetForm;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 
 new class extends Component {
     public $projet_id;
@@ -21,7 +22,9 @@ new class extends Component {
 
     function favorite()
     {
+        $this->projetForm->set($this->projet_id);
         $this->projetForm->favorite();
+
     }
 
     function edit()
@@ -38,6 +41,7 @@ new class extends Component {
 }; ?>
 
 <div class="card">
+
     <div class="border rounded p-2">
         <div class="row align-items-center">
             <div class="col-auto">

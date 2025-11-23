@@ -17,6 +17,7 @@
         "lightbox2": "^2.11.5",
         "puppeteer": "^23.11.1",
         "select2": "^4.1.0-rc.0",
-        "shiki": "^3.9.2"
+        "shiki": "^3.9.2",
+        "sweetalert2": "^11.26.3"
     }
 }

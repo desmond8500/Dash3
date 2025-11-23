@@ -10,6 +10,7 @@
         "darkaonline/l5-swagger": "^8.6",
         "drpshtiwan/livewire-async-select": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "jantinnerezo/livewire-alert": "^4.0",
         "laravel/framework": "^11.0",
         "laravel/prompts": "^0.1.3",
         "laravel/sanctum": "^4.0",

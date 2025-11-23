@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Projet;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -55,9 +56,19 @@ class projetForm extends Form
     {
         if ($this->favorite) {
             $this->favorite = 0;
+            $mesage = 'Le projet a été ajouté aux favoris';
         } else {
             $this->favorite = 1;
+            $mesage = 'Le projet a été supprimé des favoris';
         }
         $this->projet->update($this->only('favorite'));
+
+        LivewireAlert::text($mesage)
+            ->position('top-end')
+            ->toast()
+            ->success()
+            ->show();
+
+        return $this->favorite;
     }
 }

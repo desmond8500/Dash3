@@ -56,14 +56,14 @@ class projetForm extends Form
     {
         if ($this->favorite) {
             $this->favorite = 0;
-            $mesage = 'Le projet a été ajouté aux favoris';
+            $message = 'Le projet a été ajouté aux favoris';
         } else {
             $this->favorite = 1;
-            $mesage = 'Le projet a été supprimé des favoris';
+            $message = 'Le projet a été supprimé des favoris';
         }
         $this->projet->update($this->only('favorite'));
 
-        LivewireAlert::text($mesage)
+        LivewireAlert::text($message)
             ->position('top-end')
             ->toast()
             ->success()

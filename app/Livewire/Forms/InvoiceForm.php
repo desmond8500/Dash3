@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Http\Controllers\ErpController;
 use App\Models\Invoice;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -89,9 +90,19 @@ class InvoiceForm extends Form
     {
         if ($this->favorite) {
             $this->favorite = 0;
+            $message = 'Le devis a été ajouté aux favoris';
         } else {
             $this->favorite = 1;
+            $message = 'Le devis a été supprimé des favoris';
         }
         $this->invoice->update($this->only('favorite'));
+
+        LivewireAlert::text($message)
+            ->position('top-end')
+            ->toast()
+            ->success()
+            ->show();
+
+        return $this->favorite;
     }
 }

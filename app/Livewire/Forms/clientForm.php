@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use App\Models\Client;
 use Illuminate\Support\Facades\Storage;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 
@@ -89,9 +90,20 @@ class clientForm extends Form
         $this->set($id);
         if ($this->favorite) {
             $this->favorite = 0;
+            $message = 'Le client a été ajouté aux favoris';
         } else {
             $this->favorite = 1;
+            $message = 'Le client a été supprimé des favoris';
         }
         $this->client->update($this->only('favorite'));
+
+        LivewireAlert::text($message)
+            ->position('top-end')
+            ->toast()
+            ->success()
+            ->show();
+
+        return $this->favorite;
     }
+
 }

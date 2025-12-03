@@ -40,9 +40,16 @@ class dash extends Command
         $myfile = fopen("./database/docs/$model_name.md", "w");
         $txt = "# " . $model_name . "\n\n";
         $txt .= "## Description\n\n";
-        $txt .= "## Schema\n";
+        $txt .= "## Diagramme\n";
+        $txt .= "```mermaid\n";
+        $txt .= "classDiagram\n";
+        $txt .= "class ".ucfirst($model_name)."{\n";
+        $txt .= "+string att1\n";
+        $txt .= "```\n";
         fwrite($myfile, $txt);
         fclose($myfile);
+
+
 
         // if ($livewire_form || $livewire_all) {
 

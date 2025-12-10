@@ -318,6 +318,8 @@ class InvoicePage extends Component
             $this->devis->modalite = "Paiement du montant du matériel à la commande.  Paiement du reliquat après la réception des travaux";
         }elseif($id == 2){
             $this->devis->modalite = "Acompte de 50% à payer avant les travaux.  Paiement du reliquat après la réception des travaux";
+        }elseif($id == 3){
+            $this->devis->modalite = "Acompte de 100% à payer avant les travaux.";
         }
         $this->devis->save();
     }

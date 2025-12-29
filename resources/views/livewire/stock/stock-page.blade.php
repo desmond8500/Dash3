@@ -5,7 +5,7 @@
 
     <div class="row g-2">
         @foreach ($sections as $section)
-            <a class="col-md-3" href="{{ route($section['route']) }}" wire:navigate>
+            <a class="col-md-3" href="{{ route($section['route']) }}">
                 <div class="card p-2">
                     <div class="row align-items-center">
                         <div class="col-auto">

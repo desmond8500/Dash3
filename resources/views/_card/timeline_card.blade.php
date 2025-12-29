@@ -17,7 +17,7 @@
                     </div>
                     <div>
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('invoice',['invoice_id'=>$timeline->invoice->id]) }}" class="text-dark" target="_blank" wire:navigate>
+                            <a href="{{ route('invoice',['invoice_id'=>$timeline->invoice->id]) }}" class="text-dark" target="_blank">
                                 <h4 style="text-transform: uppercase">{{ $timeline->invoice->reference }}</h4>
                             </a>
 

@@ -36,31 +36,31 @@ class FinancesPage extends Component
         ]);
     }
 
-    function total(){
-        $total = 0;
-        foreach (Transaction::all() as $key => $ret) {
-            if ($ret->credit == 'credit') {
-                $total = $total + $ret->montant;
-            }else{
-                $total = $total - $ret->montant;
-            }
-        }
-        return $total;
-    }
+    // function total(){
+    //     $total = 0;
+    //     foreach (Transaction::all() as $key => $ret) {
+    //         if ($ret->credit == 'credit') {
+    //             $total = $total + $ret->montant;
+    //         }else{
+    //             $total = $total - $ret->montant;
+    //         }
+    //     }
+    //     return $total;
+    // }
 
-    public TransactionForm $transaction_form;
+    // public TransactionForm $transaction_form;
 
-    function edit($transaction_id){
-        $this->transaction_form->set($transaction_id);
-        $this->dispatch('open-editTransaction');
-    }
+    // function edit($transaction_id){
+    //     $this->transaction_form->set($transaction_id);
+    //     $this->dispatch('open-editTransaction');
+    // }
 
-    function update(){
-        $this->transaction_form->update();
-        $this->dispatch('close-editTransaction');
-    }
+    // function update(){
+    //     $this->transaction_form->update();
+    //     $this->dispatch('close-editTransaction');
+    // }
 
-    function delete($transaction_id){
-        $this->transaction_form->delete($transaction_id);
-    }
+    // function delete($transaction_id){
+    //     $this->transaction_form->delete($transaction_id);
+    // }
 }

@@ -26,7 +26,7 @@ class InvoiceAPIController extends Controller
         $invoices = Invoice::all();
         $invoices = InvoiceResource::collection($invoices);
 
-        return ResponseController::response(true, "Les devis ont été récupérés", $invoices);
+        return ResponseController::response(true, "Tous les devis ont été récupérés", $invoices);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Facture;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class FactureController extends Controller
 {
@@ -61,5 +62,21 @@ class FactureController extends Controller
     public function destroy(Facture $facture)
     {
         //
+    }
+
+
+    function demo(){
+        $mois = [];
+        $debut = Carbon::create(2025, 1, 1);
+        $fin = Carbon::now()->startOfMonth();
+
+        while ($debut <= $fin) {
+            $mois[$debut->format('Y-m')] = ucfirst(
+                $debut->translatedFormat('F Y')
+            );
+            $debut->addMonth();
+        }
+
+        return $mois;
     }
 }

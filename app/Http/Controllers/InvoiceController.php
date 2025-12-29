@@ -39,19 +39,19 @@ class InvoiceController extends Controller
     }
     static function invoice_status(){
         return (object) array(
-            array(name=>"Etude", slug=> ""),
-            array(name=>"Devis", slug=> ""),
-            array(name=>"Devis validé", slug=> ""),
-            array(name=>"Debut", slug=> ""),
-            array(name=>"En cours", slug=> ""),
-            array(name=>"En pause", slug=> ""),
-            array(name=>"Annulé", slug=> ""),
-            array(name=>"BL a rediger", slug=> ""),
-            array(name=>"BL a signer", slug=> ""),            
-            array(name=>"Facturer", slug=> ""),
-            array(name=>"Facturé", slug=> ""),
-            array(name=>"Payé", slug=> ""),
-            array(name=>"Impayé", slug=> ""),
+            array("name"=>"Etude", "slug"=> ""),
+            array("name"=>"Devis", "slug"=> ""),
+            array("name"=>"Devis validé", "slug"=> ""),
+            array("name"=>"Debut", "slug"=> ""),
+            array("name"=>"En cours", "slug"=> ""),
+            array("name"=>"En pause", "slug"=> ""),
+            array("name"=>"Annulé", "slug"=> ""),
+            array("name"=>"BL a rediger", "slug"=> ""),
+            array("name"=>"BL a signer", "slug"=> ""),
+            array("name"=>"Facturer", "slug"=> ""),
+            array("name"=>"Facturé", "slug"=> ""),
+            array("name"=>"Payé", "slug"=> ""),
+            array("name"=>"Impayé", "slug"=> ""),
         );
     }
     // Mettre à jour les status des devis

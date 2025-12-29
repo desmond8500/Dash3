@@ -10,28 +10,50 @@
                 <img src="{{ asset($provider->logo) }}" alt="L" class="img-fluid">
             </div>
 
-            <div class="card card-body mb-2">
-                {{ $provider->description }}
-            </div>
-            <div class="card p-1 mb-1">
-                <div class="d-flex justify-content-between mx-3">
-                    <i class="ti ti-map me-2"></i>
-                    {{ $provider->address }}
+            @if ($provider->description)
+                <div class="card card-body mb-2">
+                    {{ $provider->description }}
                 </div>
-            </div>
-            <div class="card p-1 mb-1">
-                <div class="d-flex justify-content-between mx-3">
-                    <i class="ti ti-phone me-2"></i>
-                    {{ $provider->phone }}
+            @endif
 
+            @if ($provider->address)
+                <div class="card p-1 mb-1">
+                    <div class="d-flex justify-content-between mx-3">
+                        <i class="ti ti-map me-2"></i>
+                        {{ $provider->address }}
+                    </div>
                 </div>
-            </div>
-            <div class="card p-1 mb-1">
-                <div class="d-flex justify-content-between mx-3">
-                    <i class="ti ti-world me-2"></i>
-                    <a href="{{ $provider->website }}" target="_blank">Site Web</a>
+            @endif
+
+            @if ($provider->phone)
+                <div class="card p-1 mb-1">
+                    <div class="d-flex justify-content-between mx-3">
+                        <i class="ti ti-phone me-2"></i>
+                        {{ $provider->phone }}
+
+                    </div>
                 </div>
-            </div>
+            @endif
+
+            @if ($provider->email)
+                <div class="card p-1 mb-1">
+                    <div class="d-flex justify-content-between mx-3">
+                        <i class="ti ti-at me-2"></i>
+                        {{ $provider->email }}
+
+                    </div>
+                </div>
+            @endif
+
+            @if ($provider->website)
+                <div class="card p-1 mb-1">
+                    <div class="d-flex justify-content-between mx-3">
+                        <i class="ti ti-world me-2"></i>
+                        <a href="{{ $provider->website }}" target="_blank">Site Web</a>
+                    </div>
+                </div>
+            @endif
+
         </div>
 
         <div class="col-md-8">

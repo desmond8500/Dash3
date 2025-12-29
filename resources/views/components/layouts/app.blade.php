@@ -92,7 +92,7 @@
                                     <a href="." class="link-secondary">Tabler</a>.
                                     All rights reserved.
                                 </li>
-                                <li class="list-inline-item" wire:ignore.seft>
+                                <li class="list-inline-item" wire:ignore.self>
                                     <a href="#" wire:click.prevent="$emit('scrollTop')" class="btn btn-primary btn-icon" >
                                         <i class="ti ti-arrow-up"></i>
                                     </a>
@@ -120,7 +120,7 @@
         {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
 
-        <script wire:navigated src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+        <script  src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
         <!-- Tabler Core -->
         <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/js/tabler.min.js"></script>
         {{-- Select2 --}}

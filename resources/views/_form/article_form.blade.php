@@ -24,7 +24,7 @@
 
             @endif
         </div>
-        <input type="file" id="file" accept="image/*" style="display: none" wire:model.live="article_form.image">
+        <input type="file" id="file" accept="image/*" style="display: none" wire:model="article_form.image">
     </div>
 
     <div class="col-md-8">

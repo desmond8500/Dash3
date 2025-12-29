@@ -15,7 +15,7 @@
         </div>
 
         <div class="col">
-            <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="text-dark" target="_blank" wire:navigate>
+            <a href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" class="text-dark" target="_blank" >
                 <h4 style="text-transform: uppercase">{{ $invoice->reference }}</h4>
             </a>
         </div>

@@ -18,6 +18,7 @@
                     <i class="ti ti-chevron-down"></i>{{ $statut ? $statut : 'Statut' }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <a class="dropdown-item" wire:click="$set('statut', 0)"> <i class="ti ti-circle"></i> Tous</a>
                     @foreach ($statuses as $status)
                         <a class="dropdown-item" wire:click="$set('statut', '{{ $status }}')"> <i class="ti ti-circle"></i> {{ $status }}</a>
                     @endforeach

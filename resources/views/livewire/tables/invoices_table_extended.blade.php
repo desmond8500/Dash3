@@ -118,7 +118,7 @@ new class extends Component {
                 <thead >
                     <tr>
                         <th style="width:5px">#</th>
-                        <th style="width:100px">Références</th>
+                        <th style="width:120px">Références</th>
                         <th>Description</th>
                         <th style="width: 120px" class="text-center">statut</th>
                         <th class="text-end" style="width: 130px">Total</th>
@@ -134,9 +134,13 @@ new class extends Component {
                             <a href="{{ route('invoice', ['invoice_id' => $invoice->id]) }}" target="_blank">
                                 {{ ucfirst($invoice->reference) }}
                             </a>
+                            <div class="text-muted" data-bs-toggle="tooltip" title="Date de création" style="font-size:12px;">
+                               <i class="ti ti-calendar-plus" style="font-size:15px;"></i>  {{ $invoice->formatDate($invoice->created_at)  }}
+                            </div>
                             @if ($invoice->paydate)
-                                <div class="text-purple" data-bs-toggle="tooltip" title="Date de paiement">
-                                    {{ $invoice->dateFormat($invoice->paydate) }}</div>
+                                <div class="text-success" data-bs-toggle="tooltip" title="Date de paiement" style="font-size:12px;">
+                                    <i class="ti ti-calendar-check" style="font-size:15px;"></i> {{ $invoice->dateFormat($invoice->paydate) }}
+                                </div>
                             @endif
                         </td>
                         <td>
@@ -151,8 +155,8 @@ new class extends Component {
                             @endcomponent
                         </td>
                         <td class="text-end">
-                            <div>{{ number_format($invoice->total(), 0, '.', ' ') }} F</div>
-                            <div class="text-muted" data-bs-toggle="tooltip" title="Date de création"> {{ $invoice->formatDate($invoice->created_at) }}</div>
+                            <div data-bs-toggle="tooltip" title="Total">{{ number_format($invoice->total(), 0, '.', ' ') }} F</div>
+
                         </td>
                         <td>
                             <div class="dropdown open">

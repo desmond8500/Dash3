@@ -1,12 +1,12 @@
 <div class="card p-2">
     <div class="row g-2 ">
         <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" >
-            <img src="{{ asset($article->image) }}" alt="A" class="avatar p-1 bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain;" >
+            <img src="{{ asset($article->image) }}" alt="A" class="avatar p-1 bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain; height: 100%;" >
         </a>
         <div class="col">
             <div class="row ">
                 <div class="col">
-                    <div style="min-height: 20px; max-height: 40px; overflow:hidden">
+                    <div style="min-height: 20px; max-height: 45px; overflow:hidden" class="border-bottom pb-2">
                         <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}" >{{ $article->designation }}</a>
                     </div>
                 </div>

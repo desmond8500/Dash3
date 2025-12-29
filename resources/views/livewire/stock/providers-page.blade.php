@@ -1,17 +1,23 @@
 <div>
     @component('components.layouts.page-header', ['title'=> 'Fournisseurs', 'breadcrumbs'=> $breadcrumbs])
-        @livewire('form.provider-add')
+        <div class="row">
+            <div class="col">
+                <div class="input-icon w-100">
+                    <input type="text" class="form-control form-control-rounded" wire:model.live="search"
+                        placeholder="Chercher un fournisseur">
+                    <span class="input-icon-addon ">
+                        <i class="ti ti-search"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-auto">
+                @livewire('form.provider-add')
+            </div>
+        </div>
     @endcomponent
 
     <div class="row row-deck g-2">
-        <div class="col-md-12">
-            <div class="input-icon w-100">
-                <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher un fournisseur">
-                <span class="input-icon-addon ">
-                    <i class="ti ti-search"></i>
-                </span>
-            </div>
-        </div>
+
         @foreach ($providers as $provider)
             <div class="col-md-4">
                 <div class="card p-2">

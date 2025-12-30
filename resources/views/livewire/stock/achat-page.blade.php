@@ -204,9 +204,7 @@
                         <div class="col-md-12">
                             {{ $articles->links() }}
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        </div>
+
                     @endif
                 </div>
                 <script> window.addEventListener('open-addAchatArticle', event => { window.$('#addAchatArticle').modal('show'); }) </script>
@@ -216,42 +214,29 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat"])
+    @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat", 'method'=>"achat_update"])
         <form class="row" wire:submit="achat_update">
             @include('_form.achat_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
+
         </form>
         <script> window.addEventListener('open-editAchat', event => { window.$('#editAchat').modal('show'); }) </script>
         <script> window.addEventListener('close-editAchat', event => { window.$('#editAchat').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editAchatRow', 'title'=>"Editer l'article"])
+    @component('components.modal', ["id"=>'editAchatRow', 'title'=>"Editer l'article", 'method'=>"achat_row_update"])
         <form class="row" wire:submit="row_update">
             @include('_form.achat_row_form')
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editAchatRow', event => { window.$('#editAchatRow').modal('show'); }) </script>
         <script> window.addEventListener('close-editAchatRow', event => { window.$('#editAchatRow').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'addAchatFacture', 'title'=>"Ajouter une facture"])
+    @component('components.modal', ["id"=>'addAchatFacture', 'title'=>"Ajouter une facture", 'method'=>"addFacture"])
         <form class="row" wire:submit="addFacture">
             <div class="col-md-12 mb-3">
                 <label class="form-label">Facture</label>
                 <input type="file" class="form-control" wire:model="facture">
                 @error('facture') <span class='text-danger'>{{ $message }}</span> @enderror
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </form>
         <script> window.addEventListener('open-addAchatFacture', event => { window.$('#addAchatFacture').modal('show'); }) </script>

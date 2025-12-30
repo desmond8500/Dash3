@@ -6,6 +6,7 @@ use App\Livewire\Forms\AchatForm;
 use App\Models\Achat;
 use App\Models\Provider;
 use App\Models\Transaction;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -64,10 +65,21 @@ class AchatsPage extends Component
     }
 
     // TODO: Voir les dépendnces de suppression
-    function delete()
+    function delete($achat_id)
     {
-        $article =  Achat::find($this->selected);
-        $article->delete();
+        $achat =  Achat::find($achat_id);
+
+        if ($achat->rows->count() || $achat->factures->count()) {
+            LivewireAlert::text("Impossible de supprimer cet achat car il contient des articles ou des factures.")
+                ->position('top-end')
+                ->toast()
+                ->warning()
+                ->show();
+        }else{
+            $achat->delete();
+
+        }
+
         $this->dispatch('close-editAchat');
     }
     // Transaction

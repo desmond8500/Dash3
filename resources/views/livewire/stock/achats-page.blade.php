@@ -19,8 +19,8 @@
                     <th width="10px" class="bg-red-lt text-center">Date</th>
                     <th width="120px" class="bg-blue-lt text-center">TVA</th>
                     <th width="150px" class="text-end">Total</th>
-                    <th class="text-center">Facture</th>
-                    <th width="130px" class="text-end">Actions</th>
+                    <th width="100px" class="text-center">Facture</th>
+                    <th width="150px" class="text-end">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,12 +37,12 @@
                             <div>{{ number_format($achat->total(), 0, 2) }} F HT<span class="text-white">C</span> </div>
                             <div class="text-danger">{{ number_format($achat->ttc(), 0, 2) }} F TTC</div>
                         </td>
-                        <td>
-                            @foreach ($achat->factures as $facture)
+                        <td class="text-center">
+                            @foreach ($achat->factures as $key => $facture)
                                 <div class="d-flex justify-content-between mb-1">
                                     <a href="{{ asset($facture->folder) }}" target="_blank">
                                         <i class="ti ti-file-pdf"></i>
-                                        {{ basename($facture->folder) }}
+                                        Facture {{ $key+1 }}
                                     </a>
                                 </div>
                             @endforeach
@@ -52,6 +52,11 @@
                                 <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Editer">
                                     <i class="ti ti-edit"></i>
                                 </button>
+                                @if (!$achat->rows->count() && !$achat->factures->count())
+                                    <button class="btn btn-danger btn-icon" wire:click="delete('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Supprimer">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                @endif
                                 @if (!$achat->transaction_id)
                                     <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Ajouter une transaction">
                                         <i class="ti ti-coins"></i>
@@ -66,13 +71,9 @@
         </table>
     </div>
 
-    @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat"])
+    @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat", 'method'=>"achat_update"])
         <form class="row" wire:submit="update">
             @include('_form.achat_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editAchat', event => { window.$('#editAchat').modal('show'); }) </script>
         <script> window.addEventListener('close-editAchat', event => { window.$('#editAchat').modal('hide'); }) </script>

@@ -6,7 +6,7 @@
         </div>
     @endcomponent
 
-    {{-- <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="card p-2 mb-3">
                 <nav class="nav nav-segmented" role="tablist">
@@ -42,7 +42,7 @@
         <div class="col-md-4"></div>
 
         <div class="col-md-4">
-            <div class="card card-body">
+            {{-- <div class="card card-body">
                 @component('components.chartjs',[
                 'labels' => ["Crédit", "Débit"],
                 'data' => [$credit, $debit],
@@ -52,7 +52,7 @@
                     <div>TOTAL:</div>
                     <div>{{ number_format($total, 0,'.', ' ') }} F</div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>
@@ -67,5 +67,5 @@
     </form>
     <script> window.addEventListener('open-editTransaction', event => { window.$('#editTransaction').modal('show'); }) </script>
     <script> window.addEventListener('close-editTransaction', event => { window.$('#editTransaction').modal('hide'); }) </script>
-    @endcomponent --}}
+    @endcomponent
 </div>

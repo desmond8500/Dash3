@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
+use App\Http\Resources\AchatResource;
 use App\Models\Achat;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,8 @@ class AchatController extends Controller
          */
     function get_achats(){
         $achats = Achat::all();
+
+        $achats = AchatResource::collection($achats);
 
         return ResponseController::response(true, 'Les achats ont été récupérés avec succès', $achats);
     }

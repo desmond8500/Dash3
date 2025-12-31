@@ -57,7 +57,7 @@ Route::prefix('v1')->group(function () {
     // Devis
     Route::apiResource('invoices', InvoiceAPIController::class);
     Route::post('get_month_invoices', [InvoiceAPIController::class, 'get_month_invoices']);
-    Route::post('get_month_deposit', [InvoiceAPIController::class, 'get_month_deposit']);
+    Route::post('get_month_deposit', [InvoiceAPIController::class, 'get_month_invoices_deposit']);
     Route::post('get_month_spents', [InvoiceAPIController::class, 'get_month_spents']);
     Route::post('paid_invoices', [InvoiceAPIController::class, 'paid_invoices']);
     // Facture

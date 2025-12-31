@@ -17,8 +17,8 @@ class InvoiceResource extends JsonResource
         return [
             'id' => $this->id,
             'projet_id' => $this->projet_id,
-            'client_name' => $this->client_name,
-            'projet_name' => $this->projet_name,
+            'client_name' => $this->client_name ?? $this->projet->client->name,
+            'projet_name' => $this->projet_name ?? $this->projet->name,
             'reference' => $this->reference,
             'description' => $this->description,
             'modalite' => $this->modalite,
@@ -32,6 +32,7 @@ class InvoiceResource extends JsonResource
             'montant' => $this->total(),
             'folder' => "https://dash3.yonkou.info/api/v1/facture_pdf/$this->id/facture",
             'spents' => $this->spents,
+            'acomptes' => $this->acomptes,
 
         ];
     }

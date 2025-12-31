@@ -92,37 +92,6 @@ class InvoiceAPIController extends Controller
 
         return ResponseController::response(true, "Les factures du mois ont été récupérées", $invoices);
     }
-    /**
-     * @OA\Post(
-     *      path="/api/v1/get_month_invoices",
-     *      tags={"Invoices"},
-     *      description="Récupérer les factures du mois",
-     *
-     *      @OA\RequestBody(
-     *          required=true,
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                  @OA\Property(property="month", type="int"),
-     *                  @OA\Property(property="year", type="int"),
-     *                  required={"month", "year"}
-     *             )
-     *         )
-     *      ),
-     *      @OA\Response(response=200, description="Utilisateurs récupérés avec succès"),
-     *      @OA\Response(response=401, description="Unauthorized")
-     * )
-     */
-    function get_month_invoices_deposit(Request $request)
-    {
-        $month = $request->month;
-        $year = $request->year;
-
-        $invoices = Invoice::whereMonth('facture_date', $month)->whereNull('facture_date')->whereHas('acomptes')->get();
-        $invoices = InvoiceResource::collection($invoices);
-
-        return ResponseController::response(true, "Les factures du mois ont été récupérées", $invoices);
-    }
 
     /**
      * @OA\Post(
@@ -194,5 +163,45 @@ class InvoiceAPIController extends Controller
 
 
         return ResponseController::response(true, "Les dépenses du mois ont été récupérées", $invoices);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/get_month_invoices_deposit",
+     *      tags={"Invoices"},
+     *      description="Récupérer les factures d'acompte du mois",
+     *
+     *      @OA\RequestBody(
+     *          required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                  @OA\Property(property="month", type="int"),
+     *                  @OA\Property(property="year", type="int"),
+     *                  required={"month", "year"}
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="les factures d'acompte récupérées avec succès"),
+     *      @OA\Response(response=401, description="Unauthorized")
+     * )
+     */
+    function get_month_invoices_deposit(Request $request)
+    {
+        $month = $request->month;
+        $year = $request->year;
+
+        // $invoices = Invoice::whereMonth('facture_date', $month)->whereNull('facture_date')->whereHas('acomptes')->get();
+        $invoices = Invoice::where(function ($q) {
+            $q->whereNull('paydate')
+                ->orWhere('paydate', '');
+            })
+            // ->whereMonth('paydate', $month)
+            // ->whereYear('paydate', $year)
+            ->whereHas('acomptes')
+            ->get();
+        $invoices = InvoiceResource::collection($invoices);
+
+        return ResponseController::response(true, "Les factures du mois ont été récupérées", $invoices);
     }
 }

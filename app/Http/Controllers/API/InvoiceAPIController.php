@@ -273,11 +273,21 @@ class InvoiceAPIController extends Controller
             ->whereYear('created_at', $year)
             ->get();
 
-        $totalPaid = $invoices->sum(
-            fn($invoice) => $invoice->acomptes
-                ->where('statut', true)
-                ->sum('montant')
-        );
+        // $totalPaid = $invoices->sum(
+        //     fn($invoice) => $invoice->acomptes
+        //         ->where('statut', true)
+        //         ->sum('montant')
+        // );
+
+        $totalPaid = InvoiceAcompte::where('statut', true)
+            ->whereHas('invoice', function ($q) use ($year) {
+                $q->where(function ($q2) {
+                    $q2->whereNull('paydate')
+                        ->orWhere('paydate', '');
+                })
+                    ->whereYear('created_at', $year); // ou date facture
+            })
+            ->sum('montant');
 
         return ResponseController::response(true, "Dépôts récupérés", [
             'year' => $year,

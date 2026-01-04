@@ -32,6 +32,11 @@ class Invoice extends Model
         'paydate',
     ];
 
+    public function getMontantAttribute()
+    {
+        return $this->total();
+    }
+
     public function projet(): BelongsTo
     {
         return $this->belongsTo(Projet::class);

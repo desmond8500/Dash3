@@ -60,6 +60,9 @@ Route::prefix('v1')->group(function () {
     Route::post('get_month_deposit', [InvoiceAPIController::class, 'get_month_invoices_deposit']);
     Route::post('get_month_spents', [InvoiceAPIController::class, 'get_month_spents']);
     Route::post('paid_invoices', [InvoiceAPIController::class, 'paid_invoices']);
+
+    Route::post('annual_paid_invoices', [InvoiceAPIController::class, 'annual_paid_invoices']);
+    Route::post('get_annual_invoices_deposit', [InvoiceAPIController::class, 'get_annual_invoices_deposit']);
     // Facture
     Route::get('factures', [FactureController::class, 'get_factures']);
     Route::get('facture_pdf/{invoice_id}/{type}', function ($invoice_id, $type) {

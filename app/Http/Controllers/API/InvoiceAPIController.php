@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
+use App\Models\InvoiceAcompte;
 use Illuminate\Http\Request;
 
 class InvoiceAPIController extends Controller
@@ -129,7 +130,7 @@ class InvoiceAPIController extends Controller
      * @OA\Post(
      *      path="/api/v1/paid_invoices",
      *      tags={"Invoices"},
-     *      description="Récupérer les factures du mois",
+     *      description="Récupérer les factures soldées du mois",
      *
      *      @OA\RequestBody(
      *          required=true,
@@ -169,7 +170,7 @@ class InvoiceAPIController extends Controller
      * @OA\Post(
      *      path="/api/v1/get_month_invoices_deposit",
      *      tags={"Invoices"},
-     *      description="Récupérer les factures d'acompte du mois",
+     *      description="Récupérer les factures d'acompte non soldées de l'année",
      *
      *      @OA\RequestBody(
      *          required=true,
@@ -203,5 +204,85 @@ class InvoiceAPIController extends Controller
         $invoices = InvoiceResource::collection($invoices);
 
         return ResponseController::response(true, "Les factures du mois ont été récupérées", $invoices);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/annual_paid_invoices",
+     *      tags={"Invoices"},
+     *      description="Récupérer les factures soldées de l'année",
+     *
+     *      @OA\RequestBody(
+     *          required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                  @OA\Property(property="year", type="int"),
+     *                  required={"year"}
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="Utilisateurs récupérés avec succès"),
+     *      @OA\Response(response=401, description="Unauthorized")
+     * )
+     */
+    function annual_paid_invoices(Request $request)
+    {
+        $year = $request->input('year', now()->year);
+
+        $invoices = Invoice::whereNotNull('paydate')
+            ->whereYear('paydate', $year)
+            ->orderBy('paydate')
+            ->get();
+
+        $data = [
+            'year'       => $year,
+            'total_paid' => $invoices->sum('montant'),
+            'invoices'   => InvoiceResource::collection($invoices),
+        ];
+
+        return ResponseController::response(true, "Les factures de l'année ont été récupérées", $data);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/get_annual_invoices_deposit",
+     *      tags={"Invoices"},
+     *      description="Récupérer les factures d'acompte non soldées de l'année",
+     *
+     *      @OA\RequestBody(
+     *          required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                  @OA\Property(property="year", type="int"),
+     *                  required={"year"}
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="les factures d'acompte récupérées avec succès"),
+     *      @OA\Response(response=401, description="Unauthorized")
+     * )
+     */
+    function get_annual_invoices_deposit(Request $request)
+    {
+        $year = $request->input('year', now()->year);
+
+        $invoices = Invoice::with('acomptes')
+            ->whereHas('acomptes', fn($q) => $q->where('statut', true))
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $totalPaid = $invoices->sum(
+            fn($invoice) => $invoice->acomptes
+                ->where('statut', true)
+                ->sum('montant')
+        );
+
+        return ResponseController::response(true, "Dépôts récupérés", [
+            'year' => $year,
+            'total_paid' => $totalPaid,
+            'invoices' => InvoiceResource::collection($invoices),
+        ]);
     }
 }

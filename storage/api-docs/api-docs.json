@@ -386,7 +386,7 @@
                 "tags": [
                     "Invoices"
                 ],
-                "description": "Récupérer les factures du mois",
+                "description": "Récupérer les factures soldées du mois",
                 "operationId": "990186738eb8405432a8b41c113056e8",
                 "requestBody": {
                     "required": true,
@@ -413,6 +413,115 @@
                 "responses": {
                     "200": {
                         "description": "Utilisateurs récupérés avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/get_month_invoices_deposit": {
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "description": "Récupérer les factures d'acompte non soldées de l'année",
+                "operationId": "82fcfd7ae6b400f24a55528bb4847217",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "month",
+                                    "year"
+                                ],
+                                "properties": {
+                                    "month": {
+                                        "type": "integer"
+                                    },
+                                    "year": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "les factures d'acompte récupérées avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/annual_paid_invoices": {
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "description": "Récupérer les factures soldées de l'année",
+                "operationId": "71083d1261e24e974389f3a642ad05b6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "year"
+                                ],
+                                "properties": {
+                                    "year": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateurs récupérés avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/get_annual_invoices_deposit": {
+            "post": {
+                "tags": [
+                    "Invoices"
+                ],
+                "description": "Récupérer les factures d'acompte non soldées de l'année",
+                "operationId": "d911cc610cf1543a590156addf6843ae",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "year"
+                                ],
+                                "properties": {
+                                    "year": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "les factures d'acompte récupérées avec succès"
                     },
                     "401": {
                         "description": "Unauthorized"

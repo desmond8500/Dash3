@@ -1,5 +1,9 @@
 # Dash3
 
+## Description
+
+Erp version 3
+
 ## Prerequis
 
 * [PHP 8](https://www.php.net/downloads.php)

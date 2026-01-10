@@ -19,6 +19,8 @@ class InvoiceForm extends Form
     public $projet_name;
     // #[Validate('nullable|required')]
     public $reference;
+    public $invoice_year;
+    public $invoice_number;
     #[Validate('required')]
     public $description;
     public $modalite;
@@ -63,6 +65,8 @@ class InvoiceForm extends Form
         $this->client_name = $this->invoice->client_name;
         $this->projet_name = $this->invoice->projet_name;
         $this->reference = $this->invoice->reference;
+        $this->invoice_number = $this->invoice->invoice_number;
+        $this->invoice_year = $this->invoice->invoice_year;
         $this->description = $this->invoice->description;
         $this->modalite = $this->invoice->modalite;
         $this->note = $this->invoice->note;

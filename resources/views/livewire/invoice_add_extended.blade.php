@@ -23,11 +23,15 @@ new class extends Component {
     }
 
        function ajouter(){
+        $ref = ErpController::getInvoiceReference($this->projet);
+
         $this->invoice_form->projet_id = $this->projet->id;
         $this->invoice_form->statut = 'Nouveau';
         $this->invoice_form->remise = 0;
         $this->invoice_form->tax = 0;
-        $this->invoice_form->reference = ErpController::getInvoiceReference($this->projet);
+        $this->invoice_form->reference = $ref['reference'];
+        $this->invoice_form->invoice_number = $ref['invoice_number'];
+        $this->invoice_form->invoice_year = $ref['invoice_year'];
         $this->dispatch('open-addInvoice');
         $this->dispatch('get-resume');
 

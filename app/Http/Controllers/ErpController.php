@@ -8,12 +8,19 @@ use Illuminate\Http\Request;
 class ErpController extends Controller
 {
     static function getInvoiceReference($projet){
-        $count = Invoice::count();
-        if ($count) {
-            return substr(strtoupper($projet->client->name), 0, 3) . "-" . sprintf("%03d", Invoice::latest()->first()->id + 1) . '-' . date('y');
-        } else {
-            return substr(strtoupper($projet->client->name), 0, 3) . "-" . sprintf("%03d", 1) . '-' . date('y');
-        }
+        $year = now()->year;
+        $yearShort = now()->format('y');
+
+        $lastNumber = Invoice::where('invoice_year', $year)->max('invoice_number');
+        $nextNumber = $lastNumber ? $lastNumber + 1 : 1;
+
+        $clientCode = substr(strtoupper($projet->client->name), 0, 3);
+
+        return [
+            'invoice_number' => $nextNumber,
+            'invoice_year'   => $year,
+            'reference'      => $clientCode . '-' . sprintf('%03d', $nextNumber) . '-' . $yearShort,
+        ];
     }
 
     static function getRandomStatus(){

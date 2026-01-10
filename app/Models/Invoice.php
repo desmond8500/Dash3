@@ -21,6 +21,8 @@ class Invoice extends Model
         'client_name',
         'projet_name',
         'reference',
+        'invoice_year',
+        'invoice_number',
         'description',
         'modalite',
         'note',
@@ -30,6 +32,7 @@ class Invoice extends Model
         'favorite',
         'facture_date',
         'paydate',
+
     ];
 
     public function getMontantAttribute()

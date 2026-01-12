@@ -35,7 +35,7 @@
 
     @component('components.modal', ["id"=>'addData', 'title' => 'Ajouter'])
         <div>
-            @livewire('form.invoice-add', ['projet_id' => $projet->id])
+            @livewire('invoice_add_extended', ['projet_id' => $projet->id])
         </div>
         <script> window.addEventListener('open-addData', event => { window.$('#addData').modal('show'); }) </script>
         <script> window.addEventListener('close-addData', event => { window.$('#addData').modal('hide'); }) </script>

@@ -22,7 +22,8 @@ new class extends Component {
         $this->client_name = $this->projet->client->name;
     }
 
-       function ajouter(){
+    // Ajouter un devis, methode appelée par le bouton
+    function ajouter(){
         $ref = ErpController::getInvoiceReference($this->projet);
 
         $this->invoice_form->projet_id = $this->projet->id;

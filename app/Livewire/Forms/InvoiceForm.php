@@ -34,15 +34,26 @@ class InvoiceForm extends Form
     public $facture_date;
     public $paydate;
 
+    function fix(){
+        $this->description = ucfirst($this->description);
+    }
+
     function store(){
+        $this->fix();
         $this->validate();
         return Invoice::create($this->all());
     }
 
     function replicate($invoice_id){
         $invoice = Invoice::find($invoice_id);
+
         $new_invoice = $invoice->replicate();
-        $new_invoice->reference = ErpController::getInvoiceReference($invoice->projet);
+        $ref = ErpController::getInvoiceReference($invoice->projet);
+
+        $new_invoice->reference = $ref['reference'];
+        $new_invoice->invoice_number = $ref['invoice_number'];
+        $new_invoice->invoice_year = $ref['invoice_year'];
+
         $new_invoice->save();
 
         foreach ($invoice->invoiceSection as $section) {

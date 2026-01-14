@@ -18,7 +18,7 @@
         $carbon->locale('fr_FR');
     @endphp
 
-    <table class="table" style="">
+    <table class="table" style="border-bottom: 2px solid #{{ $color1 ?? '6b8a7a' }}; margin-bottom: 10px;">
         <tr>
             <td width="80px" class="border_white">
                 @if ($logo)

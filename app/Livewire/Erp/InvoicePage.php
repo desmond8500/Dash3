@@ -247,6 +247,33 @@ class InvoicePage extends Component
         $row->delete();
     }
 
+    function incrementRowQuantity($row_id){
+        $row = InvoiceRow::find($row_id);
+        $row->quantite++;
+        $row->save();
+    }
+    function decrementRowQuantity($row_id){
+        $row = InvoiceRow::find($row_id);
+        if ($row->quantite > 1) {
+            $row->quantite--;
+            $row->save();
+        }
+    }
+
+    function incrementRowCoef($row_id){
+        $row = InvoiceRow::find($row_id);
+        $row->coef += 0.1;
+        $row->save();
+    }
+    function decrementRowCoef($row_id){
+        $row = InvoiceRow::find($row_id);
+        if ($row->coef > 0.1) {
+            $row->coef -= 0.1;
+            $row->save();
+        }
+    }
+
+
     // Invoice
     public InvoiceForm $invoice_form;
 

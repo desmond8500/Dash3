@@ -50,6 +50,7 @@ class JournalAdd extends Component
         $this->journalForm->devis_id= $this->devis_id;
         $this->journalForm->store();
         $this->dispatch('close-addJournal');
+        $this->dispatch('get-news');
     }
 
 }

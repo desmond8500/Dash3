@@ -176,25 +176,46 @@
 
                                             </div>
                                             <div class="text-muted">{!! nl2br($row->reference) !!}</div>
+
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <div>{{ $row->quantite }}</div>
+                                    <div x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false"
+                                        class="d-flex justify-content-evenly  hover:bg-gray-100 ">
+
+                                        <div x-show="hover" x-transition>
+                                            <button class="btn btn-sm rounded" wire:click="decrementRowQuantity({{ $row->id }})"> - </button>
+                                        </div>
+                                        <span class="">{{ $row->quantite }}</span>
+                                        <div x-show="hover" x-transition>
+                                            <button class="btn btn-sm rounded" wire:click="incrementRowQuantity({{ $row->id }})"> + </button>
+                                        </div>
+
+                                    </div>
                                     <div class="text-success" data-bs-toggle="tooltip" title="Quantitée acheté">{{ $row->bought }}</div>
-                                </td>
+                                                                    </td>
                                 <td class="text-center">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div>{{ $row->coef }}</div>
+                                    <div x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false"
+                                        class="d-flex justify-content-evenly  hover:bg-gray-100 ">
+
+                                        <div x-show="hover" x-transition>
+                                            <button class="btn btn-sm rounded" wire:click="decrementRowCoef({{ $row->id }})"> - </button>
+                                        </div>
+                                        <span>{{ $row->coef }}</span>
+                                        <div x-show="hover" x-transition>
+                                            <button class="btn btn-sm rounded" wire:click="incrementRowCoef({{ $row->id }})"> + </button>
+                                        </div>
+
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <div>{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
-                                    <div class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div>
+                                    <div data-bs-toggle="tooltip" title="Prix unitaire avec coeficient de marge">{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
+                                    <div data-bs-toggle="tooltip" title="Prix unitaire sans coeficient de marge" class="text-muted">{{ number_format($row->prix, 0,'.', ' ') }}</div>
                                 </td>
                                 <td class="text-center">
-                                    <div>{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
-                                    <div class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div>
+                                    <div data-bs-toggle="tooltip" title="Prix total sans coeficient de marge">{{ number_format($row->prix*$row->quantite*$row->coef, 0,'.', ' ') }}</div>
+                                    <div data-bs-toggle="tooltip" title="Prix total avec coeficient de marge" class="text-muted">{{ number_format($row->prix*$row->quantite, 0,'.', ' ') }}</div>
                                 </td>
                                 <td class="text-center">
                                     <div>{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', ' ') }}</div>
@@ -204,13 +225,13 @@
                                     <div>
                                         <button class="btn btn-sm btn-icon btn-outline-success" wire:click="editRow('{{ $row->id }}')"><i class="ti ti-edit"></i></button>
                                         <button class="btn btn-sm btn-icon btn-outline-danger" wire:click="deleteRow('{{ $row->id }}')"><i class="ti ti-trash"></i></button>
-                                    </div>
-                                    <div class="dropdown open mt-1 ">
-                                        <button class="btn btn-outline-primary btn-sm" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                            <i class="ti ti-chevron-down"></i>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" wire:click="add_to_acompte('{{ $row->id }}')"> <i class="ti ti-plus"></i> Ajouter aux dépenses</a>
+                                        <div class="dropdown open mt-1 ">
+                                            <button class="btn btn-icon btn-outline-primary btn-sm" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                                <i class="ti ti-chevron-down"></i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                                <a class="dropdown-item" wire:click="add_to_acompte('{{ $row->id }}')"> <i class="ti ti-plus"></i> Ajouter aux dépenses</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </td>

@@ -32,10 +32,38 @@
             </div>
         </div>
 
+        <div class="row mb-3">
+            <div class="col-md-5">
+                <label class="form-label">ID Article</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" wire:model="row_form.article_id"
+                        placeholder="Identifiant de l'article">
+                    <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.article_id', 0)">
+                        <i class="ti ti-x"></i>
+                    </a>
+                </div>
+                @error('row_form.article_id') <span class='text-danger'>{{ $message }}</span> @enderror
+
+            </div>
+            <div class="col-md-7 ">
+                @if(!$nosection)
+                <label class="form-label">Section</label>
+                <select class="form-select" wire:model="row_form.invoice_section_id">
+                    @foreach ($sections as $section)
+                    <option value="{{ $section->id }}">{{ $section->section }}</option>
+                    @endforeach
+                </select>
+                @error('row_form.invoice_section_id') <span class='text-danger'>{{ $message }}</span> @enderror
+
+                @endif
+
+            </div>
+        </div>
+
     </div>
     <div class="col-md-5 mb-3">
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-12 mb-3">
                 <label class="form-label">Quantité</label>
                 <div class="input-group">
                     <a class="btn btn-primary btn-icon" wire:click="$set('row_form.quantite', '{{ $row_form->quantite-1 }}')">
@@ -48,7 +76,7 @@
                 </div>
                 @error('row_form.quantite') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12 mb-3">
                 <label class="form-label">Coef</label>
                 <div class="input-group">
                     <a class="btn btn-primary btn-icon" wire:click="$set('row_form.coef', '{{ $row_form->coef - 0.1 }}')">
@@ -78,7 +106,7 @@
         </div>
         @error('row_form.prix') <span class='text-danger'>{{ $message }}</span> @enderror
 
-        <label class="form-label mt-5">Priorite</label>
+        <label class="form-label mt-3">Priorite</label>
         <select class="form-select" wire:model="row_form.priorite_id">
             <option value="0">Centrale 1</option>
             <option value="1">Centrale 2</option>
@@ -91,32 +119,7 @@
         </select>
         @error('row_form.priorite_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
-        <div class="row mt-3">
-            <div class="col-md-5">
-                <label class="form-label">ID Article</label>
-                <div class="input-group">
-                    <input type="number" class="form-control" wire:model="row_form.article_id" placeholder="Identifiant de l'article">
-                    <a class="btn btn-secondary btn-icon" wire:click="$set('row_form.article_id', 0)">
-                        <i class="ti ti-x"></i>
-                    </a>
-                </div>
-                @error('row_form.article_id') <span class='text-danger'>{{ $message }}</span> @enderror
 
-            </div>
-            <div class="col-md-7 ">
-                @if(!$nosection)
-                    <label class="form-label">Section</label>
-                    <select class="form-select" wire:model="row_form.invoice_section_id">
-                        @foreach ($sections as $section)
-                            <option value="{{ $section->id }}">{{ $section->section }}</option>
-                        @endforeach
-                    </select>
-                    @error('row_form.invoice_section_id') <span class='text-danger'>{{ $message }}</span> @enderror
-
-                @endif
-
-            </div>
-        </div>
 
 
     </div>

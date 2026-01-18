@@ -30,7 +30,7 @@ class ArticlesPage extends Component
         $settings = \App\Models\Setting::where('user_id', auth()->user()->id)->first();;
 
         if ($settings->size =='container-fluid') {
-            $this->paginate = 10;
+            $this->paginate = 12;
         }
 
 

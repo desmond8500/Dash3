@@ -325,3 +325,12 @@ Volt::route('/konva', 'test.konvapage')->name('konva');
 Route::fallback(function() {
     return view('errors.404page');
 });
+
+
+// ==================================================================
+// Pdf
+// ==================================================================
+
+Route::get('pdf_v1/{title}', function ($title) {
+    return PDFController::pdf_v1($title);
+})->name('pdf_v1');

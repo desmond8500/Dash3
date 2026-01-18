@@ -2,10 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Http\Controllers\PDFController;
 use App\Models\Article;
 use App\Models\Brand;
 use App\Models\Demo;
 use App\Models\Provider;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -255,6 +257,10 @@ class TestPage extends Component
     }
     public function addSubItem(object $item){
         $item[] = ['name' => '', 'quantity' => 1];
+    }
+
+    function testpdf(){
+        return PDFController::pdf_v1();
     }
 }
 

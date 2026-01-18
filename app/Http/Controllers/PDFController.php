@@ -21,6 +21,63 @@ use Illuminate\Support\Str;
 
 class PDFController extends Controller
 {
+    static function pdf_v1($title){
+        $carbon = new Carbon();
+
+        $data = [
+            'carbon' => $carbon,
+            'date' => $carbon->now()->format('d-m-Y'),
+
+            'company_name' => env('MAIN_NAME'),
+            'company_logo' => env('LOGO', ''),
+            'company_sign' => env('SIGN', ''),
+            'company_buffer' => env('BUFFER', ''),
+            'company_ninea' => env('NINEA', ''),
+            'company_rib' => env('RIB', ''),
+            'company_address' => env('ADDRESS', ''),
+            'company_phone' => env('PHONE', ''),
+            'company_email' => env('EMAIL', ''),
+
+            'devis' => (object) array(
+                'conditions' => 'Conditions générales de vente : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                'reference' => 'DV-0001',
+                'date' => $carbon->now(),
+                'validite' => 30,
+                'client' => (object) array(
+                    'nom' => 'Client Exemple',
+                    'adresse' => '123 Rue Exemple, Ville, Pays',
+                    'telephone' => '+221 77 123 45 67',
+                ),
+                'lignes' => [
+                    (object) array(
+                        'designation' => 'Produit/Service 1',
+                        'quantite' => 2,
+                        'prix_unitaire' => 50000,
+                        'total' => 100000,
+                    ),
+                    (object) array(
+                        'designation' => 'Produit/Service 2',
+                        'quantite' => 1,
+                        'prix_unitaire' => 75000,
+                        'total' => 75000,
+                    ),
+                ],
+                'total_ht' => 175000,
+                'total_tva' => 35000,
+                'total_ttc' => 210000,
+            ),
+
+            'page_title' => $title ?? 'Document V1',
+            'page_sections' => [
+                "v1/header",
+                "v1/footer",
+            ],
+        ];
+        $pdf = Pdf::loadView('_pdf.v1.layout_pdf1', $data);
+        return $pdf->stream("$title");
+    }
+
+
     public static function pdf(){
         $carbon = new Carbon();
 

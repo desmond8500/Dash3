@@ -16,7 +16,6 @@ new class extends Component {
 
     public function with(): array {
         return [
-            // 'spents' => $this->invoice->spents,
             'spents' => InvoiceSpent::where('invoice_id', $this->invoice_id)->get(),
             'acomptes' => InvoiceAcompte::where('invoice_id', $this->invoice_id)->where('statut', 1)->get(),
         ];
@@ -35,6 +34,10 @@ new class extends Component {
         <table class="table table-hover">
             <tbody>
                 <tr>
+                    <td>Total Devis</td>
+                    <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} F</td>
+                </tr>
+                <tr>
                     <td>Total Acomptes</td>
                     <td class="text-end">{{ number_format($acomptes->sum('montant'), 0,'.', ' ') }} F</td>
                 </tr>
@@ -43,7 +46,7 @@ new class extends Component {
                     <td class="text-end">{{ number_format($spents->sum('montant'), 0,'.', ' ') }} F</td>
                 </tr>
                 <tr>
-                    <td>Restants</td>
+                    <td>Restant acompte</td>
                     <td class="text-end">{{ number_format($acomptes->sum('montant') - $spents->sum('montant'), 0,'.', ' ') }} F</td>
                 </tr>
             </tbody>

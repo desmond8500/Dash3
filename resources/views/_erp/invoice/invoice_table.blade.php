@@ -2,7 +2,10 @@
     <div class="card-header">
         <div class="card-title">
             <div><span data-bs-toggle="tooltip" title="Client" >{{ $devis->client_name ?? $devis->projet->client->name }}</span> - <span data-bs-toggle="tooltip" title="Nom du projet" >{{ $devis->projet->name }}</span> </div>
-            <div class="text-primary">#{{ $devis->reference }}</div>
+            <div class="text-primary">
+                #{{ $devis->reference }}
+                <span class="fs-5 text-secondary" data-bs-toggle="tooltip" title="Date de création"> {{ $devis->dateFormat($devis->created_at) }}</span>
+            </div>
             <div class="" style="font-size: 13px; font-weight:normal;">
                 <div>{!! nl2br($devis->description) !!}</div>
                 @if($devis->paydate)
@@ -71,54 +74,57 @@
                     $subtotal_mainoeuvre = 0;
                     $subtotal_bought = 0;
                 @endphp
-                <tr ">
-                    <th scope="col" class="bg-primary-lt" colspan="2">
-                        <div>
-                            <div class='text-danger' style="font-size: 10px">{{ $section->id }}</div>
-                            <div>{{ ucfirst($section->section) }}</div>
-                        </div>
-                    </th>
-                    <th scope="col" class="bg-primary-lt " colspan="6">
-                        <div class="d-flex justify-content-end">
-                            @if ($section->show)
-                                <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Cacher le contenu de la section" wire:click="section_toggle('{{ $section->id }}')">
-                                    <i class="ti ti-eye-off"></i>
+                <thead >
+
+                    <tr >
+                        <th scope="col" class="bg-primary-lt" colspan="2" >
+                            <div>
+                                <div class='text-danger' style="font-size: 10px" data-bs-toggle="tooltip" title="Référence de la section">{{ $section->id }}</div>
+                                <div>{{ ucfirst($section->section) }}</div>
+                            </div>
+                        </th>
+                        <th scope="col" class="bg-primary-lt " colspan="6">
+                            <div class="d-flex justify-content-end">
+                                @if ($section->show)
+                                    <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Cacher le contenu de la section" wire:click="section_toggle('{{ $section->id }}')">
+                                        <i class="ti ti-eye-off"></i>
+                                    </button>
+                                @else
+                                    <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Afficher le contenu de la section" wire:click="section_toggle('{{ $section->id }}')">
+                                        <i class="ti ti-eye"></i>
+                                    </button>
+                                @endif
+                                @if ($section->status)
+                                    <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Supprimer de la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
+                                        <i class="ti ti-circle-check"></i>
+                                    </button>
+                                @else
+                                    <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Ajouter à la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
+                                        <i class="ti ti-circle-x"></i>
+                                    </button>
+                                @endif
+                                <button class="btn btn-sm p-1 rounded btn-primary me-1" wire:click="addRow('{{ $section->id }}')">
+                                    <i class="ti ti-plus"></i> Article
                                 </button>
-                            @else
-                                <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Afficher le contenu de la section" wire:click="section_toggle('{{ $section->id }}')">
-                                    <i class="ti ti-eye"></i>
+                                <button class="btn btn-sm p-1 rounded btn-primary btn-icon me-1" wire:click="edit_section('{{ $section->id }}')">
+                                    <i class="ti ti-edit"></i>
                                 </button>
-                            @endif
-                            @if ($section->status)
-                                <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Supprimer de la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
-                                    <i class="ti ti-circle-check"></i>
+                                @if (!$section->rows->count())
+                                    <button class="btn btn-sm p-1 rounded btn-danger btn-icon me-1" wire:click="delete_section('{{ $section->id }}')"
+                                        wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                @endif
+                                <button class="btn btn-sm p-1 btn-primary rounded me-1" disabled data-bs-toggle="tooltip" title="Exporter">
+                                    <i class="ti ti-file-type-xls"></i>
                                 </button>
-                            @else
-                                <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Ajouter à la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
-                                    <i class="ti ti-circle-x"></i>
+                                <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Dupliquer la section" wire:click="duplicate_section('{{ $section->id }}')">
+                                    <i class="ti ti-copy"></i>
                                 </button>
-                            @endif
-                            <button class="btn btn-sm p-1 rounded btn-primary me-1" wire:click="addRow('{{ $section->id }}')">
-                                <i class="ti ti-plus"></i> Article
-                            </button>
-                            <button class="btn btn-sm p-1 rounded btn-primary btn-icon me-1" wire:click="edit_section('{{ $section->id }}')">
-                                <i class="ti ti-edit"></i>
-                            </button>
-                            @if (!$section->rows->count())
-                                <button class="btn btn-sm p-1 rounded btn-danger btn-icon me-1" wire:click="delete_section('{{ $section->id }}')"
-                                    wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
-                                    <i class="ti ti-trash"></i>
-                                </button>
-                            @endif
-                            <button class="btn btn-sm p-1 btn-primary rounded me-1" disabled data-bs-toggle="tooltip" title="Exporter">
-                                <i class="ti ti-file-type-xls"></i>
-                            </button>
-                            <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Dupliquer la section" wire:click="duplicate_section('{{ $section->id }}')">
-                                <i class="ti ti-copy"></i>
-                            </button>
-                        </div>
-                    </th>
-                </tr>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
                 @if ($section->proposition)
                     <th>
                         <td colspan="7">
@@ -237,32 +243,34 @@
                                 </td>
                             </tr>
                         @endforeach
-                        <tr class="fw-bold">
-                            <td colspan="2" class="bg-indigo-lt">
-                                <div>
-                                    <span class="fw-bold">Materiel :</span> {{ number_format($subtotal_equipment, 0,'.', ' ') }} F
-                                </div>
-                                <div>
-                                    <span class="fw-bold">Cable :</span> {{ number_format($subtotal_cable, 0,'.', ' ') }} F
-                                </div>
-                            </td>
-                            <td colspan="2" class="text-end bg-indigo-lt">
-                                <div>
-                                    <span class="fw-bold">Accessoires :</span> {{ number_format($subtotal_accessoires, 0,'.', ' ') }} F
-                                </div>
-                                <div>
-                                    <span class="fw-bold">Main d'oeuvre :</span> {{ number_format($subtotal_mainoeuvre, 0,'.', ' ') }} F
-                                </div>
-                            </td>
-                            <td colspan="1" class="bg-azure-lt">
-                                <div>Sous Total</div>
-                                <div>Sous Total Achat :</div>
-                            </td>
-                            <td colspan="2" class="text-end bg-azure-lt">
-                                <div>{{ number_format($subtotal, 0,'.', ' ') }} F</div>
-                                <div>{{ number_format($subtotal_bought, 0,'.', ' ') }} F</div>
-                            </td>
-                        </tr>
+                        @if ($subtotal_equipment || $subtotal_cable || $subtotal_accessoires || $subtotal_mainoeuvre)
+                            <tr class="fw-bold">
+                                <td colspan="2" class="bg-indigo-lt">
+                                    <div>
+                                        <span class="fw-bold">Materiel :</span> {{ number_format($subtotal_equipment, 0,'.', ' ') }} F
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">Cable :</span> {{ number_format($subtotal_cable, 0,'.', ' ') }} F
+                                    </div>
+                                </td>
+                                <td colspan="2" class="text-end bg-indigo-lt">
+                                    <div>
+                                        <span class="fw-bold">Accessoires :</span> {{ number_format($subtotal_accessoires, 0,'.', ' ') }} F
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">Main d'oeuvre :</span> {{ number_format($subtotal_mainoeuvre, 0,'.', ' ') }} F
+                                    </div>
+                                </td>
+                                <td colspan="1" class="bg-azure-lt">
+                                    <div>Sous Total</div>
+                                    <div>Sous Total Achat :</div>
+                                </td>
+                                <td colspan="2" class="text-end bg-azure-lt">
+                                    <div>{{ number_format($subtotal, 0,'.', ' ') }} F</div>
+                                    <div>{{ number_format($subtotal_bought, 0,'.', ' ') }} F</div>
+                                </td>
+                            </tr>
+                        @endif
                     </tbody>
                 @endif
 

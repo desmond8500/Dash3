@@ -1,7 +1,22 @@
 <div class="card p-2">
     <div class="row g-2 ">
         <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" >
-            <img src="{{ asset($article->image) }}" alt="A" class="avatar p-1 bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain; height: 100%;" >
+            <div class="d-flex flex-column">
+                <img src="{{ asset($article->image) }}" alt="A" class="avatar p-1 bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain; height: 100%;" >
+                {{-- <div>
+                    <div class="btn btn-ghost-primary btn-sm mt-1">
+                        Action
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-start" aria-labelledby="triggerId">
+                        <a class="dropdown-item" wire:click="edit('{{ $article->id }}')"><i class="ti ti-edit"></i> Editer</a>
+                        <a class="dropdown-item" wire:click="dupliquer('{{ $article->id }}')"><i class="ti ti-copy"></i> Dupliquer</a>
+                        <a class="dropdown-item" wire:click="buy('{{ $article->id }}')"><i class="ti ti-shopping-cart"></i> Commander</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" wire:click="delete('{{ $article->id }}')"> <i class="ti ti-trash"></i>
+                            Supprimer</a>
+                    </div>
+                </div> --}}
+            </div>
         </a>
         <div class="col">
             <div class="row ">

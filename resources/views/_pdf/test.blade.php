@@ -31,11 +31,24 @@
         </header>
 
         <main >
-
+            main
+            <livewire:async-select
+                name="test"
+                wire:model="test"
+                :options="[
+                ['value' => '1', 'label' => 'Option 1'],
+                ['value' => '2', 'label' => 'Option 2'],
+                ['value' => '3', 'label' => 'Option 3'],
+                ]"
+                placeholder="Select an option..."
+            />
         </main>
 
         <footer>
             <!-- place footer here -->
+
+
+
         </footer>
 
 

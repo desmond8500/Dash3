@@ -20,6 +20,7 @@ Erp version 3
 * [Laravel Sanctum](https://laravel.com/docs/master/sanctum)
 * [Laravel telescope](https://laravel.com/docs/master/telescope)
 * [Laravel Tags](https://spatie.be/docs/laravel-tags/v4/installation-and-setup)
+* [Laravel Livewire Async Select](https://github.com/drpshtiwan/livewire-async-select)
 
 ## Traits
 

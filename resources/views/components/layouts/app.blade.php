@@ -58,6 +58,7 @@
         </style>
     @endassets
     @asyncSelectStyles
+    @livewireStyles
 </head>
 
 <body>
@@ -138,7 +139,7 @@
     @endstack
 
     @livewireScripts
-
+    @stack('scripts')
 </body>
 
 </html>

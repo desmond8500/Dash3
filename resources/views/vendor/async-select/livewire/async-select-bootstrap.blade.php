@@ -213,7 +213,7 @@
 
         <div class="async-select-input-wrapper position-relative w-100">
             <div class="async-select-input-group input-group ">
-                <div class="async-select-trigger form-control d-flex align-items-center flex-wrap" style="min-height: 43px; cursor: text;" x-on:click="if ($refs.search) { $refs.search.focus(); openDropdown(); } else { openDropdown(); }" >
+                <div class=" form-control d-flex align-items-center flex-wrap" style="min-height: 30px; cursor: text;" x-on:click="if ($refs.search) { $refs.search.focus(); openDropdown(); } else { openDropdown(); }" >
                     @if ($this->multiple)
                         @foreach ($selectedOptions as $chip)
                             @php
@@ -259,8 +259,9 @@
                         <button class="btn-close p-0" style="font-size: 0.75rem; width: 1.25rem; height: 1.25rem; opacity: 0.5;" type="button" wire:click="clearSelection()" x-on:click.stop title="{{ __('async-select::async-select.clear') }}" aria-label="{{ __('async-select::async-select.clear') }}" ></button>
                     @endif
 
-                    <button class="btn btn-link p-0 border-0 d-flex align-items-center justify-content-center" style="font-size: 0.875rem; min-width: 1.5rem; min-height: 1.5rem; color: inherit;" type="button" x-on:click.stop="toggle()" aria-label="{{ __('async-select::async-select.toggle') }}" >
-                        <svg class="async-select-chevron" style="width: 1rem; height: 1rem; transition: transform 0.2s; display: inline-block; vertical-align: middle; flex-shrink: 0; pointer-events: none;" x-bind:style="{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" > <path d="M4 6L7.5 9.5L11 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/> </svg>
+                    <button class="btn btn-link p-0 border-0 d-flex align-items-center justify-content-center" style="font-size: 0.875rem; min-width: 1rem; min-height: 1rem; color: inherit;" type="button" x-on:click.stop="toggle()" aria-label="{{ __('async-select::async-select.toggle') }}" >
+                       {{-- <i class="ti ti-user"></i> --}}
+                         <svg class="async-select-chevron" style="width: 1rem; height: 1rem; transition: transform 0.2s; display: inline-block; vertical-align: middle; flex-shrink: 0; pointer-events: none;" x-bind:style="{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" > <path d="M4 6L7.5 9.5L11 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/> </svg>
                     </button>
                 </div>
 

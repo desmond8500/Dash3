@@ -18,6 +18,14 @@
 
 <div class="col-md-5 mb-3">
     <label class="form-label">Client</label>
+
+    <livewire:async-select name="client_id" wire:model="forfait_form.client_id" :options="$clients" placeholder="Selectionnez un client ..." />
+
+    @error('forfait_form.client_id') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+{{--
+<div class="col-md-5 mb-3">
+    <label class="form-label">Client</label>
     <select class="form-select" wire:model="forfait_form.client_id">
         <option value="">- Select - </option>
         @foreach ($clients as $client)
@@ -25,4 +33,4 @@
         @endforeach
     </select>
     @error('forfait_form.client_id') <span class='text-danger'>{{ $message }}</span> @enderror
-</div>
+</div> --}}

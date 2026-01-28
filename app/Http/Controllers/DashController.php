@@ -43,7 +43,7 @@ class DashController extends Controller
                 'password' => Hash::make('passer1234'),
             ]);
             $admin->assignRole('admin');
-            $admin->avatar = DashController::store_url_image('https://avatar.iran.liara.run/public', "test/user/$admin->id/avatar");
+            // $admin->avatar = DashController::store_url_image('https://avatar.iran.liara.run/public', "test/user/$admin->id/avatar");
             $admin->save();
         }
 
@@ -55,14 +55,14 @@ class DashController extends Controller
 
     static function store_url_image($url, $dir)
     {
-        if ($dir) {
-            $dir = "test/avatar";
-        }
-        $contents = file_get_contents($url);
-        $name = substr($url, strrpos($url, '/') + 1);
-        Storage::disk('public')->put("$dir/$name", $contents);
+        // if ($dir) {
+        //     $dir = "test/avatar";
+        // }
+        // $contents = file_get_contents($url);
+        // $name = substr($url, strrpos($url, '/') + 1);
+        // Storage::disk('public')->put("$dir/$name", $contents);
 
-        return "storage/$dir/$name";
+        // return "storage/$dir/$name";
     }
 
     public static  function initRoles(){

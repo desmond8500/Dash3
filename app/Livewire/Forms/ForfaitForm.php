@@ -25,7 +25,6 @@ class ForfaitForm extends Form
         $this->designation = ucfirst($this->designation);
     }
 
-
     function store(){
         $this->validate();
         Forfait::create($this->all());

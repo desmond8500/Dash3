@@ -19,6 +19,7 @@ class AchatForm extends Form
     public $description;
     public $date;
     public $status = "";
+    public $remise = 0;
 
     function fix(){
         $this->name = ucfirst($this->name);
@@ -35,7 +36,8 @@ class AchatForm extends Form
             'description' => $achat->description,
             'montant' => $achat->ttc(),
             'date' => $achat->date,
-            'type' => 'debit'
+            'type' => 'debit',
+            'remise' => $achat->remise,
         ]);
         $achat->transaction_id = $transaction->id;
         $achat->save();
@@ -46,7 +48,7 @@ class AchatForm extends Form
     function store(){
         $this->validate();
         Achat::create($this->all());
-        $this->reset('name','date','provider_id', 'journal_id', 'description', 'status');
+        $this->reset('name','date','provider_id', 'journal_id', 'description', 'status', 'remise');
     }
 
     function set($model_id){
@@ -57,6 +59,7 @@ class AchatForm extends Form
         $this->description = $this->achat->description;
         $this->date = $this->achat->date;
         $this->status = $this->achat->status;
+        $this->remise = $this->achat->remise;
     }
 
     function update(){

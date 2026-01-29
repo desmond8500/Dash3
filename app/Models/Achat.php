@@ -21,6 +21,7 @@ class Achat extends Model
         'description',
         'date',
         'status',
+        'remise',
     ];
 
     public function journal(): BelongsTo

@@ -17,6 +17,18 @@
     </select>
     @error('achat_form.provider_id') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
+<div class="col-md-3 mb-3">
+    <label class="form-label">Remise</label>
+    <select class="form-select" wire:model="achat_form.remise">
+        <option value="0">0%</option>
+        <option value="0.05">5%</option>
+        <option value="0.1">10%</option>
+        <option value="0.15">15%</option>
+        <option value="0.2">20%</option>
+    </select>
+    @error('achat_form.remise') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+
 <div class="col-md-5 mb-3">
     @if ($achat_form->journal_id)
         <label class="form-label required">Journal</label>

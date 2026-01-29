@@ -127,6 +127,21 @@ class AchatPage extends Component
         $this->a_row->delete($id);
     }
 
+    function incrementRowQuantity($row_id)
+    {
+        $row = AchatRow::find($row_id);
+        $row->quantite++;
+        $row->save();
+    }
+    function decrementRowQuantity($row_id)
+    {
+        $row = AchatRow::find($row_id);
+        if ($row->quantite > 1) {
+            $row->quantite--;
+            $row->save();
+        }
+    }
+
     public $facture;
 
     function addFacture(){

@@ -39,7 +39,7 @@ new class extends Component {
 
 <div>
     <div class="card p-2">
-        <div class="position-absolut top-0 ">
+        <div class="position-absolut top-0 mb-3">
             <div class="d-flex justify-content-between align-items-center">
                 <button class="btn btn-icon rounded btn-primary" wire:click="edit('{{ $client->id ?? 1 }}')">
                     <i class="ti ti-edit"></i>
@@ -62,15 +62,11 @@ new class extends Component {
                 @endif
             </div>
         </div>
-        <img src="{{ asset($client->avatar) }}" alt="img" class="w-100">
+
+        <img src="{{ asset($client->avatar ?? 'img/icons/user3.png') }}" alt="img" class="w-100">
         <h2 class="text-center mt-1 border-top mt-3 pt-1">{{ $client->name }}</h2>
         <p>{{ $client->description }}</p>
 
-        <div class="row g-2">
-            <div class="col-md-12">
-            </div>
-
-        </div>
     </div>
 
     @component('components.modal', ["id"=>'editClient', 'title'=>'Modifier un client', 'method'=>'update'])

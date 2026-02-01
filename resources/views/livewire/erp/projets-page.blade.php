@@ -24,7 +24,7 @@
 
         <div class="col-md-9">
             <div class="row row-deck g-2">
-                <div class="col-md-12">
+                <div class="col-md-12 bg-white mb-3 p-1 rounded">
                     <nav class="nav nav-segmented" role="tablist" wire:ignore>
                         <button class="nav-link active" role="tab" data-bs-toggle="tab" aria-selected="true" aria-current="page" wire:click="$set('tab', 'projets')">
                             Projets <span class="badge bg-blue text-blue-fg badge-pill">{{ $projets->count() }}</span>

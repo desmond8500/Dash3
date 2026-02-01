@@ -4,7 +4,6 @@ namespace App\Livewire\Forms;
 
 use App\Models\Journal;
 use Livewire\Attributes\Rule;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class JournalForm extends Form

@@ -17,6 +17,7 @@ class JournauxPage extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $breadcrumbs;
+    public $journal_id;
 
     #[On('get-news')]
     public function render()

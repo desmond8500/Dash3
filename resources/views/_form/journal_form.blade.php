@@ -26,7 +26,7 @@
         @error('journalForm.date') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-12 mb-3">
+    <div class="col-md-7 mb-3">
         <label class="form-label">Type</label>
         <div class="input-group">
             <input type="text" class="form-control" list="datalistTypes" wire:model="journalForm.type" placeholder="Type de rapport">
@@ -72,7 +72,7 @@
                     <div class="dropdown-menu" aria-labelledby="triggerId">
                         <a class="dropdown-item" wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n \n# Objet \n\n# Travaux effectués\n\n# Travaux restants\n ')"></i> Rapport 1</a>
                         <a class="dropdown-item"
-                            wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n- \n- \n \n# Objet  \n\n# Points retenus \n \n- \n- \n-  ')"></i>
+                            wire:click="$set('journalForm.description', '# Intervenants\n- \n- \n- \n- \n \n# Contexte  \n\n# Points retenus \n \n- \n- \n-  ')"></i>
                             Réunion 1</a>
                     </div>
                 </div>

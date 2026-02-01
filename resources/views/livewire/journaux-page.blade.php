@@ -16,12 +16,20 @@
             <div class="card" style="height: 75vh">
                 <div class="card-header">
                     <div class="card-title">Liste des journaux</div>
+                    <div class="card-actions">
+                        <div class="input-icon">
+                            <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher ">
+                            <span class="input-icon-addon">
+                                <i class="ti ti-search"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-blue-lt card-body card-body-scrollable card-body-scrollable-shadow">
+                <div class="bg-blue-lt p-2 card-body-scrollable card-body-scrollable-shadow">
                     <ul class="timeline timeline-simple">
                         @forelse ($journaux->sortByDesc('date') as $journal)
-                        <li class="timeline-event" wire:key='{{ $journal->id }}' >
-                            <div class="mb-1">
+                        <li class="timeline-event" wire:click="select({{ $journal->id }})" style="cursor: pointer; {{ $selected && $selected->id === $journal->id ? 'background-color: #e7f1ff;' : '' }}">
+                            <div class="mb-0">
                                 @component('_card.journal_card',['journal'=>$journal]) @endcomponent
                             </div>
                         </li>
@@ -33,9 +41,7 @@
                     </ul>
                 </div>
                 <div class="card-footer">
-                    <div>
-                        {{ $journaux->links() }}
-                    </div>
+                    {{ $journaux->links() }}
                 </div>
             </div>
         </div>
@@ -76,58 +82,9 @@
         </div>
     </div>
 
-
-
-
-    {{-- <div class="row g-2">
-        <div class="col-md-4">
-            @forelse ($journaux->sortByDesc('date') as $journal)
-                <div class="mb-1">
-                    @component('_card.journal_card',['journal'=>$journal]) @endcomponent
-
-                </div>
-            @empty
-                <div class="card mt-2">
-                    <i class="ti ti-mood-empty"></i>
-                </div>
-            @endforelse
-        </div>
-        <div class="col-md-8">
-
-        </div>
-        <div class="col-md-12">
-            {{ $journaux->links() }}
-        </div>
-    </div> --}}
-{{--
-    <div class="row g-2">
-        <div class="col-md-12">
-            <div class="row row-deck g-2">
-                @forelse ($journaux->sortByDesc('date') as $journal)
-                    <div class="col-md-4">
-                        @component('_card.journal_card',['journal'=>$journal]) @endcomponent
-                    </div>
-                @empty
-                    <div class="card mt-2">
-                        <i class="ti ti-mood-empty"></i>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-        <div class="col-md-12">
-            {{ $journaux->links() }}
-        </div>
-    </div> --}}
-
-    @component('components.modal', ["id"=>'editJournal', 'title'=> 'Editer un journal'])
+    @component('components.modal', ["id"=>'editJournal', 'title'=> 'Editer un journal', "method"=>'update_journal'])
         <form class="row" wire:submit="update_journal">
-
             @include('_form.journal_form')
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editJournal', event => { window.$('#editJournal').modal('show'); }) </script>
         <script> window.addEventListener('close-editJournal', event => { window.$('#editJournal').modal('hide'); }) </script>

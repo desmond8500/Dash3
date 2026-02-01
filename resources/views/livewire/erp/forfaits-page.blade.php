@@ -1,10 +1,27 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Forfaits', 'breadcrumbs'=>$breadcrumbs])
-        <button class='btn btn-primary' wire:click="$dispatch('open-addForfait')" ><i class='ti ti-plus'></i> Forfait</button>
+        <div class="btn-list">
+            <div class="input-icon">
+                <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher ">
+                <span class="input-icon-addon">
+                    <i class="ti ti-search"></i>
+                </span>
+            </div>
+            <div class="">
+                <select class="form-select">
+                    <option value="" wire:click="$set('client_id', '')">Tous</option>
+                    @foreach ($clients->sort() as $client)
+                        <option value="{{ $client->id }}" wire:click="$set('client_id', '{{ $client->id }}')">{{ $client->name }}</option>
+                    @endforeach
+                </select>
+                @error('Name') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+            <button class='btn btn-primary' wire:click="$dispatch('open-addForfait')" ><i class='ti ti-plus'></i> Forfait</button>
+        </div>
     @endcomponent
 
     <div class="row row-deck g-2">
-        @foreach ($forfaits as $forfait)
+        @forelse ($forfaits as $forfait)
             <div class="col-md-4">
                 <div class="card p-2">
                     <div class="row">
@@ -34,7 +51,17 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="col-12">
+                <div class="card p-4 text-center">
+                    <div class="text-muted">
+                        Aucun forfait trouvé. <br>
+                        Veuillez sélectionner un autre client ou <a href="#" wire:click="$dispatch('open-addForfait')">ajouter un nouveau forfait</a>.
+                    </div>
+                </div>
+            </div>
+
+        @endforelse
         <div class="card p-2">
             {{ $forfaits->links() }}
         </div>

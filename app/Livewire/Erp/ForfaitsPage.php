@@ -14,6 +14,9 @@ class ForfaitsPage extends Component
     use WithPagination;
     public ForfaitForm $forfait_form;
     public $breadcrumbs;
+    public $search = '';
+    #[Session]
+    public $client_id;
 
     function mount(){
         $this->breadcrumbs = array(
@@ -25,8 +28,12 @@ class ForfaitsPage extends Component
     public function render()
     {
         return view('livewire.erp.forfaits-page',[
-            'forfaits' => Forfait::paginate(12),
+            'forfaits' => Forfait::where('designation', 'like', "%{$this->search}%")
+                ->where('client_id', $this->client_id)
+                // ->where('client_id', 'like', "%{$this->client_id}%")
+                ->paginate(12),
             'clients' => Client::all(),
+            'clients_pluck' => Client::pluck('name','id'),
             'test' => Test::all(),
         ]);
     }
@@ -34,6 +41,7 @@ class ForfaitsPage extends Component
     function store(){
         $this->forfait_form->store();
         $this->dispatch('close-addForfait');
+
     }
 
     function edit($id){

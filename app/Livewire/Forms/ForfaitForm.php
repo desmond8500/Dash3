@@ -21,8 +21,8 @@ class ForfaitForm extends Form
     public $price;
 
     function fix(){
-        $this->description = ucfirst($this->description);
         $this->designation = ucfirst($this->designation);
+        $this->description = ucfirst($this->description);
     }
 
     function store(){

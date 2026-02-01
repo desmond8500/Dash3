@@ -37,14 +37,26 @@
                         <td> TOTAL HT </td>
                         <td class="text-end text-danger"> {{ number_format($achat->total(), 0, 2) }} CFA </td>
                     </tr>
+                    @if ($achat->tva())
+                        <tr>
+                            <td> TVA </td>
+                            <td class="text-end text-danger"> {{ number_format($achat->tva(), 0, 2) }} CFA </td>
+                        </tr>
+                    @endif
                     <tr>
-                        <td> TVA </td>
-                        <td class="text-end text-danger"> {{ number_format($achat->tva(), 0, 2) }} CFA </td>
-                    </tr>
-                    <tr>
-                        <td> TOTAL TTC </td>
+                        <td> TOTAL TTC</td>
                         <td class="text-end text-danger"> {{ number_format($achat->ttc(), 0, 2) }} CFA </td>
                     </tr>
+                    @if ($achat->remise > 0)
+                        <tr>
+                            <td> Remise {{ $achat->remise*100 }} %</td>
+                            <td class="text-end text-danger"> {{ number_format($achat->remise * ($achat->total()+$achat->tva()), 0, 2) }} CFA </td>
+                        </tr>
+                        <tr>
+                            <td> TOTAL TTC avec remise </td>
+                            <td class="text-end text-danger"> {{ number_format($achat->ttc()*(1-$achat->remise), 0, 2) }} CFA </td>
+                        </tr>
+                    @endif
                 </table>
 
             </div>
@@ -116,7 +128,20 @@
                                         </a>
                                     @endif
                                 </td>
-                                <td class="text-center">{{ $row->quantite }}</td>
+                                <td class="text-center">
+                                    <div x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false"
+                                        class="d-flex justify-content-evenly  hover:bg-gray-100 ">
+
+                                        <div x-show="hover" x-transition>
+                                            <button class="btn btn-sm rounded" wire:click="decrementRowQuantity({{ $row->id }})"> - </button>
+                                        </div>
+                                        <span class="">{{ $row->quantite }}</span>
+                                        <div x-show="hover" x-transition>
+                                            <button class="btn btn-sm rounded" wire:click="incrementRowQuantity({{ $row->id }})"> + </button>
+                                        </div>
+
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     <div>{{ number_format($row->prix, 0, 2) }} <span style="font-size: 10px">HT</span> </div>
                                     <div class="text-danger">{{ number_format($row->prix + $row->prix * $row->tva, 0, 2)}} <span style="font-size: 10px">TTC</span></div>
@@ -223,7 +248,7 @@
         <script> window.addEventListener('close-editAchat', event => { window.$('#editAchat').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editAchatRow', 'title'=>"Editer l'article", 'method'=>"achat_row_update"])
+    @component('components.modal', ["id"=>'editAchatRow', 'title'=>"Editer l'article", 'method'=>"row_update"])
         <form class="row" wire:submit="row_update">
             @include('_form.achat_row_form')
         </form>

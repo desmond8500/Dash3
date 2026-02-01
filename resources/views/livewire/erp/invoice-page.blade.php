@@ -291,6 +291,14 @@
         @elseif($row_tab==4)
 
             <div class="row g-2">
+                <div class="col-md-12">
+                    <div class="input-icon mb-3">
+                        <input type="text" class="form-control form-control-rounded" wire:model.live="search_forfait" placeholder="Chercher un forfait">
+                        <span class="input-icon-addon">
+                            <i class="ti ti-search"></i>
+                        </span>
+                    </div>
+                </div>
                 @foreach ($forfaits as $forfait)
                     <div class="col-md-6" wire:click="forfait('{{ $forfait->id }}')">
                         <div class="card p-2">
@@ -320,6 +328,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="col-md-12">
+                    {{ $forfaits->links() }}
+                </div>
             </div>
 
         @endif

@@ -37,6 +37,7 @@ class InvoicePage extends Component
     public $search ='';
     public $breadcrumbs;
     public $devis;
+    public $search_forfait = '';
 
     public function mount($invoice_id){
         $this->devis = Invoice::find($invoice_id);
@@ -64,7 +65,7 @@ class InvoicePage extends Component
             'statuses' => InvoiceController::statut(),
             'forfaits' => Forfait::all(),
             'models' => InvoiceModel::all(),
-            'forfaits' => Forfait::where('client_id', $this->devis->projet->client_id)->get(),
+            'forfaits' => Forfait::where('client_id', $this->devis->projet->client_id)->whereLike('designation', '%'.$this->search_forfait.'%')->paginate(6),
         ]);
     }
 

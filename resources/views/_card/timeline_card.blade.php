@@ -4,14 +4,15 @@
     </div>
     <div class="card timeline-event-card">
         <div class="row p-2">
-            <div class="col-auto">
+            <div class="col-2">
                 <div class="text-secondary ">{{ $timeline->formatDate($timeline->created_at) }}</div>
                 <h4 class="text-uppercase">{{ $timeline->title }}</h4>
                 <p class="text-secondary">{{ $timeline->description }}</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 @if ($timeline->invoice)
-                    <div class="border-bottom pb-1 mb-1">
+                @include('_card.invoice_card',['invoice'=>$timeline->invoice])
+                    {{-- <div class="border-bottom pb-1 mb-1">
                         <span class="text-primary">{{ $timeline->invoice->projet->client->name }}</span> /
                         <span class="text-purple">{{ $timeline->invoice->projet->name }}</span>
                     </div>
@@ -33,15 +34,15 @@
                     <div>
                         @if ($timeline->invoice->paydate != null)
                         <div class=" text-purple"> <i class="ti ti-check"></i> {{ $timeline->invoice->dateFormat($timeline->invoice->paydate) }} </div>
-                        {{-- @else
-                        <div class=""> <i class="ti ti-calendar"></i> {{ date_format($timeline->invoice->created_at, "d-m-Y") }} </div> --}}
                         @endif
                         <div class=" text-end text-indigo fw-bold fs-3">{{ number_format($timeline->invoice->total(), 0,'.', ' ') }} F</div>
-                    </div>
+                    </div> --}}
+                @elseif($timeline->journal)
+                    @component('_card.journal_card',['journal'=>$timeline->journal]) @endcomponent
                 @endif
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
 
             </div>
         </div>

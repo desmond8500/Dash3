@@ -80,4 +80,14 @@ class TimelineForm extends Form
 
         ]);
     }
+
+    // Journal
+    function add_journal($projet_id, $journal_id){
+        Timeline::create([
+            'user_id'=> auth()->user()->id,
+            'title' => "Ajout d'un journal",
+            'journal_id' => $journal_id,
+            'projet_id' => $projet_id,
+        ]);
+    }
 }

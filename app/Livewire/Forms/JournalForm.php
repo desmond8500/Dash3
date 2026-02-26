@@ -10,6 +10,7 @@ class JournalForm extends Form
 {
     public Journal $journal;
 
+    public $id;
     #[Rule('required')]
     public $user_id;
     public $client_id;
@@ -30,7 +31,7 @@ class JournalForm extends Form
         $this->user_id = auth()->user()->id;
         $this->validate();
         $this->fix();
-        Journal::create($this->all());
+        return Journal::create($this->all());
     }
 
     function set($model_id){
@@ -55,4 +56,5 @@ class JournalForm extends Form
     function delete(){
         $this->journal->delete();
     }
+
 }

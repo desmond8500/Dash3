@@ -12,7 +12,7 @@
             <div class="card timeline-event-card">
                 <div class="row g-2 p-2">
                     <div class="col-auto">
-                        <img src="{{ asset($projet->client->avatar) }}" alt="avatar" class="avatar avatar-xl">
+                        <img src="{{ asset($projet->client->avatar ?? 'img/icons/user1.png') }}" alt="avatar" class="avatar avatar-xl p-1">
                     </div>
                     <div class="col">
                         <h1>{{ $projet->name }}</h1>

@@ -52,7 +52,6 @@ new class extends Component {
             ->search($this->search,'reference')
             ->paginate(8);
         }
-
     }
 
     function editInvoice($id)
@@ -89,7 +88,6 @@ new class extends Component {
         $this->invoice_form->replicate($invoice_id);
     }
 
-
 }; ?>
 
 <div class="card">
@@ -104,7 +102,6 @@ new class extends Component {
                         <i class="ti ti-search"></i>
                     </span>
                 </div>
-                {{-- @livewire('form.invoice-add', ['projet_id' => $projet_id], key(1)) --}}
                 @livewire('invoice_add_extended', ['projet_id' => $projet_id], key(2))
                 <div class="col-2 text-center" >
                     @include('_buttons.quotation_filter')

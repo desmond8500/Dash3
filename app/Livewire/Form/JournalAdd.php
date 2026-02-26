@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Form;
 
+use App\Http\Controllers\TimelineController;
 use App\Livewire\Forms\JournalForm;
 use App\Models\Client;
 use App\Models\Journal;
@@ -48,7 +49,12 @@ class JournalAdd extends Component
         $this->journalForm->client_id= $this->client_id;
         $this->journalForm->projet_id= $this->projet_id;
         $this->journalForm->devis_id= $this->devis_id;
-        $this->journalForm->store();
+        $journal = $this->journalForm->store();
+
+        // Timeline
+        $timeline = new TimelineController();
+        $timeline->add_journal($this->projet_id, $journal->id);
+
         $this->dispatch('close-addJournal');
         $this->dispatch('get-news');
     }

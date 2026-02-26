@@ -37,4 +37,8 @@ class Timeline extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
+    public function journal(): BelongsTo
+    {
+        return $this->belongsTo(Journal::class);
+    }
 }

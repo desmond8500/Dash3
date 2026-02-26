@@ -28,11 +28,17 @@ class ItemsApiController extends Controller
      *       ),
      *     )
      */
-    function index(){
-        $articles = Article::all();
+    function index(Request $request){
+        $perPage = min($request->get('per_page', 10), 100);
+        $articles = Article::paginate($perPage);
         $articles = ArticleResource::collection($articles);
 
-        return ResponseController::response(true, "Les articles ont été récupérés",$articles);
+        return ResponseController::response(true, "Les articles ont été récupérés",$articles, [
+            'current_page' => $articles->currentPage(),
+            'last_page' => $articles->lastPage(),
+            'per_page' => $articles->perPage(),
+            'total' => $articles->total(),
+        ]);
     }
 
     /**

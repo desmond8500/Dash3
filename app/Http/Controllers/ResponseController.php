@@ -16,28 +16,28 @@ class ResponseController extends Controller
      * @return type
      * @throws conditon
      **/
-    public static function response($success, $message, $data = null, $code = null)
+    public static function response($success, $message, $data = null, $meta = null)
     {
         if ($success) {
             $response = [
                 'success' => $success,
                 'message' => $message,
                 'data' => $data,
+                'meta' => $meta,
             ];
         } else {
             $response = [
                 'success' => $success,
                 'message' => $message,
                 'error' => $data,
+                'meta' => $meta,
             ];
         }
 
-        if (!$code) {
-            if ($success) {
-                $code = 200;
-            } else {
-                $code = 400;
-            }
+        if ($success) {
+            $code = 200;
+        } else {
+            $code = 400;
         }
 
         return response()->json($response, $code);

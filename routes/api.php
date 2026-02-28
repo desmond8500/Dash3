@@ -7,6 +7,7 @@ use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
 use App\Http\Controllers\api\ProviderAPIController;
+use App\Http\Controllers\API\TaskAPIController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\LiensControlleur;
@@ -73,7 +74,7 @@ Route::prefix('v1')->group(function () {
     // Transaction
     Route::get('transactions', [TransactionController::class, 'get_transactions']);
     // Taches
-    Route::resource('tasks', TaskController::class);
+    Route::resource('tasks', TaskAPIController::class);
     // Liens
     Route::resource('liens', LiensControlleur::class);
 });

@@ -95,22 +95,7 @@ class TaskController extends Controller
         }
     }
 
-    /**
-    *@OA\Get(
-    *      path="/api/v1/tasks",
-    *      tags={"Taches"},
-    *      summary="Liste des taches",
-    *      @OA\Response(
-    *          response=200,
-    *          description="Les taches ont été récupérés avec succès",
-    *       ),
-    *     )
-    */
 
-    function index(){
-        $users = Task::all();
-        return ResponseController::response(true, 'Les taches ont été récupérés avec succès', $users);
-    }
 
     function show(){
         return 'show';

@@ -20,9 +20,22 @@ class ClientAPIController extends Controller
     *       ),
     *     )
     */
-    function index(){
-         $clients = Client::all();
-         return ResponseController::response(true, 'Les  clients  ont été récupérés avec succès', $clients);
+    function index(Request $request){
+        $perPage = min($request->get('per_page', 10), 100);
+        if ($request->search) {
+            $clients = Client::where('name', 'like', '%' . $request->search . '%')
+                ->paginate($perPage);
+        } else {
+            $clients = Client::paginate($perPage);
+        }
+
+        $clients = Client::paginate($perPage);
+        return ResponseController::response(true, 'Les  clients  ont été récupérés avec succès', $clients, [
+            'current_page' => $clients->currentPage(),
+            'last_page' => $clients->lastPage(),
+            'per_page' => $clients->perPage(),
+            'total' => $clients->total(),
+        ]);
     }
 
     /**

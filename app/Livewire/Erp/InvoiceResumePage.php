@@ -21,6 +21,7 @@ class InvoiceResumePage extends Component
         return view('livewire.erp.invoice-resume-page',[
             'invoices' => $this->get_invoices(),
             'acomptes' => $this->getAcomptes(),
+            'acomptes_sum' => $this->getAcomptesSum(),
         ]);
     }
 
@@ -45,6 +46,20 @@ class InvoiceResumePage extends Component
                 $q->whereYear('date', $year);
             }])
             ->get();
+        return $acomptes;
+    }
+    function getAcomptesSum() {
+        $year = $this->year;
+        $acomptes = Invoice::with('acomptes')
+            ->unpaid()
+            ->whereHas('acomptes', function ($q) use ($year) {
+                $q->whereYear('date', $year);
+            })
+            ->with(['acomptes' => function ($q) use ($year) {
+                $q->whereYear('date', $year);
+            }])
+            ->where('statut', true)
+            ->sum('montant');
         return $acomptes;
     }
 

@@ -85,6 +85,12 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfooter>
+                <tr>
+                    <td colspan="3" class="text-end fw-bold">Total</td>
+                    <td colspan="5" class="fw-bold">{{ number_format($invoices->where('comptabilise', true)->sum(function($invoice) { return $invoice->total(); }), 0,'.', ' ')}} F</td>
+                </tr>
+            </tfooter>
         </table>
 
     </div>
@@ -107,6 +113,9 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $acomptetotal = 0;
+                @endphp
                 @foreach ($acomptes as $key => $invoice)
                     <tr>
                         <td class="text-center">{{ $key+1 }}</td>
@@ -138,6 +147,11 @@
                                         </td>
                                         <td><span>{{ $acompte->dateFormat($acompte->date) }}</span></td>
                                     </tr>
+                                    @php
+                                        if ($acompte->statut) {
+                                            $acomptetotal += $acompte->montant;
+                                        }
+                                    @endphp
                                 @endforeach
                             </table>
                         </td>
@@ -160,6 +174,12 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfooter>
+                <tr>
+                    <td colspan="3" class="text-end fw-bold">Total</td>
+                    <td colspan="5" class="fw-bold">{{ number_format($acomptetotal, 0,'.', ' ')}} F</td>
+                </tr>
+            </tfooter>
         </table>
 
     </div>

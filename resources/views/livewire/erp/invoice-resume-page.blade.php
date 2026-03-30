@@ -17,6 +17,7 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Résumé des factures</h3>
+            <div class="card-actions">{{ $year }}</div>
         </div>
         <table class="table table-hover">
             <thead class="sticky-top">
@@ -91,6 +92,7 @@
     <div class="card mt-2">
         <div class="card-header">
             <h3 class="card-title">Résumé des acomptes</h3>
+            <div class="card-actions">{{ $year }}</div>
         </div>
         <table class="table table-hover">
             <thead class="sticky-top">

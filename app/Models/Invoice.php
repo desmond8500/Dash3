@@ -90,4 +90,12 @@ class Invoice extends Model
         return $this->hasMany(InvoiceProposal::class);
     }
 
+    public function scopeUnpaid($query)
+    {
+        return $query->where(function ($q) {
+            $q->whereNull('paydate')
+                ->orWhere('paydate', '');
+        });
+    }
+
 }

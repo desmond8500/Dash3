@@ -35,12 +35,15 @@ class InvoiceResumePage extends Component
     }
 
     function getAcomptes() {
-        $acomptes = Invoice::where(function ($q) {
-            $q->whereNull('paydate')
-                ->orWhere('paydate', '');
-        })
-            ->whereYear('paydate', $this->year)
-            ->whereHas('acomptes')
+        $year = $this->year;
+        $acomptes = Invoice::with('acomptes')
+            ->unpaid()
+            ->whereHas('acomptes', function ($q) use ($year) {
+                $q->whereYear('date', $year);
+            })
+            ->with(['acomptes' => function ($q) use ($year) {
+                $q->whereYear('date', $year);
+            }])
             ->get();
         return $acomptes;
     }

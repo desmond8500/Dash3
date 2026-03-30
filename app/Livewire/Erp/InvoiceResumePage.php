@@ -25,12 +25,7 @@ class InvoiceResumePage extends Component
     }
 
     public function get_invoices() {
-        // $invoices = Invoice::whereYear('created_at', $this->year)
-        //     ->whereMonth('created_at', $this->month)
-        //     ->get();
-
         $invoices = Invoice::whereYear('paydate', $this->year)->orderBy('paydate', 'asc')->get();
-
         return $invoices;
     }
 

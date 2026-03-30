@@ -1,15 +1,19 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Liste des devis', 'breadcrumbs'=>$breadcrumbs])
-
-        <div class="dropdown open ">
-            <button class="btn " type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                <i class="ti ti-chevron-down"></i> Date
-            </button>
-            <div class="dropdown-menu" aria-labelledby="triggerId">
-                <a class="dropdown-item" wire:click="$set('year', 2024)"> 2024 </a>
-                <a class="dropdown-item" wire:click="$set('year', 2025)"> 2025 </a>
-                <a class="dropdown-item" wire:click="$set('year', 2026)"> 2026 </a>
+        <div class="btn-list">
+            <div class="dropdown open ">
+                <button class="btn " type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <i class="ti ti-chevron-down"></i> Date
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <a class="dropdown-item" wire:click="$set('year', 2024)"> 2024 </a>
+                    <a class="dropdown-item" wire:click="$set('year', 2025)"> 2025 </a>
+                    <a class="dropdown-item" wire:click="$set('year', 2026)"> 2026 </a>
+                </div>
             </div>
+
+            <a href="{{ route('invoice_resume_pdf',['year'=> $year]) }}" class="btn btn-primary" target="_blank" >PDF</a>
+
         </div>
 
     @endcomponent
@@ -22,13 +26,13 @@
         <table class="table table-hover">
             <thead class="sticky-top">
                 <tr>
-                    <td width="25" class="text-center">#</td>
-                    <td>Client/projet</td>
-                    <td>Devis</td>
-                    <td>Total</td>
-                    <td>Date</td>
-                    <td>Acomptes</td>
-                    <td>Actions</td>
+                    <th width="25" class="text-center">#</th>
+                    <th>Client/projet</th>
+                    <th>Devis</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>Acomptes</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -103,13 +107,13 @@
         <table class="table table-hover">
             <thead class="sticky-top">
                 <tr>
-                    <td width="25" class="text-center">#</td>
-                    <td>Client/projet</td>
-                    <td>Devis</td>
-                    <td>Total</td>
-                    <td>Date</td>
-                    <td>Acomptes</td>
-                    <td>Actions</td>
+                    <th width="25" class="text-center">#</th>
+                    <th>Client/projet</th>
+                    <th>Devis</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>Acomptes</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>

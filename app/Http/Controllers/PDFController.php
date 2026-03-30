@@ -463,6 +463,28 @@ class PDFController extends Controller
             'color3' => env('COLOR3', '6b8a7a'),
         ];
     }
+    static function invoice_resume_pdf($year)
+    {
+        $invoices = Invoice::whereYear('paydate', $year)->orderBy('paydate', 'asc')->get();
+        $acomptes = Invoice::with('acomptes')
+            ->unpaid()
+            ->whereHas('acomptes', function ($q) use ($year) {
+                $q->whereYear('date', $year);
+            })
+            ->with(['acomptes' => function ($q) use ($year) {
+                $q->whereYear('date', $year);
+            }])
+            ->get();
+
+        $data = [
+            'invoices' => $invoices,
+            'acomptes' => $acomptes,
+            'year' => $year,
+        ];
+
+        $pdf = Pdf::loadView("_pdf.facture.invoice_resume_pdf", $data)->setPaper('a4', 'landscape');
+        return $pdf->stream("Resumé des factures $year");
+    }
     static function attestation_pdf($team_id)
     {
         $team = Team::find($team_id);

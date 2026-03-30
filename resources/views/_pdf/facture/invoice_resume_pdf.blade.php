@@ -19,8 +19,8 @@
     <table class="table" style="width: 100%; margin-bottom: 20px;">
         <thead>
             <tr>
-                <th  class="text-center">#</th>
-                <th>Client/projet</th>
+                <th  class="text-center" width="10">#</th>
+                <th width="150">Client/projet</th>
                 <th>Devis</th>
                 <th>Total</th>
                 <th>Date</th>
@@ -41,16 +41,16 @@
                         </a>
                         <div>{!! $invoice->description !!}</div>
                     </td>
-                    <td align="right">{{ number_format($invoice->total() , 0,'.', ' ')}} F</td>
+                    <td align="right" width="70">{{ number_format($invoice->total() , 0,'.', ' ')}} F</td>
                     {{-- <td>{{ $invoice->paydate ?? 'NA' }}</td> --}}
-                    <td>
+                    <td width="65">
                         @if ($invoice->paydate)
                             {{ $invoice->dateFormat($invoice->paydate) }}
                         @else
                             NA
                         @endif
                     </td>
-                    <td>
+                    <td width="150">
                         <table>
                             @foreach ($invoice->acomptes as $acompte)
                                 <tr>
@@ -72,7 +72,7 @@
         <thead>
             <tr>
                 <th  class="text-center">#</th>
-                <th>Client/projet</th>
+                <th width="150">Client/projet</th>
                 <th>Devis</th>
                 <th>Total</th>
                 <th>Date</th>
@@ -81,8 +81,8 @@
         </thead>
         <tbody>
             @foreach($acomptes as $key => $invoice)
-                <tr>
-                    <td class="text-center">{{ $key+1 }}</td>
+                <tr >
+                    <td width="10" class="text-center">{{ $key+1 }}</td>
                     <td >
                         <div class="fw-bold">{{ $invoice->projet->client->name }}</div>
                         <div>{{ $invoice->projet->name }}</div>
@@ -93,16 +93,16 @@
                         </a>
                         <div>{!! $invoice->description !!}</div>
                     </td>
-                    <td align="right">{{ number_format($invoice->total() , 0,'.', ' ')}} F</td>
+                    <td align="right" width="70">{{ number_format($invoice->total() , 0,'.', ' ')}} F</td>
                     {{-- <td>{{ $invoice->paydate ?? 'NA' }}</td> --}}
-                    <td>
+                    <td width="65">
                         @if ($invoice->paydate)
                             {{ $invoice->dateFormat($invoice->paydate) }}
                         @else
                             NA
                         @endif
                     </td>
-                    <td>
+                    <td width="150">
                         <table>
                             @foreach ($invoice->acomptes as $acompte)
                                 <tr>

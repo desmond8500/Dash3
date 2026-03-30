@@ -32,6 +32,7 @@ class Invoice extends Model
         'favorite',
         'facture_date',
         'paydate',
+        'comptabilise'
 
     ];
 

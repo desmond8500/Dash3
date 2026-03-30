@@ -6,6 +6,7 @@ use App\Http\Controllers\API\ClientAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
+use App\Http\Controllers\API\ProjetAPIController;
 use App\Http\Controllers\api\ProviderAPIController;
 use App\Http\Controllers\API\TaskAPIController;
 use App\Http\Controllers\API\TransactionController;
@@ -39,12 +40,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::get('demos', [DemoController::class, 'index'])->name('demos');
 // Clients
 Route::prefix('v1')->group(function () {
-    // Route::get('demos', [DemoController::class, 'index'])->name('demos');
+    // Clients
     Route::resource('clients', ClientAPIController::class);
     Route::get('clients/projets/{id}', [ClientAPIController::class, 'getProjets']);
     Route::get('clients/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
+    // Projets
+    Route::resource('projets', ProjetAPIController::class);
+    // Route::get('projet', [ProjetAPIController::class, 'index']);
 
-    Route::resource('projets', ClientAPIController::class);
 });
 
 // Articles

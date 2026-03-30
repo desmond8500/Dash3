@@ -227,13 +227,13 @@
                 }
             }
         },
-        "/api/v1/clients/{id}/projets": {
+        "/api/v1/clients/projets/{id}": {
             "get": {
                 "tags": [
                     "Clients"
                 ],
                 "summary": "Liste des projets d'un client",
-                "operationId": "41f833633de608fd59784dd6444f5e42",
+                "operationId": "1fad2e6b9f91140ae980087a0b43439f",
                 "parameters": [
                     {
                         "name": "id",
@@ -536,6 +536,53 @@
                 ],
                 "description": "Liste des articles",
                 "operationId": "0df34968107a5a285245db41b7101cad",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "path",
+                        "description": "Recherche par nom ou référence",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "a string value",
+                                "value": "test"
+                            }
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "Page de pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "a string value",
+                                "value": "test"
+                            }
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "path",
+                        "description": "Nombre d'éléments par page",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "a string value",
+                                "value": "test"
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success"
@@ -543,16 +590,16 @@
                 }
             }
         },
-        "/api/v1/items/{id}": {
+        "/api/v1/items/{article_id}": {
             "get": {
                 "tags": [
                     "Articles"
                 ],
                 "description": "afficher un article",
-                "operationId": "099ce4e523f80e52b4ad983ba3af17ce",
+                "operationId": "3057c5a562eef036187d28de146acccc",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "article_id",
                         "in": "path",
                         "description": "Parameter with example",
                         "required": true,
@@ -574,6 +621,50 @@
                 }
             }
         },
+        "/api/v1/projets": {
+            "get": {
+                "tags": [
+                    "Projets"
+                ],
+                "summary": "Liste des projets",
+                "operationId": "a4c27241695b3afdd7b332d58197b143",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "path",
+                        "description": "Terme de recherche pour filtrer les projets par nom",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Utilisateurs récupérés avec succès"
+                    }
+                }
+            }
+        },
+        "/api/v1/projets/{id}": {
+            "get": {
+                "tags": [
+                    "Projets"
+                ],
+                "summary": "Récupération d'un projet",
+                "operationId": "be1fc823cfb3e9879c3536e4b819a466",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du projet",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Projet récupéré avec succès"
+                    }
+                }
+            }
+        },
         "/api/v1/providers": {
             "get": {
                 "tags": [
@@ -584,6 +675,20 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/tasks": {
+            "get": {
+                "tags": [
+                    "Taches"
+                ],
+                "summary": "Liste des taches",
+                "operationId": "2d1e893df10937d7fadc87a7c7cbd7be",
+                "responses": {
+                    "200": {
+                        "description": "Les taches ont été récupérés avec succès"
                     }
                 }
             }
@@ -646,20 +751,6 @@
                     }
                 }
             }
-        },
-        "/api/v1/tasks": {
-            "get": {
-                "tags": [
-                    "Taches"
-                ],
-                "summary": "Liste des taches",
-                "operationId": "4293c00a4cffdb881d9f6c2099875f96",
-                "responses": {
-                    "200": {
-                        "description": "Les taches ont été récupérés avec succès"
-                    }
-                }
-            }
         }
     },
     "tags": [
@@ -684,8 +775,16 @@
             "description": "Articles"
         },
         {
+            "name": "Projets",
+            "description": "Projets"
+        },
+        {
             "name": "Fournisseurs",
             "description": "Fournisseurs"
+        },
+        {
+            "name": "Taches",
+            "description": "Taches"
         },
         {
             "name": "Transactions",
@@ -698,10 +797,6 @@
         {
             "name": "Factures",
             "description": "Factures"
-        },
-        {
-            "name": "Taches",
-            "description": "Taches"
         }
     ]
 }

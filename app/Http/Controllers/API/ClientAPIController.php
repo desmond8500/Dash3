@@ -29,7 +29,6 @@ class ClientAPIController extends Controller
             $clients = Client::paginate($perPage);
         }
 
-        $clients = Client::paginate($perPage);
         return ResponseController::response(true, 'Les  clients  ont été récupérés avec succès', $clients, [
             'current_page' => $clients->currentPage(),
             'last_page' => $clients->lastPage(),
@@ -217,33 +216,33 @@ class ClientAPIController extends Controller
         }
     }
     /**
-    *@OA\Get(
-    *      path="/api/v1/clients/{id}/projets",
-    *      tags={"Clients",},
-    *      summary="Liste des projets d'un client",
-    *      @OA\Parameter(
-    *          name="id",
-    *          in="path",
-    *          required=true,
-    *          description="ID du client",
-    *          @OA\Schema(
-    *              type="integer"
-    *          )
-    *      ),
-    *      @OA\Response(
-    *          response=200,
-    *          description="Projets récupérés avec succès",
-    *       ),
-    *      @OA\Response(
-    *          response=404,
-    *          description="Client non trouvé",
-    *       ),
-    *      @OA\Response(
-    *          response=400,
-    *          description="Erreur lors de la récupération des projets",
-    *       ),
-    *     )
-    */
+     *@OA\Get(
+     *      path="/api/v1/clients/projets/{id}",
+     *      tags={"Clients",},
+     *      summary="Liste des projets d'un client",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID du client",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Projets récupérés avec succès",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Client non trouvé",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Erreur lors de la récupération des projets",
+     *       ),
+     *     )
+     */
 
     function getProjets($id){
         $client = Client::find($id);

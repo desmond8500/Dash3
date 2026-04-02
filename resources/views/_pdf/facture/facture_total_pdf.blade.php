@@ -29,15 +29,21 @@
                         <td class="text-end">0 F CFA</td>
                     </tr>
                 @endif
+                @if ($devis->remise)
+                    <tr>
+                        <td>Remise</td>
+                        <td class="text-end">{{ number_format($total_marge * $devis->remise, 0,'.', ' ') }} F CFA</td>
+                    </tr>
+                @endif
                 <tr>
                     <td>TOTAL TTC</td>
                     <td class="text-end">
                         @if ($devis->tax == 'tva')
-                            {{ number_format($total_marge*1.18, 0,'.', ' ') }}
+                            {{ number_format($total_marge*1.18 - $total_marge * $devis->remise, 0,'.', ' ') }}
                         @elseif($devis->tax == 'brs')
-                            {{ number_format($total_marge - $total_marge * 0.05, 0,'.', ' ') }}
+                            {{ number_format($total_marge - $total_marge * 0.05 - $total_marge * $devis->remise, 0,'.', ' ') }}
                         @else
-                            {{ number_format($total_marge, 0,'.', ' ') }}
+                            {{ number_format($total_marge - $total_marge * $devis->remise, 0,'.', ' ') }}
                         @endif
                         F CFA
                     </td>

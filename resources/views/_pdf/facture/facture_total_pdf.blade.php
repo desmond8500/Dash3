@@ -29,9 +29,9 @@
                         <td class="text-end">0 F CFA</td>
                     </tr>
                 @endif
-                @if ($devis->remise)
+                @if ($devis->remise > 0)
                     <tr>
-                        <td>Remise</td>
+                        <td>Remise {{ $devis->remise*100 }}%</td>
                         <td class="text-end">{{ number_format($total_marge * $devis->remise, 0,'.', ' ') }} F CFA</td>
                     </tr>
                 @endif

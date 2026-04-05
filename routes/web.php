@@ -338,3 +338,10 @@ Route::fallback(function() {
 Route::get('pdf_v1/{title}', function ($title) {
     return PDFController::pdf_v1($title);
 })->name('pdf_v1');
+
+Route::get('pdf_v2/{title}', function ($title) {
+
+    return Pdf::view('_pdf.test')
+        ->format('a4')
+        ->save('invoice.pdf');
+})->name('pdf_v2');

@@ -43,6 +43,9 @@
                 <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'documents')">
                     Documents
                 </button>
+                <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tabs', 'installations')">
+                    Installations
+                </button>
             </nav>
 
             @switch($tabs)
@@ -71,6 +74,10 @@
 
                 @case("journaux")
                     @livewire('erp.journaux', ['projet_id' => $projet_id, 'class'=> 'col-md-6', 'paginate' => 8],)
+                @break
+
+                @case("installations")
+                    @livewire('erp.installations', ['projet_id' => $projet_id])
                 @break
 
                 @default

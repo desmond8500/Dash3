@@ -5,22 +5,113 @@
     @endcomponent
 
     <div class="row g-2">
-        <div class="col-md-6">
-            <div class="card card-body">
-                <div>
-                    <span class="fw-bold">
-                        Client : </span> <span>{{ $devis->client_name ?? $devis->projet->client->name}}
-                    </span>
-                </div>
-                <div>
-                    <span class="fw-bold">Projet : </span> <span>{{ $devis->projet->name }}</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card card-body">
-                <div class="fw-bold">Description</div>
-                <div>{!! nl2br($devis->description) !!}</div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <table class="table table-hover">
+                    <thead class="sticky-top">
+                        <tr>
+                            <td>Section</td>
+                            <td width="50px">Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="text-uppercase fw-bold">Client</div>
+                                <div>{{ $devis->client_name ?? $devis->projet->client->name }} {{ $devis->client_name }}</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-icon" wire:click="toggleSet('client_name')">
+                                    @if ($proposal->client_name)
+                                        <i class="ti ti-eye"></i>
+                                    @else
+                                        <i class="ti ti-eye-closed"></i>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="text-uppercase fw-bold">Projet</div>
+                                <div>{{ $devis->projet->name }}</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-icon" wire:click="toggleSet('projet_name')">
+                                    @if ($proposal->projet_name)
+                                        <i class="ti ti-eye"></i>
+                                    @else
+                                        <i class="ti ti-eye-closed"></i>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="text-uppercase fw-bold">Description</div>
+                                <div>{!! nl2br($devis->description) !!}</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-icon" wire:click="toggleSet('description')">
+                                    @if ($proposal->description)
+                                        <i class="ti ti-eye"></i>
+                                    @else
+                                        <i class="ti ti-eye-closed"></i>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="text-uppercase fw-bold">Logo</div>
+                                <div></div>
+                            </td>
+                            <td>
+                                <div class="btn btn-icon" wire:click="toggleSet('logo')">
+                                    @if ($proposal->logo)
+                                        <i class="ti ti-eye"></i>
+                                    @else
+                                        <i class="ti ti-eye-closed"></i>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="text-uppercase fw-bold">Footer</div>
+                                <div>
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn btn-icon" wire:click="toggleSet('footer')">
+                                    @if ($proposal->footer)
+                                        <i class="ti ti-eye"></i>
+                                    @else
+                                        <i class="ti ti-eye-closed"></i>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="text-uppercase fw-bold">Détails</div>
+                                <div>
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn btn-icon" wire:click="toggleSet('details')">
+                                    @if ($proposal->details)
+                                        <i class="ti ti-eye"></i>
+                                    @else
+                                        <i class="ti ti-eye-closed"></i>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 

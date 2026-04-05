@@ -19,6 +19,7 @@ class InvoiceProposalForm extends Form
     public $description;
     public $footer;
     public $details;
+    public $company_name;
 
 
     function store(){
@@ -35,6 +36,7 @@ class InvoiceProposalForm extends Form
         $this->description = $this->proposal->description;
         $this->footer = $this->proposal->footer;
         $this->details = $this->proposal->details;
+        $this->company_name = $this->proposal->company_name;
     }
 
     function update(){

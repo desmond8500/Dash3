@@ -15,11 +15,12 @@
 
     <div class="col-auto mb-3">
         <label class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" wire:model="form.client_name" />
+            <input class="form-check-input" type="checkbox" wire:model="form.client_name" checked="{{ $form->client_name }}"/>
 
             <span class="form-check-label">Nom du client</span>
         </label>
         <select class="form-select" wire:model="form.client_name">
+            <option value="{{ $form->client_name }}">{{ $form->client_name }}</option>
             <option value="1">1</option>
             <option value="0">0</option>
         </select>
@@ -70,6 +71,17 @@
             <option value="0">0</option>
         </select>
         @error('form.description') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+    <div class="col-auto mb-3">
+        <label class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" wire:model="form.company_name" />
+            <span class="form-check-label">Nom de la société</span>
+        </label>
+        <select class="form-select" wire:model="form.company_name">
+            <option value="1">1</option>
+            <option value="0">0</option>
+        </select>
+        @error('form.company_name') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
 

@@ -9,6 +9,7 @@ class InvoiceProposal extends Model
     protected $fillable = [
         'invoice_id',
         'logo',
+        'company_name',
         'client_name',
         'projet_name',
         'description',

@@ -30,7 +30,9 @@
                 @endif
             </td>
             <td width="300px" class="border_white fw-bold" align="left" style="{{ $title_css }}; color: #{{ $color1 }}" >
-                <div>{{ env('MAIN_NAME') }}</div>
+                @if ($proposal->company_name>0)
+                    <div>{{ env('MAIN_NAME') }}</div>
+                @endif
             </td>
             <td align="right" class="border_white">
                 <div class="doc_title" style="text-transform: uppercase; color: #{{ $color1 }} ">{{ $title }}</div>
@@ -138,8 +140,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="page-break"></div>
             @endif
-            <div class="page-break"></div>
         @endforeach
     @endif
 

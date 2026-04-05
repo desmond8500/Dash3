@@ -50,37 +50,60 @@
                                 </tr>
                             </thead>
                             @foreach ($installation->objets as $objet)
-                            <tr class="table-primary">
-                                <td>
-                                    <div>{{ $objet->name }}</div>
-                                    <div>{{ $objet->description }}</div>
-                                </td>
-                                <td>
-                                    @foreach ($objet->valeurs as $valeur)
-                                        <div class="row">
-                                            <div class="col-auto">{{ $valeur['name'] }}</div>
-                                            <div class="col">{{ $valeur['value'] }}</div>
-                                            <div class="col-auto">
-                                                <div class="btn btn-sm btn-success" wire:click="edit_attribut('{{ $valeur->id }}')">
-                                                    <i class="ti ti-edit"></i>
-                                                </div>
-                                                <div class="btn btn-sm btn-danger" wire:click="delete_attribut('{{ $valeur->id }}')">
-                                                    <i class="ti ti-trash"></i>
+                                <tr class="table-primary">
+                                    <td>
+                                        <div>{{ $objet->name }}</div>
+                                        <div>{{ $objet->description }}</div>
+                                    </td>
+                                    <td style="padding:5px">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                    @foreach ($objet->valeurs as $valeur)
+                                                        <tr >
+                                                            <td style="padding:0px" class="fw-bold">{{ $valeur['name'] }}</td>
+                                                            <td style="padding:0px">{{ $valeur['value'] }}</td>
+                                                            <td style="padding:0px" width="80">
+                                                                <button class="btn btn-sm btn-primary" wire:click="edit_attribut('{{ $valeur->id }}')">
+                                                                    <i class="ti ti-edit"></i>
+                                                                </button>
+                                                                <button class="btn btn-sm btn-danger" wire:click="delete_attribut('{{ $valeur->id }}')">
+                                                                    <i class="ti ti-trash"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                        {{-- @foreach ($objet->valeurs as $valeur)
+
+
+                                            <div class="row">
+                                                <div class="col-auto">{{ $valeur['name'] }}</div>
+                                                <div class="col">{{ $valeur['value'] }}</div>
+                                                <div class="col-auto">
+                                                    <div class="btn btn-sm btn-success" wire:click="edit_attribut('{{ $valeur->id }}')">
+                                                        <i class="ti ti-edit"></i>
+                                                    </div>
+                                                    <div class="btn btn-sm btn-danger" wire:click="delete_attribut('{{ $valeur->id }}')">
+                                                        <i class="ti ti-trash"></i>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-                                </td>
-                                <td width="50">
-                                    <button class="btn btn-primary btn-sm btn-icon" wire:click="add_attribut('{{ $objet->id }}')">
-                                        <i class="ti ti-plus"></i>
-                                    </button>
-                                    <button class="btn btn-primary btn-sm btn-icon">
-                                        <i class="ti ti-edit"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
+                                        @endforeach --}}
+                                    </td>
+                                    <td width="50">
+                                        <button class="btn btn-primary btn-sm btn-icon" wire:click="add_attribut('{{ $objet->id }}')">
+                                            <i class="ti ti-plus"></i>
+                                        </button>
+                                        <button class="btn btn-primary btn-sm btn-icon">
+                                            <i class="ti ti-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                             @endforeach
                         </table>
                     </div>

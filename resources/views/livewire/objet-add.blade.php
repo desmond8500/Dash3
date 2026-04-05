@@ -1,5 +1,5 @@
 <div>
-    <button class='btn btn-primary' wire:click="$dispatch('open-addObjet')" >
+    <button class='btn btn-primary btn-icon' wire:click="$dispatch('open-addObjet')" >
         <i class='ti ti-plus'></i>
         {{-- Equipement --}}
     </button>

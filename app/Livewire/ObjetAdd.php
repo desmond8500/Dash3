@@ -13,7 +13,15 @@ class ObjetAdd extends Component
 
     public function render()
     {
-        return view('livewire.objet-add');
+        return view('livewire.objet-add',[
+            'equipements' => \App\Http\Controllers\ObjetController::Equipements_list(),
+            'videos' => \App\Http\Controllers\ObjetController::video(),
+            'incendies' => \App\Http\Controllers\ObjetController::incendie(),
+            'access' => \App\Http\Controllers\ObjetController::access(),
+            'alarmes' => \App\Http\Controllers\ObjetController::alarme(),
+            'reseaux' => \App\Http\Controllers\ObjetController::reseaux(),
+            'disks' => \App\Http\Controllers\ObjetController::disks(),
+        ]);
     }
 
     function store(){

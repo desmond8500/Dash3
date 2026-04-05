@@ -33,4 +33,14 @@ class Objet extends Model
     {
         return $this->belongsTo(Objet::class, 'parent_id');
     }
+
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
+
+    public function valeurs()
+    {
+        return $this->hasMany(Attribut::class);
+    }
 }

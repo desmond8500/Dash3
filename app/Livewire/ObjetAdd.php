@@ -29,5 +29,6 @@ class ObjetAdd extends Component
         $this->objet_form->parent_id = $this->parent_id;
         $this->objet_form->store();
         $this->dispatch('close-addObjet');
+        $this->dispatch('render-installations');
     }
 }

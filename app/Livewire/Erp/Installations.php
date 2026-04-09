@@ -6,6 +6,7 @@ use App\Livewire\Forms\ObjetForm;
 use App\Models\Attribut;
 use App\Models\Systeme;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Installations extends Component
 {
@@ -13,6 +14,7 @@ class Installations extends Component
     public $type;
     public $description;
 
+    #[On('render-installations',)]
     public function render()
     {
         return view('livewire.erp.installations', [

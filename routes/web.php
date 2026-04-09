@@ -3,6 +3,7 @@
 use App\Exports\InvoiceExport;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\KonvaController;
+use App\Http\Controllers\PDF2Controller;
 use App\Http\Controllers\PDFController;
 use App\Livewire\Dashboard\Dashboard1Page;
 use App\Livewire\Dashboard\Dashboard2Page;
@@ -141,6 +142,12 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     })->name('attestation_pdf');
 
     Route::get('/timeline/{projet_id}', TimelinePage::class)->name('timeline');
+
+    // PDF
+    // Détails des installations
+    Route::get('/installations_pdf/{projet_id}', function ($projet_id) {
+        return PDF2Controller::installations_pdf($projet_id);
+    })->name('installations_pdf');
 
 });
 
@@ -343,5 +350,6 @@ Route::get('pdf_v2/{title}', function ($title) {
 
     return Pdf::view('_pdf.test')
         ->format('a4')
-        ->save('invoice.pdf');
+        // ->save('invoice.pdf')
+        ;
 })->name('pdf_v2');

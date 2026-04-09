@@ -11,10 +11,10 @@
                     <i class='ti ti-plus'></i>
                     Générer
                 </button>
-                <btn class="btn disabled">
+                <a class="btn" href="{{ route('installations_pdf',['projet_id'=>$projet_id]) }}" target="_blank">
                     <i class="ti ti-file-pdf"></i>
                     Export PDF
-                </btn>
+                </a>
             </div>
         </div>
         <div class="p-2">
@@ -34,10 +34,10 @@
                             <button class="btn btn-icon btn-danger" wire:click="delete({{ $installation->id }})">
                                 <i class="ti ti-trash"></i>
                             </button>
-                            <btn class="btn disabled">
+                            <a class="btn disabled" href="{{ route('installations_pdf',['projet_id'=>$projet_id]) }}" target="_blank" disabled>
                                 <i class="ti ti-file-pdf"></i>
                                 Export PDF
-                            </btn>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-12">

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Erp;
 
+use App\Livewire\Forms\ObjetForm;
 use App\Models\Attribut;
 use App\Models\Systeme;
 use Livewire\Component;
@@ -112,5 +113,22 @@ class Installations extends Component
         ]);
 
         $this->dispatch('close-editAttribut');
+    }
+
+    // Objet
+    public ObjetForm $objet_form;
+    function edit_objet($objet_id){
+        $this->objet_form->set($objet_id);
+        $this->dispatch('open-editObjet');
+    }
+
+    function update_objet(){
+        $this->objet_form->update();
+        $this->dispatch('close-editObjet');
+    }
+
+    function delete_objet($objet_id){
+        $this->objet_form->set($objet_id);
+        $this->objet_form->delete();
     }
 }

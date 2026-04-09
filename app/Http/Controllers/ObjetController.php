@@ -29,7 +29,7 @@ class ObjetController extends Controller
     }
     static function access(){
         return (object) array(
-            (object) array( 'name' => 'centrale de controle d\'accès'),
+            (object) array( 'name' => "centrale de controle d\'accès"),
             (object) array( 'name' => 'lecteur'),
             (object) array( 'name' => 'Ventouse'),
             (object) array( 'name' => 'gache electrique'),
@@ -38,7 +38,7 @@ class ObjetController extends Controller
     }
     static function alarme(){
         return (object) array(
-            (object) array( 'name' => 'centrale d\'alarme'),
+            (object) array( 'name' => "centrale d\'alarme"),
             (object) array( 'name' => 'détecteur de mouvement'),
             (object) array( 'name' => 'contact de porte'),
             (object) array( 'name' => 'sirene'),

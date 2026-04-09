@@ -11,6 +11,7 @@ class ObjetForm extends Form
 {
     public Objet $objet;
 
+    public $id;
     #[Rule('required')]
     public $installation_id;
     public $parent_id;
@@ -33,7 +34,9 @@ class ObjetForm extends Form
 
     function set($model_id){
         $this->objet = Objet::find($model_id);
+        $this->id = $model_id;
         $this->name = $this->objet->name;
+        $this->installation_id = $this->objet->installation_id;
         $this->description = $this->objet->description;
         $this->type = $this->objet->type;
         $this->article_id = $this->objet->article_id;
@@ -45,8 +48,8 @@ class ObjetForm extends Form
         $this->objet->update($this->all());
     }
 
-    function delete($model_id){
-        $this->objet = Objet::find($model_id);
+    function delete(){
+        $this->objet = Objet::find($this->id);
 
         // unlink(this->objet->path);
         // rmdir(dirname(this->objet->path));

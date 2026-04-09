@@ -95,13 +95,18 @@
                                             </div>
                                         @endforeach --}}
                                     </td>
-                                    <td width="50">
+                                    <td width="110">
                                         <button class="btn btn-primary btn-sm btn-icon" wire:click="add_attribut('{{ $objet->id }}')">
                                             <i class="ti ti-plus"></i>
                                         </button>
-                                        <button class="btn btn-primary btn-sm btn-icon">
+                                        <button class="btn btn-primary btn-sm btn-icon" wire:click="edit_objet('{{ $objet->id }}')">
                                             <i class="ti ti-edit"></i>
                                         </button>
+                                        @if ($objet->valeurs->count()==0)
+                                            <button class="btn btn-danger btn-sm btn-icon" wire:click="delete_objet('{{ $objet->id }}')">
+                                                <i class="ti ti-trash"></i>
+                                            </button>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -167,5 +172,17 @@
         </form>
         <script> window.addEventListener('open-attributDetail', event => { window.$('#attributDetail').modal('show'); }) </script>
         <script> window.addEventListener('close-attributDetail', event => { window.$('#attributDetail').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editObjet', 'title' => 'éditer un objet', 'method'=>'update_objet'])
+    <form class="row" wire:submit="update_objet">
+        @include('_form.objet_form')
+    </form>
+    <script>
+        window.addEventListener('open-editObjet', event => { window.$('#editObjet').modal('show'); })
+    </script>
+    <script>
+        window.addEventListener('close-editObjet', event => { window.$('#editObjet').modal('hide'); })
+    </script>
     @endcomponent
 </div>

@@ -1,4 +1,5 @@
 <div class="text-start">
+    @error('objet_form.id') <span class='text-danger'>{{ $message }}</span> @enderror
     @error('objet_form.installation_id') <span class='text-danger'>{{ $message }}</span> @enderror
     @error('objet_form.parent_id') <span class='text-danger'>{{ $message }}</span> @enderror
     <div class="col-md-12 mb-3">

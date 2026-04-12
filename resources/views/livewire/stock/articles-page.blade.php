@@ -4,10 +4,10 @@
             @livewire('form.article-add')
             @livewire('form.provider-add')
             @livewire('form.brand-add')
-            <button class="btn btn-dark btn-icon disabled" >
+            <button class="btn btn-dark btn-icon " wire:click="$set('card','col-md-6 col-xl-4')">
                 <i class="ti ti-layout-grid"></i>
             </button>
-            <button class="btn btn-dark btn-icon disabled" >
+            <button class="btn btn-dark btn-icon " wire:click="$set('card','col-md-12 col-xl-12')">
                 <i class="ti ti-layout-list"></i>
             </button>
         </div>
@@ -72,7 +72,7 @@
         <div class="col-md-9 col-xl-10">
             <div class="row row-deck g-2">
                 @foreach ($articles as $article)
-                    <div class="col-md-6 col-xl-4">
+                    <div class="{{ $card }}">
                         @include('_card.articleCard',[
                             'edit' => true
                         ])

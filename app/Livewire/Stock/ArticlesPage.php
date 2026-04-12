@@ -25,6 +25,7 @@ class ArticlesPage extends Component
     public $breadcrumbs;
     public ItemForm $article_form;
     public $paginate = 12;
+    public $card = "col-md-6 col-xl-4";
 
     public function mount(){
         $settings = \App\Models\Setting::where('user_id', auth()->user()->id)->first();;

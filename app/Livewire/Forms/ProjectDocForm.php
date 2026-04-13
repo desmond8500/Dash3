@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\ProjectDoc;
+use App\Models\Projet;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -21,7 +22,8 @@ class ProjectDocForm extends Form
     }
 
     function store(){
-        // $this->validate();
+        $this->validate();
+        // $this->fix();
         $doc = ProjectDoc::create($this->all());
 
         $this->storeFile($doc, $this->document_path, $doc);
@@ -39,24 +41,25 @@ class ProjectDocForm extends Form
         $this->doc->update($this->all());
     }
 
-    function delete($model_id){
-        $this->doc = ProjectDoc::find($model_id);
-
-        unlink($this->doc->document_path);
-        // rmdir(dirname(this->doc->path));
-
-        $this->doc->delete();
+    function delete(){
+        try {
+            unlink($this->doc->document_path);
+            $this->doc->delete();
+        } catch (\Throwable $th) {
+            $this->doc->delete();
+        }
     }
 
     function storeFile($doc, $file)
     {
+        $projet = Projet::find($this->projet_id);
         if (!is_string($this->document_path)) {
-            $dir = "erp/clients/".$doc->projet->client->id."/"."projects/".$doc->projet->id."/documents";
+            $dir = "erp/clients/".$projet->client->id."/"."projects/".$projet->id."/documents";
 
             $name = $file->getClientOriginalName();
             $file->storeAs("public/$dir", $name);
 
-            $doc->folder = "storage/$dir/$name";
+            $doc->document_path = "storage/$dir/$name";
             $doc->save();
         }
     }

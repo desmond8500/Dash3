@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            <nav class="nav nav-segmented w-100 mb-2 border border-primary bg-white" role="tablist" wire:ignore>
+            <nav class="nav nav-segmented w-100 mb-2 border  " role="tablist" wire:ignore>
                 <button class="nav-link active" role="tab" data-bs-toggle="tab" aria-selected="true" aria-current="page" wire:click="$set('tabs', 'devis')">
                     Devis
                 </button>

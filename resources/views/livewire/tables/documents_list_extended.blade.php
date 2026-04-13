@@ -22,7 +22,9 @@ new class extends Component {
 
     function with(){
         return [
-            'documents' => ProjectDoc::where('projet_id', $this->projet_id)->paginate(5),
+            'documents' => ProjectDoc::where('projet_id', $this->projet_id)
+                ->whereLike('document_name', "%$this->search%")
+                ->paginate(5),
         ];
     }
 
@@ -30,6 +32,17 @@ new class extends Component {
         $this->form->store();
         $this->dispatch('close-addProjectDocument');
     }
+
+    function edit($id){
+        $this->form->set($id);
+        $this->dispatch('open-editProjectDocument');
+    }
+
+    function update(){
+        $this->form->update();
+        $this->dispatch('close-editProjectDocument');
+    }
+
     function delete($id){
         $this->form->set($id);
         $this->form->delete();
@@ -43,11 +56,11 @@ new class extends Component {
             <div class="card-actions">
                 <div class="input-group">
 
-                    <input type="text" class="form-control" placeholder="Search..." wire:model="search">
-                    <button class='btn btn-primary' wire:click="$dispatch('open-addProjectDocument')">
+                    <input type="text" class="form-control" placeholder="Search..." wire:model.live="search">
+                    <a class='btn btn-primary' wire:click="$dispatch('open-addProjectDocument')">
                         <i class='ti ti-plus'></i>
                         Document
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -71,11 +84,10 @@ new class extends Component {
                     </td>
                     <td>Général</td>
                     <td>
-                        <button class="btn btn-primary" wire:click="editDocument({{ $document->id }})">
+                        <button class="btn btn-primary" wire:click="edit({{ $document->id }})">
                             Editer
-
                         </button>
-                        <button class="btn btn-sm btn-danger" wire:click="deleteDocument({{ $document->id }})">
+                        <button class="btn btn-sm btn-danger" wire:click="delete({{ $document->id }})">
                             Delete
                         </button>
 
@@ -98,5 +110,12 @@ new class extends Component {
         </form>
         <script> window.addEventListener('open-addProjectDocument', event => { window.$('#addProjectDocument').modal('show'); }) </script>
         <script> window.addEventListener('close-addProjectDocument', event => { window.$('#addProjectDocument').modal('hide'); }) </script>
+    @endcomponent
+    @component('components.modal', ["id"=>'editProjectDocument', 'title' => 'Modifier un document', 'method'=>'update'])
+        <form class="row" wire:submit="update">
+            @include('_form.project_doc_form')
+        </form>
+        <script> window.addEventListener('open-editProjectDocument', event => { window.$('#editProjectDocument').modal('show'); }) </script>
+        <script> window.addEventListener('close-editProjectDocument', event => { window.$('#editProjectDocument').modal('hide'); }) </script>
     @endcomponent
 </div>

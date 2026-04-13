@@ -128,4 +128,9 @@ class TaskForm extends Form
         $this->task->delete();
     }
 
+    function setStatus($status_id){
+        $this->statut_id = $status_id;
+        $this->task->update($this->only('statut_id'));
+    }
+
 }

@@ -87,7 +87,6 @@
                 <button class="btn btn-sm btn-icon btn-outline-primary rounded p-1" wire:click="show('{{ $task->id }}')">
                     <i class="ti ti-eye"></i>
                 </button>
-
             </div>
 
             <div class="badge badge-pill text-white mb-1
@@ -98,12 +97,27 @@
             </div>
 
             <div>
-                <span class="badge badge-pill text-white mb-1
-                    @if($task->statut_id ==1) bg-primary  @endif
-                    @if($task->statut_id ==2) bg-warning  @endif
-                    @if($task->statut_id ==3) bg-secondary @endif
-                    @if($task->statut_id ==4) bg-success  @endif
-                ">{{ $task->statut->name }}</span>
+
+            </div>
+
+            <div class="dropdown open">
+                <a class="" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    <span class="badge badge-pill text-white mb-1
+                        @if($task->statut_id ==1) bg-primary  @endif
+                        @if($task->statut_id ==2) bg-warning  @endif
+                        @if($task->statut_id ==3) bg-secondary @endif
+                        @if($task->statut_id ==4) bg-success  @endif
+                        ">{{ $task->statut->name }}
+                    </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <a class="dropdown-item" wire:click="setTaskStatus('{{ $task->id }}', 1)"> Nouveau</a>
+                    <a class="dropdown-item" wire:click="setTaskStatus('{{ $task->id }}', 2)"> En cours</a>
+                    <a class="dropdown-item" wire:click="setTaskStatus('{{ $task->id }}', 3)"> En attente</a>
+                    <a class="dropdown-item" wire:click="setTaskStatus('{{ $task->id }}', 4)"> Terminé</a>
+                    <a class="dropdown-item" wire:click="setTaskStatus('{{ $task->id }}', 5)"> Cloturé</a>
+
+                </div>
             </div>
         </div>
     </div>

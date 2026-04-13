@@ -85,6 +85,11 @@ class Tasklist extends Component
         $this->dispatch('open-editTaskModal');
     }
 
+    function setTaskStatus($task_id, $status_id){
+        $this->form->set($task_id);
+        $this->form->setStatus($status_id);
+    }
+
     function show($task_id){
         $this->form->set($task_id);
         $this->task = Task::find($task_id);

@@ -16,4 +16,9 @@ class BuildingDocument extends Model
         'link',
         'description'
     ];
+
+    public function building()
+    {
+        return $this->belongsTo(Building::class);
+    }
 }

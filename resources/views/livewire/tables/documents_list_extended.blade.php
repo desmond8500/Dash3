@@ -25,6 +25,7 @@ new class extends Component {
             'documents' => ProjectDoc::where('projet_id', $this->projet_id)
                 ->whereLike('document_name', "%$this->search%")
                 ->paginate(5),
+            'buildings' => \App\Models\Building::where('projet_id', $this->projet_id)->get(),
         ];
     }
 
@@ -67,33 +68,61 @@ new class extends Component {
         <table class="table table-hover">
             <thead class="sticky-top">
                 <tr>
-                    <td>#</td>
+                    <td width="10">#</td>
                     <td>Document</td>
                     <td>Building</td>
-                    <td>Actions</td>
+                    <td width="100">Actions</td>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($documents as $key => $document)
-                <tr>
-                    <td>{{ $key+1 }}</td>
-                    <td>
-                        <a href="{{ asset($document->document_path) }}" target="_blank">
-                            {{ $document->document_name }}
-                        </a>
-                    </td>
-                    <td>Général</td>
-                    <td>
-                        <button class="btn btn-primary" wire:click="edit({{ $document->id }})">
-                            Editer
-                        </button>
-                        <button class="btn btn-sm btn-danger" wire:click="delete({{ $document->id }})">
-                            Delete
-                        </button>
+                    <tr>
+                        <td>{{ $key+1 }}</td>
+                        <td>
+                            <a href="{{ asset($document->document_path) }}" target="_blank">
+                                {{ $document->document_name }}
+                            </a>
+                        </td>
+                        <td>Général</td>
+                        <td>
+                            <button class="btn btn-icon btn-primary" wire:click="edit({{ $document->id }})">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                            <button class="btn btn-icon btn-danger" wire:click="delete({{ $document->id }})">
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
 
-                    </td>
+                @foreach ($buildings as $building)
+                    @foreach ($building->documents as $key => $document)
+                        <tr>
+                            <td>{{ $key+1 }}</td>
+                            <td>
+                                @if ($document->link )
+                                    <a href="{{ asset($document->link) }}" target="_blank">
+                                        {{ $document->name }}
+                                    </a>
+                                @else
+                                    <a href="{{ asset($document->folder) }}" target="_blank">
+                                        {{ $document->name }}
+                                    </a>
+                                @endif
+                            </td>
+                            <td>{{ $document->building->name }}</td>
+                            <td>
+                                <button class="btn btn-icon btn-primary" wire:click="edit({{ $document->id }})">
+                                    <i class="ti ti-edit"></i>
+                                </button>
+                                <button class="btn btn-icon btn-danger" wire:click="delete({{ $document->id }})">
+                                    <i class="ti ti-trash"></i>
+                                </button>
 
-                </tr>
+                            </td>
+
+                        </tr>
+                    @endforeach
                 @endforeach
             </tbody>
         </table>

@@ -46,6 +46,7 @@ class ObjetController extends Controller
     }
     static function reseaux(){
         return (object) array(
+            (object) array( 'name' => 'Id/Mp'),
             (object) array( 'name' => 'Identifiant'),
             (object) array( 'name' => 'Mot de passe'),
             (object) array( 'name' => 'Reference'),

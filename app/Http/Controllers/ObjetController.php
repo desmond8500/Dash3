@@ -29,30 +29,31 @@ class ObjetController extends Controller
     }
     static function access(){
         return (object) array(
-            (object) array( 'name' => "centrale de controle d\'accès"),
-            (object) array( 'name' => 'lecteur'),
+            (object) array( 'name' => "Centrale de controle d\'accès"),
+            (object) array( 'name' => 'Lecteur'),
             (object) array( 'name' => 'Ventouse'),
-            (object) array( 'name' => 'gache electrique'),
-            (object) array( 'name' => 'gache electrique'),
+            (object) array( 'name' => 'Gache électrique'),
+            (object) array( 'name' => 'Bouton de sortie'),
         );
     }
     static function alarme(){
         return (object) array(
-            (object) array( 'name' => "centrale d\'alarme"),
-            (object) array( 'name' => 'détecteur de mouvement'),
-            (object) array( 'name' => 'contact de porte'),
-            (object) array( 'name' => 'sirene'),
+            (object) array( 'name' => "Centrale d\'alarme"),
+            (object) array( 'name' => 'Détecteur de mouvement'),
+            (object) array( 'name' => 'Contact de porte'),
+            (object) array( 'name' => 'Sirène'),
         );
     }
     static function reseaux(){
         return (object) array(
-            (object) array( 'name' => 'identifiant'),
+            (object) array( 'name' => 'Identifiant'),
             (object) array( 'name' => 'Mot de passe'),
-            (object) array( 'name' => 'reference'),
-            (object) array( 'name' => 'adresse IP'),
-            (object) array( 'name' => 'passerelle'),
-            (object) array( 'name' => 'masque de sous réseau'),
+            (object) array( 'name' => 'Reference'),
+            (object) array( 'name' => 'Adresse IP'),
+            (object) array( 'name' => 'Passerelle'),
+            (object) array( 'name' => 'Masque de sous réseau'),
             (object) array( 'name' => 'Port'),
+            (object) array( 'name' => 'Disque dur'),
         );
     }
     static function disks(){
@@ -62,9 +63,9 @@ class ObjetController extends Controller
     }
 
     static function sublist($name){
-        if ($name == 'enregistreur' || $name == 'camera' || $name == 'nvr' || $name == 'dvr') {
+        if ($name == 'Enregistreur' || $name == 'Caméra' || $name == 'NVR' || $name == 'DVR') {
             $list = (object) array(
-                (object) array( 'name' => 'camera', 'description' => 'Camera de surveillance' ),
+                (object) array( 'name' => 'Caméra', 'description' => 'Caméra de surveillance' ),
             );
         }
         return $list ?? [];
@@ -73,8 +74,8 @@ class ObjetController extends Controller
 
     static function Equipements_list(){
         $list = (object) array(
-            (object) array( 'name' => 'camera', 'description' => 'Camera de surveillance' ),
-            (object) array( 'name' => 'enregistreur', 'description' => 'Enregistreur IP' ),
+            (object) array( 'name' => 'Caméra', 'description' => 'Caméra de surveillance' ),
+            (object) array( 'name' => 'Enregistreur', 'description' => 'Enregistreur IP' ),
         );
         return $list;
     }

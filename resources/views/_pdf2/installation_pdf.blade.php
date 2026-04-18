@@ -13,30 +13,41 @@
 <body class="container">
 
         <div>
-            <h1 class="h3">Installations</h1>
-            <p class="mb-0">Liste des installations du projet</p>
+            <div class="mt-2 border rounded p-2">
+                <div class="row ">
+                    <div class="col-auto">
+                        <img src="{{ public_path($projet->client->avatar) }}" alt="Logo" style="max-width: 100px;">
+                    </div>
+                    <div class="col-md">
+                        <div ">
+                            <div class="fw-bold text-uppercase"> {{ $projet->client->name }}</div>
+                            <div class="fw-bold">{{ $projet->name }}</div>
+                            <div>{{ $projet->description }}</div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <h3>INSTALLATIONS</h3>
+                        <div>
+                            <div class="text-end">{{ $projet->updated_at->format('d/m/Y') }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            @foreach ($installations as $installation)
-                <div class="border rounded p-2 mb-2">
-                    <div>{{ $installation->name }}</div>
-                    <div>{!! nl2br($installation->description) !!}</div>
+            {{-- @foreach ($installations as $installation)
 
-                    <table class="table table-bordered  mt-2">
-                        <thead>
-                            <tr class="table-secondary">
-                                <th>Nom</th>
-                                <th>Attributs</th>
-                            </tr>
-                        </thead>
-                        @foreach ($installation->objets as $objet)
-                        <tr class="table-primary">
-                            <td>
-                                <div>{{ strtoupper($objet->name) }}</div>
-                                <div>{{ $objet->description }}</div>
-                            </td>
-                            <td style="padding:5px">
-                                <div class="table-responsive">
-                                    <table class="table">
+                <div class="row g-2 mt-2 ">
+                    @foreach ($installation->objets as $objet)
+                        <div class="col-md-4">
+                            <div class="card h-100" >
+                                <div class="card-header">
+                                    <div class="card-title fw-bold">{{ ucfirst($objet->name) }}</div>
+                                    <div class="card-subtitle mb-2 text-muted">{{ ucfirst($objet->description) }}</div>
+
+                                </div>
+                                <div class="p-2 ">
+
+                                    <table class="table  table-sm mt-2">
                                         <tbody>
                                             @foreach ($objet->valeurs as $valeur)
                                             <tr>
@@ -47,19 +58,66 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-
-
                                 </div>
-
-                            </td>
-
-                        </tr>
-                        @endforeach
-                    </table>
-
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
+            @endforeach --}}
 
-            @endforeach
+            <div class="row g-2">
+                @foreach ($installations as $installation)
+                    <div class="col-md-6">
+                        <div class="mt-2 border rounded p-2 mb-2" style="font-size: 10px">
+                            <div style="background: lightgray; border-radius: 5px 5px 0px 0px" class="p-2">
+                                <div class="fw-bold" style="font-size:15px;">{{ $installation->systeme->name }}</div>
+                                <div>{!! nl2br($installation->description) !!}</div>
+                            </div>
+
+                            <table class="table border-primary table-sm mt-2">
+                                <thead>
+                                    <tr class="">
+                                        <th>Nom</th>
+                                        <th>Attributs</th>
+                                    </tr>
+                                </thead>
+                                @foreach ($installation->objets as $objet)
+                                <tr class="">
+                                    <td>
+                                        <div class="fw-bold">{{ ucfirst($objet->name) }}</div>
+                                        <div>{{ ucfirst($objet->description) }}</div>
+                                    </td>
+                                    <td style="padding:5px">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                    @foreach ($objet->valeurs as $valeur)
+                                                    <tr>
+                                                        <td style="padding:0px" class="fw-bold">{{ $valeur['name'] }}</td>
+                                                        <td style="padding:0px">{{ $valeur['value'] }}</td>
+
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                                @endforeach
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                @endforeach
+
+            </div>
+
         </div>
 
 

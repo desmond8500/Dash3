@@ -12,10 +12,14 @@ class PDF2Controller extends Controller
     {
         // Récupérer les données nécessaires pour le PDF
         $installations = Installation::where('projet_id', $projet_id)->get();
+        $projet = $installations->first()->projet ?? null;
 
 
         // Générer le PDF à partir d'une vue
-        $pdf = Pdf::view('_pdf2.installation_pdf', ['installations' => $installations]);
+        $pdf = Pdf::view('_pdf2.installation_pdf', [
+            'installations' => $installations,
+            'projet' => $projet,
+            ]);
 
         // Retourner le PDF en téléchargement
         return $pdf->name('installations.pdf');

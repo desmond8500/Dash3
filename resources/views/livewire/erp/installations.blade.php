@@ -45,15 +45,15 @@
                             <thead>
                                 <tr class="table-secondary">
                                     <th>Nom</th>
-                                    <th>Attributs</th>
-                                    <th>Actions</th>
+                                    <th class="text-center">Attributs</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             @foreach ($installation->objets as $objet)
                                 <tr class="table-primary">
                                     <td>
-                                        <div>{{ $objet->name }}</div>
-                                        <div>{{ $objet->description }}</div>
+                                        <div class="fw-bold">{{ ucfirst($objet->name) }}</div>
+                                        <div>{{ ucfirst($objet->description) }}</div>
                                     </td>
                                     <td style="padding:5px">
                                         <div class="table-responsive">

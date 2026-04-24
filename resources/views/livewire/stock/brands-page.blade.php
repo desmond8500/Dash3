@@ -1,18 +1,20 @@
 <div>
     @component('components.layouts.page-header', ['title'=>'Marques', 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
+            <div class="input-icon">
+                <input type="text" class="form-control form-control-rounded" wire:model.live="search"
+                    placeholder="Chercher une marque">
+                <span class="input-icon-addon">
+                    <i class="ti ti-search"></i>
+                </span>
+            </div>
             @livewire('form.brand-add')
         </div>
     @endcomponent
 
     <div class="row row-deck g-2">
-        <div class="col-md">
-            <div class="input-icon">
-                <input type="text" class="form-control form-control-rounded" wire:model.live="search" placeholder="Chercher une marque">
-                <span class="input-icon-addon">
-                    <i class="ti ti-search"></i>
-                </span>
-            </div>
+        {{-- <div class="col-md">
+
         </div>
         <div class="col-auto">
             <div class="btn-list">
@@ -20,8 +22,8 @@
                 <button class="btn btn-icon" wire:click="$set('card_type', 2)"><i class="ti ti-list"></i> </button>
                 <button class="btn btn-icon" wire:click="$set('card_type', 3)"><i class="ti ti-layout-grid"></i> </button>
             </div>
-        </div>
-        <div class="w-100"></div>
+        </div> --}}
+        {{-- <div class="w-100"></div> --}}
         @foreach ($brands as $brand)
             <div wire:key='{{ $brand->id }}' class="col-md-{{ $card_type == 3 ? '2' : '4' }} ">
                 @include('_card.brand_card')

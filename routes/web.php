@@ -353,3 +353,7 @@ Route::get('pdf_v2/{title}', function ($title) {
         // ->save('invoice.pdf')
         ;
 })->name('pdf_v2');
+
+Route::get('invoice_pdf_v2/{invoice_id}/{title}', function ($invoice_id, $title) {
+    return PDF2Controller::invoice_pdf($invoice_id, $title);
+})->name('invoice_pdf_v2');

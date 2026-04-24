@@ -76,7 +76,7 @@
 
                             <table class="table border-primary table-sm mt-2">
                                 <thead>
-                                    <tr class="">
+                                    <tr class="table-primary">
                                         <th>Nom</th>
                                         <th>Attributs</th>
                                     </tr>

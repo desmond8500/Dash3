@@ -448,6 +448,9 @@
                     <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
                     <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
                 </div>
+                <div class="btn-list">
+                    <a class="btn btn-primary mb-1" target="_blank" href="{{ route('invoice_pdf_v2',['invoice_id'=>$devis->id, 'title'=>'DEVIS']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                </div>
             </div>
             <div class="col-md-12">
                 <span class="dropdown-header mb-2">Facture</span>

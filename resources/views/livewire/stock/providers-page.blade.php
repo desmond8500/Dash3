@@ -28,6 +28,14 @@
                         <a class="col" href="{{ route('provider',['provider_id'=>$provider->id]) }}">
                             <div class="card-title">{{ $provider->name }}</div>
                             <div class="text-muted">{!! nl2br($provider->description) !!}</div>
+                            <div class="position-absolute bottom-0 mb-2">
+                                {{ $provider->article()->count() }}
+                                @if ($provider->article()->count() > 1)
+                                    Articles
+                                @else
+                                    Article
+                                @endif
+                            </div>
                         </a>
                         <div class="col-auto">
                             <div class="dropdown open">
@@ -40,6 +48,7 @@
                                     <a class="dropdown-item text-danger" wire:click="delete('{{ $provider->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,14 @@
             <div class="col">
                 <a class="card-title" href="{{ route('brand',['brand_id'=>$brand->id]) }}">{{ $brand->name }}</a>
                 <div class="text-muted">{!! nl2br($brand->description) !!}</div>
+                <div class="position-absolute bottom-0 mb-2 ">
+                    {{ $brand->article()->count() }}
+                    @if ($brand->article()->count() > 1)
+                        Articles
+                    @else
+                        Article
+                    @endif
+                </div>
             </div>
             <div class="col-auto">
                 <div class="dropdown open">
@@ -32,6 +40,7 @@
                                 class="ti ti-trash"></i> Supprimer</a>
                     </div>
                 </div>
+
 
             </div>
         @endif

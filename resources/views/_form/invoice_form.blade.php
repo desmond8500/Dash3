@@ -103,5 +103,10 @@
                 <option value="0.5">50%</option>
             </select>
         </div>
+        <div class="mb-2" x-data="{ expanded_emitdate: false }">
+            <label class="form-label" type="button" x-on:click="expanded_emitdate = ! expanded_emitdate">Date d'émission</label>
+            <input type="date" class="form-control" wire:model="invoice_form.emitdate"  x-show="expanded_emitdate">
+            @error('invoice_form.emitdate') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\API\ClientAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
+use App\Http\Controllers\API\NoteAPIController;
 use App\Http\Controllers\API\ProjetAPIController;
 use App\Http\Controllers\api\ProviderAPIController;
 use App\Http\Controllers\API\TaskAPIController;
@@ -47,6 +48,8 @@ Route::prefix('v1')->group(function () {
     // Projets
     Route::resource('projets', ProjetAPIController::class);
     // Route::get('projet', [ProjetAPIController::class, 'index']);
+    Route::resource('projet_notes', NoteAPIController::class);
+    Route::get('get_projet_notes/{projet_id}', [NoteAPIController::class, 'get_projet_notes']);
 
 });
 

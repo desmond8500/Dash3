@@ -32,8 +32,8 @@ class Invoice extends Model
         'favorite',
         'facture_date',
         'paydate',
-        'comptabilise'
-
+        'comptabilise',
+        'emitdate',
     ];
 
     public function getMontantAttribute()

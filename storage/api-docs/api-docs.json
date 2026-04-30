@@ -621,6 +621,82 @@
                 }
             }
         },
+        "/api/v1/projet_notes": {
+            "get": {
+                "tags": [
+                    "Notes de projets"
+                ],
+                "summary": "Liste des notes",
+                "operationId": "94dae4cea0962dbfe6eb38d1caf84b2c",
+                "responses": {
+                    "200": {
+                        "description": "Notes récupérées avec succès"
+                    }
+                }
+            }
+        },
+        "/api/v1/projet_notes/{id}": {
+            "get": {
+                "tags": [
+                    "Note de projet"
+                ],
+                "summary": "Liste des notes",
+                "operationId": "8aefbbc72fec6f390f71d6399227c46a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Recherche par nom ou référence",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "a string value",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notes récupérées avec succès"
+                    }
+                }
+            }
+        },
+        "/api/v1/get_projet_notes/{projet_id}": {
+            "get": {
+                "tags": [
+                    "Note de projet"
+                ],
+                "summary": "Liste des notes d'un projet",
+                "operationId": "4aa660f93e39deb3f527defc4a24a75e",
+                "parameters": [
+                    {
+                        "name": "projet_id",
+                        "in": "path",
+                        "description": "ID du projet",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "string": {
+                                "summary": "a string value",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notes récupérées avec succès"
+                    }
+                }
+            }
+        },
         "/api/v1/projets": {
             "get": {
                 "tags": [
@@ -773,6 +849,14 @@
         {
             "name": "Articles",
             "description": "Articles"
+        },
+        {
+            "name": "Notes de projets",
+            "description": "Notes de projets"
+        },
+        {
+            "name": "Note de projet",
+            "description": "Note de projet"
         },
         {
             "name": "Projets",

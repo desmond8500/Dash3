@@ -33,6 +33,7 @@ class InvoiceForm extends Form
     public $image;
     public $facture_date;
     public $paydate;
+    public $emitdate;
 
     function fix(){
         $this->description = ucfirst($this->description);
@@ -87,6 +88,7 @@ class InvoiceForm extends Form
         $this->favorite = $this->invoice->favorite;
         $this->facture_date = $this->invoice->facture_date;
         $this->paydate = $this->invoice->paydate;
+        $this->emitdate = $this->invoice->emitdate;
     }
 
     function update(){

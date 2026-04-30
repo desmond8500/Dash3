@@ -41,7 +41,7 @@
                     <i>#{{ strtoupper($devis->reference) }}</i>
                 @endif
                 <div>
-                    <i class="text-muted">Emis le : {{ ($devis->formatDate()) }}</i>
+                    <i class="text-muted">Emis le : {{ ( $devis->formatDate($devis->emitdate) ?? $devis->formatDate()) }}</i>
                 </div>
                 @if ($devis->facture_date && $title == 'facture')
                     <div>

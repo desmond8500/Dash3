@@ -39,18 +39,17 @@ class ArticlesPage extends Component
             array('name' => 'Stock', 'route' => route('stock')),
             array('name' => 'Articles', 'route' => route('articles')),
         );
-
-
     }
 
     public $search_brand;
+    public $search_provider;
 
     #[On('get-articles')]
     public function render()
     {
         return view('livewire.stock.articles-page',[
             'articles' => $this->get_articles(),
-            'providers' => Provider::all(),
+            'providers' => Provider::search($this->search_provider, 'name')->get(),
             'brands' => Brand::search($this->search_brand, 'name')->get(),
             'tags' => Tag::getWithType('stock_article'),
             'priorites' => ArticleController::priorites(),

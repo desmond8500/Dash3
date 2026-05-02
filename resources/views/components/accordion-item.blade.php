@@ -1,4 +1,4 @@
-<div class="accordion-item ">
+<div class="accordion-item">
     <div class="" id="flush-headingOne">
         <button class="accordion-button collapsed p-2"
             {{-- type="button" --}}
@@ -8,7 +8,6 @@
             aria-controls="flush-{{ $id ?? 'collapseOne' }}">
             {{ $title }}
         </button>
-
 
     </div>
     <div id="flush-{{ $id ?? 'collapseOne' }}"

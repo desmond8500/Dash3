@@ -17,7 +17,7 @@
         <div class="col-md-3 col-xl-2">
             <div class="mb-1">
                 <div class="input-group">
-                    <input type="text" class="form-control" wire:model.live="search" placeholder="Trouver un article">
+                    <input type="text" class="form-control" wire:model.live.debounce.250ms="search" placeholder="Trouver un article">
 
                     <button class="btn btn-icon" wire:click='reset_filter()'><i class="ti ti-reload"></i> </button>
                 </div>
@@ -28,6 +28,12 @@
                 <div wire:ignore.self>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         @component('components.accordion-item',['id'=> 'brand', 'title'=>"Marques"])
+                            <div class="input-icon mb-2">
+                                <input type="text" class="form-control form-control-rounded" wire:model.live.debounce.1s="search_brand" placeholder="Chercher une marque">
+                                <span class="input-icon-addon">
+                                    <i class="ti ti-search"></i>
+                                </span>
+                            </div>
                             @foreach ($brands->sortby('name') as $brand)
                                 @if ($brand_id == $brand->id)
                                     <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('brand_id','{{ $brand->id }}')">{{ $brand->name }}</button>
@@ -37,6 +43,12 @@
                             @endforeach
                         @endcomponent
                         @component('components.accordion-item',['id'=> 'provider', 'title'=>"Fournisseurs"])
+                            <div class="input-icon mb-2">
+                                <input type="text" class="form-control form-control-rounded" wire:model.live="search_provider" placeholder="Chercher un fournisseur">
+                                <span class="input-icon-addon">
+                                    <i class="ti ti-search"></i>
+                                </span>
+                            </div>
                             @foreach ($providers->sortby('name') as $provider)
                                 @if ($provider_id == $provider->id)
                                     <button class="btn btn-primary btn-sm rounded mb-1" wire:click="$set('provider_id','{{ $provider->id }}')">{{ $provider->name }}</button>
@@ -57,9 +69,9 @@
                         @component('components.accordion-item',['id'=> 'type', 'title'=>"Types"])
                             <div class="">
                                 @foreach ($tags as $tag)
-                                <span class="badge bg-primary cursor-pointer text-light mb-1" wire:click="$set('tag','{{ ucfirst($tag->name) }}')">
-                                    {{ $tag->name }}
-                                </span>
+                                    <span class="badge bg-primary cursor-pointer text-light mb-1" wire:click="$set('tag','{{ ucfirst($tag->name) }}')">
+                                        {{ $tag->name }}
+                                    </span>
                                 @endforeach
                             </div>
                         @endcomponent

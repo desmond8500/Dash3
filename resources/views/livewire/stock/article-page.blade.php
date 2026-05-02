@@ -42,6 +42,7 @@
 
         <div class="col-md-8">
             <div class="row g-2">
+                {{-- Informations --}}
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -106,6 +107,7 @@
                     </div>
                 </div>
 
+                {{-- Images --}}
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
@@ -144,13 +146,17 @@
                     </div>
                 </div>
 
+                {{-- Documents --}}
                 <div class="col-md-6">
                     @livewire('stock.article-documents', ['article_id' => $article->id])
                 </div>
 
+                {{-- Liens --}}
                 <div class="col-md-6">
                     @livewire('stock.article-links', ['article_id' => $article->id])
                 </div>
+
+                {{-- Articles associés --}}
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">

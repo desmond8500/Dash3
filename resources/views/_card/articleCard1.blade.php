@@ -10,9 +10,9 @@
             {{ $item->designation ?? "Désignation de l'article" }}
         </div>
 
-        <div class="text-muted" style="font-size: 12px">
+        {{-- <div class="text-muted" style="font-size: 12px">
             {!! nl2br($item->description) !!}
-        </div>
+        </div> --}}
         <div class="d-flex justify-content-between" style="position: relative">
             <div class="text-uppercase text-purple">
                 {{ $item->brand->name ?? "Marque" }}

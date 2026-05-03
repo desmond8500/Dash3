@@ -90,7 +90,7 @@
                                 </ul>
                             </div>
                             <div class="col-md-12">
-                                <div class="p-2">
+                                <div class="card-body border-top">
                                     <h3>Description</h3>
                                     {!! nl2br($article->description) !!}
                                 </div>
@@ -155,43 +155,50 @@
                 <div class="col-md-6">
                     @livewire('stock.article-links', ['article_id' => $article->id])
                 </div>
+            </div>
+        </div>
 
-                {{-- Articles associés --}}
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Articles associés</div>
-                            <div class="card-actions">
-                                <button class='btn btn-primary' wire:click="$dispatch('open-addLinkedArticle')"><i class='ti ti-plus'></i> Article </button>
-                            </div>
-                        </div>
-                        @if (!$dependances->isEmpty())
-                            <div class="card-body">
-                                <div class="row row-deck g-2">
-                                    @foreach ($dependances as $dependance)
-                                        <div class="col-md-4">
-                                            <div>
-                                                @include('_card.articleCard1', ['item' => $dependance->dependence])
-                                                <div class="d-flex justify-content-between align-items-center mt-2">
-                                                    <button class="btn btn-outline-danger btn-icon" wire:click="remove_dependance({{ $dependance->id }})">
-                                                        <i class="ti ti-trash"></i>
-                                                    </button>
-                                                    <div>
-                                                        <button class="btn btn-icon btn-primary" wire:click="increase_dependance('{{ $dependance->id }}')"><i class="ti ti-plus"></i></button>
-                                                        <div class="btn">{{ $dependance->quantity }}</div>
-                                                        <button class="btn btn-icon btn-primary" wire:click="decrease_dependance('{{ $dependance->id }}')"><i class="ti ti-minus"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-
-                            </div>
-                        @endif
+        {{-- Articles associés --}}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Articles associés</div>
+                    <div class="card-actions">
+                        <button class='btn btn-primary' wire:click="$dispatch('open-addLinkedArticle')">
+                            <i class='ti ti-plus'></i> Article
+                        </button>
                     </div>
                 </div>
+                @if (!$dependances->isEmpty())
+                    <div class="card-body">
+                        <div class="row  g-2">
+                            @foreach ($dependances as $dependance)
+                                <div class="col-md-3">
+                                    <div>
+                                        <a href="{{ route('article',['article_id' => $dependance->dependence->id]) }}" target="_blank">
+                                            @include('_card.articleCard1', ['item' => $dependance->dependence])
+                                        </a>
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <button class="btn btn-outline-danger btn-icon"
+                                                wire:click="remove_dependance({{ $dependance->id }})">
+                                                <i class="ti ti-trash"></i>
+                                            </button>
+                                            <div>
+                                                <button class="btn btn-icon btn-primary"
+                                                    wire:click="increase_dependance('{{ $dependance->id }}')"><i
+                                                        class="ti ti-plus"></i></button>
+                                                <div class="btn">{{ $dependance->quantity }}</div>
+                                                <button class="btn btn-icon btn-primary" wire:click="decrease_dependance('{{ $dependance->id }}')">
+                                                    <i class="ti ti-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -225,7 +232,7 @@
         <script> window.addEventListener('close-attachTag', event => { window.$('#attachTag').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'addLinkedArticle', 'title' => 'Tags'])
+    @component('components.modal', ["id"=>'addLinkedArticle', 'title' => 'Ajouter un article', 'class'=> 'modal-xl'])
         <div class="row row-deck g-2">
             <div class="col-md-12">
                 <input type="text" class="form-control" wire:model.live='article_search' placeholder="Rechercher un article">
@@ -258,8 +265,5 @@
         <script> window.addEventListener('open-addLinkedArticle', event => { window.$('#addLinkedArticle').modal('show'); }) </script>
         <script> window.addEventListener('close-addLinkedArticle', event => { window.$('#addLinkedArticle').modal('hide'); }) </script>
     @endcomponent
-
-
-
 
 </div>

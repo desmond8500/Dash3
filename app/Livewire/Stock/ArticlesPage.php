@@ -61,6 +61,7 @@ class ArticlesPage extends Component
     public $priorite_id = 25;
 
     public $tag;
+    public $selectedtag;
 
     function get_articles(){
         if ($this->brand_id) {
@@ -72,14 +73,14 @@ class ArticlesPage extends Component
         if ($this->priorite_id != 25 ) {
             return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate($this->paginate);
         }
-        if($this->tag){
-            return Article::withAnyTags([$this->tag]) ->paginate($this->paginate);
+        if($this->selectedtag){
+            return Article::withAnyTags([$this->selectedtag])->paginate($this->paginate);
         }
         return Article::orderByDesc('id')->articleSearch($this->search)->paginate($this->paginate);
     }
 
     function reset_filter(){
-        $this->reset('brand_id', 'provider_id', 'priorite_id', "search", "tag");
+        $this->reset('brand_id', 'provider_id', 'priorite_id', "search", "selectedtag");
     }
 
     public $selected;

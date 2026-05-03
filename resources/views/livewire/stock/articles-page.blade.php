@@ -69,7 +69,7 @@
                         @component('components.accordion-item',['id'=> 'type', 'title'=>"Types"])
                             <div class="">
                                 @foreach ($tags as $tag)
-                                    <span class="badge bg-primary cursor-pointer text-light mb-1" wire:click="$set('tag','{{ ucfirst($tag->name) }}')">
+                                    <span class="badge bg-primary cursor-pointer text-light mb-1" wire:click="$set('selectedtag','{{ $tag->name }}')">
                                         {{ $tag->name }}
                                     </span>
                                 @endforeach

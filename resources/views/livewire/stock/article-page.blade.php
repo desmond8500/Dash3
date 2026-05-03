@@ -238,7 +238,7 @@
                 <input type="text" class="form-control" wire:model.live='article_search' placeholder="Rechercher un article">
             </div>
             @foreach ($articles as $article)
-                <div class="col-md-4 cursor-pointer" wire:click="add_dependence({{ $article->id }})">
+                <div class="col-md-3 cursor-pointer" wire:click="add_dependence({{ $article->id }})">
                     <div class="border border-1 rounded p-2">
                         <div class="row">
                             <div class="col-md-12">

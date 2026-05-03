@@ -26,7 +26,7 @@ class ClientAPIController extends Controller
             $clients = Client::where('name', 'like', '%' . $request->search . '%')
                 ->paginate($perPage);
         } else {
-            $clients = Client::paginate($perPage);
+            $clients = Client::orderBy('name', 'asc')->paginate($perPage);
         }
 
         return ResponseController::response(true, 'Les  clients  ont été récupérés avec succès', $clients, [

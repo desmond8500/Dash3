@@ -173,7 +173,7 @@
                     <div class="card-body">
                         <div class="row  g-2">
                             @foreach ($dependances as $dependance)
-                                <div class="col-md-2 col-xl-3">
+                                <div class="col-md-2">
                                     <div>
                                         <a href="{{ route('article',['article_id' => $dependance->dependence->id]) }}" target="_blank">
                                             @include('_card.articleCard1', ['item' => $dependance->dependence])

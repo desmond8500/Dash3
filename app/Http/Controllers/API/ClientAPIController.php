@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
 use App\Models\Client;
+use App\Models\Projet;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class ClientAPIController extends Controller
@@ -247,7 +249,10 @@ class ClientAPIController extends Controller
     function getProjets($id){
         $client = Client::find($id);
         if ($client) {
-            $projets = $client->projets;
+            // $projets = $client->projets;
+            $projets = Projet::where('client_id', $id)->orderBy('name', 'asc')->get();
+
+
             return ResponseController::response(true, 'Projets récupérés avec succès', $projets, 200);
         } else {
             return ResponseController::response(false, 'Client non trouvé', null, 404);
@@ -284,7 +289,7 @@ class ClientAPIController extends Controller
     function getTasksByClient($id){
         $client = Client::find($id);
         if ($client) {
-            $tasks = $client->tasks;
+            $tasks = Task::where('client_id', $id)->orderBy('name', 'asc')->get();
             return ResponseController::response(true, 'Tâches récupérées avec succès', $tasks, 200);
         } else {
             return ResponseController::response(false, 'Client non trouvé', null, 404);

@@ -114,7 +114,7 @@
                             <div class="card-title">Images</div>
                             <div class="card-actions">
                                 <div class="input-group mt-2">
-                                    <div wire:loading>
+                                    <div wire:loading wire:target='images'>
                                         <div class="d-flex justify-content-between">
                                             <div>Chargement <span class="animated-dots"></div>
                                         </div>

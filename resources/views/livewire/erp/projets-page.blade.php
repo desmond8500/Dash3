@@ -12,7 +12,7 @@
                 <i class="ti ti-edit"></i>
             </button>
             @env('local')
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+                <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
             @endenv
         </div>
     @endcomponent

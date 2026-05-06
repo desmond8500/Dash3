@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-auto">
-        <div wire:loading>
+        <div wire:loading wire:target='pv_form.bct_logo'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
         <label href="#" class="avatar avatar-upload rounded" for="file">
@@ -58,7 +58,7 @@
     </div>
 
     <div class="col-auto">
-        <div wire:loading>
+        <div wire:loading wire:target='pv_form.mo_logo'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
         <label href="#" class="avatar avatar-upload rounded" for="file">
@@ -84,7 +84,7 @@
     </div>
 
     <div class="col-auto">
-        <div wire:loading>
+        <div wire:loading wire:target='pv_form.client_logo'>
             Chargement <div class="spinner-border" role="status"></div>
         </div>
         <label href="#" class="avatar avatar-upload rounded" for="file">

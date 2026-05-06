@@ -47,7 +47,7 @@
     @component('components.modal', ["id"=>'editBrandLogo', 'title' => 'Editer une marque', 'method'=>'update_logo'])
         <form class="" wire:submit="update_logo">
             <div class="text-center mb-3">
-                <div wire:loading>
+                <div wire:loading wire:target='logo'>
                     Chargement <div class="spinner-border" role="status"></div>
                 </div>
                 <div class="my-2">

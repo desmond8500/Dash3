@@ -39,34 +39,39 @@ new class extends Component {
 
 <div>
     <div class="card p-2">
-        <div class="position-absolut top-0 mb-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <button class="btn btn-icon rounded btn-primary" wire:click="edit('{{ $client->id ?? 1 }}')">
-                    <i class="ti ti-edit"></i>
-                </button>
-                <div class="text-warning">
-                    <i class="ti ti-star"></i>
-                    <i class="ti ti-star"></i>
-                    <i class="ti ti-star"></i>
-                    <i class="ti ti-star"></i>
-                    <i class="ti ti-star"></i>
+        <div class="row g-2">
+            <div class="col-5 col-md-12">
+                <div class="position-absolut top-0 mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button class="btn btn-icon rounded btn-primary" wire:click="edit('{{ $client->id ?? 1 }}')">
+                            <i class="ti ti-edit"></i>
+                        </button>
+                        <div class="text-warning d-flex align-items-center">
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                        </div>
+                        @if ($client->favorite)
+                            <button class="btn btn-icon btn-danger" data-bs-toggle="tooltip" title="Supprimer des favoris" wire:click="toggleFavorite('{{ $client->id }}')">
+                                <i class="ti ti-heart-filled"></i>
+                            </button>
+                        @else
+                            <button class="btn btn-icon btn-outline-danger" data-bs-toggle="tooltip" title="Ajouter aux favoris" wire:click="toggleFavorite('{{ $client->id }}')">
+                                <i class="ti ti-heart"></i>
+                            </button>
+                        @endif
+                    </div>
                 </div>
-                @if ($client->favorite)
-                    <button class="btn btn-icon btn-danger" data-bs-toggle="tooltip" title="Supprimer des favoris" wire:click="toggleFavorite('{{ $client->id }}')">
-                        <i class="ti ti-heart-filled"></i>
-                    </button>
-                @else
-                    <button class="btn btn-icon btn-outline-danger" data-bs-toggle="tooltip" title="Ajouter aux favoris" wire:click="toggleFavorite('{{ $client->id }}')">
-                        <i class="ti ti-heart"></i>
-                    </button>
-                @endif
+                <img src="{{ asset($client->avatar ?? 'img/icons/user3.png') }}" alt="img" class="w-100 border-bottom">
+            </div>
+
+            <div class="col-7 col-md-12">
+                <h2 class="text-center mt-3 pt-1">{{ $client->name }}</h2>
+                <p>{{ $client->description }}</p>
             </div>
         </div>
-
-        <img src="{{ asset($client->avatar ?? 'img/icons/user3.png') }}" alt="img" class="w-100">
-        <h2 class="text-center mt-1 border-top mt-3 pt-1">{{ $client->name }}</h2>
-        <p>{{ $client->description }}</p>
-
     </div>
 
     @component('components.modal', ["id"=>'editClient', 'title'=>'Modifier un client', 'method'=>'update'])

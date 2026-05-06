@@ -1,6 +1,6 @@
 <div class="row g-2">
     <div class="col-12">
-        <div wire:loading wire:target="article_form.image" class="alert alert-info d-flex align-items-center" role="alert">
+        <div wire:loading wire:target="file" class="alert alert-info d-flex align-items-center" role="alert">
             Chargement <div class="spinner-border" role="status"></div>
         </div>
         <div class="row g-1">

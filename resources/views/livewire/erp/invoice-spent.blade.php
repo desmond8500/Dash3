@@ -85,7 +85,7 @@
     @component('components.modal', ["id"=>'add-invoiceSpentFile', 'title' => 'Ajouter un fichier', 'method'=>'store_file'])
     <form class="row" wire:submit="store_file">
         <div class="col-12">
-            <div wire:loading>
+            <div wire:loading wire:target="file">
                 Chargement <div class="spinner-border" role="status"></div>
             </div>
 

@@ -14,7 +14,10 @@
                     <label for="file" class="btn btn-primary w-100 mt-2" >
                         Modifier
 
-                        <div wire:loading>
+                        <div wire:loading wire:target='avatar'>
+                             <div class="d-flex justify-content-between">
+                                 <div>Chargement <span class="animated-dots"></span></div>
+                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="ms-2 spinner-border"></div>
                             </div>

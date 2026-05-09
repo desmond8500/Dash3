@@ -30,6 +30,7 @@ class ClientAPIController extends Controller
         } else {
             $clients = Client::orderBy('name', 'asc')->paginate($perPage);
         }
+        $clients = collect($clients);
 
         return ResponseController::response(true, 'Les  clients  ont été récupérés avec succès', $clients, [
             'current_page' => $clients->currentPage(),

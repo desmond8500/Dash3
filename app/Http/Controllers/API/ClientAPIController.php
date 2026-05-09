@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
+use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use App\Models\Projet;
 use App\Models\Task;
@@ -16,6 +17,15 @@ class ClientAPIController extends Controller
     *      path="/api/v1/clients",
     *      tags={"Clients",},
     *      summary="Liste des clients",
+    *      @OA\Parameter(
+    *          name="search",
+    *          in="query",
+    *          required=false,
+    *          description="Termes de recherche",
+    *          @OA\Schema(
+    *              type="string"
+    *          )
+    *      ),
     *      @OA\Response(
     *          response=200,
     *          description="Clients récupérés avec succès",
@@ -30,7 +40,7 @@ class ClientAPIController extends Controller
         } else {
             $clients = Client::orderBy('name', 'asc')->paginate($perPage);
         }
-        $clients = collect($clients);
+        $clients = ClientResource::collection($clients);
 
         return ResponseController::response(true, 'Les  clients  ont été récupérés avec succès', $clients, [
             'current_page' => $clients->currentPage(),

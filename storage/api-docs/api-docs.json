@@ -41,6 +41,17 @@
                 ],
                 "summary": "Liste des clients",
                 "operationId": "d999fb53802a1129e29bfc6e559113d7",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termes de recherche",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Clients récupérés avec succès"

@@ -3,9 +3,10 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ClientResource extends ResourceCollection
+class ClientResource extends JsonResource
+
 {
     /**
      * Transform the resource collection into an array.
@@ -15,21 +16,13 @@ class ClientResource extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => [
-                'name' => $this->name,
-                'description' => $this->description,
-                'address' => $this->address,
-                'avatar' => url($this->avatar ?? 'img/icons/no-camera.png'),
-                'status' => $this->status,
-                'type' => $this->type,
-                'favorite' => $this->favorite,
-            ],
-            'meta' => [
-                'current_page' => $this->currentPage(),
-                'last_page' => $this->lastPage(),
-                'per_page' => $this->perPage(),
-                'total' => $this->total(),
-            ],
+            'name' => $this->name,
+            'description' => $this->description,
+            'address' => $this->address,
+            'avatar' => url($this->avatar ?? 'img/icons/no-camera.png'),
+            'status' => $this->status,
+            'type' => $this->type,
+            'favorite' => $this->favorite,
         ];
     }
 }

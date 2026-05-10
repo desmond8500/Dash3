@@ -23,7 +23,6 @@ class Client extends Model
         'favorite',
     ];
 
-
     public function projets(): HasMany
     {
         return $this->hasMany(Projet::class);

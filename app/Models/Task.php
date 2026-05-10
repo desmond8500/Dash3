@@ -14,6 +14,47 @@ class Task extends Model
     use HasFactory;
     use searchTrait;
 
+    /**
+ * @OA\Schema(
+ *     schema="Task",
+ *     title="Task",
+ *     description="Modèle d'une tâche",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="title",
+ *         type="string",
+ *         example="Installer Laravel"
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         example="Installation complète du projet"
+ *     ),
+ *     @OA\Property(
+ *         property="completed",
+ *         type="boolean",
+ *         example=false
+ *     ),
+ *     @OA\Property(
+ *         property="created_at",
+ *         type="string",
+ *         format="date-time",
+ *         example="2026-05-10T12:00:00Z"
+ *     ),
+ *     @OA\Property(
+ *         property="updated_at",
+ *         type="string",
+ *         format="date-time",
+ *         example="2026-05-10T12:00:00Z"
+ *     )
+ * )
+ */
+
+
     protected $fillable = [
         'client_id',
         'projet_id',

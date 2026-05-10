@@ -20,7 +20,7 @@ class ClientResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'address' => $this->address,
-            'avatar' => url($this->avatar ?? 'img/icons/no-camera.png'),
+            'avatar' => url($this->avatar ?? 'img/icons/012-performance.png'),
             'status' => $this->status,
             'type' => $this->type,
             'favorite' => $this->favorite,

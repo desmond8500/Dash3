@@ -12,26 +12,28 @@ use Illuminate\Http\Request;
 
 class ClientAPIController extends Controller
 {
+
     /**
-    *@OA\Get(
-    *      path="/api/v1/clients",
-    *      tags={"Clients",},
-    *      summary="Liste des clients",
-    *      @OA\Parameter(
-    *          name="search",
-    *          in="query",
-    *          required=false,
-    *          description="Termes de recherche",
-    *          @OA\Schema(
-    *              type="string"
-    *          )
-    *      ),
-    *      @OA\Response(
-    *          response=200,
-    *          description="Clients récupérés avec succès",
-    *       ),
-    *     )
+        *@OA\Get(
+        *      path="/api/v1/clients",
+        *      tags={"Clients"},
+        *      summary="Liste des clients",
+        *      @OA\Parameter(
+        *          name="search",
+        *          in="query",
+        *          required=false,
+        *          description="Termes de recherche",
+        *          @OA\Schema(
+        *              type="string"
+        *          )
+        *      ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Clients récupérés avec succès",
+        *       ),
+        *     )
     */
+
     function index(Request $request){
         $perPage = min($request->get('per_page', 10), 100);
         if ($request->search) {
@@ -51,28 +53,28 @@ class ClientAPIController extends Controller
     }
 
     /**
-    *@OA\Get(
-    *      path="/api/v1/clients/{id}",
-    *      tags={"Clients",},
-    *      summary="Détails d'un client",
-    *      @OA\Parameter(
-    *          name="id",
-    *          in="path",
-    *          required=true,
-    *          description="ID du client",
-    *          @OA\Schema(
-    *              type="integer"
-    *          )
-    *      ),
-    *      @OA\Response(
-    *          response=200,
-    *          description="Client récupéré avec succès",
-    *       ),
-    *      @OA\Response(
-    *          response=404,
-    *          description="Client non trouvé",
-    *       ),
-    *     )
+        *@OA\Get(
+        *      path="/api/v1/clients/{id}",
+        *      tags={"Clients"},
+        *      summary="Détails d'un client",
+        *      @OA\Parameter(
+        *          name="id",
+        *          in="path",
+        *          required=true,
+        *          description="ID du client",
+        *          @OA\Schema(
+        *              type="integer"
+        *          )
+        *      ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Client récupéré avec succès",
+        *       ),
+        *      @OA\Response(
+        *          response=404,
+        *          description="Client non trouvé",
+        *       ),
+        *     )
     */
 
     function show($id){
@@ -85,31 +87,31 @@ class ClientAPIController extends Controller
     }
 
     /**
-    *@OA\Post(
-    *      path="/api/v1/clients",
-    *      tags={"Clients",},
-    *      summary="Ajouter un client",
-    *      @OA\RequestBody(
-    *          required=true,
-    *          @OA\JsonContent(
-    *              required={"name",},
-    *              @OA\Property(property="name", type="string", example="Client Name"),
-    *              @OA\Property(property="description", type="string", example=""),
-    *              @OA\Property(property="avatar", type="string", example=""),
-    *              @OA\Property(property="status", type="integer", example="1"),
-    *              @OA\Property(property="type", type="1", example="1"),
-    *              @OA\Property(property="favorite", type="string", example="1"),
-    *          )
-    *      ),
-    *      @OA\Response(
-    *          response=201,
-    *          description="Client créé avec succès",
-    *       ),
-    *      @OA\Response(
-    *          response=400,
-    *          description="Erreur lors de la création du client",
-    *       ),
-    *     )
+        *@OA\Post(
+        *      path="/api/v1/clients",
+        *      tags={"Clients",},
+        *      summary="Ajouter un client",
+        *      @OA\RequestBody(
+        *          required=true,
+        *          @OA\JsonContent(
+        *              required={"name",},
+        *              @OA\Property(property="name", type="string", example="Client Name"),
+        *              @OA\Property(property="description", type="string", example=""),
+        *              @OA\Property(property="avatar", type="string", example=""),
+        *              @OA\Property(property="status", type="integer", example="1"),
+        *              @OA\Property(property="type", type="1", example="1"),
+        *              @OA\Property(property="favorite", type="string", example="1"),
+        *          )
+        *      ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Client créé avec succès",
+        *       ),
+        *      @OA\Response(
+        *          response=400,
+        *          description="Erreur lors de la création du client",
+        *       ),
+        *     )
     */
     function store(Request $request){
         $client = new Client();
@@ -129,44 +131,44 @@ class ClientAPIController extends Controller
     }
 
     /**
-    *@OA\Put(
-    *      path="/api/v1/clients/{id}",
-    *      tags={"Clients",},
-    *      summary="Mettre à jour un client",
-    *      @OA\Parameter(
-    *          name="id",
-    *          in="path",
-    *          required=true,
-    *          description="ID du client",
-    *          @OA\Schema(
-    *              type="integer"
-    *          )
-    *      ),
-    *      @OA\RequestBody(
-    *          required=true,
-    *          @OA\JsonContent(
-    *              required={"name",},
-    *              @OA\Property(property="name", type="string", example="Client Name"),
-    *              @OA\Property(property="description", type="string", example=""),
-    *              @OA\Property(property="avatar", type="string", example=""),
-    *              @OA\Property(property="status", type="integer", example="1"),
-    *              @OA\Property(property="type", type="1", example="1"),
-    *              @OA\Property(property="favorite", type="string", example="1"),
-    *          )
-    *      ),
-    *      @OA\Response(
-    *          response=200,
-    *          description="Client mis à jour avec succès",
-    *       ),
-    *      @OA\Response(
-    *          response=404,
-    *          description="Client non trouvé",
-    *       ),
-    *      @OA\Response(
-    *          response=400,
-    *          description="Erreur lors de la mise à jour du client",
-    *       ),
-    *     )
+        *@OA\Put(
+        *      path="/api/v1/clients/{id}",
+        *      tags={"Clients",},
+        *      summary="Mettre à jour un client",
+        *      @OA\Parameter(
+        *          name="id",
+        *          in="path",
+        *          required=true,
+        *          description="ID du client",
+        *          @OA\Schema(
+        *              type="integer"
+        *          )
+        *      ),
+        *      @OA\RequestBody(
+        *          required=true,
+        *          @OA\JsonContent(
+        *              required={"name",},
+        *              @OA\Property(property="name", type="string", example="Client Name"),
+        *              @OA\Property(property="description", type="string", example=""),
+        *              @OA\Property(property="avatar", type="string", example=""),
+        *              @OA\Property(property="status", type="integer", example="1"),
+        *              @OA\Property(property="type", type="1", example="1"),
+        *              @OA\Property(property="favorite", type="string", example="1"),
+        *          )
+        *      ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Client mis à jour avec succès",
+        *       ),
+        *      @OA\Response(
+        *          response=404,
+        *          description="Client non trouvé",
+        *       ),
+        *      @OA\Response(
+        *          response=400,
+        *          description="Erreur lors de la mise à jour du client",
+        *       ),
+        *     )
     */
     function update(Request $request, $id){
         $client = Client::find($id);
@@ -188,34 +190,36 @@ class ClientAPIController extends Controller
             return ResponseController::response(false, 'Client non trouvé', null, 404);
         }
     }
+
     /**
-    *@OA\Delete(
-    *      path="/api/v1/clients/{id}",
-    *      tags={"Clients",},
-    *      summary="Supprimer un client",
-    *      @OA\Parameter(
-    *          name="id",
-    *          in="path",
-    *          required=true,
-    *          description="ID du client",
-    *          @OA\Schema(
-    *              type="integer"
-    *          )
-    *      ),
-    *      @OA\Response(
-    *          response=200,
-    *          description="Client supprimé avec succès",
-    *       ),
-    *      @OA\Response(
-    *          response=404,
-    *          description="Client non trouvé",
-    *       ),
-    *      @OA\Response(
-    *          response=400,
-    *          description="Erreur lors de la suppression du client",
-    *       ),
-    *     )
+        *@OA\Delete(
+        *      path="/api/v1/clients/{id}",
+        *      tags={"Clients",},
+        *      summary="Supprimer un client",
+        *      @OA\Parameter(
+        *          name="id",
+        *          in="path",
+        *          required=true,
+        *          description="ID du client",
+        *          @OA\Schema(
+        *              type="integer"
+        *          )
+        *      ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Client supprimé avec succès",
+        *       ),
+        *      @OA\Response(
+        *          response=404,
+        *          description="Client non trouvé",
+        *       ),
+        *      @OA\Response(
+        *          response=400,
+        *          description="Erreur lors de la suppression du client",
+        *       ),
+        *     )
     */
+
     function destroy($id){
         $client = Client::find($id);
         if ($client) {
@@ -228,10 +232,11 @@ class ClientAPIController extends Controller
             return ResponseController::response(false, 'Client non trouvé', null, 404);
         }
     }
+
     /**
      *@OA\Get(
      *      path="/api/v1/clients/projets/{id}",
-     *      tags={"Clients",},
+     *      tags={"Clients"},
      *      summary="Liste des projets d'un client",
      *      @OA\Parameter(
      *          name="id",
@@ -269,34 +274,35 @@ class ClientAPIController extends Controller
             return ResponseController::response(false, 'Client non trouvé', null, 404);
         }
     }
+
     /**
-    *@OA\Get(
-    *      path="/api/v1/clients/{id}/tasks",
-    *      tags={"Clients",},
-    *      summary="Liste des tâches d'un client",
-    *      @OA\Parameter(
-    *          name="id",
-    *          in="path",
-    *          required=true,
-    *          description="ID du client",
-    *          @OA\Schema(
-    *              type="integer"
-    *          )
-    *      ),
-    *      @OA\Response(
-    *          response=200,
-    *          description="Tâches récupérées avec succès",
-    *       ),
-    *      @OA\Response(
-    *          response=404,
-    *          description="Client non trouvé",
-    *       ),
-    *      @OA\Response(
-    *          response=400,
-    *          description="Erreur lors de la récupération des tâches",
-    *       ),
-    *     )
-    */
+     *@OA\Get(
+     *      path="/api/v1/clients/tasks/{id}",
+     *      tags={"Clients","Taches"},
+     *      summary="Liste des tâches d'un client",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID du client",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Tâches récupérées avec succès",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Client non trouvé",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Erreur lors de la récupération des tâches",
+     *       ),
+     *     )
+     */
     function getTasksByClient($id){
         $client = Client::find($id);
         if ($client) {

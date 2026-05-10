@@ -5,26 +5,27 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
 use App\Models\Projet;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class ProjetAPIController extends Controller
 {
     /**
-    *@OA\Get(
-    *      path="/api/v1/projets",
-    *      tags={"Projets",},
-    *      summary="Liste des projets",
-    *      @OA\Response(
-    *          response=200,
-    *          description="Utilisateurs récupérés avec succès",
-    *       ),
-    *      @OA\Parameter(
-    *          name="search",
-    *          in="path",
-    *          required=false,
-    *          description="Terme de recherche pour filtrer les projets par nom",
-    *          ),
-    *     )
+        *@OA\Get(
+        *      path="/api/v1/projets",
+        *      tags={"Projets",},
+        *      summary="Liste des projets",
+        *      @OA\Response(
+        *          response=200,
+        *          description="Utilisateurs récupérés avec succès",
+        *       ),
+        *      @OA\Parameter(
+        *          name="search",
+        *          in="path",
+        *          required=false,
+        *          description="Terme de recherche pour filtrer les projets par nom",
+        *          ),
+        *     )
     */
     public function index(Request $request)
     {   return 0;
@@ -46,22 +47,22 @@ class ProjetAPIController extends Controller
     }
 
     /**
-    *@OA\Get(
-    *      path="/api/v1/projets/{id}",
-    *      tags={"Projets",},
-    *      summary="Récupération d'un projet",
-    *      @OA\Response(
-    *          response=200,
-    *          description="Projet récupéré avec succès",
-    *       ),
-    *      @OA\Parameter(
-    *          name="id",
-    *          in="path",
-    *          required=true,
-    *          description="ID du projet",
-    *          ),
-    *
-    *     )
+        *@OA\Get(
+        *      path="/api/v1/projets/{id}",
+        *      tags={"Projets",},
+        *      summary="Récupération d'un projet",
+        *      @OA\Response(
+        *          response=200,
+        *          description="Projet récupéré avec succès",
+        *       ),
+        *      @OA\Parameter(
+        *          name="id",
+        *          in="path",
+        *          required=true,
+        *          description="ID du projet",
+        *          ),
+        *
+        *     )
     */
 
     public function show(string $id)
@@ -88,5 +89,44 @@ class ProjetAPIController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     *@OA\Get(
+     *      path="/api/v1/projet/tasks/{id}",
+     *      tags={"Projets","Taches"},
+     *      summary="Liste des tâches d'un projet",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID du projet",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Tâches récupérées avec succès",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Client non trouvé",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Erreur lors de la récupération des tâches",
+     *       ),
+     *     )
+     */
+    function getTasksByProjet($id)
+    {
+        $projet = Projet::find($id);
+        if ($projet) {
+            $tasks = Task::where('projet_id', $id)->orderBy('name', 'asc')->get();
+            return ResponseController::response(true, 'Tâches récupérées avec succès', $tasks, 200);
+        } else {
+            return ResponseController::response(false, 'projet non trouvé', null, 404);
+        }
     }
 }

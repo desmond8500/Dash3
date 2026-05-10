@@ -50,6 +50,7 @@ class TaskController extends Controller
             return Task::orderBy('priority_id', 'desc')->active($search)->paginate($paginate);
         }
     }
+
     static function getTasklist($id, $type='', $search= '', $status = true){
         // return Task::all();
         if ($status) {
@@ -95,7 +96,9 @@ class TaskController extends Controller
         }
     }
 
-
+    function index(){
+        return 'index';
+    }
 
     function show(){
         return 'show';
@@ -103,6 +106,7 @@ class TaskController extends Controller
     function update(){
         return 'update';
     }
+
     function delete(){
         return 'delete';
     }

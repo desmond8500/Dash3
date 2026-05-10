@@ -269,13 +269,14 @@
                 }
             }
         },
-        "/api/v1/clients/{id}/tasks": {
+        "/api/v1/clients/tasks/{id}": {
             "get": {
                 "tags": [
-                    "Clients"
+                    "Clients",
+                    "Taches"
                 ],
                 "summary": "Liste des tâches d'un client",
-                "operationId": "f6c6df4ed4357d9a1252fad79efe37ee",
+                "operationId": "2d9e662a46c399163ea12fce99dd7c5d",
                 "parameters": [
                     {
                         "name": "id",
@@ -752,6 +753,38 @@
                 }
             }
         },
+        "/api/v1/projet/tasks/{id}": {
+            "get": {
+                "tags": [
+                    "Projets",
+                    "Taches"
+                ],
+                "summary": "Liste des tâches d'un projet",
+                "operationId": "f68b389dc79817d6303fe829ecb74056",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du projet",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tâches récupérées avec succès"
+                    },
+                    "404": {
+                        "description": "Client non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la récupération des tâches"
+                    }
+                }
+            }
+        },
         "/api/v1/providers": {
             "get": {
                 "tags": [
@@ -776,6 +809,257 @@
                 "responses": {
                     "200": {
                         "description": "Les taches ont été récupérés avec succès"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Taches"
+                ],
+                "summary": "Ajouter une tache",
+                "operationId": "5bb45e79ad25ec9260f42173f33ed9ca",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "client_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "projet_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "devis_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "building_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "stage_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "room_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "journal_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "priority_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "statut_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "expiration_date": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "favoris": {
+                                        "type": "boolean",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Client créé avec succès"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la création du client"
+                    }
+                }
+            }
+        },
+        "/api/v1/tasks/{id}": {
+            "get": {
+                "tags": [
+                    "Taches"
+                ],
+                "summary": "Récupérer une tache",
+                "operationId": "306b92b529b7b1a2e16c346cf44983a5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la tache",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La tache a été récupérée avec succès"
+                    },
+                    "404": {
+                        "description": "Tache non trouvée"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Taches"
+                ],
+                "summary": "Mettre à jour une Tache",
+                "operationId": "89c27a82ccf1e1eaeef2542e9179eb2c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la tache",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "client_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "projet_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "devis_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "building_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "stage_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "room_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "journal_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "priority_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "statut_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "expiration_date": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "favoris": {
+                                        "type": "boolean",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Client mis à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Client non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la mise à jour du client"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Taches"
+                ],
+                "summary": "Supprimer une Tache",
+                "operationId": "97082430e4773af0f0c518ee97d4bb97",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du Tache",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tache supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Tache non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la suppression du client"
                     }
                 }
             }
@@ -840,6 +1124,43 @@
             }
         }
     },
+    "components": {
+        "schemas": {
+            "Task": {
+                "title": "Task",
+                "description": "Modèle d'une tâche",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Installer Laravel"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Installation complète du projet"
+                    },
+                    "completed": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2026-05-10T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2026-05-10T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
     "tags": [
         {
             "name": "Achats",
@@ -852,6 +1173,10 @@
         {
             "name": "Clients",
             "description": "Clients"
+        },
+        {
+            "name": "Taches",
+            "description": "Taches"
         },
         {
             "name": "Invoices",
@@ -876,10 +1201,6 @@
         {
             "name": "Fournisseurs",
             "description": "Fournisseurs"
-        },
-        {
-            "name": "Taches",
-            "description": "Taches"
         },
         {
             "name": "Transactions",

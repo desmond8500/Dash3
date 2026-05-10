@@ -15,6 +15,7 @@ use App\Http\Controllers\DemoController;
 use App\Http\Controllers\LiensControlleur;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TaskController;
+use App\Models\Projet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,16 @@ Route::prefix('v1')->group(function () {
     Route::get('clients/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
     // Projets
     Route::resource('projets', ProjetAPIController::class);
+    Route::get('projet/tasks/{id}', [ProjetAPIController::class, 'getTasksByProjet']);
+    // Devis
+    Route::get('invoice/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
+    // Building
+    Route::get('building/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
+    // Stage
+    Route::get('stage/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
+    // Room
+    Route::get('room/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
+    // Journal
     // Route::get('projet', [ProjetAPIController::class, 'index']);
     Route::resource('projet_notes', NoteAPIController::class);
     Route::get('get_projet_notes/{projet_id}', [NoteAPIController::class, 'get_projet_notes']);

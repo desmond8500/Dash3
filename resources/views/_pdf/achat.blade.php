@@ -76,7 +76,7 @@
                         <div>{{ $row->tva*100 }}%</div>
                     @endif
                 </td>
-                <td align="center">
+                <td align="right">
                     <div>{{ number_format($row->prix *$row->quantite, 0, 2) }}</div>
                     @if ($row->tva)
                         <div>{{ number_format(($row->prix + $row->prix * $row->tva)*$row->quantite, 0, 2) }}</div>

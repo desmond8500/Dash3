@@ -14,8 +14,6 @@ use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\LiensControlleur;
 use App\Http\Controllers\PDFController;
-use App\Http\Controllers\TaskController;
-use App\Models\Projet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +59,6 @@ Route::prefix('v1')->group(function () {
     // Route::get('projet', [ProjetAPIController::class, 'index']);
     Route::resource('projet_notes', NoteAPIController::class);
     Route::get('get_projet_notes/{projet_id}', [NoteAPIController::class, 'get_projet_notes']);
-
 });
 
 // Articles

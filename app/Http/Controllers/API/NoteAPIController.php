@@ -10,15 +10,15 @@ use Illuminate\Http\Request;
 class NoteAPIController extends Controller
 {
     /**
-    *@OA\Get(
-    *      path="/api/v1/projet_notes",
-    *      tags={"Notes de projets",},
-    *      summary="Liste des notes",
-    *      @OA\Response(
-    *          response=200,
-    *          description="Notes récupérées avec succès",
-    *       ),
-    *     )
+        *@OA\Get(
+        *      path="/api/v1/projet_notes",
+        *      tags={"Notes de projets",},
+        *      summary="Liste des notes",
+        *      @OA\Response(
+        *          response=200,
+        *          description="Notes récupérées avec succès",
+        *       ),
+        *     )
     */
     function index(){
          $notes = ProjetNote::all();

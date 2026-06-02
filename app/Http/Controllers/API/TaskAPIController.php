@@ -23,7 +23,7 @@ class TaskAPIController extends Controller
 
     function index(Request $request)
     {
-        $perPage = min($request->get('per_page', 10), 100);
+        $perPage = min($request->get('per_page', 6), 100);
 
         if ($request->search) {
             $tasks = Task::where('name', 'like', '%' . $request->search . '%')
@@ -99,6 +99,7 @@ class TaskAPIController extends Controller
         $task->start_date = $request->start_date;
         $task->end_date = $request->end_date;
         $task->favoris = $request->favoris;
+
 
         if ($task->save()) {
             return ResponseController::response(true, 'Tache créée avec succès', $task, 201);

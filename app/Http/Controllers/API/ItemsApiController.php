@@ -53,24 +53,59 @@ class ItemsApiController extends Controller
      *     )
      */
     function index(Request $request){
-        $perPage = min($request->get('per_page', 10), 100);
+        $perPage = min((int) $request->get('per_page', 10), 100);
 
-        if ($request->search) {
-            $articles = Article::where('designation', 'like', '%' . $request->search . '%')
-            ->orWhere('reference', 'like', '%' . $request->search . '%')
-            ->paginate($perPage);
-        } else {
-            $articles = Article::paginate($perPage);
+        $query = Article::query();
+
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('designation', 'like', "%{$search}%")
+                    ->orWhere('reference', 'like', "%{$search}%");
+            });
         }
 
-        $articles = ArticleResource::collection($articles);
+        $articles = $query
+            ->latest()
+            ->paginate($perPage);
 
-        return ResponseController::response(true, "Les articles ont été récupérés",$articles, [
-            'current_page' => $articles->currentPage(),
-            'last_page' => $articles->lastPage(),
-            'per_page' => $articles->perPage(),
-            'total' => $articles->total(),
-        ]);
+        return ResponseController::response(
+            true,
+            "Les articles ont été récupérés",
+            $articles,
+            [
+                'current_page' => $articles->currentPage(),
+                'last_page' => $articles->lastPage(),
+                'per_page' => $articles->perPage(),
+                'total' => $articles->total(),
+                'dimp' => [
+                    $request->search,
+                    $request->page,
+                ]
+            ]
+        );
+
+
+        // $perPage = min($request->get('per_page', 10), 100);
+
+        // if ($request->search) {
+        //     $articles = Article::where('designation', 'like', '%' . $request->search . '%')
+        //     ->orWhere('reference', 'like', '%' . $request->search . '%')
+        //     ->paginate($perPage);
+        // } else {
+        //     $articles = Article::paginate($perPage);
+        // }
+
+        // // $articles = ArticleResource::collection($articles);
+
+        // return ResponseController::response(true, "Les articles ont été récupérés",$articles, [
+        //     'current_page' => $articles->currentPage(),
+        //     'last_page' => $articles->lastPage(),
+        //     'per_page' => $articles->perPage(),
+        //     'total' => $articles->total(),
+        // ]);
     }
 
     /**

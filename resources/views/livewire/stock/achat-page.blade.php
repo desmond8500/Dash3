@@ -102,6 +102,7 @@
                     <thead>
                         <tr>
                             <td width="10px">#</td>
+                            <td >Photo</td>
                             <td>Désignation</td>
                             <td class="text-center">Quantité</td>
                             <td class="text-center">Prix HT/TTC</td>
@@ -118,6 +119,9 @@
                         @foreach ($achat->rows as $key => $row)
                             <tr>
                                 <td>{{ $key+1 }}</td>
+                                <td>
+                                    <img src="{{ asset($row->article->image) }}" alt="" class="avatar">
+                                </td>
                                 <td>
                                     @if ($row->article_id)
                                         <a href="{{ route('article', ['article_id'=>$row->article_id]) }}" target="_blank">

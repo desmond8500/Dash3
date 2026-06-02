@@ -41,11 +41,12 @@
         <thead class="thead">
             <tr>
                 <td align="center" width="20px">#</td>
+                <td align="center" width="40px">IMG</td>
                 <td>Désignation</td>
-                <td align="center" width="30px">Quantité</td>
+                <td align="center" width="30px">Qte</td>
                 <td align="center" width="120px">Prix HT/TTC</td>
                 <td align="center" width="30px">TVA</td>
-                <td align="center" width="40px">Total</td>
+                <td align="right" width="120px">Total</td>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +54,9 @@
             @foreach ($achat->rows as $key => $row)
             <tr>
                 <td align="center" class="fw-bold">{{ $key+1 }}</td>
+                <td align="center" >
+                    <img src="{{ $row->article->image }}" alt="" height="30px" width="30px">
+                </td>
                 <td>
                     <div><b>{{ $row->designation }}</b></div>
                     <div class="text-muted fs-7">{{ $row->reference }}</div>

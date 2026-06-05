@@ -52,42 +52,42 @@
         <tbody>
 
             @foreach ($achat->rows as $key => $row)
-            <tr>
-                <td align="center" class="fw-bold">{{ $key+1 }}</td>
-                <td align="center" >
-                    <img src="{{ $row->article->image }}" alt="" height="30px" width="30px">
-                </td>
-                <td>
-                    <div><b>{{ $row->designation }}</b></div>
-                    <div class="text-muted fs-7">{{ $row->reference }}</div>
-                </td>
-                <td align="center">{{ $row->quantite }}</td>
-                <td align="right">
-                    <div>{{ number_format($row->prix, 0, 2) }} <span style="font-size: 10px;">HT<span style="color:white">1</span></span> </div>
-                    @if ($row->tva)
-                        <div class="text-danger">
-                            {{ number_format($row->prix + $row->prix * $row->tva, 0, 2)}}
-                            <span style="font-size: 10px;">TTC</span>
-                        </div>
-                    @endif
-                </td>
-                <td align="right">
-                    @if ($row->tva)
-                        <div>{{ $row->tva*100 }}%</div>
-                    @endif
-                </td>
-                <td align="right">
-                    <div>{{ number_format($row->prix *$row->quantite, 0, 2) }}</div>
-                    @if ($row->tva)
-                        <div>{{ number_format(($row->prix + $row->prix * $row->tva)*$row->quantite, 0, 2) }}</div>
-                    @endif
-                </td>
+                <tr>
+                    <td align="center" class="fw-bold">{{ $key+1 }}</td>
+                    <td align="center" >
+                        <img src="{{ $row->article->image }}" alt="" height="30px" width="30px">
+                    </td>
+                    <td>
+                        <div><b>{{ $row->designation }}</b></div>
+                        <div class="text-muted fs-7">{{ $row->reference }}</div>
+                    </td>
+                    <td align="center">{{ $row->quantite }}</td>
+                    <td align="right">
+                        <div>{{ number_format($row->prix, 0, 2) }} <span style="font-size: 10px;">HT<span style="color:white">1</span></span> </div>
+                        @if ($row->tva)
+                            <div class="text-danger">
+                                {{ number_format($row->prix + $row->prix * $row->tva, 0, 2)}}
+                                <span style="font-size: 10px;">TTC</span>
+                            </div>
+                        @endif
+                    </td>
+                    <td align="right">
+                        @if ($row->tva)
+                            <div>{{ $row->tva*100 }}%</div>
+                        @endif
+                    </td>
+                    <td align="right">
+                        <div>{{ number_format($row->prix *$row->quantite, 0, 2) }}</div>
+                        @if ($row->tva)
+                            <div>{{ number_format(($row->prix + $row->prix * $row->tva)*$row->quantite, 0, 2) }}</div>
+                        @endif
+                    </td>
 
-            </tr>
-            @php
-            $total+= ($row->prix + $row->prix * $row->tva)*$row->quantite;
-            $tva+= $row->prix * $row->tva*$row->quantite;
-            @endphp
+                </tr>
+                @php
+                    $total+= ($row->prix + $row->prix * $row->tva)*$row->quantite;
+                    $tva+= $row->prix * $row->tva*$row->quantite;
+                @endphp
             @endforeach
         </tbody>
     </table>

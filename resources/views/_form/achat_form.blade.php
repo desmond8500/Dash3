@@ -2,7 +2,7 @@
     <label class="form-label">Fournisseur</label>
     <select class="form-select" wire:model="achat_form.provider_id">
         <option disabled selected value="0">Selectioner un fournisseur</option>
-        @foreach ($providers as $provider)
+        @foreach ($providers->sortBy('name') as $provider)
             <option value="{{ $provider->id }}">{{ $provider->name }}</option>
         @endforeach
     </select>

@@ -1,15 +1,13 @@
 <div class="row g-2">
     <div class="col-12">
-        <div wire:loading wire:target="file" class="alert alert-info d-flex align-items-center" role="alert">
-            Chargement <div class="spinner-border" role="status"></div>
-        </div>
+
         <div class="row g-1">
             @if ($article_form)
                 @if ($article_form->image)
                     @if(is_string($article_form->image))
-                        <img src="{{ asset($article_form->image) }}" alt="" class="avatar avatar-xl rounded avatar-upload mt-1 col-auto">
+                        <img src="{{ asset($article_form->image) }}" alt="" class="avatar avatar-xl rounded avatar-upload mt-1 col-auto" >
                     @else
-                        <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar avatar-xl rounded avatar-upload mt-1 col-auto">
+                        <img src="{{ $article_form->image->temporaryUrl() }}" alt="" class="avatar avatar-xl rounded avatar-upload mt-1 col-auto" >
                     @endif
                     <label for="file" href="#" class="avatar avatar-xl avatar-upload rounded col-auto">
                         <i class="ti ti-edit text-muted"></i>
@@ -63,10 +61,10 @@
         <label class="form-label">Prix</label>
         <div class="input-group">
             <input type="number" class="form-control" wire:model.live="article_form.price" placeholder="Prix">
-            <a class="btn btn-primary btn-icon" wire:click="$set('article_form.price', '{{ ($article_form->price ?? 1) * 1,8 }}' )">
+            <a class="btn btn-primary btn-icon" wire:click="$set('article_form.price', '{{ ($article_form->price ?? 1) * 1.2 }}' )">
                 tva
             </a>
-            <a class="btn btn-icon btn-primary" wire:click="$set('article_form.price', '{{ ($article_form->price ?? 1) * 655 }}' )" data-bs-toggle="tooltip" title="Convertir en Euro">
+            <a class="btn btn-icon btn-primary" wire:click="$set('article_form.price', '{{ ($article_form->price ?? 1) * 656 }}' )" data-bs-toggle="tooltip" title="Convertir en Euro">
                 <i class="ti ti-currency-euro"></i>
             </a>
         </div>

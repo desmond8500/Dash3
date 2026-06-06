@@ -5,14 +5,14 @@
         <div style="height: 100px; width: 100%; background-color: #f1f1f1; margin: 0 auto;"></div>
     @endif
 
-    <div class="text-uppercase my-1" style="font-size: 12px">
+    <div class="text-uppercase my-1" style="font-size: 12px; min-height: 40px;">
         {{ $item->designation ?? "Désignation de l'article" }}
     </div>
 
     {{-- <div class="text-muted" style="font-size: 12px">
         {!! nl2br($item->description) !!}
     </div> --}}
-    <div class="d-flex justify-content-between" style="position: relative">
+    <div class="d-flex justify-content-between" style="position: relative; font-size: 10px; min-height: 30px;">
         <div class="text-uppercase text-purple">
             {{ $item->brand->name ?? "Marque" }}
         </div>

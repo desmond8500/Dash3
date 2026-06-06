@@ -21,10 +21,10 @@ class ArticlesPage extends Component
     use WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
-    public $search ='';
-    public $breadcrumbs;
+    public string $search ='';
+    public array $breadcrumbs;
     public ItemForm $article_form;
-    public $paginate = 12;
+    public int $paginate = 12;
     public $card = "col-md-6 col-xl-4";
 
     public function mount(){
@@ -41,8 +41,8 @@ class ArticlesPage extends Component
         );
     }
 
-    public $search_brand;
-    public $search_provider;
+    public string $search_brand = '';
+    public string $search_provider = '';
 
     #[On('get-articles')]
     public function render()
@@ -56,36 +56,51 @@ class ArticlesPage extends Component
         ]);
     }
 
-    public $brand_id;
-    public $provider_id;
-    public $priorite_id = 25;
+    public ?int $brand_id = 0;
+    public ?int $provider_id = 0;
+    public ?int $priorite_id = 25;
 
-    public $tag;
-    public $selectedtag;
+    public ?array $tag = null;
+    public ?string $selectedtag = null;
 
     function get_articles(){
-        if ($this->brand_id) {
-            return Article::orderByDesc('id')->where('brand_id', $this->brand_id)->articleSearch($this->search)->paginate($this->paginate);
-        }
-        if ($this->provider_id) {
-            return Article::orderByDesc('id')->where('provider_id', $this->provider_id)->articleSearch($this->search)->paginate($this->paginate);
-        }
-        if ($this->priorite_id != 25 ) {
-            return Article::orderByDesc('id')->where('priority_id', $this->priorite_id)->articleSearch($this->search)->paginate($this->paginate);
-        }
-        if($this->selectedtag){
-            return Article::withAnyTags([$this->selectedtag])->paginate($this->paginate);
-        }
-        return Article::orderByDesc('id')->articleSearch($this->search)->paginate($this->paginate);
+
+        return Article::query()
+
+            ->when(
+                $this->brand_id,
+                fn($q) => $q->where('brand_id', $this->brand_id)
+            )
+
+            ->when(
+                $this->provider_id,
+                fn($q) => $q->where('provider_id', $this->provider_id)
+            )
+
+            ->when(
+                $this->priorite_id != 25,
+                fn($q) => $q->where('priority_id', $this->priorite_id)
+            )
+
+            ->when(
+                $this->selectedtag,
+                fn($q) => $q->withAnyTags([$this->selectedtag])
+            )
+
+            ->articleSearch($this->search)
+
+            ->orderByDesc('id')
+
+            ->paginate($this->paginate);
     }
 
     function reset_filter(){
         $this->reset('brand_id', 'provider_id', 'priorite_id', "search", "selectedtag");
     }
 
-    public $selected;
+    public int $selected = 0;
 
-    function edit($article_id){
+    function edit(int $article_id){
         $this->article_form->set($article_id);
         $this->selected = $article_id;
 
@@ -99,18 +114,18 @@ class ArticlesPage extends Component
     }
 
     // TODO: Voir les dépendnces de suppression
-    function delete($article_id){
+    function delete(int $article_id){
         $this->article_form->delete($article_id);
     }
 
-    function dupliquer($article_id){
+    function dupliquer(int $article_id){
         $article = Article::find($article_id);
 
         $new = $article->replicate();
         $new->save();
     }
 
-    function buy($article_id){
+    function buy(int $article_id){
         Commande::create([
             'article_id' => $article_id,
             'quantity' => 1,
@@ -121,7 +136,7 @@ class ArticlesPage extends Component
         $this->article_form->price *= 655;
     }
     function add_tva(){
-        $this->article_form->price *= 1.18;
+        $this->article_form->price *= 1.2;
     }
 
     function uppercase(){

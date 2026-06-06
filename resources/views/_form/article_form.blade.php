@@ -61,12 +61,18 @@
         <label class="form-label">Prix</label>
         <div class="input-group">
             <input type="number" class="form-control" wire:model.live="article_form.price" placeholder="Prix">
-            <a class="btn btn-primary btn-icon" wire:click="$set('article_form.price', '{{ ($article_form->price ?? 1) * 1.2 }}' )">
+            <a class="btn btn-primary btn-icon" wire:click="add_tva()">
                 tva
             </a>
-            <a class="btn btn-icon btn-primary" wire:click="$set('article_form.price', '{{ ($article_form->price ?? 1) * 656 }}' )" data-bs-toggle="tooltip" title="Convertir en Euro">
+            {{-- <a class="btn btn-primary btn-icon" wire:click="$set('article_form.price', '{{ ($article_form->price ?? 1) * 1.2 }}' )">
+                tva
+            </a> --}}
+            <a class="btn btn-icon btn-primary" wire:click="convert_euro()" data-bs-toggle="tooltip" title="Convertir en Euro">
                 <i class="ti ti-currency-euro"></i>
             </a>
+            {{-- <a class="btn btn-icon btn-primary" wire:click="$set('article_form.price', '{{ ($article_form->price ?? 1) * 656 }}' )" data-bs-toggle="tooltip" title="Convertir en Euro">
+                <i class="ti ti-currency-euro"></i>
+            </a> --}}
         </div>
         @error('article_form.price') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
@@ -118,6 +124,18 @@
         <label class="form-label">Spécifications techniques</label>
         <textarea class="form-control"  wire:model="article_form.spec" placeholder="Description" data-bs-toggle="autosize"></textarea>
         @error('article_form.spec') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label ">Poids </label>
+        <input type="text" class="form-control" wire:model="article_form.weight" placeholder="Poids en kilogrammes">
+        @error('article_form.weight') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label ">TVA </label>
+        <input type="text" class="form-control" wire:model="article_form.tva" placeholder="TVA, ex: 1.2, 1.18">
+        @error('article_form.tva') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
 </div>

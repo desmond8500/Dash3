@@ -28,6 +28,8 @@ class Article extends Model
         'provider_id',
         'price',
         'spec',
+        'weight',
+        'tva',
     ];
 
     protected $hidden = [

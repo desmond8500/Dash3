@@ -67,6 +67,9 @@
                                     <li class="list-group-item d-flex justify-content-between">
                                         <b>Prix :</b> {{ number_format($article->price, 0, '.', ' ') }} CFA
                                     </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <b>Poids :</b> {{ $article->weight }} kg
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
@@ -86,6 +89,9 @@
                                     @endif
                                     <li class="list-group-item d-flex justify-content-between">
                                         <b>Priorité :</b> {{ $article->priority() }}
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <b>TVA :</b> {{ $article->tva }}
                                     </li>
                                 </ul>
                             </div>
@@ -173,7 +179,7 @@
                     <div class="card-body">
                         <div class="row  g-2">
                             @foreach ($dependances as $dependance)
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div>
                                         <a href="{{ route('article',['article_id' => $dependance->dependence->id]) }}" target="_blank">
                                             @include('_card.articleCard1', ['item' => $dependance->dependence])

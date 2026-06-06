@@ -3,11 +3,9 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Article;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-use function App\Livewire\storeAvatar;
 
 class ItemForm extends Form
 {
@@ -31,6 +29,9 @@ class ItemForm extends Form
     public $brand_id;
     public $provider_id;
     public $image;
+    public $weight;
+    public $tva;
+
 
     function fix(){
         $this->designation = ucfirst($this->designation);

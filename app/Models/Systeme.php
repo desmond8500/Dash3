@@ -10,6 +10,6 @@ class Systeme extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description'
+        'name', 'description', 'icon',
     ];
 }

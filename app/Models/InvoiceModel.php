@@ -14,6 +14,7 @@ class InvoiceModel extends Model
         'invoice_system_id',
         'name',
         'description',
+        'icon',
     ];
 
     public function system(): BelongsTo

@@ -13,6 +13,7 @@ class SystemeForm extends Form
     #[Validate('required')]
     public $name;
     public $description;
+    public $icon;
 
     function store()
     {
@@ -31,6 +32,7 @@ class SystemeForm extends Form
         $this->name = $this->system->name;
 
         $this->description = $this->system->description;
+        $this->icon = $this->system->icon;
     }
 
     function update()
@@ -41,6 +43,7 @@ class SystemeForm extends Form
 
         $this->system->name = ucfirst($this->system->name);
         $this->system->description = ucfirst($this->system->description);
+        $this->system->icon = ucfirst($this->system->icon);
         $this->system->save();
     }
 

@@ -12,7 +12,7 @@
                 <nav class="nav nav-segmented" role="tablist">
                     @foreach ($systems as $systeme)
                         <a class="nav-link" role="tab" wire:click="select_system('{{ $systeme->id }}')" >
-                            <i class="ti ti-star"></i>
+                            <i class="ti ti-{{ $systeme->icon }}"></i>
                             {{ $systeme->name }}
                         </a>
                     @endforeach
@@ -24,7 +24,7 @@
             @if ($selected_system)
                 <div class="card mb-3">
                     <div class="card-header">
-                        <div class="card-title">{{ $selected_system->name }}</div>
+                        <div class="card-title"> <i class="ti ti-{{ $selected_system->icon }}"></i> {{ $selected_system->name }}</div>
                         <div class="card-actions">
                             <button class="btn btn-primary btn-icon" wire:click="add_model('{{ $selected_system->id }}')">
                                 <i class="ti ti-plus"></i>
@@ -39,8 +39,15 @@
                         <div class="border rounded p-1 mb-1">
                             <div class="row g-1 align-items-center"class="col cursor-pointer">
                                 <div class="col" wire:click="select_model('{{ $model->id }}')">
-                                    <a  >{{ $model->name }}</a>
-                                    <div class="text-muted">{{ $model->description }}</div>
+                                    <div class="row align-items-center g-1">
+                                        <div class="col-auto">
+                                            <i class="ti ti-{{ $model->icon }}"></i>
+                                        </div>
+                                        <div class="col">
+                                            <a  >{{ $model->name }}</a>
+                                            <div class="text-muted">{{ $model->description }}</div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-auto">
                                     <div class="dropdown open">

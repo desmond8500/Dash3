@@ -5,7 +5,18 @@
 </div>
 <div class="col mb-3">
     <label class="form-label">Nom</label>
-    <input type="text" class="form-control" wire:model="projetForm.name" placeholder="Nom du projet">
+    <div class="input-group">
+        <input type="text" class="form-control" wire:model="projetForm.name" placeholder="Nom du projet">
+
+        <div class="dropdown open">
+            <button class="btn btn-action" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <i class="ti ti-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="triggerId">
+                <a class="dropdown-item" wire:click="$set('projetForm.name', 'Projet X')"> Projet X</a>
+            </div>
+        </div>
+    </div>
     @error('projetForm.name') <span class="text-danger">{{ $message }}</span> @enderror
 </div>
 <div class="col-auto md-3">

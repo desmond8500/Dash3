@@ -15,6 +15,7 @@ class InvoiceModelForm extends Form
     public $invoice_system_id;
     public $name;
     public $description;
+    public $icon;
 
     function fix(){
         $this->name = ucfirst($this->name);
@@ -32,6 +33,7 @@ class InvoiceModelForm extends Form
         $this->invoice_system_id = $this->model->invoice_system_id;
         $this->name = $this->model->name;
         $this->description = $this->model->description;
+        $this->icon = $this->model->icon;
     }
 
     function update(){

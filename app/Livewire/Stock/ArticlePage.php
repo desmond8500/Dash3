@@ -6,6 +6,7 @@ use App\Livewire\Forms\ItemForm;
 use App\Models\Article;
 use App\Models\ArticleDependence;
 use App\Models\Brand;
+use App\Models\Item;
 use App\Models\Provider;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -146,6 +147,21 @@ class ArticlePage extends Component
         if ($dependance->quantity > 1) {
             $dependance->quantity -= 1;
             $dependance->save();
+        }
+    }
+
+    function incrementArticleQte($item_id)
+    {
+        $item = Item::find($item_id);
+        $item->quantity++;
+        $item->save();
+    }
+    function decrementArticleQte($item_id)
+    {
+        $item = Item::find($item_id);
+        if ($item->quantity > 1) {
+            $item->quantity--;
+            $item->save();
         }
     }
 

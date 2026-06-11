@@ -7,7 +7,6 @@ use App\Livewire\Forms\InvoiceModelRowForm;
 use App\Livewire\Forms\InvoiceSystemForm;
 use App\Models\Article;
 use App\Models\Brand;
-use App\Models\Invoice;
 use App\Models\InvoiceModel;
 use App\Models\InvoiceModelRow;
 use App\Models\InvoiceSystem;

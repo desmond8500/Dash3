@@ -11,6 +11,7 @@ class InvoiceSystem extends Model
     use HasFactory;
 
     protected $fillable = [
+        'icon',
         'name',
         'description',
     ];
@@ -19,5 +20,5 @@ class InvoiceSystem extends Model
     {
         return $this->hasMany(InvoiceModel::class, 'invoice_system_id');
     }
-    
+
 }

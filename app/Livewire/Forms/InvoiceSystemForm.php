@@ -4,7 +4,6 @@ namespace App\Livewire\Forms;
 
 use App\Models\InvoiceSystem;
 use Livewire\Attributes\Rule;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class InvoiceSystemForm extends Form
@@ -12,13 +11,13 @@ class InvoiceSystemForm extends Form
     public InvoiceSystem $system;
 
     #[Rule('required')]
-    public $name;
-    public $description;
+    public string $name;
+    public string $description;
+    public string $icon;
 
     function fix(){
         $this->name = ucfirst($this->name);
     }
-
 
     function store(){
         $this->validate();
@@ -27,10 +26,11 @@ class InvoiceSystemForm extends Form
         $this->reset('name', 'description');
     }
 
-    function set($model_id){
+    function set(int $model_id){
         $this->system = InvoiceSystem::find($model_id);
         $this->name = $this->system->name;
         $this->description = $this->system->description;
+        $this->icon = $this->system->icon;
     }
 
     function update(){
@@ -39,8 +39,8 @@ class InvoiceSystemForm extends Form
         $this->system->update($this->all());
     }
 
-    function delete($model_id){
-        $this->system = InvoiceSystem::find($model_id);
+    function delete(int $model_id){
+        $this->system = InvoiceSystem::find($model_id, ['name', 'description', 'icon']);
         $this->system->delete();
     }
 }

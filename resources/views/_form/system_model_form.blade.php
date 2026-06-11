@@ -11,6 +11,12 @@
     @error('model_form.name') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 
+<div class="col-md-4 mb-3">
+    <label class="form-label">Icone</label>
+    <input type="text" class="form-control"  wire:model="model_form.icon">
+    @error('model_form.icon') <span class='text-danger'>{{ $message }}</span> @enderror
+</div>
+
 <div class="col-md-12 mb-3">
     <label class="form-label">Description</label>
     <textarea class="form-control" wire:model="model_form.description" placeholder="Description" data-bs-toggle="autosize"></textarea>

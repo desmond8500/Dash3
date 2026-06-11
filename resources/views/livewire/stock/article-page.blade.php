@@ -61,7 +61,20 @@
                                     </li>
 
                                     <li class="list-group-item d-flex justify-content-between {{ $article->quantity <= $article->quantity_min ? 'text-danger' : '' }}">
-                                        <b class="">Quantité :</b> {{ $article->quantity }}
+                                        <b class="">Quantité :</b>
+
+                                        <div x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false"
+                                            class="d-flex justify-content-evenly  hover:bg-gray-100 ">
+
+                                            <div x-show="hover" x-transition>
+                                                <button class="btn btn-sm rounded" wire:click="decrementArticleQte('{{ $article->id }}')"> - </button>
+                                            </div>
+                                             <span class="mx-2">{{ $article->quantity }}</span>                                           <div x-show="hover" x-transition>
+                                                <button class="btn btn-sm rounded" wire:click="incrementArticleQte('{{ $article->id }}')"> + </button>
+                                            </div>
+
+                                        </div>
+
                                     </li>
 
                                     <li class="list-group-item d-flex justify-content-between">

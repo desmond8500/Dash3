@@ -12,8 +12,8 @@ class InvoiceSystemForm extends Form
 
     #[Rule('required')]
     public string $name;
-    public string $description;
-    public string $icon;
+    public ?string $description;
+    public ?string $icon;
 
     function fix(){
         $this->name = ucfirst($this->name);

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
+use App\Http\Resources\ClientResource;
+use App\Http\Resources\InvoiceResource;
+use App\Http\Resources\ProjetResource;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Projet;
@@ -25,9 +28,9 @@ class FavorisController extends Controller
 
     public function getFavoris(){
         return ResponseController::response(true, 'Favoris retrieved successfully', [
-            'clients' => Client::favorite(),
-            'projets' => Projet::favorite(),
-            'invoices' => Invoice::favorite(),
+            'clients' => ClientResource::collection(Client::favorite()),
+            'projets' => ProjetResource::collection(Projet::favorite()),
+            'invoices' => InvoiceResource::collection(Invoice::favorite()),
         ]);
     }
 }

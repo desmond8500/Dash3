@@ -12,7 +12,7 @@
                 <nav class="nav nav-segmented" role="tablist">
                     @foreach ($systems as $systeme)
                         <a class="nav-link" role="tab" wire:click="select_system('{{ $systeme->id }}')" >
-                            <i class="ti ti-{{ $systeme->icon }}"></i>
+                            <i class="ti ti-{{ $systeme->icon ?? 'circle' }}"></i>
                             {{ $systeme->name }}
                         </a>
                     @endforeach
@@ -24,7 +24,7 @@
             @if ($selected_system)
                 <div class="card mb-3">
                     <div class="card-header">
-                        <div class="card-title"> <i class="ti ti-{{ $selected_system->icon }}"></i> {{ $selected_system->name }}</div>
+                        <div class="card-title"> <i class="ti ti-{{ $selected_system->icon ?? 'circle' }}"></i> {{ $selected_system->name }}</div>
                         <div class="card-actions">
                             <button class="btn btn-primary btn-icon" wire:click="add_model('{{ $selected_system->id }}')">
                                 <i class="ti ti-plus"></i>
@@ -41,7 +41,7 @@
                                 <div class="col" wire:click="select_model('{{ $model->id }}')">
                                     <div class="row align-items-center g-1">
                                         <div class="col-auto">
-                                            <i class="ti ti-{{ $model->icon }}"></i>
+                                            <i class="ti ti-{{ $model->icon ?? 'circle' }}"></i>
                                         </div>
                                         <div class="col">
                                             <a  >{{ $model->name }}</a>

@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AchatController;
 use App\Http\Controllers\api\BrandAPIController;
 use App\Http\Controllers\API\ClientAPIController;
 use App\Http\Controllers\API\FactureController;
+use App\Http\Controllers\API\FavorisController;
 use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
 use App\Http\Controllers\API\NoteAPIController;
@@ -91,6 +92,11 @@ Route::prefix('v1')->group(function () {
     Route::resource('tasks', TaskAPIController::class);
     // Liens
     Route::resource('liens', LiensControlleur::class);
+});
+
+// Favoris
+Route::prefix('v1')->group(function () {
+    Route::get('favoris', [FavorisController::class, 'getFavoris'])->name('favoris');
 });
 
 

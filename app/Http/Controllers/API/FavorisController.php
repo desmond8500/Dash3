@@ -25,7 +25,7 @@ class FavorisController extends Controller
 
     public function getFavoris(){
         return ResponseController::response(true, 'Favoris retrieved successfully', [
-            'clients' => Client::favorite()(),
+            'clients' => Client::favorite(),
             'projets' => Projet::favorite(),
             'invoices' => Invoice::favorite(),
         ]);

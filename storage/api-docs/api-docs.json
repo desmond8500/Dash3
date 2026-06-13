@@ -301,6 +301,20 @@
                 }
             }
         },
+        "/api/v1/favoris": {
+            "get": {
+                "tags": [
+                    "Favoris"
+                ],
+                "summary": "Liste des favoris",
+                "operationId": "97b42eccaed32d4cd0f8cfb3de363237",
+                "responses": {
+                    "200": {
+                        "description": "Favoris récupérés avec succès"
+                    }
+                }
+            }
+        },
         "/api/v1/invoices": {
             "get": {
                 "tags": [
@@ -1177,6 +1191,10 @@
         {
             "name": "Taches",
             "description": "Taches"
+        },
+        {
+            "name": "Favoris",
+            "description": "Favoris"
         },
         {
             "name": "Invoices",

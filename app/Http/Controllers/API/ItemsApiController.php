@@ -71,6 +71,8 @@ class ItemsApiController extends Controller
             ->latest()
             ->paginate($perPage);
 
+        $articles = ArticleResource::collection($articles);
+
         return ResponseController::response(
             true,
             "Les articles ont été récupérés",

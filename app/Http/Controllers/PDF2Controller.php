@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Installation;
 use App\Models\Invoice;
 use App\Models\InvoiceSection;
@@ -38,6 +39,32 @@ class PDF2Controller extends Controller
             'invoice' => $invoice,
             'title' => $title,
             'sections' => $sections,
+            ]);
+
+        $pdf->format('a4');
+        $pdf->margins(10, 0, 5, 0);
+
+        // $pdf->headerView('pdf.invoice.header');
+        $pdf->footerView('_pdf2.invoice_footer');
+
+        // $pdf->meta(
+        // title: 'Invoice #123',
+        // author: 'Tyto Services',
+        // subject: 'Devis',
+        // keywords: 'invoice, Devis',
+        // creator: 'Diène',
+        // );
+
+        // Retourner le PDF en téléchargement
+        return $pdf->name('invoice.pdf');
+    }
+    static function task_pdf($client_id)
+    {
+        $client = Client::findOrFail($client_id);
+
+        // Générer le PDF à partir d'une vue
+        $pdf = Pdf::view('_pdf2.tasks_pdf', [
+            'client' => $client,
             ]);
 
         $pdf->format('a4');

@@ -2,6 +2,10 @@
     <div class="card-header">
         <h3 class="card-title">{{ $title ?? 'Liste des taches' }}</h3>
         <div class="card-actions">
+            @isset($client_id)
+                <a href="{{ route('task_pdf_v2',['client_id'=> $client_id]) }}" class="btn " target="_blank">PDF</a>
+            @endisset
+
             @if ($toggle)
                 <button class="btn btn-primary" wire:click="$toggle('toggle')">Terminés</button>
             @else

@@ -357,3 +357,7 @@ Route::get('pdf_v2/{title}', function ($title) {
 Route::get('invoice_pdf_v2/{invoice_id}/{title}', function ($invoice_id, $title) {
     return PDF2Controller::invoice_pdf($invoice_id, $title);
 })->name('invoice_pdf_v2');
+
+Route::get('task_pdf_v2/{client_id}', function ($client_id) {
+    return PDF2Controller::task_pdf($client_id);
+})->name('task_pdf_v2');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\dateTrait;
 use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,7 @@ class Task extends Model
 {
     use HasFactory;
     use searchTrait;
+    use dateTrait;
 
     /**
  * @OA\Schema(

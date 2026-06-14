@@ -65,9 +65,9 @@ Route::prefix('v1')->group(function () {
 // Articles
 Route::prefix('v1')->group(function () {
     Route::apiResource('items', ItemsApiController::class);
-    Route::get('item_image/{article_id}', [ItemsApiController::class, 'getImages']);
-    Route::get('item_link/{article_id}', [ItemsApiController::class, 'getLinks']);
-    Route::get('item_document/{article_id}', [ItemsApiController::class, 'getDocuments']);
+    Route::get('items_image/{article_id}', [ItemsApiController::class, 'getImages']);
+    Route::get('items_link/{article_id}', [ItemsApiController::class, 'getLinks']);
+    Route::get('items_document/{article_id}', [ItemsApiController::class, 'getDocuments']);
     Route::resource('providers', ProviderAPIController::class);
     Route::resource('brands', BrandAPIController::class);
 });

@@ -125,7 +125,7 @@ class ItemsApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/v1/item_image/{article_id}",
+     *      path="/api/v1/items_image/{article_id}",
      *      tags={"Articles"},
      *      description="Récupérer les images d'un article",
      *      @OA\Parameter(
@@ -161,7 +161,7 @@ class ItemsApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/v1/item_link/{article_id}",
+     *      path="/api/v1/items_link/{article_id}",
      *      tags={"Articles"},
      *      description="Récupérer les liens d'un article",
      *      @OA\Parameter(
@@ -188,7 +188,7 @@ class ItemsApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/v1/item_document/{article_id}",
+     *      path="/api/v1/items_document/{article_id}",
      *      tags={"Articles"},
      *      description="Récupérer les documents d'un article",
      *      @OA\Parameter(

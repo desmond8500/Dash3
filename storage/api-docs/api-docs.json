@@ -734,12 +734,53 @@
                         "description": "Notes récupérées avec succès"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Notes de projets"
+                ],
+                "summary": "Ajouter une note",
+                "operationId": "28eaf7562e39987bdada2ce7991af9e0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "titre"
+                                ],
+                                "properties": {
+                                    "projet_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "titre": {
+                                        "type": "Note 1"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mon super texte"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Note créée avec succès"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la création de la note"
+                    }
+                }
             }
         },
         "/api/v1/projet_notes/{id}": {
             "get": {
                 "tags": [
-                    "Note de projet"
+                    "Notes de projets"
                 ],
                 "summary": "Liste des notes",
                 "operationId": "8aefbbc72fec6f390f71d6399227c46a",
@@ -765,12 +806,96 @@
                         "description": "Notes récupérées avec succès"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Notes de projets"
+                ],
+                "summary": "Mettre à jour une note",
+                "operationId": "e890bd55ae75e80b75c44e826829c8b2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la note",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "titre"
+                                ],
+                                "properties": {
+                                    "projet_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "titre": {
+                                        "type": "Note 1"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Mon super texte"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Note mise à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Note non trouvée"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la mise à jour de la note"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Notes de projets"
+                ],
+                "summary": "Supprimer une note",
+                "operationId": "edf5d0ff525de5d9753d4038534ce9d6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la note",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note supprimée avec succès"
+                    },
+                    "404": {
+                        "description": "Note non trouvée"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la suppression du Note"
+                    }
+                }
             }
         },
         "/api/v1/get_projet_notes/{projet_id}": {
             "get": {
                 "tags": [
-                    "Note de projet"
+                    "Notes de projets"
                 ],
                 "summary": "Liste des notes d'un projet",
                 "operationId": "4aa660f93e39deb3f527defc4a24a75e",
@@ -1215,6 +1340,29 @@
     },
     "components": {
         "schemas": {
+            "Notes de projet": {
+                "title": "Notes de projet",
+                "description": "Modèle d'une tâche",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "projet_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "titre": {
+                        "type": "string",
+                        "example": "Installer Laravel"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Installation complète du projet"
+                    }
+                },
+                "type": "object"
+            },
             "Task": {
                 "title": "Task",
                 "description": "Modèle d'une tâche",
@@ -1282,10 +1430,6 @@
         {
             "name": "Notes de projets",
             "description": "Notes de projets"
-        },
-        {
-            "name": "Note de projet",
-            "description": "Note de projet"
         },
         {
             "name": "Projets",

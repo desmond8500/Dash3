@@ -52,4 +52,16 @@ class Projet extends Model
     {
         return $this->hasMany(Contact::class);
     }
+
+    public function activeClientTask()
+    {
+        $tasks = Task::where('projet_id', this->projet_id)->get();
+
+        foreach ($tasks as $key => $task) {
+            if ($task->statut != 4) {
+                return 1;
+            }
+        }
+        return 0;
+    }
 }

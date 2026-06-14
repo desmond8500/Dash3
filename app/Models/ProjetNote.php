@@ -34,7 +34,6 @@ class ProjetNote extends Model
      *         type="string",
      *         example="Installation complète du projet"
      *     ),
-
      * )
      */
 

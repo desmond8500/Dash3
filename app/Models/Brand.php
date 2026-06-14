@@ -34,9 +34,9 @@ class Brand extends Model
         return $this->hasMany(BrandNotes::class);
     }
 
-    public function article(): BelongsTo
+    public function article(): HasMany
     {
-        return $this->belongsTo(Article::class, 'brand_id', 'id');
+        return $this->hasMany(Article::class);
     }
 
 

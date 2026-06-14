@@ -15,7 +15,7 @@
     </div>
 
     @foreach ($client->projets->sortBy('name') as $projet)
-        @if ($projet->tasks->count() )
+        @if ($projet->activeClientTask())
             <div class="">
                 <h2 class="card-title mt-2 text-primary">{{ $projet->name }}</h2>
                 <div class="border" >

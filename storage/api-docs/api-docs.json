@@ -647,6 +647,81 @@
                 }
             }
         },
+        "/api/v1/item_image/{article_id}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "description": "Récupérer les images d'un article",
+                "operationId": "b144fd59137d8ae3ff03f66610f15449",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "description": "ID de l'article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/item_link/{article_id}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "description": "Récupérer les liens d'un article",
+                "operationId": "6a41c7b3816eefc85db054133f31e8cd",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "description": "ID de l'article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/v1/item_document/{article_id}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "description": "Récupérer les documents d'un article",
+                "operationId": "2065fa5624ab2b16b6186985e1a403aa",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "description": "ID de l'article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/v1/projet_notes": {
             "get": {
                 "tags": [

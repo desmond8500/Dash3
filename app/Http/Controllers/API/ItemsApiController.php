@@ -144,14 +144,19 @@ class ItemsApiController extends Controller
     public function getImages(string $article_id)
     {
         $article = Article::find($article_id);
-        $images = $article->images();
+        if ($article) {
+            $images = $article->images();
 
-        $img_list = [];
-        foreach ($images as $image) {
-            $img_list[] = url($image);
+            $img_list = [];
+            foreach ($images as $image) {
+                $img_list[] = url($image);
+            }
+
+            return ResponseController::response(true, "Les images de l'article ont été récupérées", $img_list);
+        } else {
+            return ResponseController::response(false, "L'article n'a pas été trouvé", []);
         }
 
-        return ResponseController::response(true, "Les images de l'article ont été récupérées", $img_list);
     }
 
     /**

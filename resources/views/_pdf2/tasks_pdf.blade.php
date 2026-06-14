@@ -15,7 +15,7 @@
     </div>
 
     @foreach ($client->projets as $projet)
-        @if ($projet->tasks )
+        @if ($projet->tasks->count() )
             <div class="">
                 <h2 class="card-title mt-2 text-primary">{{ $projet->name }}</h2>
                 <div class="border" >

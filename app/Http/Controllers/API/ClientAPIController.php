@@ -35,7 +35,7 @@ class ClientAPIController extends Controller
     */
 
     function index(Request $request){
-        $perPage = min($request->get('per_page', 10), 100);
+        $perPage = min($request->get('per_page', 9), 100);
         if ($request->search) {
             $clients = Client::where('name', 'like', '%' . $request->search . '%')
                 ->paginate($perPage);

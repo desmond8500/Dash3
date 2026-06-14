@@ -16,9 +16,9 @@ class ArticleLinkResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'article_id' => $this->article_id,
             'name' => $this->name,
-            'link' => $this->link,
-            'image' => url($this->link),
+            'link' => url($this->link),*
         ];
     }
 }

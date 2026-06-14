@@ -32,6 +32,7 @@ class ProjetResource extends JsonResource
                     'contacts' => $this->contacts,
                     'notes' => $this->notes,
                     'badges' => $this->badges,
+                    'img' => url($this->client->avatar)
         ];
     }
 }

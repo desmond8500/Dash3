@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
+use App\Http\Resources\ProjetResource;
 use App\Models\Projet;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -68,6 +69,9 @@ class ProjetAPIController extends Controller
     public function show(string $id)
     {
         $projet = Projet::with(['client', 'invoices', 'buildings', 'tasks', 'journals', 'contacts'])->find($id);
+
+        $projet = new ProjetResource($projet);
+
         if (!$projet) {
             return ResponseController::response(false, 'Projet non trouvé', null);
         }

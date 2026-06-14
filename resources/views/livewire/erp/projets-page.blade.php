@@ -42,7 +42,7 @@
                 </div>
                 @switch($tab)
                     @case("projets")
-                        @forelse ($projets as $projet)
+                        @forelse ($projets->sortBy('name') as $projet)
                             <div class="col-md-4">
                                 @include('_card.projet_card')
                             </div>

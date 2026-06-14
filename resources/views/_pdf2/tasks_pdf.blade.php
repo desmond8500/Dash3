@@ -15,35 +15,49 @@
     </div>
 
     @foreach ($client->projets as $projet)
-        <div class="">
-            <h2 class="card-title mt-2 text-primary">{{ $projet->name }}</h2>
-            <div class="border" >
-                <table class="table" >
-                    <thead>
-                        <tr class="bg-primary text-light">
-                            <th class="text-white">Taches</th>
-                            <th class="text-white">Description</th>
-                            <th class="text-white">Statut</th>
-                            <th class="text-white">Dates</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($projet->tasks as $task)
-                            <tr class="">
-                                <td scope="row">{{ $task->name }}</td>
-                                <td>{!! nl2br($task->description) !!}</td>
-                                <td scope="row" class="fs-6">{{ $task->statut->name }}</td>
-                                <td width=80px>
-                                    <div class="fs-6">{{ $task->start_date }}</div>
-                                    <div class="fs-6">{{ $task->end_date }}</div>
-                                </td>
+        @if ($projet->tasks )
+            <div class="">
+                <h2 class="card-title mt-2 text-primary">{{ $projet->name }}</h2>
+                <div class="border" >
+                    <table class="table" >
+                        <thead>
+                            <tr class="bg-primary text-light">
+                                <th class="text-white">Taches</th>
+                                <th class="text-white">Description</th>
+                                <th class="text-white">Statut</th>
+                                <th class="text-white">Dates</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($projet->tasks as $task)
+                                <tr class="">
+                                    <td class="fs-4">{{ $task->name }}</td>
+                                    <td class="fs-4">{!! nl2br($task->description) !!}</td>
+                                    <td scope="row" class="fs-6">
+                                        {{ $task->statut->name }}</td>
+                                    <td width=80px>
+                                        @if ($task->start_date)
+                                            <div class="fs-6 text-center border-bottom">
+                                                <div>Début</div>
+                                                <div>{{ $task->start_date }}</div>
+                                            </div>
+                                        @endif
+                                        @if ($task->end_date)
+                                            <div class="fs-6 text-center">
+                                                <div>Fin</div>
+                                                <div>{{ $task->end_date }}</div>
+                                            </div>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
-        </div>
+        @endif
     @endforeach
 
 </body>

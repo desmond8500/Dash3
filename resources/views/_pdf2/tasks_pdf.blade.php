@@ -30,26 +30,28 @@
                         </thead>
                         <tbody>
                             @foreach ($projet->tasks as $task)
-                                <tr class="">
-                                    <td class="fs-4">{{ $task->name }}</td>
-                                    <td class="fs-4">{!! nl2br($task->description) !!}</td>
-                                    <td scope="row" class="fs-6">
-                                        {{ $task->statut->name }}</td>
-                                    <td width=80px>
-                                        @if ($task->start_date)
-                                            <div class="fs-6 text-center border-bottom">
-                                                <div>Début</div>
-                                                <div>{{ $task->start_date }}</div>
-                                            </div>
-                                        @endif
-                                        @if ($task->end_date)
-                                            <div class="fs-6 text-center">
-                                                <div>Fin</div>
-                                                <div>{{ $task->end_date }}</div>
-                                            </div>
-                                        @endif
-                                    </td>
-                                </tr>
+                                @if ($task->statut_id == 1 || $task->statut_id ==2)
+                                    <tr class="">
+                                        <td class="fs-4">{{ $task->name }}</td>
+                                        <td class="fs-4">{!! nl2br($task->description) !!}</td>
+                                        <td scope="row" class="fs-6">
+                                            {{ $task->statut->name }}</td>
+                                        <td width=80px>
+                                            @if ($task->start_date)
+                                                <div class="fs-6 text-center border-bottom">
+                                                    <div>Début</div>
+                                                    <div>{{ $task->start_date }}</div>
+                                                </div>
+                                            @endif
+                                            @if ($task->end_date)
+                                                <div class="fs-6 text-center">
+                                                    <div>Fin</div>
+                                                    <div>{{ $task->end_date }}</div>
+                                                </div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

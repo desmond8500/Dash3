@@ -148,8 +148,13 @@ class ItemsApiController extends Controller
             $images = $article->images();
 
             $img_list = [];
+            $i = 1;
             foreach ($images as $image) {
-                $img_list[] = url($image);
+                $img_list[] = (object)array(
+                    'id' => $i,
+                    'image' => url("storage/$image"),
+                );
+                $i++;
             }
 
             return ResponseController::response(true, "Les images de l'article ont été récupérées", $img_list);

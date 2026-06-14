@@ -647,13 +647,13 @@
                 }
             }
         },
-        "/api/v1/item_image/{article_id}": {
+        "/api/v1/items_image/{article_id}": {
             "get": {
                 "tags": [
                     "Articles"
                 ],
                 "description": "Récupérer les images d'un article",
-                "operationId": "b144fd59137d8ae3ff03f66610f15449",
+                "operationId": "47b8fe0732b4bdd26635072caa159e42",
                 "parameters": [
                     {
                         "name": "article_id",
@@ -672,13 +672,13 @@
                 }
             }
         },
-        "/api/v1/item_link/{article_id}": {
+        "/api/v1/items_link/{article_id}": {
             "get": {
                 "tags": [
                     "Articles"
                 ],
                 "description": "Récupérer les liens d'un article",
-                "operationId": "6a41c7b3816eefc85db054133f31e8cd",
+                "operationId": "72f8fc2526381a53de0618761ff51817",
                 "parameters": [
                     {
                         "name": "article_id",
@@ -697,13 +697,13 @@
                 }
             }
         },
-        "/api/v1/item_document/{article_id}": {
+        "/api/v1/items_document/{article_id}": {
             "get": {
                 "tags": [
                     "Articles"
                 ],
                 "description": "Récupérer les documents d'un article",
-                "operationId": "2065fa5624ab2b16b6186985e1a403aa",
+                "operationId": "d71f4f0d22e7ef750aec831ed3ab4a4e",
                 "parameters": [
                     {
                         "name": "article_id",

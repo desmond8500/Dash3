@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="">
+    <div class="table-responsive">
         <table class="table ">
             <thead >
                 <tr>
@@ -288,7 +288,7 @@
     </div>
     <div class="card-footer p-0">
 
-        <div class=" mb-2">
+        <div class="table-responsive mb-2">
             <table class="table  table-bordered bg-white">
                 <tr class="fw-bold">
                     <td class="">

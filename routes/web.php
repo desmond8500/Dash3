@@ -324,9 +324,11 @@ Route::get('browsershot', function () {
     //     ->format('a4')
     //     ->save('invoice.pdf');
 
-    return pdf()
-        ->view('_pdf.test')
-        ->name('invoice-2023-04-10.pdf');
+    // return pdf()
+    //     ->view('_pdf.test')
+    //     ->name('invoice-2023-04-10.pdf');
+
+    return 0;
 
 })->name('browsershot');
 

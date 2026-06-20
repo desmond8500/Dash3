@@ -77,50 +77,52 @@
                 <thead >
 
                     <tr >
-                        <th scope="col" class="bg-primary-lt" colspan="2" >
-                            <div>
-                                <div class='text-danger' style="font-size: 10px" data-bs-toggle="tooltip" title="Référence de la section">{{ $section->id }}</div>
-                                <div>{{ ucfirst($section->section) }}</div>
-                            </div>
-                        </th>
-                        <th scope="col" class="bg-primary-lt " colspan="6">
-                            <div class="d-flex justify-content-end">
-                                @if ($section->show)
-                                    <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Cacher le contenu de la section" wire:click="section_toggle('{{ $section->id }}')">
-                                        <i class="ti ti-eye-off"></i>
-                                    </button>
-                                @else
-                                    <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Afficher le contenu de la section" wire:click="section_toggle('{{ $section->id }}')">
-                                        <i class="ti ti-eye"></i>
-                                    </button>
-                                @endif
-                                @if ($section->status)
-                                    <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Supprimer de la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
-                                        <i class="ti ti-circle-check"></i>
-                                    </button>
-                                @else
-                                    <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Ajouter à la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
-                                        <i class="ti ti-circle-x"></i>
-                                    </button>
-                                @endif
-                                <button class="btn btn-sm p-1 rounded btn-primary me-1" wire:click="addRow('{{ $section->id }}')">
-                                    <i class="ti ti-plus"></i> Article
-                                </button>
-                                <button class="btn btn-sm p-1 rounded btn-primary btn-icon me-1" wire:click="edit_section('{{ $section->id }}')">
-                                    <i class="ti ti-edit"></i>
-                                </button>
-                                @if (!$section->rows->count())
-                                    <button class="btn btn-sm p-1 rounded btn-danger btn-icon me-1" wire:click="delete_section('{{ $section->id }}')"
-                                        wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
-                                        <i class="ti ti-trash"></i>
-                                    </button>
-                                @endif
-                                <button class="btn btn-sm p-1 btn-primary rounded me-1" disabled data-bs-toggle="tooltip" title="Exporter">
-                                    <i class="ti ti-file-type-xls"></i>
-                                </button>
-                                <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Dupliquer la section" wire:click="duplicate_section('{{ $section->id }}')">
-                                    <i class="ti ti-copy"></i>
-                                </button>
+                        <th scope="col" class="bg-primary-lt" colspan="8" >
+                            <div class="row g-2 align-items-center">
+                                <div class="col">
+                                    <div class='text-danger' style="font-size: 10px" data-bs-toggle="tooltip" title="Référence de la section">{{ $section->id }}</div>
+                                    <div style=" text-wrap: wrap;">{{ ucfirst($section->section) }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="d-flex justify-content-end">
+                                        @if ($section->show)
+                                            <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Cacher le contenu de la section" wire:click="section_toggle('{{ $section->id }}')">
+                                                <i class="ti ti-eye-off"></i>
+                                            </button>
+                                        @else
+                                            <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Afficher le contenu de la section" wire:click="section_toggle('{{ $section->id }}')">
+                                                <i class="ti ti-eye"></i>
+                                            </button>
+                                        @endif
+                                        @if ($section->status)
+                                            <button class="btn btn-sm rounded btn-success me-1" data-bs-toggle="tooltip" title="Supprimer de la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
+                                                <i class="ti ti-circle-check"></i>
+                                            </button>
+                                        @else
+                                            <button class="btn btn-sm rounded btn-dark me-1" data-bs-toggle="tooltip" title="Ajouter à la proposition technique" wire:click="proposition_toggle('{{ $section->id }}')">
+                                                <i class="ti ti-circle-x"></i>
+                                            </button>
+                                        @endif
+                                        <button class="btn btn-sm p-1 rounded btn-primary me-1" wire:click="addRow('{{ $section->id }}')">
+                                            <i class="ti ti-plus"></i> Article
+                                        </button>
+                                        <button class="btn btn-sm p-1 rounded btn-primary btn-icon me-1" wire:click="edit_section('{{ $section->id }}')">
+                                            <i class="ti ti-edit"></i>
+                                        </button>
+                                        @if (!$section->rows->count())
+                                            <button class="btn btn-sm p-1 rounded btn-danger btn-icon me-1" wire:click="delete_section('{{ $section->id }}')"
+                                                wire:confirm="Etes vous sur de vouloir supprimer cette section ?">
+                                                <i class="ti ti-trash"></i>
+                                            </button>
+                                        @endif
+                                        <button class="btn btn-sm p-1 btn-primary rounded me-1" disabled data-bs-toggle="tooltip" title="Exporter">
+                                            <i class="ti ti-file-type-xls"></i>
+                                        </button>
+                                        <button class="btn btn-sm p-1 btn-primary rounded" data-bs-toggle="tooltip" title="Dupliquer la section" wire:click="duplicate_section('{{ $section->id }}')">
+                                            <i class="ti ti-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </th>
                     </tr>

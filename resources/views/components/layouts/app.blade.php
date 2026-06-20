@@ -75,7 +75,7 @@
             @auth
                 <div class="{{ $settings->size ?? "container-xl"}}">
             @else
-                <div class="container-xl">
+                <div class="container-fluid">
             @endauth
 
                 {{ $slot }}

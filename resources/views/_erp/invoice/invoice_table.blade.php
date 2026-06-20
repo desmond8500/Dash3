@@ -35,7 +35,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table ">
+        <table class="table table-vcenter table-nowrap">
             <thead >
                 <tr>
                     <th scope="col">Désignation</th>

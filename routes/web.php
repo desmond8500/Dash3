@@ -332,7 +332,7 @@ Route::get('browsershot', function () {
 
 })->name('browsershot');
 
-Volt::route('/konva', 'test.konvapage')->name('konva');
+// Volt::route('/konva', 'test.konvapage')->name('konva');
 
 // Fallback
 Route::fallback(function() {
@@ -363,3 +363,7 @@ Route::get('invoice_pdf_v2/{invoice_id}/{title}', function ($invoice_id, $title)
 Route::get('task_pdf_v2/{client_id}', function ($client_id) {
     return PDF2Controller::task_pdf($client_id);
 })->name('task_pdf_v2');
+
+Route::get('invoice_resume/{invoice_id}', function ($invoice_id) {
+    return PDF2Controller::invoice_resume_pdf($invoice_id);
+})->name('invoice_resume_pdf2');

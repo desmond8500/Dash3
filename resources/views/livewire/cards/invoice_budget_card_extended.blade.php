@@ -14,6 +14,7 @@ new class extends Component {
         $this->invoice = \App\Models\Invoice::find($this->invoice_id);
     }
 
+    #On('invoice_resume_reload')
     public function with(): array {
         return [
             'spents' => InvoiceSpent::where('invoice_id', $this->invoice_id)->get(),
@@ -28,7 +29,9 @@ new class extends Component {
         <div class="card-header">
             <div class="card-title">Budget</div>
             <div class="card-actions">
-
+                <a href="{{ route('invoice_resume_pdf2',['invoice_id'=>$invoice->id ]) }}" target="_blank" class="btn btn-icon btn-primary">
+                    <i class="ti ti-pdf"></i>
+                </a>
             </div>
         </div>
         <table class="table table-hover">
@@ -37,17 +40,21 @@ new class extends Component {
                     <td>Total Devis</td>
                     <td class="text-end">{{ number_format($invoice->total(), 0,'.', ' ') }} F</td>
                 </tr>
-                <tr>
-                    <td>Total Acomptes</td>
-                    <td class="text-end">{{ number_format($acomptes->sum('montant'), 0,'.', ' ') }} F</td>
+                <tr >
+                    <td class='bg-green-lt'>Total Acomptes</td>
+                    <td class="text-end bg-green-lt">{{ number_format($acomptes->sum('montant'), 0,'.', ' ') }} F</td>
+                </tr>
+                <tr >
+                    <td class='bg-green-lt'>Restant Acompte</td>
+                    <td class="text-end bg-green-lt">{{ number_format($acomptes->sum('montant') - $spents->sum('montant'), 0,'.', ' ') }} F</td>
                 </tr>
                 <tr>
-                    <td>Total Dépenses</td>
-                    <td class="text-end">{{ number_format($spents->sum('montant'), 0,'.', ' ') }} F</td>
+                    <td class='bg-red-lt'>Total Dépenses</td>
+                    <td class="text-end bg-red-lt">{{ number_format($spents->sum('montant'), 0,'.', ' ') }} F</td>
                 </tr>
                 <tr>
-                    <td>Restant acompte</td>
-                    <td class="text-end">{{ number_format($acomptes->sum('montant') - $spents->sum('montant'), 0,'.', ' ') }} F</td>
+                    <td class='bg-red-lt'>Reliquat</td>
+                    <td class="text-end bg-red-lt">{{ number_format($invoice->total() - $spents->sum('montant'), 0,'.', ' ') }} F</td>
                 </tr>
             </tbody>
         </table>

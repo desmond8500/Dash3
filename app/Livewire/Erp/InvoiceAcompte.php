@@ -35,6 +35,7 @@ class InvoiceAcompte extends Component
     function store(){
         $this->acompte_form->store($this->invoice->id);
         $this->dispatch('close-add-invoiceAcompte');
+        $this->dispatch('invoice_resume_reload');
     }
 
     function edit($id){
@@ -45,6 +46,7 @@ class InvoiceAcompte extends Component
     function update(){
         $this->acompte_form->update();
         $this->dispatch('close-edit-invoiceAcompte');
+        $this->dispatch('invoice_resume_reload');
     }
 
     function delete($id){

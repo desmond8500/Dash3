@@ -40,9 +40,8 @@
                     <td class="text-end bg-red-lt">{{ number_format($spents->sum('montant'), 0,'.', ' ') }} F</td>
                 </tr>
                 <tr>
-                    <td class='bg-red-lt'>Reliquat</td>
-                    <td class="text-end bg-red-lt">{{ number_format($invoice->total() - $spents->sum('montant'), 0,'.', ' ')
-                        }} F</td>
+                    <td class='bg-red-lt'>Reliquat devis</td>
+                    <td class="text-end bg-red-lt">{{ number_format($invoice->total() - $acomptes->sum('montant'), 0,'.', ' ') }} F</td>
                 </tr>
             </tbody>
         </table>

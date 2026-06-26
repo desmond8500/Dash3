@@ -12,48 +12,6 @@ class Provider extends Model
     use HasFactory;
     use searchTrait;
 
-    /**
-     * @OA\Schema(
-     *     schema="Fournisseur",
-     *     title="Fournisseur",
-     *     description="Modèle d'un fournisseur",
-     *     @OA\Property(
-     *         property="name",
-     *         type="string",
-     *         example=""
-     *     ),
-     *     @OA\Property(
-     *         property="logo",
-     *         type="string",
-     *         example=""
-     *     ),
-     *     @OA\Property(
-     *         property="address",
-     *         type="string",
-     *         example="avenue 12"
-     *     ),
-     *     @OA\Property(
-     *         property="description",
-     *         type="string",
-     *         example="Installation complète du projet"
-     *     ),
-     *     @OA\Property(
-     *         property="email",
-     *         type="string",
-     *         example="email@mail.com"
-     *     ),
-     *     @OA\Property(
-     *         property="phone",
-     *         type="string",
-     *         example="777589564"
-     *     ),
-     *     @OA\Property(
-     *         property="webside",
-     *         type="string",
-     *         example="www.site.com
-     *     ),
-     * )
-     */
 
     protected $fillable = [
         'name',

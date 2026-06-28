@@ -943,6 +943,53 @@
                         "description": "Utilisateurs récupérés avec succès"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Projets"
+                ],
+                "summary": "Ajouter un projet",
+                "operationId": "7c7dfedc36fd812f905eb05b9791f596",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "client_id"
+                                ],
+                                "properties": {
+                                    "client_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Projet Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "favorite": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Projet créé avec succès"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la création du projet"
+                    }
+                }
             }
         },
         "/api/v1/projets/{id}": {
@@ -963,6 +1010,96 @@
                 "responses": {
                     "200": {
                         "description": "Projet récupéré avec succès"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Projets"
+                ],
+                "summary": "Mettre à jour un projet",
+                "operationId": "e93c14b9760d37c4e448ad2475d55334",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du projet",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "client_id"
+                                ],
+                                "properties": {
+                                    "client_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Projet Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "favorite": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Client mis à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Client non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la mise à jour du client"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Projets"
+                ],
+                "summary": "Supprimer un projet",
+                "operationId": "f784b51fe04de42803cad48a4e16e2a8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du projet",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Projet supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Projet non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la suppression du projet"
                     }
                 }
             }

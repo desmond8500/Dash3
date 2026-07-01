@@ -738,6 +738,33 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "ID du client",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "projet_id",
+                        "in": "query",
+                        "description": "ID du projet",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "devis_id",
+                        "in": "query",
+                        "description": "ID du devis",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "responses": {

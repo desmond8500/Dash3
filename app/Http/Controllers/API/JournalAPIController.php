@@ -24,6 +24,33 @@ class JournalAPIController extends Controller
      *              type="string"
      *          )
      *      ),
+     *      @OA\Parameter(
+     *          name="client_id",
+     *          in="query",
+     *          required=false,
+     *          description="ID du client",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="projet_id",
+     *          in="query",
+     *          required=false,
+     *          description="ID du projet",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="devis_id",
+     *          in="query",
+     *          required=false,
+     *          description="ID du devis",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="Journaux récupérés avec succès",
@@ -47,7 +74,7 @@ class JournalAPIController extends Controller
             ->orderBy('date')
             ->paginate($perPage);
 
-        return ResponseController::response( true, 'Les journaux ont été récupérés avec succès', $journaux,
+        return ResponseController::response( true,  'Les journaux ont été récupérés avec succès', $journaux,
             [
                 'current_page' => $journaux->currentPage(),
                 'last_page'    => $journaux->lastPage(),

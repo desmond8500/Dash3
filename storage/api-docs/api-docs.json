@@ -722,6 +722,217 @@
                 }
             }
         },
+        "/api/v1/journaux": {
+            "get": {
+                "tags": [
+                    "Journaux"
+                ],
+                "summary": "Liste des journaux",
+                "operationId": "89d6e2e36064c35d4d1f7e2d9fb32f65",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Termes de recherche",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Journaux récupérés avec succès"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Journaux"
+                ],
+                "summary": "Ajouter un journal",
+                "operationId": "0c6d07fbcbe622097c12bc4fba872900",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "projet_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "devis_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Journal Title"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-01-01"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Journal créé avec succès"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la création du Journal"
+                    }
+                }
+            }
+        },
+        "/api/v1/journaux/{id}": {
+            "get": {
+                "tags": [
+                    "Journaux"
+                ],
+                "summary": "Détails d'un journal",
+                "operationId": "a246df4ec4ed3b13bd08599008aff7d8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du journal",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Journal récupéré avec succès"
+                    },
+                    "404": {
+                        "description": "Journal non trouvé"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Journaux"
+                ],
+                "summary": "Mettre à jour un journal",
+                "operationId": "21f8b250919bb20f6cb36e89ab01e203",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du journal",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "projet_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "devis_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Journal Title"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-01-01"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Journal mis à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Journal non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la mise à jour du journal"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Journaux"
+                ],
+                "summary": "Supprimer un journal",
+                "operationId": "07602f0c375390aab9705653947f7637",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du journal",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Journal supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Journal non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur lors de la suppression du journal"
+                    }
+                }
+            }
+        },
         "/api/v1/projet_notes": {
             "get": {
                 "tags": [
@@ -1563,6 +1774,10 @@
         {
             "name": "Articles",
             "description": "Articles"
+        },
+        {
+            "name": "Journaux",
+            "description": "Journaux"
         },
         {
             "name": "Notes de projets",

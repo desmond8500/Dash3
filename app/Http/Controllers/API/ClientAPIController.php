@@ -36,13 +36,18 @@ class ClientAPIController extends Controller
 
     function index(Request $request){
         $perPage = min($request->get('per_page', 9), 100);
-        if ($request->search) {
-            $clients = Client::where('name', 'like', '%' . $request->search . '%')
-                ->paginate($perPage);
-        } else {
-            $clients = Client::orderBy('name', 'asc')->paginate($perPage);
-        }
-        $clients = ClientResource::collection($clients);
+        // if ($request->search) {
+        //     $clients = Client::where('name', 'like', '%' . $request->search . '%')
+        //         ->paginate($perPage);
+        // } else {
+        //     $clients = Client::orderBy('name', 'asc')->paginate($perPage);
+        // }
+        // $clients = ClientResource::collection($clients);
+
+        $clients = Client::search($request->search)
+            ->orderBy('name', 'asc')
+            ->paginate($perPage);
+
 
         return ResponseController::response(true, 'Les  clients  ont été récupérés avec succès', $clients, [
             'current_page' => $clients->currentPage(),
@@ -77,7 +82,7 @@ class ClientAPIController extends Controller
         *     )
     */
 
-    function show($id){
+    function show(int $id){
         $client = Client::find($id);
         if ($client) {
             return ResponseController::response(true, 'Le client a été récupéré avec succès', $client);
@@ -170,7 +175,7 @@ class ClientAPIController extends Controller
         *       ),
         *     )
     */
-    function update(Request $request, $id){
+    function update(Request $request, int $id){
         $client = Client::find($id);
         if ($client) {
             $client->name = $request->name;
@@ -220,7 +225,7 @@ class ClientAPIController extends Controller
         *     )
     */
 
-    function destroy($id){
+    function destroy(int $id){
         $client = Client::find($id);
         if ($client) {
             if ($client->delete()) {
@@ -262,7 +267,7 @@ class ClientAPIController extends Controller
      *     )
      */
 
-    function getProjets($id){
+    function getProjets(int $id){
         $client = Client::find($id);
         if ($client) {
             // $projets = $client->projets;
@@ -303,7 +308,7 @@ class ClientAPIController extends Controller
      *       ),
      *     )
      */
-    function getTasksByClient($id){
+    function getTasksByClient(int $id){
         $client = Client::find($id);
         if ($client) {
             $tasks = Task::where('client_id', $id)->orderBy('name', 'asc')->get();
@@ -312,6 +317,5 @@ class ClientAPIController extends Controller
             return ResponseController::response(false, 'Client non trouvé', null, 404);
         }
     }
-
 
 }

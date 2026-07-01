@@ -32,5 +32,10 @@ class Client extends Model
         return $this->hasManyThrough(Task::class, Projet::class);
     }
 
-
+    public function scopeSearch($query, $search)
+    {
+        return $query->when($search, function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%");
+        });
+    }
 }

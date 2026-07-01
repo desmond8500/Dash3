@@ -235,7 +235,7 @@ class ProjetAPIController extends Controller
      *       ),
      *     )
      */
-    function getTasksByProjet($id)
+    function getTasksByProjet(int $id)
     {
         $projet = Projet::find($id);
         if ($projet) {

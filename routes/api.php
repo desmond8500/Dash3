@@ -7,6 +7,7 @@ use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\FavorisController;
 use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
+use App\Http\Controllers\API\JournalAPIController;
 use App\Http\Controllers\API\NoteAPIController;
 use App\Http\Controllers\API\ProjetAPIController;
 use App\Http\Controllers\api\ProviderAPIController;
@@ -57,6 +58,7 @@ Route::prefix('v1')->group(function () {
     // Room
     Route::get('room/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
     // Journal
+    Route::resource('journaux', JournalAPIController::class);
     // Route::get('projet', [ProjetAPIController::class, 'index']);
     Route::resource('projet_notes', NoteAPIController::class);
     Route::get('get_projet_notes/{projet_id}', [NoteAPIController::class, 'get_projet_notes']);

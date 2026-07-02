@@ -47,6 +47,7 @@ class ClientAPIController extends Controller
         $clients = Client::search($request->search)
             ->orderBy('name', 'asc')
             ->paginate($perPage);
+        $clients = ClientResource::collection($clients);
 
 
         return ResponseController::response(true, 'Les  clients  ont été récupérés avec succès', $clients, [

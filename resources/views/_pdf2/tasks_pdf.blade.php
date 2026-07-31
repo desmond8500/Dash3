@@ -13,15 +13,13 @@
     <div class="border rounded p-2">
         <h1>{{ $client->name }}</h1>
     </div>
-
-    @foreach ($client->projets->sortBy('name') as $projet)
-        @if ($projet->activeClientTask())
             <div class="">
-                <h2 class="card-title mt-2 text-primary">{{ $projet->name }}</h2>
+                {{-- <h2 class="card-title mt-2 text-primary">{{ $projet->name }}</h2> --}}
                 <div class="border" >
                     <table class="table" >
                         <thead>
                             <tr class="bg-primary text-light">
+                                <th class="text-white">Site</th>
                                 <th class="text-white">Taches</th>
                                 <th class="text-white">Description</th>
                                 <th class="text-white">Statut</th>
@@ -29,28 +27,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($projet->tasks as $task)
-                                @if ($task->statut_id == 1 || $task->statut_id ==2)
-                                    <tr class="">
-                                        <td class="fs-4">{{ $task->name }}</td>
-                                        <td class="fs-4">{!! nl2br($task->description) !!}</td>
-                                        <td scope="row" class="fs-6">
-                                            {{ $task->statut->name }}</td>
-                                        <td width=80px>
-                                            @if ($task->start_date)
-                                                <div class="fs-6 text-center border-bottom">
-                                                    <div>Début</div>
-                                                    <div>{{ $task->start_date }}</div>
-                                                </div>
-                                            @endif
-                                            @if ($task->end_date)
-                                                <div class="fs-6 text-center">
-                                                    <div>Fin</div>
-                                                    <div>{{ $task->end_date }}</div>
-                                                </div>
-                                            @endif
-                                        </td>
-                                    </tr>
+                            @foreach ($client->projets->sortBy('name') as $projet)
+                                @if ($projet->activeClientTask())
+                                    @foreach ($projet->tasks as $task)
+                                        @if ($task->statut_id == 1 || $task->statut_id ==2)
+                                            <tr class="">
+                                                    <td >{{ $projet->name }} </td>
+                                                    {{-- <td rowspan="{{ $projet->activeClientTaskCount() }}">{{ $projet->name }} </td> --}}
+
+                                                <td class="fs-4">{{ $task->name }}</td>
+                                                <td class="fs-4">{!! nl2br($task->description) !!}</td>
+                                                <td scope="row" class="fs-6">
+                                                    {{ $task->statut->name }}</td>
+                                                <td width=80px>
+                                                    @if ($task->start_date)
+                                                        <div class="fs-6 text-center border-bottom">
+                                                            <div>Début</div>
+                                                            <div>{{ $task->start_date }}</div>
+                                                        </div>
+                                                    @endif
+                                                    @if ($task->end_date)
+                                                        <div class="fs-6 text-center">
+                                                            <div>Fin</div>
+                                                            <div>{{ $task->end_date }}</div>
+                                                        </div>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 @endif
                             @endforeach
                         </tbody>
@@ -59,8 +64,7 @@
 
             </div>
 
-        @endif
-    @endforeach
+
 
 </body>
 

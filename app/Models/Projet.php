@@ -53,22 +53,18 @@ class Projet extends Model
         return $this->hasMany(Contact::class);
     }
 
-    // public function activeClientTask()
-    // {
-    //     $tasks = Task::where('projet_id', $this->projet_id)->get();
-
-    //     foreach ($tasks as $key => $task) {
-    //         if ($task->statut_id != 4) {
-    //             return 1;
-    //         }
-    //     }
-    //     return 0;
-    // }
-
     public function activeClientTask(): bool
     {
         return $this->tasks()
             ->where('statut_id', '!=', 4)
             ->exists();
+    }
+
+    public function activeClientTaskCount(): int
+    {
+        return $this->tasks()
+            ->where('statut_id', '!=', 4)
+            ->where('statut_id', '!=', 3)
+            ->count();
     }
 }

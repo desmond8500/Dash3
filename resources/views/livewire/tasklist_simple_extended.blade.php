@@ -114,6 +114,12 @@ new class extends Component {
         $this->form->delete($task_id);
         $this->dispatch('close-editTaskModal');
     }
+
+    function check_task($task_id)
+    {
+        $this->form->setStatus(4);
+        $this->dispatch('get-tasks');
+    }
 }; ?>
 
 <div>

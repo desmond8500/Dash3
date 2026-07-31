@@ -58,7 +58,7 @@ class Projet extends Model
         $tasks = Task::where('projet_id', $this->projet_id)->get();
 
         foreach ($tasks as $key => $task) {
-            if ($task->statut != 4) {
+            if ($task->statut_id != 4) {
                 return 1;
             }
         }

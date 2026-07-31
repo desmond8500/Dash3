@@ -84,7 +84,7 @@ class ClientAPIController extends Controller
     */
 
     function show(int $id){
-        $client = Client::find($id);
+        $client = Client::findorFail($id);
         if ($client) {
             return ResponseController::response(true, 'Le client a été récupéré avec succès', $client);
         } else {
@@ -177,7 +177,7 @@ class ClientAPIController extends Controller
         *     )
     */
     function update(Request $request, int $id){
-        $client = Client::find($id);
+        $client = Client::findorFail($id);
         if ($client) {
             $client->name = $request->name;
             $client->description = $request->description;
@@ -227,7 +227,7 @@ class ClientAPIController extends Controller
     */
 
     function destroy(int $id){
-        $client = Client::find($id);
+        $client = Client::findorFail($id);
         if ($client) {
             if ($client->delete()) {
                 return ResponseController::response(true, 'Client supprimé avec succès', null, 200);
@@ -269,10 +269,10 @@ class ClientAPIController extends Controller
      */
 
     function getProjets(int $id){
-        $client = Client::find($id);
+        $client = Client::findorFail($id);
         if ($client) {
             // $projets = $client->projets;
-            $projets = Projet::where('client_id', $id)->orderBy('name', 'asc')->get();
+            $projets = Projet::where('client_id', '=', $id, true)->orderBy('name', 'asc')->get();
 
 
             return ResponseController::response(true, 'Projets récupérés avec succès', $projets, 200);
@@ -310,9 +310,9 @@ class ClientAPIController extends Controller
      *     )
      */
     function getTasksByClient(int $id){
-        $client = Client::find($id);
+        $client = Client::findorFail($id);
         if ($client) {
-            $tasks = Task::where('client_id', $id)->orderBy('name', 'asc')->get();
+            $tasks = Task::where('client_id', '==', $id, true)->orderBy('name', 'asc')->get();
             return ResponseController::response(true, 'Tâches récupérées avec succès', $tasks, 200);
         } else {
             return ResponseController::response(false, 'Client non trouvé', null, 404);

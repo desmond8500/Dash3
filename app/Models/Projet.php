@@ -55,7 +55,7 @@ class Projet extends Model
 
     public function activeClientTask()
     {
-        $tasks = Task::where('projet_id', this->projet_id)->get();
+        $tasks = Task::where('projet_id', $this->projet_id)->get();
 
         foreach ($tasks as $key => $task) {
             if ($task->statut != 4) {

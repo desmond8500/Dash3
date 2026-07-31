@@ -67,6 +67,7 @@ class PDF2Controller extends Controller
         // Générer le PDF à partir d'une vue
         $pdf = Pdf::view('_pdf2.tasks_pdf', [
             'client' => $client,
+            'date' => now(),
             ]);
 
         $pdf->format('a4');

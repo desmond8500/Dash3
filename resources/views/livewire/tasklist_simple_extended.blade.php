@@ -117,6 +117,7 @@ new class extends Component {
 
     function check_task($task_id)
     {
+        $this->form->set($task_id);
         $this->form->setStatus(4);
         $this->dispatch('get-tasks');
     }

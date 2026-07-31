@@ -47,7 +47,7 @@ class PDF2Controller extends Controller
         $pdf->margins(10, 0, 5, 0);
 
         // $pdf->headerView('pdf.invoice.header');
-        $pdf->footerView('_pdf2.invoice_footer');
+        $pdf->footerView('_pdf2.invoice.invoice_footer');
 
         // $pdf->meta(
         // title: 'Invoice #123',
@@ -73,7 +73,7 @@ class PDF2Controller extends Controller
         $pdf->margins(10, 0, 5, 0);
 
         // $pdf->headerView('pdf.invoice.header');
-        $pdf->footerView('_pdf2.invoice_footer');
+        $pdf->footerView('_pdf2.invoice.invoice_footer');
 
         // $pdf->meta(
         // title: 'Invoice #123',

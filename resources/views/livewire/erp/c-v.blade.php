@@ -19,4 +19,14 @@
             </div>
         @endforeach
     </div>
+
+    <button class='btn btn-primary' wire:click="$dispatch('open-editCv')" ><i class='ti ti-plus'></i> Bouton</button>
+
+    @component('components.modal', ["id"=>'editCv', 'title' => 'Titre', 'method'=>'store'])
+        <form class="row" wire:submit="store">
+            {{-- @include('_form.document_form') --}}
+        </form>
+        <script> window.addEventListener('open-editCv', event => { window.$('#editCv').modal('show'); }) </script>
+        <script> window.addEventListener('close-editCv', event => { window.$('#editCv').modal('hide'); }) </script>
+    @endcomponent
 </div>

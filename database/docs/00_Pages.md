@@ -3,59 +3,61 @@
 ## Authentification
 
 1. LoginPage
-2. RegisterPage
-3. ForgottenPage
+1. RegisterPage
+1. ForgottenPage
 
 ## ERP
 
 1. ClientsPage
-2. ClientPage
-3. ProjetPage
-4. DevisPage
-5. ContactsPage
-6. Documents
-7. DevisModelPage
-8. PersonnelPage
+1. ClientPage
+1. ProjetPage
+1. DevisPage
+1. ContactsPage
+1. Documents
+1. DevisModelPage
+1. PersonnelPage
 
 ### Configuration
 
 1. DashboardPage
-2. UsersPage
-3. PermissionsPage
+1. UsersPage
+1. PermissionsPage
 
 ## Stock
 
 1. ArticlesPage
-2. ArticlePage
-3. AchatsPage
-4. ProvidersPage
-5. StockConfigPage
-6. WishlistPage
+1. ArticlePage
+1. PurchasesPage
+1. PurchasePage
+1. SuppliersPage
+1. SupplierPage
+1. StockConfigPage
+1. WishlistPage
 
 ## Medias
 
 1. ImagesPage
-2. VideosPage
-3. VideoPage
-4. GamesPage
-5. GamePage
-6. MangasPage
-7. MangaPage
-8. Films
+1. VideosPage
+1. VideoPage
+1. GamesPage
+1. GamePage
+1. MangasPage
+1. MangaPage
+1. Films
 
 ## Tools
 
 1. SoftwaresPages
-2. QuotesPages
-3. KitsPage
-4. WebsitesPage
-5. PersonasPage
-6. TestPage
+1. QuotesPages
+1. KitsPage
+1. WebsitesPage
+1. PersonasPage
+1. TestPage
 
 ## Tasks
 
 1. TasksPage
-2. TaskPage
+1. TaskPage
 
 ## Comptabilité
 

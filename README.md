@@ -21,6 +21,35 @@ Erp version 3
 * [Laravel telescope](https://laravel.com/docs/master/telescope)
 * [Laravel Tags](https://spatie.be/docs/laravel-tags/v4/installation-and-setup)
 * [Laravel Livewire Async Select](https://github.com/drpshtiwan/livewire-async-select)
+* [Laravel Envoy](https://laravel.com/docs/13.x/envoy)
+
+## Installation
+
+```console
+git clone https://github.com/desmond8500/Dash3.git
+```
+
+```console
+composer install
+```
+
+```console
+npm install
+```
+
+```console
+cp .env.example .env
+```
+
+```console
+php artisan key:generate
+```
+
+```console
+php artisan migrate
+```
+
+Mettre `DB_CONNECTION=sqlite`
 
 ## Traits
 

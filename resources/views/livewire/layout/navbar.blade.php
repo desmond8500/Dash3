@@ -163,8 +163,11 @@
                         <a href="{{ route('profile') }}" class="dropdown-item"><i class="ti ti-user"></i>
                             Profile</a>
                         <div class="dropdown-divider"></div>
-                        <a href="{{ route('settings') }}" class="dropdown-item"><i class="ti ti-settings"></i>
-                            Paramètres</a>
+                        @role('admin')
+                            <a href="{{ route('settings') }}" class="dropdown-item"><i class="ti ti-settings"></i>
+                                Paramètres</a>
+
+                        @endrole
                         <a wire:click="logout()" class="dropdown-item text-danger"> <i class="ti ti-logout"></i>
                             Déconnexion</a>
                     </div>

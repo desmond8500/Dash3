@@ -6,6 +6,7 @@ use App\Livewire\Forms\BuildingForm;
 use App\Livewire\Forms\RoomForm;
 use App\Livewire\Forms\StageForm;
 use App\Models\Building;
+use App\Models\Room;
 use App\Models\Stage;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Session;
@@ -28,6 +29,8 @@ class BuildingPage extends Component
     public StageForm $stage_form;
     public RoomForm $room_form;
     public $form;
+
+
 
     protected $listeners = ['get_stages'];
 
@@ -63,6 +66,7 @@ class BuildingPage extends Component
     {
         return view('livewire.erp.building-page',[
             'stages' => $this->get_stages(),
+            'items'
         ]);
     }
 
@@ -100,5 +104,34 @@ class BuildingPage extends Component
         $stage->delete();
         $this->reset('selected_stage');
         $this->dispatch('get-stages');
+    }
+
+    // Items
+    #[On('get-stages')]
+    function get_items()
+    {
+        // return Stage::where('building_id', $this->building->id)->get();
+    }
+
+    // Rooms
+    public $room_tab;
+    public $selected_room;
+    function select_room()
+    {
+        $this->room_tab = ($this->room_tab) ? false : true;
+        $this->room_form->stage_id = $this->selected_stage->id;
+        $stages = Room::where('stage_id', $this->selected_stage->id)->get();
+        if ($stages->count() > 0) {
+            $this->room_form->order = $stages->max('order') + 1;
+        } else {
+            $this->room_form->order = 1;
+        }
+    }
+
+    function store()
+    {
+        $this->room_form->store();
+        $this->dispatch('close-addRoom');
+        $this->dispatch('get-rooms');
     }
 }

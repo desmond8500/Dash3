@@ -2,7 +2,7 @@
     <div class="card p-2">
         <div class="row g-2">
             <div class="col-auto">
-                <img src="{{ asset("$article->image") }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}">
+                <img src="{{ asset("$article->image") }}" alt="A" class="avatar {{ $img_class ?? 'avatar-xl' }}" >
             </div>
             <div class="col">
                 <div class="row">

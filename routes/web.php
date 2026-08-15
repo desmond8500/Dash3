@@ -2,7 +2,6 @@
 
 use App\Exports\InvoiceExport;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\KonvaController;
 use App\Http\Controllers\PDF2Controller;
 use App\Http\Controllers\PDFController;
 use App\Livewire\Dashboard\Dashboard1Page;
@@ -18,7 +17,6 @@ use App\Livewire\Erp\FichesPage;
 use App\Livewire\Erp\FicheZonePage;
 use App\Livewire\Erp\FinancesPage;
 use App\Livewire\Erp\ForfaitsPage;
-use App\Livewire\Erp\Invoicelist2Page;
 use App\Livewire\Erp\InvoiceListPage;
 use App\Livewire\Erp\InvoiceModelPage;
 use App\Livewire\Erp\InvoicePage;
@@ -60,9 +58,7 @@ use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use App\Livewire\TimelinePage;
 use App\Livewire\VideoPage;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Browsershot\Browsershot;
 use Spatie\LaravelPdf\Facades\Pdf;
@@ -75,8 +71,8 @@ Route::get('/login', LoginPage::class)->name('login');
 
 // Settings
 Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', ProfilePage::class)->name('profile');
     Route::get('/settings', SettingsPage::class)->name('settings');
+    Route::get('/profile', ProfilePage::class)->name('profile');
     Route::get('/cv/{cv_id}', CVpage::class)->name('cv');
     Route::get('/cv_pdf/{cv_id}', function ($cv_id) {
         return PDFController::cv_pdf($cv_id);

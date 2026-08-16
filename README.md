@@ -66,3 +66,11 @@ Mettre `DB_CONNECTION=sqlite`
   * php artisan app:docs doc_name
 * Formulaire
   * php artisan app:forms form_name
+
+## Commandes Artisan
+
+### Générer un modèle avec ses dépendances
+
+```console
+php artisan app:model
+```

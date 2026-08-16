@@ -22,15 +22,17 @@ class model extends Command
         $args = [];
         $args_type = [];
         $relations = [];
+
         do {
             $name = text("Veuillez entrer le nom de l'argument $i (laisser vide pour terminer) : ");
             if ($name) {
+                $fillable .= "\n";
                 $fillable .= "        '$name',\n";
-                $args[] = $name;
+                $args[]['name'] = $name;
 
                 $type = text("Veuillez entrer le type de l'argument $i (int, string, date, boolean, text, select, img) : ");
                 if ($type) {
-                    $args_type[] = $type;
+                    $args[]['type'] = $type;
                 }
             }
             $i++;
@@ -71,9 +73,7 @@ class model extends Command
         $this->info('Ajout des arguments au modèle ' . $model_name);
         $file = app_path("/Models/$model_name.php");
         $content = file_get_contents($file);
-
         $content = preg_replace('/}\s*$/', $fillable . "\n}", $content);
-
         file_put_contents($file, $content);
 
 
@@ -112,8 +112,8 @@ class model extends Command
                 $txt .= "```mermaid\n";
                 $txt .= "classDiagram\n\n";
                 $txt .= "class " . ucfirst($model_name) . "{\n";
-                foreach ($args as $key => $arg) {
-                    $txt .= "    +$args_type[$key] $arg\n";
+                foreach ($args as $arg) {
+                    $txt .= "    + ".$arg['type']." ".$arg['name']."\n";
                 }
                 $txt .= "}\n";
                 $txt .= "```\n";

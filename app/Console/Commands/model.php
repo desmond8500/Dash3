@@ -9,7 +9,6 @@ use function Laravel\Prompts\text;
 
 class model extends Command
 {
-
     protected $signature = 'app:model {model_name : Nom de la fonction}';
     protected $description = 'Permet de créer un modèle, une migration, un livewireform, une factory';
 
@@ -22,17 +21,16 @@ class model extends Command
         $args = [];
         $args_type = [];
         $relations = [];
-
+        $factory_attributes = [];
         do {
             $name = text("Veuillez entrer le nom de l'argument $i (laisser vide pour terminer) : ");
             if ($name) {
-                $fillable .= "\n";
                 $fillable .= "        '$name',\n";
-                $args[]['name'] = $name;
+                $args[] = $name;
 
                 $type = text("Veuillez entrer le type de l'argument $i (int, string, date, boolean, text, select, img) : ");
                 if ($type) {
-                    $args[]['type'] = $type;
+                    $args_type[] = $type;
                 }
             }
             $i++;
@@ -40,20 +38,20 @@ class model extends Command
 
         $fillable .= '    ];'."\n";
 
-        if ($this->confirm('Voulez vous ajouter des relations ?', true)) {
-            $this->info('Ajout des relations au modèle ' . $model_name);
+        // if ($this->confirm('Voulez vous ajouter des relations ?', true)) {
+        //     $this->info('Ajout des relations au modèle ' . $model_name);
 
-            do {
-                $relation_type = text("Veuillez entrer le type de relation (hasOne, hasMany, belongsTo, belongsToMany) : ");
-                $relation_model = text("Veuillez entrer le nom du modèle lié : ");
-                if ($relation_type && $relation_model) {
-                    $relations[] = [
-                        'type' => $relation_type,
-                        'model' => ucfirst($relation_model),
-                    ];
-                }
-            } while ($this->confirm('Voulez vous ajouter une autre relation ?', true));
-        }
+        //     do {
+        //         $relation_type = text("Veuillez entrer le type de relation (hasOne, hasMany, belongsTo, belongsToMany) : ");
+        //         $relation_model = text("Veuillez entrer le nom du modèle lié : ");
+        //         if ($relation_type && $relation_model) {
+        //             $relations[] = [
+        //                 'type' => $relation_type,
+        //                 'model' => ucfirst($relation_model),
+        //             ];
+        //         }
+        //     } while ($this->confirm('Voulez vous ajouter une autre relation ?', true));
+        // }
 
         $fonctions = multiselect(
             label: "Quels sont les options que vous voulez ajouter ?",
@@ -66,8 +64,8 @@ class model extends Command
         $this->call("make:model",[
             'name' => $model_name,
             '--migration' => true,
-            '--factory' => true,
-            '--resource' => true,
+            // '--factory' => true,
+            // '--resource' => true,
         ]);
 
         $this->info('Ajout des arguments au modèle ' . $model_name);
@@ -75,6 +73,11 @@ class model extends Command
         $content = file_get_contents($file);
         $content = preg_replace('/}\s*$/', $fillable . "\n}", $content);
         file_put_contents($file, $content);
+
+        // $migration = app_path("/database/factories/".$model_name."Factory.php");
+        $doc = app_path("/database/docs/".$model_name.".md");
+
+
 
 
         foreach ($fonctions as $option) {
@@ -112,8 +115,8 @@ class model extends Command
                 $txt .= "```mermaid\n";
                 $txt .= "classDiagram\n\n";
                 $txt .= "class " . ucfirst($model_name) . "{\n";
-                foreach ($args as $arg) {
-                    $txt .= "    + ".$arg['type']." ".$arg['name']."\n";
+                foreach ($args as $key => $arg) {
+                    $txt .= "    +$args_type[$key] $arg\n";
                 }
                 $txt .= "}\n";
                 $txt .= "```\n";

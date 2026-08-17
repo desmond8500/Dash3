@@ -32,6 +32,7 @@ use App\Livewire\Erp\SchemaPage;
 use App\Livewire\Erp\StagePage;
 use App\Livewire\Erp\SystemesPage;
 use App\Livewire\Erp\TeamPage;
+use App\Livewire\GeneratePage;
 use App\Livewire\IndexPage;
 use App\Livewire\JournalPage;
 use App\Livewire\JournauxPage;
@@ -71,6 +72,7 @@ Route::get('/login', LoginPage::class)->name('login');
 
 // Settings
 Route::middleware(['auth'])->group(function () {
+    Route::get('/generate', GeneratePage::class)->name('generate');
     Route::get('/settings', SettingsPage::class)->name('settings');
     Route::get('/profile', ProfilePage::class)->name('profile');
     Route::get('/cv/{cv_id}', CVpage::class)->name('cv');

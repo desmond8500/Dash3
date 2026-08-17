@@ -164,8 +164,14 @@
                             Profile</a>
                         <div class="dropdown-divider"></div>
                         @role('admin')
-                            <a href="{{ route('settings') }}" class="dropdown-item"><i class="ti ti-settings"></i>
-                                Paramètres</a>
+                            <a href="{{ route('settings') }}" class="dropdown-item">
+                                <i class="ti ti-settings"></i>
+                                Paramètres
+                            </a>
+                            <a href="{{ route('generate') }}" class="dropdown-item">
+                                <i class="ti ti-settings"></i>
+                                Génerer
+                            </a>
 
                         @endrole
                         <a wire:click="logout()" class="dropdown-item text-danger"> <i class="ti ti-logout"></i>

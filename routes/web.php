@@ -38,6 +38,8 @@ use App\Livewire\JournalPage;
 use App\Livewire\JournauxPage;
 use App\Livewire\LoginPage;
 use App\Livewire\Medias\ImagesPage;
+use App\Livewire\Medias\PersonaPage;
+use App\Livewire\Medias\PersonasPage;
 use App\Livewire\Medias\VideosPage;
 use App\Livewire\Modules\ContactsPage;
 use App\Livewire\MyprojectPage;
@@ -280,6 +282,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/images', ImagesPage::class)->name('images');
     Route::get('/videos', VideosPage::class)->name('videos');
     Route::get('/video/{video_id}', VideoPage::class)->name('video');
+    Route::get('/personas', PersonasPage::class)->name('personas');
+    Route::get('/persona/{persona_id}', PersonaPage::class)->name('persona');
 
 });
 

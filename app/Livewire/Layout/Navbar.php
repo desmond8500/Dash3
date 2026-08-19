@@ -42,6 +42,7 @@ class Navbar extends Component
             'submenu' => [
                 array('name' => "Images", "route" => "images", "icon" => "photo"),
                 array('name' => "Vidéos", "route" => "videos", "icon" => "video"),
+                array('name' => "Personas", "route" => "personas", "icon" => "user"),
             ]
         ),
         array('name' => "Tableaux", "icon" => "dashboard", "can"=> "erp",

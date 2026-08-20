@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Medias;
 
+use App\Livewire\Forms\PersonaForm;
 use App\Models\Persona;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,6 +15,7 @@ class PersonasPage extends Component
 
     public $search = '';
     public array $breadcrumbs;
+    public PersonaForm $form;
 
     public function mount()
     {
@@ -28,5 +30,24 @@ class PersonasPage extends Component
         return view('livewire.medias.personas-page',[
             'personas' => Persona::get()
         ]);
+    }
+
+    function store(){
+        $this->form->store() ;
+        $this->dispatch('close-addPersona');
+    }
+
+    function edit(int $id){
+        $this->form->set($id);
+        $this->dispatch('open-editPersona');
+    }
+
+    function update(){
+        $this->form->update();
+        $this->dispatch('close-editPersona');
+    }
+
+    function delete(int $id){
+        $this->form->delete($id);
     }
 }

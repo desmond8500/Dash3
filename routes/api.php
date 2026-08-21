@@ -9,6 +9,7 @@ use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
 use App\Http\Controllers\API\JournalAPIController;
 use App\Http\Controllers\API\NoteAPIController;
+use App\Http\Controllers\Api\PersonaController;
 use App\Http\Controllers\API\ProjetAPIController;
 use App\Http\Controllers\api\ProviderAPIController;
 use App\Http\Controllers\API\TaskAPIController;
@@ -102,6 +103,11 @@ Route::prefix('v1')->group(function () {
 // Favoris
 Route::prefix('v1')->group(function () {
     Route::get('favoris', [FavorisController::class, 'getFavoris'])->name('favoris');
+});
+
+// Medias
+Route::prefix('v1')->group(function () {
+    Route::apiResource('personas', PersonaController::class);
 });
 
 

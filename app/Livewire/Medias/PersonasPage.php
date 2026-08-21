@@ -21,7 +21,7 @@ class PersonasPage extends Component
     {
         $this->breadcrumbs = array(
             array('name' => 'Medias', 'route' => ''),
-            array('name' => 'Images', 'route' => ''),
+            array('name' => 'Personas', 'route' => 'personas'),
         );
     }
 

@@ -9,8 +9,8 @@
         </div>
 
         @foreach ($personas as $persona)
-            <div class="col-md-2">
-                @include("_card.persona_card",['persona'=>$persona])
+            <div class="col-2">
+                @include("_card.persona_card",['persona'=>$persona, 'delete'=>true])
             </div>
         @endforeach
 

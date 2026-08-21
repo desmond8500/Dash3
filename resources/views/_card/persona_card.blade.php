@@ -21,9 +21,11 @@
             <button wire:click="edit('{{ $persona->id }}')" class="btn btn-icon btn-warning" type="button">
                 <i class="ti ti-edit"></i>
             </button>
-            <button wire:click="delete('{{ $persona->id }}')" class="btn btn-icon btn-danger" type="button">
-                <i class="ti ti-trash"></i>
-            </button>
+            @isset ($delete)
+                <button wire:click="delete('{{ $persona->id }}')" class="btn btn-icon btn-danger" type="button">
+                    <i class="ti ti-trash"></i>
+                </button>
+            @endisset
         </div>
     </div>
 </div>

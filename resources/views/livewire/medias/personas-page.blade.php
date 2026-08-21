@@ -9,7 +9,7 @@
         </div>
 
         @foreach ($personas as $persona)
-            <div class="col-2">
+            <div class="col-6 col-md-2">
                 @include("_card.persona_card",['persona'=>$persona, 'delete'=>true])
             </div>
         @endforeach

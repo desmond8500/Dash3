@@ -4,6 +4,7 @@ namespace App\Livewire\Stock;
 
 use App\Models\Article;
 use App\Models\Commande;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -17,6 +18,7 @@ class Commandes extends Component
         return view('livewire.stock.commandes',[
             'articles' => Article::whereRaw('`quantity` < `quantity_min`')->paginate(8),
             'commandes' => Commande::all(),
+            'commands' => $this->getCommandesFusionneesProperty(),
         ]);
     }
 
@@ -40,4 +42,17 @@ class Commandes extends Component
         }
     }
 
+    public function getCommandesFusionneesProperty()
+    {
+        return Commande::query()
+            ->select(
+                'article_id',
+                DB::raw('SUM(quantity) as total_quantity'),
+                DB::raw('COUNT(*) as demandes')
+            )
+            ->with('article')
+            ->groupBy('article_id')
+            ->orderBy('article_id')
+            ->get();
+    }
 }

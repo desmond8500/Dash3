@@ -32,7 +32,7 @@
     </div>
 
 
-    {{-- <div class="card">
+    <div class="card">
         <div class="card-header">
             <div class="card-title">Articles à acheter</div>
             <div class="card-actions">
@@ -84,5 +84,5 @@
         </form>
         <script> window.addEventListener('open-addModal', event => { window.$('#addModal').modal('show'); }) </script>
         <script> window.addEventListener('close-addModal', event => { window.$('#addModal').modal('hide'); }) </script>
-    @endcomponent --}}
+    @endcomponent
 </div>

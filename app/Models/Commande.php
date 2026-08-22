@@ -21,4 +21,10 @@ class Commande extends Model
     {
         return $this->belongsTo(Article::class);
     }
+    public function invoice_row(): BelongsTo
+    {
+        return $this->belongsTo(InvoiceRow::class);
+    }
+
+
 }

@@ -239,6 +239,7 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="triggerId">
                                                 <a class="dropdown-item" wire:click="add_to_acompte('{{ $row->id }}')"> <i class="ti ti-plus"></i> Ajouter aux dépenses</a>
+                                                <a class="dropdown-item" wire:click="to_buy('{{ $row->id }}')"> <i class="ti ti-plus"></i> Commander</a>
                                             </div>
                                         </div>
                                     </div>

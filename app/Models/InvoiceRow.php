@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class InvoiceRow extends Model
 {
@@ -56,5 +57,15 @@ class InvoiceRow extends Model
         if ($this->priorite_id == 7) {
             return "Forfait";
         }
+    }
+
+    /**
+     * Get the commande associated with the InvoiceRow
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function commande(): HasOne
+    {
+        return $this->hasOne(Commande::class);
     }
 }

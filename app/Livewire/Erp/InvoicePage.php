@@ -9,6 +9,7 @@ use App\Livewire\Forms\InvoiceRowForm;
 use App\Livewire\Forms\InvoiceSectionForm;
 use App\Models\Article;
 use App\Models\Brand;
+use App\Models\Commande;
 use App\Models\Forfait;
 use App\Models\Invoice;
 use App\Models\InvoiceModel;
@@ -437,5 +438,15 @@ class InvoicePage extends Component
         }
 
         $this->dispatch('invoice-section-reload');
+    }
+
+    function to_buy(int $row_id){
+        $row = InvoiceRow::find($row_id);
+
+        Commande::create([
+            'article_id'=> $row->article_id,
+            'quantity'=> $row->quantite,
+            'invoice_row_id' => $row->id,
+        ]);
     }
 }

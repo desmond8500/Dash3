@@ -105,8 +105,9 @@
                         <thead>
                             <tr>
                                 <th>Article</th>
+                                <th class="text-center">Photo</th>
                                 <th class="text-center">Demandes</th>
-                                <th class="text-end">Qté Totale</th>
+                                <th class="text-end">Qté</th>
                                 <th class="text-end">Prix</th>
                                 <th class="text-end">Action</th>
                             </tr>
@@ -119,11 +120,15 @@
                             )
 
                             @php $article = $rows->first()->article; @endphp
+                            <tr>
+                                <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
+                                    <img src="{{ asset($article->image) }}" class="avatar avatar-sm">
+                                </a>
+                            </tr>
 
                             <tr>
                                 <td class="d-flex align-items-center gap-2">
                                     <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
-                                        <img src="{{ asset($article->image) }}" class="avatar avatar-sm">
                                         {{ $article->designation }}
                                     </a>
 

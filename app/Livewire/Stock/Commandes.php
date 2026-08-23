@@ -55,4 +55,8 @@ class Commandes extends Component
             ->orderBy('article_id')
             ->get();
     }
+
+    function delete(){
+
+    }
 }

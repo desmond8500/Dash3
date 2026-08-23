@@ -9,67 +9,154 @@
         </div>
     @endcomponent
 
-
-    <div class="card">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th width="10px">#</th>
-                    <th>Nom</th>
-                    <th width="10px" class="bg-red-lt text-center">Date</th>
-                    <th width="120px" class="bg-blue-lt text-center">TVA</th>
-                    <th width="150px" class="text-end">Total</th>
-                    <th width="100px" class="text-center">Facture</th>
-                    <th width="150px" class="text-end">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($achats as $key => $achat)
-                    <tr>
-                        <td>{{ $key+1 }}</td>
-                        <td>
-                            <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a> <br>
-                            <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{!! nl2br($achat->description) !!}</a>
-                        </td>
-                        <td class="text-center">{{ $achat->date }}</td>
-                        <td class="text-center">{{ number_format($achat->tva(), 0, 2) }} F</td>
-                        <td class="text-end">
-                            <div>{{ number_format($achat->total(), 0, 2) }} F HT<span class="text-white">C</span> </div>
-                            <div class="text-danger">{{ number_format($achat->ttc(), 0, 2) }} F TTC</div>
-                        </td>
-                        <td class="text-center">
-                            @foreach ($achat->factures as $key => $facture)
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Achats</div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="10px">#</th>
+                            <th>Nom</th>
+                            <th width="10px" class="bg-red-lt text-center">Date</th>
+                            <th width="120px" class="bg-blue-lt text-center">TVA</th>
+                            <th width="150px" class="text-end">Total</th>
+                            <th width="100px" class="text-center">Facture</th>
+                            <th width="150px" class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($achats as $key => $achat)
+                        <tr>
+                            <td>{{ $key+1 }}</td>
+                            <td>
+                                <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a> <br>
+                                <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{!!
+                                    nl2br($achat->description) !!}</a>
+                            </td>
+                            <td class="text-center">{{ $achat->date }}</td>
+                            <td class="text-center">{{ number_format($achat->tva(), 0, 2) }} F</td>
+                            <td class="text-end">
+                                <div>{{ number_format($achat->total(), 0, 2) }} F HT<span class="text-white">C</span> </div>
+                                <div class="text-danger">{{ number_format($achat->ttc(), 0, 2) }} F TTC</div>
+                            </td>
+                            <td class="text-center">
+                                @foreach ($achat->factures as $key => $facture)
                                 <div class="d-flex justify-content-between mb-1">
                                     <a href="{{ asset($facture->folder) }}" target="_blank">
                                         <i class="ti ti-file-pdf"></i>
                                         Facture {{ $key+1 }}
                                     </a>
                                 </div>
-                            @endforeach
-                        </td>
-                        <td class="text-end">
-                            <div class="btn-list">
-                                <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Editer">
-                                    <i class="ti ti-edit"></i>
-                                </button>
-                                @if (!$achat->rows->count() && !$achat->factures->count())
-                                    <button class="btn btn-danger btn-icon" wire:click="delete('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Supprimer">
+                                @endforeach
+                            </td>
+                            <td class="text-end">
+                                <div class="btn-list">
+                                    <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')"
+                                        data-bs-toggle="tooltip" title="Editer">
+                                        <i class="ti ti-edit"></i>
+                                    </button>
+                                    @if (!$achat->rows->count() && !$achat->factures->count())
+                                    <button class="btn btn-danger btn-icon" wire:click="delete('{{ $achat->id }}')"
+                                        data-bs-toggle="tooltip" title="Supprimer">
                                         <i class="ti ti-trash"></i>
                                     </button>
-                                @endif
-                                @if (!$achat->transaction_id)
-                                    <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Ajouter une transaction">
+                                    @endif
+                                    @if (!$achat->transaction_id)
+                                    <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')"
+                                        data-bs-toggle="tooltip" title="Ajouter une transaction">
                                         <i class="ti ti-coins"></i>
                                     </button>
-                                @endif
+                                    @endif
 
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {{-- <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Commandes</div>
+                    <div class="card-actions">
+
+                    </div>
+                </div>
+                <div class="card-body">
+
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div> --}}
+
+            @foreach($commandes as $providerId => $commandes)
+
+            @php
+            $provider = $commandes->first()->invoice_row->article->provider;
+            @endphp
+
+            <div class="card mb-3">
+
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        {{ $provider->name }}
+                    </h3>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-vcenter">
+                        <thead>
+                            <tr>
+                                <th>Article</th>
+                                <th class="text-center">Demandes</th>
+                                <th class="text-end">Qté Totale</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach(
+                                $commandes->groupBy('article_id') as $articleId => $rows
+                            )
+
+                            @php $article = $rows->first()->article; @endphp
+
+                            <tr>
+                                <td class="d-flex align-items-center gap-2">
+                                    <img src="{{ asset($article->image) }}" class="avatar avatar-sm">
+
+                                    {{ $article->designation }}
+                                </td>
+
+                                <td class="text-center">
+                                    {{ $rows->count() }}
+                                </td>
+
+                                <td class="text-end fw-bold">
+                                    {{ $rows->sum('quantity') }}
+                                </td>
+                            </tr>
+
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            @endforeach
+        </div>
     </div>
+
+
+
 
     @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat", 'method'=>"achat_update"])
         <form class="row" wire:submit="update">

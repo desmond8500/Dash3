@@ -4,6 +4,7 @@ namespace App\Livewire\Stock;
 
 use App\Livewire\Forms\AchatForm;
 use App\Models\Achat;
+use App\Models\Commande;
 use App\Models\Provider;
 use App\Models\Transaction;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
@@ -46,8 +47,20 @@ class AchatsPage extends Component
     {
         return view('livewire.stock.achats-page',[
             'achats' => Achat::all(),
-            'providers' => Provider::all()
+            'providers' => Provider::all(),
+            'commandes' => $this->getCommandesParFournisseurProperty(),
         ]);
+    }
+
+    public function getCommandesParFournisseurProperty()
+    {
+        return Commande::with([
+            'invoice_row.article.provider'
+        ])
+            ->get()
+            ->groupBy(function ($commande) {
+                return $commande->invoice_row->article->provider->id ?? 0;
+            });
     }
 
     public $selected;

@@ -2,7 +2,7 @@
     @component('components.layouts.page-header', ['title'=> 'Clients', 'breadcrumbs' => $breadcrumbs])
         <div class="btn-list">
             <div>
-                <input type="text" class="form-control" wire:model.live="search" placeholder="Rechercher un client">
+                <input type="text" class="form-control" wire:model.live="search" placeholder="Trouver un client">
             </div>
 
             <button type="button" class="btn btn-primary" wire:click="add()" data-bs-toggle="tooltip" title="Ajouter un client">

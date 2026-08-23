@@ -96,7 +96,7 @@
 
                 <div class="card-header bg-primary text-white">
                     <h3 class="card-title mb-0">
-                        {{ $provider->name }}
+                        {{ $provider->name ?? '-'}}
                     </h3>
                 </div>
 

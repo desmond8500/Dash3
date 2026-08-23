@@ -120,14 +120,14 @@
                             )
 
                             @php $article = $rows->first()->article; @endphp
-                            <tr>
-                                <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
-                                    <img src="{{ asset($article->image) }}" class="avatar avatar-sm">
-                                </a>
-                            </tr>
 
                             <tr>
-                                <td class="d-flex align-items-center gap-2">
+                                <td>
+                                    <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
+                                        <img src="{{ asset($article->image) }}" class="avatar avatar-sm">
+                                    </a>
+                                </td>
+                                <td class="">
                                     <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
                                         {{ $article->designation }}
                                     </a>

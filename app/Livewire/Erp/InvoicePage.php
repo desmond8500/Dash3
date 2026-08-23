@@ -444,14 +444,14 @@ class InvoicePage extends Component
         $row = InvoiceRow::find($row_id);
         $commande = Commande::where('row_id', $row_id)->get();
 
-        if ($commande) {
-            $commande->increment('quantity', $row->quantite);
-        } else {
+        // if ($commande) {
+        //     $commande->increment('quantity', $row->quantite);
+        // } else {
             Commande::create([
                 'article_id'=> $row->article_id,
                 'quantity'=> $row->quantite,
-                'invoice_row_id' => $row->id,
+                'invoice_row_id' => $row_id,
             ]);
-        }
+        // }
     }
 }

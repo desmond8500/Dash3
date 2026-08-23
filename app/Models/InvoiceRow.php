@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -60,13 +59,18 @@ class InvoiceRow extends Model
         }
     }
 
-    /**
-     * Get the commande associated with the InvoiceRow
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
     public function commande(): HasOne
     {
         return $this->hasOne(Commande::class);
+    }
+
+    function buy(){
+        $row = Commande::where('invoice_row_id', $this->id)->first();
+        if ($row) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

@@ -442,7 +442,7 @@ class InvoicePage extends Component
 
     function to_buy(int $row_id){
         $row = InvoiceRow::find($row_id);
-        $commande = Commande::where('row_id', $row_id)->get();
+        // $commande = Commande::where('row_id', $row_id)->get();
 
         // if ($commande) {
         //     $commande->increment('quantity', $row->quantite);

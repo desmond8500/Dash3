@@ -12,6 +12,7 @@ class Commande extends Model
     use HasFactory;
     use searchTrait;
 
+
     protected $fillable = [
         'article_id',
         'invoice_row_id',

@@ -485,3 +485,23 @@
         <script> window.addEventListener('close-exportPDF', event => { window.$('#exportPDF').modal('hide'); }) </script>
     @endcomponent
 </div>
+
+<div class="card p-2">
+    <div class="row">
+        <div class="col-auto">
+            <img src="" alt="A" class="avatar avatar-md">
+        </div>
+        <div class="col">
+            <div class="card-title">Titre</div>
+            <div class="text-muted">Description</div>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $model->id }}')">
+            <i class="ti ti-edit"></i>
+          </button>
+          <button class="btn btn-outline-danger btn-icon" wire:click="edit('{{ $model->id }}')">
+            <i class="ti ti-trash"></i>
+          </button>
+      </div>
+    </div>
+</div>

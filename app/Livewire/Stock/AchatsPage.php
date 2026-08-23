@@ -52,16 +52,7 @@ class AchatsPage extends Component
         ]);
     }
 
-    public function getCommandesParFournisseurProperty()
-    {
-        return Commande::with([
-            'invoice_row.article.provider'
-        ])
-            ->get()
-            ->groupBy(function ($commande) {
-                return $commande->invoice_row->article->provider->id ?? 0;
-            });
-    }
+
 
     public $selected;
     public AchatForm $achat_form;
@@ -109,4 +100,28 @@ class AchatsPage extends Component
         ]);
         }
     }
+
+    // Commandes
+    public int $quantity, $article_id;
+
+    public function getCommandesParFournisseurProperty()
+    {
+        return Commande::with([
+            'invoice_row.article.provider'
+        ])
+            ->get()
+            ->groupBy(function ($commande) {
+                return $commande->invoice_row->article->provider->id ?? 0;
+            });
+    }
+
+    public object $selected_commande;
+    function edit_commande(int $commande_id){
+        $selected_commande = Commande::find($commande_id);
+        $this->quantity = $selected_commande->quantity;
+        $this->article_id = $selected_commande->article_id;
+        $this->dispatch('open-editCommand');
+    }
+
+
 }

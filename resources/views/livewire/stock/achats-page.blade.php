@@ -88,89 +88,94 @@
 
             @foreach($commandes as $providerId => $commandes)
 
-            @php
-            $provider = $commandes->first()->invoice_row->article->provider;
-            @endphp
+                @php
+                $provider = $commandes->first()->invoice_row->article->provider;
+                @endphp
 
-            <div class="card mb-3">
+                <div class="card mb-3">
 
-                <div class="card-header bg-primary text-white">
-                    <h3 class="card-title mb-0">
-                        {{ $provider->name ?? '-'}}
-                    </h3>
-                </div>
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title mb-0">
+                            {{ $provider->name ?? '-'}}
+                        </h3>
+                        <div class="card-actions">
 
-                <div class="table-responsive">
-                    <table class="table table-vcenter">
-                        <thead>
-                            <tr>
-                                <th class="text-center" width="10px">Photo</th>
-                                <th>Article</th>
-                                <th class="text-center">Demandes</th>
-                                <th class="text-center">Qté</th>
-                                <th class="text-end">Prix</th>
-                                <th class="text-end">Action</th>
-                            </tr>
-                        </thead>
+                        </div>
+                    </div>
 
-                        <tbody>
+                    <div class="table-responsive">
+                        <table class="table table-vcenter">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" width="10px">Photo</th>
+                                    <th>Article</th>
+                                    {{-- <th class="text-center">Demandes</th> --}}
+                                    <th class="text-center">Qté</th>
+                                    <th class="text-end">Prix</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
 
-                            @foreach(
-                                $commandes->groupBy('article_id') as $articleId => $rows
-                            )
+                            <tbody>
 
-                            @php
-                                $article = $rows->first()->article;
-                                $totalFournisseur = $commandes->sum(
-                                    fn($row) => $row->quantity * $row->article->price
-                                );
-                            @endphp
+                                @foreach(
+                                    $commandes->groupBy('article_id') as $articleId => $rows
+                                )
 
-                            <tr>
-                                <td>
-                                    <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
-                                        <img src="{{ asset($article->image) }}" class="avatar avatar-sm">
-                                    </a>
-                                </td>
-                                <td class="">
-                                    <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
-                                        {{ $article->designation }}
-                                    </a>
+                                @php
+                                    $article = $rows->first()->article;
+                                    $totalFournisseur = $commandes->sum(
+                                        fn($row) => $row->quantity * $row->article->price
+                                    );
+                                @endphp
 
-                                </td>
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
+                                            <img src="{{ asset($article->image) }}" class="avatar avatar-sm">
+                                        </a>
+                                    </td>
+                                    <td class="">
+                                        <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
+                                            {{ $article->designation }}
+                                        </a>
 
-                                <td class="text-center">
-                                    {{ $rows->count() }}
-                                </td>
+                                    </td>
 
-                                <td class="text-center fw-bold">
-                                    {{ $rows->sum('quantity') }}
-                                </td>
-                                <td class="text-end fw-bold">
-                                    <div>
+                                    {{-- <td class="text-center">
+                                        {{ $rows->count() }}
+                                    </td> --}}
+
+                                    <td class="text-center fw-bold">
+                                        {{ $rows->sum('quantity') }}
+                                    </td>
+                                    <td class="text-end fw-bold">
                                         <div>
-                                            {{ number_format($article->price,0,0) }} F
+                                            <div>
+                                                {{ number_format($article->price,0,0) }} F
+                                            </div>
+                                            <div>
+                                                {{ number_format($rows->sum('quantity')*$article->price,0,0) }} F
+                                            </div>
                                         </div>
-                                        <div>
-                                            {{ number_format($rows->sum('quantity')*$article->price,0,0) }} F
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <button type="button" class="btn btn-primary btn-icon" wire:click="edit_commande()">
+                                        <i class="ti ti-edit"></i>
+                                    </button>
+                                </tr>
 
-                            </tr>
+                                @endforeach
 
-                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer text-end fw-bold">
+                        {{ number_format($totalFournisseur, 0, ',', ' ') }} FCFA
+                    </div>
 
-                        </tbody>
-                    </table>
                 </div>
-                <div class="card-footer text-end fw-bold">
-                    Total fournisseur : {{ number_format($totalFournisseur, 0, ',', ' ') }} FCFA
-                </div>
-
-            </div>
 
             @endforeach
         </div>
@@ -182,6 +187,14 @@
         </form>
         <script> window.addEventListener('open-editAchat', event => { window.$('#editAchat').modal('show'); }) </script>
         <script> window.addEventListener('close-editAchat', event => { window.$('#editAchat').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editCommand', 'title'=>"Editer la commande", 'method'=>"commande_update"])
+        <form class="row" wire:submit="update">
+            @include('_form.commande_form')
+        </form>
+        <script> window.addEventListener('open-editCommand', event => { window.$('#editCommand').modal('show'); }) </script>
+        <script> window.addEventListener('close-editCommand', event => { window.$('#editCommand').modal('hide'); }) </script>
     @endcomponent
 
 </div>

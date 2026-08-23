@@ -46,7 +46,7 @@ class AchatsPage extends Component
     public function render()
     {
         return view('livewire.stock.achats-page',[
-            'achats' => Achat::all(),
+            'achats' => Achat::orderby('created_at','desc')->paginate(8),
             'providers' => Provider::all(),
             'commandes' => $this->getCommandesParFournisseurProperty(),
         ]);
@@ -99,5 +99,14 @@ class AchatsPage extends Component
 
     function add_transaction($achat_id){
         $this->achat_form->add_transaction($achat_id);
+    }
+
+    // Seeders
+    function seed(){
+        for ($i=0; $i < 10; $i++){
+            Achat::create([
+
+        ]);
+        }
     }
 }

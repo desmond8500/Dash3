@@ -216,6 +216,10 @@
                                         </div>
 
                                     </div>
+                                    @if ($row->buy() )
+                                        <i class="ti ti-shopping-cart-plus text-muted" data-bs-toggle="tooltip" title="A commander"></i>
+                                    @endif
+                                    <div></div>
                                 </td>
                                 <td class="text-center">
                                     <div data-bs-toggle="tooltip" title="Prix unitaire avec coeficient de marge">{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>

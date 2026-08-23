@@ -104,10 +104,10 @@
                     <table class="table table-vcenter">
                         <thead>
                             <tr>
+                                <th class="text-center" width="10px">Photo</th>
                                 <th>Article</th>
-                                <th class="text-center">Photo</th>
                                 <th class="text-center">Demandes</th>
-                                <th class="text-end">Qté</th>
+                                <th class="text-center">Qté</th>
                                 <th class="text-end">Prix</th>
                                 <th class="text-end">Action</th>
                             </tr>

@@ -119,7 +119,12 @@
                                 $commandes->groupBy('article_id') as $articleId => $rows
                             )
 
-                            @php $article = $rows->first()->article; @endphp
+                            @php
+                                $article = $rows->first()->article;
+                                $totalFournisseur = $commandes->sum(
+                                    fn($row) => $row->quantity * $row->article->price
+                                );
+                            @endphp
 
                             <tr>
                                 <td>
@@ -160,6 +165,9 @@
 
                         </tbody>
                     </table>
+                </div>
+                <div class="card-footer text-end fw-bold">
+                    Total fournisseur : {{ number_format($totalFournisseur, 0, ',', ' ') }} FCFA
                 </div>
 
             </div>

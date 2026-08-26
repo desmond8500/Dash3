@@ -28,43 +28,20 @@ class PDFController extends Controller
             'carbon' => $carbon,
             'date' => $carbon->now()->format('d-m-Y'),
 
-            'company_name' => env('MAIN_NAME'),
-            'company_logo' => env('LOGO', ''),
-            'company_sign' => env('SIGN', ''),
-            'company_buffer' => env('BUFFER', ''),
-            'company_ninea' => env('NINEA', ''),
-            'company_rib' => env('RIB', ''),
-            'company_address' => env('ADDRESS', ''),
-            'company_phone' => env('PHONE', ''),
-            'company_email' => env('EMAIL', ''),
-
-            'devis' => (object) array(
-                'conditions' => 'Conditions générales de vente : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                'reference' => 'DV-0001',
-                'date' => $carbon->now(),
-                'validite' => 30,
-                'client' => (object) array(
-                    'nom' => 'Client Exemple',
-                    'adresse' => '123 Rue Exemple, Ville, Pays',
-                    'telephone' => '+221 77 123 45 67',
-                ),
-                'lignes' => [
-                    (object) array(
-                        'designation' => 'Produit/Service 1',
-                        'quantite' => 2,
-                        'prix_unitaire' => 50000,
-                        'total' => 100000,
-                    ),
-                    (object) array(
-                        'designation' => 'Produit/Service 2',
-                        'quantite' => 1,
-                        'prix_unitaire' => 75000,
-                        'total' => 75000,
-                    ),
-                ],
-                'total_ht' => 175000,
-                'total_tva' => 35000,
-                'total_ttc' => 210000,
+            'company' => (object)array(
+                'logo' => $company_logo ?? 'img/tyto/logo.png',
+                'name' => $company_name ?? 'Company',
+                'address' => $company_address ?? '',
+                'email' => $company_email ?? 'email@mail.com',
+            ),
+            'document' => (object)array(
+                'title' => $document_title ?? 'Title',
+                'date' => date('d-m-Y'),
+                'reference' => 'INV-001-26'
+            ),
+            'file' => (object)array(
+                'name' => 'Test PDF',
+                'path' => 'img/test.pdf'
             ),
 
             'page_title' => $title ?? 'Document V1',
@@ -73,7 +50,7 @@ class PDFController extends Controller
                 "v1/footer",
             ],
         ];
-        $pdf = Pdf::loadView('_pdf.v1.layout_pdf1', $data);
+        $pdf = Pdf::loadView('_pdf3.invoice_pdf', $data);
         return $pdf->stream("$title");
     }
 

@@ -19,7 +19,7 @@ class ProviderForm extends Form
     public $description;
     #[Rule('email|nullable')]
     public $email;
-    #[Rule('number|nullable')]
+    #[Rule('integer|nullable')]
     public $phone;
     #[Rule('url|nullable')]
     public $website;

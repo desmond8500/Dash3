@@ -241,11 +241,11 @@ class ClientAPIController extends Controller
 
     /**
      *@OA\Get(
-     *      path="/api/v1/clients/projets/{id}",
+     *      path="/api/v1/clients_projets/{client_id}",
      *      tags={"Clients"},
      *      summary="Liste des projets d'un client",
      *      @OA\Parameter(
-     *          name="id",
+     *          name="client_id",
      *          in="path",
      *          required=true,
      *          description="ID du client",
@@ -268,11 +268,11 @@ class ClientAPIController extends Controller
      *     )
      */
 
-    function getProjets(int|string $id){
-        $client = Client::findorFail($id);
+    function getProjets(int|string $client_id){
+        $client = Client::findorFail($client_id);
         if ($client) {
             // $projets = $client->projets;
-            $projets = Projet::where('client_id', '=', $id, true)->orderBy('name', 'asc')->get();
+            $projets = Projet::where('client_id', '=', $client_idclient_idclient_id, true)->orderBy('name', 'asc')->get();
 
 
             return ResponseController::response(true, 'Projets récupérés avec succès', $projets, 200);
@@ -283,11 +283,11 @@ class ClientAPIController extends Controller
 
     /**
      *@OA\Get(
-     *      path="/api/v1/clients/tasks/{id}",
+     *      path="/api/v1/clients/tasks/{client_id}",
      *      tags={"Clients","Taches"},
      *      summary="Liste des tâches d'un client",
      *      @OA\Parameter(
-     *          name="id",
+     *          name="client_id",
      *          in="path",
      *          required=true,
      *          description="ID du client",
@@ -309,10 +309,10 @@ class ClientAPIController extends Controller
      *       ),
      *     )
      */
-    function getTasksByClient(int $id){
-        $client = Client::findorFail($id);
+    function getTasksByClient(int $client_id){
+        $client = Client::findorFail($client_id);
         if ($client) {
-            $tasks = Task::where('client_id', '==', $id, true)->orderBy('name', 'asc')->get();
+            $tasks = Task::where('client_id', '==', $client_id, true)->orderBy('name', 'asc')->get();
             return ResponseController::response(true, 'Tâches récupérées avec succès', $tasks, 200);
         } else {
             return ResponseController::response(false, 'Client non trouvé', null, 404);

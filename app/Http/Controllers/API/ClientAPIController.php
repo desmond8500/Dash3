@@ -83,7 +83,7 @@ class ClientAPIController extends Controller
         *     )
     */
 
-    function show(string $id){
+    function show(int $id){
         $client = Client::findorFail($id);
         if ($client) {
             return ResponseController::response(true, 'Le client a été récupéré avec succès', $client);
@@ -268,7 +268,7 @@ class ClientAPIController extends Controller
      *     )
      */
 
-    function getProjets(int $id){
+    function getProjets(int|string $id){
         $client = Client::findorFail($id);
         if ($client) {
             // $projets = $client->projets;

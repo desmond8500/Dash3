@@ -83,7 +83,7 @@ class ClientAPIController extends Controller
         *     )
     */
 
-    function show(int $id){
+    function show(string $id){
         $client = Client::findorFail($id);
         if ($client) {
             return ResponseController::response(true, 'Le client a été récupéré avec succès', $client);

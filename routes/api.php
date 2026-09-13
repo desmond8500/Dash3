@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AchatController;
-use App\Http\Controllers\api\BrandAPIController;
+use App\Http\Controllers\API\BrandAPIController;
 use App\Http\Controllers\API\ClientAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\FavorisController;
@@ -11,7 +11,7 @@ use App\Http\Controllers\API\JournalAPIController;
 use App\Http\Controllers\API\NoteAPIController;
 use App\Http\Controllers\Api\PersonaController;
 use App\Http\Controllers\API\ProjetAPIController;
-use App\Http\Controllers\api\ProviderAPIController;
+use App\Http\Controllers\API\ProviderAPIController;
 use App\Http\Controllers\API\TaskAPIController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;

@@ -238,16 +238,16 @@
                 }
             }
         },
-        "/api/v1/clients/projets/{id}": {
+        "/api/v1/clients_projets/{client_id}": {
             "get": {
                 "tags": [
                     "Clients"
                 ],
                 "summary": "Liste des projets d'un client",
-                "operationId": "1fad2e6b9f91140ae980087a0b43439f",
+                "operationId": "9e19db21ee815a42484be83db76bb800",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "client_id",
                         "in": "path",
                         "description": "ID du client",
                         "required": true,
@@ -269,17 +269,17 @@
                 }
             }
         },
-        "/api/v1/clients/tasks/{id}": {
+        "/api/v1/clients/tasks/{client_id}": {
             "get": {
                 "tags": [
                     "Clients",
                     "Taches"
                 ],
                 "summary": "Liste des tâches d'un client",
-                "operationId": "2d9e662a46c399163ea12fce99dd7c5d",
+                "operationId": "a5b2387d7a936de3278775a1c5092ed7",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "client_id",
                         "in": "path",
                         "description": "ID du client",
                         "required": true,

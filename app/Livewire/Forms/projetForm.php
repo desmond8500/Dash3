@@ -6,62 +6,92 @@ use App\Models\Projet;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Form;
 
-class projetForm extends Form
+class ProjetForm extends Form
 {
     public Projet $projet;
 
     #[Rule('required')]
-    public $name;
+    public string $name = '';
+
     #[Rule('required')]
-    public $client_id;
-    public $description;
-    public $start_date;
-    public $end_date;
-    public $favorite = 0;
+    public int $client_id = 0;
+
+    public string $description = '';
+    public ?string $start_date = null;
+    public ?string $end_date = null;
+    public bool $favorite = false;
+    #[Validate('nullable|image|max:2048')]
+    public TemporaryUploadedFile|string|null $logo = null;
 
 
-    function set($projet_id){
-        $this->projet = Projet::find($projet_id);
-
-        $this->client_id = $this->projet->client_id;
-        $this->name = $this->projet->name;
-        $this->description = $this->projet->description;
-        $this->start_date = $this->projet->start_date;
-        $this->end_date = $this->projet->end_date;
-        $this->favorite = $this->projet->favorite;
-    }
-
-    function store(){
-        $this->validate();
-        $projet = Projet::create($this->all());
-        $projet->name = ucfirst($projet->name);
-        $projet->description = ucfirst($projet->description);
-        $projet->save();
-    }
-
-    function update() {
-        $this->projet->update($this->all());
-        $this->projet->name = ucfirst($this->projet->name);
-        $this->projet->description = ucfirst($this->projet->description);
-        $this->projet->save();
-    }
-
-    function delete() {
-
-    }
-
-    function favorite()
+    public function set(int $projet_id): void
     {
-        if ($this->favorite) {
-            $this->favorite = 0;
-            $message = 'Le projet a été ajouté aux favoris';
-        } else {
-            $this->favorite = 1;
-            $message = 'Le projet a été supprimé des favoris';
-        }
-        $this->projet->update($this->only('favorite'));
+        $this->projet = Projet::findOrFail($projet_id);
+
+        $this->fill($this->projet->only([
+            'client_id',
+            'name',
+            'description',
+            'start_date',
+            'end_date',
+            'favorite',
+            'logo',
+        ]));
+    }
+
+    public function store(): void
+    {
+        $this->validate();
+
+        Projet::create([
+            'client_id' => $this->client_id,
+            'name' => ucfirst($this->name),
+            'description' => ucfirst($this->description),
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'favorite' => $this->favorite,
+        ]);
+    }
+
+    public function update(): void
+    {
+        $this->validate();
+
+        $this->projet->update([
+            'client_id' => $this->client_id,
+            'name' => ucfirst($this->name),
+            'description' => ucfirst($this->description),
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'favorite' => $this->favorite,
+        ]);
+    }
+
+    public function delete(): void
+    {
+        $this->projet->delete();
+
+        LivewireAlert::text('Le projet a été supprimé avec succès.')
+            ->position('top-end')
+            ->toast()
+            ->success()
+            ->show();
+    }
+
+    public function favorite(): bool
+    {
+        $this->favorite = !$this->favorite;
+
+        $this->projet->update([
+            'favorite' => $this->favorite,
+        ]);
+
+        $message = $this->favorite
+            ? 'Le projet a été ajouté aux favoris.'
+            : 'Le projet a été retiré des favoris.';
 
         LivewireAlert::text($message)
             ->position('top-end')
@@ -71,4 +101,27 @@ class projetForm extends Form
 
         return $this->favorite;
     }
+
+    public function store_logo()
+    {
+        if (! $this->logo instanceof TemporaryUploadedFile) {
+            LivewireAlert::text('Veuillez sélectionner un logo avant de sauvegarder.')
+                ->position('top-end')
+                ->toast()
+                ->error()
+                ->show();
+            return;
+        }
+
+        $dir = "erp/clients/{$this->client_id}/projets/{$this->projet->id}/logo";
+        $name = $this->logo->getClientOriginalName();
+
+        $this->logo->storeAs("public/$dir", $name);
+        $path = "storage/$dir/$name";
+        $this->projet->update([
+            'logo' => $path,
+        ]);
+        $this->logo = $path;
+    }
+
 }

@@ -12,31 +12,56 @@ use Illuminate\Http\Request;
 class ProjetAPIController extends Controller
 {
     /**
-        *@OA\Get(
-        *      path="/api/v1/projets",
-        *      tags={"Projets",},
-        *      summary="Liste des projets",
-        *      @OA\Response(
-        *          response=200,
-        *          description="Utilisateurs récupérés avec succès",
-        *       ),
-        *      @OA\Parameter(
-        *          name="search",
-        *          in="path",
-        *          required=false,
-        *          description="Terme de recherche pour filtrer les projets par nom",
-        *          ),
-        *     )
-    */
+     *@OA\Get(
+     *      path="/api/v1/projets",
+     *      tags={"Projets",},
+     *      summary="Liste des projets",
+     *      *      @OA\Parameter(
+     *          name="search",
+     *          in="query",
+     *          required=false,
+     *          description="Termes de recherche",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="client_id",
+     *          in="query",
+     *          required=false,
+     *          description="ID du client",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Utilisateurs récupérés avec succès",
+     *       ),
+     */
+
     public function index(Request $request)
-    {   return 0;
-        if($request->search) {
-            $projets = Projet::with(['client', 'invoices', 'buildings', 'tasks', 'journals', 'contacts'])->where('name', 'like', '%' . $request->search . '%')->get();
-        } else {
-            $projets = Projet::with(['client', 'invoices', 'buildings', 'tasks', 'journals', 'contacts'])->get();
+    {
+        $query = Projet::query();
+
+        // Filtre par client
+        if ($request->filled('client_id')) {
+            $query->where('client_id', $request->client_id);
         }
-        return ResponseController::response(true, 'Projets récupérés avec succès', $projets);
-        // return ResponseController::response(true, 'Projets récupérés avec succès', ProjetResource::collection($projets));
+
+        // Recherche
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Pagination (recommandée pour Ionic)
+        $projets = $query->latest()->paginate(20);
+
+        return ResponseController::response(
+            true,
+            'Projets récupérés avec succès',
+            $projets
+        );
     }
 
     /**

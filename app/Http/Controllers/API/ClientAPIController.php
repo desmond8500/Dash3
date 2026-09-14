@@ -41,14 +41,6 @@ class ClientAPIController extends Controller
             $perPage = min($request->get('per_page', 9), 100);
         }
 
-        // if ($request->search) {
-        //     $clients = Client::where('name', 'like', '%' . $request->search . '%')
-        //         ->paginate($perPage);
-        // } else {
-        //     $clients = Client::orderBy('name', 'asc')->paginate($perPage);
-        // }
-        // $clients = ClientResource::collection($clients);
-
         $clients = Client::search($request->search)
             ->orderBy('name', 'asc')
             ->paginate($perPage);
@@ -277,7 +269,7 @@ class ClientAPIController extends Controller
         $client = Client::findorFail($client_id);
         if ($client) {
             // $projets = $client->projets;
-            $projets = Projet::where('client_id', '=', $client_idclient_idclient_id, true)->orderBy('name', 'asc')->get();
+            $projets = Projet::where('client_id', '=', $client_id, true)->orderBy('name', 'asc')->get();
 
 
             return ResponseController::response(true, 'Projets récupérés avec succès', $projets, 200);

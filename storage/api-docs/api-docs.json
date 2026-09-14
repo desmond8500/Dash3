@@ -1171,6 +1171,24 @@
                 "parameters": [
                     {
                         "name": "search",
+                        "in": "query",
+                        "description": "Termes de recherche",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "ID du client",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "search",
                         "in": "path",
                         "description": "Terme de recherche pour filtrer les projets par nom",
                         "required": false

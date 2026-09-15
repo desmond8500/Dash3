@@ -11,7 +11,6 @@ use App\Models\Fiche;
 use App\Models\Invoice;
 use App\Models\InvoiceAcompte;
 use App\Models\InvoiceBl;
-use App\Models\InvoiceProposal;
 use App\Models\InvoiceSection;
 use App\Models\Journal;
 use App\Models\Team;
@@ -414,33 +413,10 @@ class PDFController extends Controller
         return $pdf->stream("Procès verbal");
     }
 
-    public static function proposal_pdf($proposal_id, $type = 'devis')
-    {
-        $data = PDFController::proposal($proposal_id, $type);
-        $pdf = Pdf::loadView('_pdf.facture.proposal_pdf', $data);
-        return $pdf->stream(Str::upper($type) . ' ' . Str::upper($data['devis']->reference) . ' - ' . $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
-    }
 
-    static function proposal($proposal_id, $type)
-    {
-        $proposal = InvoiceProposal::find($proposal_id);
-        $devis = Invoice::find($proposal->invoice->id);
-        $carbon = new Carbon($devis->date);
 
-        return [
-            'logo' => env('LOGO', ''),
-            'title' => $type ?? "Facture",
-            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
-            'devis' => $devis,
-            'carbon' => $carbon,
-            'proposal' => $proposal,
-            'acompte' => 0,
-            'color1' => env('COLOR1', '6b8a7a'),
-            'color2' => env('COLOR2', '6b8a7a'),
-            'color3' => env('COLOR3', '6b8a7a'),
-        ];
-    }
-    static function invoice_resume_pdf($year)
+
+    static function invoice_resume_pdf(int $year)
     {
         $invoices = Invoice::whereYear('paydate', $year)->orderBy('paydate', 'asc')->get();
         $acomptes = Invoice::with('acomptes')
@@ -462,7 +438,7 @@ class PDFController extends Controller
         $pdf = Pdf::loadView("_pdf.facture.invoice_resume_pdf", $data)->setPaper('a4', 'landscape');
         return $pdf->stream("Resumé des factures $year");
     }
-    static function attestation_pdf($team_id)
+    static function attestation_pdf(int $team_id)
     {
         $team = Team::find($team_id);
         $carbon = new Carbon();

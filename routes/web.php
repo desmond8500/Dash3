@@ -105,7 +105,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
 
     Route::get('/facture/invoice_resume_pdf/{year}', function ($year) { return PDFController::invoice_resume_pdf($year); })->name('invoice_resume_pdf');
 
-    Route::get('/facture/proposal_pdf/{proposal_id}/{type}', function ($proposal_id, $type) { return PDFController::proposal_pdf($proposal_id, $type); })->name('proposal_pdf');
+    Route::get('/facture/proposal_pdf/{proposal_id}/{type}', function ($proposal_id, $type) { return PDF2Controller::proposal_pdf($proposal_id, $type); })->name('proposal_pdf');
     Route::get('invoice_proposal/{proposal_id}', InvoiceProposalPage::class)->name('invoice_proposal');
 
 

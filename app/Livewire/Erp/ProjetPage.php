@@ -28,7 +28,7 @@ class ProjetPage extends Component
     #[Session()]
     public $tabs = 'devis';
 
-    public function mount($projet_id){
+    public function mount(int $projet_id){
         $this->projet = Projet::find($projet_id);
         $this->projet_id = $projet_id;
 

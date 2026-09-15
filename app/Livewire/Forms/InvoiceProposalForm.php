@@ -12,14 +12,14 @@ class InvoiceProposalForm extends Form
     public InvoiceProposal $proposal;
 
     #[Rule('required')]
-    public $invoice_id;
+    public int $invoice_id;
     public $logo;
-    public $client_name;
-    public $projet_name;
-    public $description;
-    public $footer;
-    public $details;
-    public $company_name;
+    public string $client_name = '';
+    public string $projet_name = '';
+    public string $description = '';
+    public bool $footer = false;
+    public bool $details = false;
+    public string $company_name = '';
 
 
     function store(){
@@ -27,7 +27,7 @@ class InvoiceProposalForm extends Form
         InvoiceProposal::create($this->all());
     }
 
-    function set($model_id){
+    function set(int $model_id){
         $this->proposal = InvoiceProposal::find($model_id);
         $this->invoice_id = $this->proposal->invoice_id;
         $this->logo = $this->proposal->logo;
@@ -44,7 +44,7 @@ class InvoiceProposalForm extends Form
         $this->proposal->update($this->all());
     }
 
-    function delete($model_id){
+    function delete(int $model_id){
         $this->proposal = InvoiceProposal::find($model_id);
         $this->proposal->delete();
     }

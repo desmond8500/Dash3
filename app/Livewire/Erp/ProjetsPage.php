@@ -42,7 +42,7 @@ class ProjetsPage extends Component
     public function render()
     {
         return view('livewire.erp.projets-page', [
-            'projets' => Projet::where('client_id',$this->client_id)->search($this->search)->paginate(20),
+            'projets' => Projet::where('client_id',$this->client_id)->orderBy('name')->search($this->search)->paginate(20),
             'taches' => Task::where('client_id', $this->client_id)->get(),
             'contacts' => Contact::where('client_id', $this->client_id)->get(),
         ]);

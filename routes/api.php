@@ -107,7 +107,7 @@ Route::prefix('v1')->group(function () {
 
 // Medias
 Route::prefix('v1')->group(function () {
-    // Route::apiResource('personas', PersonaController::class);
+    Route::apiResource('personas', PersonaController::class);
 });
 
 

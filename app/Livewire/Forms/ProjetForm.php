@@ -91,7 +91,7 @@ class ProjetForm extends Form
 
         $message = $this->favorite
             ? 'Le projet a été ajouté aux favoris .'
-            : 'Le projet a été retiré des favoris .';
+            : 'Le projet a été retiré des favoris  .';
 
         LivewireAlert::text($message)
             ->position('top-end')

@@ -3,7 +3,7 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\clientForm;
-use App\Livewire\Forms\projetForm;
+use App\Livewire\Forms\ProjetForm;
 use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Projet;

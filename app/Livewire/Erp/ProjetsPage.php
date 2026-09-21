@@ -20,13 +20,14 @@ class ProjetsPage extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search = '';
-    public $breadcrumbs;
-    public $client_id, $selected;
+    public mixed $breadcrumbs;
+    public $client_id = 0;
+    public mixed $selected;
     public projetForm $projetForm;
     #[Session()]
     public $tab = 'projets';
 
-    public function mount($client_id)
+    public function mount(int $client_id)
     {
         $this->client_id = $client_id;
         $this->projetForm->client_id = $client_id;
@@ -54,7 +55,7 @@ class ProjetsPage extends Component
         $this->reset('projetForm.name', 'projetForm.description');
     }
 
-    function edit($projet_id) {
+    function edit(int $projet_id) {
         $this->selected = Projet::find($projet_id);
 
         $this->projetForm->set($projet_id);
@@ -66,7 +67,7 @@ class ProjetsPage extends Component
         $this->dispatch('close-editProjet');
     }
 
-    function delete($projet_id) {
+    function delete(int $projet_id) {
         $this->selected = Projet::find($projet_id);
         $this->selected->delete();
         $this->dispatch('close-editProjet');
@@ -77,7 +78,7 @@ class ProjetsPage extends Component
         $this->projetForm->favorite();
     }
 
-    function toggleFavorite2($projet_id)
+    function toggleFavorite2(int $projet_id)
     {
         $this->projetForm->set($projet_id);
         $this->projetForm->favorite();
@@ -86,7 +87,7 @@ class ProjetsPage extends Component
     // Client
     public clientForm $clientForm;
 
-    function edit_client($client_id)
+    function edit_client(int $client_id)
     {
         $this->clientForm->set($client_id);
         $this->dispatch('open-editClient');

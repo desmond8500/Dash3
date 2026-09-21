@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePersonaRequest;
 use App\Http\Requests\UpdatePersonaRequest;
-use App\Http\Resources\Api\PersonaResource;
+use App\Http\Resources\PersonaResource;
 use App\Models\Persona;
 use Illuminate\Http\Request;
 

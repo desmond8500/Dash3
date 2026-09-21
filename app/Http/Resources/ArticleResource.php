@@ -9,7 +9,7 @@ class ArticleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
-     *
+     * @mixin Article
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array

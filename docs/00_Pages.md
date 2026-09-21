@@ -1,5 +1,8 @@
 # Pages
 
+Bienvenue dans la documentation de l'API.
+
+
 ## Authentification
 
 1. LoginPage

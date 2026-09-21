@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Api;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -9,6 +9,7 @@ class PersonaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
+     * @mixin Persona
      *
      * @return array<string, mixed>
      */

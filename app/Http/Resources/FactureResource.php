@@ -9,7 +9,7 @@ class FactureResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
-     *
+     *  @mixin Facture
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array

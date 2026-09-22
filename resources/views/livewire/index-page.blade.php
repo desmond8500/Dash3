@@ -149,6 +149,7 @@
             @env('local')
                 <a class="btn btn-purple" href="/migrator" target="_blank">Migrator page</a>
                 <button class="btn btn-secondary" wire:click='send'>Send mail</button>
+                <a class="btn btn-success" href="/api/documentation" target="_blank">Swagger</a>
             @endenv
         </div>
     </div>

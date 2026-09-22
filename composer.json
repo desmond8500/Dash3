@@ -7,8 +7,7 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1.2",
-        "darkaonline/l5-swagger": "^8.6",
-        "dedoc/scramble": "^0.13.45",
+        "darkaonline/l5-swagger": "^9.0",
         "drpshtiwan/livewire-async-select": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^4.1",
@@ -35,6 +34,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
+        "dedoc/scramble": "^0.13.45",
         "fakerphp/faker": "^1.9.1",
         "laravel/envoy": "^2.12",
         "laravel/pint": "^1.0",

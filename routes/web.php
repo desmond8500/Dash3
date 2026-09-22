@@ -369,3 +369,8 @@ Route::get('task_pdf_v2/{client_id}', function ($client_id) {
 Route::get('invoice_resume/{invoice_id}', function ($invoice_id) {
     return PDF2Controller::invoice_resume_pdf($invoice_id);
 })->name('invoice_resume_pdf2');
+
+
+Route::get('/vue', function (){
+    return view('vue');
+});

@@ -19,7 +19,7 @@ class ProjetForm extends Form
     #[Rule('required')]
     public int $client_id = 0;
 
-    public string $description = '';
+    public ?string $description = '';
     public ?string $start_date = null;
     public ?string $end_date = null;
     public bool $favorite = false;

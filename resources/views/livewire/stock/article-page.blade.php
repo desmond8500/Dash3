@@ -31,7 +31,7 @@
                     <div class="p-2">
                         @foreach ($article->tags->sortBy('name') as $tag)
                             <span class="badge bg-primary text-light me-1 mb-1">
-                                {{ $tag->name }}
+                                {{ ucfirst($tag->name) }}
                                 <i class="ti ti-x cursor-pointer" wire:click="detach_tag('{{ $tag->name }}')"></i>
                             </span>
                         @endforeach
@@ -45,22 +45,27 @@
                 {{-- Informations --}}
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">{{ $article->designation }}</div>
+                        <div class="card-header align-items-center">
+                            <div class="card-title">
+                                <div class="d-flex align-items-center">
+                                    <i class="ti ti-file-text text-primary" style="font-size: 25px"></i>
+                                    <b>{{ $article->designation }}</b>
+                                </div>
+                            </div>
                             <div class="card-actions">
                                 <button class="btn btn-primary btn-icon" wire:click="edit('{{ $article->id }}')">
                                     <i class="ti ti-edit"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row px-2">
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex justify-content-between">
+                                    <li class="list-group-item d-flex justify-content-between p-2">
                                         <b>Référence :</b> {{ $article->reference }}
                                     </li>
 
-                                    <li class="list-group-item d-flex justify-content-between {{ $article->quantity <= $article->quantity_min ? 'text-danger' : '' }}">
+                                    <li class="list-group-item d-flex justify-content-between p-2 {{ $article->quantity <= $article->quantity_min ? 'text-danger' : '' }}">
                                         <b class="">Quantité :</b>
 
                                         <div x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false"
@@ -77,10 +82,10 @@
 
                                     </li>
 
-                                    <li class="list-group-item d-flex justify-content-between">
+                                    <li class="list-group-item d-flex justify-content-between p-2">
                                         <b>Prix :</b> {{ number_format($article->price, 0, '.', ' ') }} CFA
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between">
+                                    <li class="list-group-item d-flex justify-content-between p-2">
                                         <b>Poids :</b> {{ $article->weight }} kg
                                     </li>
                                 </ul>
@@ -88,27 +93,27 @@
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     @if ($article->brand)
-                                        <li class="list-group-item d-flex justify-content-between">
+                                        <li class="list-group-item d-flex justify-content-between p-2">
                                             <b>Marque :</b> <a href="{{ route('brand', ['brand_id'=>$article->brand->id]) }}">{{ $article->brand->name }}</a>
                                         </li>
                                     @endif
                                     @if ($article->provider)
-                                        <li class="list-group-item d-flex justify-content-between">
+                                        <li class="list-group-item d-flex justify-content-between p-2">
                                             <b>Fournisseur :</b>
                                             <a href="{{ route('provider', ['provider_id'=>$article->provider->id]) }}">
                                                 {{ $article->provider->name }}
                                             </a>
                                         </li>
                                     @endif
-                                    <li class="list-group-item d-flex justify-content-between">
+                                    <li class="list-group-item d-flex justify-content-between p-2">
                                         <b>Priorité :</b> {{ $article->priority() }}
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between">
+                                    <li class="list-group-item d-flex justify-content-between p-2">
                                         <b>TVA :</b> {{ $article->tva }}
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 p-0">
                                 <div class="card-body border-top">
                                     <h3>Description</h3>
                                     {!! nl2br($article->description) !!}
@@ -139,7 +144,10 @@
                                         </div>
                                     </div>
                                     <input type="file" id="file" class="form-control" accept="image/*" multiple wire:model="images">
-                                    <button class="btn btn-primary" wire:click="store_files">Ajouter images</button>
+                                    <button class="btn btn-primary" wire:click="store_files">
+                                        <i class="ti ti-plus"></i>
+                                        Images
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -233,14 +241,14 @@
     @component('components.modal', ["id"=>'attachTag', 'title' => 'Tags'])
         <div class="row g-1">
             <div class="col">
-                <input type="text" class="form-control" wire:model='tag_name' placeholder="Ajouter  un tag">
+                <input type="text" class="form-control" wire:model='tag_name' wire:keydown.enter='add_tag' placeholder="Ajouter  un tag">
             </div>
             <div class="col-auto">
                 <button class="btn btn-primary" wire:click="add_tag()">
-                    <i class="ti ti-plus"></i> Ajouter un nouveau Tag
+                    <i class="ti ti-plus"></i> Tag
                 </button>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mt-2">
                 @foreach ($tags->sortBy('name') as $tag)
                     <a class="badge bg-primary text-white mb-1 cursor-pointer" wire:click="attach_tag('{{ $tag->name }}')"> {{ ucfirst($tag->name) }}</a>
                 @endforeach

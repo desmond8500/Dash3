@@ -78,8 +78,8 @@
                                         <div class="col">
                                             <div class="fw-bold text-primary">{{ $projet->client->name }}</div>
                                             <div class="fw-bold">{{ $projet->name }}</div>
-                                            <div class="text-muted">{{ $projet->description }}</div>
                                         </div>
+                                        <div class="col-12 text-muted">{{ $projet->description }}</div>
                                     </div>
                                 </a>
                             </div>

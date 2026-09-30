@@ -30,7 +30,7 @@
                                 <h4 class="font-weight-medium"> {{ $resume->name }} </h4>
                             </div>
                             <div class="col-auto">
-                                <div class="text-primary" style="font-size: 20px" >
+                                <div class="text-primary" style="font-size: 25px" >
                                     {{ $resume->all }}
                                 </div>
                             </div>
@@ -45,19 +45,19 @@
 
                     <div class="row row-deck g-2">
                         @foreach ($clients as $client)
-                        <div class="col-md-3">
-                            <a class="card p-2"  href="{{ route('projets',['client_id'=>$client->id]) }}" style="height: 73px; overflow: hidden;">
-                                <div class="row g-2">
-                                    <div class="col-auto">
-                                        <img src="{{ asset($client->avatar) }}" alt="A" class="avatar">
+                            <div class="col-6 col-md-3">
+                                <a class="card p-2"  href="{{ route('projets',['client_id'=>$client->id]) }}" >
+                                    <div class="row g-2">
+                                        <div class="col-auto">
+                                            <img src="{{ asset($client->avatar) }}" alt="A" class="avatar">
+                                        </div>
+                                        <div class="col">
+                                            <div class="fw-bold text-primary">{{ $client->name }}</div>
+                                            <div class="text-muted">{{ $client->description }}</div>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="fw-bold text-primary">{{ $client->name }}</div>
-                                        <div class="text-muted">{{ $client->description }}</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -101,11 +101,17 @@
                                             <img src="{{ asset($invoice->projet->client->avatar) }}" alt="A" class="avatar">
                                         </div>
                                         <div class="col">
-                                            <div class="fw-bold text-primary">{{ $invoice->projet->client->name }}</div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="fw-bold text-primary">{{ $invoice->projet->client->name }}</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="">{{ $invoice->reference }}</i>
+                                                </div>
+                                            </div>
                                             <div class="fw-bold">{{ $invoice->projet->name }}</div>
-                                            <div class="">{{ $invoice->reference }}</div>
-                                            <div class="text-muted">{{ $invoice->description }}</div>
                                         </div>
+                                        <div class="col-md-12 text-muted">{{ $invoice->description }}</div>
                                     </div>
                                 </a>
                             </div>

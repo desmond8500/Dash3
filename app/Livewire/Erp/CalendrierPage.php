@@ -8,7 +8,6 @@ use Livewire\Component;
 
 class CalendrierPage extends Component
 {
-
     public array $tasksByDay = [];
     public Carbon $carbon;
 

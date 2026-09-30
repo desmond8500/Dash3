@@ -27,8 +27,8 @@ use Spatie\Permission\Models\Role;
 class DashController extends Controller
 {
     static function init_app(){
-        DashController::init_admin();
-        DashController::initRoles();
+        // DashController::init_admin();
+        // DashController::initRoles();
         DashController::init_task_status();
         DashController::init_task_priority();
     }

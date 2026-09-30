@@ -155,13 +155,13 @@
                             <div class="row g-1">
                                 @foreach ($article->images() as $image)
                                     <div class="col-4 col-xs-4 col-sm-4 col-md-2">
-                                        <div class="border rounded p-1 text-center bg-white">
+                                        <div class="border border-primary rounded p-1 text-center bg-white">
                                             <a href="{{ asset("storage/$image") }}" data-lightbox="avatarlist">
-                                                <img src="{{ asset("storage/$image") }}" class="avatar avatar-xl " alt="">
+                                                <img src="{{ asset("storage/$image") }}" class="avatar avatar-xl border" alt="">
                                             </a>
-                                            <div class="d-flex-between mt-2">
-                                                <i class="ti ti-trash btn  btn-ghost-danger rounded" wire:click="unset_image('{{ $image }}')" data-bs-toggle="tooltip" title="Supprimer l'image"></i>
-                                                <i class="ti ti-photo btn  btn-ghost-primary rounded" wire:click="set_image('{{ $image }}')" data-bs-toggle="tooltip" title="Définir comme image par défaut"></i>
+                                            <div class="d-flex-evenly mt-1">
+                                                <i class="ti ti-trash btn btn-sm btn-ghost-danger rounded" wire:click="unset_image('{{ $image }}')" data-bs-toggle="tooltip" title="Supprimer l'image"></i>
+                                                <i class="ti ti-photo btn btn-sm btn-ghost-primary rounded" wire:click="set_image('{{ $image }}')" data-bs-toggle="tooltip" title="Définir comme image par défaut"></i>
                                             </div>
                                         </div>
                                     </div>

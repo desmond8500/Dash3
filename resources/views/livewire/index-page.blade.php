@@ -115,9 +115,7 @@
             @endif
 
             <div class="col-md-12">
-                @env('local')
-                    @livewire('erp.planning')
-                @endenv
+                @livewire('erp.planning')
             </div>
 
         </div>

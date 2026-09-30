@@ -9,6 +9,7 @@ use App\Livewire\Dashboard\Dashboard2Page;
 use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
+use App\Livewire\Erp\CalendrierPage;
 use App\Livewire\Erp\ClientsPage;
 use App\Livewire\Erp\CVpage;
 use App\Livewire\Erp\DocumentsPage;
@@ -298,6 +299,7 @@ Route::middleware(['auth'])->group(function () {
 // Plannings
 Route::middleware(['auth'])->group(function () {
     Route::get('/plannings', PlanningsPage::class )->name('plannings');
+    Route::get('/calendrier', CalendrierPage::class )->name('calendrier');
 
 });
 

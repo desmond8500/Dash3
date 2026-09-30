@@ -2,7 +2,7 @@
     <div class="card-header">
         <div class="card-title">Planning de la semaine - {{ ucfirst($carbon->monthName) }} {{ $carbon->year }}</div>
         <div class="card-actions">
-            <a href="{{ route('plannings') }}" class="btn">Planning</a>
+            <a href="{{ route('calendrier') }}" class="btn">Calendrier</a>
         </div>
     </div>
 

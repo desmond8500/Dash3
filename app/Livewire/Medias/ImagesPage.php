@@ -44,7 +44,7 @@ class ImagesPage extends Component
     public function render()
     {
         return view('livewire.medias.images-page',[
-            'images' => Images::paginate(12),
+            'images' => Images::paginate(18),
         ]);
     }
 

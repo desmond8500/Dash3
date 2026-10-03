@@ -63,7 +63,6 @@
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane active show" id="tabs-home-ex5">
-                                <h4>Détails</h4>
                                 <div>
                                     <div class="row mb-2">
                                         <div class="col-12">{{ $selected_image->name }}</div>

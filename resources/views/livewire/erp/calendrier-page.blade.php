@@ -4,6 +4,9 @@
     @endcomponent
 
     <div class="row row-deck g-2 mb-3">
+        @php
+            $today = $carbon->now()->format('Y-m-d');
+        @endphp
         @for ($i = 0; $i < 7; $i++)
             @php
                 $day=$carbon->copy()->startOfWeek()->addDays($i);
@@ -11,12 +14,12 @@
             @endphp
 
             <div class="col-md-4">
-                <div class="card">
+                <div class="card @if($today == $day->format('Y-m-d')) card-code @endif">
                     <div class="card-header p-2">
                         <div class="row g-2 align-items-center">
-                            <div class="col-auto border border-primary text-primary text-center p-1 px-3 rounded">
-                                <div>{{ $day->format('d') }}</div>
-                                <div>{{ $day->format('M') }}</div>
+                            <div class="col-auto border @if($today == $day->format('Y-m-d')) border-warning @else border-primary @endif text-primary text-center p-1 px-3 rounded">
+                                <div class="fs-6 ">{{ $day->format('d') }}</div>
+                                <div class="fs-5">{{ $day->format('M') }}</div>
                             </div>
                             <div class="col fs-2" >
                                 {{ ucfirst($day->dayName) }}

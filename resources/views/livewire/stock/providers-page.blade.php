@@ -23,7 +23,7 @@
                 <div class="card p-2">
                     <div class="row">
                         <a class="col-auto" href="{{ route('provider',['provider_id'=>$provider->id]) }}">
-                            <img src="{{ asset($provider->logo) }}" alt="A" class="avatar avatar-xl">
+                            <img src="{{ $provider->logo ? asset($provider->logo) : asset('img/images/not_found.png') }}" alt="A" class="avatar avatar-xl">
                         </a>
                         <a class="col" href="{{ route('provider',['provider_id'=>$provider->id]) }}">
                             <div class="card-title">{{ $provider->name }}</div>

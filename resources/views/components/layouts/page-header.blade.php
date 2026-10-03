@@ -20,7 +20,8 @@
                 </ol>
             </div>
             <h2 class="page-title">
-                <span class="text-truncate">{{ $title ?? 'Title' }}</span>
+                <span class="text-truncate">
+                    <span wire:loading class="spinner-border"> </span> {{ $title ?? 'Title' }}</span>
             </h2>
         </div>
         <div class="col-xs-12 col-sm-auto ">

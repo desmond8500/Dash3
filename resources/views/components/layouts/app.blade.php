@@ -94,7 +94,7 @@
                                     All rights reserved.
                                 </li>
                                 <li class="list-inline-item" wire:ignore.self>
-                                    <a href="#" wire:click.prevent="$emit('scrollTop')" class="btn btn-primary btn-icon" >
+                                    <a href="#" wire:click.prevent="$emit('scrollTop')" class="btn btn-primary btn-floating btn-icon" >
                                         <i class="ti ti-arrow-up"></i>
                                     </a>
                                 </li>

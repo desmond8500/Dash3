@@ -5,7 +5,6 @@
                 <input type="text" class="form-control " wire:model.live="search" placeholder="Rechercher" wire:keydown.enter='ProjetSearch'>
             </div>
 
-
             <button class="btn btn-primary ms-1" wire:click="$dispatch('open-addProjet')">
                 <i class="ti ti-plus"></i> Projet
             </button>

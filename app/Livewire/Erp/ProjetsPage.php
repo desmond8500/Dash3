@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Projet;
 use App\Models\Task;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -26,6 +27,11 @@ class ProjetsPage extends Component
     public projetForm $projetForm;
     #[Session()]
     public $tab = 'projets';
+
+    #[On('select-projets_tab')]
+    function setTab(string $tab) {
+        $this->tab = $tab;
+    }
 
     public function mount(int $client_id)
     {

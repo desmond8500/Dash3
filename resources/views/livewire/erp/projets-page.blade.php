@@ -1,8 +1,10 @@
 <div>
     @component('components.layouts.page-header', ['title' => 'Projets', 'breadcrumbs' => $breadcrumbs])
-        <div class="d-flex" style="gap:5px">
-            <input type="text" class="form-control mr-1" wire:model.live="search" placeholder="Rechercher"
-                wire:keydown.enter='ProjetSearch'>
+        <div class="btn-list">
+            <div>
+                <input type="text" class="form-control " wire:model.live="search" placeholder="Rechercher" wire:keydown.enter='ProjetSearch'>
+            </div>
+
 
             <button class="btn btn-primary ms-1" wire:click="$dispatch('open-addProjet')">
                 <i class="ti ti-plus"></i> Projet
@@ -17,28 +19,18 @@
         </div>
     @endcomponent
 
-    <div class="row">
+    <div class="row g-2">
         <div class="col-md-3">
             @livewire('cards/client_card_extended', ['client_id' => $client_id])
         </div>
 
         <div class="col-md-9">
             <div class="row row-deck g-2">
-                <div class="col-md-12 bg-white mb-3 p-1 rounded">
-                    <nav class="nav nav-segmented" role="tablist" wire:ignore>
-                        <button class="nav-link active" role="tab" data-bs-toggle="tab" aria-selected="true" aria-current="page" wire:click="$set('tab', 'projets')">
-                            Projets <span class="badge bg-blue text-blue-fg badge-pill">{{ $projets->count() }}</span>
-                        </button>
-                        <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tab', 'taches')">
-                            Taches <span class="badge bg-blue text-blue-fg badge-pill">{{ $taches->count() }}</span>
-                        </button>
-                        <button class="nav-link" role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tab', 'contacts')">
-                            Contacts <span class="badge bg-blue text-blue-fg badge-pill">{{ $contacts->count() }}</span>
-                        </button>
-                        <button class="nav-link" disabled role="tab" data-bs-toggle="tab" aria-selected="false" tabindex="-1" wire:click="$set('tab', 'contacts')">
-                            Timeline
-                        </button>
-                    </nav>
+
+                <div wire:loading>
+                    <div class="d-flex justify-content-between">
+                        <div>Chargement <span class="animated-dots"></div>
+                    </div>
                 </div>
                 @switch($tab)
                     @case("projets")

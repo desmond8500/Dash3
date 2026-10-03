@@ -29,7 +29,7 @@
             <div class="text-muted mt-1">{{ nl2br($projet->description) }}</div>
         </div> --}}
     </div>
-    <div class="d-flex justify-content-between bg-blue-lt mt-2 p-1 rounded">
+    <div class="d-flex justify-content-between {{ $projet->favorite ? 'bg-red-lt' : 'bg-blue-lt' }} mt-2 p-1 rounded">
         <div> <b>Devis:</b> {{ $projet->devis->count() }}</div>
         <div> <b>Taches:</b> {{ $projet->tasks->count() }}</div>
     </div>

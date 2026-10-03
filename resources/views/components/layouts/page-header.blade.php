@@ -3,7 +3,11 @@
         <div class="col">
             <div class="mb-1">
                 <ol class="breadcrumb" aria-label="breadcrumbs">
-                    <li class="breadcrumb-item"><a href="{{ route('index') }}">Accueil</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('index') }}">
+                            <i class="ti ti-home"></i>
+                        </a>
+                    </li>
                     @isset($breadcrumbs)
                         @foreach ($breadcrumbs as $bread)
                             @if ($loop->last)

@@ -8,6 +8,11 @@
             @env('local')
                 <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
             @endenv
+            @if ($projet->favorite )
+                <button class="btn btn-ghost-danger btn-icon" wire:click="toggleFavorite"><i class="ti ti-star-filled"></i></button>
+            @else
+                <button class="btn btn-ghost-secondary btn-icon" wire:click="toggleFavorite"><i class="ti ti-star"></i></button>
+            @endif
         </div>
     @endcomponent
 

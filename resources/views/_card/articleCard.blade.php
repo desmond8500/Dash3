@@ -1,6 +1,6 @@
 <div class="card p-2">
     <div class="row g-2 ">
-        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" >
+        <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>
             <div class="d-flex flex-column">
                 <img src="{{ asset($article->image) }}" alt="A" class="avatar p-1 bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain; height: 100%;" >
             </div>
@@ -9,7 +9,7 @@
             <div class="row ">
                 <div class="col">
                     <div style="min-height: 20px; max-height: 45px; overflow:hidden" class="border-bottom pb-2">
-                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}" >{{ $article->designation }}</a>
+                        <a class="fw-bold" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>{{ $article->designation }}</a>
                     </div>
                 </div>
                 @isset($edit)

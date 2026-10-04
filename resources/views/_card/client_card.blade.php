@@ -2,10 +2,10 @@
 <div class="card p-1 bg-light rounded border-primary red_hover" >
     <div class="bg-{{ $client->type == 'Entreprise' ? "primary" : 'cyan' }} p-2 rounded">
         <div class="row ">
-            <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}">
+            <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}" wire:navigate>
                 <img src="{{ $client->avatar ?? 'img/icons/user4.png' }}" alt="C" class="avatar p-1">
             </a>
-            <a class="col cursor-pointer text-white" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}" style="text-decoration: none">
+            <a class="col cursor-pointer text-white" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}" style="text-decoration: none" wire:navigate>
                 <div class="">{{ $client->type ?? 'Type' }}</div>
                 <div class="fw-bold">{{ $client->name ?? 'Nom' }}</div>
             </a>

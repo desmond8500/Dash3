@@ -4,7 +4,7 @@
             <div class="mb-1">
                 <ol class="breadcrumb" aria-label="breadcrumbs">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('index') }}">
+                        <a href="{{ route('index') }}" wire:navigate>
                             <i class="ti ti-home"></i>
                         </a>
                     </li>
@@ -13,7 +13,7 @@
                             @if ($loop->last)
                                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ $bread['route'] }}">{{ $bread['name'] }}</a></li>
                             @else
-                                <li class="breadcrumb-item"><a href="{{ $bread['route'] }}">{{ $bread['name'] }}</a></li>
+                                <li class="breadcrumb-item"><a href="{{ $bread['route'] }}" wire:navigate>{{ $bread['name'] }}</a></li>
                             @endif
                         @endforeach
                     @endisset

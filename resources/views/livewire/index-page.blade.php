@@ -18,7 +18,7 @@
     @auth
         <div class="row g-2">
             @foreach ($resumes as $resume)
-                <a class="col-6 col-sm-6 col-md-3 col-xl-2 " href="{{ $resume->route }}" >
+                <a class="col-6 col-sm-6 col-md-3 col-xl-2 " href="{{ $resume->route }}" wire:navigate>
                     <div class="card p-2">
                         <div class="row g-1 align-items-center ">
                             <div class="col-auto">
@@ -46,7 +46,7 @@
                     <div class="row row-deck g-2">
                         @foreach ($clients as $client)
                             <div class="col-6 col-md-3">
-                                <a class="card p-2"  href="{{ route('projets',['client_id'=>$client->id]) }}" >
+                                <a class="card p-2"  href="{{ route('projets',['client_id'=>$client->id]) }}" wire:navigate>
                                     <div class="row g-2">
                                         <div class="col-auto">
                                             <img src="{{ asset($client->avatar) }}" alt="A" class="avatar">
@@ -70,7 +70,7 @@
                     <div class="row row-deck g-2">
                         @foreach ($projets as $projet)
                             <div class="col-md-3">
-                                <a class="card p-2"  href="{{ route('projet',['projet_id'=>$projet->id]) }}">
+                                <a class="card p-2"  href="{{ route('projet',['projet_id'=>$projet->id]) }}" wire:navigate>
                                     <div class="row g-2">
                                         <div class="col-auto">
                                             <img src="{{ asset($projet->client->avatar) }}" alt="A" class="avatar">
@@ -95,7 +95,7 @@
                     <div class="row row-deck g-2">
                         @foreach ($invoices as $invoice)
                             <div class="col-md-4">
-                                <a class="card p-2"  href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}">
+                                <a class="card p-2"  href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" wire:navigate>
                                     <div class="row g-2">
                                         <div class="col-auto">
                                             <img src="{{ asset($invoice->projet->client->avatar) }}" alt="A" class="avatar">

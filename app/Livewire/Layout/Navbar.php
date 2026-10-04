@@ -47,8 +47,8 @@ class Navbar extends Component
         ),
         array('name' => "Tableaux", "icon" => "dashboard", "can"=> "erp",
             'submenu' => [
-            array('name' => "Liens rapides", "route" => "dashboard1", "icon" => "dashboard"),
-            array('name' => "Recherche", "route" => "dashboard2", "icon" => "dashboard"),
+            array('name' => "Liens rapides", "route" => "dashboard1", "icon" => "network"),
+            array('name' => "Recherche", "route" => "dashboard2", "icon" => "search"),
             ]
         ),
         array('name' => "Perso", "icon" => "dashboard", "can"=> "erp",

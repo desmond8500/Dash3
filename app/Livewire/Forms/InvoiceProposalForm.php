@@ -13,10 +13,10 @@ class InvoiceProposalForm extends Form
 
     #[Rule('required')]
     public int $invoice_id;
-    public $logo;
-    public string $client_name = '';
-    public string $projet_name = '';
-    public string $description = '';
+    public mixed $logo;
+    public int $client_name = 0;
+    public int $projet_name = 0;
+    public int $description = 0;
     public bool $footer = false;
     public bool $details = false;
     public string $company_name = '';

@@ -171,7 +171,7 @@
                                             @if ($row->comment)
                                                 <i class="ti ti-message text-success cursor-pointer" data-bs-toggle="tooltip" title="{{ $row->comment }}" wire:click="edit_comment({{ $row->id }})"></i>
                                             @else
-                                                <i class="ti ti-message" wire:click="edit_comment({{ $row->id }})"></i>
+                                                <i class="ti ti-message cursor-pointer" wire:click="edit_comment({{ $row->id }})"></i>
                                             @endif
                                             @isset ($row->article->image)
                                                 <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">

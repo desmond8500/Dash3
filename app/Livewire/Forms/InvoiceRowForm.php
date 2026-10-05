@@ -25,7 +25,7 @@ class InvoiceRowForm extends Form
     public float $prix = 0;
     public int $priorite_id=1;
     #[Validate('integer')]
-    public int $bought = 0;
+    public int|null $bought = 0;
     public string|null $comment = null;
 
     function set(int $row_id)

@@ -490,7 +490,7 @@
         <script> window.addEventListener('close-exportPDF', event => { window.$('#exportPDF').modal('hide'); }) </script>
     @endcomponent
 
-    @component('components.modal', ["id"=>'editComment', 'title' => 'Titre', 'method'=>'update_comment'])
+    @component('components.modal', ["id"=>'editComment', 'title' => 'Commentaire', 'method'=>'update_comment'])
         <form class="row" wire:submit="update_comment">
             <div class="col-12">
                 <label class="form-label">Commentaire</label>

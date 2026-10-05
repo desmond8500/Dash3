@@ -18,7 +18,7 @@ class InvoiceRowForm extends Form
     #[Validate('numeric')]
     public float $coef = 1;
     #[Validate('required')]
-    public string $reference;
+    public string|null $reference;
     #[Validate('integer')]
     public int $quantite= 1;
     #[Validate('numeric')]

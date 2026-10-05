@@ -168,6 +168,11 @@
                                 <td scope="row">
                                     <div class="row g-0">
                                         <div class="col-auto">
+                                            @if ($row->comment)
+                                                <i class="ti ti-message text-success cursor-pointer" data-bs-toggle="tooltip" title="{{ $row->comment }}" wire:click="edit_comment({{ $row->id }})"></i>
+                                            @else
+                                                <i class="ti ti-message"></i>
+                                            @endif
                                             @isset ($row->article->image)
                                                 <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
                                             @else
@@ -484,4 +489,18 @@
         <script> window.addEventListener('open-exportPDF', event => { window.$('#exportPDF').modal('show'); }) </script>
         <script> window.addEventListener('close-exportPDF', event => { window.$('#exportPDF').modal('hide'); }) </script>
     @endcomponent
+
+    @component('components.modal', ["id"=>'editComment', 'title' => 'Titre', 'method'=>'update_comment'])
+        <form class="row" wire:submit="update_comment">
+            <div class="col-12">
+                <label class="form-label">Commentaire</label>
+                <textarea class="form-control" wire:model="row_form.comment" placeholder="Commentaire sur l'article"
+                    data-bs-toggle="autosize"></textarea>
+                @error('row_form.comment') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+        </form>
+        <script> window.addEventListener('open-editComment', event => { window.$('#editComment').modal('show'); }) </script>
+        <script> window.addEventListener('close-editComment', event => { window.$('#editComment').modal('hide'); }) </script>
+    @endcomponent
+
 </div>

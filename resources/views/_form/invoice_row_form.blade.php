@@ -63,7 +63,7 @@
     </div>
     <div class="col-md-5 mb-3">
         <div class="row mb-3">
-            <div class="col-md-12 mb-3">
+            <div class="col-6 col-md-12 mb-3">
                 <label class="form-label">Quantité</label>
                 <div class="input-group">
                     <a class="btn btn-primary btn-icon" wire:click="$set('row_form.quantite', '{{ $row_form->quantite-1 }}')">
@@ -76,7 +76,7 @@
                 </div>
                 @error('row_form.quantite') <span class='text-danger'>{{ $message }}</span> @enderror
             </div>
-            <div class="col-md-12 mb-3">
+            <div class="col-6 col-md-12 mb-3">
                 <label class="form-label">Coef</label>
                 <div class="input-group">
                     <a class="btn btn-primary btn-icon" wire:click="$set('row_form.coef', '{{ $row_form->coef - 0.1 }}')">
@@ -118,11 +118,11 @@
             <option value="7">Forfait</option>
         </select>
         @error('row_form.priorite_id') <span class='text-danger'>{{ $message }}</span> @enderror
-
-
-
-
     </div>
-
+    <div class="col-12">
+        <label class="form-label">Commentaire</label>
+        <textarea class="form-control" wire:model="row_form.comment" placeholder="Commentaire sur l'article" data-bs-toggle="autosize"></textarea>
+        @error('row_form.comment') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
 </div>
 

@@ -11,23 +11,24 @@ class InvoiceRowForm extends Form
     public InvoiceRow $row;
 
     #[Validate('required')]
-    public $invoice_section_id;
-    public $article_id;
+    public int $invoice_section_id;
+    public ?int $article_id = null;
     #[Validate('required')]
-    public $designation;
+    public string $designation;
     #[Validate('numeric')]
-    public $coef = 1;
+    public float $coef = 1;
     #[Validate('required')]
-    public $reference;
+    public string $reference;
     #[Validate('integer')]
-    public $quantite= 1;
+    public int $quantite= 1;
     #[Validate('numeric')]
-    public $prix = 0;
-    public $priorite_id=1;
+    public float $prix = 0;
+    public int $priorite_id=1;
     #[Validate('integer')]
-    public $bought=0;
+    public int $bought = 0;
+    public string|null $comment = null;
 
-    function set($row_id)
+    function set(int $row_id)
     {
         $this->row = InvoiceRow::find($row_id);
 
@@ -40,6 +41,7 @@ class InvoiceRowForm extends Form
         $this->prix = $this->row->prix;
         $this->priorite_id = $this->row->priorite_id;
         $this->bought = $this->row->bought;
+        $this->comment = $this->row->comment;
     }
 
     function store()
@@ -50,7 +52,7 @@ class InvoiceRowForm extends Form
         $this->validate();
         $row = InvoiceRow::create($this->all());
         $row->designation = ucfirst($row->designation);
-        $this->reset('designation', 'reference', 'quantite', 'prix', 'coef', 'priorite_id', 'article_id', 'bought');
+        $this->reset('designation', 'reference', 'quantite', 'prix', 'coef', 'priorite_id', 'article_id', 'bought', 'comment');
         $row->save();
     }
 

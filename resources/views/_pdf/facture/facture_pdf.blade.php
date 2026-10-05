@@ -208,15 +208,13 @@
                                 <div class="fw-bold">{{ $section->section }}</div>
                                 <div class="text-muted  " style="font-size: 12px;">{!! $section->proposition !!}</div>
                             </div>
-
                         </td>
-
                     </tr>
                     <thead>
                         <tr style="background: #{{ $color1 }}; color: white;">
                             <th scope="col" style="width: 150px;">Photo</th>
                             <th scope="col" class="text-center">Description</th>
-                            <th scope="col" style="width: 10px" class="text-center">Quantité</th>
+                            <th scope="col" style="width: 10px" class="text-center">Qte</th>
                         </tr>
                     </thead>
 
@@ -225,37 +223,44 @@
                         @foreach ($section->rows->sortBy('priorite_id') as $row)
                             @if ($row->priorite_id < 5   )
                                 <tr >
-                                    <td>
+                                    <td style="text-align: center;">
                                         @isset ($row->article->image)
-                                        <img src="{{ ($row->article->image) }}" style="height: 150px" alt="I" class="avatar avatar-sm me-2">
+                                        <img src="{{ ($row->article->image) }}" style=" max-height: 100px; margin: auto;" alt="I" >
                                         @else
-                                        <img src="{{ ("img/icons/packaging.png") }}" style="height: 150px" alt="I" class="avatar avatar-sm me-2 bg-white border border-white">
+                                        <img src="{{ ("img/icons/packaging.png") }}" style=" max-height: 100px; margin: auto;" alt="I">
                                         @endisset
                                     </td>
                                     <td style="vertical-align: top;">
-                                        <div class="mb-1">
-                                            @if ($row->article_id)
-                                            <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{
-                                                $row->designation }}</a>
+                                        <div class="">
+                                            {{-- @if ($row->article_id)
+                                                <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">
+                                                {{ $row->designation }}
+                                                </a>
                                             @else
                                             {{ $row->designation }}
-                                            @endif
+                                            @endif --}}
+
+                                            <table>
+                                                <tr>
+                                                    <td style="border: 1px solid white;">{{ $row->designation }}</td>
+                                                    <td style="border: 1px solid white; text-align: right; font-size: 12px;">
+                                                        @if ($row->article && $row->article->links)
+                                                            @foreach ($row->article->links as $link)
+                                                                @if ($link->name == "Fiche Technique")
+                                                                    <a href="{{ $link->link }}" class="text-purple" target="_blank">Fiche</a>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            </table>
+
 
                                         </div>
-                                        <div class="text-muted" style="font-size: 12px;">{!! nl2br($row->reference) !!}</div>
-                                        <hr>
+                                        <div class="text-muted" style="font-size: 12px; border-bottom: 1px solid gray; padding-bottom: 5px;">{!! nl2br($row->reference) !!}</div>
 
-                                        <div style="font-size: 14px;">{!! nl2br($row->article->description ?? ' ') !!}</div>
+                                        <div style="font-size: 12px;">{!! nl2br($row->article->description ?? ' ') !!}</div>
 
-                                        <div class="mt-1">
-                                            @if ($row->article && $row->article->links)
-                                                @foreach ($row->article->links as $link)
-                                                    @if ($link->name == "Fiche Technique")
-                                                        <a href="{{ $link->link }}" class="text-purple" target="_blank">{{ $link->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        </div>
                                     </td>
                                     <td class="text-center">{{ $row->quantite }}</td>
                                 </tr>

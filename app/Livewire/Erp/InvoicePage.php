@@ -393,8 +393,6 @@ class InvoicePage extends Component
         $this->dispatch('invoice-section-reload');
     }
 
-
-
     // Acompte
 
     function add_to_acompte($row_id){
@@ -453,5 +451,18 @@ class InvoicePage extends Component
                 'invoice_row_id' => $row_id,
             ]);
         // }
+    }
+
+    // Comment
+
+    function edit_comment(int $row_id){
+        $row = InvoiceRow::find($row_id);
+        $this->row_form->set($row_id);
+        $this->dispatch('open-editComment');
+    }
+
+    function update_comment(){
+        $this->row_form->update();
+        $this->dispatch('close-editComment');
     }
 }

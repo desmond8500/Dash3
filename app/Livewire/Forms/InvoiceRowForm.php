@@ -14,7 +14,7 @@ class InvoiceRowForm extends Form
     public int $invoice_section_id;
     public ?int $article_id = null;
     #[Validate('required')]
-    public string $designation;
+    public string|null $designation;
     #[Validate('numeric')]
     public float $coef = 1;
     #[Validate('required')]

@@ -137,17 +137,14 @@
                         <div class="card-header">
                             <div class="card-title">Images</div>
                             <div class="card-actions">
-                                <div class="input-group mt-2">
-                                    <div wire:loading wire:target='images'>
-                                        <div class="d-flex justify-content-between">
-                                            <div>Chargement <span class="animated-dots"></div>
-                                        </div>
-                                    </div>
+                                <div class="input-group">
                                     <input type="file" id="file" class="form-control" accept="image/*" multiple wire:model="images">
-                                    <button class="btn btn-primary" wire:click="store_files">
-                                        <i class="ti ti-plus"></i>
-                                        Images
-                                    </button>
+                                    <button class="btn btn-primary" wire:click="store_files" wire:loading.remove wire:target='images'>
+                                        <i class="ti ti-photo-plus"></i> 
+                                    </button> 
+                                    <button class="btn btn-primary" wire:click="store_files" wire:loading wire:target='images'>
+                                        <span  class="spinner-border"></span>
+                                    </button> 
                                 </div>
                             </div>
                         </div>

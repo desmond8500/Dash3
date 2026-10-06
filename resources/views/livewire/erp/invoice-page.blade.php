@@ -33,15 +33,16 @@
                     </a>
                 @endif
             </div>
-            <button class="btn btn-icon" wire:click='$refresh'><i class="ti ti-reload"></i> </button>
+            <button class="btn btn-icon {{ $layout == 1 ? 'active' : '' }}" wire:click='$set("layout", 1)'><i class="ti ti-arrow-autofit-width"></i> </button>
+            <button class="btn btn-icon {{ $layout == 0 ? 'active' : '' }}" wire:click='$set("layout", 0)'><i class="ti ti-layout-sidebar-right"></i> </button>
         </div>
     @endcomponent
 
     <div class="row g-2">
-        <div class="col-md-8">
+        <div class="col-md-{{ $layout == 0 ? '8' : '12'}}">
             @include('_erp.invoice.invoice_table')
         </div>
-        <div class="col-md-4">
+        <div class="col-md-{{ $layout == 0 ? '4' : '12'}}">
 
             @if ($devis->statut != "Proforma" && $devis->statut != "Nouveau" && $devis->statut != "Annulé" && $devis->statut != "En Pause")
                 <div class="card mb-2">

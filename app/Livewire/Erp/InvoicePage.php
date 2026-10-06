@@ -465,4 +465,8 @@ class InvoicePage extends Component
         $this->row_form->update();
         $this->dispatch('close-editComment');
     }
+
+    // Layout
+
+    public $layout = 0;
 }

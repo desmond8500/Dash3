@@ -138,6 +138,14 @@
         </script>
     @endstack
 
+    <script>
+        document.addEventListener('livewire:navigated', () => {
+        // Réinitialise tous les dropdowns Bootstrap sur la nouvelle page
+        const dropdownElementList = document.querySelectorAll('[data-bs-toggle="dropdown"]');
+        const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl));
+        });
+    </script>
+
     @livewireScripts
     @stack('scripts')
 </body>

@@ -13,12 +13,3 @@ import 'select2/dist/css/select2.css'; // Import des styles CSS de Select2
 // SweetAlert2
 import Swal from 'sweetalert2';
 window.Swal = Swal;
-
-
-import './bootstrap';
-
-// import { createApp } from 'vue';
-
-// import App from './App.vue';
-
-// createApp(App).mount('#vue-app');

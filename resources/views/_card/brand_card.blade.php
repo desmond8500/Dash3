@@ -1,7 +1,9 @@
 <div class="card p-2">
     <div class="row">
         <div class="col-md-12">
-            <img src="{{ $brand->logo ? asset($brand->logo) : asset('img/images/not_found.png') }}" alt="{{ $brand->logo }}" class="img-fluid" style="max-height: 100px; margin: auto; display: block;">
+            <a class="card-title text-center" href="{{ route('brand',['brand_id'=>$brand->id]) }}">
+                <img src="{{ $brand->logo ? asset($brand->logo) : asset('img/images/not_found.png') }}" alt="{{ $brand->logo }}" class="img-fluid" style="max-height: 100px; margin: auto; display: block;">
+            </a>
         </div>
         <div class="col-md-12">
             <a class="card-title text-center" href="{{ route('brand',['brand_id'=>$brand->id]) }}">{{ $brand->name }}</a>

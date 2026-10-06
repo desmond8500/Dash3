@@ -23,21 +23,21 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <a href="{{ route('profile') }}" class="dropdown-item"><i class="ti ti-user"></i>
+                        <a href="{{ route('profile') }}" class="dropdown-item" wire:navigate><i class="ti ti-user"></i>
                             Profile</a>
                         <div class="dropdown-divider"></div>
                         @role('admin')
-                            <a href="{{ route('settings') }}" class="dropdown-item">
+                            <a href="{{ route('settings') }}" class="dropdown-item" wire:navigate>
                                 <i class="ti ti-settings"></i>
                                 Paramètres
                             </a>
-                            <a href="{{ route('generate') }}" class="dropdown-item">
+                            <a href="{{ route('generate') }}" class="dropdown-item" wire:navigate>
                                 <i class="ti ti-settings"></i>
                                 Génerer
                             </a>
 
                         @endrole
-                        <a wire:click="logout()" class="dropdown-item text-danger"> <i class="ti ti-logout"></i>
+                        <a wire:click="logout()" class="dropdown-item text-danger" wire:navigate> <i class="ti ti-logout"></i>
                             Déconnexion</a>
                     </div>
                 @else
@@ -69,7 +69,7 @@
                                 @isset ($menu['submenu'])
                                     <li class="nav-item dropdown" wire:key="{{ $menu['name'] }}">
                                         <a class="nav-link dropdown-toggle" href="#navbar-third" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-                                            role="button" aria-expanded="false">
+                                            role="button" aria-expanded="false" wire:navigate>
                                             <span class="nav-link-title text-dark">
                                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                     <i class="ti ti-{{ $menu['icon'] }}"></i>
@@ -79,7 +79,7 @@
                                         </a>
                                         <div class="dropdown-menu">
                                             @foreach ($menu['submenu'] as $submenu)
-                                            <a class="dropdown-item" href="{{ route($submenu['route']) }}" >
+                                            <a class="dropdown-item" href="{{ route($submenu['route']) }}" wire:navigate>
                                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                     <i class="ti ti-{{ $submenu['icon'] }}"></i>
                                                 </span>
@@ -90,7 +90,7 @@
                                     </li>
                                 @else
                                     <li class="nav-item" wire:key="{{ $menu['name'] }}">
-                                        <a class="nav-link" href="{{ route($menu['route']) }}" >
+                                        <a class="nav-link" href="{{ route($menu['route']) }}" wire:navigate>
                                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                 <i class="ti ti-{{ $menu['icon'] }}"></i>
                                             </span>

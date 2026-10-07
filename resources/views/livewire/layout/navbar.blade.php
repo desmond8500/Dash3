@@ -69,7 +69,7 @@
                                 @isset ($menu['submenu'])
                                     <li class="nav-item dropdown" wire:key="{{ $menu['name'] }}">
                                         <a class="nav-link dropdown-toggle" href="#navbar-third" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-                                            role="button" aria-expanded="false" wire:navigate>
+                                            role="button" aria-expanded="false">
                                             <span class="nav-link-title text-dark">
                                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                     <i class="ti ti-{{ $menu['icon'] }}"></i>

@@ -11,7 +11,9 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@popperjs/core": "^2.11.8",
         "autosize": "^6.0.1",
+        "bootstrap": "^5.3.8",
         "easymde": "^2.19.0",
         "jquery": "^3.7.1",
         "lightbox2": "^2.11.5",

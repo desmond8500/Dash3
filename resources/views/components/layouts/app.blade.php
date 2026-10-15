@@ -139,17 +139,33 @@
     @endstack
 
     <script>
-        document.addEventListener('livewire:navigated', () => {
-        // Réinitialise tous les dropdowns Bootstrap sur la nouvelle page
-        const dropdownElementList = document.querySelectorAll('[data-bs-toggle="dropdown"]');
-        const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl));
+        function initBootstrapComponents() {
+            // Dropdowns
+            document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach((element) => {
+            window.bootstrap.Dropdown.getOrCreateInstance(element);
+            });
 
-        const modalTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="modal"]'));
-        modalTriggerList.map(function (modalTriggerEl) {
-        return new bootstrap.Modal(modalTriggerEl);
-        });
+            // Modals : initialiser les éléments déclencheurs
+            document.querySelectorAll('[data-bs-toggle="modal"]').forEach((element) => {
+            window.bootstrap.Modal.getOrCreateInstance(element);
+            });
 
-        });
+            // Tooltips
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((element) => {
+            window.bootstrap.Tooltip.getOrCreateInstance(element);
+            });
+
+            // Popovers
+            document.querySelectorAll('[data-bs-toggle="popover"]').forEach((element) => {
+            window.bootstrap.Popover.getOrCreateInstance(element);
+            });
+        }
+
+        // Chargement initial
+        document.addEventListener('DOMContentLoaded', initBootstrapComponents);
+
+        // Navigation Livewire
+        document.addEventListener('livewire:navigated', initBootstrapComponents);
     </script>
 
     @livewireScripts

@@ -31,7 +31,8 @@
 
     @assets
         <!-- CSS files -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/css/tabler.min.css" />
+        {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/css/tabler.min.css" /> --}}
+        {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.6.1/dist/css/tabler.min.css" integrity="sha384-tT2UAGE9hxG/p5d0iGIvZ/s8El3nWWG3tfG02i8iOY5Pbf8cZZRVmcrrVs+JG5Vw" crossorigin="anonymous" /> --}}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
@@ -123,7 +124,10 @@
 
         <script  src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
         <!-- Tabler Core -->
-        <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/js/tabler.min.js"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/js/tabler.min.js"></script> --}}
+        {{-- <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.6.1/dist/js/tabler.min.js"
+            integrity="sha384-1yCHfhyU8+V33urXkAlLLpNYd9jdzXkxdafCg0+auIIEtYFnOuM/DwJQgk5sXY98" crossorigin="anonymous">
+        </script> --}}
         {{-- Select2 --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
         {{-- Autosize --}}
@@ -138,35 +142,7 @@
         </script>
     @endstack
 
-    <script>
-        function initBootstrapComponents() {
-            // Dropdowns
-            document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach((element) => {
-            window.bootstrap.Dropdown.getOrCreateInstance(element);
-            });
 
-            // Modals : initialiser les éléments déclencheurs
-            document.querySelectorAll('[data-bs-toggle="modal"]').forEach((element) => {
-            window.bootstrap.Modal.getOrCreateInstance(element);
-            });
-
-            // Tooltips
-            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((element) => {
-            window.bootstrap.Tooltip.getOrCreateInstance(element);
-            });
-
-            // Popovers
-            document.querySelectorAll('[data-bs-toggle="popover"]').forEach((element) => {
-            window.bootstrap.Popover.getOrCreateInstance(element);
-            });
-        }
-
-        // Chargement initial
-        document.addEventListener('DOMContentLoaded', initBootstrapComponents);
-
-        // Navigation Livewire
-        document.addEventListener('livewire:navigated', initBootstrapComponents);
-    </script>
 
     @livewireScripts
     @stack('scripts')

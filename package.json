@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
+        "@tabler/core": "^1.7.0",
         "autosize": "^6.0.1",
         "bootstrap": "^5.3.8",
         "easymde": "^2.19.0",

@@ -179,7 +179,7 @@
         @include('_form.login_form')
 
         <script>
-            window.addEventListener('open-login', event => { window.$('#login').modal('show'); })
+            window.addEventListener('open-login', event => { $('#login').modal('show'); })
         </script>
         <script>
             window.addEventListener('close-login', event => { window.$('#login').modal('hide'); })

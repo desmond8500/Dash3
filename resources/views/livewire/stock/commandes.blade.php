@@ -54,7 +54,7 @@
                     <tr>
                         <td width="10px">{{ $key +1 }}</td>
                         <td width="10px">
-                            <img src="{{ asset($command->article->image) }}" alt="" class="avatar p-1 me-1"
+                            <img src="{{ asset($command->article->image) }}" alt="" class="avatar p-1 me-1 rounded-2"
                                 style="object-fit: cover">
                         </td>
                         <td class="">

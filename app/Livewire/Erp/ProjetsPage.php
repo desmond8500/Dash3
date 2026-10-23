@@ -65,7 +65,7 @@ class ProjetsPage extends Component
         $this->selected = Projet::find($projet_id);
 
         $this->projetForm->set($projet_id);
-        $this->dispatch('open-editProjet');
+        $this->dispatch('open-modal', id:'open-editProjet');
     }
 
     function update() {

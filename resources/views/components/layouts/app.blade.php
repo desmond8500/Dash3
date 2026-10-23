@@ -142,35 +142,7 @@
         </script>
     @endstack
 
-    <script>
-        function initBootstrapComponents() {
-            // Dropdowns
-            document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach((element) => {
-            window.bootstrap.Dropdown.getOrCreateInstance(element);
-            });
-
-            // Modals : initialiser les éléments déclencheurs
-            document.querySelectorAll('[data-bs-toggle="modal"]').forEach((element) => {
-            window.bootstrap.Modal.getOrCreateInstance(element);
-            });
-
-            // Tooltips
-            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((element) => {
-            window.bootstrap.Tooltip.getOrCreateInstance(element);
-            });
-
-            // Popovers
-            document.querySelectorAll('[data-bs-toggle="popover"]').forEach((element) => {
-            window.bootstrap.Popover.getOrCreateInstance(element);
-            });
-        }
-
-        // Chargement initial
-        document.addEventListener('DOMContentLoaded', initBootstrapComponents);
-
-        // Navigation Livewire
-        document.addEventListener('livewire:navigated', initBootstrapComponents);
-    </script>
+   
 
     @livewireScripts
     @stack('scripts')

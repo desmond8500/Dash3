@@ -16,7 +16,7 @@
             <div class="nav-item dropdown">
                 @auth
                     <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown" aria-label="Open user menu">
-                        <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm border border-secondary">
+                        <img src="{{ asset($user->avatar) }}" alt="A" class="avatar avatar-sm rounded-2 border border-secondary">
                         <div class="d-none d-xl-block ps-2">
                             <div>{{ $user->firstname }} {{ $user->lastname }}</div>
                             <div class="mt-1 small text-secondary">{{ $user->function ?? '_' }}</div>

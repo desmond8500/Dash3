@@ -12,10 +12,10 @@
             <div class="card">
                 <div class="card-body-sm">
                     <a href="{{ asset($article->image) }}" data-lightbox="avatar"  class="d-block d-sm-none">
-                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"  alt="">
+                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"  alt="" style="object-fit: contain; max-height: 325px;">
                     </a>
                     <a href="{{ asset($article->image) }}" data-lightbox="avatar"  class="d-none d-sm-block">
-                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"  alt="">
+                        <img src="{{ asset($article->image) }}" class="ratio ratio-1x1 rounded p-2"  alt="" style="object-fit: contain; max-height: 325px;">
                     </a>
                 </div>
             </div>
@@ -154,7 +154,7 @@
                                     <div class="col-4 col-xs-4 col-sm-4 col-md-2">
                                         <div class="border border-primary rounded p-1 text-center bg-white">
                                             <a href="{{ asset("storage/$image") }}" data-lightbox="avatarlist">
-                                                <img src="{{ asset("storage/$image") }}" class="avatar avatar-xl border" alt="">
+                                                <img src="{{ asset("storage/$image") }}" class="avatar avatar-xl rounded-2 border p-1" alt="" style="object-fit: contain;">
                                             </a>
                                             <div class="d-flex-evenly mt-1">
                                                 <i class="ti ti-trash btn btn-sm btn-ghost-danger rounded" wire:click="unset_image('{{ $image }}')" data-bs-toggle="tooltip" title="Supprimer l'image"></i>

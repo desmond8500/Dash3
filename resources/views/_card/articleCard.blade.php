@@ -2,7 +2,7 @@
     <div class="row g-2 ">
         <a class="col-auto" href="{{ route('article',['article_id'=>$article->id]) }}" wire:navigate>
             <div class="d-flex flex-column">
-                <img src="{{ asset($article->image) }}" alt="A" class="avatar p-1 bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain; height: 100%;" >
+                <img src="{{ asset($article->image) }}" alt="A" class="avatar rounded-2 p-1 bg-white {{ $img_class ?? 'avatar-xl' }}" style="object-fit: contain; max-height: 100px;" >
             </div>
         </a>
         <div class="col">

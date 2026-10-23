@@ -22,7 +22,7 @@
                     <div class="card p-2">
                         <div class="row g-1 align-items-center ">
                             <div class="col-auto">
-                                <span class="bg-blue text-white avatar">
+                                <span class="bg-blue text-white avatar rounded-2">
                                     <i class="ti ti-{{ $resume->icon }}"></i>
                                 </span>
                             </div>
@@ -49,7 +49,7 @@
                                 <a class="card p-2"  href="{{ route('projets',['client_id'=>$client->id]) }}" wire:navigate>
                                     <div class="row g-2">
                                         <div class="col-auto">
-                                            <img src="{{ asset($client->avatar) }}" alt="A" class="avatar">
+                                            <img src="{{ asset($client->avatar) }}" alt="A" class="avatar rounded-2">
                                         </div>
                                         <div class="col">
                                             <div class="fw-bold text-primary">{{ $client->name }}</div>
@@ -73,7 +73,7 @@
                                 <a class="card p-2"  href="{{ route('projet',['projet_id'=>$projet->id]) }}" wire:navigate>
                                     <div class="row g-2">
                                         <div class="col-auto">
-                                            <img src="{{ asset($projet->client->avatar) }}" alt="A" class="avatar">
+                                            <img src="{{ asset($projet->client->avatar) }}" alt="A" class="avatar rounded-2">
                                         </div>
                                         <div class="col">
                                             <div class="fw-bold text-primary">{{ $projet->client->name }}</div>
@@ -98,7 +98,7 @@
                                 <a class="card p-2"  href="{{ route('invoice',['invoice_id'=>$invoice->id]) }}" wire:navigate>
                                     <div class="row g-2">
                                         <div class="col-auto">
-                                            <img src="{{ asset($invoice->projet->client->avatar) }}" alt="A" class="avatar">
+                                            <img src="{{ asset($invoice->projet->client->avatar) }}" alt="A" class="avatar rounded-2">
                                         </div>
                                         <div class="col">
                                             <div class="row">

@@ -42,7 +42,13 @@
                                     <div class="card-status-start bg-blue"></div>
                                     <div class="card-body p-2">
                                         <div style="font-size: 10px" >
-                                            <a href="{{ route('projet', ['projet_id'=> $task->projet->id]) }}">{{ $task->projet->name }}</a>
+                                            @isset($task->projet->id)
+                                                <a href="{{ route('projet', ['projet_id'=> $task->projet->id]) }}">
+                                            @endisset
+                                                {{ $task->projet->name }}
+                                            @isset($task->projet->id)
+                                                </a>
+                                            @endisset
                                         </div>
                                         {{ $task->name }}
                                     </div>

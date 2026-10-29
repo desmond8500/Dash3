@@ -13,7 +13,7 @@ class SystemeForm extends Form
     #[Validate('required')]
     public string $name;
     public string $description;
-    public string $icon;
+    public mixed $icon;
 
     function store()
     {

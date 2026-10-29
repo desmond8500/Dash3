@@ -87,38 +87,66 @@ new class extends Component {
                 <p>{{ $client->description }}</p>
             </div>
             <div class="col-md-12">
-                <div class="list-group list-group-horizontal">
-                    <div class="list-group-item w-100 text-center cursor-pointer @if($tab === 'projets') bg-blue-lt  @endif" wire:click="selectTab('projets')">
-                        <div class="fs-6">
-                            {{ $resume[0] }}
+                <div class="row g-2">
+                    {{-- Projets --}}
+                    <div class="col-4">
+                        <div class="card card-sm h-100 text-center cursor-pointer transition-base
+                                @if($tab === 'projets') bg-blue-lt border-primary @endif" wire:click="selectTab('projets')">
+                            <div class="card-body p-2">
+                                <div class="fs-2 fw-bold lh-1">
+                                    {{ $resume[0] }}
+                                </div>
+
+                                <div class="my-1">
+                                    <i class="ti ti-folder fs-2"></i>
+                                </div>
+
+                                <div class="small fw-medium">Projets</div>
+                            </div>
                         </div>
-                        <div>
-                            <i class="ti ti-folder"></i>
-                        </div>
-                        <div>Projets</div>
                     </div>
-                    <div class="list-group-item w-100 text-center cursor-pointer @if($tab === 'taches') bg-blue-lt  @endif" wire:click="selectTab('taches')">
-                        <div class="fs-6">
-                            {{ $resume[1] }}
+
+                    {{-- Tâches --}}
+                    <div class="col-4">
+                        <div class="card card-sm h-100 text-center cursor-pointer transition-base
+                                @if($tab === 'taches') bg-blue-lt border-primary @endif" wire:click="selectTab('taches')">
+                            <div class="card-body p-2">
+                                <div class="fs-2 fw-bold lh-1">
+                                    {{ $resume[1] }}
+                                </div>
+
+                                <div class="my-1">
+                                    <i class="ti ti-circle-check fs-2"></i>
+                                </div>
+
+                                <div class="small fw-medium">Tâches</div>
+                            </div>
                         </div>
-                        <div>
-                            <i class="ti ti-circle-check"></i>
-                        </div>
-                        <div>Taches</div>
                     </div>
-                    <div class="list-group-item w-100 text-center cursor-pointer @if($tab === 'contacts') bg-blue-lt  @endif" wire:click="selectTab('contacts')">
-                        <div class="fs-6">
-                            {{ $resume[2] }}
+
+                    {{-- Contacts --}}
+                    <div class="col-4">
+                        <div class="card card-sm h-100 text-center cursor-pointer transition-base
+                                @if($tab === 'contacts') bg-blue-lt border-primary @endif" wire:click="selectTab('contacts')">
+                            <div class="card-body p-2">
+                                <div class="fs-2 fw-bold lh-1">
+                                    {{ $resume[2] }}
+                                </div>
+
+                                <div class="my-1">
+                                    <i class="ti ti-users fs-2"></i>
+                                </div>
+
+                                <div class="small fw-medium">Contacts</div>
+                            </div>
                         </div>
-                        <div>
-                            <i class="ti ti-users"></i>
-                        </div>
-                        <div>Contacts</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 
     @component('components.modal', ["id"=>'editClient', 'title'=>'Modifier un client', 'method'=>'update'])
     <form class="row" wire:submit="update">

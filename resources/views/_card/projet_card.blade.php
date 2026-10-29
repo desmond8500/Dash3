@@ -1,7 +1,7 @@
 <div class="card p-2 border {{ $projet->favorite ? 'border-danger' : 'border-primary' }}  mb-2">
     <div class="row g-1">
         <a class="col-auto" href="{{ route('projet',['projet_id'=> $projet->id]) }}" wire:navigate>
-            <img class="avatar rounded-2 " src="{{ asset($projet->logo ?? $projet->client->avatar ?? 'img/icons/005-notebook.png') }}" alt="A" style="object-fit: contain;">
+            <img class="avatar rounded-2 p-1" src="{{ asset($projet->logo ?? $projet->client->avatar ?? 'img/icons/005-notebook.png') }}" alt="A" style="object-fit: contain;">
         </a>
         <a class="col" href="{{ route('projet',['projet_id'=> $projet->id]) }}" style="text-decoration: none" wire:navigate>
             <div class="fw-bold">{{ $projet->name }}</div>

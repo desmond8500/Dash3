@@ -3,7 +3,7 @@
     <div class="bg-{{ $client->type == 'Entreprise' ? "primary" : 'cyan' }} p-2 rounded">
         <div class="row ">
             <a class="col-auto cursor-pointer" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}" wire:navigate>
-                <img src="{{ $client->avatar ?? 'img/icons/user4.png' }}" alt="C" class="avatar p-1">
+                <img src="{{ $client->avatar ?? 'img/icons/user4.png' }}" alt="C" class="avatar rounded-2 p-1 bg-white">
             </a>
             <a class="col cursor-pointer text-white" href="{{ route('projets', ['client_id'=>$client->id ?? 1]) }}" style="text-decoration: none" wire:navigate>
                 <div class="">{{ $client->type ?? 'Type' }}</div>

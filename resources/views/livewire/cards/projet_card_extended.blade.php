@@ -63,7 +63,7 @@ new class extends Component {
         <div class="border rounded p-2">
             <div class="row align-items-center">
                 <div class="col-auto">
-                    <img class="avatar avatar-md" src="{{ asset($projet->logo ?? $projet->client->avatar)}}" alt="A">
+                    <img class="avatar avatar-md rounded-2 border p-1" src="{{ asset($projet->logo ?? $projet->client->avatar)}}" alt="A">
                 </div>
                 <div class="col">
                     <div class="text-center">

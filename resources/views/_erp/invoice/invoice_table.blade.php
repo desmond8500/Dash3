@@ -174,9 +174,9 @@
                                                 <i class="ti ti-message cursor-pointer" wire:click="edit_comment({{ $row->id }})"></i>
                                             @endif
                                             @isset ($row->article->image)
-                                                <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
+                                                <img src="{{ asset($row->article->image) }}" alt="I" class="avatar rounded-2 avatar-sm me-2">
                                             @else
-                                                <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar avatar-md me-2 bg-white border border-white">
+                                                <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar rounded-2 avatar-md me-2 bg-white border border-white">
                                             @endisset
                                         </div>
                                         <div class="col">
@@ -236,17 +236,32 @@
                                 </td>
                                 <td class="text-center">
                                     <div>{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', ' ') }}</div>
-                                    <div class="badge mt-1">{{ $row->priority() }} </div>
+                                    
+                                    <div class="dropdown open">
+                                        <button class="badge " type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            <div class="">{{ $row->priority() }} </div>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 0)">  Centrale 1</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 1)">  Centrale 2</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 2)">  Organe 1</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 3)">  Organe 2</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 4)">  Organe 3</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 5)">  Cable</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 6)">  Accessoires</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 7)">  Forfait</a>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="text-center ">
                                     <div>
-                                        <button class="btn btn-sm btn-icon btn-outline-success" wire:click="editRow('{{ $row->id }}')"><i class="ti ti-edit"></i></button>
-                                        <button class="btn btn-sm btn-icon btn-outline-danger" wire:click="deleteRow('{{ $row->id }}')"><i class="ti ti-trash"></i></button>
                                         <div class="dropdown open mt-1 ">
-                                            <button class="btn btn-icon btn-outline-primary btn-sm" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            <button class="btn btn-icon" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                                 <i class="ti ti-chevron-down"></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="triggerId">
+                                                <a class="dropdown-item text-success" wire:click="editRow('{{ $row->id }}')"> <i class="ti ti-edit"></i> Editer</a>
+                                                <a class="dropdown-item" wire:click="deleteRow('{{ $row->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                                                 <a class="dropdown-item" wire:click="add_to_acompte('{{ $row->id }}')"> <i class="ti ti-plus"></i> Ajouter aux dépenses</a>
 
                                                 @if (!$row->buy())

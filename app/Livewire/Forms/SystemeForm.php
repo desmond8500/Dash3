@@ -11,9 +11,9 @@ class SystemeForm extends Form
     public Systeme $system;
 
     #[Validate('required')]
-    public $name;
-    public $description;
-    public $icon;
+    public string $name;
+    public string $description;
+    public string $icon;
 
     function store()
     {
@@ -26,7 +26,7 @@ class SystemeForm extends Form
         $system->save();
     }
 
-    function set($system_id)
+    function set(int $system_id)
     {
         $this->system = Systeme::find($system_id);
         $this->name = $this->system->name;
@@ -43,11 +43,10 @@ class SystemeForm extends Form
 
         $this->system->name = ucfirst($this->system->name);
         $this->system->description = ucfirst($this->system->description);
-        $this->system->icon = ucfirst($this->system->icon);
         $this->system->save();
     }
 
-    function delete($id)
+    function delete(int $id)
     {
         $system = Systeme::find($id);
         $system->delete();

@@ -44,9 +44,12 @@
                                         <div style="font-size: 10px" >
                                             @isset($task->projet->id)
                                                 <a href="{{ route('projet', ['projet_id'=> $task->projet->id]) }}">
+                                                    {{ $task->projet->name }}
+                                                </a>
                                             @endisset
-                                                {{ $task->projet->name }}
-                                            @isset($task->projet->id)
+                                            @isset($task->invoice->id)
+                                                <a href="{{ route('invoice', ['projet_id'=> $task->invoice->projet->id]) }}">
+                                                    {{ $task->invoice->projet->name }}
                                                 </a>
                                             @endisset
                                         </div>

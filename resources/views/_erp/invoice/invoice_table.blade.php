@@ -75,8 +75,7 @@
                     $subtotal_bought = 0;
                 @endphp
                 <thead >
-
-                    <tr >
+                    <tr>
                         <th scope="col" class="bg-primary-lt" colspan="8" >
                             <div class="row g-2 align-items-center">
                                 <div class="col">
@@ -128,16 +127,15 @@
                     </tr>
                 </thead>
                 @if ($section->proposition)
-                    <th>
-                        <td colspan="7">
-                            <div class="text-muted" style="font-size: 12px;">{!! $section->proposition !!}</div>
+                    <tr>
+                        <td colspan="8">
+                            <div class="text-muted" style="font-size: 12px; text-align:left; ">{!! nl2br($section->proposition) !!}</div>
                         </td>
-                    </th>
+                    </tr>
                 @endif
 
                 @if ($section->show)
                     <tbody>
-
                         @foreach ($section->rows->sortBy('priorite_id') as $row)
                             @php
                                 $total += $row->quantite*$row->prix;
@@ -476,13 +474,17 @@
             <div class="col-md-12">
                 <span class="dropdown-header mb-2">Devis</span>
                 <div class="btn-list">
-                    <a class="btn mb-1" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'devis']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                    <a class="btn btn-primary mb-1" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'devis']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
                     <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
                     <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
                 </div>
+                <span class="dropdown-header mb-2">Propositions</span>
                 <div class="btn-list">
-                    <a class="btn btn-primary mb-1" target="_blank" href="{{ route('invoice_pdf_v2',['invoice_id'=>$devis->id, 'title'=>'DEVIS']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                    <a class="btn btn-success mb-1" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'proposition']) }}"> <i class="ti ti-file-type-pdf"></i> Proposition </a>
                 </div>
+                {{-- <div class="btn-list">
+                    <a class="btn btn-primary mb-1" target="_blank" href="{{ route('invoice_pdf_v2',['invoice_id'=>$devis->id, 'title'=>'DEVIS']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                </div> --}}
             </div>
             <div class="col-md-12">
                 <span class="dropdown-header mb-2">Facture</span>

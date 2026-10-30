@@ -475,8 +475,8 @@
                 <span class="dropdown-header mb-2">Devis</span>
                 <div class="btn-list">
                     <a class="btn btn-primary mb-1" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'devis']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
-                    <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
-                    <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
+                    <a class="btn mb-1 disabled" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
+                    <a class="btn mb-1 disabled" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
                 </div>
                 <span class="dropdown-header mb-2">Propositions</span>
                 <div class="btn-list">
@@ -489,15 +489,15 @@
             <div class="col-md-12">
                 <span class="dropdown-header mb-2">Facture</span>
                 <div class="btn-icon">
-                    <a class="btn mb-1 " target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
-                    <a class="btn mb-1 " target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
-                    <a class="btn mb-1 " target="_blank" href="{{ route('facture_pdf_save',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Générer Facture </a>
+                    <a class="btn mb-1 btn-success" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
+                    <a class="btn mb-1 disabled" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
+                    <a class="btn mb-1 disabled" target="_blank" href="{{ route('facture_pdf_save',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Générer Facture </a>
                 </div>
             </div>
             <div class="col-md-12">
                 <span class="dropdown-header mb-2">Quantité</span>
                 <div class="btn-list">
-                    <a class="btn " target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
+                    <a class="btn btn-purple" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
                     <a class="btn " target="_blank" href="{{ route('invoice_export',['invoice_id'=>$devis->id]) }}"> <i class="ti ti-file-type-pdf"></i> Exporter Quantitatif XLS </a>
                 </div>
             </div>

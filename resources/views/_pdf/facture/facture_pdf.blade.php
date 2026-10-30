@@ -20,7 +20,7 @@
 
     {{-- Devis --}}
 
-    @if ($type == "devis" || $type == 'facture' || $type ="Facture d'acompte")
+    @if ($type != "proposition")
         <table class="table" style="border-bottom: 2px solid #{{ $color1 ?? '6b8a7a' }}; margin-bottom: 10px;">
             <tr>
                 <td width="80px" class="border_white">
@@ -286,7 +286,7 @@
         @endforeach
     @endif
 
-    @if ($type =! "proposition")
+    @if ($type != "proposition")
         <div class="footer">
             @include('_pdf.facture.facture_footer_pdf')
         </div>

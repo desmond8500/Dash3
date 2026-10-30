@@ -178,14 +178,14 @@ class PDFController extends Controller
         $color3 = "#005b96";
 
         if ($type == 'devis') {
-            $color1 = "005b96";
-            $color2 = "e3f2fd";
+            $color1 = "066fd1";
+            $color2 = "e6f0fa";
         } else if($type == 'facture'){
-            $color1 = "2e7d32";
-            $color2 = "e8f5e9";
-        } else if($type == "Facture d'acompte"){
-            $color1 = "2e7d32";
-            $color2 = "e8f5e9";
+            $color1 = "0ca678";
+            $color2 = "e6f6f1";
+        } else if($type == "quantitatif"){
+            $color1 = "ae3ec9";
+            $color2 = "f7ebf9";
         }
 
         return [
@@ -245,8 +245,8 @@ class PDFController extends Controller
         $devis = Invoice::find($invoice_id);
         $carbon = new Carbon($devis->date);
 
-        $color1 = "fb8c00";
-        $color2 = "fff3e0";
+        $color1 = "2fb344";
+        $color2 = "eaf7ec";
 
         $data = [
             'logo' => env('LOGO', ''),

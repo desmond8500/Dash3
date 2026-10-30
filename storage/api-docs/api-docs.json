@@ -1749,13 +1749,18 @@
                                 ],
                                 "properties": {
                                     "name": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "name1"
                                     },
                                     "email": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "name1@mail.com"
                                     },
                                     "password": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "passer1234"
                                     }
                                 },
                                 "type": "object"
@@ -1765,7 +1770,50 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Utilisateurs récupérés avec succès"
+                        "description": "Utilisateur créé avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Connexion",
+                "operationId": "d7d51829be22c07b1dbdeca806fd4354",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "name1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "passer1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur récupéré avec succès"
                     },
                     "401": {
                         "description": "Unauthorized"

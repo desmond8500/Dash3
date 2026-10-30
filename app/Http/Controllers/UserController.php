@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
     /**
      * @OA\Post(
      *      path="/api/v1/register",
-     *      tags={"Auth"},
+     *      tags={"Auth",},
      *      summary="S'inscrire",
      *
      *      @OA\RequestBody(
@@ -22,14 +23,14 @@ class UserController extends Controller
      *         @OA\MediaType(
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
-     *                  @OA\Property(property="name", type="string", value="name1"),
-     *                  @OA\Property(property="email", type="test1@test.com"),
-     *                  @OA\Property(property="password", type="passer1234"),
+     *                  @OA\Property(property="name", type="string", example="name1"),
+     *                  @OA\Property(property="email", type="string", example="name1@mail.com", format="email"),
+     *                  @OA\Property(property="password", type="string", format="password", example="passer1234"),
      *                  required={"name"}
      *             ),
      *         )
      *      ),
-     *      @OA\Response(response=200, description="Utilisateurs récupérés avec succès"),
+     *      @OA\Response(response=200, description="Utilisateur créé avec succès"),
      *      @OA\Response(response=401, description="Unauthorized")
      * )
      */
@@ -37,7 +38,7 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'unique:App\Models\User,email'],
             'password' => ['required'],
         ]);
 
@@ -63,24 +64,54 @@ class UserController extends Controller
         return ResponseController::response(true, 'Inscription réussie', $data);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/v1/login",
+     *      tags={"Auth",},
+     *      summary="Connexion",
+     *
+     *      @OA\RequestBody(
+     *          required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                  @OA\Property(property="email", type="string", example="name1@mail.com", format="email"),
+     *                  @OA\Property(property="password", type="string", format="password", example="passer1234"),
+     *                  required={"email", "password"}
+     *             ),
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="Utilisateur récupéré avec succès"),
+     *      @OA\Response(response=401, description="Unauthorized")
+     * )
+     */
     public function login(Request $request)
     {
-        $data = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-            'device_name' => 'nullable|string',
+        $validator = Validator::make($request->all(), [
+            'email' => ['required'],
+            'password' => ['required'],
         ]);
 
-        $user = User::where('email', $data['email'])->first();
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Les données fournies sont invalides.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
 
-        if (! $user || ! Hash::check($data['password'], $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Identifiants incorrects.'],
-            ]);
+        $user = User::where('email', $request['email'])->first();
+
+        if (! $user || ! Hash::check($request['password'], $user->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Les données fournies sont invalides.',
+                'errors' => $validator->errors(),
+            ], 422);
         }
 
         return response()->json([
-            'user' => $user,
+            'user' => new UserResource($user),
             'token' => $user->createToken($data['device_name'] ?? 'mobile')->plainTextToken,
         ]);
     }

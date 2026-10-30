@@ -1731,6 +1731,47 @@
                     }
                 }
             }
+        },
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "S'inscrire",
+                "operationId": "e3d7c33191c03363f0fe6765dde1c762",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateurs récupérés avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1857,6 +1898,10 @@
         {
             "name": "Factures",
             "description": "Factures"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
         }
     ]
 }

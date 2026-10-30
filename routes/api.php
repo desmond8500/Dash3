@@ -17,11 +17,22 @@ use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\LiensControlleur;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('v1')->group( function () {
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login'])->middleware('throttle:6,1');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', [UserController::class, 'me']);
+    Route::post('/logout', [UserController::class, 'logout']);
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {

@@ -34,6 +34,12 @@ class User extends Authenticatable
         'function',
     ];
 
+    protected $rules = [
+        'name'     => 'required|string|min:3',
+        'email'    => 'required|email|unique:users',
+        'password' => 'required|min:8',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -58,4 +64,6 @@ class User extends Authenticatable
     {
         return $this->hasOne(setting::class);
     }
+
+
 }

@@ -118,9 +118,44 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/v1/me",
+     *      tags={"Auth"},
+     *      summary="Récupérer les informations d'un utilisateur",
+     *
+     *      @OA\RequestBody(
+     *          required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                  @OA\Property(property="user_id", type="int"),
+     *                  required={"user_id"}
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="Utilisateur récupéré avec succès"),
+     *      @OA\Response(response=401, description="Unauthorized")
+     * )
+     */
     public function me(Request $request)
     {
-        return $request->user();
+        $validator = Validator::make($request->all(), [
+            'user_id' => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Les données fournies sont invalides.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $user = User::find($request['user_id']);
+        $user = new UserResource($user);
+
+        return $user;
     }
 
     /**

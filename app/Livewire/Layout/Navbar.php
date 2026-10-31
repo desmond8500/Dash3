@@ -37,7 +37,12 @@ class Navbar extends Component
                 array('name' => "Types", "route" => "article_types", "icon" => "building", "can" => "stock"),
             ]
         ),
-        array('name' => "Test", "route" => "test", "icon" => "hammer", "can"=> "test"),
+        array('name' => "Finances", "icon" => "coins", "can"=> "finances",
+            'submenu' => [
+                array('name' => "Dépenses", "route" => "depenses", "icon" => "coins", "can" => "depenses"),
+            ]
+        ),
+
         array('name' => "Medias", "icon" => "photo", "can"=> "medias",
             'submenu' => [
                 array('name' => "Images", "route" => "images", "icon" => "photo"),
@@ -56,6 +61,7 @@ class Navbar extends Component
             array('name' => "Mes Projets", "route" => "myprojects", "icon" => "circle"),
             ]
         ),
+        array('name' => "Test", "route" => "test", "icon" => "hammer", "can" => "test"),
     );
 
     public function render()

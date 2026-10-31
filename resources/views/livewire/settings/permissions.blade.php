@@ -26,9 +26,9 @@
                         </form>
                     </div>
                 @endif
-                <ul class="list-group">
+                <ul class="list-group list-group-sm">
                     @foreach ($roles as $role)
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center ">
                             <div wire:click="select_role('{{ $role->id }}')">{{ ucfirst($role->name) }}</div>
                             <button class="btn btn-danger btn-sm rounded" wire:click="role_delete('{{ $role->id }}')">
                                 <i class="ti ti-trash"></i>
@@ -99,7 +99,7 @@
                         </form>
                     </div>
                 @endif
-                <ul class="list-group">
+                <ul class="list-group list-group-sm">
                     @foreach ($permissions as $permission)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{ ucfirst($permission->name) }}

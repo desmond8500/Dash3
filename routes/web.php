@@ -4,6 +4,7 @@ use App\Exports\InvoiceExport;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PDF2Controller;
 use App\Http\Controllers\PDFController;
+use App\Livewire\Accounting\DepensesPage;
 use App\Livewire\Dashboard\Dashboard1Page;
 use App\Livewire\Dashboard\Dashboard2Page;
 use App\Livewire\Erp\AvancementsPage;
@@ -230,6 +231,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
 // Finances
 Route::middleware(['auth', 'can:finances'])->group(function () {
     Route::get('/finances', FinancesPage::class)->name('finances');
+    Route::get('/depenses', DepensesPage::class)->name('depenses');
 
 });
 

@@ -28,11 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group( function () {
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login'])->middleware('throttle:6,1');
+Route::post('/logout', [UserController::class, 'logout']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::get('/me', [UserController::class, 'me']);
-    Route::post('/logout', [UserController::class, 'logout']);
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {

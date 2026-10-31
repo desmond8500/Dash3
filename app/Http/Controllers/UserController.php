@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
 {
@@ -121,10 +123,58 @@ class UserController extends Controller
         return $request->user();
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/v1/logout",
+     *      tags={"Auth"},
+     *      summary="Deconnexion",
+     *
+     *      @OA\RequestBody(
+     *          required=true,
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                  @OA\Property(property="user_id", type="int", example="1"),
+     *                  required={"user_id"}
+     *             )
+     *         )
+     *      ),
+     *      @OA\Response(response=200, description="Déconnecté avec succès"),
+     *      @OA\Response(response=401, description="Unauthorized")
+     * )
+     */
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-        return response()->noContent();
+        $validator = Validator::make($request->all(), [
+            'user_id' => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Les données fournies sont invalides.',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $user = User::find($request['user_id']);
+        $token = $user?->currentAccessToken();
+
+        if ($token instanceof PersonalAccessToken) {
+            // Ionic : on révoque uniquement le token de cet appareil
+            $token->delete();
+        } else {
+            // Web : on ferme la session
+            Auth::guard('web')->logout();
+
+            if ($request->hasSession()) {
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+            }
+        }
+
+        return ResponseController::response(true, 'Déconnecté avec succès', []);
+
     }
 
 

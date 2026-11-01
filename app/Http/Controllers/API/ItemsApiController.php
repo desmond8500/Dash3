@@ -118,9 +118,16 @@ class ItemsApiController extends Controller
     public function show(string $article_id)
     {
         $article = Article::find($article_id);
-        $article = new ArticleResource($article);
 
-        return ResponseController::response(true, "L'article a été récupéré", $article);
+        if ($article) {
+            $article = new ArticleResource($article);
+            return ResponseController::response(true, "L'article a été récupéré", $article);
+        } else {
+            return ResponseController::response(false, "L'article n'a pas été trouvé", []);
+        }
+
+
+
     }
 
     /**

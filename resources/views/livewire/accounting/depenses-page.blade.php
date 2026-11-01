@@ -5,60 +5,136 @@
 
     <div class="row g-2">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header">
                     <div class="card-title">Dépenses</div>
                     <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addExpenseDepense')"><i class="ti ti-plus"></i> </button>
+                        <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addExpenseDepense')"><i
+                                class="ti ti-plus"></i> </button>
                     </div>
                 </div>
-
+                <div class="table-responsive">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="10px">#</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Montant</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Methode</th>
+                                <th scope="col" style="width: 100px" class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($expenses as $key => $expense)
+                            <tr class="">
+                                <td scope="row">{{ $key+1 }}</td>
+                                <td>
+                                    <div class="fw-bold">{{ $expense->description }}</div>
+                                </td>
+                                <td class="text-muted">{{ $expense->amount }}</td>
+                                <td class="text-muted">{{ $expense->expense_date }}</td>
+                                <td class="text-muted">{{ $expense->expense_type }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon btn-success" wire:click="edit_expense('{{ $expense->id }}')">
+                                        <i class="ti ti-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon btn-danger"
+                                        wire:click="delete_expense('{{ $expense->id }}')">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
         <div class="col-md-4">
             <div class="card mb-3">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <div class="card-title">Espaces</div>
-                        <div class="card-actions">
-                            <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addExpenseSpace')"><i
-                                    class="ti ti-plus"></i> </button>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-primary">
-                            <thead>
-                                <tr>
-                                    <th scope="col" width="10px">#</th>
-                                    <th scope="col">Nom / Description</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($spaces as $key => $space)
-                                <tr class="">
-                                    <td scope="row">{{ $key+1 }}</td>
-                                    <td>
-                                        <div class="fw-bold">{{ $space->name }}</div>
-                                        <div class="text-muted">{{ $space->type }}</div>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-icon btn-success"
-                                            wire:click="edit_space('{{ $space->id }}')">
-                                            <i class="ti ti-edit"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-icon btn-danger"
-                                            wire:click="delete_space('{{ $space->id }}')">
-                                            <i class="ti ti-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                <div class="card-header">
+                    <div class="card-title">Espaces</div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addExpenseSpace')"><i
+                                class="ti ti-plus"></i> </button>
                     </div>
                 </div>
+                <div class="table-responsive">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col" >#</th>
+                                <th scope="col">Nom / Description</th>
+                                <th scope="col" style="width: 100px" class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($spaces as $key => $space)
+                            <tr class="">
+                                <td scope="row">{{ $key+1 }}</td>
+                                <td>
+                                    <div class="fw-bold">{{ $space->name }}</div>
+                                    <div class="text-muted">{{ $space->type }}</div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon btn-success"
+                                        wire:click="edit_space('{{ $space->id }}')">
+                                        <i class="ti ti-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon btn-danger"
+                                        wire:click="delete_space('{{ $space->id }}')">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="card-title">Utilisateurs</div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addExpenseSpace')"><i
+                                class="ti ti-plus"></i> </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col" >#</th>
+                                <th scope="col">Nom / Description</th>
+                                <th scope="col" style="width: 100px" class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($spaces as $key => $space)
+                            <tr class="">
+                                <td scope="row">{{ $key+1 }}</td>
+                                <td>
+                                    <div class="fw-bold">{{ $space->name }}</div>
+                                    <div class="text-muted">{{ $space->type }}</div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-icon btn-success"
+                                        wire:click="edit_space('{{ $space->id }}')">
+                                        <i class="ti ti-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-icon btn-danger"
+                                        wire:click="delete_space('{{ $space->id }}')">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="card mb-3">
@@ -74,7 +150,7 @@
                             <tr>
                                 <th scope="col" width="10px">#</th>
                                 <th scope="col">Nom / Description</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" style="width: 100px" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -105,12 +181,20 @@
 
     <button class='btn btn-primary' wire:click="$dispatch('open-addExpenseDepense')" ><i class='ti ti-plus'></i> dépense</button>
 
-    @component('components.modal', ["id"=>'addExpenseDepense', 'title' => 'Ajouter une dépense', 'method'=>'store'])
-        <form class="row" wire:submit="store">
-            {{-- @include('_form.document_form') --}}
+    @component('components.modal', ["id"=>'addExpenseDepense', 'title' => 'Ajouter une dépense', 'method'=>'store_expense'])
+        <form class="row" wire:submit="store_expense">
+            @include('_form.expense_form')
         </form>
         <script> window.addEventListener('open-addExpenseDepense', event => { window.$('#addExpenseDepense').modal('show'); }) </script>
         <script> window.addEventListener('close-addExpenseDepense', event => { window.$('#addExpenseDepense').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editExpenseDepense', 'title' => 'Editer une dépense', 'method'=>'update_expense'])
+        <form class="row" wire:submit="update_expense">
+            @include('_form.expense_form')
+        </form>
+        <script> window.addEventListener('open-editExpenseDepense', event => { window.$('#editExpenseDepense').modal('show'); }) </script>
+        <script> window.addEventListener('close-editExpenseDepense', event => { window.$('#editExpenseDepense').modal('hide'); }) </script>
     @endcomponent
 
     {{-- Catégory --}}

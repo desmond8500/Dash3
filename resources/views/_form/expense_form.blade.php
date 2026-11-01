@@ -1,13 +1,52 @@
-<div>
-    <div class="col-md-12 mb-3">
-        <label class="form-label">Name</label>
-        <input type="text" class="form-control" wire:model="name" placeholder="Name">
-        @error('name') <span class='text-danger'>{{ $message }}</span> @enderror
+<div class="row g-2">
+    <div class="col-md-3 mb-2">
+        <label class="form-label">User</label>
+        <input type="text" class="form-control" wire:model="expense_user_id" placeholder="Description">
+        @error('expense_user_id') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+    <div class="col-md-12 mb-2">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" wire:model="expense_description" placeholder="Description">
+        @error('expense_description') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+    <div class="col-md-4 mb-2">
+        <label class="form-label">Montant</label>
+        <input type="number" class="form-control" wire:model="expense_amount" placeholder="Montant">
+        @error('expense_amount') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+    <div class="col-md-4 mb-2">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-control" wire:model="expense_date" >
+        @error('expense_date') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
-    <div class="col-md-12 mb-3">
-        <label class="form-label">Description</label>
-        <textarea class="form-control" wire:model="description" placeholder="Description" cols="30" rows="5"></textarea>
-        @error('description') <span class='text-danger'>{{ $message }}</span> @enderror
+    <div class="col-md-4 mb-2">
+        <label class="form-label">Methode de paiement</label>
+        <select class="form-select" wire:model="expense_payment_method">
+            <option value="espece">Espèce</option>
+            <option value="wave">Wave</option>
+            <option value="om">Orange Money</option>
+            <option value="autre">Autre</option>
+        </select>
+        @error('expense_payment_method') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
+
+    <div class="col-md-4 mb-2">
+        <label class="form-label">Type</label>
+        <select class="form-select" wire:model="expense_type">
+            <option value="">Personnel</option>
+            <option value="">Commune</option>
+            <option value="">Professionel</option>
+        </select>
+        @error('expense_type') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
+    <div class="col-md-12 mb-2">
+        <label class="form-label">Notes</label>
+        <textarea class="form-control" wire:model="expense_notes" placeholder="Notes" cols="30"
+            rows="5"></textarea>
+        @error('expense_notes') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
+
 </div>

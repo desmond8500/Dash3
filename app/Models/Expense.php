@@ -9,11 +9,14 @@ class Expense extends Model
     protected $fillable = [
         'expense_space_id',
         'user_id',
+
         'article_id',
         'brand_id',
         'provider_id',
+
         'category_id',
         'paid_by',
+
         'amount',
         'description',
         'expense_date',

@@ -8,12 +8,17 @@
             <div class="row g-2">
                 <div class="col-md-12">
                     <div class="col-md-12 mb-3">
-                        <input type="text" class="form-control" wire:model="article_search" placeholder="Rechercher" wire:keydown.enter="get_articles()">
-                        @error('article_search') <span class='text-danger'>{{ $message }}</span> @enderror
+                        <div class="input-group">
+                            <input type="text" class="form-control" wire:model="article_search" placeholder="Rechercher">
+                            <button class="btn btn-outline-primary" wire:click="get_articles(1)">
+                                <i class="ti ti-search"></i>
+                            </button>
+                        </div>
+                        @error('article_search') <span class='text-danger'>{{ $message }}</span> @enderror {{ $article_search }}
                     </div>
                 </div>
 
-                @foreach ($articles['data'] as $article)
+                @foreach ($articles['data'] ?? [] as $article)
                     <div class="col-md-6">
                         <div class="card p-1">
                             <div class="row">
@@ -33,6 +38,19 @@
 
                     </div>
                 @endforeach
+                @isset ($articles['data'])
+                    <div class="col-md-12 text-center">
+
+                        <button wire:click="previousPage" class="btn" @if($articles['meta']['current_page'] <= 1) disabled @endif>Précédent</button>
+                        @if ($articles['meta']['current_page'] > 1)
+                            <button class="btn">{{ $articles['meta']['current_page'] - 1 }}</button>
+                        @endif
+                        <button class="btn btn-primary">{{ $articles['meta']['current_page'] }}</button>
+                        <button class="btn ">{{ $articles['meta']['current_page'] + 1 }}</button>
+                        <button wire:click="nextPage" class="btn" @if($articles['meta']['current_page'] >= $articles['meta']['last_page']) disabled @endif>Suivant</button>
+                        <button class="btn" wire:click="get_articles({{ $articles['meta']['last_page'] }})">{{ $articles['meta']['last_page'] }}</button>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="col-md-4">

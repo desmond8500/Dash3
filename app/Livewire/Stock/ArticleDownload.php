@@ -11,10 +11,11 @@ class ArticleDownload extends Component
     public string $search = '';
     public array $breadcrumbs;
     public mixed $articles;
+    public int $page=1;
 
     public function mount()
     {
-        $this->articles = Http::get('https://dash3.yonkou.info/api/v1/items')->json();
+        $this->articles = $this->get_articles();
         $this->breadcrumbs = array(
             array('name' => 'Stock', 'route' => route('stock')),
             array('name' => 'Articles', 'route' => route('articles')),
@@ -28,7 +29,9 @@ class ArticleDownload extends Component
     }
 
     function store(int $article_id){
-        $article = Http::get("https://dash3.yonkou.info/api/v1/items/{$article_id}")->json();
+        $article = Http::get("https://dash3.yonkou.info/api/v1/items/{$article_id}");
+
+        $article = $article['data'];
 
         Article::create([
             'designation' => $article['designation'],
@@ -37,7 +40,22 @@ class ArticleDownload extends Component
             'price' => $article['price'],
             'brand_id' => $article['brand_id'],
             'provider_id' => $article['provider_id'],
-            'type_id' => $article['type_id'],
         ]);
+    }
+    public string $article_search = "";
+    function get_articles($page=1){
+        $query = Http::get('https://dash3.yonkou.info/api/v1/items?page='.$page.'&search='.$this->article_search);
+
+        return $query->json();
+    }
+
+    function nextPage(){
+        $this->page++;
+        $this->articles = $this->get_articles($this->page);
+
+    }
+    function previousPage(){
+        $this->page--;
+        $this->articles = $this->get_articles($this->page);
     }
 }

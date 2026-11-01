@@ -1,6 +1,13 @@
 <div>
     @component('components.layouts.page-header', ['title'=> "Téléchargement d'articles", 'breadcrumbs'=> $breadcrumbs])
-
+        <div class="btn-group">
+            {{-- <label for="">Server</label> --}}
+            <div class="input-group">
+                <input type="text" class="form-control mb-2" wire:model="server_url" placeholder="Server">
+                <button class="btn btn" wire:click="edit_server(server_url)">Modifier</button>
+            </div>
+            @error('server_url') <span class='text-danger'>{{ $message }}</span> @enderror
+        </div>
     @endcomponent
 
     <div class="row g-2">

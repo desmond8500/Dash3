@@ -12,6 +12,7 @@ class ArticleDownload extends Component
     public array $breadcrumbs;
     public mixed $articles;
     public int $page=1;
+    public string $server_url = "https://dash3.yonkou.info/api/v1/items";
 
     public function mount()
     {
@@ -29,7 +30,7 @@ class ArticleDownload extends Component
     }
 
     function store(int $article_id){
-        $article = Http::get("https://dash3.yonkou.info/api/v1/items/{$article_id}");
+        $article = Http::get("{$this->server_url}/{$article_id}");
 
         $article = $article['data'];
 
@@ -57,5 +58,9 @@ class ArticleDownload extends Component
     function previousPage(){
         $this->page--;
         $this->articles = $this->get_articles($this->page);
+    }
+
+    function edit_server(string $server_url){
+        $this->server_url = $server_url;
     }
 }

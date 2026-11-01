@@ -2,9 +2,12 @@
 
 namespace App\Livewire\Accounting;
 
+use App\Models\Article;
 use App\Models\Expense;
 use App\Models\ExpenseCategories;
 use App\Models\ExpenseSpace;
+use App\Models\ExpenseSpaceUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -17,7 +20,7 @@ class DepensesPage extends Component
 
     protected $paginationTheme = 'bootstrap';
     public $search = '';
-    public $breadcrumbs;
+    public mixed $breadcrumbs;
 
     public function mount()
     {
@@ -31,6 +34,8 @@ class DepensesPage extends Component
             'expenses' => Expense::all(),
             'categories' => ExpenseCategories::all(),
             'spaces' => ExpenseSpace::all(),
+            'users' => User::all(),
+            'articles' => $this->get_articles()
         ]);
     }
 
@@ -125,9 +130,7 @@ class DepensesPage extends Component
         $space = ExpenseSpace::find($this->space_id);
 
         $space->name = $this->space_name;
-        $this->space_user_id = $space->user_id;
-        $this->space_name = $space->name;
-        $this->space_type = $space->type;
+        $space->type = $this->space_type ;
         $space->save();
         $this->dispatch('close-editExpenseSpace');
     }
@@ -222,10 +225,21 @@ class DepensesPage extends Component
     {
         $expense = Expense::find($this->expense_id);
 
-        $expense->name = $this->expense_name;
-        $this->expense_user_id = $expense->user_id;
-        $this->expense_name = $expense->name;
-        $this->expense_type = $expense->type;
+        $expense->user_id = $this->expense_user_id;
+
+        $expense->article_id = $this->expense_article_id;
+        $expense->brand_id = $this->expense_brand_id;
+        $expense->provider_id = $this->expense_provider_id;
+        $expense->category_id = $this->expense_category_id;
+        $expense->paid_by = $this->expense_paid_by;
+
+        $expense->amount = $this->expense_amount;
+        $expense->description = $this->expense_description;
+        $expense->expense_date = $this->expense_date;
+        $expense->payment_method = $this->expense_payment_method;
+        $expense->expense_type = $this->expense_type;
+        $expense->notes = $this->expense_notes;
+
         $expense->save();
         $this->dispatch('close-editExpenseDepense');
     }
@@ -234,5 +248,51 @@ class DepensesPage extends Component
     {
         $expense = Expense::find($expense_id);
         $expense->delete();
+    }
+
+    // User
+    public int $user_id = 0;
+    public int $user_space_id = 0;
+    public string $role = "admin";
+
+    function add_user_to_space(int $space_id)
+    {
+        $this->user_space_id = $space_id;
+        $this->dispatch('open-addUserToSpace');
+    }
+
+    function store_user_to_space()
+    {
+        $this->validate([
+            'user_id' => ['required'],
+            'user_space_id' => ['required'],
+            'role' => ['required'],
+        ]);
+
+        ExpenseSpaceUser::create([
+            'user_id' => $this->user_id,
+            'expense_space_id' => $this->user_space_id,
+            'role' => $this->role,
+        ]);
+        $this->dispatch('close-addUserToSpace');
+    }
+
+    function select_article(int $article_id)
+    {
+        $this->expense_article_id = $article_id;
+    }
+
+    public $article_search = "";
+
+    function get_articles()
+    {
+        return Article::query()
+            // ->when(
+            //     $this->brand_id,
+            //     fn($q) => $q->where('brand_id', $this->brand_id)
+            // )
+            ->articleSearch($this->article_search)
+            ->orderByDesc('id')
+            ->paginate(6);
     }
 }

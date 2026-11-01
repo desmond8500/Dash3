@@ -8,9 +8,9 @@
     <div class="col-md-4 mb-3">
         <label class="form-label">Type</label>
         <select class="form-select" wire:model="space_type">
-            <option value="">Personnel</option>
-            <option value="">Commune</option>
-            <option value="">Professionel</option>
+            <option value="Personnel">Personnel</option>
+            <option value="Commune">Commune</option>
+            <option value="Professionel">Professionel</option>
         </select>
         @error('space_type') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>

@@ -67,7 +67,7 @@
                             <tr>
                                 <th scope="col" >#</th>
                                 <th scope="col">Nom / Description</th>
-                                <th scope="col" style="width: 100px" class="text-center">Action</th>
+                                <th scope="col" style="width: 130px" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,50 +77,17 @@
                                 <td>
                                     <div class="fw-bold">{{ $space->name }}</div>
                                     <div class="text-muted">{{ $space->type }}</div>
+                                    <ul>
+                                        @foreach ($space->userlist as $user)
+                                            <li>{{ $user->firstname }} {{ $user->lastname }}</li>
+                                        @endforeach
+                                    </ul>
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-icon btn-success"
-                                        wire:click="edit_space('{{ $space->id }}')">
-                                        <i class="ti ti-edit"></i>
+                                    <button class="btn btn-sm btn-icon btn-primary"
+                                        wire:click="add_user_to_space('{{ $space->id }}')">
+                                        <i class="ti ti-plus"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-icon btn-danger"
-                                        wire:click="delete_space('{{ $space->id }}')">
-                                        <i class="ti ti-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-header">
-                    <div class="card-title">Utilisateurs</div>
-                    <div class="card-actions">
-                        <button class="btn btn-primary btn-icon" wire:click="$dispatch('open-addExpenseSpace')"><i
-                                class="ti ti-plus"></i> </button>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-primary">
-                        <thead>
-                            <tr>
-                                <th scope="col" >#</th>
-                                <th scope="col">Nom / Description</th>
-                                <th scope="col" style="width: 100px" class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($spaces as $key => $space)
-                            <tr class="">
-                                <td scope="row">{{ $key+1 }}</td>
-                                <td>
-                                    <div class="fw-bold">{{ $space->name }}</div>
-                                    <div class="text-muted">{{ $space->type }}</div>
-                                </td>
-                                <td>
                                     <button class="btn btn-sm btn-icon btn-success"
                                         wire:click="edit_space('{{ $space->id }}')">
                                         <i class="ti ti-edit"></i>
@@ -179,8 +146,8 @@
         </div>
     </div>
 
-    <button class='btn btn-primary' wire:click="$dispatch('open-addExpenseDepense')" ><i class='ti ti-plus'></i> dépense</button>
-
+    {{-- Expense --}}
+    {{-- Add Expense --}}
     @component('components.modal', ["id"=>'addExpenseDepense', 'title' => 'Ajouter une dépense', 'method'=>'store_expense'])
         <form class="row" wire:submit="store_expense">
             @include('_form.expense_form')
@@ -189,6 +156,7 @@
         <script> window.addEventListener('close-addExpenseDepense', event => { window.$('#addExpenseDepense').modal('hide'); }) </script>
     @endcomponent
 
+    {{-- Edit Expense --}}
     @component('components.modal', ["id"=>'editExpenseDepense', 'title' => 'Editer une dépense', 'method'=>'update_expense'])
         <form class="row" wire:submit="update_expense">
             @include('_form.expense_form')
@@ -227,11 +195,21 @@
     @endcomponent
 
     {{-- Edit Space --}}
-    @component('components.modal', ["id"=>'editExpenseSpace', 'title' => 'Editer un espace', 'method'=>'space_update'])
-        <form class="row" wire:submit="space_update">
+    @component('components.modal', ["id"=>'editExpenseSpace', 'title' => 'Editer un espace', 'method'=>'update_space'])
+        <form class="row" wire:submit="update_space">
             @include('_form.expense_space_form')
         </form>
         <script> window.addEventListener('open-editExpenseSpace', event => { window.$('#editExpenseSpace').modal('show'); }) </script>
         <script> window.addEventListener('close-editExpenseSpace', event => { window.$('#editExpenseSpace').modal('hide'); }) </script>
+    @endcomponent
+
+    {{-- User --}}
+    {{-- Add User to Space --}}
+    @component('components.modal', ["id"=>'addUserToSpace', 'title' => 'Ajouter un utilisateur à l\'espace', 'method'=>'store_user_to_space'])
+        <form class="row" wire:submit="store_user_to_space">
+            @include('_form.user_space_form')
+        </form>
+        <script> window.addEventListener('open-addUserToSpace', event => { window.$('#addUserToSpace').modal('show'); }) </script>
+        <script> window.addEventListener('close-addUserToSpace', event => { window.$('#addUserToSpace').modal('hide'); }) </script>
     @endcomponent
 </div>

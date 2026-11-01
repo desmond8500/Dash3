@@ -616,16 +616,16 @@
                 }
             }
         },
-        "/api/v1/items/{article_id}": {
+        "/api/v1/items/{id}": {
             "get": {
                 "tags": [
                     "Articles"
                 ],
                 "description": "afficher un article",
-                "operationId": "3057c5a562eef036187d28de146acccc",
+                "operationId": "099ce4e523f80e52b4ad983ba3af17ce",
                 "parameters": [
                     {
-                        "name": "article_id",
+                        "name": "id",
                         "in": "path",
                         "description": "Parameter with example",
                         "required": true,
@@ -1666,11 +1666,77 @@
                 ],
                 "summary": "Liste des transactions",
                 "operationId": "d1896d9e43f164ed711b6fb976065a2b",
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Date exacte (YYYY-MM-DD)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2026-10-31"
+                        }
+                    },
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "description": "Mois (1 à 12)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 12,
+                            "minimum": 1,
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Année",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 2026
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "Identifiant de l'utilisateur",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Nombre d'éléments par page (1 à 100, défaut 15)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 15
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Transactions récupérés avec succès"
+                        "description": "Transactions récupérées avec succès"
+                    },
+                    "401": {
+                        "description": "Non authentifié"
+                    },
+                    "422": {
+                        "description": "Paramètres invalides"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/v1/liens": {
@@ -1804,6 +1870,41 @@
                                         "type": "string",
                                         "format": "password",
                                         "example": "passer1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur récupéré avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/me": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Récupérer les informations d'un utilisateur",
+                "operationId": "8f4f4c63da075147ca1abb08793f7f87",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"

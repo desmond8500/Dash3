@@ -97,13 +97,13 @@ class ItemsApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/v1/items/{article_id}",
+     *      path="/api/v1/items/{id}",
      *      tags={"Articles"},
      *      description="afficher un article",
      *        @OA\Parameter(
      *          description="Parameter with example",
      *          in="path",
-     *          name="article_id",
+     *          name="id",
      *          required=true,
      *          @OA\Schema(type="integer"),
      *          @OA\Examples(example="int", value="1", summary="an int value"),
@@ -115,9 +115,9 @@ class ItemsApiController extends Controller
      *     )
      */
 
-    public function show(string $article_id)
+    public function show(int $id)
     {
-        $article = Article::find($article_id);
+        $article = Article::find($id);
 
         if ($article) {
             $article = new ArticleResource($article);

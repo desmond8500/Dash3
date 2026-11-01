@@ -74,3 +74,9 @@ Mettre `DB_CONNECTION=sqlite`
 ```console
 php artisan app:model
 ```
+
+## Swagger Generate
+
+```console
+php artisan l5-swagger:generate
+```

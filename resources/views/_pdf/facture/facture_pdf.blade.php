@@ -193,6 +193,9 @@
     {{-- Détails techniques --}}
     @if ($sections)
         @foreach ($sections as $key => $section)
+            @if (!$loop->first )
+                <div class="page-break"></div>
+            @endif
 
         @if ($section->status)
 

@@ -43,6 +43,17 @@
         @error('expense_article_id') <span class='text-danger'>{{ $message }}</span> @enderror
     </div>
 
+    <div class="col-md-4 mb-2">
+        <label class="form-label">Espace</label>
+        <select class="form-select" wire:model="expense_payment_method">
+            <option value="">Selectionnez un espace</option>
+            @foreach ($spaces as $space)
+                <option value="{{ $space->id }}">{{ $space->name }}</option>
+            @endforeach
+        </select>
+        @error('expense_article_id') <span class='text-danger'>{{ $message }}</span> @enderror
+    </div>
+
     <div class="col-md-12 mb-2">
         <label class="form-label">Notes</label>
         <textarea class="form-control" wire:model="expense_notes" placeholder="Notes" cols="30"

@@ -65,6 +65,8 @@ class ApiAuthTest extends TestCase
             'plans projet'       => ['GET', '/api/v1/projets/1/plans'],
             'importer plan'      => ['POST', '/api/v1/plans'],
             'emplacements plan'  => ['PUT', '/api/v1/plans/1/markers'],
+            'fichier plan'       => ['GET', '/api/v1/plans/1/file'],
+            'convertir plan'     => ['POST', '/api/v1/plans/1/convert'],
             'devis'              => ['GET', '/api/v1/invoices'],
             'devis du mois'      => ['POST', '/api/v1/get_month_invoices'],
             'factures'           => ['GET', '/api/v1/factures'],

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
+use App\Jobs\ConvertDwgPlan;
 use App\Models\Building;
 use App\Models\Equipement;
 use App\Models\InstallationSysteme;
@@ -274,9 +275,15 @@ class InstallationAPIController extends Controller
             'file' => "storage/$dir/$name",
             'mime' => $file->getClientMimeType(),
             'kind' => self::PLAN_EXTENSIONS[$ext],
+            'conversion_status' => self::PLAN_EXTENSIONS[$ext] === 'dwg' ? 'pending' : null,
         ]);
 
-        return response()->json(['success' => true, 'message' => 'Plan importé', 'data' => $plan, 'meta' => null], 201);
+        // DWG : conversion en PDF (immédiate avec QUEUE_CONNECTION=sync, sinon par le worker)
+        if ($plan->kind === 'dwg') {
+            ConvertDwgPlan::dispatch($plan->id);
+        }
+
+        return response()->json(['success' => true, 'message' => 'Plan importé', 'data' => $plan->fresh(), 'meta' => null], 201);
     }
 
     /** @OA\Put(path="/api/v1/plans/{id}", tags={"Installations"}, summary="Renommer un plan ou changer son bâtiment", security={{"sanctum":{}}}, @OA\Response(response=200, description="Modifié")) */
@@ -298,6 +305,9 @@ class InstallationAPIController extends Controller
         $plan = Plan::find($id);
         if (! $plan) return $this->notFound('Plan');
         Storage::disk('public')->delete(Str::after($plan->file, 'storage/'));
+        if ($plan->converted_file) {
+            Storage::disk('public')->delete(Str::after($plan->converted_file, 'storage/'));
+        }
         $plan->delete();
 
         return ResponseController::response(true, 'Plan supprimé', null);
@@ -351,5 +361,46 @@ class InstallationAPIController extends Controller
         });
 
         return $this->markers($id);
+    }
+
+    /**
+     * @OA\Get(path="/api/v1/plans/{id}/file", tags={"Installations"},
+     *      summary="Fichier du plan (?variant=pdf pour le PDF converti d'un DWG). Passe par l'API pour le CORS et l'authentification.",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Fichier"))
+     */
+    public function file(Request $request, int $id)
+    {
+        $plan = Plan::find($id);
+        if (! $plan) return $this->notFound('Plan');
+
+        $path = $request->query('variant') === 'pdf' ? $plan->converted_file : $plan->file;
+        if (! $path) {
+            return response()->json(['success' => false, 'message' => "Ce plan n'a pas encore de PDF", 'error' => null, 'meta' => null], 404);
+        }
+        $relative = Str::after($path, 'storage/');
+        $disk = Storage::disk('public');
+        if (! $disk->exists($relative)) {
+            return response()->json(['success' => false, 'message' => 'Fichier introuvable sur le serveur', 'error' => null, 'meta' => null], 404);
+        }
+
+        $filename = Str::slug($plan->name) . '.' . pathinfo($relative, PATHINFO_EXTENSION);
+        return $disk->response($relative, $filename, ['Cache-Control' => 'private, max-age=3600']);
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/plans/{id}/convert", tags={"Installations"}, summary="Relancer la conversion DWG → PDF",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Conversion relancée"))
+     */
+    public function convert(int $id)
+    {
+        $plan = Plan::find($id);
+        if (! $plan) return $this->notFound('Plan');
+        if ($plan->kind !== 'dwg') {
+            return response()->json(['success' => false, 'message' => "Seuls les plans DWG sont convertis", 'error' => null, 'meta' => null], 422);
+        }
+        $plan->update(['conversion_status' => 'pending', 'conversion_error' => null]);
+        ConvertDwgPlan::dispatch($plan->id);
+
+        return ResponseController::response(true, 'Conversion lancée', $plan->fresh());
     }
 }

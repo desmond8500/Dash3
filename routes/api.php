@@ -90,6 +90,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('plans/{id}', [InstallationAPIController::class, 'destroyPlan']);
             Route::get('plans/{id}/markers', [InstallationAPIController::class, 'markers']);
             Route::put('plans/{id}/markers', [InstallationAPIController::class, 'saveMarkers']);
+            Route::get('plans/{id}/file', [InstallationAPIController::class, 'file']);
+            Route::post('plans/{id}/convert', [InstallationAPIController::class, 'convert']);
 
             // TODO : ces routes pointent toutes vers getTasksByClient, à implémenter.
             Route::get('invoice/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);

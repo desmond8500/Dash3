@@ -9,6 +9,7 @@ use App\Http\Resources\ArticleImageResource;
 use App\Http\Resources\ArticleLinkResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Resources\ArticleResource;
 use App\Models\ArticleDocument;
 use App\Models\ArticleLink;
@@ -223,5 +224,110 @@ class ItemsApiController extends Controller
         $documents = ArticleDocumentResource::collection($documents);
 
         return ResponseController::response(true, "Les documents de l'article ont été récupérés", $documents);
+    }
+
+    /**
+     * Règles de validation communes à la création et à la modification.
+     */
+    private function rules(): array
+    {
+        return [
+            'designation' => ['required', 'string', 'max:255'],
+            'reference' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'spec' => ['nullable', 'string'],
+            'price' => ['nullable', 'numeric', 'min:0'],
+            'quantity' => ['nullable', 'integer', 'min:0'],
+            'quantity_min' => ['nullable', 'integer', 'min:0'],
+            'priority_id' => ['nullable', 'integer', 'between:0,7'],
+            'weight' => ['nullable', 'numeric', 'min:0'],
+            'tva' => ['nullable', 'numeric', 'min:0'],
+            'brand_id' => ['nullable', 'integer', Rule::exists('brands', 'id')],
+            'provider_id' => ['nullable', 'integer', Rule::exists('providers', 'id')],
+        ];
+    }
+
+    /**
+     * Les colonnes quantity, quantity_min et price ne sont pas nullables.
+     */
+    private function normalize(array $data): array
+    {
+        foreach (['quantity', 'quantity_min', 'price'] as $field) {
+            if (array_key_exists($field, $data) && $data[$field] === null) {
+                $data[$field] = 0;
+            }
+        }
+        $data['designation'] = ucfirst($data['designation']);
+
+        return $data;
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/items",
+     *      tags={"Articles"},
+     *      summary="Créer un article",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=201, description="Article créé"),
+     *      @OA\Response(response=422, description="Données invalides")
+     * )
+     */
+    public function store(Request $request)
+    {
+        $data = $this->normalize($request->validate($this->rules()));
+
+        $article = Article::create($data + ['priority_id' => 1]);
+
+        return response()->json([
+            'success' => true,
+            'message' => "L'article a été créé",
+            'data' => new ArticleResource($article->fresh()),
+            'meta' => null,
+        ], 201);
+    }
+
+    /**
+     * @OA\Put(
+     *      path="/api/v1/items/{id}",
+     *      tags={"Articles"},
+     *      summary="Modifier un article",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Article modifié"),
+     *      @OA\Response(response=404, description="Article introuvable"),
+     *      @OA\Response(response=422, description="Données invalides")
+     * )
+     */
+    public function update(Request $request, int $id)
+    {
+        $article = Article::find($id);
+        if (! $article) {
+            return response()->json(['success' => false, 'message' => "L'article n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+
+        $article->update($this->normalize($request->validate($this->rules())));
+
+        return ResponseController::response(true, "L'article a été modifié", new ArticleResource($article->fresh()));
+    }
+
+    /**
+     * @OA\Delete(
+     *      path="/api/v1/items/{id}",
+     *      tags={"Articles"},
+     *      summary="Supprimer un article",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Article supprimé"),
+     *      @OA\Response(response=404, description="Article introuvable")
+     * )
+     */
+    public function destroy(int $id)
+    {
+        $article = Article::find($id);
+        if (! $article) {
+            return response()->json(['success' => false, 'message' => "L'article n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+
+        $article->delete();
+
+        return ResponseController::response(true, "L'article a été supprimé", null);
     }
 }

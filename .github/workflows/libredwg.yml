@@ -1,0 +1,53 @@
+# Compile dwg2dxf (LibreDWG) pour Linux x86_64 et le publie en release du dépôt.
+# Utilisé par scripts/install-dwg-tools.sh sur les hébergements où la
+# compilation manque de mémoire (alwaysdata…).
+name: LibreDWG (dwg2dxf)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version de LibreDWG
+        default: "0.13.3"
+  push:
+    branches: [main]
+    paths: [".github/workflows/libredwg.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    # glibc 2.35 : compatible avec les serveurs Debian 12 / Ubuntu 22.04 et plus récents
+    runs-on: ubuntu-22.04
+    env:
+      VERSION: ${{ inputs.version || '0.13.3' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Télécharger LibreDWG
+        run: |
+          wget -q "https://ftp.gnu.org/gnu/libredwg/libredwg-$VERSION.tar.xz" || \
+          wget -q "https://ftp.gnu.org/gnu/libredwg/libredwg-$VERSION.tar.gz"
+          tar xf libredwg-$VERSION.tar.*
+
+      - name: Compiler (statique)
+        working-directory: libredwg-${{ env.VERSION }}
+        run: |
+          ./configure --prefix="$PWD/out" --disable-shared --enable-static --disable-bindings CFLAGS="-O2 -g0"
+          make -j"$(nproc)"
+          make install
+          strip out/bin/dwg2dxf
+          out/bin/dwg2dxf --version
+          ldd out/bin/dwg2dxf || true
+          cp out/bin/dwg2dxf "$GITHUB_WORKSPACE/dwg2dxf-linux-x86_64"
+
+      - name: Publier la release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="libredwg-$VERSION"
+          gh release view "$TAG" >/dev/null 2>&1 || \
+            gh release create "$TAG" --title "LibreDWG $VERSION (dwg2dxf, Linux x86_64)" \
+              --notes "Binaire dwg2dxf compilé par GitHub Actions pour scripts/install-dwg-tools.sh."
+          gh release upload "$TAG" dwg2dxf-linux-x86_64 --clobber

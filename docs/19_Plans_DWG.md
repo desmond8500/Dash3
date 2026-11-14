@@ -22,7 +22,14 @@ Activer SSH pour l'utilisateur (Accès distant › SSH), se connecter, puis depu
 bash scripts/install-dwg-tools.sh
 ```
 
-Le script compile LibreDWG en binaire statique dans `~/.local/bin/dwg2dxf` et installe `ezdxf` + `matplotlib` avec pip dans `~/.local`.
+Le script installe `dwg2dxf` dans `~/.local/bin` et `ezdxf` + `matplotlib` avec pip dans `~/.local`.
+
+`dwg2dxf` est d'abord téléchargé tout compilé depuis les releases du dépôt
+(workflow GitHub Actions `.github/workflows/libredwg.yml`, tag `libredwg-0.13.3`) :
+la compilation de LibreDWG demande plus de mémoire qu'une session SSH mutualisée
+n'en accorde (« gcc: fatal error: Killed signal terminated program cc1 »).
+Si le binaire n'est pas disponible, le script compile sur place avec des options économes
+(un seul job, `-O1` puis `-O0`, sans débogage). `COMPILE=1` force la compilation.
 Pour une autre version de LibreDWG : `LIBREDWG_VERSION=0.13.3 bash scripts/install-dwg-tools.sh`.
 
 ### 2. Configurer `.env`

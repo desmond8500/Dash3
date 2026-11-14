@@ -5,7 +5,9 @@ use App\Http\Controllers\API\BrandAPIController;
 use App\Http\Controllers\API\ClientAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\FavorisController;
+use App\Http\Controllers\API\InstallationAPIController;
 use App\Http\Controllers\API\InvoiceAPIController;
+use App\Http\Controllers\API\InvoiceEditAPIController;
 use App\Http\Controllers\API\ItemsApiController;
 use App\Http\Controllers\API\JournalAPIController;
 use App\Http\Controllers\API\NoteAPIController;
@@ -72,6 +74,26 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('projets/{id}/logo', [ProjetAPIController::class, 'updateLogo']);
             Route::get('projets/{id}/badges', [ProjetAPIController::class, 'getBadges']);
 
+            // Installations : bâtiments › systèmes › équipements, et plans
+            Route::get('projets/{id}/installations', [InstallationAPIController::class, 'index']);
+            Route::post('buildings', [InstallationAPIController::class, 'storeBuilding']);
+            Route::put('buildings/{id}', [InstallationAPIController::class, 'updateBuilding']);
+            Route::delete('buildings/{id}', [InstallationAPIController::class, 'destroyBuilding']);
+            Route::post('installation_systemes', [InstallationAPIController::class, 'storeSysteme']);
+            Route::put('installation_systemes/{id}', [InstallationAPIController::class, 'updateSysteme']);
+            Route::delete('installation_systemes/{id}', [InstallationAPIController::class, 'destroySysteme']);
+            Route::post('equipements', [InstallationAPIController::class, 'storeEquipement']);
+            Route::put('equipements/{id}', [InstallationAPIController::class, 'updateEquipement']);
+            Route::delete('equipements/{id}', [InstallationAPIController::class, 'destroyEquipement']);
+            Route::get('projets/{id}/plans', [InstallationAPIController::class, 'plans']);
+            Route::post('plans', [InstallationAPIController::class, 'storePlan']);
+            Route::put('plans/{id}', [InstallationAPIController::class, 'updatePlan']);
+            Route::delete('plans/{id}', [InstallationAPIController::class, 'destroyPlan']);
+            Route::get('plans/{id}/markers', [InstallationAPIController::class, 'markers']);
+            Route::put('plans/{id}/markers', [InstallationAPIController::class, 'saveMarkers']);
+            Route::get('plans/{id}/file', [InstallationAPIController::class, 'file']);
+            Route::post('plans/{id}/convert', [InstallationAPIController::class, 'convert']);
+
             // TODO : ces routes pointent toutes vers getTasksByClient, à implémenter.
             Route::get('invoice/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
             Route::get('building/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
@@ -116,6 +138,19 @@ Route::middleware('auth:sanctum')->group(function () {
         // Finances : devis, factures, achats, transactions
         Route::middleware('can:finances')->group(function () {
             Route::apiResource('invoices', InvoiceAPIController::class);
+            Route::post('invoices/{id}/favorite', [InvoiceAPIController::class, 'toggleFavorite']);
+            // Édition du devis : sections, lignes, acomptes, dépenses
+            Route::post('invoice_sections', [InvoiceEditAPIController::class, 'storeSection']);
+            Route::put('invoice_sections/{id}', [InvoiceEditAPIController::class, 'updateSection']);
+            Route::delete('invoice_sections/{id}', [InvoiceEditAPIController::class, 'destroySection']);
+            Route::post('invoice_sections/{id}/duplicate', [InvoiceEditAPIController::class, 'duplicateSection']);
+            Route::post('invoice_rows', [InvoiceEditAPIController::class, 'storeRow']);
+            Route::put('invoice_rows/{id}', [InvoiceEditAPIController::class, 'updateRow']);
+            Route::delete('invoice_rows/{id}', [InvoiceEditAPIController::class, 'destroyRow']);
+            Route::post('invoice_acomptes', [InvoiceEditAPIController::class, 'storeAcompte']);
+            Route::delete('invoice_acomptes/{id}', [InvoiceEditAPIController::class, 'destroyAcompte']);
+            Route::post('invoice_spents', [InvoiceEditAPIController::class, 'storeSpent']);
+            Route::delete('invoice_spents/{id}', [InvoiceEditAPIController::class, 'destroySpent']);
             Route::post('get_month_invoices', [InvoiceAPIController::class, 'get_month_invoices']);
             Route::post('get_month_deposit', [InvoiceAPIController::class, 'get_month_invoices_deposit']);
             Route::post('get_month_spents', [InvoiceAPIController::class, 'get_month_spents']);

@@ -78,27 +78,35 @@ class InvoiceAPIController extends Controller
      */
     public function show(int $id)
     {
-        $invoice = Invoice::with(['projet.client', 'sections.rows', 'acomptes', 'spents'])->find($id);
+        $invoice = Invoice::with(['projet.client', 'sections.rows.article:id,image', 'acomptes', 'spents', 'documents'])->find($id);
         if (! $invoice) {
             return response()->json(['success' => false, 'message' => "Le devis n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
         }
 
         $sections = $invoice->sections->sortBy('ordre')->values()->map(function ($section) {
-            $rows = $section->rows->map(fn ($row) => [
+            $rows = $section->rows->sortBy('priorite_id')->map(fn ($row) => [
                 'id' => $row->id,
+                'invoice_section_id' => $row->invoice_section_id,
+                'article_id' => $row->article_id,
+                'priorite_id' => $row->priorite_id,
                 'designation' => $row->designation,
                 'reference' => $row->reference,
                 'quantite' => (float) $row->quantite,
                 'coef' => (float) $row->coef,
                 'prix' => (float) $row->prix,
+                'bought' => (float) $row->bought,
                 'total' => (float) $row->quantite * (float) $row->coef * (float) $row->prix,
                 'comment' => $row->comment,
+                'image' => $row->article?->image ? url($row->article->image) : null,
             ])->values();
 
             return [
                 'id' => $section->id,
                 'section' => $section->section,
                 'ordre' => $section->ordre,
+                'proposition' => $section->proposition,
+                'show' => (bool) $section->show,
+                'status' => (bool) $section->status,
                 'rows' => $rows,
                 'total' => $rows->sum('total'),
             ];
@@ -107,6 +115,11 @@ class InvoiceAPIController extends Controller
         $data = (new InvoiceResource($invoice))->resolve();
         $data['sections'] = $sections;
         $data['acompte_total'] = (float) $invoice->acomptes->sum('montant');
+        $data['spent_total'] = (float) $invoice->spents->sum('montant');
+        $data['client_id'] = $invoice->projet?->client_id;
+        $data['created_at'] = $invoice->created_at;
+        $data['documents'] = $invoice->documents->map(fn ($d) => ['id' => $d->id, 'name' => $d->name, 'type' => $d->type, 'url' => $d->file ? url($d->file) : null])->values();
+        $data['statuses'] = array_values((array) \App\Http\Controllers\InvoiceController::statut());
 
         return ResponseController::response(true, 'Le devis a été récupéré', $data);
     }
@@ -116,7 +129,40 @@ class InvoiceAPIController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $invoice = Invoice::find($id);
+        if (! $invoice) {
+            return response()->json(['success' => false, 'message' => "Le devis n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+        $statuses = array_values((array) \App\Http\Controllers\InvoiceController::statut());
+        $invoice->update($request->validate([
+            'reference' => ['sometimes', 'required', 'string', 'max:255'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'modalite' => ['sometimes', 'nullable', 'string'],
+            'note' => ['sometimes', 'nullable', 'string'],
+            'statut' => ['sometimes', 'required', 'string', \Illuminate\Validation\Rule::in($statuses)],
+            'tax' => ['sometimes', 'nullable', 'string', \Illuminate\Validation\Rule::in(['tva', 'brs', ''])],
+            'remise' => ['sometimes', 'nullable', 'numeric', 'min:0'],
+            'facture_date' => ['sometimes', 'nullable', 'date'],
+            'paydate' => ['sometimes', 'nullable', 'date'],
+        ]));
+
+        return $this->show((int) $id);
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/invoices/{id}/favorite", tags={"Invoices"}, summary="Ajouter / retirer des favoris",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Favori mis à jour"))
+     */
+    public function toggleFavorite(int $id)
+    {
+        $invoice = Invoice::find($id);
+        if (! $invoice) {
+            return response()->json(['success' => false, 'message' => "Le devis n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+        $invoice->favorite = ! $invoice->favorite;
+        $invoice->save();
+
+        return ResponseController::response(true, 'Favori mis à jour', ['favorite' => (bool) $invoice->favorite]);
     }
 
     /**

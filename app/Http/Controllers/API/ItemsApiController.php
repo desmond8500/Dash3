@@ -89,7 +89,7 @@ class ItemsApiController extends Controller
         }
 
         $articles = $query
-            ->with(['brand:id,name', 'provider:id,name'])
+            ->with(['brand:id,name', 'provider:id,name', 'tags'])
             ->latest()
             ->paginate($perPage);
 

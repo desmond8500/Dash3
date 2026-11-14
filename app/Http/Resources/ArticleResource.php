@@ -33,6 +33,8 @@ class ArticleResource extends JsonResource
             'provider_id' => $this->provider_id,
             'provider_name' => $this->provider->name ?? null,
             'image' => url($this->image ?? 'img/icons/no-camera.png'),
+            // Tags (servent au type des équipements et à leur icône sur les plans)
+            'tag_names' => $this->whenLoaded('tags', fn () => $this->tags->pluck('name')->values()),
         ];
     }
 }

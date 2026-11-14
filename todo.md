@@ -16,3 +16,5 @@ Projet
        - element secondaire (exemple: disquedur)
 
  coté je veux pouvoir importer des plans en dwg, pdf ou image et implanter les équipments dessus puis pouvoir exporter en pdf
+
+ 

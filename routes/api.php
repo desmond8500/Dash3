@@ -3,7 +3,9 @@
 use App\Http\Controllers\API\AchatController;
 use App\Http\Controllers\API\BrandAPIController;
 use App\Http\Controllers\API\ClientAPIController;
+use App\Http\Controllers\API\CommandeAPIController;
 use App\Http\Controllers\API\ContactAPIController;
+use App\Http\Controllers\API\CvAPIController;
 use App\Http\Controllers\API\DocumentAPIController;
 use App\Http\Controllers\API\IconAPIController;
 use App\Http\Controllers\API\FactureController;
@@ -115,6 +117,19 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('room/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
 
             Route::resource('journaux', JournalAPIController::class);
+            // Journal détaillé : sections (photos), intervenants
+            Route::post('journal_sections', [JournalAPIController::class, 'storeSection']);
+            Route::put('journal_sections/{id}', [JournalAPIController::class, 'updateSection']);
+            Route::delete('journal_sections/{id}', [JournalAPIController::class, 'destroySection']);
+            Route::post('journal_sections/{id}/images', [JournalAPIController::class, 'storeSectionImages']);
+            Route::delete('journal_images/{id}', [JournalAPIController::class, 'destroyImage']);
+            Route::get('journaux/{id}/options', [JournalAPIController::class, 'intervenantOptions']);
+            Route::post('journaux/{id}/intervenants', [JournalAPIController::class, 'storeIntervenant']);
+            Route::delete('journal_intervenants/{id}', [JournalAPIController::class, 'destroyIntervenant']);
+
+            // Modèles de badge et CV
+            Route::get('badge_modeles', [ProjetAPIController::class, 'getBadgeModeles']);
+            Route::apiResource('cvs', CvAPIController::class)->except(['show']);
 
             // Contacts et documents de projet
             Route::apiResource('contacts', ContactAPIController::class)->except(['show']);
@@ -151,6 +166,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('items_image/{article_id}', [ItemsApiController::class, 'getImages']);
             Route::get('items_link/{article_id}', [ItemsApiController::class, 'getLinks']);
             Route::get('items_document/{article_id}', [ItemsApiController::class, 'getDocuments']);
+            Route::post('items/{id}/links', [ItemsApiController::class, 'storeLink']);
+            Route::delete('items_link/{id}', [ItemsApiController::class, 'destroyLink']);
+            Route::post('items/{id}/documents', [ItemsApiController::class, 'storeDocument']);
+            Route::delete('items_document/{id}', [ItemsApiController::class, 'destroyDocument']);
+            // Commandes (réapprovisionnement)
+            Route::get('commandes', [CommandeAPIController::class, 'index']);
+            Route::put('commandes/articles/{articleId}', [CommandeAPIController::class, 'update']);
+            Route::delete('commandes/articles/{articleId}', [CommandeAPIController::class, 'destroy']);
             Route::apiResource('providers', ProviderAPIController::class);
             Route::apiResource('brands', BrandAPIController::class);
             Route::post('providers/{id}/logo', [ProviderAPIController::class, 'updateLogo']);

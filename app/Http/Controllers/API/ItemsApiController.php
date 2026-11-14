@@ -12,6 +12,7 @@ use App\Models\Commande;
 use Spatie\Tags\Tag;
 use App\Models\ArticleDependence;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Resources\ArticleResource;
@@ -243,6 +244,67 @@ class ItemsApiController extends Controller
         $documents = ArticleDocumentResource::collection($documents);
 
         return ResponseController::response(true, "Les documents de l'article ont été récupérés", $documents);
+    }
+
+    /** @OA\Post(path="/api/v1/items/{id}/links", tags={"Articles"}, summary="Ajouter un lien à un article", security={{"sanctum":{}}}, @OA\Response(response=201, description="Créé")) */
+    public function storeLink(Request $request, int $id)
+    {
+        $article = Article::find($id);
+        if (! $article) return ResponseController::response(false, 'Article non trouvé', null, 404);
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'link' => ['required', 'url', 'max:2048'],
+        ]);
+        $link = ArticleLink::create($data + ['article_id' => $id]);
+
+        return response()->json(['success' => true, 'message' => 'Lien ajouté', 'data' => new ArticleLinkResource($link), 'meta' => null], 201);
+    }
+
+    /** @OA\Delete(path="/api/v1/items_link/{id}", tags={"Articles"}, summary="Supprimer un lien", security={{"sanctum":{}}}, @OA\Response(response=200, description="Supprimé")) */
+    public function destroyLink(int $id)
+    {
+        $link = ArticleLink::find($id);
+        if (! $link) return ResponseController::response(false, 'Lien non trouvé', null, 404);
+        $link->delete();
+
+        return ResponseController::response(true, 'Lien supprimé', null);
+    }
+
+    /** @OA\Post(path="/api/v1/items/{id}/documents", tags={"Articles"}, summary="Ajouter un document à un article (multipart : file, name?)", security={{"sanctum":{}}}, @OA\Response(response=201, description="Créé")) */
+    public function storeDocument(Request $request, int $id)
+    {
+        $article = Article::find($id);
+        if (! $article) return ResponseController::response(false, 'Article non trouvé', null, 404);
+        $request->validate([
+            'name' => ['nullable', 'string', 'max:255'],
+            'file' => ['required', 'file', 'max:20480'],
+        ]);
+        $file = $request->file('file');
+        $ext = strtolower($file->getClientOriginalExtension());
+        if (in_array($ext, ['php', 'phtml', 'phar', 'sh', 'exe', 'bat', 'cmd', 'js', 'html', 'htm', 'svg'], true)) {
+            return response()->json(['success' => false, 'message' => "Type de fichier refusé (.$ext)", 'error' => null, 'meta' => null], 422);
+        }
+        $dir = "stock/articles/$id/documents";
+        $name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . Str::random(6) . ($ext ? ".$ext" : '');
+        Storage::disk('public')->putFileAs($dir, $file, $name);
+        $document = ArticleDocument::create([
+            'article_id' => $id,
+            'name' => $request->input('name') ?: $file->getClientOriginalName(),
+            'folder' => "storage/$dir/$name",
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Document ajouté', 'data' => new ArticleDocumentResource($document), 'meta' => null], 201);
+    }
+
+    /** @OA\Delete(path="/api/v1/items_document/{id}", tags={"Articles"}, summary="Supprimer un document", security={{"sanctum":{}}}, @OA\Response(response=200, description="Supprimé")) */
+    public function destroyDocument(int $id)
+    {
+        $document = ArticleDocument::find($id);
+        if (! $document) return ResponseController::response(false, 'Document non trouvé', null, 404);
+        Storage::disk('public')->delete(Str::after($document->folder, 'storage/'));
+        $document->delete();
+
+        return ResponseController::response(true, 'Document supprimé', null);
     }
 
     /**

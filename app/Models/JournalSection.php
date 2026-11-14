@@ -14,6 +14,11 @@ class JournalSection extends Model
         'order',
     ];
 
+    public function images()
+    {
+        return $this->hasMany(JournalImage::class)->latest();
+    }
+
     public function invoice(): BelongsTo
     {
         return $this->belongsTo(Invoice::class);

@@ -102,6 +102,7 @@ class TaskAPIController extends Controller
             'client_id' => ['nullable', 'integer', 'exists:clients,id'],
             'projet_id' => ['nullable', 'integer', 'exists:projets,id'],
             'devis_id' => ['nullable', 'integer', 'exists:invoices,id'],
+            'journal_id' => ['nullable', 'integer', 'exists:journals,id'],
         ]);
         $task = new Task();
         $task->client_id = $request->client_id;

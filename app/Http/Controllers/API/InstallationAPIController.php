@@ -7,6 +7,10 @@ use App\Http\Controllers\ResponseController;
 use App\Jobs\ConvertDwgPlan;
 use App\Models\Building;
 use App\Models\Equipement;
+use App\Models\Icon;
+use App\Models\Room;
+use App\Models\Stage;
+use App\Models\Article;
 use App\Models\InstallationSysteme;
 use App\Models\Plan;
 use App\Models\PlanMarker;
@@ -32,6 +36,44 @@ class InstallationAPIController extends Controller
     // Arborescence
     // ------------------------------------------------------------------
 
+    /** Relations des équipements : article, nombre posé sur les plans, local */
+    private const EQUIPEMENT_WITH = [
+        'article:id,designation,reference,image',
+        'article.tags',
+    ];
+
+    /** Ajoute à chaque équipement : placed (emplacements posés sur les plans) et icon (via les tags de l'article) */
+    private function decorate($equipements, $icons = null)
+    {
+        $icons ??= Icon::all();
+        foreach ($equipements as $e) {
+            $e->placed = (int) ($e->placed_count ?? $e->markers()->count());
+            $tags = $e->article?->tags?->pluck('name')->map(fn ($t) => mb_strtolower($t))->all() ?? [];
+            $e->icon = $icons->first(fn ($i) => $i->tag && in_array(mb_strtolower($i->tag), $tags, true));
+            if ($e->relationLoaded('article') && $e->article) {
+                $e->article->image_url = $e->article->image ? url($e->article->image) : null;
+                $e->article->tag_names = $tags;
+                $e->article->unsetRelation('tags');
+            }
+            unset($e->placed_count);
+            if ($e->relationLoaded('children')) $this->decorate($e->children, $icons);
+        }
+
+        return $equipements;
+    }
+
+    private function systemesQuery()
+    {
+        $with = self::EQUIPEMENT_WITH;
+        $count = ['markers as placed_count'];
+
+        return InstallationSysteme::with([
+            'baseEquipements' => fn ($q) => $q->with($with)->withCount($count),
+            'baseEquipements.children' => fn ($q) => $q->with($with)->withCount($count),
+            'systeme:id,name,icon',
+        ]);
+    }
+
     /**
      * @OA\Get(path="/api/v1/projets/{id}/installations", tags={"Installations"},
      *      summary="Bâtiments du projet avec leurs systèmes et équipements (arborescence complète)",
@@ -43,13 +85,16 @@ class InstallationAPIController extends Controller
             return $this->notFound('Projet');
         }
 
-        $systemes = InstallationSysteme::with(['baseEquipements.children', 'systeme:id,name,icon'])
+        $systemes = $this->systemesQuery()
             ->where('projet_id', $projetId)
             ->orderBy('order')
             ->orderBy('id')
             ->get();
+        $icons = Icon::all();
+        $systemes->each(fn ($sys) => $this->decorate($sys->baseEquipements, $icons));
 
         $buildings = Building::where('projet_id', $projetId)
+            ->with(['stages' => fn ($q) => $q->orderBy('order')->orderBy('id'), 'stages.rooms'])
             ->orderBy('order')
             ->orderBy('id')
             ->get(['id', 'projet_id', 'name', 'description', 'order'])
@@ -64,7 +109,121 @@ class InstallationAPIController extends Controller
             'unassigned' => $systemes->whereNull('building_id')->values(),
             // Catalogue de systèmes (vidéosurveillance, alarme…)
             'catalogue' => Systeme::orderBy('name')->get(['id', 'name', 'icon']),
+            'icons' => $icons,
         ]);
+    }
+
+    /**
+     * @OA\Get(path="/api/v1/buildings/{id}", tags={"Installations"},
+     *      summary="Bâtiment : niveaux et locaux, systèmes et équipements, plans",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Success"))
+     */
+    public function showBuilding(int $id)
+    {
+        $building = Building::with(['stages' => fn ($q) => $q->orderBy('order')->orderBy('id'), 'stages.rooms'])->find($id);
+        if (! $building) return $this->notFound('Bâtiment');
+
+        $icons = Icon::all();
+        $systemes = $this->systemesQuery()->where('building_id', $id)->orderBy('order')->orderBy('id')->get();
+        $systemes->each(fn ($sys) => $this->decorate($sys->baseEquipements, $icons));
+
+        return ResponseController::response(true, 'Bâtiment récupéré', [
+            'building' => $building,
+            'projet' => Projet::with('client:id,name')->find($building->projet_id, ['id', 'name', 'client_id']),
+            'systemes' => $systemes,
+            'plans' => Plan::where('building_id', $id)->latest()->get(),
+            'catalogue' => Systeme::orderBy('name')->get(['id', 'name', 'icon']),
+            'icons' => $icons,
+        ]);
+    }
+
+    // ------------------------------------------------------------------
+    // Niveaux et locaux
+    // ------------------------------------------------------------------
+
+    /** @OA\Post(path="/api/v1/stages", tags={"Installations"}, summary="Ajouter un niveau à un bâtiment", security={{"sanctum":{}}}, @OA\Response(response=201, description="Créé")) */
+    public function storeStage(Request $request)
+    {
+        $data = $request->validate([
+            'building_id' => ['required', 'integer', 'exists:buildings,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'order' => ['nullable', 'integer'],
+        ]);
+        $data['order'] ??= Stage::where('building_id', $data['building_id'])->count();
+        $stage = Stage::create($data);
+
+        return response()->json(['success' => true, 'message' => 'Niveau ajouté', 'data' => $stage->load('rooms'), 'meta' => null], 201);
+    }
+
+    /** @OA\Put(path="/api/v1/stages/{id}", tags={"Installations"}, summary="Modifier un niveau", security={{"sanctum":{}}}, @OA\Response(response=200, description="Modifié")) */
+    public function updateStage(Request $request, int $id)
+    {
+        $stage = Stage::find($id);
+        if (! $stage) return $this->notFound('Niveau');
+        $stage->update($request->validate([
+            'name' => ['sometimes', 'required', 'string', 'max:255'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'order' => ['sometimes', 'integer'],
+        ]));
+
+        return ResponseController::response(true, 'Niveau modifié', $stage->load('rooms'));
+    }
+
+    /** @OA\Delete(path="/api/v1/stages/{id}", tags={"Installations"}, summary="Supprimer un niveau et ses locaux", security={{"sanctum":{}}}, @OA\Response(response=200, description="Supprimé")) */
+    public function destroyStage(int $id)
+    {
+        $stage = Stage::find($id);
+        if (! $stage) return $this->notFound('Niveau');
+        DB::transaction(function () use ($stage) {
+            $roomIds = Room::where('stage_id', $stage->id)->pluck('id');
+            Equipement::where('stage_id', $stage->id)->orWhereIn('room_id', $roomIds)->update(['stage_id' => null, 'room_id' => null]);
+            Room::whereIn('id', $roomIds)->delete();
+            $stage->delete();
+        });
+
+        return ResponseController::response(true, 'Niveau supprimé', null);
+    }
+
+    /** @OA\Post(path="/api/v1/rooms", tags={"Installations"}, summary="Ajouter un local à un niveau", security={{"sanctum":{}}}, @OA\Response(response=201, description="Créé")) */
+    public function storeRoom(Request $request)
+    {
+        $data = $request->validate([
+            'stage_id' => ['required', 'integer', 'exists:stages,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'order' => ['nullable', 'integer'],
+        ]);
+        $data['order'] ??= Room::where('stage_id', $data['stage_id'])->count();
+        $room = Room::create($data);
+
+        return response()->json(['success' => true, 'message' => 'Local ajouté', 'data' => $room, 'meta' => null], 201);
+    }
+
+    /** @OA\Put(path="/api/v1/rooms/{id}", tags={"Installations"}, summary="Modifier un local", security={{"sanctum":{}}}, @OA\Response(response=200, description="Modifié")) */
+    public function updateRoom(Request $request, int $id)
+    {
+        $room = Room::find($id);
+        if (! $room) return $this->notFound('Local');
+        $room->update($request->validate([
+            'stage_id' => ['sometimes', 'integer', 'exists:stages,id'],
+            'name' => ['sometimes', 'required', 'string', 'max:255'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'order' => ['sometimes', 'integer'],
+        ]));
+
+        return ResponseController::response(true, 'Local modifié', $room);
+    }
+
+    /** @OA\Delete(path="/api/v1/rooms/{id}", tags={"Installations"}, summary="Supprimer un local", security={{"sanctum":{}}}, @OA\Response(response=200, description="Supprimé")) */
+    public function destroyRoom(int $id)
+    {
+        $room = Room::find($id);
+        if (! $room) return $this->notFound('Local');
+        Equipement::where('room_id', $id)->update(['room_id' => null]);
+        $room->delete();
+
+        return ResponseController::response(true, 'Local supprimé', null);
     }
 
     // ------------------------------------------------------------------
@@ -170,6 +329,9 @@ class InstallationAPIController extends Controller
             'installation_systeme_id' => [$create ? 'required' : 'prohibited', 'integer', 'exists:installation_systemes,id'],
             'parent_id' => ['sometimes', 'nullable', 'integer', 'exists:equipements,id'],
             'article_id' => ['sometimes', 'nullable', 'integer', 'exists:articles,id'],
+            'stage_id' => ['sometimes', 'nullable', 'integer', 'exists:stages,id'],
+            'room_id' => ['sometimes', 'nullable', 'integer', 'exists:rooms,id'],
+            'quantite' => ['sometimes', 'integer', 'min:1', 'max:10000'],
             'name' => [$req, 'string', 'max:255'],
             'type' => ['sometimes', 'nullable', 'string', 'max:255'],
             'modele' => ['sometimes', 'nullable', 'string', 'max:255'],
@@ -191,6 +353,32 @@ class InstallationAPIController extends Controller
         return null;
     }
 
+
+    /** Type déduit des tags de l'article quand il n'est pas saisi ; le local fixe le niveau */
+    private function fillFromArticle(array $data, ?Equipement $current = null): array
+    {
+        $articleId = array_key_exists('article_id', $data) ? $data['article_id'] : $current?->article_id;
+        $type = array_key_exists('type', $data) ? $data['type'] : $current?->type;
+        if ($articleId && ! $type) {
+            $article = Article::with('tags')->find($articleId);
+            if ($tag = $article?->tags->first()) $data['type'] = ucfirst($tag->name);
+        }
+        if (! empty($data['room_id'])) {
+            $data['stage_id'] = Room::find($data['room_id'])?->stage_id;
+        }
+
+        return $data;
+    }
+
+    private function equipementPayload(Equipement $e)
+    {
+        $e->load(self::EQUIPEMENT_WITH)->loadCount('markers as placed_count');
+        $e->load(['children' => fn ($q) => $q->with(self::EQUIPEMENT_WITH)->withCount('markers as placed_count')]);
+        $this->decorate([$e]);
+
+        return $e;
+    }
+
     /** @OA\Post(path="/api/v1/equipements", tags={"Installations"}, summary="Ajouter un équipement (de base ou secondaire)", security={{"sanctum":{}}}, @OA\Response(response=201, description="Créé")) */
     public function storeEquipement(Request $request)
     {
@@ -198,9 +386,9 @@ class InstallationAPIController extends Controller
         if ($msg = $this->invalidParent($data['parent_id'] ?? null, (int) $data['installation_systeme_id'])) {
             return response()->json(['success' => false, 'message' => $msg, 'error' => null, 'meta' => null], 422);
         }
-        $equipement = Equipement::create($data + ['order' => 0]);
+        $equipement = Equipement::create($this->fillFromArticle($data) + ['order' => 0]);
 
-        return response()->json(['success' => true, 'message' => 'Équipement ajouté', 'data' => $equipement->load('children'), 'meta' => null], 201);
+        return response()->json(['success' => true, 'message' => 'Équipement ajouté', 'data' => $this->equipementPayload($equipement), 'meta' => null], 201);
     }
 
     /** @OA\Put(path="/api/v1/equipements/{id}", tags={"Installations"}, summary="Modifier un équipement", security={{"sanctum":{}}}, @OA\Response(response=200, description="Modifié")) */
@@ -217,9 +405,32 @@ class InstallationAPIController extends Controller
                 return response()->json(['success' => false, 'message' => 'Un équipement qui a des équipements rattachés ne peut pas devenir secondaire', 'error' => null, 'meta' => null], 422);
             }
         }
-        $equipement->update($data);
+        $equipement->update($this->fillFromArticle($data, $equipement));
 
-        return ResponseController::response(true, 'Équipement modifié', $equipement->load('children'));
+        return ResponseController::response(true, 'Équipement modifié', $this->equipementPayload($equipement));
+    }
+
+    /** @OA\Post(path="/api/v1/equipements/{id}/duplicate", tags={"Installations"}, summary="Dupliquer un équipement (et ses équipements secondaires)", security={{"sanctum":{}}}, @OA\Response(response=201, description="Créé")) */
+    public function duplicateEquipement(int $id)
+    {
+        $source = Equipement::with('children')->find($id);
+        if (! $source) return $this->notFound('Équipement');
+
+        $copy = DB::transaction(function () use ($source) {
+            $copy = $source->replicate(['order']);
+            $copy->name = $source->name . ' (copie)';
+            $copy->order = $source->order + 1;
+            $copy->save();
+            foreach ($source->children as $child) {
+                $c = $child->replicate();
+                $c->parent_id = $copy->id;
+                $c->save();
+            }
+
+            return $copy;
+        });
+
+        return response()->json(['success' => true, 'message' => 'Équipement dupliqué', 'data' => $this->equipementPayload($copy), 'meta' => null], 201);
     }
 
     /** @OA\Delete(path="/api/v1/equipements/{id}", tags={"Installations"}, summary="Supprimer un équipement (et ses équipements secondaires)", security={{"sanctum":{}}}, @OA\Response(response=200, description="Supprimé")) */
@@ -321,7 +532,7 @@ class InstallationAPIController extends Controller
 
         return ResponseController::response(true, 'Emplacements récupérés', [
             'plan' => $plan,
-            'markers' => $plan->markers()->with('equipement:id,name,type,parent_id,installation_systeme_id')->get(),
+            'markers' => $plan->markers()->with('equipement:id,name,type,parent_id,installation_systeme_id,quantite')->get(),
         ]);
     }
 
@@ -357,6 +568,12 @@ class InstallationAPIController extends Controller
                     'icon' => $m['icon'] ?? null,
                     'color' => $m['color'] ?? null,
                 ]);
+            }
+
+            // Synchronisation : un équipement posé plus de fois que sa quantité voit sa quantité augmenter
+            $ids = collect($data['markers'])->pluck('equipement_id')->filter()->unique();
+            foreach (Equipement::whereIn('id', $ids)->withCount('markers')->get() as $e) {
+                if ($e->markers_count > $e->quantite) $e->update(['quantite' => $e->markers_count]);
             }
         });
 

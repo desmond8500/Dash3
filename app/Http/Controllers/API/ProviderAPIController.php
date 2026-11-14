@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ResponseController;
 use App\Models\Provider;
 use Illuminate\Http\Request;
@@ -38,9 +39,11 @@ class ProviderAPIController extends Controller
     public function index(Request $request)
     {
         $providers = Provider::query()
+            ->withCount('article as articles_count')
             ->when($request->filled('search'), fn ($q) => $q->where('name', 'like', '%' . $request->search . '%'))
             ->orderBy('name')
-            ->get();
+            ->get()
+            ->each(fn ($provider) => $provider->logo_url = $provider->logo ? url($provider->logo) : null);
 
         return ResponseController::response(true, 'Les fournisseurs ont été récupérés', $providers);
     }
@@ -134,5 +137,29 @@ class ProviderAPIController extends Controller
         $provider->delete();
 
         return ResponseController::response(true, 'Le fournisseur a été supprimé', null);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/providers/{id}/logo",
+     *      tags={"Fournisseurs"},
+     *      summary="Remplacer le logo (multipart, champ image)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Logo mis à jour")
+     * )
+     */
+    public function updateLogo(Request $request, int $id)
+    {
+        $provider = Provider::find($id);
+        if (! $provider) {
+            return $this->notFound();
+        }
+        $request->validate(['image' => ['required', 'image', 'max:4096']]);
+
+        // Même dossier que la page web
+        $provider->logo = ImageController::update_logo("stock/providers/$provider->id/logo", $request->file('image'));
+        $provider->save();
+
+        return ResponseController::response(true, 'Logo mis à jour', ['logo_url' => url($provider->logo)]);
     }
 }

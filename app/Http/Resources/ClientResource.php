@@ -24,6 +24,9 @@ class ClientResource extends JsonResource
             'status' => $this->status,
             'type' => $this->type,
             'favorite' => $this->favorite,
+            'projets_count' => $this->whenHas('projets_count'),
+            'tasks_count' => $this->whenHas('tasks_count'),
+            'contacts_count' => $this->whenHas('contacts_count'),
         ];
     }
 }

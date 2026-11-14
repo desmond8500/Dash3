@@ -32,7 +32,8 @@ class ProjetResource extends JsonResource
                     'contacts' => $this->contacts,
                     'notes' => $this->notes,
                     'badges' => $this->badges,
-                    'img' => url($this->client->avatar)
+                    'img' => url($this->logo ?? $this->client?->avatar ?? 'img/icons/005-notebook.png'),
+                    'logo' => $this->logo
         ];
     }
 }

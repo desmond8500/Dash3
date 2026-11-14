@@ -67,11 +67,48 @@ class InvoiceAPIController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *      path="/api/v1/invoices/{id}",
+     *      tags={"Invoices"},
+     *      summary="Détail d'un devis : sections, lignes et totaux",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success"),
+     *      @OA\Response(response=404, description="Devis introuvable")
+     * )
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $invoice = Invoice::with(['projet.client', 'sections.rows', 'acomptes', 'spents'])->find($id);
+        if (! $invoice) {
+            return response()->json(['success' => false, 'message' => "Le devis n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+
+        $sections = $invoice->sections->sortBy('ordre')->values()->map(function ($section) {
+            $rows = $section->rows->map(fn ($row) => [
+                'id' => $row->id,
+                'designation' => $row->designation,
+                'reference' => $row->reference,
+                'quantite' => (float) $row->quantite,
+                'coef' => (float) $row->coef,
+                'prix' => (float) $row->prix,
+                'total' => (float) $row->quantite * (float) $row->coef * (float) $row->prix,
+                'comment' => $row->comment,
+            ])->values();
+
+            return [
+                'id' => $section->id,
+                'section' => $section->section,
+                'ordre' => $section->ordre,
+                'rows' => $rows,
+                'total' => $rows->sum('total'),
+            ];
+        });
+
+        $data = (new InvoiceResource($invoice))->resolve();
+        $data['sections'] = $sections;
+        $data['acompte_total'] = (float) $invoice->acomptes->sum('montant');
+
+        return ResponseController::response(true, 'Le devis a été récupéré', $data);
     }
 
     /**

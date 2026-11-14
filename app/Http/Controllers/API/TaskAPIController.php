@@ -23,15 +23,25 @@ class TaskAPIController extends Controller
 
     function index(Request $request)
     {
-        $perPage = min($request->get('per_page', 6), 100);
+        $perPage = min((int) $request->get('per_page', 6), 100);
+        $search = $request->search;
 
-        if ($request->search) {
-            $tasks = Task::where('name', 'like', '%' . $request->search . '%')
-                ->orWhere('description', 'like', '%' . $request->search . '%')
-                ->paginate($perPage);
-        } else {
-            $tasks = Task::paginate($perPage);
-        }
+        $tasks = Task::query()
+            ->with(['priority', 'statut'])
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('description', 'like', '%' . $search . '%');
+                });
+            })
+            // ?statut=active : tâches non terminées ; ?statut=finished : terminées (statut 4)
+            ->when($request->statut === 'active', fn ($q) => $q->where('statut_id', '!=', 4))
+            ->when($request->statut === 'finished', fn ($q) => $q->where('statut_id', 4))
+            ->when($request->filled('projet_id'), fn ($q) => $q->where('projet_id', $request->projet_id))
+            ->orderBy('priority_id', 'desc')
+            ->latest()
+            ->paginate($perPage);
+
         return ResponseController::response(true, 'Les taches ont été récupérés avec succès', $tasks, [
             'current_page' => $tasks->currentPage(),
             'last_page' => $tasks->lastPage(),
@@ -135,7 +145,7 @@ class TaskAPIController extends Controller
 
     function show($id)
     {
-        $task = Task::find($id);
+        $task = Task::with(['priority', 'statut', 'client:id,name', 'projet:id,name,client_id', 'subtasks'])->find($id);
         if ($task) {
             return ResponseController::response(true, 'La tache a été récupéré avec succès', $task);
         } else {

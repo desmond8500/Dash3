@@ -22,12 +22,40 @@ class InvoiceAPIController extends Controller
      *       ),
      *     )
      */
-    public function index()
+    public function index(Request $request)
     {
-        $invoices = Invoice::all();
-        $invoices = InvoiceResource::collection($invoices);
+        // Sans paramètre : comportement historique (tous les devis).
+        // Avec ?search= ou ?per_page= : liste filtrée et paginée.
+        if (! $request->filled('search') && ! $request->filled('per_page')) {
+            $invoices = InvoiceResource::collection(Invoice::all());
 
-        return ResponseController::response(true, "Tous les devis ont été récupérés", $invoices);
+            return ResponseController::response(true, "Tous les devis ont été récupérés", $invoices);
+        }
+
+        $perPage = min((int) $request->get('per_page', 20), 100);
+        $search = $request->search;
+
+        $invoices = Invoice::query()
+            ->with('projet.client')
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($q) use ($search) {
+                    $q->where('reference', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('client_name', 'like', "%{$search}%")
+                        ->orWhere('projet_name', 'like', "%{$search}%")
+                        ->orWhereHas('projet', fn ($p) => $p->where('name', 'like', "%{$search}%"))
+                        ->orWhereHas('projet.client', fn ($c) => $c->where('name', 'like', "%{$search}%"));
+                });
+            })
+            ->latest()
+            ->paginate($perPage);
+
+        return ResponseController::response(true, "Les devis ont été récupérés", InvoiceResource::collection($invoices), [
+            'current_page' => $invoices->currentPage(),
+            'last_page' => $invoices->lastPage(),
+            'per_page' => $invoices->perPage(),
+            'total' => $invoices->total(),
+        ]);
     }
 
     /**

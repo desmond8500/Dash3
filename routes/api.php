@@ -88,8 +88,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('items_image/{article_id}', [ItemsApiController::class, 'getImages']);
             Route::get('items_link/{article_id}', [ItemsApiController::class, 'getLinks']);
             Route::get('items_document/{article_id}', [ItemsApiController::class, 'getDocuments']);
-            Route::resource('providers', ProviderAPIController::class);
-            Route::resource('brands', BrandAPIController::class);
+            Route::apiResource('providers', ProviderAPIController::class);
+            Route::apiResource('brands', BrandAPIController::class);
         });
 
         // Finances : devis, factures, achats, transactions

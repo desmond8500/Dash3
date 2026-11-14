@@ -38,6 +38,9 @@ class TaskAPIController extends Controller
             ->when($request->statut === 'active', fn ($q) => $q->where('statut_id', '!=', 4))
             ->when($request->statut === 'finished', fn ($q) => $q->where('statut_id', 4))
             ->when($request->filled('projet_id'), fn ($q) => $q->where('projet_id', $request->projet_id))
+            // Planning : ?from=AAAA-MM-JJ&to=AAAA-MM-JJ sur la date d'échéance
+            ->when($request->filled('from'), fn ($q) => $q->whereDate('expiration_date', '>=', $request->from))
+            ->when($request->filled('to'), fn ($q) => $q->whereDate('expiration_date', '<=', $request->to))
             ->orderBy('priority_id', 'desc')
             ->latest()
             ->paginate($perPage);
@@ -91,6 +94,12 @@ class TaskAPIController extends Controller
      */
 
      function store(Request $request){
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'expiration_date' => ['nullable', 'date'],
+            'priority_id' => ['nullable', 'integer'],
+            'statut_id' => ['nullable', 'integer'],
+        ]);
         $task = new Task();
         $task->client_id = $request->client_id;
         $task->projet_id = $request->projet_id;
@@ -103,12 +112,13 @@ class TaskAPIController extends Controller
         $task->name = $request->name;
         $task->description = $request->description;
 
-        $task->priority_id = $request->priority_id;
-        $task->statut_id = $request->statut_id;
+        // priority_id, statut_id et favoris ne sont pas nullables : valeurs par défaut
+        $task->priority_id = $request->input('priority_id', 1) ?? 1;
+        $task->statut_id = $request->input('statut_id', 1) ?? 1;
         $task->expiration_date = $request->expiration_date;
         $task->start_date = $request->start_date;
         $task->end_date = $request->end_date;
-        $task->favoris = $request->favoris;
+        $task->favoris = (bool) $request->input('favoris', false);
 
 
         if ($task->save()) {
@@ -276,5 +286,27 @@ class TaskAPIController extends Controller
         } else {
             return ResponseController::response(false, 'Tache non trouvée', null, 404);
         }
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/tasks/{id}/statut",
+     *      tags={"Taches"},
+     *      summary="Changer le statut d'une tâche (1 Nouveau, 2 En cours, 3 En pause, 4 Terminé, 5 Clôturé)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Statut mis à jour")
+     * )
+     */
+    function setStatut(Request $request, int $id)
+    {
+        $task = Task::find($id);
+        if (! $task) {
+            return response()->json(['success' => false, 'message' => 'Tache non trouvée', 'error' => null, 'meta' => null], 404);
+        }
+        $data = $request->validate(['statut_id' => ['required', 'integer', 'between:1,5']]);
+        $task->statut_id = $data['statut_id'];
+        $task->save();
+
+        return ResponseController::response(true, 'Statut mis à jour', $task->load(['priority', 'statut']));
     }
 }

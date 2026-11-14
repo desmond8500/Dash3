@@ -82,6 +82,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::resource('projet_notes', NoteAPIController::class);
             Route::get('get_projet_notes/{projet_id}', [NoteAPIController::class, 'get_projet_notes']);
 
+            Route::post('tasks/{id}/statut', [TaskAPIController::class, 'setStatut']);
             Route::resource('tasks', TaskAPIController::class);
             Route::resource('liens', LiensControlleur::class);
 

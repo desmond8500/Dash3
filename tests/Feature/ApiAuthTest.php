@@ -49,6 +49,8 @@ class ApiAuthTest extends TestCase
             'badges projet'      => ['GET', '/api/v1/projets/1/badges'],
             'types articles'     => ['GET', '/api/v1/items_types'],
             'commander article'  => ['POST', '/api/v1/items/1/commande'],
+            'planning tâches'    => ['GET', '/api/v1/tasks?from=2026-11-09&to=2026-11-15'],
+            'statut tâche'       => ['POST', '/api/v1/tasks/1/statut'],
             'devis'              => ['GET', '/api/v1/invoices'],
             'devis du mois'      => ['POST', '/api/v1/get_month_invoices'],
             'factures'           => ['GET', '/api/v1/factures'],

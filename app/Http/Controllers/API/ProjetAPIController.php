@@ -8,6 +8,7 @@ use App\Http\Controllers\ResponseController;
 use App\Http\Resources\ProjetResource;
 use App\Models\Projet;
 use App\Models\Task;
+use App\Models\Badge;
 use Illuminate\Http\Request;
 
 class ProjetAPIController extends Controller
@@ -325,5 +326,36 @@ class ProjetAPIController extends Controller
         $projet->save();
 
         return ResponseController::response(true, 'Logo mis à jour', ['logo_url' => url($projet->logo)]);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/v1/projets/{id}/badges",
+     *      tags={"Projets"},
+     *      summary="Badges du projet (onglet Badges)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success")
+     * )
+     */
+    public function getBadges(int $id)
+    {
+        if (! Projet::whereKey($id)->exists()) {
+            return response()->json(['success' => false, 'message' => 'Projet non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $badges = Badge::where('projet_id', $id)
+            ->orderBy('nom')
+            ->get()
+            ->map(fn ($b) => [
+                'id' => $b->id,
+                'prenom' => $b->prenom,
+                'nom' => $b->nom,
+                'fonction' => $b->fonction,
+                'service' => $b->service,
+                'direction' => $b->direction,
+                'matricule' => $b->matricule,
+                'photo' => $b->photo ? url($b->photo) : null,
+            ]);
+
+        return ResponseController::response(true, 'Badges récupérés', $badges);
     }
 }

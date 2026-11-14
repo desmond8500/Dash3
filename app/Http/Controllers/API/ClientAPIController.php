@@ -370,4 +370,35 @@ class ClientAPIController extends Controller
         }
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/v1/clients/{id}/contacts",
+     *      tags={"Clients"},
+     *      summary="Contacts d'un client (comme l'onglet Contacts de la page Projets)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success")
+     * )
+     */
+    function getContacts(int $id)
+    {
+        if (! Client::whereKey($id)->exists()) {
+            return response()->json(['success' => false, 'message' => 'Client non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $contacts = Contact::where('client_id', $id)
+            ->orderBy('firstname')
+            ->get()
+            ->map(fn ($c) => [
+                'id' => $c->id,
+                'firstname' => $c->firstname,
+                'lastname' => $c->lastname,
+                'fonction' => $c->fonction,
+                'societe' => $c->societe,
+                'phone' => $c->phone,
+                'email' => $c->email,
+                'projet_id' => $c->projet_id,
+                'avatar' => $c->avatar ? url($c->avatar) : null,
+            ]);
+
+        return ResponseController::response(true, 'Contacts récupérés', $contacts);
+    }
 }

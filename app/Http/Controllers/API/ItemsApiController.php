@@ -8,6 +8,8 @@ use App\Http\Resources\ArticleDocumentResource;
 use App\Http\Resources\ArticleImageResource;
 use App\Http\Resources\ArticleLinkResource;
 use App\Models\Article;
+use App\Models\Commande;
+use Spatie\Tags\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Resources\ArticleResource;
@@ -78,6 +80,10 @@ class ItemsApiController extends Controller
             if ($request->filled($filter)) {
                 $query->where($filter, $request->input($filter));
             }
+        }
+        // Type d'article (tags spatie de type stock_article)
+        if ($request->filled('type')) {
+            $query->withAnyTags([$request->input('type')], 'stock_article');
         }
 
         $articles = $query
@@ -337,5 +343,48 @@ class ItemsApiController extends Controller
         $article->delete();
 
         return ResponseController::response(true, "L'article a été supprimé", null);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/v1/items_types",
+     *      tags={"Articles"},
+     *      summary="Types d'articles (filtre Types de la page Articles)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success")
+     * )
+     */
+    public function getTypes()
+    {
+        $types = Tag::getWithType('stock_article')
+            ->map(fn ($tag) => ['id' => $tag->id, 'name' => $tag->name])
+            ->sortBy('name')
+            ->values();
+
+        return ResponseController::response(true, "Les types d'articles ont été récupérés", $types);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/items/{id}/commande",
+     *      tags={"Articles"},
+     *      summary="Commander un article (action Commander de la page Articles)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=201, description="Commande créée")
+     * )
+     */
+    public function commander(Request $request, int $id)
+    {
+        if (! Article::whereKey($id)->exists()) {
+            return response()->json(['success' => false, 'message' => "L'article n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+        $data = $request->validate(['quantity' => ['nullable', 'integer', 'min:1']]);
+
+        $commande = Commande::create([
+            'article_id' => $id,
+            'quantity' => $data['quantity'] ?? 1,
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Article ajouté aux commandes', 'data' => $commande, 'meta' => null], 201);
     }
 }

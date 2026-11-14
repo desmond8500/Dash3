@@ -64,11 +64,13 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('clients_tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
             Route::post('clients/{id}/favorite', [ClientAPIController::class, 'toggleFavorite']);
             Route::post('clients/{id}/avatar', [ClientAPIController::class, 'updateAvatar']);
+            Route::get('clients/{id}/contacts', [ClientAPIController::class, 'getContacts']);
 
             Route::resource('projets', ProjetAPIController::class);
             Route::get('projet/tasks/{id}', [ProjetAPIController::class, 'getTasksByProjet']);
             Route::post('projets/{id}/favorite', [ProjetAPIController::class, 'toggleFavorite']);
             Route::post('projets/{id}/logo', [ProjetAPIController::class, 'updateLogo']);
+            Route::get('projets/{id}/badges', [ProjetAPIController::class, 'getBadges']);
 
             // TODO : ces routes pointent toutes vers getTasksByClient, à implémenter.
             Route::get('invoice/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
@@ -88,6 +90,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Stock : articles, fournisseurs, marques
         Route::middleware('can:stock')->group(function () {
+            Route::get('items_types', [ItemsApiController::class, 'getTypes']);
+            Route::post('items/{id}/commande', [ItemsApiController::class, 'commander']);
             Route::apiResource('items', ItemsApiController::class);
             Route::get('items_image/{article_id}', [ItemsApiController::class, 'getImages']);
             Route::get('items_link/{article_id}', [ItemsApiController::class, 'getLinks']);

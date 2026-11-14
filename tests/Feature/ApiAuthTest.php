@@ -95,6 +95,7 @@ class ApiAuthTest extends TestCase
             'commandes'          => ['GET', '/api/v1/commandes'],
             'lien article'       => ['POST', '/api/v1/items/1/links'],
             'document article'   => ['POST', '/api/v1/items/1/documents'],
+            'lien marque'        => ['POST', '/api/v1/brands/1/links'],
             'devis'              => ['GET', '/api/v1/invoices'],
             'devis du mois'      => ['POST', '/api/v1/get_month_invoices'],
             'factures'           => ['GET', '/api/v1/factures'],

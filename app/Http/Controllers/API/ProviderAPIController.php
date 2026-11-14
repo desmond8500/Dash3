@@ -85,11 +85,11 @@ class ProviderAPIController extends Controller
      */
     public function show(int $id)
     {
-        $provider = Provider::find($id);
+        $provider = Provider::withCount('article as articles_count')->find($id);
+        if (! $provider) return $this->notFound();
+        $provider->logo_url = $provider->logo ? url($provider->logo) : null;
 
-        return $provider
-            ? ResponseController::response(true, 'Le fournisseur a été récupéré', $provider)
-            : $this->notFound();
+        return ResponseController::response(true, 'Le fournisseur a été récupéré', $provider);
     }
 
     /**

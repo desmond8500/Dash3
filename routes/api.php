@@ -174,6 +174,9 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('commandes', [CommandeAPIController::class, 'index']);
             Route::put('commandes/articles/{articleId}', [CommandeAPIController::class, 'update']);
             Route::delete('commandes/articles/{articleId}', [CommandeAPIController::class, 'destroy']);
+            // Liens de marque
+            Route::post('brands/{id}/links', [BrandAPIController::class, 'storeLink']);
+            Route::delete('brand_links/{id}', [BrandAPIController::class, 'destroyLink']);
             Route::apiResource('providers', ProviderAPIController::class);
             Route::apiResource('brands', BrandAPIController::class);
             Route::post('providers/{id}/logo', [ProviderAPIController::class, 'updateLogo']);

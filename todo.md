@@ -15,7 +15,7 @@ Projet
 
 ## Page article
 
-- [] créer une table d'icones
-- [] Lier les icones aux articles en fonction des tags
-- [] les icones seront utilisées pour matérialiser les équipements sur les plans
+- [x] créer une table d'icones
+- [x] Lier les icones aux articles en fonction des tags
+- [x] les icones seront utilisées pour matérialiser les équipements sur les plans
  

@@ -69,6 +69,16 @@ class JournalAPIController extends Controller
         $perPage = min($request->integer('per_page', 9), 100);
 
         $journaux = Journal::query()
+            ->with(['projet:id,name,client_id', 'projet.client:id,name'])
+            ->withCount(['sections', 'intervenants'])
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->string('search');
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%$search%")
+                        ->orWhere('description', 'like', "%$search%")
+                        ->orWhere('type', 'like', "%$search%");
+                });
+            })
             ->when($request->filled('client_id'), function ($query) use ($request) {
                 $query->where('client_id', $request->client_id);
             })
@@ -78,7 +88,7 @@ class JournalAPIController extends Controller
             ->when($request->filled('devis_id'), function ($query) use ($request) {
                 $query->where('devis_id', $request->devis_id);
             })
-            ->orderBy('date')
+            ->orderByDesc('date')
             ->paginate($perPage);
 
         return ResponseController::response( true,  'Les journaux ont été récupérés avec succès', $journaux,

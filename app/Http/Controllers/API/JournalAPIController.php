@@ -148,83 +148,36 @@ class JournalAPIController extends Controller
         */
     function store(Request $request)
     {
-        $journal = new Journal();
-        $journal->user_id = $request->user_id;
-        $journal->projet_id = $request->projet_id;
-        $journal->devis_id = $request->devis_id;
-        $journal->title = $request->title;
-        $journal->date = $request->date;
-        $journal->description = $request->description;
-        $journal->type = $request->type;
+        $data = $request->validate([
+            'projet_id' => ['nullable', 'integer', 'exists:projets,id'],
+            'devis_id' => ['nullable', 'integer', 'exists:invoices,id'],
+            'title' => ['required', 'string', 'max:255'],
+            'date' => ['required', 'date'],
+            'description' => ['nullable', 'string'],
+            'type' => ['nullable', 'string', 'max:255'],
+        ]);
+        $journal = Journal::create($data + ['user_id' => $request->user()?->id]);
 
-        if ($journal->save()) {
-            return ResponseController::response(true, 'Journal créé avec succès', $journal, 201);
-        } else {
-            return ResponseController::response(false, 'Erreur lors de la création du Journal', null, 400);
-        }
+        return ResponseController::response(true, 'Journal créé avec succès', $journal, 201);
     }
 
-    /**
-     *@OA\Put(
-        *      path="/api/v1/journaux/{id}",
-        *      tags={"Journaux",},
-        *      summary="Mettre à jour un journal",
-        *      @OA\Parameter(
-        *          name="id",
-        *          in="path",
-        *          required=true,
-        *          description="ID du journal",
-        *          @OA\Schema(
-        *              type="integer"
-        *          )
-        *      ),
-        *      @OA\RequestBody(
-        *          required=true,
-        *          @OA\JsonContent(
-        *              required={"title",},
-        *              @OA\Property(property="user_id", type="integer", example=1),
-        *              @OA\Property(property="projet_id", type="integer", example=1),
-        *              @OA\Property(property="devis_id", type="integer", example=1),
-        *              @OA\Property(property="title", type="string", example="Journal Title"),
-        *              @OA\Property(property="date", type="string", format="date", example="2023-01-01"),
-        *              @OA\Property(property="description", type="string", example=""),
-        *              @OA\Property(property="type", type="integer", example=1),
-        *          )
-        *      ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="Journal mis à jour avec succès",
-        *       ),
-        *      @OA\Response(
-        *          response=404,
-        *          description="Journal non trouvé",
-        *       ),
-        *      @OA\Response(
-        *          response=400,
-        *          description="Erreur lors de la mise à jour du journal",
-        *       ),
-        *     )
-        */
     function update(Request $request, int $id)
     {
         $journal = Journal::find($id);
-        if ($journal) {
-            $journal->user_id = $request->user_id;
-            $journal->projet_id = $request->projet_id;
-            $journal->devis_id = $request->devis_id;
-            $journal->title = $request->title;
-            $journal->date = $request->date;
-            $journal->description = $request->description;
-            $journal->type = $request->type;
-
-            if ($journal->save()) {
-                return ResponseController::response(true, 'Journal mis à jour avec succès', $journal, 200);
-            } else {
-                return ResponseController::response(false, 'Erreur lors de la mise à jour du journal', null, 400);
-            }
-        } else {
+        if (! $journal) {
             return ResponseController::response(false, 'Journal non trouvé', null, 404);
         }
+        // Seuls les champs envoyés sont modifiés (avant : tout champ absent était remis à null)
+        $journal->update($request->validate([
+            'projet_id' => ['sometimes', 'nullable', 'integer', 'exists:projets,id'],
+            'devis_id' => ['sometimes', 'nullable', 'integer', 'exists:invoices,id'],
+            'title' => ['sometimes', 'required', 'string', 'max:255'],
+            'date' => ['sometimes', 'required', 'date'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'type' => ['sometimes', 'nullable', 'string', 'max:255'],
+        ]));
+
+        return ResponseController::response(true, 'Journal mis à jour avec succès', $journal, 200);
     }
 
     /**

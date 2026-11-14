@@ -27,7 +27,7 @@ class TaskAPIController extends Controller
         $search = $request->search;
 
         $tasks = Task::query()
-            ->with(['priority', 'statut'])
+            ->with(['priority', 'statut', 'projet:id,name,client_id', 'client:id,name'])
             ->when($search, function ($q) use ($search) {
                 $q->where(function ($q) use ($search) {
                     $q->where('name', 'like', '%' . $search . '%')
@@ -99,6 +99,9 @@ class TaskAPIController extends Controller
             'expiration_date' => ['nullable', 'date'],
             'priority_id' => ['nullable', 'integer'],
             'statut_id' => ['nullable', 'integer'],
+            'client_id' => ['nullable', 'integer', 'exists:clients,id'],
+            'projet_id' => ['nullable', 'integer', 'exists:projets,id'],
+            'devis_id' => ['nullable', 'integer', 'exists:invoices,id'],
         ]);
         $task = new Task();
         $task->client_id = $request->client_id;
@@ -217,33 +220,31 @@ class TaskAPIController extends Controller
     function update(Request $request, $id)
     {
         $task = Task::find($id);
-        if ($task) {
-            $task->client_id = $request->client_id;
-            $task->projet_id = $request->projet_id;
-            $task->devis_id = $request->devis_id;
-            $task->building_id = $request->building_id;
-            $task->stage_id = $request->stage_id;
-            $task->room_id = $request->room_id;
-            $task->journal_id = $request->journal_id;
-
-            $task->name = $request->name;
-            $task->description = $request->description;
-
-            $task->priority_id = $request->priority_id;
-            $task->statut_id = $request->statut_id;
-            $task->expiration_date = $request->expiration_date;
-            $task->start_date = $request->start_date;
-            $task->end_date = $request->end_date;
-            $task->favoris = $request->favoris;
-
-            if ($task->save()) {
-                return ResponseController::response(true, 'Tache mise à jour avec succès', $task, 200);
-            } else {
-                return ResponseController::response(false, 'Erreur lors de la mise à jour de la tache', null, 400);
-            }
-        } else {
+        if (! $task) {
             return ResponseController::response(false, 'Tache non trouvé', null, 404);
         }
+
+        // Seuls les champs envoyés sont modifiés (avant : tout champ absent était remis à null)
+        $data = $request->validate([
+            'client_id' => ['sometimes', 'nullable', 'integer', 'exists:clients,id'],
+            'projet_id' => ['sometimes', 'nullable', 'integer', 'exists:projets,id'],
+            'devis_id' => ['sometimes', 'nullable', 'integer', 'exists:invoices,id'],
+            'building_id' => ['sometimes', 'nullable', 'integer'],
+            'stage_id' => ['sometimes', 'nullable', 'integer'],
+            'room_id' => ['sometimes', 'nullable', 'integer'],
+            'journal_id' => ['sometimes', 'nullable', 'integer'],
+            'name' => ['sometimes', 'required', 'string', 'max:255'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'priority_id' => ['sometimes', 'integer'],
+            'statut_id' => ['sometimes', 'integer', 'between:1,5'],
+            'expiration_date' => ['sometimes', 'nullable', 'date'],
+            'start_date' => ['sometimes', 'nullable', 'date'],
+            'end_date' => ['sometimes', 'nullable', 'date'],
+            'favoris' => ['sometimes', 'boolean'],
+        ]);
+        $task->update($data);
+
+        return ResponseController::response(true, 'Tache mise à jour avec succès', $task->fresh()->load(['priority', 'statut']), 200);
     }
     /**
      *@OA\Delete(

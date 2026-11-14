@@ -3,6 +3,8 @@
 use App\Http\Controllers\API\AchatController;
 use App\Http\Controllers\API\BrandAPIController;
 use App\Http\Controllers\API\ClientAPIController;
+use App\Http\Controllers\API\ContactAPIController;
+use App\Http\Controllers\API\DocumentAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\FavorisController;
 use App\Http\Controllers\API\InstallationAPIController;
@@ -101,6 +103,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('room/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
 
             Route::resource('journaux', JournalAPIController::class);
+
+            // Contacts et documents de projet
+            Route::apiResource('contacts', ContactAPIController::class)->except(['show']);
+            Route::get('projets/{id}/documents', [DocumentAPIController::class, 'index']);
+            Route::post('projet_documents', [DocumentAPIController::class, 'store']);
+            Route::put('projet_documents/{id}', [DocumentAPIController::class, 'update']);
+            Route::get('projet_documents/{id}/file', [DocumentAPIController::class, 'file']);
+            Route::delete('projet_documents/{id}', [DocumentAPIController::class, 'destroy']);
             Route::resource('projet_notes', NoteAPIController::class);
             Route::get('get_projet_notes/{projet_id}', [NoteAPIController::class, 'get_projet_notes']);
 

@@ -10,7 +10,59 @@ Un navigateur ne sait pas afficher un DWG : à l'import, Dash3 le convertit en P
 
 Le code est dans `app/Services/DwgConverter.php`, la tâche dans `app/Jobs/ConvertDwgPlan.php`, les réglages dans `config/plans.php`.
 
-## Installation sur le serveur
+## Hébergement mutualisé alwaysdata
+
+Pas d'accès root ni d'`apt` : tout s'installe dans le compte (`~/.local`).
+
+### 1. Installer les outils (une fois, en SSH)
+
+Activer SSH pour l'utilisateur (Accès distant › SSH), se connecter, puis depuis le dossier de Dash3 :
+
+```console
+bash scripts/install-dwg-tools.sh
+```
+
+Le script compile LibreDWG en binaire statique dans `~/.local/bin/dwg2dxf` et installe `ezdxf` + `matplotlib` avec pip dans `~/.local`.
+Pour une autre version de LibreDWG : `LIBREDWG_VERSION=0.13.3 bash scripts/install-dwg-tools.sh`.
+
+### 2. Configurer `.env`
+
+```dotenv
+DWG_DRIVER=libredwg
+DWG2DXF_BIN=/home/<compte>/.local/bin/dwg2dxf
+EZDXF_BIN=/home/<compte>/.local/bin/ezdxf
+DWG_EXTRA_PATH=/home/<compte>/.local/bin
+DWG_PDF_DPI=150
+
+# Conversion en arrière-plan (évite les délais d'expiration des requêtes web)
+QUEUE_CONNECTION=database
+```
+
+```console
+php artisan config:clear
+php artisan migrate               # tables plans + table jobs
+php artisan plans:convert --check
+```
+
+### 3. Lancer la file d'attente
+
+Dans l'administration alwaysdata, **Avancé › Services** › Ajouter un service :
+
+- Commande : `php /home/<compte>/<dossier-dash3>/artisan queue:work --sleep=3 --tries=1 --max-time=3600`
+- Répertoire de travail : `/home/<compte>/<dossier-dash3>`
+
+Le service est relancé automatiquement s'il s'arrête. Ses journaux sont dans `~/admin/logs/services/`.
+
+**Sans service** (alternative) : une **tâche planifiée** toutes les 5 minutes avec
+`php /home/<compte>/<dossier-dash3>/artisan plans:convert`
+convertit les DWG en attente.
+
+### Limites
+
+- Les très gros DWG peuvent dépasser la mémoire ou le temps alloués : augmenter `DWG_CONVERT_TIMEOUT`, baisser `DWG_PDF_DPI`, ou exporter le plan en PDF depuis le logiciel de DAO.
+- ODA File Converter (AppImage) nécessite FUSE, généralement indisponible en mutualisé : rester sur LibreDWG.
+
+## Installation sur un serveur dédié / VPS
 
 ### LibreDWG (recommandé, libre)
 
@@ -28,7 +80,7 @@ Ou, si Homebrew est installé : `brew install libredwg`.
 ### ezdxf
 
 ```console
-pip install "ezdxf[draw]"
+pip install ezdxf matplotlib
 ezdxf draw --formats      # doit lister « pdf »
 ```
 

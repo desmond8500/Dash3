@@ -38,7 +38,8 @@ return [
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
-            'retry_after' => 90,
+            // Supérieur à la durée maximale d'une conversion DWG (config/plans.php)
+            'retry_after' => (int) env('QUEUE_RETRY_AFTER', 400),
             'after_commit' => false,
         ],
 

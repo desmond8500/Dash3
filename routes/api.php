@@ -5,6 +5,7 @@ use App\Http\Controllers\API\BrandAPIController;
 use App\Http\Controllers\API\ClientAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\FavorisController;
+use App\Http\Controllers\API\InstallationAPIController;
 use App\Http\Controllers\API\InvoiceAPIController;
 use App\Http\Controllers\API\ItemsApiController;
 use App\Http\Controllers\API\JournalAPIController;
@@ -71,6 +72,24 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('projets/{id}/favorite', [ProjetAPIController::class, 'toggleFavorite']);
             Route::post('projets/{id}/logo', [ProjetAPIController::class, 'updateLogo']);
             Route::get('projets/{id}/badges', [ProjetAPIController::class, 'getBadges']);
+
+            // Installations : bâtiments › systèmes › équipements, et plans
+            Route::get('projets/{id}/installations', [InstallationAPIController::class, 'index']);
+            Route::post('buildings', [InstallationAPIController::class, 'storeBuilding']);
+            Route::put('buildings/{id}', [InstallationAPIController::class, 'updateBuilding']);
+            Route::delete('buildings/{id}', [InstallationAPIController::class, 'destroyBuilding']);
+            Route::post('installation_systemes', [InstallationAPIController::class, 'storeSysteme']);
+            Route::put('installation_systemes/{id}', [InstallationAPIController::class, 'updateSysteme']);
+            Route::delete('installation_systemes/{id}', [InstallationAPIController::class, 'destroySysteme']);
+            Route::post('equipements', [InstallationAPIController::class, 'storeEquipement']);
+            Route::put('equipements/{id}', [InstallationAPIController::class, 'updateEquipement']);
+            Route::delete('equipements/{id}', [InstallationAPIController::class, 'destroyEquipement']);
+            Route::get('projets/{id}/plans', [InstallationAPIController::class, 'plans']);
+            Route::post('plans', [InstallationAPIController::class, 'storePlan']);
+            Route::put('plans/{id}', [InstallationAPIController::class, 'updatePlan']);
+            Route::delete('plans/{id}', [InstallationAPIController::class, 'destroyPlan']);
+            Route::get('plans/{id}/markers', [InstallationAPIController::class, 'markers']);
+            Route::put('plans/{id}/markers', [InstallationAPIController::class, 'saveMarkers']);
 
             // TODO : ces routes pointent toutes vers getTasksByClient, à implémenter.
             Route::get('invoice/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);

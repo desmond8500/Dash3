@@ -358,7 +358,12 @@ class ClientAPIController extends Controller
     function getTasksByClient(int $client_id){
         $client = Client::findorFail($client_id);
         if ($client) {
-            $tasks = Task::where('client_id', '==', $client_id, true)->orderBy('name', 'asc')->get();
+            // Tâches rattachées au client ou à l'un de ses projets
+            // (avant : where('client_id', '==', …) ne renvoyait jamais rien)
+            $tasks = Task::where('client_id', $client_id)
+                ->orWhereIn('projet_id', $client->projets()->select('id'))
+                ->orderBy('name', 'asc')
+                ->get();
             return ResponseController::response(true, 'Tâches récupérées avec succès', $tasks, 200);
         } else {
             return ResponseController::response(false, 'Client non trouvé', null, 404);

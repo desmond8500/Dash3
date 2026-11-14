@@ -73,7 +73,15 @@ class ItemsApiController extends Controller
             });
         }
 
+        // Filtres de la page Articles (comme le panneau latéral de Dash3)
+        foreach (['brand_id', 'provider_id', 'priority_id'] as $filter) {
+            if ($request->filled($filter)) {
+                $query->where($filter, $request->input($filter));
+            }
+        }
+
         $articles = $query
+            ->with(['brand:id,name', 'provider:id,name'])
             ->latest()
             ->paginate($perPage);
 

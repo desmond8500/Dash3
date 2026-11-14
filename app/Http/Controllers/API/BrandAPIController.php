@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ResponseController;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -34,9 +35,11 @@ class BrandAPIController extends Controller
     public function index(Request $request)
     {
         $brands = Brand::query()
+            ->withCount('article as articles_count')
             ->when($request->filled('search'), fn ($q) => $q->where('name', 'like', '%' . $request->search . '%'))
             ->orderBy('name')
-            ->get();
+            ->get()
+            ->each(fn ($brand) => $brand->logo_url = $brand->logo ? url($brand->logo) : null);
 
         return ResponseController::response(true, 'Les marques ont été récupérées', $brands);
     }
@@ -130,5 +133,29 @@ class BrandAPIController extends Controller
         $brand->delete();
 
         return ResponseController::response(true, 'La marque a été supprimée', null);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/brands/{id}/logo",
+     *      tags={"Marques"},
+     *      summary="Remplacer le logo (multipart, champ image)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Logo mis à jour")
+     * )
+     */
+    public function updateLogo(Request $request, int $id)
+    {
+        $brand = Brand::find($id);
+        if (! $brand) {
+            return $this->notFound();
+        }
+        $request->validate(['image' => ['required', 'image', 'max:4096']]);
+
+        // Même dossier que la page web
+        $brand->logo = ImageController::update_logo("stock/brands/$brand->id/logo", $request->file('image'));
+        $brand->save();
+
+        return ResponseController::response(true, 'Logo mis à jour', ['logo_url' => url($brand->logo)]);
     }
 }

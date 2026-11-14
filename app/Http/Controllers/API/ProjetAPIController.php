@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Resources\ProjetResource;
 use App\Models\Projet;
@@ -43,7 +44,13 @@ class ProjetAPIController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Projet::query();
+        $query = Projet::query()
+            ->with('client:id,name,avatar')
+            ->withCount(['invoices as devis_count', 'tasks']);
+
+        if ($request->boolean('favorites')) {
+            $query->where('favorite', true);
+        }
 
         if ($request->filled('client_id')) {
             $query->where('client_id', $request->client_id);
@@ -53,11 +60,16 @@ class ProjetAPIController extends Controller
             $query->where('name', 'like', "%{$request->search}%");
         }
 
-        return ResponseController::response(
-            true,
-            'Projets récupérés avec succès',
-            $query->latest()->paginate(20)
-        );
+        $perPage = min((int) $request->get('per_page', 20), 100);
+        $projets = $query->latest()->paginate($perPage);
+
+        // URL complète du logo (logo du projet, sinon avatar du client)
+        $projets->getCollection()->transform(function ($projet) {
+            $projet->logo_url = url($projet->logo ?? $projet->client?->avatar ?? 'img/icons/005-notebook.png');
+            return $projet;
+        });
+
+        return ResponseController::response(true, 'Projets récupérés avec succès', $projets);
     }
 
     /**
@@ -88,6 +100,8 @@ class ProjetAPIController extends Controller
             'client_id' => ['required', 'integer', 'exists:clients,id'],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
             'favorite' => ['nullable', 'boolean'],
         ]);
 
@@ -187,6 +201,8 @@ class ProjetAPIController extends Controller
             'client_id' => ['required', 'integer', 'exists:clients,id'],
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
             'favorite' => ['nullable', 'boolean'],
         ]);
 
@@ -264,5 +280,50 @@ class ProjetAPIController extends Controller
             'Tâches récupérées avec succès',
             $projet->tasks()->orderBy('name')->get()
         );
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/projets/{id}/favorite",
+     *      tags={"Projets"},
+     *      summary="Ajouter ou retirer un projet des favoris",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Favori mis à jour")
+     * )
+     */
+    public function toggleFavorite(int $id)
+    {
+        $projet = Projet::find($id);
+        if (! $projet) {
+            return response()->json(['success' => false, 'message' => 'Projet non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $projet->favorite = ! $projet->favorite;
+        $projet->save();
+
+        return ResponseController::response(true, $projet->favorite ? 'Projet ajouté aux favoris' : 'Projet retiré des favoris', ['favorite' => (bool) $projet->favorite]);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/projets/{id}/logo",
+     *      tags={"Projets"},
+     *      summary="Remplacer le logo d'un projet (multipart, champ image)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Logo mis à jour")
+     * )
+     */
+    public function updateLogo(Request $request, int $id)
+    {
+        $projet = Projet::find($id);
+        if (! $projet) {
+            return response()->json(['success' => false, 'message' => 'Projet non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $request->validate(['image' => ['required', 'image', 'max:4096']]);
+
+        // Même dossier que le formulaire web (projetForm::store_logo)
+        $projet->logo = ImageController::update_logo("erp/clients/{$projet->client_id}/projets/{$projet->id}/logo", $request->file('image'));
+        $projet->save();
+
+        return ResponseController::response(true, 'Logo mis à jour', ['logo_url' => url($projet->logo)]);
     }
 }

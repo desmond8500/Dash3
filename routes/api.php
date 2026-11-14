@@ -62,9 +62,13 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::resource('clients', ClientAPIController::class);
             Route::get('clients_projets/{id}', [ClientAPIController::class, 'getProjets']);
             Route::get('clients_tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
+            Route::post('clients/{id}/favorite', [ClientAPIController::class, 'toggleFavorite']);
+            Route::post('clients/{id}/avatar', [ClientAPIController::class, 'updateAvatar']);
 
             Route::resource('projets', ProjetAPIController::class);
             Route::get('projet/tasks/{id}', [ProjetAPIController::class, 'getTasksByProjet']);
+            Route::post('projets/{id}/favorite', [ProjetAPIController::class, 'toggleFavorite']);
+            Route::post('projets/{id}/logo', [ProjetAPIController::class, 'updateLogo']);
 
             // TODO : ces routes pointent toutes vers getTasksByClient, à implémenter.
             Route::get('invoice/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
@@ -90,6 +94,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('items_document/{article_id}', [ItemsApiController::class, 'getDocuments']);
             Route::apiResource('providers', ProviderAPIController::class);
             Route::apiResource('brands', BrandAPIController::class);
+            Route::post('providers/{id}/logo', [ProviderAPIController::class, 'updateLogo']);
+            Route::post('brands/{id}/logo', [BrandAPIController::class, 'updateLogo']);
         });
 
         // Finances : devis, factures, achats, transactions

@@ -40,8 +40,8 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'unique:App\Models\User,email'],
-            'password' => ['required'],
+            'email' => ['required', 'email', 'max:255', 'unique:App\Models\User,email'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
         if ($validator->fails()) {
@@ -53,7 +53,7 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'name' => $request['name'],
+            'firstname' => $request['name'], // la table users n'a pas de colonne name
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
@@ -114,92 +114,46 @@ class UserController extends Controller
 
         return response()->json([
             'user' => new UserResource($user),
-            'token' => $user->createToken($data['device_name'] ?? 'mobile')->plainTextToken,
+            'token' => $user->createToken($request->input('device_name', 'mobile'))->plainTextToken,
         ]);
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      *      path="/api/v1/me",
      *      tags={"Auth"},
-     *      summary="Récupérer les informations d'un utilisateur",
-     *
-     *      @OA\RequestBody(
-     *          required=true,
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                  @OA\Property(property="user_id", type="int"),
-     *                  required={"user_id"}
-     *             )
-     *         )
-     *      ),
+     *      summary="Récupérer l'utilisateur connecté (token Bearer requis)",
+     *      security={{"sanctum":{}}},
      *      @OA\Response(response=200, description="Utilisateur récupéré avec succès"),
-     *      @OA\Response(response=401, description="Unauthorized")
+     *      @OA\Response(response=401, description="Unauthenticated")
      * )
      */
     public function me(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'user_id' => ['required', 'integer'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Les données fournies sont invalides.',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $user = User::find($request['user_id']);
-        $user = new UserResource($user);
-
-        return $user;
+        // On renvoie toujours l'utilisateur du token : plus de `user_id` passé
+        // par le client, qui permettait de lire n'importe quel compte.
+        return new UserResource($request->user());
     }
 
     /**
      * @OA\Post(
      *      path="/api/v1/logout",
      *      tags={"Auth"},
-     *      summary="Deconnexion",
-     *
-     *      @OA\RequestBody(
-     *          required=true,
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                  @OA\Property(property="user_id", type="int", example="1"),
-     *                  required={"user_id"}
-     *             )
-     *         )
-     *      ),
+     *      summary="Déconnexion : révoque le token courant (token Bearer requis)",
+     *      security={{"sanctum":{}}},
      *      @OA\Response(response=200, description="Déconnecté avec succès"),
-     *      @OA\Response(response=401, description="Unauthorized")
+     *      @OA\Response(response=401, description="Unauthenticated")
      * )
      */
     public function logout(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'user_id' => ['required', 'integer'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Les données fournies sont invalides.',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $user = User::find($request['user_id']);
-        $token = $user?->currentAccessToken();
+        $token = $request->user()?->currentAccessToken();
 
         if ($token instanceof PersonalAccessToken) {
-            // Ionic : on révoque uniquement le token de cet appareil
+            // Client mobile / SPA par token : on révoque le token de cet appareil
             $token->delete();
         } else {
-            // Web : on ferme la session
+            // Session web (cookie Sanctum) : on ferme la session
             Auth::guard('web')->logout();
 
             if ($request->hasSession()) {
@@ -209,7 +163,6 @@ class UserController extends Controller
         }
 
         return ResponseController::response(true, 'Déconnecté avec succès', []);
-
     }
 
 

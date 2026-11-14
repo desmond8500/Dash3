@@ -56,6 +56,7 @@ use App\Livewire\Stock\ArticlesPage;
 use App\Livewire\Stock\ArticleTypesPage;
 use App\Livewire\Stock\BrandPage;
 use App\Livewire\Stock\BrandsPage;
+use App\Livewire\Stock\IconsPage;
 use App\Livewire\Stock\ProviderPage;
 use App\Livewire\Stock\ProvidersPage;
 use App\Livewire\Stock\StockPage;
@@ -167,6 +168,7 @@ Route::middleware(['auth', 'can:stock'])->group(function () {
     Route::get('/stock/articles', ArticlesPage::class)->name('articles');
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
     Route::get('/stock/types', ArticleTypesPage::class)->name('article_types');
+    Route::get('/stock/icons', IconsPage::class)->name('icons');
     Route::get('/stock/article_download', ArticleDownload::class)->name('article_download');
     // Achats
     Route::get('/stock/achats', AchatsPage::class)->name('achats');

@@ -34,6 +34,7 @@ class Navbar extends Component
                 array('name' => "Achats", "route" => "achats", "icon" => "brand-cake", "can" => "stock"),
                 array('name' => "Marques", "route" => "brands", "icon" => "brand-cake", "can" => "stock"),
                 array('name' => "Fournisseurs", "route" => "providers", "icon" => "building", "can" => "stock"),
+                array('name' => "Icônes", "route" => "icons", "icon" => "icons", "can" => "stock"),
                 array('name' => "Types", "route" => "article_types", "icon" => "building", "can" => "stock"),
                 array('name' => "Téléchargement", "route" => "article_download", "icon" => "download", "can" => "stock"),
             ]

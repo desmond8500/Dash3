@@ -10,6 +10,8 @@ use App\Http\Resources\ArticleLinkResource;
 use App\Models\Article;
 use App\Models\Commande;
 use Spatie\Tags\Tag;
+use App\Models\ArticleDependence;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Resources\ArticleResource;
@@ -135,8 +137,9 @@ class ItemsApiController extends Controller
         $article = Article::find($id);
 
         if ($article) {
-            $article = new ArticleResource($article);
-            return ResponseController::response(true, "L'article a été récupéré", $article);
+            $data = (new ArticleResource($article->load(['brand:id,name', 'provider:id,name'])))->resolve();
+            $data['tags'] = $article->tags->pluck('name')->map(fn ($n) => ucfirst($n))->sort()->values();
+            return ResponseController::response(true, "L'article a été récupéré", $data);
         } else {
             return ResponseController::response(false, "L'article n'a pas été trouvé", []);
         }
@@ -175,6 +178,8 @@ class ItemsApiController extends Controller
                 $img_list[] = (object)array(
                     'id' => $i,
                     'image' => url("storage/$image"),
+                    'path' => $image,
+                    'is_default' => $article->image === "storage/$image",
                 );
                 $i++;
             }
@@ -386,5 +391,197 @@ class ItemsApiController extends Controller
         ]);
 
         return response()->json(['success' => true, 'message' => 'Article ajouté aux commandes', 'data' => $commande, 'meta' => null], 201);
+    }
+
+    // ---------- Page article (comme livewire/stock/article-page) ----------
+
+    private function articleOr404(int $id)
+    {
+        return Article::find($id);
+    }
+
+    private function notFoundJson()
+    {
+        return response()->json(['success' => false, 'message' => "L'article n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+    }
+
+    /** Vérifie qu'un chemin d'image appartient bien au dossier de l'article */
+    private function safeImagePath(Article $article, ?string $path): ?string
+    {
+        $dir = "stock/articles/{$article->id}/images/";
+        if (! $path || str_contains($path, '..') || ! str_starts_with($path, $dir)) {
+            return null;
+        }
+        return $path;
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/items/{id}/quantity", tags={"Articles"}, summary="Ajuster la quantité (delta +1 / -1)",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Quantité mise à jour"))
+     */
+    public function adjustQuantity(Request $request, int $id)
+    {
+        $article = $this->articleOr404($id) ?? null;
+        if (! $article) return $this->notFoundJson();
+        $data = $request->validate(['delta' => ['required', 'integer', 'between:-1000,1000']]);
+        $article->quantity = max(0, (int) $article->quantity + $data['delta']);
+        $article->save();
+
+        return ResponseController::response(true, 'Quantité mise à jour', ['quantity' => $article->quantity]);
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/items/{id}/tags", tags={"Articles"}, summary="Ajouter un tag (type d'article)",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Tag ajouté"))
+     */
+    public function attachTag(Request $request, int $id)
+    {
+        $article = $this->articleOr404($id);
+        if (! $article) return $this->notFoundJson();
+        $data = $request->validate(['name' => ['required', 'string', 'max:255']]);
+        $tag = Tag::findOrCreate(strtolower(trim($data['name'])), 'stock_article');
+        $article->attachTag($tag);
+
+        return ResponseController::response(true, 'Tag ajouté', $article->fresh()->tags->pluck('name')->map(fn ($n) => ucfirst($n))->sort()->values());
+    }
+
+    /**
+     * @OA\Delete(path="/api/v1/items/{id}/tags", tags={"Articles"}, summary="Retirer un tag (?name=)",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Tag retiré"))
+     */
+    public function detachTag(Request $request, int $id)
+    {
+        $article = $this->articleOr404($id);
+        if (! $article) return $this->notFoundJson();
+        $name = strtolower(trim((string) $request->query('name', '')));
+        $tag = $article->tags->first(fn ($t) => strtolower($t->name) === $name);
+        if ($tag) {
+            $article->detachTag($tag);
+        }
+
+        return ResponseController::response(true, 'Tag retiré', $article->fresh()->tags->pluck('name')->map(fn ($n) => ucfirst($n))->sort()->values());
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/items/{id}/images", tags={"Articles"}, summary="Ajouter des images (multipart images[])",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Images ajoutées"))
+     */
+    public function storeImages(Request $request, int $id)
+    {
+        $article = $this->articleOr404($id);
+        if (! $article) return $this->notFoundJson();
+        $request->validate(['images' => ['required', 'array'], 'images.*' => ['image', 'max:6144']]);
+
+        // Même dossier que la page web (ArticlePage::store_files)
+        $dir = "stock/articles/{$article->id}/images";
+        foreach ($request->file('images') as $photo) {
+            $photo->storeAs("public/$dir", $photo->getClientOriginalName());
+        }
+
+        return $this->getImages((string) $article->id);
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/items/{id}/image-default", tags={"Articles"}, summary="Définir l'image par défaut (path)",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Image par défaut définie"))
+     */
+    public function setDefaultImage(Request $request, int $id)
+    {
+        $article = $this->articleOr404($id);
+        if (! $article) return $this->notFoundJson();
+        $path = $this->safeImagePath($article, $request->input('path'));
+        if (! $path) {
+            return response()->json(['success' => false, 'message' => 'Image invalide', 'error' => null, 'meta' => null], 422);
+        }
+        $article->image = "storage/$path";
+        $article->save();
+
+        return ResponseController::response(true, 'Image par défaut définie', ['image' => url($article->image)]);
+    }
+
+    /**
+     * @OA\Delete(path="/api/v1/items/{id}/images", tags={"Articles"}, summary="Supprimer une image (?path=)",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Image supprimée"))
+     */
+    public function deleteImage(Request $request, int $id)
+    {
+        $article = $this->articleOr404($id);
+        if (! $article) return $this->notFoundJson();
+        $path = $this->safeImagePath($article, $request->query('path'));
+        if (! $path) {
+            return response()->json(['success' => false, 'message' => 'Image invalide', 'error' => null, 'meta' => null], 422);
+        }
+        Storage::disk('public')->delete($path);
+        if ($article->image === "storage/$path") {
+            $article->image = null;
+            $article->save();
+        }
+
+        return $this->getImages((string) $article->id);
+    }
+
+    /**
+     * @OA\Get(path="/api/v1/items/{id}/dependances", tags={"Articles"}, summary="Articles associés",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Success"))
+     */
+    public function getDependances(int $id)
+    {
+        $deps = ArticleDependence::with('dependence')
+            ->where('article_id', $id)
+            ->get()
+            ->filter(fn ($d) => $d->dependence)
+            ->map(fn ($d) => [
+                'id' => $d->id,
+                'quantity' => $d->quantity,
+                'article' => (new ArticleResource($d->dependence))->resolve(),
+            ])
+            ->values();
+
+        return ResponseController::response(true, 'Articles associés', $deps);
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/items/{id}/dependances", tags={"Articles"}, summary="Associer un article (dependence_id)",
+     *      security={{"sanctum":{}}}, @OA\Response(response=201, description="Article associé"))
+     */
+    public function addDependance(Request $request, int $id)
+    {
+        if (! $this->articleOr404($id)) return $this->notFoundJson();
+        $data = $request->validate(['dependence_id' => ['required', 'integer', 'exists:articles,id']]);
+        if ((int) $data['dependence_id'] === $id) {
+            return response()->json(['success' => false, 'message' => 'Un article ne peut pas dépendre de lui-même', 'error' => null, 'meta' => null], 422);
+        }
+        ArticleDependence::firstOrCreate(['article_id' => $id, 'dependence_id' => $data['dependence_id']], ['quantity' => 1]);
+
+        return $this->getDependances($id);
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/dependances/{id}/quantity", tags={"Articles"}, summary="Quantité d'un article associé (delta)",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Quantité mise à jour"))
+     */
+    public function adjustDependance(Request $request, int $id)
+    {
+        $dep = ArticleDependence::find($id);
+        if (! $dep) return response()->json(['success' => false, 'message' => 'Association introuvable', 'error' => null, 'meta' => null], 404);
+        $data = $request->validate(['delta' => ['required', 'integer', 'between:-1000,1000']]);
+        $dep->quantity = max(1, (int) $dep->quantity + $data['delta']);
+        $dep->save();
+
+        return ResponseController::response(true, 'Quantité mise à jour', ['quantity' => $dep->quantity]);
+    }
+
+    /**
+     * @OA\Delete(path="/api/v1/dependances/{id}", tags={"Articles"}, summary="Retirer un article associé",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Association supprimée"))
+     */
+    public function removeDependance(int $id)
+    {
+        $dep = ArticleDependence::find($id);
+        if ($dep) {
+            $dep->delete();
+        }
+
+        return ResponseController::response(true, 'Association supprimée', null);
     }
 }

@@ -92,6 +92,16 @@ Route::middleware('auth:sanctum')->group(function () {
         // Stock : articles, fournisseurs, marques
         Route::middleware('can:stock')->group(function () {
             Route::get('items_types', [ItemsApiController::class, 'getTypes']);
+            Route::post('items/{id}/quantity', [ItemsApiController::class, 'adjustQuantity']);
+            Route::post('items/{id}/tags', [ItemsApiController::class, 'attachTag']);
+            Route::delete('items/{id}/tags', [ItemsApiController::class, 'detachTag']);
+            Route::post('items/{id}/images', [ItemsApiController::class, 'storeImages']);
+            Route::post('items/{id}/image-default', [ItemsApiController::class, 'setDefaultImage']);
+            Route::delete('items/{id}/images', [ItemsApiController::class, 'deleteImage']);
+            Route::get('items/{id}/dependances', [ItemsApiController::class, 'getDependances']);
+            Route::post('items/{id}/dependances', [ItemsApiController::class, 'addDependance']);
+            Route::post('dependances/{id}/quantity', [ItemsApiController::class, 'adjustDependance']);
+            Route::delete('dependances/{id}', [ItemsApiController::class, 'removeDependance']);
             Route::post('items/{id}/commande', [ItemsApiController::class, 'commander']);
             Route::apiResource('items', ItemsApiController::class);
             Route::get('items_image/{article_id}', [ItemsApiController::class, 'getImages']);

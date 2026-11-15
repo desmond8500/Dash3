@@ -11,13 +11,40 @@
     font-style: normal;
     font-weight: 400;
     font-size: 1.05rem;
-    line-height: 30px;
 }
 
-.editor-toolbar button.ti {
+/* Disposition : EasyMDE aligne ses boutons en flux inline et insère des
+   pseudo-éléments en display:block qui coupent la ligne. Une rangée flex
+   garde les groupes alignés et les fait passer à la ligne proprement. */
+.EasyMDEContainer .editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 8px;
+}
+
+.EasyMDEContainer .editor-toolbar:before,
+.EasyMDEContainer .editor-toolbar:after {
+    display: none;
+}
+
+.EasyMDEContainer .editor-toolbar button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    float: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    line-height: 1;
+}
+
+.EasyMDEContainer .editor-toolbar i.separator {
+    display: inline-block;
+    height: 20px;
+    margin: 0 4px;
 }
 
 /* La fenêtre modale masque le plein écran de l'éditeur : on le remet au-dessus */

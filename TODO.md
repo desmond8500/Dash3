@@ -8,15 +8,16 @@ Par exemple pour réaliser un projet domotique j'aurais besoin de pouvoir
 - [ ] ajouter des liens de recherche
 - [ ] Ajouter des documents
 - [ ] Ajouter des notes
-- [ ] ajouter des taches
+- [ ] ajouter des tachessd
 - [ ] faire un budget
   - [ ] achats prévisionnels
   - [ ] dépenses
 
 ## Page Journal
 - [ ] Faire en sorte qu'un journal puisse intéger des sections qui auront :
-  - un titre
-  - une description
   - des images
   - un liste de taches
 - [ ] intégrer dans le formulaire un éditeur markdown
+
+## Devis PDF
+- [ ] Proposer un modèle existant basé sur laravel spatie PDF et ajouter un bouton d'exportation, il doit etre similaire à celui existant

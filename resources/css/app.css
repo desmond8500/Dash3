@@ -26,3 +26,31 @@
 .EasyMDEContainer .editor-preview-side {
     z-index: 1060;
 }
+
+/* Titres dans l'éditeur markdown : EasyMDE les affiche jusqu'à 200 %,
+   ce qui déborde dans les fenêtres modales. Tailles ramenées à l'échelle
+   du texte, pour la saisie comme pour l'aperçu. */
+.EasyMDEContainer .CodeMirror .cm-header-1 { font-size: 1.5em; }
+.EasyMDEContainer .CodeMirror .cm-header-2 { font-size: 1.35em; }
+.EasyMDEContainer .CodeMirror .cm-header-3 { font-size: 1.2em; }
+.EasyMDEContainer .CodeMirror .cm-header-4 { font-size: 1.1em; }
+.EasyMDEContainer .CodeMirror .cm-header-5 { font-size: 1.05em; }
+.EasyMDEContainer .CodeMirror .cm-header-6 { font-size: 1em; }
+
+.EasyMDEContainer .CodeMirror .cm-header {
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.EasyMDEContainer .editor-preview h1,
+.EasyMDEContainer .editor-preview-side h1 { font-size: 1.5rem; }
+.EasyMDEContainer .editor-preview h2,
+.EasyMDEContainer .editor-preview-side h2 { font-size: 1.3rem; }
+.EasyMDEContainer .editor-preview h3,
+.EasyMDEContainer .editor-preview-side h3 { font-size: 1.15rem; }
+.EasyMDEContainer .editor-preview h4,
+.EasyMDEContainer .editor-preview-side h4,
+.EasyMDEContainer .editor-preview h5,
+.EasyMDEContainer .editor-preview-side h5,
+.EasyMDEContainer .editor-preview h6,
+.EasyMDEContainer .editor-preview-side h6 { font-size: 1rem; }

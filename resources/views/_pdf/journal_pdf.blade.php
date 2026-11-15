@@ -79,7 +79,32 @@
         <x-markdown>
          {{ $section->description }}
         </x-markdown>
+
+        {{-- Photos de la section --}}
+        @include('_pdf.journal_photos', ['photos' => $section->images])
+
+        {{-- Tâches de la section --}}
+        @if ($section->tasks->count())
+            <table class="table" style="font-size:13px; margin-top: 6px;">
+                <tbody>
+                    @foreach ($section->tasks as $task)
+                        <tr>
+                            <td width="15px" class="text-center">{{ $task->statut_id >= 4 ? 'X' : 'O' }}</td>
+                            <td>{{ $task->name }}</td>
+                            <td width="90px" class="text-center text-primary">{{ $task->statut->name ?? '' }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
     @endforeach
+
+    {{-- Photos rattachées au journal et non à une section --}}
+    @php $photosJournal = $journal->images->whereNull('journal_section_id'); @endphp
+    @if ($photosJournal->count())
+        <h1>Photos</h1>
+        @include('_pdf.journal_photos', ['photos' => $photosJournal])
+    @endif
 
 
     @if ($journal->tasks->count())

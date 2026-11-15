@@ -150,7 +150,18 @@ class PDFController extends Controller
     }
 
     public static function journal_pdf($journal_id){
-        $journal = Journal::find($journal_id);
+        // Photos des sections et du journal comprises (voir _pdf.journal_photos)
+        $journal = Journal::with([
+            'projet.client',
+            'sections.images',
+            'sections.tasks.statut',
+            'images',
+            'intervenants.contact',
+            'intervenants.team',
+            'tasks.statut',
+            'tasks.priority',
+            'achats.rows.article',
+        ])->findOrFail($journal_id);
         $carbon = new Carbon($journal->date);
 
         $data = [

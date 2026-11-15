@@ -36,6 +36,9 @@ import 'lightbox2/dist/css/lightbox.css';
 import Swal from 'sweetalert2';
 window.Swal = Swal;
 
+// Éditeur markdown (sections de journal, …)
+import './markdown-editor';
+
 // --- Init des composants à initialiser à la main ---
 function initBootstrapComponents() {
     document.querySelectorAll('[data-bs-toggle="tooltip"]')

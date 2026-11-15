@@ -61,6 +61,40 @@ class PDF2Controller extends Controller
         // Retourner le PDF en téléchargement
         return $pdf->name('invoice.pdf');
     }
+    /**
+     * Devis / facture / quantitatif rendu par spatie/laravel-pdf.
+     * Même présentation que le modèle dompdf (PDFController::facture_pdf),
+     * avec les mêmes données : voir _pdf2/invoice/devis_pdf.blade.php.
+     *
+     * @OA\Get(path="/api/v1/facture/devis_pdf/{invoice_id}/{type}", tags={"PDF"},
+     *      summary="Devis au format PDF (spatie)",
+     *      @OA\Response(response=200, description="PDF généré avec succès"))
+     */
+    public static function devis_pdf(int $invoice_id, string $type = 'devis', bool $download = false)
+    {
+        $data = PDFController::facture($invoice_id, $type);
+        $devis = $data['devis'];
+
+        // Les couleurs du modèle dompdf sont écrites sans dièse selon le type
+        foreach (['color1', 'color2', 'color3'] as $key) {
+            $value = $data[$key] ?? null;
+            $data[$key] = $value ? (str_starts_with($value, '#') ? $value : "#$value") : '#066fd1';
+        }
+
+        $name = Str::upper($type) . ' ' . Str::upper($devis->reference)
+            . ' - ' . ($devis->projet->client->name ?? '')
+            . ' - ' . $devis->projet->name
+            . ' - ' . $devis->description;
+        $name = Str::limit(preg_replace('/[\/\\:*?"<>|]+/', ' ', $name), 150, '') . '.pdf';
+
+        $pdf = Pdf::view('_pdf2.invoice.devis_pdf', $data)
+            ->format('a4')
+            ->margins(10, 0, 18, 0)
+            ->footerView('_pdf2.invoice.devis_footer');
+
+        return $download ? $pdf->download($name) : $pdf->name($name);
+    }
+
     static function task_pdf(int $client_id)
     {
         $client = Client::findOrFail($client_id);

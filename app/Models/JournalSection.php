@@ -14,6 +14,16 @@ class JournalSection extends Model
         'order',
     ];
 
+    public function journal(): BelongsTo
+    {
+        return $this->belongsTo(Journal::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'journal_section_id');
+    }
+
     public function images()
     {
         return $this->hasMany(JournalImage::class)->latest();

@@ -8,6 +8,20 @@
                 <div class="dropdown-menu" aria-labelledby="triggerId">
                     <a class="dropdown-item" wire:click="$dispatch('open-importRows')" data-bs-toggle="tooltip" title="Ajouter un devis"> <i class="ti ti-file-arrow-left"></i> Importer Devis</a>
                     <a class="dropdown-item" wire:click="$dispatch('open-addSection')" data-bs-toggle="tooltip" title="Ajouter une section"> <i class="ti ti-plus"></i> Section</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ route('devis_pdf', ['invoice_id' => $devis->id, 'type' => 'devis']) }}" target="_blank" title="Exporter le devis en PDF">
+                        <i class="ti ti-file-type-pdf"></i> Exporter le devis
+                    </a>
+                    <a class="dropdown-item" href="{{ route('devis_pdf', ['invoice_id' => $devis->id, 'type' => 'facture']) }}" target="_blank" title="Exporter la facture en PDF">
+                        <i class="ti ti-file-type-pdf"></i> Exporter la facture
+                    </a>
+                    <a class="dropdown-item" href="{{ route('devis_pdf', ['invoice_id' => $devis->id, 'type' => 'quantitatif']) }}" target="_blank" title="Exporter le quantitatif en PDF">
+                        <i class="ti ti-file-type-pdf"></i> Exporter le quantitatif
+                    </a>
+                    <a class="dropdown-item" href="{{ route('devis_pdf_save', ['invoice_id' => $devis->id, 'type' => 'devis']) }}" title="Télécharger le devis">
+                        <i class="ti ti-download"></i> Télécharger le devis
+                    </a>
+                    <div class="dropdown-divider"></div>
                     @empty($pvs)
                         <a class="dropdown-item" wire:click="addPv()" title="Ajouter un PV"> <i class="ti ti-plus"></i> Procès Verbal</a>
                     @else

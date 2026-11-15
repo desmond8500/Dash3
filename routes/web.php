@@ -110,6 +110,9 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     Route::get('/facture/invoice_resume_pdf/{year}', function ($year) { return PDFController::invoice_resume_pdf($year); })->name('invoice_resume_pdf');
 
     Route::get('/facture/proposal_pdf/{proposal_id}/{type}', function ($proposal_id, $type) { return PDF2Controller::proposal_pdf($proposal_id, $type); })->name('proposal_pdf');
+    // Devis au format PDF via spatie/laravel-pdf (modèle _pdf2/invoice/devis_pdf)
+    Route::get('/facture/devis_pdf/{invoice_id}/{type?}', function ($invoice_id, $type = 'devis') { return PDF2Controller::devis_pdf($invoice_id, $type); })->name('devis_pdf');
+    Route::get('/facture/devis_pdf_save/{invoice_id}/{type?}', function ($invoice_id, $type = 'devis') { return PDF2Controller::devis_pdf($invoice_id, $type, true); })->name('devis_pdf_save');
     Route::get('invoice_proposal/{proposal_id}', InvoiceProposalPage::class)->name('invoice_proposal');
 
 

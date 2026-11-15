@@ -134,6 +134,7 @@ class JournalAPIController extends Controller
             'invoice:id,reference,description',
             'sections' => fn ($q) => $q->orderBy('order')->orderBy('id'),
             'sections.images',
+            'sections.tasks' => fn ($q) => $q->with(['priority', 'statut']),
             'intervenants.contact:id,firstname,lastname,fonction,societe,phone,email,avatar',
             'intervenants.team:id,firstname,lastname,function',
             'tasks' => fn ($q) => $q->with(['priority', 'statut'])->orderBy('id'),

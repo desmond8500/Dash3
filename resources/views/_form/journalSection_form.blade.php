@@ -9,8 +9,17 @@
     @error('order') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>
 
+{{-- Éditeur markdown : wire:ignore car EasyMDE remplace le champ par CodeMirror --}}
 <div class="col-md-12 mb-3">
     <label class="form-label">Description</label>
-    <textarea class="form-control" wire:model="description" placeholder="Description" data-bs-toggle="autosize"></textarea>
+    <div wire:ignore>
+        <textarea
+            id="journal-section-description"
+            class="form-control"
+            data-markdown-editor
+            data-markdown-model="description"
+            data-markdown-height="220px"
+            placeholder="**Gras**, *italique*, # titres, - listes, [lien](url)…"></textarea>
+    </div>
     @error('description') <span class='text-danger'>{{ $message }}</span> @enderror
 </div>

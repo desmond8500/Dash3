@@ -129,7 +129,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
             // Modèles de badge et CV
             Route::get('badge_modeles', [ProjetAPIController::class, 'getBadgeModeles']);
-            Route::apiResource('cvs', CvAPIController::class)->except(['show']);
+            Route::apiResource('cvs', CvAPIController::class);
+            Route::post('cvs/{id}/photo', [CvAPIController::class, 'updatePhoto']);
+            Route::post('cv_sections', [CvAPIController::class, 'storeSection']);
+            Route::put('cv_sections/{id}', [CvAPIController::class, 'updateSection']);
+            Route::delete('cv_sections/{id}', [CvAPIController::class, 'destroySection']);
+            Route::post('cv_items', [CvAPIController::class, 'storeItem']);
+            Route::put('cv_items/{id}', [CvAPIController::class, 'updateItem']);
+            Route::delete('cv_items/{id}', [CvAPIController::class, 'destroyItem']);
 
             // Contacts et documents de projet
             Route::apiResource('contacts', ContactAPIController::class)->except(['show']);

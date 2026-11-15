@@ -9,66 +9,176 @@
         </div>
     @endcomponent
 
+    <div class="row g-2">
+        <div class="col-md-7">
+            <div class="card" >
+                <div class="card-header">
+                    <div class="card-title">Achats</div>
+                </div>
+                <div class="card-body p-1">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th width="10px">#</th>
+                                <th>Nom</th>
+                                <th width="10px" class="bg-red-lt text-center">Date</th>
+                                <th width="120px" class="bg-blue-lt text-center">TVA</th>
+                                <th width="150px" class="text-end">Total</th>
+                                <th width="100px" class="text-center">Facture</th>
+                                <th width="150px" class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($achats as $key => $achat)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>
+                                    <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a> <br>
+                                    <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{!!
+                                        nl2br($achat->description) !!}</a>
+                                </td>
+                                <td class="text-center">{{ $achat->date }}</td>
+                                <td class="text-center">{{ number_format($achat->tva(), 0, 2) }} F</td>
+                                <td class="text-end">
+                                    <div>{{ number_format($achat->total(), 0, 2) }} F HT<span class="text-white">C</span> </div>
+                                    <div class="text-danger">{{ number_format($achat->ttc(), 0, 2) }} F TTC</div>
+                                </td>
+                                <td class="text-center">
+                                    @foreach ($achat->factures as $key => $facture)
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <a href="{{ asset($facture->folder) }}" target="_blank">
+                                            <i class="ti ti-file-pdf"></i>
+                                            Facture {{ $key+1 }}
+                                        </a>
+                                    </div>
+                                    @endforeach
+                                </td>
+                                <td class="text-end">
+                                    <div class="btn-list">
+                                        <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')"
+                                            data-bs-toggle="tooltip" title="Editer">
+                                            <i class="ti ti-edit"></i>
+                                        </button>
+                                        @if (!$achat->rows->count() && !$achat->factures->count())
+                                        <button class="btn btn-danger btn-icon" wire:click="delete('{{ $achat->id }}')"
+                                            data-bs-toggle="tooltip" title="Supprimer">
+                                            <i class="ti ti-trash"></i>
+                                        </button>
+                                        @endif
+                                        @if (!$achat->transaction_id)
+                                        <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')"
+                                            data-bs-toggle="tooltip" title="Ajouter une transaction">
+                                            <i class="ti ti-coins"></i>
+                                        </button>
+                                        @endif
 
-    <div class="card">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th width="10px">#</th>
-                    <th>Nom</th>
-                    <th width="10px" class="bg-red-lt text-center">Date</th>
-                    <th width="120px" class="bg-blue-lt text-center">TVA</th>
-                    <th width="150px" class="text-end">Total</th>
-                    <th width="100px" class="text-center">Facture</th>
-                    <th width="150px" class="text-end">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($achats as $key => $achat)
-                    <tr>
-                        <td>{{ $key+1 }}</td>
-                        <td>
-                            <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}">{{ $achat->name }}</a> <br>
-                            <a href="{{ route('achat', ['achat_id'=> $achat->id]) }}" class="text-muted">{!! nl2br($achat->description) !!}</a>
-                        </td>
-                        <td class="text-center">{{ $achat->date }}</td>
-                        <td class="text-center">{{ number_format($achat->tva(), 0, 2) }} F</td>
-                        <td class="text-end">
-                            <div>{{ number_format($achat->total(), 0, 2) }} F HT<span class="text-white">C</span> </div>
-                            <div class="text-danger">{{ number_format($achat->ttc(), 0, 2) }} F TTC</div>
-                        </td>
-                        <td class="text-center">
-                            @foreach ($achat->factures as $key => $facture)
-                                <div class="d-flex justify-content-between mb-1">
-                                    <a href="{{ asset($facture->folder) }}" target="_blank">
-                                        <i class="ti ti-file-pdf"></i>
-                                        Facture {{ $key+1 }}
-                                    </a>
-                                </div>
+                                    </div>
+                                </td>
+                            </tr>
                             @endforeach
-                        </td>
-                        <td class="text-end">
-                            <div class="btn-list">
-                                <button class="btn btn-primary btn-icon" wire:click="edit('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Editer">
-                                    <i class="ti ti-edit"></i>
-                                </button>
-                                @if (!$achat->rows->count() && !$achat->factures->count())
-                                    <button class="btn btn-danger btn-icon" wire:click="delete('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Supprimer">
-                                        <i class="ti ti-trash"></i>
-                                    </button>
-                                @endif
-                                @if (!$achat->transaction_id)
-                                    <button class="btn btn-primary btn-icon" wire:click="add_transaction('{{ $achat->id }}')" data-bs-toggle="tooltip" title="Ajouter une transaction">
-                                        <i class="ti ti-coins"></i>
-                                    </button>
-                                @endif
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    {{ $achats->links() }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
 
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            @foreach($commandes as $providerId => $commandes)
+
+                @php
+                $provider = $commandes->first()->invoice_row->article->provider;
+                @endphp
+
+                <div class="card mb-3">
+
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title mb-0">
+                            {{ $provider->name ?? '-'}}
+                        </h3>
+                        <div class="card-actions">
+
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-vcenter">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" width="10px">Photo</th>
+                                    <th>Article</th>
+                                    {{-- <th class="text-center">Demandes</th> --}}
+                                    <th class="text-center">Qté</th>
+                                    <th class="text-end">Prix</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach(
+                                    $commandes->groupBy('article_id') as $articleId => $rows
+                                )
+
+                                @php
+                                    $article = $rows->first()->article;
+                                    $totalFournisseur = $commandes->sum(
+                                        fn($row) => $row->quantity * $row->article->price
+                                    );
+                                @endphp
+
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
+                                            <img src="{{ asset($article->image) }}" class="avatar avatar-sm">
+                                        </a>
+                                    </td>
+                                    <td class="">
+                                        <a href="{{ route('article', ['article_id' => $article->id] ) }}" target='_blank'>
+                                            {{ $article->designation }}
+                                        </a>
+
+                                    </td>
+
+                                    {{-- <td class="text-center">
+                                        {{ $rows->count() }}
+                                    </td> --}}
+
+                                    <td class="text-center fw-bold">
+                                        {{ $rows->sum('quantity') }}
+                                    </td>
+                                    <td class="text-end fw-bold">
+                                        <div>
+                                            <div>
+                                                {{ number_format($article->price,0,0) }} F
+                                            </div>
+                                            <div>
+                                                {{ number_format($rows->sum('quantity')*$article->price,0,0) }} F
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <button type="button" class="btn btn-primary btn-icon" wire:click="edit_commande()">
+                                        <i class="ti ti-edit"></i>
+                                    </button>
+                                </tr>
+
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer text-end fw-bold">
+                        {{ number_format($totalFournisseur, 0, ',', ' ') }} FCFA
+                    </div>
+
+                </div>
+
+            @endforeach
+        </div>
     </div>
 
     @component('components.modal', ["id"=>'editAchat', 'title'=>"Editer l'achat", 'method'=>"achat_update"])
@@ -77,6 +187,14 @@
         </form>
         <script> window.addEventListener('open-editAchat', event => { window.$('#editAchat').modal('show'); }) </script>
         <script> window.addEventListener('close-editAchat', event => { window.$('#editAchat').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editCommand', 'title'=>"Editer la commande", 'method'=>"commande_update"])
+        <form class="row" wire:submit="update">
+            @include('_form.commande_form')
+        </form>
+        <script> window.addEventListener('open-editCommand', event => { window.$('#editCommand').modal('show'); }) </script>
+        <script> window.addEventListener('close-editCommand', event => { window.$('#editCommand').modal('hide'); }) </script>
     @endcomponent
 
 </div>

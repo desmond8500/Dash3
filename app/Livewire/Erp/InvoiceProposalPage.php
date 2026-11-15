@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Erp;
 
+use App\Http\Controllers\PDF2Controller;
+use App\Livewire\Forms\InvoiceProposalForm;
 use App\Models\Invoice;
 use App\Models\InvoiceProposal;
 use Livewire\Component;
@@ -12,6 +14,7 @@ class InvoiceProposalPage extends Component
     public $proposal_id;
     public $proposal;
     public $devis;
+    public InvoiceProposalForm $form;
 
     function mount($proposal_id)
     {
@@ -32,6 +35,7 @@ class InvoiceProposalPage extends Component
         return view('livewire.erp.invoice-proposal-page', [
             'proposal' => InvoiceProposal::find($this->proposal_id),
             'devis' => $this->devis,
+            'data' => PDF2Controller::proposal_data($this->proposal_id, "DOE"),
         ]);
     }
 

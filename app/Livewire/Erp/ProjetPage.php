@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Erp;
 
-use App\Livewire\Forms\projetForm;
+use App\Livewire\Forms\ProjetForm;
 use App\Models\Building;
 use App\Models\Invoice;
 use App\Models\Journal;
@@ -22,13 +22,15 @@ class ProjetPage extends Component
     protected $paginationTheme = 'bootstrap';
     public $search ='';
     public $journal_search ='';
-    public $breadcrumbs;
-    public $projet, $projet_id;
+    public mixed $breadcrumbs;
+    public mixed $projet;
+    public int $projet_id;
     public $tab = 3;
+
     #[Session()]
     public $tabs = 'devis';
 
-    public function mount($projet_id){
+    public function mount(int $projet_id){
         $this->projet = Projet::find($projet_id);
         $this->projet_id = $projet_id;
 

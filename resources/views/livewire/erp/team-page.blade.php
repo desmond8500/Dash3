@@ -48,24 +48,16 @@
         </div>
     </div>
 
-    @component('components.modal', ["id"=>'addTeam', 'title' => 'Ajouter un membre'])
+    @component('components.modal', ["id"=>'addTeam', 'title' => 'Ajouter un membre', 'method' => 'store'])
         <form class="row" wire:submit="store">
             @include('_form.team_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-addTeam', event => { window.$('#addTeam').modal('show'); }) </script>
         <script> window.addEventListener('close-addTeam', event => { window.$('#addTeam').modal('hide'); }) </script>
     @endcomponent
-    @component('components.modal', ["id"=>'editTeam', 'title' => 'Editer un membre'])
+    @component('components.modal', ["id"=>'editTeam', 'title' => 'Editer un membre', 'method' => 'update'])
         <form class="row" wire:submit="update">
             @include('_form.team_form')
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
         </form>
         <script> window.addEventListener('open-editTeam', event => { window.$('#editTeam').modal('show'); }) </script>
         <script> window.addEventListener('close-editTeam', event => { window.$('#editTeam').modal('hide'); }) </script>

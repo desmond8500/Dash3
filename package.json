@@ -11,13 +11,17 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@popperjs/core": "^2.11.8",
+        "@tabler/core": "^1.7.0",
         "autosize": "^6.0.1",
+        "bootstrap": "^5.3.8",
         "easymde": "^2.19.0",
         "jquery": "^3.7.1",
         "lightbox2": "^2.11.5",
         "puppeteer": "^23.11.1",
         "select2": "^4.1.0-rc.0",
         "shiki": "^3.9.2",
-        "sweetalert2": "^11.26.3"
+        "sweetalert2": "^11.26.3",
+        "vue": "^3.5.43"
     }
 }

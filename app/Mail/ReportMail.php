@@ -5,49 +5,55 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ReportMail extends Mailable
+class ReportMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        public string $clientName,
+        public string $projectName,
+        public ?string $message = null,
+        public ?string $pdfPath = null,
+    ) {}
 
     /**
-     * Get the message envelope.
+     * Sujet et expéditeur.
      */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Report Mail',
+            subject: 'Rapport d’avancement - ' . $this->projectName,
         );
     }
 
     /**
-     * Get the message content definition.
+     * Contenu du mail.
      */
     public function content(): Content
     {
         return new Content(
-            view: '_mail.mail',
+            view: 'emails.report',
         );
     }
 
     /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * Pièces jointes.
      */
     public function attachments(): array
     {
-        return [];
+        if (!$this->pdfPath) {
+            return [];
+        }
+
+        return [
+            Attachment::fromPath($this->pdfPath)
+                ->as('rapport-' . str($this->projectName)->slug() . '.pdf')
+                ->withMime('application/pdf'),
+        ];
     }
 }

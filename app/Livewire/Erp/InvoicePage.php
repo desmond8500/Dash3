@@ -9,6 +9,7 @@ use App\Livewire\Forms\InvoiceRowForm;
 use App\Livewire\Forms\InvoiceSectionForm;
 use App\Models\Article;
 use App\Models\Brand;
+use App\Models\Commande;
 use App\Models\Forfait;
 use App\Models\Invoice;
 use App\Models\InvoiceModel;
@@ -63,7 +64,6 @@ class InvoicePage extends Component
             'articles' => Article::search($this->search, 'designation')->paginate(9),
             'pvs' => Pv::where('invoice_id', $this->devis->id)->get(),
             'statuses' => InvoiceController::statut(),
-            'forfaits' => Forfait::all(),
             'models' => InvoiceModel::all(),
             'forfaits' => Forfait::where('client_id', $this->devis->projet->client_id)->whereLike('designation', '%'.$this->search_forfait.'%')->paginate(6),
         ]);
@@ -93,7 +93,7 @@ class InvoicePage extends Component
         $this->dispatch('close-addSection2');
     }
 
-    function section_generate($name)
+    function section_generate(string $name)
     {
         $section = InvoiceSection::create([
             'invoice_id' => $this->devis->id,
@@ -105,7 +105,7 @@ class InvoicePage extends Component
         return $section;
     }
 
-    function edit_section($section_id){
+    function edit_section(int$section_id){
         $this->section_form->set($section_id);
         $this->dispatch('open-editSection');
     }
@@ -114,13 +114,13 @@ class InvoicePage extends Component
         $this->section_form->update();
         $this->dispatch('close-editSection');
     }
-    function delete_section($id)
+    function delete_section(int $id)
     {
         $this->message= $this->section_form->delete($id);
         $this->dispatch('open-infoModal');
     }
 
-    function section_model_add($section_model_id, $section_id = 0)
+    function section_model_add(int $section_model_id, $section_id = 0)
     {
         if (!$section_id) {
             $section_id = InvoiceSection::count() + 1;
@@ -155,7 +155,7 @@ class InvoicePage extends Component
 
 
 
-    function proposition_toggle($section_id)
+    function proposition_toggle(int $section_id)
     {
         $this->section_form->set($section_id);
         $this->section_form->proposition_toggle();
@@ -166,7 +166,7 @@ class InvoicePage extends Component
     // Row
     public $row_tab = 1, $row_class = '';
     public InvoiceRowForm $row_form;
-    function toggle_row($tab){
+    function toggle_row(int $tab){
         $this->row_tab = $tab;
         if ($this->row_tab == 1) {
             $this->row_class = '';
@@ -178,7 +178,7 @@ class InvoicePage extends Component
 
     }
 
-    function addRow($section_id){
+    function addRow(int $section_id){
         $this->row_form->invoice_section_id = $section_id;
         $this->dispatch('open-addRow');
     }
@@ -186,11 +186,11 @@ class InvoicePage extends Component
         $this->row_form->store();
         $this->dispatch('close-addRow');
     }
-    function designation($designation){
+    function designation(string $designation){
         $this->row_form->designation = $designation;
         $this->row_form->reference = $designation;
     }
-    function forfait($id){
+    function forfait(int $id){
         $forfait = Forfait::find($id);
         $this->row_form->designation = $forfait->designation;
         $this->row_form->reference = $forfait->description;
@@ -204,7 +204,14 @@ class InvoicePage extends Component
 
         $this->row_form->store();
     }
-    function prix($prix){
+
+    function update_priorite(int $row_id, int $priorite_id){
+        $this->row_form->set($row_id);
+        $this->row_form->priorite_id = $priorite_id;
+        $this->row_form->update();
+    }
+
+    function prix(float $prix){
         $this->row_form->prix = $prix;
     }
 
@@ -213,7 +220,7 @@ class InvoicePage extends Component
         $this->dispatch('close-addRow');
     }
 
-    function setArticleRow($article_id){
+    function setArticleRow(int $article_id){
         $article = Article::find($article_id);
         $this->row_form->designation = $article->designation;
         $this->row_form->reference = $article->reference;
@@ -222,7 +229,7 @@ class InvoicePage extends Component
     public $quantity = 1;
 
     #[On('generateArticleRow')]
-    function generateArticleRow($article_id){
+    function generateArticleRow(int$article_id){
         $article = Article::find($article_id);
         $this->row_form->article_id = $article->id;
         $this->row_form->designation = $article->designation;
@@ -233,7 +240,7 @@ class InvoicePage extends Component
         // $this->dispatch('close-addRow');
     }
 
-    function editRow($row_id){
+    function editRow(int $row_id){
         $this->row_form->set($row_id);
         $this->dispatch('open-editRow');
     }
@@ -243,17 +250,17 @@ class InvoicePage extends Component
         $this->dispatch('close-editRow');
     }
 
-    function deleteRow($id){
+    function deleteRow(int $id){
         $row = InvoiceRow::find($id);
         $row->delete();
     }
 
-    function incrementRowQuantity($row_id){
+    function incrementRowQuantity(int $row_id){
         $row = InvoiceRow::find($row_id);
         $row->quantite++;
         $row->save();
     }
-    function decrementRowQuantity($row_id){
+    function decrementRowQuantity(int $row_id){
         $row = InvoiceRow::find($row_id);
         if ($row->quantite > 1) {
             $row->quantite--;
@@ -261,12 +268,12 @@ class InvoicePage extends Component
         }
     }
 
-    function incrementRowCoef($row_id){
+    function incrementRowCoef(int $row_id){
         $row = InvoiceRow::find($row_id);
         $row->coef += 0.1;
         $row->save();
     }
-    function decrementRowCoef($row_id){
+    function decrementRowCoef(int $row_id){
         $row = InvoiceRow::find($row_id);
         if ($row->coef > 0.1) {
             $row->coef -= 0.1;
@@ -301,8 +308,8 @@ class InvoicePage extends Component
     }
 
     // Message
-    public $message;
-    function info($message){
+    public string $message;
+    function info(string $message){
         $this->message = $message;
         $this->dispatch('open-infoModal');
     }
@@ -311,13 +318,13 @@ class InvoicePage extends Component
         $this->dispatch('close-infoModal');
     }
 
-    public $file;
+    public mixed $file;
     function import(){
         // $sections = InvoiceSection::where('invoice_id', $this->devis->id)->get();
         Excel::import(new InvoiceImport, $this->file);
     }
 
-    public $modalite;
+    public mixed $modalite;
     function edit_modalite(){
         $this->modalite = $this->devis->modalite;
         $this->dispatch('open-editModalite');
@@ -328,7 +335,7 @@ class InvoicePage extends Component
         $this->dispatch('close-editModalite');
     }
 
-    public $note;
+    public mixed $note;
     function edit_note(){
         $this->note = $this->devis->note;
         $this->dispatch('open-editNote');
@@ -392,8 +399,6 @@ class InvoicePage extends Component
         $this->dispatch('invoice-section-reload');
     }
 
-
-
     // Acompte
 
     function add_to_acompte($row_id){
@@ -438,4 +443,36 @@ class InvoicePage extends Component
 
         $this->dispatch('invoice-section-reload');
     }
+
+    function to_buy(int $row_id){
+        $row = InvoiceRow::find($row_id);
+        // $commande = Commande::where('row_id', $row_id)->get();
+
+        // if ($commande) {
+        //     $commande->increment('quantity', $row->quantite);
+        // } else {
+            Commande::create([
+                'article_id'=> $row->article_id,
+                'quantity'=> $row->quantite,
+                'invoice_row_id' => $row_id,
+            ]);
+        // }
+    }
+
+    // Comment
+
+    function edit_comment(int $row_id){
+        $row = InvoiceRow::find($row_id);
+        $this->row_form->set($row_id);
+        $this->dispatch('open-editComment');
+    }
+
+    function update_comment(){
+        $this->row_form->update();
+        $this->dispatch('close-editComment');
+    }
+
+    // Layout
+
+    public $layout = 0;
 }

@@ -16,12 +16,13 @@ class ClientsPage extends Component
     use WithFileUploads;
     public clientForm $clientForm;
 
-    public $search;
-    public $error_message;
+    public string $search='';
+    public string $error_message;
     protected $paginationTheme = 'bootstrap';
     public $edit_avatar = false;
 
     public $breadcrumbs = array(
+        array("name" => "ERP", "route" => "erp"),
         array("name" => "Clients", "route" => "clients"),
     );
 
@@ -33,7 +34,7 @@ class ClientsPage extends Component
         ]);
     }
 
-    function gotoProjets($client_id)
+    function gotoProjets(int $client_id)
     {
         return redirect()->route('projets', ['client_id' => $client_id]);
     }
@@ -49,10 +50,10 @@ class ClientsPage extends Component
         $this->dispatch('close-addClient');
     }
 
-    public $selected;
+    public object $selected;
     public $tempo  = false;
 
-    function edit($client_id)
+    function edit(int $client_id)
     {
         $this->selected = Client::find($client_id);;
         $this->clientForm->set($client_id);
@@ -65,7 +66,7 @@ class ClientsPage extends Component
         $this->dispatch('close-editClient');
         $this->render();
     }
-    function delete($id)
+    function delete(int $id)
     {
         $client = Client::find($id);
 
@@ -82,7 +83,7 @@ class ClientsPage extends Component
         return Excel::download(new ClientsExport, 'clients.xlsx');
     }
 
-    function toggleFavorite($id)
+    function toggleFavorite(int $id)
     {
         $this->clientForm->favorite($id);
     }

@@ -9,5 +9,12 @@ class Item extends Model
 {
     use searchTrait;
 
-    protected $fillable = ['name', 'description', 'tag', 'unit', 'type', 'data'];
+    protected $fillable = [
+        'name',
+        'description',
+        'tag',
+        'unit',
+        'type',
+        'data'
+        ];
 }

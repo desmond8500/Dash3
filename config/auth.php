@@ -112,4 +112,16 @@ return [
 
     'password_timeout' => 10800,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Inscription via l'API
+    |--------------------------------------------------------------------------
+    |
+    | Désactivée par défaut : sinon n'importe qui peut créer un compte et
+    | obtenir un token. Mettre API_REGISTRATION=true pour la réactiver.
+    |
+    */
+
+    'api_registration' => env('API_REGISTRATION', false),
+
 ];

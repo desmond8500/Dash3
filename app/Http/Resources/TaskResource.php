@@ -16,7 +16,7 @@ class TaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
-     *
+     * @mixin Task
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array

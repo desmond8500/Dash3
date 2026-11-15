@@ -22,12 +22,40 @@ class InvoiceAPIController extends Controller
      *       ),
      *     )
      */
-    public function index()
+    public function index(Request $request)
     {
-        $invoices = Invoice::all();
-        $invoices = InvoiceResource::collection($invoices);
+        // Sans paramètre : comportement historique (tous les devis).
+        // Avec ?search= ou ?per_page= : liste filtrée et paginée.
+        if (! $request->filled('search') && ! $request->filled('per_page')) {
+            $invoices = InvoiceResource::collection(Invoice::all());
 
-        return ResponseController::response(true, "Tous les devis ont été récupérés", $invoices);
+            return ResponseController::response(true, "Tous les devis ont été récupérés", $invoices);
+        }
+
+        $perPage = min((int) $request->get('per_page', 20), 100);
+        $search = $request->search;
+
+        $invoices = Invoice::query()
+            ->with('projet.client')
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($q) use ($search) {
+                    $q->where('reference', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('client_name', 'like', "%{$search}%")
+                        ->orWhere('projet_name', 'like', "%{$search}%")
+                        ->orWhereHas('projet', fn ($p) => $p->where('name', 'like', "%{$search}%"))
+                        ->orWhereHas('projet.client', fn ($c) => $c->where('name', 'like', "%{$search}%"));
+                });
+            })
+            ->latest()
+            ->paginate($perPage);
+
+        return ResponseController::response(true, "Les devis ont été récupérés", InvoiceResource::collection($invoices), [
+            'current_page' => $invoices->currentPage(),
+            'last_page' => $invoices->lastPage(),
+            'per_page' => $invoices->perPage(),
+            'total' => $invoices->total(),
+        ]);
     }
 
     /**
@@ -35,15 +63,92 @@ class InvoiceAPIController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'projet_id' => ['required', 'integer', 'exists:projets,id'],
+            'description' => ['required', 'string'],
+            'statut' => ['nullable', 'string'],
+            'modalite' => ['nullable', 'string'],
+            'note' => ['nullable', 'string'],
+        ]);
+        $projet = \App\Models\Projet::with('client')->find($data['projet_id']);
+
+        // Référence comme sur le web (ErpController::getInvoiceReference) : CLI-001-26
+        $ref = \App\Http\Controllers\ErpController::getInvoiceReference($projet);
+        $invoice = Invoice::create([
+            'projet_id' => $projet->id,
+            'client_name' => $projet->client?->name,
+            'projet_name' => $projet->name,
+            'reference' => $ref['reference'],
+            'invoice_number' => $ref['invoice_number'],
+            'invoice_year' => $ref['invoice_year'],
+            'description' => ucfirst($data['description']),
+            'statut' => $data['statut'] ?? 'Nouveau',
+            'modalite' => $data['modalite'] ?? null,
+            'note' => $data['note'] ?? null,
+            'tax' => 0,
+            'remise' => 0,
+            'favorite' => false,
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Devis créé', 'data' => ['id' => $invoice->id, 'reference' => $invoice->reference], 'meta' => null], 201);
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *      path="/api/v1/invoices/{id}",
+     *      tags={"Invoices"},
+     *      summary="Détail d'un devis : sections, lignes et totaux",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success"),
+     *      @OA\Response(response=404, description="Devis introuvable")
+     * )
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $invoice = Invoice::with(['projet.client', 'sections.rows.article:id,image', 'acomptes', 'spents', 'documents'])->find($id);
+        if (! $invoice) {
+            return response()->json(['success' => false, 'message' => "Le devis n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+
+        $sections = $invoice->sections->sortBy('ordre')->values()->map(function ($section) {
+            $rows = $section->rows->sortBy('priorite_id')->map(fn ($row) => [
+                'id' => $row->id,
+                'invoice_section_id' => $row->invoice_section_id,
+                'article_id' => $row->article_id,
+                'priorite_id' => $row->priorite_id,
+                'designation' => $row->designation,
+                'reference' => $row->reference,
+                'quantite' => (float) $row->quantite,
+                'coef' => (float) $row->coef,
+                'prix' => (float) $row->prix,
+                'bought' => (float) $row->bought,
+                'total' => (float) $row->quantite * (float) $row->coef * (float) $row->prix,
+                'comment' => $row->comment,
+                'image' => $row->article?->image ? url($row->article->image) : null,
+            ])->values();
+
+            return [
+                'id' => $section->id,
+                'section' => $section->section,
+                'ordre' => $section->ordre,
+                'proposition' => $section->proposition,
+                'show' => (bool) $section->show,
+                'status' => (bool) $section->status,
+                'rows' => $rows,
+                'total' => $rows->sum('total'),
+            ];
+        });
+
+        $data = (new InvoiceResource($invoice))->resolve();
+        $data['sections'] = $sections;
+        $data['acompte_total'] = (float) $invoice->acomptes->sum('montant');
+        $data['spent_total'] = (float) $invoice->spents->sum('montant');
+        $data['client_id'] = $invoice->projet?->client_id;
+        $data['created_at'] = $invoice->created_at;
+        $data['documents'] = $invoice->documents->map(fn ($d) => ['id' => $d->id, 'name' => $d->name, 'type' => $d->type, 'url' => $d->file ? url($d->file) : null])->values();
+        $data['statuses'] = array_values((array) \App\Http\Controllers\InvoiceController::statut());
+
+        return ResponseController::response(true, 'Le devis a été récupéré', $data);
     }
 
     /**
@@ -51,7 +156,40 @@ class InvoiceAPIController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $invoice = Invoice::find($id);
+        if (! $invoice) {
+            return response()->json(['success' => false, 'message' => "Le devis n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+        $statuses = array_values((array) \App\Http\Controllers\InvoiceController::statut());
+        $invoice->update($request->validate([
+            'reference' => ['sometimes', 'required', 'string', 'max:255'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'modalite' => ['sometimes', 'nullable', 'string'],
+            'note' => ['sometimes', 'nullable', 'string'],
+            'statut' => ['sometimes', 'required', 'string', \Illuminate\Validation\Rule::in($statuses)],
+            'tax' => ['sometimes', 'nullable', 'string', \Illuminate\Validation\Rule::in(['tva', 'brs', ''])],
+            'remise' => ['sometimes', 'nullable', 'numeric', 'min:0'],
+            'facture_date' => ['sometimes', 'nullable', 'date'],
+            'paydate' => ['sometimes', 'nullable', 'date'],
+        ]));
+
+        return $this->show((int) $id);
+    }
+
+    /**
+     * @OA\Post(path="/api/v1/invoices/{id}/favorite", tags={"Invoices"}, summary="Ajouter / retirer des favoris",
+     *      security={{"sanctum":{}}}, @OA\Response(response=200, description="Favori mis à jour"))
+     */
+    public function toggleFavorite(int $id)
+    {
+        $invoice = Invoice::find($id);
+        if (! $invoice) {
+            return response()->json(['success' => false, 'message' => "Le devis n'a pas été trouvé", 'error' => null, 'meta' => null], 404);
+        }
+        $invoice->favorite = ! $invoice->favorite;
+        $invoice->save();
+
+        return ResponseController::response(true, 'Favori mis à jour', ['favorite' => (bool) $invoice->favorite]);
     }
 
     /**

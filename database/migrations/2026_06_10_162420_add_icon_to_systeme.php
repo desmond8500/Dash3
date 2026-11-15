@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('systeme', function (Blueprint $table) {
+        Schema::table('invoice_systems', function (Blueprint $table) {
             $table->dropColumn('icon');
         });
     }

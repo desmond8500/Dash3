@@ -12,8 +12,10 @@ class Commande extends Model
     use HasFactory;
     use searchTrait;
 
+
     protected $fillable = [
         'article_id',
+        'invoice_row_id',
         'quantity',
     ];
 
@@ -21,4 +23,10 @@ class Commande extends Model
     {
         return $this->belongsTo(Article::class);
     }
+    public function invoice_row(): BelongsTo
+    {
+        return $this->belongsTo(InvoiceRow::class);
+    }
+
+
 }

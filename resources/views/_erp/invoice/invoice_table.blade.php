@@ -39,7 +39,7 @@
             <thead >
                 <tr>
                     <th scope="col">Désignation</th>
-                    <th scope="col" class="text-center">Quantité</th>
+                    <th scope="col" class="text-center">Qte</th>
                     <th scope="col" class="text-center">Coef</th>
                     <th scope="col" class="text-center">Prix</th>
                     <th scope="col" class="text-center">Total</th>
@@ -75,8 +75,7 @@
                     $subtotal_bought = 0;
                 @endphp
                 <thead >
-
-                    <tr >
+                    <tr>
                         <th scope="col" class="bg-primary-lt" colspan="8" >
                             <div class="row g-2 align-items-center">
                                 <div class="col">
@@ -128,16 +127,15 @@
                     </tr>
                 </thead>
                 @if ($section->proposition)
-                    <th>
-                        <td colspan="7">
-                            <div class="text-muted" style="font-size: 12px;">{!! $section->proposition !!}</div>
+                    <tr>
+                        <td colspan="8">
+                            <div class="text-muted" style="font-size: 12px; text-align:left; ">{!! nl2br($section->proposition) !!}</div>
                         </td>
-                    </th>
+                    </tr>
                 @endif
 
                 @if ($section->show)
                     <tbody>
-
                         @foreach ($section->rows->sortBy('priorite_id') as $row)
                             @php
                                 $total += $row->quantite*$row->prix;
@@ -168,10 +166,15 @@
                                 <td scope="row">
                                     <div class="row g-0">
                                         <div class="col-auto">
-                                            @isset ($row->article->image)
-                                                <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-sm me-2">
+                                            @if ($row->comment)
+                                                <i class="ti ti-message text-success cursor-pointer" data-bs-toggle="tooltip" title="{{ $row->comment }}" wire:click="edit_comment({{ $row->id }})"></i>
                                             @else
-                                                <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar avatar-md me-2 bg-white border border-white">
+                                                <i class="ti ti-message cursor-pointer" wire:click="edit_comment({{ $row->id }})"></i>
+                                            @endif
+                                            @isset ($row->article->image)
+                                                <img src="{{ asset($row->article->image) }}" alt="I" class="avatar rounded-2 avatar-sm me-2">
+                                            @else
+                                                <img src="{{ asset("img/icons/packaging.png") }}" alt="I" class="avatar rounded-2 avatar-md me-2 bg-white border border-white">
                                             @endisset
                                         </div>
                                         <div class="col">
@@ -216,6 +219,10 @@
                                         </div>
 
                                     </div>
+                                    @if ($row->buy() )
+                                        <i class="ti ti-shopping-cart-plus text-muted" data-bs-toggle="tooltip" title="A commander"></i>
+                                    @endif
+                                    <div></div>
                                 </td>
                                 <td class="text-center">
                                     <div data-bs-toggle="tooltip" title="Prix unitaire avec coeficient de marge">{{ number_format($row->prix*$row->coef, 0,'.', ' ') }}</div>
@@ -227,18 +234,37 @@
                                 </td>
                                 <td class="text-center">
                                     <div>{{ number_format($row->prix*$row->quantite*$row->coef -$row->prix*$row->quantite , 0,'.', ' ') }}</div>
-                                    <div class="badge mt-1">{{ $row->priority() }} </div>
+
+                                    <div class="dropdown open">
+                                        <button class="badge " type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            <div class="">{{ $row->priority() }} </div>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 0)"> <i class="ti ti-box"></i>  Centrale 1</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 1)"> <i class="ti ti-box"></i>  Centrale 2</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 2)"> <i class="ti ti-circles"></i>  Organe 1</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 3)"> <i class="ti ti-circles"></i>  Organe 2</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 4)"> <i class="ti ti-circles"></i>  Organe 3</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 5)"> <i class="ti ti-plug"></i>  Cable</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 6)"> <i class="ti ti-cash"></i>  Accessoires</a>
+                                            <a class="dropdown-item" wire:click="update_priorite('{{ $row->id }}', 7)"> <i class="ti ti-cash"></i>  Forfait</a>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="text-center ">
                                     <div>
-                                        <button class="btn btn-sm btn-icon btn-outline-success" wire:click="editRow('{{ $row->id }}')"><i class="ti ti-edit"></i></button>
-                                        <button class="btn btn-sm btn-icon btn-outline-danger" wire:click="deleteRow('{{ $row->id }}')"><i class="ti ti-trash"></i></button>
                                         <div class="dropdown open mt-1 ">
-                                            <button class="btn btn-icon btn-outline-primary btn-sm" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            <button class="btn btn-icon btn-sm" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                                 <i class="ti ti-chevron-down"></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="triggerId">
+                                                <a class="dropdown-item text-success" wire:click="editRow('{{ $row->id }}')"> <i class="ti ti-edit"></i> Editer</a>
+                                                <a class="dropdown-item text-danger" wire:click="deleteRow('{{ $row->id }}')"> <i class="ti ti-trash"></i> Supprimer</a>
                                                 <a class="dropdown-item" wire:click="add_to_acompte('{{ $row->id }}')"> <i class="ti ti-plus"></i> Ajouter aux dépenses</a>
+
+                                                @if (!$row->buy())
+                                                    <a class="dropdown-item text-azur" wire:click="to_buy('{{ $row->id }}')"> <i class="ti ti-shopping-cart-plus"></i> Commander</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -448,26 +474,30 @@
             <div class="col-md-12">
                 <span class="dropdown-header mb-2">Devis</span>
                 <div class="btn-list">
-                    <a class="btn mb-1" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'devis']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
-                    <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
-                    <a class="btn mb-1" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
+                    <a class="btn btn-primary mb-1" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'devis']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                    <a class="btn mb-1 disabled" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Devis Simple PDF </a>
+                    <a class="btn mb-1 disabled" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Proforma PDF </a>
                 </div>
+                <span class="dropdown-header mb-2">Propositions</span>
                 <div class="btn-list">
-                    <a class="btn btn-primary mb-1" target="_blank" href="{{ route('invoice_pdf_v2',['invoice_id'=>$devis->id, 'title'=>'DEVIS']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                    <a class="btn btn-success mb-1" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'proposition']) }}"> <i class="ti ti-file-type-pdf"></i> Proposition </a>
                 </div>
+                {{-- <div class="btn-list">
+                    <a class="btn btn-primary mb-1" target="_blank" href="{{ route('invoice_pdf_v2',['invoice_id'=>$devis->id, 'title'=>'DEVIS']) }}"> <i class="ti ti-file-type-pdf"></i> Devis PDF </a>
+                </div> --}}
             </div>
             <div class="col-md-12">
                 <span class="dropdown-header mb-2">Facture</span>
                 <div class="btn-icon">
-                    <a class="btn mb-1 " target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
-                    <a class="btn mb-1 " target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
-                    <a class="btn mb-1 " target="_blank" href="{{ route('facture_pdf_save',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Générer Facture </a>
+                    <a class="btn mb-1 btn-success" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Facture PDF </a>
+                    <a class="btn mb-1 disabled" target="_blank" href="#"> <i class="ti ti-file-type-pdf"></i> Facture Simple PDF </a>
+                    <a class="btn mb-1 disabled" target="_blank" href="{{ route('facture_pdf_save',['invoice_id'=>$devis->id, 'type'=>'facture']) }}"> <i class="ti ti-file-type-pdf"></i> Générer Facture </a>
                 </div>
             </div>
             <div class="col-md-12">
                 <span class="dropdown-header mb-2">Quantité</span>
                 <div class="btn-list">
-                    <a class="btn " target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
+                    <a class="btn btn-purple" target="_blank" href="{{ route('facture_pdf',['invoice_id'=>$devis->id, 'type'=>'quantitatif']) }}"> <i class="ti ti-file-type-pdf"></i> Quantitatif PDF </a>
                     <a class="btn " target="_blank" href="{{ route('invoice_export',['invoice_id'=>$devis->id]) }}"> <i class="ti ti-file-type-pdf"></i> Exporter Quantitatif XLS </a>
                 </div>
             </div>
@@ -476,4 +506,18 @@
         <script> window.addEventListener('open-exportPDF', event => { window.$('#exportPDF').modal('show'); }) </script>
         <script> window.addEventListener('close-exportPDF', event => { window.$('#exportPDF').modal('hide'); }) </script>
     @endcomponent
+
+    @component('components.modal', ["id"=>'editComment', 'title' => 'Commentaire', 'method'=>'update_comment'])
+        <form class="row" wire:submit="update_comment">
+            <div class="col-12">
+                <label class="form-label">Commentaire</label>
+                <textarea class="form-control" wire:model="row_form.comment" placeholder="Commentaire sur l'article"
+                    data-bs-toggle="autosize"></textarea>
+                @error('row_form.comment') <span class='text-danger'>{{ $message }}</span> @enderror
+            </div>
+        </form>
+        <script> window.addEventListener('open-editComment', event => { window.$('#editComment').modal('show'); }) </script>
+        <script> window.addEventListener('close-editComment', event => { window.$('#editComment').modal('hide'); }) </script>
+    @endcomponent
+
 </div>

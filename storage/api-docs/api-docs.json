@@ -238,16 +238,16 @@
                 }
             }
         },
-        "/api/v1/clients/projets/{id}": {
+        "/api/v1/clients_projets/{client_id}": {
             "get": {
                 "tags": [
                     "Clients"
                 ],
                 "summary": "Liste des projets d'un client",
-                "operationId": "1fad2e6b9f91140ae980087a0b43439f",
+                "operationId": "9e19db21ee815a42484be83db76bb800",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "client_id",
                         "in": "path",
                         "description": "ID du client",
                         "required": true,
@@ -269,17 +269,17 @@
                 }
             }
         },
-        "/api/v1/clients/tasks/{id}": {
+        "/api/v1/clients/tasks/{client_id}": {
             "get": {
                 "tags": [
                     "Clients",
                     "Taches"
                 ],
                 "summary": "Liste des tâches d'un client",
-                "operationId": "2d9e662a46c399163ea12fce99dd7c5d",
+                "operationId": "a5b2387d7a936de3278775a1c5092ed7",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "client_id",
                         "in": "path",
                         "description": "ID du client",
                         "required": true,
@@ -616,16 +616,16 @@
                 }
             }
         },
-        "/api/v1/items/{article_id}": {
+        "/api/v1/items/{id}": {
             "get": {
                 "tags": [
                     "Articles"
                 ],
                 "description": "afficher un article",
-                "operationId": "3057c5a562eef036187d28de146acccc",
+                "operationId": "099ce4e523f80e52b4ad983ba3af17ce",
                 "parameters": [
                     {
-                        "name": "article_id",
+                        "name": "id",
                         "in": "path",
                         "description": "Parameter with example",
                         "required": true,
@@ -1167,18 +1167,31 @@
                     "Projets"
                 ],
                 "summary": "Liste des projets",
-                "operationId": "a4c27241695b3afdd7b332d58197b143",
+                "description": "Retourne la liste paginée des projets.",
+                "operationId": "getProjets",
                 "parameters": [
                     {
                         "name": "search",
-                        "in": "path",
-                        "description": "Terme de recherche pour filtrer les projets par nom",
-                        "required": false
+                        "in": "query",
+                        "description": "Recherche par nom du projet",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "Filtrer par client",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Utilisateurs récupérés avec succès"
+                        "description": "Liste récupérée avec succès"
                     }
                 }
             },
@@ -1186,33 +1199,33 @@
                 "tags": [
                     "Projets"
                 ],
-                "summary": "Ajouter un projet",
-                "operationId": "7c7dfedc36fd812f905eb05b9791f596",
+                "summary": "Créer un projet",
+                "operationId": "storeProjet",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "name",
-                                    "client_id"
+                                    "client_id",
+                                    "name"
                                 ],
                                 "properties": {
                                     "client_id": {
                                         "type": "integer",
-                                        "example": "1"
+                                        "example": 1
                                     },
                                     "name": {
                                         "type": "string",
-                                        "example": "Projet Name"
+                                        "example": "Installation Caméras Banque"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "example": ""
+                                        "example": "Projet de vidéosurveillance."
                                     },
                                     "favorite": {
-                                        "type": "string",
-                                        "example": "1"
+                                        "type": "boolean",
+                                        "example": false
                                     }
                                 },
                                 "type": "object"
@@ -1222,10 +1235,10 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Projet créé avec succès"
+                        "description": "Projet créé"
                     },
-                    "400": {
-                        "description": "Erreur lors de la création du projet"
+                    "422": {
+                        "description": "Erreur de validation"
                     }
                 }
             }
@@ -1235,19 +1248,24 @@
                 "tags": [
                     "Projets"
                 ],
-                "summary": "Récupération d'un projet",
-                "operationId": "be1fc823cfb3e9879c3536e4b819a466",
+                "summary": "Afficher un projet",
+                "operationId": "showProjet",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID du projet",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Projet récupéré avec succès"
+                        "description": "Projet trouvé"
+                    },
+                    "404": {
+                        "description": "Projet introuvable"
                     }
                 }
             },
@@ -1255,13 +1273,12 @@
                 "tags": [
                     "Projets"
                 ],
-                "summary": "Mettre à jour un projet",
-                "operationId": "e93c14b9760d37c4e448ad2475d55334",
+                "summary": "Modifier un projet",
+                "operationId": "updateProjet",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID du projet",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -1274,25 +1291,25 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "name",
-                                    "client_id"
+                                    "client_id",
+                                    "name"
                                 ],
                                 "properties": {
                                     "client_id": {
                                         "type": "integer",
-                                        "example": "1"
+                                        "example": 1
                                     },
                                     "name": {
                                         "type": "string",
-                                        "example": "Projet Name"
+                                        "example": "Projet Banque Dakar"
                                     },
                                     "description": {
                                         "type": "string",
-                                        "example": ""
+                                        "example": "Mise à jour."
                                     },
                                     "favorite": {
-                                        "type": "string",
-                                        "example": "1"
+                                        "type": "boolean",
+                                        "example": true
                                     }
                                 },
                                 "type": "object"
@@ -1302,13 +1319,10 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Client mis à jour avec succès"
+                        "description": "Projet modifié"
                     },
                     "404": {
-                        "description": "Client non trouvé"
-                    },
-                    "400": {
-                        "description": "Erreur lors de la mise à jour du client"
+                        "description": "Projet introuvable"
                     }
                 }
             },
@@ -1317,12 +1331,11 @@
                     "Projets"
                 ],
                 "summary": "Supprimer un projet",
-                "operationId": "f784b51fe04de42803cad48a4e16e2a8",
+                "operationId": "deleteProjet",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID du projet",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -1331,30 +1344,26 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Projet supprimé avec succès"
+                        "description": "Projet supprimé"
                     },
                     "404": {
-                        "description": "Projet non trouvé"
-                    },
-                    "400": {
-                        "description": "Erreur lors de la suppression du projet"
+                        "description": "Projet introuvable"
                     }
                 }
             }
         },
-        "/api/v1/projet/tasks/{id}": {
+        "/api/v1/projets/{id}/tasks": {
             "get": {
                 "tags": [
                     "Projets",
-                    "Taches"
+                    "Tâches"
                 ],
                 "summary": "Liste des tâches d'un projet",
-                "operationId": "f68b389dc79817d6303fe829ecb74056",
+                "operationId": "getProjetTasks",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID du projet",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -1363,13 +1372,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Tâches récupérées avec succès"
+                        "description": "Liste des tâches"
                     },
                     "404": {
-                        "description": "Client non trouvé"
-                    },
-                    "400": {
-                        "description": "Erreur lors de la récupération des tâches"
+                        "description": "Projet introuvable"
                     }
                 }
             }
@@ -1660,11 +1666,77 @@
                 ],
                 "summary": "Liste des transactions",
                 "operationId": "d1896d9e43f164ed711b6fb976065a2b",
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Date exacte (YYYY-MM-DD)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2026-10-31"
+                        }
+                    },
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "description": "Mois (1 à 12)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 12,
+                            "minimum": 1,
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Année",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 2026
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "Identifiant de l'utilisateur",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Nombre d'éléments par page (1 à 100, défaut 15)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 15
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Transactions récupérés avec succès"
+                        "description": "Transactions récupérées avec succès"
+                    },
+                    "401": {
+                        "description": "Non authentifié"
+                    },
+                    "422": {
+                        "description": "Paramètres invalides"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/v1/liens": {
@@ -1677,6 +1749,20 @@
                 "responses": {
                     "200": {
                         "description": "Liste des catégories"
+                    }
+                }
+            }
+        },
+        "/api/v1/facture/proposal_pdf/proposal_id/type": {
+            "get": {
+                "tags": [
+                    "PDF"
+                ],
+                "summary": "Resumé de projet",
+                "operationId": "ecb24038bb3ed7eeb8ef195f2fa5ac47",
+                "responses": {
+                    "200": {
+                        "description": "PDF généré avec succès"
                     }
                 }
             }
@@ -1708,6 +1794,166 @@
                 "responses": {
                     "200": {
                         "description": "Facture récupéré avec succès"
+                    }
+                }
+            }
+        },
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "S'inscrire",
+                "operationId": "e3d7c33191c03363f0fe6765dde1c762",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "name1"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "name1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "passer1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur créé avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Connexion",
+                "operationId": "d7d51829be22c07b1dbdeca806fd4354",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "name1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "passer1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur récupéré avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/me": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Récupérer les informations d'un utilisateur",
+                "operationId": "8f4f4c63da075147ca1abb08793f7f87",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur récupéré avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Deconnexion",
+                "operationId": "95c20f5153ad6cbd9a7de701fdef9493",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Déconnecté avec succès"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
                     }
                 }
             }
@@ -1815,6 +2061,10 @@
             "description": "Projets"
         },
         {
+            "name": "Tâches",
+            "description": "Tâches"
+        },
+        {
             "name": "Fournisseurs",
             "description": "Fournisseurs"
         },
@@ -1827,8 +2077,16 @@
             "description": "Liens utiles"
         },
         {
+            "name": "PDF",
+            "description": "PDF"
+        },
+        {
             "name": "Factures",
             "description": "Factures"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
         }
     ]
 }

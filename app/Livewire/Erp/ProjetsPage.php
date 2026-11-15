@@ -3,11 +3,12 @@
 namespace App\Livewire\Erp;
 
 use App\Livewire\Forms\clientForm;
-use App\Livewire\Forms\projetForm;
+use App\Livewire\Forms\ProjetForm;
 use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Projet;
 use App\Models\Task;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Session;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -20,13 +21,19 @@ class ProjetsPage extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search = '';
-    public $breadcrumbs;
-    public $client_id, $selected;
+    public mixed $breadcrumbs;
+    public $client_id = 0;
+    public mixed $selected;
     public projetForm $projetForm;
     #[Session()]
     public $tab = 'projets';
 
-    public function mount($client_id)
+    #[On('select-projets_tab')]
+    function setTab(string $tab) {
+        $this->tab = $tab;
+    }
+
+    public function mount(int $client_id)
     {
         $this->client_id = $client_id;
         $this->projetForm->client_id = $client_id;
@@ -42,7 +49,7 @@ class ProjetsPage extends Component
     public function render()
     {
         return view('livewire.erp.projets-page', [
-            'projets' => Projet::where('client_id',$this->client_id)->search($this->search)->paginate(20),
+            'projets' => Projet::where('client_id',$this->client_id)->orderBy('name')->search($this->search)->paginate(20),
             'taches' => Task::where('client_id', $this->client_id)->get(),
             'contacts' => Contact::where('client_id', $this->client_id)->get(),
         ]);
@@ -54,11 +61,11 @@ class ProjetsPage extends Component
         $this->reset('projetForm.name', 'projetForm.description');
     }
 
-    function edit($projet_id) {
+    function edit(int $projet_id) {
         $this->selected = Projet::find($projet_id);
 
         $this->projetForm->set($projet_id);
-        $this->dispatch('open-editProjet');
+        $this->dispatch('open-modal', id:'open-editProjet');
     }
 
     function update() {
@@ -66,7 +73,7 @@ class ProjetsPage extends Component
         $this->dispatch('close-editProjet');
     }
 
-    function delete($projet_id) {
+    function delete(int $projet_id) {
         $this->selected = Projet::find($projet_id);
         $this->selected->delete();
         $this->dispatch('close-editProjet');
@@ -77,7 +84,7 @@ class ProjetsPage extends Component
         $this->projetForm->favorite();
     }
 
-    function toggleFavorite2($projet_id)
+    function toggleFavorite2(int $projet_id)
     {
         $this->projetForm->set($projet_id);
         $this->projetForm->favorite();
@@ -86,7 +93,7 @@ class ProjetsPage extends Component
     // Client
     public clientForm $clientForm;
 
-    function edit_client($client_id)
+    function edit_client(int $client_id)
     {
         $this->clientForm->set($client_id);
         $this->dispatch('open-editClient');

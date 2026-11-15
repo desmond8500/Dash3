@@ -6,10 +6,11 @@ use App\Models\Client;
 use App\Models\Installation;
 use App\Models\Invoice;
 use App\Models\InvoiceAcompte;
+use App\Models\InvoiceProposal;
 use App\Models\InvoiceSection;
 use App\Models\InvoiceSpent;
-use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Unit;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Spatie\LaravelPdf\Facades\Pdf;
 
 class PDF2Controller extends Controller
@@ -103,5 +104,43 @@ class PDF2Controller extends Controller
         // $pdf->footerView('_pdf2.invoice.invoice_footer');
 
         return $pdf->name('invoice_resume.pdf');
+    }
+
+    /**
+     *@OA\Get(
+     *      path="/api/v1/facture/proposal_pdf/proposal_id/type",
+     *      tags={"PDF",},
+     *      summary="Resumé de projet",
+     *      @OA\Response(
+     *          response=200,
+     *          description="PDF généré avec succès",
+     *       ),
+     *     )
+     */
+
+    public static function proposal_pdf(int $proposal_id, $type = 'devis')
+    {
+        $data = static::proposal_data($proposal_id, $type);
+
+        $pdf = Pdf::view('_pdf.facture.proposal_pdf', $data);
+
+        $pdf->format('a4');
+        $pdf->margins(10, 5, 5, 5);
+
+        // Retourner le PDF en téléchargement
+        return $pdf->name('Resume.pdf');
+    }
+
+    public static function proposal_data(int $proposal_id, $type = 'devis'){
+        $proposal = InvoiceProposal::find($proposal_id);
+        $quotation = Invoice::find($proposal->invoice_id);
+
+        return [
+            'logo' => env('APP_LOGO') ?? null,
+            'proposal' => $proposal,
+            'quotation' => $quotation,
+            'date' => Carbon::now(),
+            'type' => 'devis',
+        ];
     }
 }

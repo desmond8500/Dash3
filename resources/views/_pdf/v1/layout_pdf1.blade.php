@@ -1,59 +1,98 @@
-{{-- <!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/table.css">
-    <link rel="stylesheet" href="css/text.css">
-    <title>{{ $page_title }}</title>
-
-</head>
-
-<style>
-    body {
-        font-family: 'Roboto';
-    }
-</style>
-
-<body>
-
-    @foreach ($page_sections as $page_section)
-        @include('_pdf.'.$page_section)
-    @endforeach
-
-</body>
-
-</html> --}}
-
-
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Devis {{ $devis->reference ?? "REFERENCE" }}</title>
-
     <style>
         body {
-            font-family: DejaVu Sans, sans-serif;
-            font-size: 12px;
-            color: #000;
+            margin: 0;
+            padding: 0 20px;
+            font-size: 10px;
+            font-family: Arial, sans-serif;
+            color: #555;
         }
 
-        .clear {
-            clear: both;
+        .header {
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
         }
 
+        .left {
+            float: left;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        /* Company */
+        .company {
+            text-align: right;
+        }
+
+        .company_name {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        /* Document */
+        .document_title {
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .document_date {
+            font-size: 15px;
+        }
+
+        .document_reference {
+            font-size: 15px;
+            font-style: italic;
+            color: grey;
+            font-weight: bold;
+        }
+
+        .logo {
+            border-radius: 4px;
+            height: 50px;
+            width: 70px;
+            aspect-ratio: 1/1;
+        }
     </style>
+    <link rel="stylesheet" href="{{ public_path('css/pdf.css') }}">
 </head>
 
 <body>
+    <div class="header">
+        <table style="width: 95%;">
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="logo">
+                                    {{-- @inlinedImage('img/logo.png') --}}
+                                </div>
+                                {{-- <img src="" style="width:70px;height:auto;"> --}}
+                            </td>
+                            <td>
+                                <h3 class="company_name"> {{ $company->name }}</h3>
 
-    @foreach ($page_sections as $page_section)
-    @include('_pdf.'.$page_section)
-    @endforeach
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <div class="company">
+                        <div class="document_title"> {{ $document->title }}</div>
+                        <div class="document_date">{{ $document->date }}</div>
+                        <div class="document_reference">{{ $document->reference }}</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 
 </body>
 

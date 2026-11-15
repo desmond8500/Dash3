@@ -12,7 +12,11 @@
         @foreach ($systemes as $systeme)
             <div class="col-auto">
                 <div class="btn-group">
-                    <button class="btn" >{{ $systeme->name}}</button>
+                    <button class="btn" >
+                        <i class="ti ti-{{ $systeme->icon }}"></i>
+                        {{ $systeme->name}}
+
+                    </button>
                     <button class="btn btn-outline-primary btn-icon" wire:click="edit('{{ $systeme->id }}')">
                         <i class="ti ti-edit"></i>
                     </button>

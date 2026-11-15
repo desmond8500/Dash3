@@ -34,20 +34,28 @@ class Navbar extends Component
                 array('name' => "Achats", "route" => "achats", "icon" => "brand-cake", "can" => "stock"),
                 array('name' => "Marques", "route" => "brands", "icon" => "brand-cake", "can" => "stock"),
                 array('name' => "Fournisseurs", "route" => "providers", "icon" => "building", "can" => "stock"),
+                array('name' => "Icônes", "route" => "icons", "icon" => "icons", "can" => "stock"),
                 array('name' => "Types", "route" => "article_types", "icon" => "building", "can" => "stock"),
+                array('name' => "Téléchargement", "route" => "article_download", "icon" => "download", "can" => "stock"),
             ]
         ),
-        array('name' => "Test", "route" => "test", "icon" => "hammer", "can"=> "test"),
+        array('name' => "Finances", "icon" => "coins", "can"=> "finances",
+            'submenu' => [
+                array('name' => "Dépenses", "route" => "depenses", "icon" => "coins", "can" => "depenses"),
+            ]
+        ),
+
         array('name' => "Medias", "icon" => "photo", "can"=> "medias",
             'submenu' => [
                 array('name' => "Images", "route" => "images", "icon" => "photo"),
                 array('name' => "Vidéos", "route" => "videos", "icon" => "video"),
+                array('name' => "Personas", "route" => "personas", "icon" => "user"),
             ]
         ),
         array('name' => "Tableaux", "icon" => "dashboard", "can"=> "erp",
             'submenu' => [
-            array('name' => "Liens rapides", "route" => "dashboard1", "icon" => "dashboard"),
-            array('name' => "Recherche", "route" => "dashboard2", "icon" => "dashboard"),
+            array('name' => "Liens rapides", "route" => "dashboard1", "icon" => "network"),
+            array('name' => "Recherche", "route" => "dashboard2", "icon" => "search"),
             ]
         ),
         array('name' => "Perso", "icon" => "dashboard", "can"=> "erp",
@@ -55,6 +63,7 @@ class Navbar extends Component
             array('name' => "Mes Projets", "route" => "myprojects", "icon" => "circle"),
             ]
         ),
+        array('name' => "Test", "route" => "test", "icon" => "hammer", "can" => "test"),
     );
 
     public function render()

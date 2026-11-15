@@ -11,7 +11,6 @@ use App\Models\Fiche;
 use App\Models\Invoice;
 use App\Models\InvoiceAcompte;
 use App\Models\InvoiceBl;
-use App\Models\InvoiceProposal;
 use App\Models\InvoiceSection;
 use App\Models\Journal;
 use App\Models\Team;
@@ -28,43 +27,20 @@ class PDFController extends Controller
             'carbon' => $carbon,
             'date' => $carbon->now()->format('d-m-Y'),
 
-            'company_name' => env('MAIN_NAME'),
-            'company_logo' => env('LOGO', ''),
-            'company_sign' => env('SIGN', ''),
-            'company_buffer' => env('BUFFER', ''),
-            'company_ninea' => env('NINEA', ''),
-            'company_rib' => env('RIB', ''),
-            'company_address' => env('ADDRESS', ''),
-            'company_phone' => env('PHONE', ''),
-            'company_email' => env('EMAIL', ''),
-
-            'devis' => (object) array(
-                'conditions' => 'Conditions générales de vente : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                'reference' => 'DV-0001',
-                'date' => $carbon->now(),
-                'validite' => 30,
-                'client' => (object) array(
-                    'nom' => 'Client Exemple',
-                    'adresse' => '123 Rue Exemple, Ville, Pays',
-                    'telephone' => '+221 77 123 45 67',
-                ),
-                'lignes' => [
-                    (object) array(
-                        'designation' => 'Produit/Service 1',
-                        'quantite' => 2,
-                        'prix_unitaire' => 50000,
-                        'total' => 100000,
-                    ),
-                    (object) array(
-                        'designation' => 'Produit/Service 2',
-                        'quantite' => 1,
-                        'prix_unitaire' => 75000,
-                        'total' => 75000,
-                    ),
-                ],
-                'total_ht' => 175000,
-                'total_tva' => 35000,
-                'total_ttc' => 210000,
+            'company' => (object)array(
+                'logo' => $company_logo ?? 'img/tyto/logo.png',
+                'name' => $company_name ?? 'Company',
+                'address' => $company_address ?? '',
+                'email' => $company_email ?? 'email@mail.com',
+            ),
+            'document' => (object)array(
+                'title' => $document_title ?? 'Title',
+                'date' => date('d-m-Y'),
+                'reference' => 'INV-001-26'
+            ),
+            'file' => (object)array(
+                'name' => 'Test PDF',
+                'path' => 'img/test.pdf'
             ),
 
             'page_title' => $title ?? 'Document V1',
@@ -73,7 +49,7 @@ class PDFController extends Controller
                 "v1/footer",
             ],
         ];
-        $pdf = Pdf::loadView('_pdf.v1.layout_pdf1', $data);
+        $pdf = Pdf::loadView('_pdf3.invoice_pdf', $data);
         return $pdf->stream("$title");
     }
 
@@ -197,6 +173,21 @@ class PDFController extends Controller
         $devis = Invoice::find($invoice_id);
         $carbon = new Carbon($devis->date);
 
+        $color1 = "#1e88e5";
+        $color2 = "#e3f2fd";
+        $color3 = "#005b96";
+
+        if ($type == 'devis') {
+            $color1 = "066fd1";
+            $color2 = "e6f0fa";
+        } else if($type == 'facture'){
+            $color1 = "0ca678";
+            $color2 = "e6f6f1";
+        } else if($type == "quantitatif"){
+            $color1 = "ae3ec9";
+            $color2 = "f7ebf9";
+        }
+
         return [
             'logo' => env('LOGO', ''),
             'title' => $type ?? "Facture",
@@ -206,9 +197,10 @@ class PDFController extends Controller
             'acompte' => 0,
             // 'acompte' => InvoiceAcompte::find($acompte_id),
             'sections' => InvoiceSection::where('invoice_id', $devis->id)->get(),
-            'color1' => env('COLOR1', '6b8a7a'),
-            'color2' => env('COLOR2', '6b8a7a'),
-            'color3' => env('COLOR3', '6b8a7a'),
+            'color1' => $color1,
+            'color2' => $color2,
+            'color3' => $color3,
+            'type' => $type,
         ];
     }
 
@@ -234,7 +226,7 @@ class PDFController extends Controller
      *       ),
      *     )
      */
-    public static function facture_pdf($invoice_id,$type='facture'){
+    public static function facture_pdf(int $invoice_id, $type='facture'){
         $data = PDFController::facture($invoice_id, $type);
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
         return $pdf->stream( Str::upper($type).' '. Str::upper($data['devis']->reference). ' - '. $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
@@ -253,6 +245,9 @@ class PDFController extends Controller
         $devis = Invoice::find($invoice_id);
         $carbon = new Carbon($devis->date);
 
+        $color1 = "2fb344";
+        $color2 = "eaf7ec";
+
         $data = [
             'logo' => env('LOGO', ''),
             'title' => $type ?? "Facture",
@@ -262,9 +257,10 @@ class PDFController extends Controller
             'acompte' => InvoiceAcompte::find($acompte_id),
             'acomptes' => InvoiceAcompte::where('invoice_id', $devis->id)->get(),
             'sections' => InvoiceSection::where('invoice_id', $devis->id)->get(),
-            'color1' => env('COLOR1', '6b8a7a'),
-            'color2' => env('COLOR2', '6b8a7a'),
+            'color1' => $color1,
+            'color2' => $color2,
             'color3' => env('COLOR3', '6b8a7a'),
+            'type' => $type,
         ];
 
         $pdf = Pdf::loadView('_pdf.facture.facture_pdf', $data);
@@ -437,33 +433,10 @@ class PDFController extends Controller
         return $pdf->stream("Procès verbal");
     }
 
-    public static function proposal_pdf($proposal_id, $type = 'devis')
-    {
-        $data = PDFController::proposal($proposal_id, $type);
-        $pdf = Pdf::loadView('_pdf.facture.proposal_pdf', $data);
-        return $pdf->stream(Str::upper($type) . ' ' . Str::upper($data['devis']->reference) . ' - ' . $data['devis']->projet->client->name . ' - ' . $data['devis']->projet->name . ' - ' . $data['devis']->description);
-    }
 
-    static function proposal($proposal_id, $type)
-    {
-        $proposal = InvoiceProposal::find($proposal_id);
-        $devis = Invoice::find($proposal->invoice->id);
-        $carbon = new Carbon($devis->date);
 
-        return [
-            'logo' => env('LOGO', ''),
-            'title' => $type ?? "Facture",
-            'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
-            'devis' => $devis,
-            'carbon' => $carbon,
-            'proposal' => $proposal,
-            'acompte' => 0,
-            'color1' => env('COLOR1', '6b8a7a'),
-            'color2' => env('COLOR2', '6b8a7a'),
-            'color3' => env('COLOR3', '6b8a7a'),
-        ];
-    }
-    static function invoice_resume_pdf($year)
+
+    static function invoice_resume_pdf(int $year)
     {
         $invoices = Invoice::whereYear('paydate', $year)->orderBy('paydate', 'asc')->get();
         $acomptes = Invoice::with('acomptes')
@@ -485,7 +458,7 @@ class PDFController extends Controller
         $pdf = Pdf::loadView("_pdf.facture.invoice_resume_pdf", $data)->setPaper('a4', 'landscape');
         return $pdf->stream("Resumé des factures $year");
     }
-    static function attestation_pdf($team_id)
+    static function attestation_pdf(int $team_id)
     {
         $team = Team::find($team_id);
         $carbon = new Carbon();

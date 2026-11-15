@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class InvoiceRow extends Model
 {
@@ -19,6 +20,7 @@ class InvoiceRow extends Model
         'quantite',
         'prix',
         'bought',
+        'comment',
     ];
 
     public function section(): BelongsTo {
@@ -56,5 +58,20 @@ class InvoiceRow extends Model
         if ($this->priorite_id == 7) {
             return "Forfait";
         }
+    }
+
+    public function commande(): HasOne
+    {
+        return $this->hasOne(Commande::class);
+    }
+
+    function buy(){
+        $row = Commande::where('invoice_row_id', $this->id)->first();
+        if ($row) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }

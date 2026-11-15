@@ -31,7 +31,8 @@
 
     @assets
         <!-- CSS files -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/css/tabler.min.css" />
+        {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/css/tabler.min.css" /> --}}
+        {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.6.1/dist/css/tabler.min.css" integrity="sha384-tT2UAGE9hxG/p5d0iGIvZ/s8El3nWWG3tfG02i8iOY5Pbf8cZZRVmcrrVs+JG5Vw" crossorigin="anonymous" /> --}}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css">
@@ -94,7 +95,7 @@
                                     All rights reserved.
                                 </li>
                                 <li class="list-inline-item" wire:ignore.self>
-                                    <a href="#" wire:click.prevent="$emit('scrollTop')" class="btn btn-primary btn-icon" >
+                                    <a href="#" wire:click.prevent="$emit('scrollTop')" class="btn btn-primary btn-floating btn-icon" >
                                         <i class="ti ti-arrow-up"></i>
                                     </a>
                                 </li>
@@ -123,7 +124,10 @@
 
         <script  src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
         <!-- Tabler Core -->
-        <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/js/tabler.min.js"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.2.0/dist/js/tabler.min.js"></script> --}}
+        {{-- <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.6.1/dist/js/tabler.min.js"
+            integrity="sha384-1yCHfhyU8+V33urXkAlLLpNYd9jdzXkxdafCg0+auIIEtYFnOuM/DwJQgk5sXY98" crossorigin="anonymous">
+        </script> --}}
         {{-- Select2 --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
         {{-- Autosize --}}
@@ -137,6 +141,8 @@
             autosize(document.querySelectorAll('textarea'));
         </script>
     @endstack
+
+   
 
     @livewireScripts
     @stack('scripts')

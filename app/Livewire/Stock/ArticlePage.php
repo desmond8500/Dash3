@@ -21,6 +21,7 @@ class ArticlePage extends Component
 
     protected $paginationTheme = 'bootstrap';
     public $search ='';
+    public $search_tag ='';
 
     public $breadcrumbs;
     public $article_id;
@@ -42,7 +43,10 @@ class ArticlePage extends Component
             'providers' => Provider::all(),
             'brands' => Brand::all(),
             'article' => Article::find($this->article_id),
-            "tags" => Tag::getWithType('stock_article'),
+            "tags" => Tag::getWithType('stock_article')
+                ->when($this->search_tag, function ($query) {
+                    $query->where('name', 'like', '%' . $this->search_tag . '%');
+                }),
             'dependances' => ArticleDependence::where('article_id', $this->article_id)->get(),
             'articles' => Article::articleSearch($this->article_search)->paginate(6)
         ]);

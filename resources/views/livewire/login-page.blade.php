@@ -3,7 +3,9 @@
         <div class="col-lg">
             <div class="container-tight">
                 <div class="text-center mb-4">
-                    <img src="{{ asset(env('LOGO')) }}" alt="L" class="avatar avatar-xl">
+                    <img src="{{ config('app.logo') ? asset(config('app.logo')) : asset('img/tyto/logo.png') }}" alt="Logo"
+                        class="avatar avatar-xl" />
+                    {{-- <img src="{{ asset(env('LOGO')) }}" alt="L" class="avatar avatar-xl"> --}}
                 </div>
                 <div class="card card-md">
 

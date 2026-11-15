@@ -11,7 +11,7 @@
             <div class="card p-2">
                 <nav class="nav nav-segmented" role="tablist">
                     @foreach ($systems as $systeme)
-                        <a class="nav-link" role="tab" wire:click="select_system('{{ $systeme->id }}')" >
+                        <a class="nav-link  role="tab @if($selected_system && $selected_system->id == $systeme->id) active @endif " wire:click="select_system('{{ $systeme->id }}')" >
                             <i class="ti ti-{{ $systeme->icon ?? 'circle' }}"></i>
                             {{ $systeme->name }}
                         </a>
@@ -22,9 +22,12 @@
 
         <div class="col-md-4">
             @if ($selected_system)
-                <div class="card mb-3">
+                <div class="card mb-3 ">
                     <div class="card-header">
-                        <div class="card-title"> <i class="ti ti-{{ $selected_system->icon ?? 'circle' }}"></i> {{ $selected_system->name }}</div>
+                        <div class="card-title">
+                            <i class="ti ti-{{ $selected_system->icon ?? 'circle' }}"></i>
+                            <span class="overflow-hidden">{{ $selected_system->name }}</span>
+                        </div>
                         <div class="card-actions">
                             <button class="btn btn-primary btn-icon" wire:click="add_model('{{ $selected_system->id }}')">
                                 <i class="ti ti-plus"></i>
@@ -36,7 +39,7 @@
                     </div>
                     <div class="p-2">
                         @foreach ($selected_system->models as $model)
-                        <div class="border rounded p-1 mb-1">
+                        <div class="border rounded p-1 mb-1 @if($selected_model && $selected_model->id == $model->id) bg-primary text-white @endif">
                             <div class="row g-1 align-items-center"class="col cursor-pointer">
                                 <div class="col" wire:click="select_model('{{ $model->id }}')">
                                     <div class="row align-items-center g-1">

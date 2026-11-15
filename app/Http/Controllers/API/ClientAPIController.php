@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
 use App\Http\Resources\ClientResource;
+use App\Http\Controllers\ImageController;
 use App\Models\Client;
+use App\Models\Contact;
 use App\Models\Projet;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -35,16 +37,16 @@ class ClientAPIController extends Controller
     */
 
     function index(Request $request){
-        $perPage = min($request->get('per_page', 9), 100);
-        // if ($request->search) {
-        //     $clients = Client::where('name', 'like', '%' . $request->search . '%')
-        //         ->paginate($perPage);
-        // } else {
-        //     $clients = Client::orderBy('name', 'asc')->paginate($perPage);
-        // }
-        // $clients = ClientResource::collection($clients);
+        if($request->perPage){
+            $perPage = 1000;
+        }else{
+            $perPage = min($request->get('per_page', 9), 100);
+        }
 
         $clients = Client::search($request->search)
+            ->withCount(['projets', 'tasks'])
+            ->addSelect(['contacts_count' => Contact::selectRaw('count(*)')->whereColumn('contacts.client_id', 'clients.id')])
+            ->when($request->boolean('favorites'), fn ($q) => $q->where('favorite', true))
             ->orderBy('name', 'asc')
             ->paginate($perPage);
         $clients = ClientResource::collection($clients);
@@ -83,10 +85,12 @@ class ClientAPIController extends Controller
         *     )
     */
 
-    function show(int $id){
-        $client = Client::findorFail($id);
+    function show(int|string $id){
+        $client = Client::withCount(['projets', 'tasks'])
+            ->addSelect(['contacts_count' => Contact::selectRaw('count(*)')->whereColumn('contacts.client_id', 'clients.id')])
+            ->find($id);
         if ($client) {
-            return ResponseController::response(true, 'Le client a été récupéré avec succès', $client);
+            return ResponseController::response(true, 'Le client a été récupéré avec succès', new ClientResource($client));
         } else {
             return ResponseController::response(false, 'Client non trouvé', null, 404);
         }
@@ -177,24 +181,66 @@ class ClientAPIController extends Controller
         *     )
     */
     function update(Request $request, int $id){
-        $client = Client::findorFail($id);
-        if ($client) {
-            $client->name = $request->name;
-            $client->description = $request->description;
-            $client->address = $request->address;
-            // $client->avatar = $request->avatar;
-            $client->status = $request->status;
-            $client->type = $request->type;
-            $client->favorite = $request->favorite;
-
-            if ($client->save()) {
-                return ResponseController::response(true, 'Client mis à jour avec succès', null, 200);
-            } else {
-                return ResponseController::response(false, 'Erreur lors de la mise à jour du client', null, 400);
-            }
-        } else {
-            return ResponseController::response(false, 'Client non trouvé', null, 404);
+        $client = Client::find($id);
+        if (! $client) {
+            return response()->json(['success' => false, 'message' => 'Client non trouvé', 'error' => null, 'meta' => null], 404);
         }
+
+        // Seuls les champs envoyés sont modifiés (avant, un champ absent était remis à null)
+        $data = $request->validate([
+            'name' => ['sometimes', 'required', 'string', 'max:255'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'address' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'status' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'type' => ['sometimes', 'nullable', 'string', 'max:255'],
+            'favorite' => ['sometimes', 'boolean'],
+        ]);
+        $client->update($data);
+
+        return ResponseController::response(true, 'Client mis à jour avec succès', new ClientResource($client->fresh()));
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/clients/{id}/favorite",
+     *      tags={"Clients"},
+     *      summary="Ajouter ou retirer un client des favoris",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Favori mis à jour")
+     * )
+     */
+    function toggleFavorite(int $id){
+        $client = Client::find($id);
+        if (! $client) {
+            return response()->json(['success' => false, 'message' => 'Client non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $client->favorite = ! $client->favorite;
+        $client->save();
+
+        return ResponseController::response(true, $client->favorite ? 'Client ajouté aux favoris' : 'Client retiré des favoris', ['favorite' => (bool) $client->favorite]);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/clients/{id}/avatar",
+     *      tags={"Clients"},
+     *      summary="Remplacer le logo / l'avatar d'un client (multipart, champ image)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Avatar mis à jour")
+     * )
+     */
+    function updateAvatar(Request $request, int $id){
+        $client = Client::find($id);
+        if (! $client) {
+            return response()->json(['success' => false, 'message' => 'Client non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $request->validate(['image' => ['required', 'image', 'max:4096']]);
+
+        // Même dossier que le formulaire web (clientForm::storeAvatar)
+        $client->avatar = ImageController::update_logo("erp/clients/$client->id/avatar", $request->file('image'));
+        $client->save();
+
+        return ResponseController::response(true, 'Avatar mis à jour', new ClientResource($client));
     }
 
     /**
@@ -241,11 +287,11 @@ class ClientAPIController extends Controller
 
     /**
      *@OA\Get(
-     *      path="/api/v1/clients/projets/{id}",
+     *      path="/api/v1/clients_projets/{client_id}",
      *      tags={"Clients"},
      *      summary="Liste des projets d'un client",
      *      @OA\Parameter(
-     *          name="id",
+     *          name="client_id",
      *          in="path",
      *          required=true,
      *          description="ID du client",
@@ -268,11 +314,11 @@ class ClientAPIController extends Controller
      *     )
      */
 
-    function getProjets(int $id){
-        $client = Client::findorFail($id);
+    function getProjets(int|string $client_id){
+        $client = Client::findorFail($client_id);
         if ($client) {
             // $projets = $client->projets;
-            $projets = Projet::where('client_id', '=', $id, true)->orderBy('name', 'asc')->get();
+            $projets = Projet::where('client_id', '=', $client_id, true)->orderBy('name', 'asc')->get();
 
 
             return ResponseController::response(true, 'Projets récupérés avec succès', $projets, 200);
@@ -283,11 +329,11 @@ class ClientAPIController extends Controller
 
     /**
      *@OA\Get(
-     *      path="/api/v1/clients/tasks/{id}",
+     *      path="/api/v1/clients/tasks/{client_id}",
      *      tags={"Clients","Taches"},
      *      summary="Liste des tâches d'un client",
      *      @OA\Parameter(
-     *          name="id",
+     *          name="client_id",
      *          in="path",
      *          required=true,
      *          description="ID du client",
@@ -309,14 +355,51 @@ class ClientAPIController extends Controller
      *       ),
      *     )
      */
-    function getTasksByClient(int $id){
-        $client = Client::findorFail($id);
+    function getTasksByClient(int $client_id){
+        $client = Client::findorFail($client_id);
         if ($client) {
-            $tasks = Task::where('client_id', '==', $id, true)->orderBy('name', 'asc')->get();
+            // Tâches rattachées au client ou à l'un de ses projets
+            // (avant : where('client_id', '==', …) ne renvoyait jamais rien)
+            $tasks = Task::where('client_id', $client_id)
+                ->orWhereIn('projet_id', $client->projets()->select('id'))
+                ->with('projet:id,name')
+                ->orderBy('name', 'asc')
+                ->get();
             return ResponseController::response(true, 'Tâches récupérées avec succès', $tasks, 200);
         } else {
             return ResponseController::response(false, 'Client non trouvé', null, 404);
         }
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/v1/clients/{id}/contacts",
+     *      tags={"Clients"},
+     *      summary="Contacts d'un client (comme l'onglet Contacts de la page Projets)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success")
+     * )
+     */
+    function getContacts(int $id)
+    {
+        if (! Client::whereKey($id)->exists()) {
+            return response()->json(['success' => false, 'message' => 'Client non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $contacts = Contact::where('client_id', $id)
+            ->orderBy('firstname')
+            ->get()
+            ->map(fn ($c) => [
+                'id' => $c->id,
+                'firstname' => $c->firstname,
+                'lastname' => $c->lastname,
+                'fonction' => $c->fonction,
+                'societe' => $c->societe,
+                'phone' => $c->phone,
+                'email' => $c->email,
+                'projet_id' => $c->projet_id,
+                'avatar' => $c->avatar ? url($c->avatar) : null,
+            ]);
+
+        return ResponseController::response(true, 'Contacts récupérés', $contacts);
+    }
 }

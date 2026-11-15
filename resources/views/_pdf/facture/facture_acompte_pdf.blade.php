@@ -1,3 +1,11 @@
+<style>
+    .page-break {
+        page-break-after: always;
+    }
+</style>
+
+<div class="page-break"></div>
+
 <table class="" style="font-size: 14px;">
     <tr>
         <th class="" style="background: #6b8a7a; color: white;" colspan="4">ACOMPTE</th>

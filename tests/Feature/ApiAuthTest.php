@@ -1,0 +1,151 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use Laravel\Sanctum\Sanctum;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\TestCase;
+
+/**
+ * Vérifie que l'API n'est plus accessible sans token Sanctum.
+ * Ces tests n'ont pas besoin de base de données.
+ */
+class ApiAuthTest extends TestCase
+{
+    public static function protectedEndpoints(): array
+    {
+        return [
+            'liste clients'      => ['GET', '/api/v1/clients'],
+            'création client'    => ['POST', '/api/v1/clients'],
+            'suppression client' => ['DELETE', '/api/v1/clients/1'],
+            'projets'            => ['GET', '/api/v1/projets'],
+            'tâches'             => ['GET', '/api/v1/tasks'],
+            'suppression tâche'  => ['DELETE', '/api/v1/tasks/1'],
+            'journaux'           => ['GET', '/api/v1/journaux'],
+            'articles'           => ['GET', '/api/v1/items'],
+            'création article'   => ['POST', '/api/v1/items'],
+            'modif article'      => ['PUT', '/api/v1/items/1'],
+            'suppression article'=> ['DELETE', '/api/v1/items/1'],
+            'fournisseurs'       => ['GET', '/api/v1/providers'],
+            'création fournisseur' => ['POST', '/api/v1/providers'],
+            'modif fournisseur'  => ['PUT', '/api/v1/providers/1'],
+            'marques'            => ['GET', '/api/v1/brands'],
+            'création marque'    => ['POST', '/api/v1/brands'],
+            'suppression marque' => ['DELETE', '/api/v1/brands/1'],
+            'recherche devis'    => ['GET', '/api/v1/invoices?search=test'],
+            'détail devis'       => ['GET', '/api/v1/invoices/1'],
+            'détail projet'      => ['GET', '/api/v1/projets/1'],
+            'détail tâche'       => ['GET', '/api/v1/tasks/1'],
+            'tâches actives'     => ['GET', '/api/v1/tasks?statut=active'],
+            'favori client'      => ['POST', '/api/v1/clients/1/favorite'],
+            'avatar client'      => ['POST', '/api/v1/clients/1/avatar'],
+            'favori projet'      => ['POST', '/api/v1/projets/1/favorite'],
+            'logo projet'        => ['POST', '/api/v1/projets/1/logo'],
+            'logo fournisseur'   => ['POST', '/api/v1/providers/1/logo'],
+            'logo marque'        => ['POST', '/api/v1/brands/1/logo'],
+            'articles filtrés'   => ['GET', '/api/v1/items?brand_id=1'],
+            'contacts client'    => ['GET', '/api/v1/clients/1/contacts'],
+            'badges projet'      => ['GET', '/api/v1/projets/1/badges'],
+            'types articles'     => ['GET', '/api/v1/items_types'],
+            'commander article'  => ['POST', '/api/v1/items/1/commande'],
+            'planning tâches'    => ['GET', '/api/v1/tasks?from=2026-11-09&to=2026-11-15'],
+            'statut tâche'       => ['POST', '/api/v1/tasks/1/statut'],
+            'quantité article'   => ['POST', '/api/v1/items/1/quantity'],
+            'tag article'        => ['POST', '/api/v1/items/1/tags'],
+            'images article'     => ['POST', '/api/v1/items/1/images'],
+            'image par défaut'   => ['POST', '/api/v1/items/1/image-default'],
+            'articles associés'  => ['GET', '/api/v1/items/1/dependances'],
+            'retirer association'=> ['DELETE', '/api/v1/dependances/1'],
+            'modifier note'      => ['PUT', '/api/v1/projet_notes/1'],
+            'installations'      => ['GET', '/api/v1/projets/1/installations'],
+            'créer bâtiment'     => ['POST', '/api/v1/buildings'],
+            'créer système'      => ['POST', '/api/v1/installation_systemes'],
+            'créer équipement'   => ['POST', '/api/v1/equipements'],
+            'plans projet'       => ['GET', '/api/v1/projets/1/plans'],
+            'importer plan'      => ['POST', '/api/v1/plans'],
+            'emplacements plan'  => ['PUT', '/api/v1/plans/1/markers'],
+            'fichier plan'       => ['GET', '/api/v1/plans/1/file'],
+            'convertir plan'     => ['POST', '/api/v1/plans/1/convert'],
+            'modifier devis'     => ['PUT', '/api/v1/invoices/1'],
+            'favori devis'       => ['POST', '/api/v1/invoices/1/favorite'],
+            'section devis'      => ['POST', '/api/v1/invoice_sections'],
+            'ligne devis'        => ['POST', '/api/v1/invoice_rows'],
+            'acompte devis'      => ['POST', '/api/v1/invoice_acomptes'],
+            'dépense devis'      => ['POST', '/api/v1/invoice_spents'],
+            'créer devis'        => ['POST', '/api/v1/invoices'],
+            'contacts'           => ['GET', '/api/v1/contacts?projet_id=1'],
+            'créer contact'      => ['POST', '/api/v1/contacts'],
+            'documents projet'   => ['GET', '/api/v1/projets/1/documents'],
+            'ajouter document'   => ['POST', '/api/v1/projet_documents'],
+            'modifier tâche'     => ['PUT', '/api/v1/tasks/1'],
+            'modifier journal'   => ['PUT', '/api/v1/journaux/1'],
+            'bâtiment'           => ['GET', '/api/v1/buildings/1'],
+            'ajouter niveau'     => ['POST', '/api/v1/stages'],
+            'ajouter local'      => ['POST', '/api/v1/rooms'],
+            'dupliquer équip.'   => ['POST', '/api/v1/equipements/1/duplicate'],
+            'icônes'             => ['GET', '/api/v1/icons'],
+            'ajouter icône'      => ['POST', '/api/v1/icons'],
+            'journal détaillé'   => ['GET', '/api/v1/journaux/1'],
+            'ajouter section'    => ['POST', '/api/v1/journal_sections'],
+            'photos de section'  => ['POST', '/api/v1/journal_sections/1/images'],
+            'intervenants'       => ['POST', '/api/v1/journaux/1/intervenants'],
+            'modèles de badge'   => ['GET', '/api/v1/badge_modeles'],
+            'mes CV'             => ['GET', '/api/v1/cvs'],
+            'commandes'          => ['GET', '/api/v1/commandes'],
+            'lien article'       => ['POST', '/api/v1/items/1/links'],
+            'document article'   => ['POST', '/api/v1/items/1/documents'],
+            'lien marque'        => ['POST', '/api/v1/brands/1/links'],
+            'devis'              => ['GET', '/api/v1/invoices'],
+            'devis du mois'      => ['POST', '/api/v1/get_month_invoices'],
+            'factures'           => ['GET', '/api/v1/factures'],
+            'pdf facture'        => ['GET', '/api/v1/facture_pdf/1/facture'],
+            'achats'             => ['GET', '/api/v1/achats'],
+            'transactions'       => ['GET', '/api/v1/transactions'],
+            'favoris'            => ['GET', '/api/v1/favoris'],
+            'personas'           => ['GET', '/api/v1/personas'],
+            'demos'              => ['GET', '/api/demos'],
+            'me'                 => ['GET', '/api/v1/me'],
+            'logout'             => ['POST', '/api/v1/logout'],
+            'user'               => ['GET', '/api/user'],
+        ];
+    }
+
+    #[DataProvider('protectedEndpoints')]
+    public function test_endpoint_refuse_les_requetes_sans_token(string $method, string $uri): void
+    {
+        $this->json($method, $uri)->assertUnauthorized();
+    }
+
+    public function test_inscription_desactivee_par_defaut(): void
+    {
+        $this->postJson('/api/v1/register', [
+            'name' => 'Test',
+            'email' => 'test@example.com',
+            'password' => 'password123',
+        ])->assertNotFound();
+    }
+
+    public function test_me_renvoie_l_utilisateur_du_token_et_ignore_user_id(): void
+    {
+        $user = new User(['email' => 'moi@example.com', 'firstname' => 'Moi']);
+        $user->id = 42;
+        Sanctum::actingAs($user);
+
+        $this->getJson('/api/v1/me?user_id=1')
+            ->assertOk()
+            ->assertJsonPath('data.id', 42)
+            ->assertJsonPath('data.email', 'moi@example.com');
+    }
+
+    public function test_logout_authentifie_repond_200(): void
+    {
+        $user = new User(['email' => 'moi@example.com']);
+        $user->id = 42;
+        Sanctum::actingAs($user);
+
+        $this->postJson('/api/v1/logout')
+            ->assertOk()
+            ->assertJsonPath('success', true);
+    }
+}

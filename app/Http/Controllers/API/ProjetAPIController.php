@@ -3,246 +3,386 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Resources\ProjetResource;
 use App\Models\Projet;
 use App\Models\Task;
+use App\Models\Badge;
 use Illuminate\Http\Request;
 
 class ProjetAPIController extends Controller
 {
     /**
-        *@OA\Get(
-        *      path="/api/v1/projets",
-        *      tags={"Projets",},
-        *      summary="Liste des projets",
-        *      @OA\Response(
-        *          response=200,
-        *          description="Utilisateurs récupérés avec succès",
-        *       ),
-        *      @OA\Parameter(
-        *          name="search",
-        *          in="path",
-        *          required=false,
-        *          description="Terme de recherche pour filtrer les projets par nom",
-        *          ),
-        *     )
-    */
+     * @OA\Get(
+     *     path="/api/v1/projets",
+     *     operationId="getProjets",
+     *     tags={"Projets"},
+     *     summary="Liste des projets",
+     *     description="Retourne la liste paginée des projets.",
+     *
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         required=false,
+     *         description="Recherche par nom du projet",
+     *         @OA\Schema(type="string")
+     *     ),
+     *
+     *     @OA\Parameter(
+     *         name="client_id",
+     *         in="query",
+     *         required=false,
+     *         description="Filtrer par client",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste récupérée avec succès"
+     *     )
+     * )
+     */
     public function index(Request $request)
-    {   return 0;
-        if($request->search) {
-            $projets = Projet::with(['client', 'invoices', 'buildings', 'tasks', 'journals', 'contacts'])->where('name', 'like', '%' . $request->search . '%')->get();
-        } else {
-            $projets = Projet::with(['client', 'invoices', 'buildings', 'tasks', 'journals', 'contacts'])->get();
+    {
+        $query = Projet::query()
+            ->with('client:id,name,avatar')
+            ->withCount(['invoices as devis_count', 'tasks']);
+
+        if ($request->boolean('favorites')) {
+            $query->where('favorite', true);
         }
+
+        if ($request->filled('client_id')) {
+            $query->where('client_id', $request->client_id);
+        }
+
+        if ($request->filled('search')) {
+            $query->where('name', 'like', "%{$request->search}%");
+        }
+
+        $perPage = min((int) $request->get('per_page', 20), 100);
+        $projets = $query->latest()->paginate($perPage);
+
+        // URL complète du logo (logo du projet, sinon avatar du client)
+        $projets->getCollection()->transform(function ($projet) {
+            $projet->logo_url = url($projet->logo ?? $projet->client?->avatar ?? 'img/icons/005-notebook.png');
+            return $projet;
+        });
+
         return ResponseController::response(true, 'Projets récupérés avec succès', $projets);
-        // return ResponseController::response(true, 'Projets récupérés avec succès', ProjetResource::collection($projets));
     }
 
     /**
-     *@OA\Post(
-     *      path="/api/v1/projets",
-     *      tags={"Projets",},
-     *      summary="Ajouter un projet",
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(
-     *              required={"name","client_id"},
-     *              @OA\Property(property="client_id", type="integer", example="1"),
-     *              @OA\Property(property="name", type="string", example="Projet Name"),
-     *              @OA\Property(property="description", type="string", example=""),
-     *              @OA\Property(property="favorite", type="string", example="1"),
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="Projet créé avec succès",
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Erreur lors de la création du projet",
-     *       ),
-     *     )
+     * @OA\Post(
+     *     path="/api/v1/projets",
+     *     operationId="storeProjet",
+     *     tags={"Projets"},
+     *     summary="Créer un projet",
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"client_id","name"},
+     *             @OA\Property(property="client_id", type="integer", example=1),
+     *             @OA\Property(property="name", type="string", example="Installation Caméras Banque"),
+     *             @OA\Property(property="description", type="string", example="Projet de vidéosurveillance."),
+     *             @OA\Property(property="favorite", type="boolean", example=false)
+     *         )
+     *     ),
+     *
+     *     @OA\Response(response=201, description="Projet créé"),
+     *     @OA\Response(response=422, description="Erreur de validation")
+     * )
      */
     public function store(Request $request)
     {
-        $projet = new Projet();
-        $projet->client_id = $request->client_id;
-        $projet->name = $request->name;
-        $projet->description = $request->description;
+        $validated = $request->validate([
+            'client_id' => ['required', 'integer', 'exists:clients,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
+            'favorite' => ['nullable', 'boolean'],
+        ]);
 
-        if ($projet->save()) {
-            return ResponseController::response(true, 'Projet créé avec succès', $projet, 201);
-        } else {
-            return ResponseController::response(false, 'Erreur lors de la création du projet', null, 400);
-        }
+        $projet = Projet::create($validated);
+
+        return ResponseController::response(
+            true,
+            'Projet créé avec succès',
+            $projet,
+            201
+        );
     }
 
     /**
-        *@OA\Get(
-        *      path="/api/v1/projets/{id}",
-        *      tags={"Projets",},
-        *      summary="Récupération d'un projet",
-        *      @OA\Response(
-        *          response=200,
-        *          description="Projet récupéré avec succès",
-        *       ),
-        *      @OA\Parameter(
-        *          name="id",
-        *          in="path",
-        *          required=true,
-        *          description="ID du projet",
-        *          ),
-        *
-        *     )
-    */
-
-    public function show(string $id)
+     * @OA\Get(
+     *     path="/api/v1/projets/{id}",
+     *     operationId="showProjet",
+     *     tags={"Projets"},
+     *     summary="Afficher un projet",
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *
+     *     @OA\Response(response=200, description="Projet trouvé"),
+     *     @OA\Response(response=404, description="Projet introuvable")
+     * )
+     */
+    public function show(int $id)
     {
-        $projet = Projet::with(['client', 'invoices', 'buildings', 'tasks', 'journals', 'contacts'])->find($id);
-
-        $projet = new ProjetResource($projet);
+        $projet = Projet::with([
+            'client',
+            'invoices',
+            'buildings',
+            'tasks',
+            'journals',
+            'contacts'
+        ])->find($id);
 
         if (!$projet) {
-            return ResponseController::response(false, 'Projet non trouvé', null);
+            return ResponseController::response(
+                false,
+                'Projet non trouvé',
+                null,
+                404
+            );
         }
-        return ResponseController::response(true, 'Projet récupéré avec succès', $projet);
-        // return ResponseController::response(true, 'Projet récupéré avec succès', new ProjetResource($projet));
+
+        // Montant total (lignes des sections) et date de paiement de chaque devis
+        $projet->invoices->loadMissing('rows');
+        $projet->invoices->each(function ($i) {
+            $i->total = $i->total();
+            $i->makeHidden('rows')->unsetRelation('rows');
+        });
+
+        return ResponseController::response(
+            true,
+            'Projet récupéré avec succès',
+            new ProjetResource($projet)
+        );
     }
 
     /**
-     *@OA\Put(
-     *      path="/api/v1/projets/{id}",
-     *      tags={"Projets",},
-     *      summary="Mettre à jour un projet",
-     *      @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          required=true,
-     *          description="ID du projet",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\RequestBody(
-     *          required=true,
-     *              @OA\JsonContent(
-     *              required={"name","client_id"},
-     *              @OA\Property(property="client_id", type="integer", example="1"),
-     *              @OA\Property(property="name", type="string", example="Projet Name"),
-     *              @OA\Property(property="description", type="string", example=""),
-     *              @OA\Property(property="favorite", type="string", example="1"),
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Client mis à jour avec succès",
-     *       ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Client non trouvé",
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Erreur lors de la mise à jour du client",
-     *       ),
-     *     )
+     * @OA\Put(
+     *     path="/api/v1/projets/{id}",
+     *     operationId="updateProjet",
+     *     tags={"Projets"},
+     *     summary="Modifier un projet",
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"client_id","name"},
+     *             @OA\Property(property="client_id", type="integer", example=1),
+     *             @OA\Property(property="name", type="string", example="Projet Banque Dakar"),
+     *             @OA\Property(property="description", type="string", example="Mise à jour."),
+     *             @OA\Property(property="favorite", type="boolean", example=true)
+     *         )
+     *     ),
+     *
+     *     @OA\Response(response=200, description="Projet modifié"),
+     *     @OA\Response(response=404, description="Projet introuvable")
+     * )
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         $projet = Projet::find($id);
-        if($projet){
-            $projet->client_id = $request->client_id;
-            $projet->name = $request->name;
-            $projet->description = $request->description;
-            if ($projet->save()) {
-                return ResponseController::response(true, 'Projet mis à jour avec succès', $projet, 200);
-            } else {
-                return ResponseController::response(false, 'Erreur lors de la mise à jour du projet', null, 400);
-            }
-        } else {
+
+        if (!$projet) {
             return ResponseController::response(false, 'Projet non trouvé', null, 404);
         }
+
+        $validated = $request->validate([
+            'client_id' => ['required', 'integer', 'exists:clients,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
+            'favorite' => ['nullable', 'boolean'],
+        ]);
+
+        $projet->update($validated);
+
+        return ResponseController::response(
+            true,
+            'Projet mis à jour avec succès',
+            $projet
+        );
     }
 
     /**
-     *@OA\Delete(
-     *      path="/api/v1/projets/{id}",
-     *      tags={"Projets",},
-     *      summary="Supprimer un projet",
-     *      @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          required=true,
-     *          description="ID du projet",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Projet supprimé avec succès",
-     *       ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Projet non trouvé",
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Erreur lors de la suppression du projet",
-     *       ),
-     *     )
+     * @OA\Delete(
+     *     path="/api/v1/projets/{id}",
+     *     operationId="deleteProjet",
+     *     tags={"Projets"},
+     *     summary="Supprimer un projet",
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *
+     *     @OA\Response(response=200, description="Projet supprimé"),
+     *     @OA\Response(response=404, description="Projet introuvable")
+     * )
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
         $projet = Projet::find($id);
-        if ($projet) {
-            if ($projet->delete()) {
-                return ResponseController::response(true, 'Projet supprimé avec succès', null, 200);
-            } else {
-                return ResponseController::response(false, 'Erreur lors de la suppression du Projet', null, 400);
-            }
-        } else {
+
+        if (!$projet) {
             return ResponseController::response(false, 'Projet non trouvé', null, 404);
         }
+
+        $projet->delete();
+
+        return ResponseController::response(
+            true,
+            'Projet supprimé avec succès'
+        );
     }
 
     /**
-     *@OA\Get(
-     *      path="/api/v1/projet/tasks/{id}",
-     *      tags={"Projets","Taches"},
-     *      summary="Liste des tâches d'un projet",
-     *      @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          required=true,
-     *          description="ID du projet",
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Tâches récupérées avec succès",
-     *       ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Client non trouvé",
-     *       ),
-     *      @OA\Response(
-     *          response=400,
-     *          description="Erreur lors de la récupération des tâches",
-     *       ),
-     *     )
+     * @OA\Get(
+     *     path="/api/v1/projets/{id}/tasks",
+     *     operationId="getProjetTasks",
+     *     tags={"Projets","Tâches"},
+     *     summary="Liste des tâches d'un projet",
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *
+     *     @OA\Response(response=200, description="Liste des tâches"),
+     *     @OA\Response(response=404, description="Projet introuvable")
+     * )
      */
-    function getTasksByProjet(int $id)
+    public function getTasksByProjet(int $id)
     {
         $projet = Projet::find($id);
-        if ($projet) {
-            $tasks = Task::where('projet_id', $id)->orderBy('name', 'asc')->get();
-            return ResponseController::response(true, 'Tâches récupérées avec succès', $tasks, 200);
-        } else {
-            return ResponseController::response(false, 'projet non trouvé', null, 404);
+
+        if (!$projet) {
+            return ResponseController::response(false, 'Projet non trouvé', null, 404);
         }
+
+        return ResponseController::response(
+            true,
+            'Tâches récupérées avec succès',
+            $projet->tasks()->orderBy('name')->get()
+        );
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/projets/{id}/favorite",
+     *      tags={"Projets"},
+     *      summary="Ajouter ou retirer un projet des favoris",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Favori mis à jour")
+     * )
+     */
+    public function toggleFavorite(int $id)
+    {
+        $projet = Projet::find($id);
+        if (! $projet) {
+            return response()->json(['success' => false, 'message' => 'Projet non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $projet->favorite = ! $projet->favorite;
+        $projet->save();
+
+        return ResponseController::response(true, $projet->favorite ? 'Projet ajouté aux favoris' : 'Projet retiré des favoris', ['favorite' => (bool) $projet->favorite]);
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/projets/{id}/logo",
+     *      tags={"Projets"},
+     *      summary="Remplacer le logo d'un projet (multipart, champ image)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Logo mis à jour")
+     * )
+     */
+    public function updateLogo(Request $request, int $id)
+    {
+        $projet = Projet::find($id);
+        if (! $projet) {
+            return response()->json(['success' => false, 'message' => 'Projet non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $request->validate(['image' => ['required', 'image', 'max:4096']]);
+
+        // Même dossier que le formulaire web (projetForm::store_logo)
+        $projet->logo = ImageController::update_logo("erp/clients/{$projet->client_id}/projets/{$projet->id}/logo", $request->file('image'));
+        $projet->save();
+
+        return ResponseController::response(true, 'Logo mis à jour', ['logo_url' => url($projet->logo)]);
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/v1/projets/{id}/badges",
+     *      tags={"Projets"},
+     *      summary="Badges du projet (onglet Badges)",
+     *      security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success")
+     * )
+     */
+    /**
+     * @OA\Get(path="/api/v1/badge_modeles", tags={"Projets"},
+     *      summary="Liste des modèles de badge", security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success"))
+     */
+    public function getBadgeModeles()
+    {
+        $modeles = \App\Models\BadgeModele::orderBy('name')
+            ->withCount('badges')
+            ->get()
+            ->map(fn ($m) => [
+                'id' => $m->id,
+                'name' => $m->name,
+                'file' => $m->file ? url($m->file) : null,
+                'badges_count' => $m->badges_count,
+            ]);
+
+        return ResponseController::response(true, 'Modèles de badge récupérés', $modeles);
+    }
+
+    public function getBadges(int $id)
+    {
+        if (! Projet::whereKey($id)->exists()) {
+            return response()->json(['success' => false, 'message' => 'Projet non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $badges = Badge::where('projet_id', $id)
+            ->orderBy('nom')
+            ->get()
+            ->map(fn ($b) => [
+                'id' => $b->id,
+                'prenom' => $b->prenom,
+                'nom' => $b->nom,
+                'fonction' => $b->fonction,
+                'service' => $b->service,
+                'direction' => $b->direction,
+                'matricule' => $b->matricule,
+                'photo' => $b->photo ? url($b->photo) : null,
+            ]);
+
+        return ResponseController::response(true, 'Badges récupérés', $badges);
     }
 }

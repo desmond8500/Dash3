@@ -6,7 +6,7 @@
 
     <div class="row g-2">
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card">
                 <table class="table table-hover">
                     <thead class="sticky-top">
@@ -115,129 +115,24 @@
             </div>
         </div>
 
-        <div class="col-md-8">
-            @foreach ($devis->sections as $key => $section)
-
-                @if ($section->status)
-                    <div class="card mb-2">
-                        <table class="table table-hover">
-                            <tr>
-                                <td colspan="3">
-                                    <div class="mb-3">
-                                        <div class="fw-bold">{{ $section->section }}</div>
-                                        <div class="text-muted  " style="font-size: 12px;">{!! $section->proposition !!}</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <thead class="sticky-top">
-                                <tr>
-                                    <td width="100px">Photo</td>
-                                    <td>Description</td>
-                                    <td width="80px" class="text-center">Quantité</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($section->rows->sortBy('priorite_id') as $key => $row)
-                                    @if ($row->priorite_id<5 )
-                                        <tr>
-                                            <td>
-                                                @isset ($row->article->image)
-                                                <img src="{{ asset($row->article->image) }}" alt="I" class="avatar avatar-xl me-2">
-                                                @else
-                                                <img src="{{ asset(" img/icons/packaging.png") }}" alt="I" class="avatar avatar-sm me-2 bg-white border border-white">
-                                                @endisset
-                                            </td>
-                                            <td>
-                                                <div class="mb-1">
-                                                    @if ($row->article_id)
-                                                    <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{
-                                                        $row->designation }}</a>
-                                                    @else
-                                                    {{ $row->designation }}
-                                                    @endif
-
-                                                </div>
-                                                <div class="text-muted" style="font-size: 12px;">{!! nl2br($row->reference) !!}</div>
-
-                                                <div style="font-size: 14px;">{!! nl2br($row->article->description ?? ' ') !!}</div>
-
-                                                <div class="mt-1">
-                                                    @if ($row->article && $row->article->links)
-                                                    @foreach ($row->article->links as $link)
-                                                    @if ($link->name == "Fiche Technique")
-                                                    <a href="{{ $link->link }}" class="text-purple" target="_blank">{{ $link->name }}</a>
-                                                    @endif
-                                                    @endforeach
-                                                    @endif      </div>
-                                            </td>
-                                            <td class="text-center">
-                                                {{ $row->quantite }}
-                                            </td>
-                                        </tr>
-                                        @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-
+        <div class="col-md-9">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <div class="card-title">Proposition Technique</div>
+                    <div class="card-actions">
+                        <button class='btn btn-primary btn-icon' wire:click="$dispatch('open-editInvoiceProposal')" ><i class='ti ti-edit'></i> </button>
                     </div>
+                </div>
+            </div>
 
-
-
-
-                    {{-- <table class="table table-responsive">
-                        <thead class="sticky-top table-dark">
-                            <tr class="">
-                                <th scope="col" style="width: 150px;">Photo</th>
-                                <th scope="col" class="text-center">Description</th>
-                                <th scope="col" style="width: 10px" class="text-center">Quantité</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            @foreach ($section->rows->sortBy('priorite_id') as $row)
-                            @if ($row->priorite_id<5 ) <tr>
-                                <td>
-                                    @isset ($row->article->image)
-                                    <img src="{{ asset($row->article->image) }}"  alt="I" class="avatar avatar-xl me-2">
-                                    @else
-                                    <img src="{{ asset("img/icons/packaging.png") }}" alt="I"
-                                        class="avatar avatar-sm me-2 bg-white border border-white">
-                                    @endisset
-                                </td>
-                                <td>
-                                    <div class="mb-1">
-                                        @if ($row->article_id)
-                                        <a href="{{ route('article',['article_id'=>$row->article_id]) }}" target="_blank">{{
-                                            $row->designation }}</a>
-                                        @else
-                                        {{ $row->designation }}
-                                        @endif
-
-                                    </div>
-                                    <div class="text-muted" style="font-size: 12px;">{!! nl2br($row->reference) !!}</div>
-                                    <hr>
-
-                                    <div style="font-size: 14px;">{!! nl2br($row->article->description ?? ' ') !!}</div>
-
-                                    <div class="mt-1">
-                                        @if ($row->article && $row->article->links)
-                                        @foreach ($row->article->links as $link)
-                                        @if ($link->name == "Fiche Technique")
-                                        <a href="{{ $link->link }}" class="text-purple" target="_blank">{{ $link->name }}</a>
-                                        @endif
-                                        @endforeach
-                                        @endif
-                                    </div>
-                                </td>
-                                <td class="text-center">{{ $row->quantite }}</td>
-                                </tr>
-                                @endif
-                                @endforeach
-                        </tbody>
-                    </table> --}}
-                @endif
-            @endforeach
+            @livewire('erp/invoice/pdf/header', ['data' => $data])
+            @livewire('erp/invoice/pdf/resume', ['data' => $data])
+            @livewire('erp/invoice/pdf/devis', ['quotation' => $data['quotation']])
+            @livewire('erp/invoice/pdf/details_tech', ['quotation' => $data['quotation']])
+            @livewire('erp/invoice/pdf/avancement', ['data' => $data])
+            @livewire('erp/invoice/pdf/photos', ['data' => $data])
+            @livewire('erp/invoice/pdf/taches', ['data' => $data])
+            @livewire('erp/invoice/pdf/plans', ['data' => $data])
 
         </div>
     </div>

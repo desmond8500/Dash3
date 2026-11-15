@@ -9,6 +9,7 @@ class AchatResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
+     * @mixin Achat
      *
      * @return array<int|string, mixed>
      */

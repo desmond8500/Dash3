@@ -111,6 +111,11 @@ class NoteAPIController extends Controller
      */
 
     public function store(Request $request){
+        $request->validate([
+            'projet_id' => ['required', 'integer', 'exists:projets,id'],
+            'titre' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+        ]);
         $note  = new ProjetNote();
 
         $note->projet_id = $request->projet_id;
@@ -118,7 +123,7 @@ class NoteAPIController extends Controller
         $note->description = $request->description;
 
         if ($note->save()) {
-            return ResponseController::response(true, 'Note créée avec succès', null, 201);
+            return ResponseController::response(true, 'Note créée avec succès', $note, 201);
         } else {
             return ResponseController::response(false, 'Erreur lors de la création de la note', null, 400);
         }
@@ -165,12 +170,19 @@ class NoteAPIController extends Controller
         $note  = ProjetNote::find($id);
 
         if ($note) {
-            $note->projet_id = $request->projet_id;
+            $request->validate([
+                'titre' => ['required', 'string', 'max:255'],
+                'description' => ['nullable', 'string'],
+            ]);
+            // Le projet n'est changé que s'il est envoyé (avant : remis à null)
+            if ($request->filled('projet_id')) {
+                $note->projet_id = $request->projet_id;
+            }
             $note->titre = $request->titre;
             $note->description = $request->description;
 
             if ($note->save()) {
-                return ResponseController::response(true, 'Note mise à jour avec succès', null, 201);
+                return ResponseController::response(true, 'Note mise à jour avec succès', $note, 201);
             } else {
                 return ResponseController::response(false, 'Erreur lors de la mise à jour de la note', null, 400);
                 }

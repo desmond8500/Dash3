@@ -2,14 +2,15 @@
 
 use App\Exports\InvoiceExport;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\KonvaController;
 use App\Http\Controllers\PDF2Controller;
 use App\Http\Controllers\PDFController;
+use App\Livewire\Accounting\DepensesPage;
 use App\Livewire\Dashboard\Dashboard1Page;
 use App\Livewire\Dashboard\Dashboard2Page;
 use App\Livewire\Erp\AvancementsPage;
 use App\Livewire\Erp\BuildingPage;
 use App\Livewire\Erp\BuildingsPage;
+use App\Livewire\Erp\CalendrierPage;
 use App\Livewire\Erp\ClientsPage;
 use App\Livewire\Erp\CVpage;
 use App\Livewire\Erp\DocumentsPage;
@@ -18,7 +19,6 @@ use App\Livewire\Erp\FichesPage;
 use App\Livewire\Erp\FicheZonePage;
 use App\Livewire\Erp\FinancesPage;
 use App\Livewire\Erp\ForfaitsPage;
-use App\Livewire\Erp\Invoicelist2Page;
 use App\Livewire\Erp\InvoiceListPage;
 use App\Livewire\Erp\InvoiceModelPage;
 use App\Livewire\Erp\InvoicePage;
@@ -34,11 +34,14 @@ use App\Livewire\Erp\SchemaPage;
 use App\Livewire\Erp\StagePage;
 use App\Livewire\Erp\SystemesPage;
 use App\Livewire\Erp\TeamPage;
+use App\Livewire\GeneratePage;
 use App\Livewire\IndexPage;
 use App\Livewire\JournalPage;
 use App\Livewire\JournauxPage;
 use App\Livewire\LoginPage;
 use App\Livewire\Medias\ImagesPage;
+use App\Livewire\Medias\PersonaPage;
+use App\Livewire\Medias\PersonasPage;
 use App\Livewire\Medias\VideosPage;
 use App\Livewire\Modules\ContactsPage;
 use App\Livewire\MyprojectPage;
@@ -47,11 +50,13 @@ use App\Livewire\ProfilePage;
 use App\Livewire\SettingsPage;
 use App\Livewire\Stock\AchatPage;
 use App\Livewire\Stock\AchatsPage;
+use App\Livewire\Stock\ArticleDownload;
 use App\Livewire\Stock\ArticlePage;
 use App\Livewire\Stock\ArticlesPage;
 use App\Livewire\Stock\ArticleTypesPage;
 use App\Livewire\Stock\BrandPage;
 use App\Livewire\Stock\BrandsPage;
+use App\Livewire\Stock\IconsPage;
 use App\Livewire\Stock\ProviderPage;
 use App\Livewire\Stock\ProvidersPage;
 use App\Livewire\Stock\StockPage;
@@ -60,9 +65,7 @@ use App\Livewire\Task\TasksPage;
 use App\Livewire\TestPage;
 use App\Livewire\TimelinePage;
 use App\Livewire\VideoPage;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Browsershot\Browsershot;
 use Spatie\LaravelPdf\Facades\Pdf;
@@ -75,8 +78,9 @@ Route::get('/login', LoginPage::class)->name('login');
 
 // Settings
 Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', ProfilePage::class)->name('profile');
+    Route::get('/generate', GeneratePage::class)->name('generate');
     Route::get('/settings', SettingsPage::class)->name('settings');
+    Route::get('/profile', ProfilePage::class)->name('profile');
     Route::get('/cv/{cv_id}', CVpage::class)->name('cv');
     Route::get('/cv_pdf/{cv_id}', function ($cv_id) {
         return PDFController::cv_pdf($cv_id);
@@ -105,7 +109,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
 
     Route::get('/facture/invoice_resume_pdf/{year}', function ($year) { return PDFController::invoice_resume_pdf($year); })->name('invoice_resume_pdf');
 
-    Route::get('/facture/proposal_pdf/{proposal_id}/{type}', function ($proposal_id, $type) { return PDFController::proposal_pdf($proposal_id, $type); })->name('proposal_pdf');
+    Route::get('/facture/proposal_pdf/{proposal_id}/{type}', function ($proposal_id, $type) { return PDF2Controller::proposal_pdf($proposal_id, $type); })->name('proposal_pdf');
     Route::get('invoice_proposal/{proposal_id}', InvoiceProposalPage::class)->name('invoice_proposal');
 
 
@@ -164,6 +168,8 @@ Route::middleware(['auth', 'can:stock'])->group(function () {
     Route::get('/stock/articles', ArticlesPage::class)->name('articles');
     Route::get('/stock/article/{article_id}', ArticlePage::class)->name('article');
     Route::get('/stock/types', ArticleTypesPage::class)->name('article_types');
+    Route::get('/stock/icons', IconsPage::class)->name('icons');
+    Route::get('/stock/article_download', ArticleDownload::class)->name('article_download');
     // Achats
     Route::get('/stock/achats', AchatsPage::class)->name('achats');
     Route::get('/stock/achat/{achat_id}', AchatPage::class)->name('achat');
@@ -229,6 +235,7 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
 // Finances
 Route::middleware(['auth', 'can:finances'])->group(function () {
     Route::get('/finances', FinancesPage::class)->name('finances');
+    Route::get('/depenses', DepensesPage::class)->name('depenses');
 
 });
 
@@ -282,6 +289,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/images', ImagesPage::class)->name('images');
     Route::get('/videos', VideosPage::class)->name('videos');
     Route::get('/video/{video_id}', VideoPage::class)->name('video');
+    Route::get('/personas', PersonasPage::class)->name('personas');
+    Route::get('/persona/{persona_id}', PersonaPage::class)->name('persona');
 
 });
 
@@ -296,6 +305,7 @@ Route::middleware(['auth'])->group(function () {
 // Plannings
 Route::middleware(['auth'])->group(function () {
     Route::get('/plannings', PlanningsPage::class )->name('plannings');
+    Route::get('/calendrier', CalendrierPage::class )->name('calendrier');
 
 });
 
@@ -367,3 +377,8 @@ Route::get('task_pdf_v2/{client_id}', function ($client_id) {
 Route::get('invoice_resume/{invoice_id}', function ($invoice_id) {
     return PDF2Controller::invoice_resume_pdf($invoice_id);
 })->name('invoice_resume_pdf2');
+
+
+Route::get('/vue', function (){
+    return view('vue');
+});

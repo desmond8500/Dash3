@@ -13,6 +13,7 @@
                             <a href="#" wire:click="$set('tab', 0)" class="list-group-item list-group-item-action d-flex align-items-center @if($tab==0)active @endif">Mon Compte</a>
                             <a href="#" wire:click="$set('tab', 1)" class="list-group-item list-group-item-action d-flex align-items-center @if($tab==1)active @endif">My Notifications</a>
                         </div>
+                        @role('admin')
                         <h4 class="subheader mt-4">Paramètres Système</h4>
                         <div class="list-group list-group-transparent">
                             <a href="#" wire:click="$set('tab', 2)" class="list-group-item list-group-item-action @if($tab==2)active @endif">Utilisateurs</a>
@@ -21,6 +22,7 @@
                             <a href="#" wire:click="$set('tab', 5)" class="list-group-item list-group-item-action @if($tab==5)active @endif">Préférences</a>
                             <a href="#" wire:click="$set('tab', 6)" class="list-group-item list-group-item-action @if($tab==6)active @endif">Color Palette</a>
                         </div>
+                        @endrole
                     </div>
                 </div>
                 <div class="col-12 col-md-9 d-flex flex-column">

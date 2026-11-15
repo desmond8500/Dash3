@@ -167,7 +167,7 @@ class PDFController extends Controller
 
         $data = [
             'logo' => env('LOGO', ''),
-            'title' => $journal->type ?? "Rapport d'intervention",
+            'title' => $journal->type ?: 'Rapport de travaux',
             'title_css' => env('TITLE_CSS', 'border: 1px solid white; font-size: 20px;'),
             'journal' => $journal,
             'carbon' => $carbon,

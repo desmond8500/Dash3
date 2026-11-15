@@ -2,3 +2,27 @@
 /* @import "bootstrap/dist/css/bootstrap.min.css"; */
 
 @import '@tabler/core/dist/css/tabler.min.css';
+
+/* Éditeur markdown (EasyMDE) : la barre d'outils utilise les icônes Tabler,
+   Font Awesome n'étant pas chargé. */
+.editor-toolbar button.ti,
+.editor-toolbar button.ti:before {
+    font-family: "tabler-icons" !important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.05rem;
+    line-height: 30px;
+}
+
+.editor-toolbar button.ti {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* La fenêtre modale masque le plein écran de l'éditeur : on le remet au-dessus */
+.EasyMDEContainer .CodeMirror-fullscreen,
+.EasyMDEContainer .editor-toolbar.fullscreen,
+.EasyMDEContainer .editor-preview-side {
+    z-index: 1060;
+}

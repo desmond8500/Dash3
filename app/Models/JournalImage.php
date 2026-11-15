@@ -10,7 +10,7 @@ class JournalImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['journal_id', 'journal_section_id', 'folder'];
+    protected $fillable = ['journal_id', 'journal_section_id', 'folder', 'caption'];
 
     protected $appends = ['url'];
 

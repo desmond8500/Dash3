@@ -122,6 +122,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::put('journal_sections/{id}', [JournalAPIController::class, 'updateSection']);
             Route::delete('journal_sections/{id}', [JournalAPIController::class, 'destroySection']);
             Route::post('journal_sections/{id}/images', [JournalAPIController::class, 'storeSectionImages']);
+            Route::put('journal_images/{id}', [JournalAPIController::class, 'updateImage']);
             Route::delete('journal_images/{id}', [JournalAPIController::class, 'destroyImage']);
             Route::get('journaux/{id}/options', [JournalAPIController::class, 'intervenantOptions']);
             Route::get('journaux/{id}/devis', [JournalAPIController::class, 'devisOptions']);

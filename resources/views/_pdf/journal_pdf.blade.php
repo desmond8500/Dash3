@@ -34,45 +34,52 @@
         }
 
         /* ---------- Bandeau et pied, répétés sur chaque page ---------- */
+        /* Bandeau clair dans l'esprit de l'ancien en-tête : logo à gauche,
+           société au centre, type de rapport et date à droite, filet de couleur. */
         .band {
             position: fixed;
-            top: -70px;
+            top: -74px;
             left: 0;
             right: 0;
-            height: 52px;
-            background: {{ $accent }};
-            color: #ffffff;
-            border-radius: 6px;
+            height: 58px;
+            border-bottom: 2px solid {{ $accent }};
         }
 
         .band td {
             vertical-align: middle;
-            padding: 6px 12px;
+            padding: 0 4px 6px 4px;
         }
 
         .band .societe {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: bold;
+            color: {{ $accent }};
             letter-spacing: 0.3px;
         }
 
+        .band .baseline {
+            font-size: 8.5px;
+            color: #98a2b3;
+        }
+
         .band .doc {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
+            color: {{ $accent }};
         }
 
         .band .date {
             font-size: 10px;
-            opacity: 0.85;
+            color: #667085;
         }
 
-        .logo-box {
-            width: 44px;
-            height: 44px;
-            background: #ffffff;
-            border-radius: 5px;
+        .band .logo-box {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #eaecf0;
+            border-radius: 6px;
             text-align: center;
         }
 
@@ -243,15 +250,37 @@
         .text-end { text-align: right; }
         .nowrap { white-space: nowrap; }
 
-        /* Photos */
+        /* Photos : vignettes de même largeur, légende sous l'image */
+        .shots {
+            margin-top: 8px;
+        }
+
         .shot {
-            padding: 3px;
+            padding: 0 5px 10px 5px;
+            vertical-align: top;
+        }
+
+        .shot .frame {
+            border: 1px solid #eaecf0;
+            border-radius: 6px;
+            padding: 4px;
+            background: #ffffff;
         }
 
         .shot img {
             width: 100%;
-            border: 1px solid #eaecf0;
-            border-radius: 5px;
+            border-radius: 4px;
+        }
+
+        .shot .caption {
+            font-size: 9.5px;
+            color: #475467;
+            padding: 4px 2px 0 2px;
+        }
+
+        .shot .caption .num {
+            color: {{ $accent }};
+            font-weight: bold;
         }
 
         /* Contenu markdown */
@@ -309,14 +338,19 @@
     <div class="band">
         <table class="plain">
             <tr>
-                <td width="56">
-                    @if ($logo)
+                @if ($logo)
+                    <td width="62">
                         <div class="logo-box">
-                            <img src="{{ $logo }}" alt="" style="max-width: 38px; max-height: 38px; margin-top: 3px;">
+                            <img src="{{ $logo }}" alt="" style="max-width: 42px; max-height: 42px; margin-top: 4px;">
                         </div>
+                    </td>
+                @endif
+                <td>
+                    <div class="societe">{{ $societe }}</div>
+                    @if (env('EMAIL'))
+                        <div class="baseline">{{ env('EMAIL') }}@if (env('PHONE')) · {{ env('PHONE') }}@endif</div>
                     @endif
                 </td>
-                <td class="societe">{{ $societe }}</td>
                 <td class="text-end">
                     <div class="doc">{{ $title }}</div>
                     <div class="date">{{ $journal->formatDate() }}</div>
@@ -407,7 +441,7 @@
                 </div>
             @endif
 
-            @include('_pdf.journal_photos', ['photos' => $section->images])
+            @include('_pdf.journal_photos', ['photos' => $section->images, 'prefixe' => $loop->iteration . '.'])
 
             @if ($section->tasks->count())
                 <table class="data avoid-break" style="margin-top: 6px;">
@@ -488,8 +522,9 @@
         @endforeach
     @endif
 
-    {{-- Tâches du journal --}}
-    @if ($journal->tasks->count())
+    {{-- Tâches du journal qui ne sont rattachées à aucune section --}}
+    @php $tachesLibres = $journal->tasks->whereNull('journal_section_id'); @endphp
+    @if ($tachesLibres->count())
         <div class="part">Tâches</div>
         <table class="data">
             <thead>
@@ -501,7 +536,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($journal->tasks as $task)
+                @foreach ($tachesLibres as $task)
                     <tr @class(['alt' => $loop->odd])>
                         <td class="text-center muted">{{ $loop->iteration }}</td>
                         <td>

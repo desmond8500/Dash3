@@ -177,30 +177,16 @@
             margin-right: 5px;
         }
 
-        /* Pastilles */
-        .pill {
-            display: inline-block;
-            padding: 1px 8px;
-            border-radius: 9px;
-            font-size: 9.5px;
-            background: #f2f4f7;
-            color: #475467;
+        /* États, en texte plutôt qu'en pastille */
+        .done { color: #137547; }
+        .wait { color: #b54708; }
+
+        .people {
+            margin: 0;
+            padding-left: 16px;
         }
 
-        .pill-accent {
-            background: {{ $accentSoft }};
-            color: {{ $accent }};
-        }
-
-        .pill-done {
-            background: #e7f6ec;
-            color: #137547;
-        }
-
-        .pill-wait {
-            background: #fff4e5;
-            color: #b54708;
-        }
+        .people li { margin-bottom: 2px; }
 
         /* Tableaux de données */
         .data th {
@@ -397,11 +383,9 @@
     </table>
 
     <h1 class="journal">{{ $journal->title }}</h1>
-    <div class="journal-meta">
-        @if ($journal->type)<span class="pill pill-accent">{{ $journal->type }}</span>@endif
-        <span class="pill">{{ $journal->sections->count() }} section(s)</span>
-        <span class="pill">{{ $journal->tasks->count() }} tâche(s)</span>
-    </div>
+    @if ($journal->type)
+        <div class="journal-meta">{{ $journal->type }}</div>
+    @endif
 
     @if ($journal->description)
         <div class="md">
@@ -412,19 +396,19 @@
     {{-- Intervenants --}}
     @if ($journal->intervenants->count())
         <div class="part">Intervenants</div>
-        <div>
+        <ul class="people">
             @foreach ($journal->intervenants as $intervenant)
                 @php
                     $personne = $intervenant->contact ?? $intervenant->team;
                     $role = $intervenant->contact?->fonction ?? $intervenant->contact?->societe;
                 @endphp
                 @if ($personne)
-                    <span class="pill pill-accent" style="margin-right: 4px;">
-                        {{ $personne->firstname }} {{ strtoupper($personne->lastname) }}@if ($role) — {{ $role }}@endif
-                    </span>
+                    <li>
+                        {{ $personne->firstname }} {{ strtoupper($personne->lastname) }}@if ($role)<span class="muted"> — {{ $role }}</span>@endif
+                    </li>
                 @endif
             @endforeach
-        </div>
+        </ul>
     @endif
 
     {{-- Sections : description, photos et tâches --}}
@@ -449,9 +433,7 @@
                         @foreach ($section->tasks as $task)
                             <tr @class(['alt' => $loop->odd])>
                                 <td>{{ $task->name }}</td>
-                                <td width="90" class="text-end">
-                                    <span class="pill {{ $task->statut_id >= 4 ? 'pill-done' : 'pill-wait' }}">{{ $task->statut->name ?? '' }}</span>
-                                </td>
+                                <td width="90" class="text-end {{ $task->statut_id >= 4 ? 'done' : 'wait' }}">{{ $task->statut->name ?? '' }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -474,7 +456,7 @@
             @php $totalDevis = 0; @endphp
             <div class="section-title">
                 {{ strtoupper($devis->reference) }}
-                @if ($devis->statut)<span class="pill pill-accent" style="margin-left: 4px;">{{ $devis->statut }}</span>@endif
+                @if ($devis->statut)<span class="muted" style="font-weight: normal;"> — {{ $devis->statut }}</span>@endif
             </div>
             <div class="muted" style="margin-bottom: 4px;">{{ $devis->description }}</div>
 
@@ -543,10 +525,8 @@
                             <div>{{ $task->name }}</div>
                             @if ($task->description)<div class="ref">{{ strip_tags($task->description) }}</div>@endif
                         </td>
-                        <td class="text-center">
-                            <span class="pill {{ $task->statut_id >= 4 ? 'pill-done' : 'pill-wait' }}">{{ $task->statut->name ?? '' }}</span>
-                        </td>
-                        <td class="text-center"><span class="pill">{{ $task->priority->name ?? '' }}</span></td>
+                        <td class="text-center {{ $task->statut_id >= 4 ? 'done' : 'wait' }}">{{ $task->statut->name ?? '' }}</td>
+                        <td class="text-center muted">{{ $task->priority->name ?? '' }}</td>
                     </tr>
                 @endforeach
             </tbody>

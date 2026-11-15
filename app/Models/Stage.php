@@ -22,7 +22,7 @@ class Stage extends Model
 
     public function rooms(): HasMany
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(Room::class)->orderBy('order')->orderBy('id');
     }
 
     public function building(): BelongsTo

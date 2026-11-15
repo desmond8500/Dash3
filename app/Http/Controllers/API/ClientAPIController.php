@@ -362,6 +362,7 @@ class ClientAPIController extends Controller
             // (avant : where('client_id', '==', …) ne renvoyait jamais rien)
             $tasks = Task::where('client_id', $client_id)
                 ->orWhereIn('projet_id', $client->projets()->select('id'))
+                ->with('projet:id,name')
                 ->orderBy('name', 'asc')
                 ->get();
             return ResponseController::response(true, 'Tâches récupérées avec succès', $tasks, 200);

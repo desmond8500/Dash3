@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ResponseController;
 use App\Models\Brand;
+use App\Models\BrandLink;
 use Illuminate\Http\Request;
 
 class BrandAPIController extends Controller
@@ -81,11 +82,40 @@ class BrandAPIController extends Controller
      */
     public function show(int $id)
     {
-        $brand = Brand::find($id);
+        $brand = Brand::withCount('article as articles_count')->find($id);
+        if (! $brand) return $this->notFound();
+        $brand->logo_url = $brand->logo ? url($brand->logo) : null;
+        $brand->links = BrandLink::where('brand_id', $id)->get()->map(function ($l) {
+            $l->url = $l->link ? url($l->link) : ($l->folder ? url($l->folder) : null);
 
-        return $brand
-            ? ResponseController::response(true, 'La marque a été récupérée', $brand)
-            : $this->notFound();
+            return $l;
+        });
+
+        return ResponseController::response(true, 'La marque a été récupérée', $brand);
+    }
+
+    /** @OA\Post(path="/api/v1/brands/{id}/links", tags={"Marques"}, summary="Ajouter un lien à une marque", security={{"sanctum":{}}}, @OA\Response(response=201, description="Créé")) */
+    public function storeLink(Request $request, int $id)
+    {
+        if (! Brand::find($id)) return $this->notFound();
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'link' => ['required', 'url', 'max:2048'],
+            'description' => ['nullable', 'string'],
+        ]);
+        $link = BrandLink::create($data + ['brand_id' => $id]);
+
+        return response()->json(['success' => true, 'message' => 'Lien ajouté', 'data' => $link, 'meta' => null], 201);
+    }
+
+    /** @OA\Delete(path="/api/v1/brand_links/{id}", tags={"Marques"}, summary="Supprimer un lien de marque", security={{"sanctum":{}}}, @OA\Response(response=200, description="Supprimé")) */
+    public function destroyLink(int $id)
+    {
+        $link = BrandLink::find($id);
+        if (! $link) return ResponseController::response(false, 'Lien non trouvé', null, 404);
+        $link->delete();
+
+        return ResponseController::response(true, 'Lien supprimé', null);
     }
 
     /**

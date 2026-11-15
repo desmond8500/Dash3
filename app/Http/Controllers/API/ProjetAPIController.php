@@ -154,6 +154,13 @@ class ProjetAPIController extends Controller
             );
         }
 
+        // Montant total (lignes des sections) et date de paiement de chaque devis
+        $projet->invoices->loadMissing('rows');
+        $projet->invoices->each(function ($i) {
+            $i->total = $i->total();
+            $i->makeHidden('rows')->unsetRelation('rows');
+        });
+
         return ResponseController::response(
             true,
             'Projet récupéré avec succès',
@@ -337,6 +344,26 @@ class ProjetAPIController extends Controller
      *      @OA\Response(response=200, description="Success")
      * )
      */
+    /**
+     * @OA\Get(path="/api/v1/badge_modeles", tags={"Projets"},
+     *      summary="Liste des modèles de badge", security={{"sanctum":{}}},
+     *      @OA\Response(response=200, description="Success"))
+     */
+    public function getBadgeModeles()
+    {
+        $modeles = \App\Models\BadgeModele::orderBy('name')
+            ->withCount('badges')
+            ->get()
+            ->map(fn ($m) => [
+                'id' => $m->id,
+                'name' => $m->name,
+                'file' => $m->file ? url($m->file) : null,
+                'badges_count' => $m->badges_count,
+            ]);
+
+        return ResponseController::response(true, 'Modèles de badge récupérés', $modeles);
+    }
+
     public function getBadges(int $id)
     {
         if (! Projet::whereKey($id)->exists()) {

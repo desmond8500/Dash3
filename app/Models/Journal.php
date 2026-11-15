@@ -52,6 +52,11 @@ class Journal extends Model
     {
         return $this->hasMany(Achat::class);
     }
+    public function images(): HasMany
+    {
+        return $this->hasMany(JournalImage::class);
+    }
+
     public function sections(): HasMany
     {
         return $this->hasMany(JournalSection::class);

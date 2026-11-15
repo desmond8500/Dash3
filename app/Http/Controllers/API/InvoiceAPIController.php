@@ -63,7 +63,34 @@ class InvoiceAPIController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'projet_id' => ['required', 'integer', 'exists:projets,id'],
+            'description' => ['required', 'string'],
+            'statut' => ['nullable', 'string'],
+            'modalite' => ['nullable', 'string'],
+            'note' => ['nullable', 'string'],
+        ]);
+        $projet = \App\Models\Projet::with('client')->find($data['projet_id']);
+
+        // Référence comme sur le web (ErpController::getInvoiceReference) : CLI-001-26
+        $ref = \App\Http\Controllers\ErpController::getInvoiceReference($projet);
+        $invoice = Invoice::create([
+            'projet_id' => $projet->id,
+            'client_name' => $projet->client?->name,
+            'projet_name' => $projet->name,
+            'reference' => $ref['reference'],
+            'invoice_number' => $ref['invoice_number'],
+            'invoice_year' => $ref['invoice_year'],
+            'description' => ucfirst($data['description']),
+            'statut' => $data['statut'] ?? 'Nouveau',
+            'modalite' => $data['modalite'] ?? null,
+            'note' => $data['note'] ?? null,
+            'tax' => 0,
+            'remise' => 0,
+            'favorite' => false,
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Devis créé', 'data' => ['id' => $invoice->id, 'reference' => $invoice->reference], 'meta' => null], 201);
     }
 
     /**

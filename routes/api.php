@@ -3,6 +3,11 @@
 use App\Http\Controllers\API\AchatController;
 use App\Http\Controllers\API\BrandAPIController;
 use App\Http\Controllers\API\ClientAPIController;
+use App\Http\Controllers\API\CommandeAPIController;
+use App\Http\Controllers\API\ContactAPIController;
+use App\Http\Controllers\API\CvAPIController;
+use App\Http\Controllers\API\DocumentAPIController;
+use App\Http\Controllers\API\IconAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\FavorisController;
 use App\Http\Controllers\API\InstallationAPIController;
@@ -79,12 +84,23 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::post('buildings', [InstallationAPIController::class, 'storeBuilding']);
             Route::put('buildings/{id}', [InstallationAPIController::class, 'updateBuilding']);
             Route::delete('buildings/{id}', [InstallationAPIController::class, 'destroyBuilding']);
+            Route::get('buildings/{id}', [InstallationAPIController::class, 'showBuilding']);
+            Route::post('stages', [InstallationAPIController::class, 'storeStage']);
+            Route::put('stages/{id}', [InstallationAPIController::class, 'updateStage']);
+            Route::delete('stages/{id}', [InstallationAPIController::class, 'destroyStage']);
+            Route::post('rooms', [InstallationAPIController::class, 'storeRoom']);
+            Route::put('rooms/{id}', [InstallationAPIController::class, 'updateRoom']);
+            Route::delete('rooms/{id}', [InstallationAPIController::class, 'destroyRoom']);
             Route::post('installation_systemes', [InstallationAPIController::class, 'storeSysteme']);
             Route::put('installation_systemes/{id}', [InstallationAPIController::class, 'updateSysteme']);
             Route::delete('installation_systemes/{id}', [InstallationAPIController::class, 'destroySysteme']);
             Route::post('equipements', [InstallationAPIController::class, 'storeEquipement']);
             Route::put('equipements/{id}', [InstallationAPIController::class, 'updateEquipement']);
             Route::delete('equipements/{id}', [InstallationAPIController::class, 'destroyEquipement']);
+            Route::post('equipements/{id}/duplicate', [InstallationAPIController::class, 'duplicateEquipement']);
+            // Table d'icônes (liées aux articles par tag, affichées sur les plans)
+            Route::apiResource('icons', IconAPIController::class)->except(['show']);
+            Route::post('icons/{id}/image', [IconAPIController::class, 'updateImage']);
             Route::get('projets/{id}/plans', [InstallationAPIController::class, 'plans']);
             Route::post('plans', [InstallationAPIController::class, 'storePlan']);
             Route::put('plans/{id}', [InstallationAPIController::class, 'updatePlan']);
@@ -101,6 +117,27 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('room/tasks/{id}', [ClientAPIController::class, 'getTasksByClient']);
 
             Route::resource('journaux', JournalAPIController::class);
+            // Journal détaillé : sections (photos), intervenants
+            Route::post('journal_sections', [JournalAPIController::class, 'storeSection']);
+            Route::put('journal_sections/{id}', [JournalAPIController::class, 'updateSection']);
+            Route::delete('journal_sections/{id}', [JournalAPIController::class, 'destroySection']);
+            Route::post('journal_sections/{id}/images', [JournalAPIController::class, 'storeSectionImages']);
+            Route::delete('journal_images/{id}', [JournalAPIController::class, 'destroyImage']);
+            Route::get('journaux/{id}/options', [JournalAPIController::class, 'intervenantOptions']);
+            Route::post('journaux/{id}/intervenants', [JournalAPIController::class, 'storeIntervenant']);
+            Route::delete('journal_intervenants/{id}', [JournalAPIController::class, 'destroyIntervenant']);
+
+            // Modèles de badge et CV
+            Route::get('badge_modeles', [ProjetAPIController::class, 'getBadgeModeles']);
+            Route::apiResource('cvs', CvAPIController::class)->except(['show']);
+
+            // Contacts et documents de projet
+            Route::apiResource('contacts', ContactAPIController::class)->except(['show']);
+            Route::get('projets/{id}/documents', [DocumentAPIController::class, 'index']);
+            Route::post('projet_documents', [DocumentAPIController::class, 'store']);
+            Route::put('projet_documents/{id}', [DocumentAPIController::class, 'update']);
+            Route::get('projet_documents/{id}/file', [DocumentAPIController::class, 'file']);
+            Route::delete('projet_documents/{id}', [DocumentAPIController::class, 'destroy']);
             Route::resource('projet_notes', NoteAPIController::class);
             Route::get('get_projet_notes/{projet_id}', [NoteAPIController::class, 'get_projet_notes']);
 
@@ -129,6 +166,17 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('items_image/{article_id}', [ItemsApiController::class, 'getImages']);
             Route::get('items_link/{article_id}', [ItemsApiController::class, 'getLinks']);
             Route::get('items_document/{article_id}', [ItemsApiController::class, 'getDocuments']);
+            Route::post('items/{id}/links', [ItemsApiController::class, 'storeLink']);
+            Route::delete('items_link/{id}', [ItemsApiController::class, 'destroyLink']);
+            Route::post('items/{id}/documents', [ItemsApiController::class, 'storeDocument']);
+            Route::delete('items_document/{id}', [ItemsApiController::class, 'destroyDocument']);
+            // Commandes (réapprovisionnement)
+            Route::get('commandes', [CommandeAPIController::class, 'index']);
+            Route::put('commandes/articles/{articleId}', [CommandeAPIController::class, 'update']);
+            Route::delete('commandes/articles/{articleId}', [CommandeAPIController::class, 'destroy']);
+            // Liens de marque
+            Route::post('brands/{id}/links', [BrandAPIController::class, 'storeLink']);
+            Route::delete('brand_links/{id}', [BrandAPIController::class, 'destroyLink']);
             Route::apiResource('providers', ProviderAPIController::class);
             Route::apiResource('brands', BrandAPIController::class);
             Route::post('providers/{id}/logo', [ProviderAPIController::class, 'updateLogo']);

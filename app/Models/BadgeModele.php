@@ -14,4 +14,9 @@ class BadgeModele extends Model
         'css',
         'file',
     ];
+
+    public function badges()
+    {
+        return $this->hasMany(Badge::class);
+    }
 }

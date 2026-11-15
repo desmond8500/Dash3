@@ -19,3 +19,4 @@ Projet
 - [] Lier les icones aux articles en fonction des tags
 - [] les icones seront utilisées pour matérialiser les équipements sur les plans
  
+## Mes projets

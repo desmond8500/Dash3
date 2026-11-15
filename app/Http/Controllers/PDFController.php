@@ -156,6 +156,7 @@ class PDFController extends Controller
             'sections.images',
             'sections.tasks.statut',
             'images',
+            'invoices.sections.rows',
             'intervenants.contact',
             'intervenants.team',
             'tasks.statut',

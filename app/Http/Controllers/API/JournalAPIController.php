@@ -132,6 +132,7 @@ class JournalAPIController extends Controller
             'projet:id,name,client_id',
             'projet.client:id,name',
             'invoice:id,reference,description',
+            'invoices:id,reference,description,statut',
             'sections' => fn ($q) => $q->orderBy('order')->orderBy('id'),
             'sections.images',
             'sections.tasks' => fn ($q) => $q->with(['priority', 'statut']),
@@ -146,6 +147,51 @@ class JournalAPIController extends Controller
         $journal->setRelation('images', $journal->images()->whereNull('journal_section_id')->latest()->get());
 
         return ResponseController::response(true, 'Le journal a été récupéré avec succès', $journal);
+    }
+
+    /** @OA\Get(path="/api/v1/journaux/{id}/devis", tags={"Journaux"}, summary="Devis du projet rattachables au journal", security={{"sanctum":{}}}, @OA\Response(response=200, description="Success")) */
+    function devisOptions(int $id)
+    {
+        $journal = Journal::find($id);
+        if (! $journal) return ResponseController::response(false, 'Journal non trouvé', null, 404);
+
+        $devis = \App\Models\Invoice::where('projet_id', $journal->projet_id)
+            ->orderByDesc('id')
+            ->get(['id', 'reference', 'description', 'statut']);
+
+        return ResponseController::response(true, 'Devis récupérés', $devis);
+    }
+
+    /** @OA\Post(path="/api/v1/journaux/{id}/devis", tags={"Journaux"}, summary="Rattacher un devis au journal", security={{"sanctum":{}}}, @OA\Response(response=201, description="Rattaché")) */
+    function attachDevis(Request $request, int $id)
+    {
+        $journal = Journal::find($id);
+        if (! $journal) return ResponseController::response(false, 'Journal non trouvé', null, 404);
+        $data = $request->validate(['invoice_id' => ['required', 'integer', 'exists:invoices,id']]);
+
+        $invoice = \App\Models\Invoice::where('projet_id', $journal->projet_id)->find($data['invoice_id']);
+        if (! $invoice) {
+            return response()->json(['success' => false, 'message' => "Ce devis n'appartient pas au projet du journal", 'error' => null, 'meta' => null], 422);
+        }
+        $journal->invoices()->syncWithoutDetaching([$invoice->id]);
+        if (! $journal->devis_id) {
+            $journal->update(['devis_id' => $invoice->id]);
+        }
+
+        return response()->json(['success' => true, 'message' => 'Devis rattaché', 'data' => $journal->invoices()->get(['invoices.id', 'reference', 'description', 'statut']), 'meta' => null], 201);
+    }
+
+    /** @OA\Delete(path="/api/v1/journaux/{id}/devis/{invoiceId}", tags={"Journaux"}, summary="Détacher un devis du journal", security={{"sanctum":{}}}, @OA\Response(response=200, description="Détaché")) */
+    function detachDevis(int $id, int $invoiceId)
+    {
+        $journal = Journal::find($id);
+        if (! $journal) return ResponseController::response(false, 'Journal non trouvé', null, 404);
+        $journal->invoices()->detach($invoiceId);
+        if ($journal->devis_id == $invoiceId) {
+            $journal->update(['devis_id' => $journal->invoices()->value('invoices.id')]);
+        }
+
+        return ResponseController::response(true, 'Devis détaché', null);
     }
 
     // ------------------------------------------------------------------

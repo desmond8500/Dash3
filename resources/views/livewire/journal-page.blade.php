@@ -1,5 +1,5 @@
 <div>
-    @component('components.layouts.page-header', ['title'=>'Journal', 'breadcrumbs'=>$breadcrumbs])
+    @component('components.layouts.page-header', ['title'=>$journal->title, 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             <a class="btn btn-*primary" target="_blank" href="{{ route('journal_pdf',['journal_id'=>$journal->id]) }}">PDF</a>
             @livewire('form.task-add', ['journal_id' => $journal->id])
@@ -35,18 +35,6 @@
     @endpush
 
     <div class="row g-2">
-        <div class="col-md-12">
-            <div class="status status-blue">
-                <div class="d-flex">
-                    <a class="" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projets', ['client_id'=>$journal->projet->client->id]) }}" title="Client">{{ $journal->projet->client->name }}</a>
-                    <span class="mx-1">/</span>
-                    <a class="" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('projet', ['projet_id'=>$journal->projet->id]) }}" title="Projet">{{ $journal->projet->name }}</a>
-                    <span class="mx-1">/</span>
-                    <a class="" data-bs-toggle="tooltip" data-bs-placement="top" href="{{ route('journal', ['journal_id'=>$journal->id]) }}" title="Journal">Journal</a>
-                </div>
-            </div>
-        </div>
-
         <div class="col-md-8 mb-2">
 
             <div class="card mb-2">
@@ -77,29 +65,54 @@
                     <div class="card-header">
                         <div class="card-title">Devis</div>
                         <div class="card-actions">
-
+                            <div class="dropdown">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                    @disabled(! $devis_disponibles->count())>
+                                    <i class="ti ti-plus"></i> Lier un devis
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    @forelse ($devis_disponibles as $disponible)
+                                        <a class="dropdown-item" wire:click="add_devis('{{ $disponible->id }}')">
+                                            <span class="fw-bold">{{ $disponible->reference }}</span>
+                                            <span class="text-muted ms-1">{{ Str::limit($disponible->description, 40) }}</span>
+                                        </a>
+                                    @empty
+                                        <span class="dropdown-item text-muted">Aucun autre devis sur ce projet</span>
+                                    @endforelse
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-
+                    <div class="list-group list-group-flush">
+                        @forelse ($devis as $d)
+                            <div class="list-group-item" wire:key="devis-{{ $d->id }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="min-w-0">
+                                        <a href="{{ route('invoice', ['invoice_id' => $d->id]) }}" class="fw-bold">
+                                            {{ $d->reference }}
+                                        </a>
+                                        @if ($d->statut)
+                                            <span class="badge bg-blue-lt ms-1">{{ $d->statut }}</span>
+                                        @endif
+                                        <div class="text-muted">{{ $d->description }}</div>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <div class="fw-bold text-nowrap">{{ number_format($d->total(), 0, ',', ' ') }} F</div>
+                                        <div class="text-muted" style="font-size: 12px;">{{ $d->rows->count() }} ligne(s)</div>
+                                    </div>
+                                    <button class="btn btn-icon btn-ghost-danger ms-2" title="Détacher du journal"
+                                        wire:click="delete_devis('{{ $d->id }}')"
+                                        wire:confirm="Détacher le devis {{ $d->reference }} de ce journal ?">
+                                        <i class="ti ti-unlink"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="list-group-item text-muted">Aucun devis rattaché à ce journal.</div>
+                        @endforelse
                     </div>
                 </div>
             </div>
-
-            <div class="mb-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Modalités</div>
-                        <div class="card-actions">
-
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-
 
         </div>
 

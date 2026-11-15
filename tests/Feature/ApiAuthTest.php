@@ -90,6 +90,8 @@ class ApiAuthTest extends TestCase
             'ajouter section'    => ['POST', '/api/v1/journal_sections'],
             'photos de section'  => ['POST', '/api/v1/journal_sections/1/images'],
             'intervenants'       => ['POST', '/api/v1/journaux/1/intervenants'],
+            'devis du journal'   => ['GET', '/api/v1/journaux/1/devis'],
+            'lier un devis'      => ['POST', '/api/v1/journaux/1/devis'],
             'modèles de badge'   => ['GET', '/api/v1/badge_modeles'],
             'mes CV'             => ['GET', '/api/v1/cvs'],
             'un CV'              => ['GET', '/api/v1/cvs/1'],

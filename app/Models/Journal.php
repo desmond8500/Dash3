@@ -7,6 +7,7 @@ use App\Traits\dateTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Journal extends Model
@@ -36,9 +37,16 @@ class Journal extends Model
         return $this->belongsTo(Projet::class);
     }
 
+    /** Devis principal (ancien champ devis_id) */
     public function invoice(): BelongsTo
     {
-        return $this->belongsTo(Invoice::class);
+        return $this->belongsTo(Invoice::class, 'devis_id');
+    }
+
+    /** Devis rattachés au journal */
+    public function invoices(): BelongsToMany
+    {
+        return $this->belongsToMany(Invoice::class, 'journal_invoice', 'journal_id', 'invoice_id')->withTimestamps();
     }
     public function intervenants(): HasMany
     {

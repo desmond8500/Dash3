@@ -107,6 +107,62 @@
     @endif
 
 
+    {{-- Devis rattachés au journal : sections, lignes et total --}}
+    @if ($journal->invoices->count())
+        <h1>Devis</h1>
+        @foreach ($journal->invoices as $devis)
+            @php $totalDevis = 0; @endphp
+            <div class="fw-bold" style="margin-top: 6px;">
+                {{ strtoupper($devis->reference) }}
+                @if ($devis->statut) <span class="text-gray">— {{ $devis->statut }}</span> @endif
+            </div>
+            <div class="text-gray fs-7">{{ $devis->description }}</div>
+
+            <table class="table" style="font-size:13px; margin-top: 4px;">
+                <thead class="thead">
+                    <tr>
+                        <th>Désignation</th>
+                        <th width='60px' class="text-center">Qté</th>
+                        <th width='80px' class="text-center">Prix</th>
+                        <th width='90px' class="text-center">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($devis->sections->sortBy('ordre') as $section)
+                        @continue(! $section->rows->count())
+                        <tr>
+                            <th colspan="4" style="background: #eeeeee;">{{ $section->section }}</th>
+                        </tr>
+                        @foreach ($section->rows->sortBy('priorite_id') as $row)
+                            @php
+                                $ligne = $row->quantite * $row->coef * $row->prix;
+                                $totalDevis += $ligne;
+                            @endphp
+                            <tr>
+                                <td>
+                                    <div class="task_name">{{ $row->designation }}</div>
+                                    <div class="task_description fs-7">{{ strtoupper($row->reference) }}</div>
+                                </td>
+                                <td class="text-center">{{ $row->quantite }}</td>
+                                <td class="text-center">{{ number_format($row->prix * $row->coef, 0, '.', ' ') }} F</td>
+                                <td class="text-center">{{ number_format($ligne, 0, '.', ' ') }} F</td>
+                            </tr>
+                        @endforeach
+                    @endforeach
+                    <tr>
+                        <td colspan="3"><b>TOTAL</b></td>
+                        <td class="text-center"><b>{{ number_format($totalDevis, 0, '.', ' ') }} F</b></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            @if ($devis->modalite)
+                <div class="fs-7"><span class="fw-bold">Modalités : </span>{{ $devis->modalite }}</div>
+            @endif
+            <br>
+        @endforeach
+    @endif
+
     @if ($journal->tasks->count())
         <h1>Taches</h1>
 

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Livewire\Forms\JournalForm;
 use App\Models\Achat;
 use App\Models\Contact;
+use App\Models\Invoice;
 use App\Models\Journal;
 use App\Models\JournalIntervenant;
 use App\Models\Task;
@@ -18,12 +19,16 @@ class JournalPage extends Component
     public $breadcrumbs;
 
     function mount($journal_id){
-        $this->journal = Journal::find($journal_id);
+        $this->journal = Journal::findOrFail($journal_id);
+        $projet = $this->journal->projet;
 
-        $this->breadcrumbs = array(
+        // Fil d'Ariane complet : Journaux › Client › Projet › titre du journal
+        $this->breadcrumbs = array_values(array_filter([
             array('name' => 'Journaux', 'route' => route('journaux')),
-            array('name' => 'Journal', 'route' => route('journal',['journal_id'=>$this->journal->id])),
-        );
+            $projet?->client ? array('name' => $projet->client->name, 'route' => route('projets', ['client_id' => $projet->client->id])) : null,
+            $projet ? array('name' => $projet->name, 'route' => route('projet', ['projet_id' => $projet->id])) : null,
+            array('name' => $this->journal->title, 'route' => route('journal', ['journal_id' => $this->journal->id])),
+        ]));
     }
 
     #[On('close-editJournal')]
@@ -38,6 +43,11 @@ class JournalPage extends Component
             'tasks' => Task::where('journal_id', $this->journal->id)->get(),
             'achats' => Achat::where('journal_id', $this->journal->id)->get(),
             'projets' => $this->journal->projet->client->projets,
+            'devis' => $this->journal->invoices()->with('sections.rows')->get(),
+            'devis_disponibles' => Invoice::where('projet_id', $this->journal->projet_id)
+                ->whereNotIn('id', $this->journal->invoices()->pluck('invoices.id'))
+                ->orderByDesc('id')
+                ->get(['id', 'reference', 'description']),
         ]);
     }
 
@@ -68,6 +78,26 @@ class JournalPage extends Component
     function delete_intervenant($id){
         $intervenant = JournalIntervenant::find($id);
         $intervenant->delete();
+    }
+
+    /** Rattache un devis du projet au journal */
+    function add_devis($invoice_id){
+        $invoice = Invoice::where('projet_id', $this->journal->projet_id)->find($invoice_id);
+        if (! $invoice) {
+            return;
+        }
+        $this->journal->invoices()->syncWithoutDetaching([$invoice->id]);
+        // Le premier devis rattaché devient le devis principal
+        if (! $this->journal->devis_id) {
+            $this->journal->update(['devis_id' => $invoice->id]);
+        }
+    }
+
+    function delete_devis($invoice_id){
+        $this->journal->invoices()->detach($invoice_id);
+        if ($this->journal->devis_id == $invoice_id) {
+            $this->journal->update(['devis_id' => $this->journal->invoices()->value('invoices.id')]);
+        }
     }
 
 

@@ -3,21 +3,21 @@
 ## MyProject Page
 C'est une section pour gérer de petit projet parrallèles. je veux que tu fasse sa refonte.
 Par exemple pour réaliser un projet domotique j'aurais besoin de pouvoir
-- [ ] lui donner un titre, une description et une photo
-- [ ] ajouter des images
-- [ ] ajouter des liens de recherche
-- [ ] Ajouter des documents
-- [ ] Ajouter des notes
-- [ ] ajouter des tachessd
-- [ ] faire un budget
-  - [ ] achats prévisionnels
-  - [ ] dépenses
+- [x] lui donner un titre, une description et une photo
+- [x] ajouter des images
+- [x] ajouter des liens de recherche
+- [x] Ajouter des documents
+- [x] Ajouter des notes
+- [x] ajouter des tachessd
+- [x] faire un budget
+  - [x] achats prévisionnels
+  - [x] dépenses
 
 ## Page Journal
-- [ ] Faire en sorte qu'un journal puisse intéger des sections qui auront :
+- [x] Faire en sorte qu'un journal puisse intéger des sections qui auront :
   - des images
   - un liste de taches
-- [ ] intégrer dans le formulaire un éditeur markdown
+- [x] intégrer dans le formulaire un éditeur markdown
 
 ## Devis PDF
-- [ ] Proposer un modèle existant basé sur laravel spatie PDF et ajouter un bouton d'exportation, il doit etre similaire à celui existant
+- [x] Proposer un modèle existant basé sur laravel spatie PDF et ajouter un bouton d'exportation, il doit etre similaire à celui existant

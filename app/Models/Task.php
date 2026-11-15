@@ -74,6 +74,7 @@ class Task extends Model
         'favoris',
         'journal_id',
         'journal_section_id',
+        'myproject_id',
     ];
 
     protected $with = ['room'];

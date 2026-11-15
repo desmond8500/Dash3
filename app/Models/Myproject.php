@@ -42,4 +42,35 @@ class Myproject extends Model
         return $this->hasMany(MyprojectTransaction::class);
     }
 
+    /** Liens de recherche (documentation, tutoriels, boutiques…) */
+    public function links(): HasMany
+    {
+        return $this->hasMany(MyprojectLink::class);
+    }
+
+    public function notes(): HasMany
+    {
+        return $this->hasMany(MyprojectNote::class)->latest();
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'myproject_id');
+    }
+
+    /** Total des achats prévisionnels */
+    public function previsionsTotal(): float
+    {
+        return (float) $this->transactions
+            ->where('type', MyprojectTransaction::PREVISION)
+            ->sum(fn ($t) => $t->total());
+    }
+
+    /** Total des dépenses effectuées */
+    public function depensesTotal(): float
+    {
+        return (float) $this->transactions
+            ->where('type', MyprojectTransaction::DEPENSE)
+            ->sum(fn ($t) => $t->total());
+    }
 }

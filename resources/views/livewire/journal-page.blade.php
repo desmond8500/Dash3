@@ -2,7 +2,6 @@
     @component('components.layouts.page-header', ['title'=>$journal->title, 'breadcrumbs'=>$breadcrumbs])
         <div class="btn-list">
             <a class="btn btn-*primary" target="_blank" href="{{ route('journal_pdf',['journal_id'=>$journal->id]) }}">PDF</a>
-            @livewire('form.task-add', ['journal_id' => $journal->id])
             @livewire('form.achat-add',['journal_id' => $journal->id])
         </div>
     @endcomponent
@@ -145,9 +144,6 @@
                 </div>
             </div>
 
-            <div class="mb-2">
-                @livewire('erp.tasks.tasklist1', ['journal_id' => $journal->id, 'paginate'=>6])
-            </div>
 
             <div class="card mb-2">
                 <div class="card-header">

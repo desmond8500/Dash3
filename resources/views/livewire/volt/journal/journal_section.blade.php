@@ -154,6 +154,26 @@ new class extends Component {
         $this->dispatch('close-addSectionPhotos');
     }
 
+    public $caption_image_id;
+    public $caption_text;
+
+    function edit_caption($image_id)
+    {
+        $image = JournalImage::find($image_id);
+        if (! $image) return;
+        $this->caption_image_id = $image->id;
+        $this->caption_text = $image->caption;
+        $this->resetValidation();
+        $this->dispatch('open-editImageCaption');
+    }
+
+    function save_caption()
+    {
+        $this->validate(['caption_text' => ['nullable', 'string', 'max:255']]);
+        JournalImage::find($this->caption_image_id)?->update(['caption' => $this->caption_text]);
+        $this->dispatch('close-editImageCaption');
+    }
+
     function delete_photo($image_id)
     {
         $image = JournalImage::find($image_id);
@@ -269,16 +289,29 @@ new class extends Component {
                             <div class="col-md-12">
                                 <div class="row g-1">
                                     @foreach ($section->images as $image)
-                                        <div class="col-auto" wire:key="image-{{ $image->id }}">
-                                            <div class="position-relative">
-                                                <a href="{{ asset($image->folder) }}" data-lightbox="section-{{ $section->id }}">
-                                                    <img src="{{ asset($image->folder) }}" alt="" class="rounded" style="height: 90px; width: 110px; object-fit: cover;">
+                                        <div class="col-6 col-md-3" wire:key="image-{{ $image->id }}">
+                                            <div class="card card-sm h-100">
+                                                <a href="{{ asset($image->folder) }}" data-lightbox="section-{{ $section->id }}"
+                                                    title="{{ $image->caption }}">
+                                                    <img src="{{ asset($image->folder) }}" alt="{{ $image->caption }}"
+                                                        class="card-img-top" style="height: 120px; object-fit: cover;">
                                                 </a>
-                                                <button class="btn btn-sm btn-icon position-absolute" style="top: 2px; right: 2px;"
-                                                    title="Supprimer la photo" wire:click="delete_photo('{{ $image->id }}')"
-                                                    wire:confirm="Supprimer cette photo ?">
-                                                    <i class="ti ti-x"></i>
-                                                </button>
+                                                <div class="card-body p-1 d-flex align-items-center">
+                                                    <div class="small text-truncate {{ $image->caption ? '' : 'text-muted fst-italic' }}"
+                                                        title="{{ $image->caption }}">
+                                                        {{ $image->caption ?: 'Sans légende' }}
+                                                    </div>
+                                                    <div class="ms-auto btn-list flex-nowrap">
+                                                        <button class="btn btn-sm btn-icon" title="Légende"
+                                                            wire:click="edit_caption('{{ $image->id }}')">
+                                                            <i class="ti ti-text-caption"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-icon text-danger" title="Supprimer la photo"
+                                                            wire:click="delete_photo('{{ $image->id }}')" wire:confirm="Supprimer cette photo ?">
+                                                            <i class="ti ti-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     @endforeach
@@ -345,6 +378,17 @@ new class extends Component {
         </form>
         <script> window.addEventListener('open-addSectionPhotos', event => { window.$('#addSectionPhotos').modal('show'); }) </script>
         <script> window.addEventListener('close-addSectionPhotos', event => { window.$('#addSectionPhotos').modal('hide'); }) </script>
+    @endcomponent
+
+    @component('components.modal', ["id"=>'editImageCaption', 'title' => 'Légende de la photo', 'method'=>'save_caption'])
+        <form wire:submit="save_caption">
+            <label class="form-label">Légende</label>
+            <input type="text" class="form-control" wire:model="caption_text" placeholder="Pose de la caméra d'entrée">
+            <div class="form-hint">Affichée sous la photo dans le rapport PDF.</div>
+            @error('caption_text') <span class='text-danger'>{{ $message }}</span> @enderror
+        </form>
+        <script> window.addEventListener('open-editImageCaption', event => { window.$('#editImageCaption').modal('show'); }) </script>
+        <script> window.addEventListener('close-editImageCaption', event => { window.$('#editImageCaption').modal('hide'); }) </script>
     @endcomponent
 
     @component('components.modal', ["id"=>'addSectionTask', 'title' => 'Ajouter une tâche', 'method'=>'store_task'])

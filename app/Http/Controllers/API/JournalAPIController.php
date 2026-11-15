@@ -263,7 +263,17 @@ class JournalAPIController extends Controller
         return response()->json(['success' => true, 'message' => 'Photos ajoutées', 'data' => $section->images()->get(), 'meta' => null], 201);
     }
 
-    /** @OA\Delete(path="/api/v1/journal_images/{id}", tags={"Journaux"}, summary="Supprimer une photo", security={{"sanctum":{}}}, @OA\Response(response=200, description="Supprimée")) */
+    /** @OA\Put(path="/api/v1/journal_images/{id}", tags={"Journaux"}, summary="Légender une photo", security={{"sanctum":{}}}, @OA\Response(response=200, description="Modifiée")) */
+    function updateImage(Request $request, int $id)
+    {
+        $img = JournalImage::find($id);
+        if (! $img) return ResponseController::response(false, 'Photo non trouvée', null, 404);
+        $img->update($request->validate(['caption' => ['nullable', 'string', 'max:255']]));
+
+        return ResponseController::response(true, 'Légende enregistrée', $img);
+    }
+
+    /** @OA\Delete(path="/api/v1/journal_images/{id}", tags={"Journaux"}, summary="Supprimer une photo, security={{"sanctum":{}}}, @OA\Response(response=200, description="Supprimée")) */
     function destroyImage(int $id)
     {
         $img = JournalImage::find($id);

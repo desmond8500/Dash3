@@ -8,6 +8,7 @@ use App\Http\Controllers\API\ContactAPIController;
 use App\Http\Controllers\API\CvAPIController;
 use App\Http\Controllers\API\DocumentAPIController;
 use App\Http\Controllers\API\IconAPIController;
+use App\Http\Controllers\API\ImageEditAPIController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\FavorisController;
 use App\Http\Controllers\API\InstallationAPIController;
@@ -63,6 +64,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Demo
         Route::get('demos', [DemoController::class, 'index'])->name('demos');
+
+        // Édition d'images (rogner, pivoter, redimensionner) — permission vérifiée
+        // selon le dossier de l'image (config/images.php)
+        Route::get('images/info', [ImageEditAPIController::class, 'info']);
+        Route::post('images/edit', [ImageEditAPIController::class, 'edit'])->middleware('throttle:30,1');
 
         // ERP : clients, projets, tâches, journaux, notes, liens, favoris
         Route::middleware('can:erp')->group(function () {

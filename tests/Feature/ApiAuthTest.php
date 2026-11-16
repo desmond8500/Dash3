@@ -109,6 +109,8 @@ class ApiAuthTest extends TestCase
             'transactions'       => ['GET', '/api/v1/transactions'],
             'favoris'            => ['GET', '/api/v1/favoris'],
             'personas'           => ['GET', '/api/v1/personas'],
+            'infos image'        => ['GET', '/api/v1/images/info?path=storage/stock/a.png'],
+            'éditer image'       => ['POST', '/api/v1/images/edit'],
             'demos'              => ['GET', '/api/demos'],
             'me'                 => ['GET', '/api/v1/me'],
             'logout'             => ['POST', '/api/v1/logout'],

@@ -130,6 +130,10 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('journaux/{id}/devis/{invoiceId}', [JournalAPIController::class, 'detachDevis']);
             Route::post('journaux/{id}/intervenants', [JournalAPIController::class, 'storeIntervenant']);
             Route::delete('journal_intervenants/{id}', [JournalAPIController::class, 'destroyIntervenant']);
+            // PDF du journal (même rendu que /journaux/journal_pdf du site), pour les applis mobile et web
+            Route::get('journal_pdf/{journal_id}', function ($journal_id) {
+                return PDFController::journal_pdf($journal_id);
+            })->name('journal_pdf_api');
 
             // Modèles de badge et CV
             Route::get('badge_modeles', [ProjetAPIController::class, 'getBadgeModeles']);

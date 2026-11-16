@@ -177,7 +177,8 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('_pdf.journal_pdf', $data);
-        return $pdf->stream($journal->date.' - '.$journal->projet->name. ' - ' . $journal->title . ' - ' . $data['title']);
+        // Journal sans projet : pas d'erreur sur le nom du fichier
+        return $pdf->stream($journal->date.' - '.($journal->projet?->name ?? 'Sans projet'). ' - ' . $journal->title . ' - ' . $data['title']);
         // return $pdf->download('sdfsd');
     }
 

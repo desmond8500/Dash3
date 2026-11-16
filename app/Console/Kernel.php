@@ -13,6 +13,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+
+        // Dash3Tech : alertes avant expiration et purge des informations expirées
+        $schedule->command('tech:expire-shares')->everyFifteenMinutes()->withoutOverlapping();
     }
 
     /**

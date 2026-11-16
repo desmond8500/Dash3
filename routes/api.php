@@ -21,6 +21,8 @@ use App\Http\Controllers\API\PersonaController;
 use App\Http\Controllers\API\ProjetAPIController;
 use App\Http\Controllers\API\ProviderAPIController;
 use App\Http\Controllers\API\TaskAPIController;
+use App\Http\Controllers\API\Tech\TechAdminController;
+use App\Http\Controllers\API\Tech\TechController;
 use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\LiensControlleur;
@@ -239,6 +241,55 @@ Route::middleware('auth:sanctum')->group(function () {
         // Médias
         Route::middleware('can:medias')->group(function () {
             Route::resource('personas', PersonaController::class);
+        });
+
+        // Application Dash3Tech : comptes techniciens (permission « tech » uniquement)
+        Route::middleware('can:tech')->prefix('tech')->group(function () {
+            Route::get('me', [TechController::class, 'me']);
+            Route::get('sync', [TechController::class, 'sync'])->middleware('throttle:30,1');
+
+            Route::get('tasks', [TechController::class, 'tasks']);
+            Route::get('tasks/{id}', [TechController::class, 'task']);
+            Route::patch('tasks/{id}/status', [TechController::class, 'updateTaskStatus']);
+
+            Route::get('shares', [TechController::class, 'shares']);
+            Route::get('shares/{id}', [TechController::class, 'share']);
+            Route::get('shares/{id}/file', [TechController::class, 'shareFile']);
+
+            Route::get('reports', [TechController::class, 'reports']);
+            Route::post('reports', [TechController::class, 'storeReport'])->middleware('throttle:60,1');
+            Route::post('reports/{id}/photos', [TechController::class, 'storeReportPhoto'])->middleware('throttle:120,1');
+
+            Route::get('access-requests', [TechController::class, 'accessRequests']);
+            Route::post('access-requests', [TechController::class, 'storeAccessRequest'])->middleware('throttle:30,1');
+        });
+
+        // Gestion des techniciens depuis Dash3
+        Route::middleware('can:erp')->prefix('tech-admin')->group(function () {
+            Route::get('technicians', [TechAdminController::class, 'technicians']);
+            Route::post('technicians', [TechAdminController::class, 'storeTechnician']);
+            Route::patch('technicians/{id}', [TechAdminController::class, 'updateTechnician']);
+            Route::delete('technicians/{id}', [TechAdminController::class, 'destroyTechnician']);
+
+            Route::get('tasks/{task}/technicians', [TechAdminController::class, 'taskTechnicians']);
+            Route::put('tasks/{task}/technicians', [TechAdminController::class, 'assignTask']);
+
+            Route::get('shares', [TechAdminController::class, 'shares']);
+            Route::post('shares', [TechAdminController::class, 'storeShare']);
+            Route::post('shares/{share}', [TechAdminController::class, 'updateShare']); // POST : envoi de fichier possible
+            Route::delete('shares/{share}', [TechAdminController::class, 'destroyShare']);
+
+            Route::get('reports', [TechAdminController::class, 'reports']);
+            Route::get('reports/{report}', [TechAdminController::class, 'showReport']);
+            Route::patch('reports/{report}', [TechAdminController::class, 'reviewReport']);
+            Route::get('reports/{report}/photos/{photo}', [TechAdminController::class, 'reportPhoto']);
+
+            Route::get('access-requests', [TechAdminController::class, 'accessRequests']);
+            Route::post('access-requests/{accessRequest}/approve', [TechAdminController::class, 'approveAccessRequest']);
+            Route::post('access-requests/{accessRequest}/reject', [TechAdminController::class, 'rejectAccessRequest']);
+
+            Route::get('notifications', [TechAdminController::class, 'notifications']);
+            Route::post('notifications/{id}/read', [TechAdminController::class, 'readNotification']);
         });
     });
 });

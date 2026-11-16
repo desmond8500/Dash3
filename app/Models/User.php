@@ -6,6 +6,8 @@ namespace App\Models;
 
 use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -65,5 +67,34 @@ class User extends Authenticatable
         return $this->hasOne(setting::class);
     }
 
+    /** Tâches affectées à ce technicien (application Dash3Tech). */
+    public function techTasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class, 'task_technician')
+            ->withPivot('assigned_by')
+            ->withTimestamps();
+    }
 
+    /** Informations temporaires partagées avec ce technicien. */
+    public function techShares(): BelongsToMany
+    {
+        return $this->belongsToMany(TechShare::class, 'tech_share_user')
+            ->withPivot('read_at')
+            ->withTimestamps();
+    }
+
+    public function techReports(): HasMany
+    {
+        return $this->hasMany(TechReport::class);
+    }
+
+    public function techAccessRequests(): HasMany
+    {
+        return $this->hasMany(TechAccessRequest::class);
+    }
+
+    public function isTechnician(): bool
+    {
+        return $this->hasRole(config('tech.role', 'technicien'));
+    }
 }

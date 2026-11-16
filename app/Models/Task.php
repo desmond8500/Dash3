@@ -7,6 +7,7 @@ use App\Traits\searchTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -136,6 +137,19 @@ class Task extends Model
 
     function subtasks(): HasMany{
         return $this->hasMany(Subtask::class, 'task_id');
+    }
+
+    /** Techniciens affectés (application Dash3Tech). */
+    public function technicians(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'task_technician')
+            ->withPivot('assigned_by')
+            ->withTimestamps();
+    }
+
+    public function techShares(): HasMany
+    {
+        return $this->hasMany(TechShare::class);
     }
 
 

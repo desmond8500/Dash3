@@ -22,6 +22,7 @@ class Navbar extends Component
                 array('name' => "Journaux", "route" => "journaux", "icon" =>"article", "can" => "journaux"),
                 array('name' => "Finances", "route" => "finances", "icon" => "coins", "can" => "finances"),
                 array('name' => "Equipe", "route" => "team", "icon" => "users", "can" => ""),
+                array('name' => "Techniciens", "route" => "techniciens", "icon" => "tool", "can" => ""),
                 array('name' => "Forfaits", "route" => "forfaits", "icon" => "receipt", "can" => ""),
                 array('name' => "Plannings", "route" => "plannings", "icon" => "receipt", "can" => ""),
                 // array('name' => "Timeline", "route" => "timeline", "icon" => "list", "can" => ""),
@@ -71,7 +72,25 @@ class Navbar extends Component
         return view('livewire.layout.navbar', [
             "menus" => $this->menu1,
             'user' => auth()->user(),
+            'techAlerts' => $this->techAlerts(),
         ]);
+    }
+
+    /** Notifications Dash3Tech non lues (alertes d'expiration, rapports, demandes). */
+    private function techAlerts(): int
+    {
+        $user = auth()->user();
+        if (! $user || ! $user->can('erp')) {
+            return 0;
+        }
+
+        try {
+            return $user->unreadNotifications()
+                ->whereIn('type', [\App\Notifications\TechShareExpiring::class, \App\Notifications\TechActivity::class])
+                ->count();
+        } catch (\Throwable) {
+            return 0; // table notifications pas encore migrée
+        }
     }
 
     // Register

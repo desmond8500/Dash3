@@ -10,12 +10,10 @@ use App\Models\TechReport;
 use App\Models\TechShare;
 use App\Models\User;
 use App\Support\TechPresenter;
+use App\Support\TechService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 
 /**
  * Gestion de l'espace technicien depuis Dash3 (permission « erp ») :
@@ -48,8 +46,7 @@ class TechAdminController extends Controller
             'function' => ['nullable', 'string', 'max:255'],
         ]);
 
-        $user = User::create($data); // mot de passe haché par le cast « hashed »
-        $user->assignRole(config('tech.role'));
+        $user = TechService::createTechnician($data);
 
         return ResponseController::response(true, 'Technicien créé', TechPresenter::user($user));
     }
@@ -66,15 +63,7 @@ class TechAdminController extends Controller
             'function' => ['nullable', 'string', 'max:255'],
         ]);
 
-        if (empty($data['password'])) {
-            unset($data['password']);
-        }
-
-        $user->update($data);
-
-        if (isset($data['password'])) {
-            $user->tokens()->delete(); // nouveau mot de passe : reconnexion obligatoire
-        }
+        TechService::updateTechnician($user, $data);
 
         return ResponseController::response(true, 'Technicien mis à jour', TechPresenter::user($user));
     }
@@ -84,9 +73,7 @@ class TechAdminController extends Controller
     {
         $user = $this->findTechnician($id);
 
-        $user->removeRole(config('tech.role'));
-        $user->tokens()->delete();
-        DB::table('tech_share_user')->where('user_id', $user->id)->delete();
+        TechService::revokeTechnician($user);
 
         return ResponseController::response(true, 'Accès technicien retiré', []);
     }
@@ -110,18 +97,7 @@ class TechAdminController extends Controller
             'user_ids.*' => ['integer'],
         ]);
 
-        $ids = $this->technicianIds($data['user_ids']);
-        $sync = collect($ids)->mapWithKeys(fn ($id) => [$id => ['assigned_by' => $request->user()->id]])->all();
-        $changes = $task->technicians()->sync($sync);
-
-        foreach (TechShare::active()->where('task_id', $task->id)->get() as $share) {
-            if ($changes['attached']) {
-                $share->technicians()->syncWithoutDetaching($changes['attached']);
-            }
-            if ($changes['detached']) {
-                $share->technicians()->detach($changes['detached']);
-            }
-        }
+        TechService::assignTask($task, $data['user_ids'], $request->user());
 
         return ResponseController::response(true, 'Affectation enregistrée',
             $task->technicians()->get()->map(fn (User $u) => TechPresenter::user($u))->values());
@@ -150,31 +126,7 @@ class TechAdminController extends Controller
     public function storeShare(Request $request)
     {
         $data = $this->validateShare($request, true);
-
-        $technicianIds = $data['technician_ids'] ?? null;
-        $task = isset($data['task_id']) ? Task::find($data['task_id']) : null;
-        if ($technicianIds === null && $task) {
-            $technicianIds = $task->technicians()->pluck('users.id')->all();
-        }
-        $technicianIds = $this->technicianIds($technicianIds ?? []);
-        if (! $technicianIds) {
-            throw ValidationException::withMessages([
-                'technician_ids' => 'Choisissez au moins un technicien (ou une tâche qui en a).',
-            ]);
-        }
-
-        $share = new TechShare(collect($data)->except(['technician_ids', 'file'])->all());
-        $share->created_by = $request->user()->id;
-        $share->projet_id ??= $task?->projet_id;
-        $share->building_id ??= $task?->building_id;
-
-        if ($request->hasFile('file')) {
-            $share->file_path = $request->file('file')->store('tech/shares', 'local');
-            $share->file_name = $request->file('file')->getClientOriginalName();
-        }
-
-        $share->save();
-        $share->technicians()->sync($technicianIds);
+        $share = TechService::createShare($data, $request->file('file'), $request->user());
 
         return ResponseController::response(true, 'Information partagée',
             TechPresenter::shareAdmin($share->load(['projet', 'building', 'article.brand', 'creator', 'technicians'])));
@@ -186,26 +138,7 @@ class TechAdminController extends Controller
         abort_unless($share->isActive(), 409, 'Ce partage a expiré : créez-en un nouveau.');
 
         $data = $this->validateShare($request, false);
-
-        if (array_key_exists('technician_ids', $data)) {
-            $share->technicians()->sync($this->technicianIds($data['technician_ids'] ?? []));
-        }
-
-        $share->fill(collect($data)->except(['technician_ids', 'file'])->all());
-
-        if ($share->isDirty('expires_at')) {
-            $share->expiry_notified_at = null; // nouvelle date : nouvelle alerte
-        }
-
-        if ($request->hasFile('file')) {
-            if ($share->file_path) {
-                Storage::disk('local')->delete($share->file_path);
-            }
-            $share->file_path = $request->file('file')->store('tech/shares', 'local');
-            $share->file_name = $request->file('file')->getClientOriginalName();
-        }
-
-        $share->save();
+        TechService::updateShare($share, $data, $request->file('file'));
 
         return ResponseController::response(true, 'Information mise à jour',
             TechPresenter::shareAdmin($share->load(['projet', 'building', 'article.brand', 'creator', 'technicians'])));
@@ -248,7 +181,7 @@ class TechAdminController extends Controller
             'review_note' => ['nullable', 'string', 'max:5000'],
         ]);
 
-        $report->update($data + ['reviewed_by' => $request->user()->id, 'reviewed_at' => now()]);
+        TechService::reviewReport($report, $data['status'], $data['review_note'] ?? null, $request->user());
 
         return ResponseController::response(true, 'Rapport mis à jour', TechPresenter::report($report->load(['task', 'photos', 'user'])));
     }
@@ -282,41 +215,12 @@ class TechAdminController extends Controller
         $data = $request->validate([
             'title' => ['nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string', 'max:20000'],
-            'expires_at' => ['required', 'date', 'after:now', 'before_or_equal:'.now()->addDays(config('tech.max_share_days', 90))->toDateTimeString()],
+            'expires_at' => ['required', 'date'],
             'response' => ['nullable', 'string', 'max:5000'],
             'file' => ['nullable', 'file', 'max:20480'],
         ]);
 
-        $share = DB::transaction(function () use ($request, $accessRequest, $data) {
-            $share = new TechShare([
-                'category' => 'acces',
-                'title' => $data['title'] ?? $accessRequest->subject,
-                'content' => $data['content'] ?? null,
-                'task_id' => $accessRequest->task_id,
-                'projet_id' => $accessRequest->projet_id,
-                'article_id' => $accessRequest->article_id,
-                'expires_at' => Carbon::parse($data['expires_at']),
-            ]);
-            $share->created_by = $request->user()->id;
-
-            if ($request->hasFile('file')) {
-                $share->file_path = $request->file('file')->store('tech/shares', 'local');
-                $share->file_name = $request->file('file')->getClientOriginalName();
-            }
-
-            $share->save();
-            $share->technicians()->sync([$accessRequest->user_id]);
-
-            $accessRequest->update([
-                'status' => 'approved',
-                'decided_by' => $request->user()->id,
-                'decided_at' => now(),
-                'response' => $data['response'] ?? null,
-                'tech_share_id' => $share->id,
-            ]);
-
-            return $share;
-        });
+        $share = TechService::approveRequest($accessRequest, $data, $request->file('file'), $request->user());
 
         return ResponseController::response(true, 'Accès accordé', [
             'request' => TechPresenter::accessRequest($accessRequest->fresh('user')),
@@ -330,12 +234,7 @@ class TechAdminController extends Controller
 
         $data = $request->validate(['response' => ['nullable', 'string', 'max:5000']]);
 
-        $accessRequest->update([
-            'status' => 'rejected',
-            'decided_by' => $request->user()->id,
-            'decided_at' => now(),
-            'response' => $data['response'] ?? null,
-        ]);
+        TechService::rejectRequest($accessRequest, $data['response'] ?? null, $request->user());
 
         return ResponseController::response(true, 'Demande refusée', TechPresenter::accessRequest($accessRequest->fresh('user')));
     }
@@ -364,12 +263,12 @@ class TechAdminController extends Controller
 
     // ---------------------------------------------------------------- Interne
 
+    /** Validation de forme ; les règles d'expiration sont dans TechService. */
     private function validateShare(Request $request, bool $creating): array
     {
-        $max = now()->addDays(config('tech.max_share_days', 90));
         $req = $creating ? 'required' : 'sometimes';
 
-        $data = $request->validate([
+        return $request->validate([
             'category' => [$req, Rule::in(TechShare::CATEGORIES)],
             'title' => [$req, 'string', 'max:255'],
             'content' => ['nullable', 'string', 'max:20000'],
@@ -379,41 +278,10 @@ class TechAdminController extends Controller
             'building_id' => ['nullable', 'integer', 'exists:buildings,id'],
             'technician_ids' => ['nullable', 'array'],
             'technician_ids.*' => ['integer'],
-            'expires_at' => ['nullable', 'date', 'after:now', 'before_or_equal:'.$max->toDateTimeString()],
+            'expires_at' => ['nullable', 'date'],
             'expires_with_task' => ['sometimes', 'boolean'],
             'file' => ['nullable', 'file', 'max:20480'],
         ]);
-
-        if ($creating) {
-            $withTask = ! empty($data['expires_with_task']);
-
-            if ($withTask && empty($data['task_id'])) {
-                throw ValidationException::withMessages(['task_id' => 'Une tâche est nécessaire pour « expire avec la tâche ».']);
-            }
-            if (! $withTask && empty($data['expires_at'])) {
-                throw ValidationException::withMessages(['expires_at' => 'Indiquez une date d\'expiration : les informations sont temporaires.']);
-            }
-
-            // Toujours une date butoir, même liée à une tâche
-            $data['expires_at'] = isset($data['expires_at']) ? Carbon::parse($data['expires_at']) : $max;
-        } elseif (array_key_exists('expires_at', $data)) {
-            if ($data['expires_at'] === null) {
-                throw ValidationException::withMessages(['expires_at' => 'Une information doit garder une date d\'expiration.']);
-            }
-            $data['expires_at'] = Carbon::parse($data['expires_at']);
-        }
-
-        return $data;
-    }
-
-    /** Ne garde que les identifiants de comptes ayant le rôle technicien. */
-    private function technicianIds(array $ids): array
-    {
-        if (! $ids) {
-            return [];
-        }
-
-        return User::role(config('tech.role'))->whereIn('id', $ids)->pluck('id')->all();
     }
 
     private function findTechnician(int $id): User

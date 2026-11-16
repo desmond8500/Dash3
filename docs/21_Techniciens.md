@@ -8,6 +8,21 @@ Application mobile pour les techniciens sur site. Elle utilise l'API de Dash3 so
 - La création, la modification et le retrait d'accès se font via `/api/v1/tech-admin/technicians`.
 - Retirer l'accès enlève le rôle et révoque les sessions mobiles.
 
+## Écran d'administration : `/techniciens`
+
+Accessible depuis le menu **ERP > Techniciens** (permission `erp`). Une **cloche** dans la barre du haut affiche le nombre d'alertes non lues et mène à la page.
+
+| Onglet | Rôle |
+|---|---|
+| **Alertes** | informations qui expirent dans moins de 24 h, à prolonger en un clic (+1 j, +7 j). Notifications : expirations, nouveaux rapports, nouvelles demandes |
+| **Comptes** | créer, modifier ou retirer un technicien. Le badge « connecté » indique une session mobile active. « Déconnecter les téléphones » sert si un appareil est perdu |
+| **Affectations** | affecter des techniciens à une tâche. Les informations déjà partagées sur la tâche suivent les ajouts et les retraits |
+| **Informations** | partager une information temporaire : type, contenu, tâche, fiche article, destinataires, date limite (raccourcis 1 j, 3 j, 1 semaine, 1 mois), « expire aussi à la fin de la tâche », pièce jointe. Pour chaque destinataire, un badge indique s'il l'a lue. Actions : prolonger, modifier, retirer |
+| **Rapports** | lire un rapport (texte, photos, position GPS), puis **Valider** ou **À revoir**. « À revoir » exige un commentaire, que le technicien voit dans l'app |
+| **Demandes** | **Accorder** : crée une information réservée au demandeur, avec une date de fin d'accès (raccourcis ce soir, demain, 1 semaine). **Refuser**, avec un motif facultatif |
+
+Les règles métier sont réunies dans `App\Support\TechService`, que l'écran web et l'API `/tech-admin` utilisent tous les deux.
+
 ## Ce que voit un technicien
 
 | Donnée | Règle |

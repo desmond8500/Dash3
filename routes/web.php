@@ -34,6 +34,8 @@ use App\Livewire\Erp\SchemaPage;
 use App\Livewire\Erp\StagePage;
 use App\Livewire\Erp\SystemesPage;
 use App\Livewire\Erp\TeamPage;
+use App\Livewire\Tech\TechniciensPage;
+use App\Http\Controllers\TechFileController;
 use App\Livewire\GeneratePage;
 use App\Livewire\IndexPage;
 use App\Livewire\JournalPage;
@@ -144,6 +146,11 @@ Route::middleware(['auth', 'can:erp'])->group(function () {
     })->name('avancements_pdf');
 
     Route::get('/team', TeamPage::class)->name('team');
+
+    // Techniciens (application Dash3Tech)
+    Route::get('/techniciens', TechniciensPage::class)->name('techniciens');
+    Route::get('/techniciens/rapports/{report}/photos/{photo}', [TechFileController::class, 'reportPhoto'])->name('tech.report_photo');
+    Route::get('/techniciens/informations/{share}/fichier', [TechFileController::class, 'shareFile'])->name('tech.share_file');
     Route::get('/attestation/{team_id}', function ($team_id) {
         return PDFController::attestation_pdf($team_id);
     })->name('attestation_pdf');

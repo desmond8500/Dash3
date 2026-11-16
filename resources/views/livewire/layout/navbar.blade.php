@@ -13,6 +13,16 @@
         </div>
         <div class="navbar-nav flex-row order-md-last">
 
+            @if ($techAlerts)
+                {{-- Alertes Dash3Tech : informations qui expirent, rapports, demandes --}}
+                <div class="nav-item me-2">
+                    <a href="{{ route('techniciens') }}" class="nav-link px-2 position-relative" title="Alertes techniciens" wire:navigate>
+                        <i class="ti ti-bell fs-2"></i>
+                        <span class="badge bg-red badge-notification badge-pill">{{ $techAlerts }}</span>
+                    </a>
+                </div>
+            @endif
+
             <div class="nav-item dropdown">
                 @auth
                     <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown" aria-label="Open user menu">

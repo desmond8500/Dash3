@@ -134,7 +134,8 @@ class ClientAPIController extends Controller
         $client->favorite = $request->favorite;
 
         if ($client->save()) {
-            return ResponseController::response(true, 'Client créé avec succès', null, 201);
+            // Le client créé est renvoyé : le front en a besoin pour envoyer ensuite son logo
+            return ResponseController::response(true, 'Client créé avec succès', new ClientResource($client), 201);
         } else {
             return ResponseController::response(false, 'Erreur lors de la création du client', null, 400);
         }

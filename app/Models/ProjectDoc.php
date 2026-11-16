@@ -10,6 +10,7 @@ class ProjectDoc extends Model
         'projet_id',
         'document_name',
         'document_path',
+        'category',
     ];
 
     public function project()

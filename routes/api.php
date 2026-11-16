@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AchatController;
+use App\Http\Controllers\API\BadgeAPIController;
 use App\Http\Controllers\API\BrandAPIController;
 use App\Http\Controllers\API\ClientAPIController;
 use App\Http\Controllers\API\CommandeAPIController;
@@ -85,7 +86,8 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('projet/tasks/{id}', [ProjetAPIController::class, 'getTasksByProjet']);
             Route::post('projets/{id}/favorite', [ProjetAPIController::class, 'toggleFavorite']);
             Route::post('projets/{id}/logo', [ProjetAPIController::class, 'updateLogo']);
-            Route::get('projets/{id}/badges', [ProjetAPIController::class, 'getBadges']);
+            Route::get('projets/{id}/badges', [BadgeAPIController::class, 'index']);
+            Route::put('projets/{id}/location', [ProjetAPIController::class, 'updateLocation']);
 
             // Installations : bâtiments › systèmes › équipements, et plans
             Route::get('projets/{id}/installations', [InstallationAPIController::class, 'index']);
@@ -144,9 +146,18 @@ Route::middleware('auth:sanctum')->group(function () {
             })->name('journal_pdf_api');
 
             // Modèles de badge et CV
-            Route::get('badge_modeles', [ProjetAPIController::class, 'getBadgeModeles']);
+            Route::get('badge_modeles', [BadgeAPIController::class, 'modeles']);
+            Route::post('badge_modeles', [BadgeAPIController::class, 'storeModele']);
+            Route::put('badge_modeles/{id}', [BadgeAPIController::class, 'updateModele']);
+            Route::post('badge_modeles/{id}/image', [BadgeAPIController::class, 'modeleImage']);
+            Route::delete('badge_modeles/{id}', [BadgeAPIController::class, 'destroyModele']);
+            Route::post('badges', [BadgeAPIController::class, 'store']);
+            Route::put('badges/{id}', [BadgeAPIController::class, 'update']);
+            Route::post('badges/{id}/photo', [BadgeAPIController::class, 'photo']);
+            Route::delete('badges/{id}', [BadgeAPIController::class, 'destroy']);
             Route::apiResource('cvs', CvAPIController::class);
             Route::post('cvs/{id}/photo', [CvAPIController::class, 'updatePhoto']);
+            Route::post('cvs/{id}/duplicate', [CvAPIController::class, 'duplicate']);
             Route::post('cv_sections', [CvAPIController::class, 'storeSection']);
             Route::put('cv_sections/{id}', [CvAPIController::class, 'updateSection']);
             Route::delete('cv_sections/{id}', [CvAPIController::class, 'destroySection']);
@@ -203,6 +214,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('providers', ProviderAPIController::class);
             Route::apiResource('brands', BrandAPIController::class);
             Route::post('providers/{id}/logo', [ProviderAPIController::class, 'updateLogo']);
+            Route::get('providers/{id}/documents', [ProviderAPIController::class, 'documents']);
+            Route::post('providers/{id}/documents', [ProviderAPIController::class, 'storeDocument']);
+            Route::put('provider_documents/{id}', [ProviderAPIController::class, 'updateDocument']);
+            Route::get('provider_documents/{id}/file', [ProviderAPIController::class, 'documentFile']);
+            Route::delete('provider_documents/{id}', [ProviderAPIController::class, 'destroyDocument']);
+            Route::post('providers/{id}/links', [ProviderAPIController::class, 'storeLink']);
+            Route::put('provider_links/{id}', [ProviderAPIController::class, 'updateLink']);
+            Route::delete('provider_links/{id}', [ProviderAPIController::class, 'destroyLink']);
             Route::post('brands/{id}/logo', [BrandAPIController::class, 'updateLogo']);
         });
 

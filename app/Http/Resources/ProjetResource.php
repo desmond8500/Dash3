@@ -32,6 +32,15 @@ class ProjetResource extends JsonResource
                     'contacts' => $this->contacts,
                     'notes' => $this->notes,
                     'badges' => $this->badges,
+                    'address' => $this->address,
+                    'latitude' => $this->latitude !== null ? (float) $this->latitude : null,
+                    'longitude' => $this->longitude !== null ? (float) $this->longitude : null,
+                    // Quantités affichées dans la carte résumé (onglets)
+                    'counts' => [
+                        'badges' => \App\Models\Badge::where('projet_id', $this->id)->count(),
+                        'notes' => \App\Models\ProjetNote::where('projet_id', $this->id)->count(),
+                        'documents' => \App\Models\ProjectDoc::where('projet_id', $this->id)->count(),
+                    ],
                     'img' => url($this->logo ?? $this->client?->avatar ?? 'img/icons/005-notebook.png'),
                     'logo' => $this->logo
         ];

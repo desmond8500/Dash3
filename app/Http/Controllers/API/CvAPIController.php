@@ -4,12 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseController;
-use App\Http\Controllers\ImageController;
 use App\Models\CV;
 use App\Models\CvItem;
 use App\Models\CvSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /** CV de l'utilisateur connecté */
 class CvAPIController extends Controller
@@ -95,9 +96,54 @@ class CvAPIController extends Controller
         $cv = $this->find($request, $id);
         if (! $cv) return ResponseController::response(false, 'CV non trouvé', null, 404);
         $request->validate(['image' => ['required', 'image', 'max:4096']]);
-        $cv->update(['photo' => ImageController::update_logo("cvs/{$cv->id}", $request->file('image'))]);
+        $file = $request->file('image');
+        // Nom de fichier sans espaces ni caractères spéciaux (sinon l'URL ne s'affiche pas
+        // dans le CSS) et unique (sinon le navigateur garde l'ancienne photo en cache)
+        $ext = strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'jpg');
+        $name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) ?: 'photo';
+        $name = $name.'-'.now()->format('YmdHis').'.'.$ext;
+        Storage::disk('public')->deleteDirectory("cvs/{$cv->id}");
+        $file->storeAs("cvs/{$cv->id}", $name, 'public');
+        $cv->update(['photo' => "storage/cvs/{$cv->id}/{$name}"]);
 
         return ResponseController::response(true, 'Photo modifiée', $cv);
+    }
+
+    /** @OA\Post(path="/api/v1/cvs/{id}/duplicate", tags={"CV"}, summary="Dupliquer un CV (sections, lignes et photo)", security={{"sanctum":{}}}, @OA\Response(response=201, description="Créé")) */
+    public function duplicate(Request $request, int $id)
+    {
+        $cv = $this->find($request, $id, ['sections.items']);
+        if (! $cv) return ResponseController::response(false, 'CV non trouvé', null, 404);
+        $name = $request->validate(['name' => ['nullable', 'string', 'max:255']])['name'] ?? null;
+
+        $copy = DB::transaction(function () use ($cv, $name) {
+            $copy = $cv->replicate(['photo']);
+            $copy->name = $name ?: $cv->name.' (copie)';
+            $copy->save();
+
+            foreach ($cv->sections as $section) {
+                $newSection = $section->replicate();
+                $newSection->c_v_id = $copy->id;
+                $newSection->save();
+                foreach ($section->items as $item) {
+                    $newItem = $item->replicate();
+                    $newItem->cv_section_id = $newSection->id;
+                    $newItem->save();
+                }
+            }
+
+            // Copie de la photo dans le dossier du nouveau CV
+            $source = $cv->photo ? Str::after($cv->photo, 'storage/') : null;
+            if ($source && Storage::disk('public')->exists($source)) {
+                $target = "cvs/{$copy->id}/".basename($source);
+                Storage::disk('public')->copy($source, $target);
+                $copy->update(['photo' => "storage/{$target}"]);
+            }
+
+            return $copy;
+        });
+
+        return response()->json(['success' => true, 'message' => 'CV dupliqué', 'data' => $copy->load('sections.items'), 'meta' => null], 201);
     }
 
     // ------------------------------------------------------------------

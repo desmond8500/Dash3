@@ -349,6 +349,28 @@ class ProjetAPIController extends Controller
      *      summary="Liste des modèles de badge", security={{"sanctum":{}}},
      *      @OA\Response(response=200, description="Success"))
      */
+    /**
+     * @OA\Put(path="/api/v1/projets/{id}/location", tags={"Projets"}, summary="Localisation du projet (adresse, latitude, longitude)", security={{"sanctum":{}}}, @OA\Response(response=200, description="Modifiée"))
+     */
+    public function updateLocation(Request $request, int $id)
+    {
+        $projet = Projet::find($id);
+        if (! $projet) {
+            return response()->json(['success' => false, 'message' => 'Projet non trouvé', 'error' => null, 'meta' => null], 404);
+        }
+        $projet->update($request->validate([
+            'address' => ['nullable', 'string', 'max:255'],
+            'latitude' => ['nullable', 'numeric', 'between:-90,90', 'required_with:longitude'],
+            'longitude' => ['nullable', 'numeric', 'between:-180,180', 'required_with:latitude'],
+        ]));
+
+        return ResponseController::response(true, 'Localisation enregistrée', [
+            'address' => $projet->address,
+            'latitude' => $projet->latitude !== null ? (float) $projet->latitude : null,
+            'longitude' => $projet->longitude !== null ? (float) $projet->longitude : null,
+        ]);
+    }
+
     public function getBadgeModeles()
     {
         $modeles = \App\Models\BadgeModele::orderBy('name')

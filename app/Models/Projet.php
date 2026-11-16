@@ -21,6 +21,9 @@ class Projet extends Model
         'start_date',
         'end_date',
         'favorite',
+        'address',
+        'latitude',
+        'longitude',
     ];
 
     public function client(): BelongsTo {

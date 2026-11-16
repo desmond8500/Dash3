@@ -24,6 +24,11 @@ class Badge extends Model
     ];
 
 
+    public function modele(): BelongsTo
+    {
+        return $this->belongsTo(BadgeModele::class, 'badge_modele_id');
+    }
+
     public function projet(): BelongsTo
     {
         return $this->belongsTo(Projet::class);

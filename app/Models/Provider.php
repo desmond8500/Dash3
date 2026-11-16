@@ -20,10 +20,22 @@ class Provider extends Model
         'description',
         'email',
         'phone',
-        'website'
+        'website',
+        'latitude',
+        'longitude',
     ];
 
     protected $hidden = ['created_at','updated_at','deleted_at'];
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(ProviderDocument::class)->latest();
+    }
+
+    public function links(): HasMany
+    {
+        return $this->hasMany(ProviderLink::class)->orderBy('name');
+    }
 
     public function article(): HasMany
     {

@@ -13,7 +13,15 @@ class BadgeModele extends Model
         'name',
         'css',
         'file',
+        'client_id',
+        'orientation',
+        'color',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     public function badges()
     {
